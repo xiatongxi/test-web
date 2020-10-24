@@ -1,0 +1,109 @@
+<!-- MAIN CONTENT -->
+<div id="content">
+    <!-- widget grid -->
+    <section widget-grid id="widget-grid">
+
+
+        <div class="row">
+            <article class="col-sm-12">
+
+                <div jarvis-widget id="standard-datatable-widget" data-widget-color="darken" data-widget-editbutton="false">
+                    <header>
+                        <span class="widget-icon"> <i class="fa fa-table"></i> </span>
+                        <h2>合同变更审批列表</h2>
+                    </header>
+                    <div>
+                        <div class="widget-body no-padding">
+                        <div id="DataTables_Table_1_wrapper" class="dataTables_wrapper form-inline no-footer">
+                            <div class="dt-toolbar">
+                                <div class="col-xs-12 col-sm-9">
+                                    <div class="form-group">
+                                        <label> 合同编号: 
+                                        	<input type="search" class="form-control input-sm" ng-model="searchCondition.contractNumber"/>
+                                       	</label>&emsp;
+                                        <label><select class="form-control input-sm" ng-model="searchCondition.auditState">
+                                                            <option value="">--当前状态--</option>
+                                                            <option value="待审批">待审批</option>
+                                                            <option value="驳回">驳回</option>
+                                                            <option value="拒绝">拒绝</option>
+                                                            <option value="同意">同意</option>
+                                                        </select>
+                                        </label>&emsp;
+                                        <label><a class="btn btn-default btn-sm" ng-click="loadData()">
+											<i class="fa fa-search"></i>&nbsp;查&nbsp;询
+										</a>
+										</label>
+										<!-- <label><a class="btn btn-default btn-sm" ng-click="clearConditions()">
+											<i class="fa fa-trash-o"></i>&nbsp;清&nbsp;空
+										</a> &emsp;
+	                                     		</label> -->
+                                    </div>
+                                </div>
+                                <div class="col-sm-3 col-xs-12 hidden-xs">
+                                    <div class="dataTables_length">
+											<label>每页显示 <select ng-model="pageInfo.pageSize" ng-change="loadData(pageInfo.pageNum=1)"
+																ng-options="num as num for num in [1,10,25,50,100]"
+																class="form-control input-sm"></select> 条
+											</label>
+									</div>
+                                </div>
+                            </div>
+
+                        <table class="table table-striped table-bordered table-hover" width="100%">
+	                        <thead>
+		                        <tr>
+		                            <th> 计划编号</th>
+		                            <th> 合同编号</th>
+		                            <th> 合同名称</th>
+		                            <th> 合同类型</th>
+		                            <th> 客户名称</th>
+		                            <th> 数量(公斤)</th>
+		                            <th> 金额(元)</th>
+		                            <th> 支付方式</th>
+		                            <th> 创建日期</th>
+		                            <th> 当前状态</th>
+		                            <th> 当前节点</th>
+		                            <th> 操作</th>
+		                        </tr>
+	                        </thead>
+	                        
+	                        <tbody>
+	                            <tr ng-repeat="contract in pageInfo.list">
+	                                <td>{{contract.planNumber}}</td>
+	                                <td>{{contract.contractNumber}}</td>
+	                                <td>{{contract.contractTitle}}</td>
+	                                <td>{{ dicData[contract.contractType] }}</td>
+	                                <td>{{ contract.customerName}}</td>
+	                                <td>{{ contract.grainQuantity}}</td>
+	                                <td>{{ contract.moneyQuantity}}</td>
+	                                <td>{{ dicData[contract.contractPayType]}}</td>
+	                                <td>{{ contract.createTime | date:'yyyy-MM-dd' }}</td>
+	                                <td>
+	                                	<div ng-switch="contract.result">
+	                                		<div ng-switch-when="待审批">
+	                                			<span style='color:green;'>{{contract.result}}</span>
+											</div>
+											<div ng-switch-default>
+												{{contract.result}}
+											</div>
+	                                	</div>
+	                                </td>
+	                                <td>{{ contract.taskName }}</td>
+	                                <td>
+	                                    <a has-permission="439" href-void ng-click="auditPage(contract.id, contract.processInstanceId, contract.taskId, contract.auditId, contract.result)" ng-hide="contract.result !='待审批'">
+	                                    	<i class="fa fa-pencil-square"></i>审批</a>
+	                                    <a href-void ng-click="viewAuditPage(contract.id, contract.processInstanceId, contract.taskId, contract.auditId)" ng-hide="contract.result =='待审批'">
+	                                    	<i class="fa fa-info-circle"></i>查看</a>
+	                                </td>
+	                            </tr>
+	                        </tbody>
+                        </table>
+						<div smart-include="app/layout/partials/page.tpl.html"></div>
+                        </div>
+                        </div>
+                    </div>
+                </div>
+            </article>
+        </div>
+    </section>
+</div>

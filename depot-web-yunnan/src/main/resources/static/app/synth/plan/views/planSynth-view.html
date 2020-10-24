@@ -1,0 +1,210 @@
+<!-- MAIN CONTENT -->
+<div id="content">
+	<!-- widget grid -->
+	<section id="widget-grid" widget-grid>
+		<!-- START ROW -->
+		<div class="row">
+			<!-- NEW COL START -->
+			<article class="col-sm-12 col-md-12 col-lg-12">
+
+				<!-- Widget ID (each widget will need unique ID)-->
+				<div jarvis-widget id="form-grid-widget"
+					data-widget-colorbutton="false" data-widget-editbutton="false"
+					data-widget-custombutton="false">
+					<!-- widget div-->
+					<div>
+						<!-- widget content -->
+						<div class="widget-body no-padding saf-asc-bodybg">
+							<form id="foodInfo-form" name='foodInfo-form'
+								class="smart-form ng-pristine ng-valid"
+								data-validator-option="validateOptions" novalidate="novalidate">
+								<header>
+									<a href-void class="btn btn-default btn-xs" ng-click="retList()">
+										<i class="fa fa-angle-left"></i>&nbsp;返回&nbsp;
+									</a>
+									&nbsp;<strong>计划信息追溯</strong>
+								</header>
+                                <div class="saf-asc-row2">
+                                    <h3>计划信息</h3>
+                                    <table>
+				                    	<tr>
+				                        	<td class="label-td">计划编号：</td><td>{{ plan.planNumber }}</td>
+				                            <td class="label-td">计划名称：</td><td>{{ plan.planTitle }}</td>
+				                            <td class="label-td">计划类型：</td><td>{{ dicData[plan.executeType] }}</td>
+				                            <td class="label-td">粮食品种：</td><td>{{ dicData[plan.grainKind] }}</td>
+				                            <td class="label-td">粮食明细品种：</td><td>{{ dicData[plan.grainDetailKind] }}</td>
+				                        </tr>
+				                        <tr>
+				                            <td class="label-td">粮食等级：</td><td>{{ dicData[plan.grainGrade] }}</td>
+				                            <td class="label-td">生产年限：</td><td>{{ dicData[plan.grainAnnual] }}</td>
+				                        	<td class="label-td">粮食数量(公斤)：</td><td>{{ plan.demandAmount }}</td>
+				                            <td class="label-td">收储单价(元/公斤)：</td><td>{{ plan.storagePrice }}</td>
+				                            <td class="label-td">销售单价(元/公斤)：</td><td>{{ plan.salesPrice }}</td>
+				                        </tr>
+				                    </table>
+                                </div>
+                                <!--row2-->
+                                <div class="saf-asc-row2">
+                                    <h3>质量标准</h3>
+                                    <table>
+	                                    <tr>
+	                                    	<td class="label-td">&nbsp;</td><td>{{ plan.qualityStandard }}</td>
+	                                    </tr>
+                                    </table>
+                                </div>
+                                <!--row2-->
+								
+								<div class="text-center">
+                                	<div class="saf-asc-row3">
+					                	<ul class="timeline-box timeline-box3">
+					                    	<li class="jih-gl timeline-bom-msg" ng-click="getPlanList()"><!-- 计划通过时间 -->
+					                            <div class="timeline-time">{{ plan.agreeTime | date:'yyyy-MM-dd' }}</div>
+					                            <i class="timeline-icon"></i>
+					                        </li>
+					                        <li class="het-gl">
+					                            <i class="timeline-icon" ng-click="getContractList()"></i><!-- 第一个合同通过时间 -->
+					                            <div class="timeline-time">{{ contractFirstDate | date:'yyyy-MM-dd' }}</div>
+					                        </li>
+					                        <li class="churk-tzd timeline-bom-msg" ng-click="getNoticeList()"><!-- 第一个出入库通知单通过时间 -->
+					                            <div class="timeline-time">{{ noticeFirstDate | date:'yyyy-MM-dd' }}</div>
+					                            <i class="timeline-icon"></i>
+					                        </li>
+					                        <li class="churk-gl">
+					                            <i class="timeline-icon"></i>
+					                            <div class="timeline-time"></div>
+					                        </li>
+					                        <li class="jies-mx timeline-bom-msg">
+					                            <div class="timeline-time"></div>
+					                            <i class="timeline-icon"></i>
+					                        </li>
+					                        <li class="feiy-gl">
+					                            <i class="timeline-icon"></i>
+					                            <div class="timeline-time"></div>
+					                        </li>
+					                    </ul>
+					                </div>
+                                    <!--/saf-asc-row3-->
+                                </div>
+                                <div class="saf-asc-row4">
+                                	<!-- ******计划****** -->
+	                				<table class="table table-bordered" id="planTableId">
+	                                    <thead>
+					                        <tr>
+					                            <th> 计划编号</th>
+					                            <th> 计划文号</th>
+					                            <th> 计划执行类型</th>
+					                            <th> 粮食品种</th>
+					                            <th> 粮食性质</th>
+					                            <th> 生产年限</th>
+					                            <th> 要求数量(公斤)</th>
+					                            <th> 审批结束日期</th>
+					                            <th> 操作</th>
+					                        </tr>
+				                        </thead>
+				                        
+				                        <tbody>
+				                            <tr>
+				                                <td>{{plan.planNumber}}</td>
+				                                <td>{{plan.referenceNumber}}</td>
+				                                <td>{{ dicData[plan.executeType] }}</td>
+				                                <td>{{ dicData[plan.grainKind] }}</td>
+				                                <td>{{ dicData[plan.grainAttribute] }}</td>
+				                                <td>{{ dicData[plan.grainAnnual] }}</td>
+				                                <td>{{ plan.demandAmount }}</td>
+				                                <td>{{ plan.agreeTime | date:'yyyy-MM-dd' }}</td>
+				                                <td>
+				                                    <a href-void ng-click="showView('plan', plan.id, plan.processInstanceId)"><i class="fa fa-info-circle"></i>查看</a>
+				                                </td>
+				                            </tr>
+				                        </tbody>
+	                                </table>
+	                                <!-- ******合同****** -->
+	                                <table class="table table-bordered" id="contractTableId" style="display: none;">
+	                                    <thead>
+					                        <tr>
+					                        
+					                            <th> 计划编号</th>
+					                            <th> 合同编号</th>
+					                            <th> 合同名称</th>
+					                            <th> 合同类型</th>
+					                            <th> 粮食品种</th>
+					                            <th> 粮食性质</th>
+					                            <th> 数量(吨)</th>
+					                            <th> 金额(元)</th>
+					                            <th> 支付方式</th>
+					                            <th> 审批结束日期</th>
+					                            <th> 操作</th>
+					                        </tr>
+					                        </thead>
+					                        
+					                        <tbody>
+					                            <tr ng-repeat="contract in contractList.list">
+					                                <td>{{contract.planNumber}}</td>
+					                                <td>{{contract.contractNumber}}</td>
+					                                <td>{{contract.contractTitle}}</td>
+					                                <td>{{ dicData[contract.contractType] }}</td>
+					                                <td>{{ dicData[contract.grainKind] }}</td>
+					                                <td>{{ dicData[contract.grainAttribute] }}</td>
+					                                <td>{{ contract.grainQuantity}}</td>
+					                                <td>{{ contract.moneyQuantity}}</td>
+					                                <td>{{ dicData[contract.contractPayType]}}</td>
+					                                <td>{{ contract.agreeTime | date:'yyyy-MM-dd' }}</td>
+					                                <td>
+					                                    <a href-void ng-click="showView('contract', contract.id, contract.processInstanceId)"><i class="fa fa-info-circle"></i>查看</a>
+					                                </td>
+					                            </tr>
+					                        </tbody>
+	                                </table>
+	                                
+	                                <!-- 通知单  -->
+	                                <table  class="table table-bordered" id="noticeTableId" style="display: none;">
+		                                <thead>
+					                        <tr>
+					                            <th> 通知单类型</th>
+					                            <th> 通知单编号</th>
+					                            <th> 合同编号</th>
+					                            <th> 计划编号</th>
+					                            <th> 客户名称</th>
+					                            <th> 粮食品种</th>
+					                            <th> 金额(元)</th>
+					                            <th> 审批结束日期</th>
+					                            <th> 操作</th>
+					                        </tr>
+				                        </thead>
+				                        
+				                        <tbody>
+				                            <tr ng-repeat="notice in noticeList.list">
+				                                <td>
+				                                    <div ng-switch="{{notice.billType}}">
+				                                    <div ng-switch-when="1">入库</div>
+				                                    <div ng-switch-when="3">出库</div>
+				                                    </div>
+				                                </td>
+				                                <td>{{ notice.billNumber}}</td>
+				                                <td>{{ notice.contract}}</td>
+				                                <td>{{ notice.planNumber}}</td>
+				                                <td>{{ notice.deliveryCustomer}}</td>
+				                                <td>{{ dicData[notice.goodsKind] }}</td>
+				                                <td>{{ notice.moneyQuantity}}</td>
+				                                <td>{{ notice.agreeTime | date:'yyyy-MM-dd' }}</td>
+				                                <td>
+			                                    	<a href-void ng-click="showView('notice', notice.id, notice.processInstanceId, notice.billType)"><i class="fa fa-info-circle"></i>查看</a>
+				                                </td>
+				                            </tr>
+				                        </tbody>
+	                                </table>
+	                                
+	                                
+	                                
+	                                
+	                                
+	                                
+                                </div>
+							</form>
+						</div>
+					</div>
+				</div>
+			</article>
+		</div>
+	</section>
+</div>

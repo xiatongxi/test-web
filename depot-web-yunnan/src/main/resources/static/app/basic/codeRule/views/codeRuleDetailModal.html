@@ -1,0 +1,55 @@
+<div class="modal-content">
+    <div class="modal-header">
+        <button type="button" class="close" ng-click="cancel()">
+            &times;
+        </button>
+    </div>
+    <div class="modal-body">
+        <form id="codeRuleDetail-form" class="smart-form ng-pristine ng-valid" data-validator-option="validateOptions" novalidate="novalidate">
+			<div class="row">
+				<section class="col col-sm-12">
+					<label class="label txt-bg-red">类型<span style="color: red;">*</span></label> 
+					<select ng-model="codeRuleDetail.ruleType" name="ruleType" required 
+						ng-options="type.value as type.name for type in typeList"
+						ng-change="ruleTypeChange()" ng-disabled="isNotEdit" class="form-control">
+							<option value="">--请选择--</option>
+					</select>
+				</section>
+			</div>
+            
+            <!-- 时间 -->
+            <div class="row" ng-show="codeRuleDetail.ruleType == 'dateType'">
+				<section class="col col-sm-12">
+					<label class="label">日期格式<span style="color: red;">*</span></label> 
+					<select ng-model="codeRuleDetail.ruleValue" name="ruleValue" required 
+						ng-options="dateType.value as dateType.name for dateType in dateTypeList"
+						ng-change="typeChange()" ng-disabled="isNotEdit" class="form-control">
+							<option value="">--请选择--</option>
+					</select>
+				</section>
+			</div>
+			
+			<!-- 自定义 -->   
+			<div class="row" ng-show="codeRuleDetail.ruleType == 'customType' || codeRuleDetail.ruleType == 'orgCodeType'">
+				<section class="col col-sm-12">
+					<label class="label">值<span style="color: red;">*</span></label> 
+					<label class="input">
+						<input type="text" ng-model="codeRuleDetail.ruleValue" name="ruleValue" ng-readOnly="ruleValueReadOnly"
+                        required>
+					</label>
+				</section>
+			</div>
+			
+		</form>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-primary" ng-hide="isNotEdit" ng-click="save()">
+        	提交
+        </button>
+        <button type="button" class="btn btn-default"  ng-click="cancel()">
+        	取消
+        </button>
+    </div>
+</div>
+
+

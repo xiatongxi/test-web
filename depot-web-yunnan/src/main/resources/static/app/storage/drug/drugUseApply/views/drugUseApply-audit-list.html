@@ -1,0 +1,97 @@
+<!-- MAIN CONTENT -->
+<div id="content">
+    <section widget-grid id="widget-grid">
+        <div class="row">
+            <article class="col-sm-12">
+                <div jarvis-widget id="standard-datatable-widget" data-widget-color="darken" data-widget-editbutton="false">
+                    <header>
+                        <span class="widget-icon"> <i class="fa fa-table"></i> </span>
+                        <h2>药剂领用审批列表 </h2>
+                    </header>
+                    <div>
+                        <div class="widget-body no-padding">
+                        <div id="DataTables_Table_1_wrapper" class="dataTables_wrapper form-inline no-footer">
+                            <div class="dt-toolbar">
+                                <div class="col-xs-12 col-sm-10">
+                                    <div class="form-group">
+                                        <label> 领用申请编号:
+                                            <input type="search" class="form-control input-sm" ng-model="searchCondition.applyNumber"/>
+                                        </label>&emsp;
+                                        <label><select class="form-control input-sm" ng-model="searchCondition.state">
+                                            <option value="">--当前状态--</option>
+                                            <option value="待审批">待审批</option>
+                                            <option value="驳回">驳回</option>
+                                            <option value="拒绝">拒绝</option>
+                                            <option value="同意">同意</option>
+                                        </select>
+                                        </label>&emsp;
+                                        <label><a class="btn btn-default btn-sm" ng-click="loadData()">
+                                            <i class="fa fa-search"></i>&nbsp;查&nbsp;询
+                                        </a>
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="col-sm-2 col-xs-2 hidden-xs">
+                                    <div class="dataTables_length">
+											<label>每页显示 <select ng-model="pageInfo.pageSize" ng-change="loadData(pageInfo.pageNum=1)"
+																ng-options="num as num for num in [1,10,25,50,100]"
+																class="form-control input-sm"></select> 条
+											</label>
+									</div>
+                                </div>
+                            </div>
+
+                        <table class="table table-striped table-bordered table-hover" width="100%">
+                        <thead>
+                        <tr>
+                            <th>序号</th>
+                            <th>领用申请编号</th>
+                            <th>药剂名称</th>
+                            <th data-hide="expand"><i class="fa fa-fw  text-muted hidden-md hidden-sm hidden-xs"></i>申请总数量</th>
+                            <th data-hide="expand"><i class="fa fa-fw  text-muted hidden-md hidden-sm hidden-xs"></i>申请部门</th>
+                            <th data-class="expand"><i class="fa fa-fw  text-muted hidden-md hidden-sm hidden-xs"></i>申请人</th>
+                            <th data-class="expand"><i class="fa fa-fw  text-muted hidden-md hidden-sm hidden-xs"></i>申请时间</th>
+                            <th data-hide="expand"><i class="fa fa-fw  txt-color-blue hidden-md hidden-sm hidden-xs"></i> 当前状态</th>
+                            <th>当前节点</th>
+                            <th data-hide="expand"> 操作</th>
+                        </tr>
+                        </thead>
+                        
+                        <tbody>
+                            <tr ng-repeat="drugUseApply in pageInfo.list">
+                                <td>{{$index+1}}</td>
+                                <td>{{drugUseApply.applyNumber}}</td>
+                                <td>{{dicData[drugUseApply.drugName]}} ...</td><!--药剂名称-->
+                                <td>{{drugUseApply.sumCount}}</td>
+                                <td>{{drugUseApply.useDepartment}}</td>
+                                <td>{{userInfoData[drugUseApply.creater]}}</td>
+                                <td>{{drugUseApply.createTime | date:'yyyy-MM-dd HH:mm:ss' }}</td>
+                                <td>
+                                    <div ng-switch="drugUseApply.result">
+                                        <div ng-switch-when="待审批">
+                                            <span style='color:green;'>{{drugUseApply.result}}</span>
+                                        </div>
+                                        <div ng-switch-default>
+                                            {{drugUseApply.result}}
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>{{drugUseApply.taskName}}</td><!--当前节点-->
+                                <td>
+                                    <a has-permission="567" href-void ng-click="auditPage(drugUseApply)" ng-hide="drugUseApply.result !='待审批'"><i class="fa fa-pencil-square"></i>审批</a>
+                                    <a has-permission="568" href-void ng-click="viewAuditPage(drugUseApply)"><i class="fa fa-info-circle"></i>查看</a>
+                                </td>
+                            </tr>
+                        </tbody>
+                        </table>
+						<div smart-include="app/layout/partials/page.tpl.html"></div>
+                        </div>
+                        </div>
+                    </div>
+                </div>
+            </article>
+        </div>
+
+    </section>
+    
+</div>

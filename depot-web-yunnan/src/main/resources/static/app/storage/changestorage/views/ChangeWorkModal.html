@@ -1,0 +1,58 @@
+<div class="modal-content">
+    <div class="modal-header">
+        <button type="button" class="close" ng-click="cancel()">
+            &times;
+        </button>
+        <h4 class="modal-title" id="myModalLabel">倒仓作业</h4>
+    </div>
+    <div class="modal-body">
+		<div>
+           <div class="widget-body no-padding">
+           <div id="DataTables_Table_1_wrapper" class="table-responsive" style="overflow:auto;">
+                  <table class="table table-bordered">
+                  <thead>
+                   <tr>
+                   	   <th>序号</th>
+                   	   <th>倒仓申请单号</th>
+                       <th>倒出仓房名称</th>
+                       <th>倒出货位名称</th>
+                       <th>粮油品种</th>
+                       <th>计划倒出数量（公斤）</th>
+                       <th>剩余数量（公斤）</th>
+                       <th>倒入仓房名称</th>
+                       <th>倒入货位名称</th>
+                   </tr>
+                  </thead>
+                  <tbody>
+                      <tr ng-repeat="check in pageInfo.list">
+                          <td>
+                              <input type="checkbox" ng-model="check.checked" ng-click="selectData($event, check)">{{$index + 1 + (pageInfo.pageNum-1) * pageInfo.pageSize}}
+                          </td>
+                          <td>{{check.businessNo}}</td>
+                          <td>{{storehouseObj[check.houseId].storehouseName}}</td>
+                          <td>{{wares[check.wareId].warehouseName}}</td>
+                          <td>{{dicData[check.lspz]}}</td>
+                          <td>{{check.pourOutNum}}</td>
+                          <td>{{check.surplusNum}}</td>
+                          <td>{{storehouseObj[check.storehouseId].storehouseName}}</td>
+                          <td>{{wares[check.warehouseId].warehouseName}}</td>
+                          <!-- <td>
+                              <a href-void ng-click="selectCheck(check)"><i class="fa fa-edit"></i>选择</a>
+                          </td> -->
+                      </tr>
+                  </tbody>
+                  </table>
+				<div smart-include="app/layout/partials/page.tpl.html"></div>
+                  </div>
+                  </div>
+              </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-default"  ng-click="check()">
+        	确定
+        </button>
+        <button type="button" class="btn btn-default"  ng-click="cancel()">
+        	取消
+        </button>
+    </div>
+</div>

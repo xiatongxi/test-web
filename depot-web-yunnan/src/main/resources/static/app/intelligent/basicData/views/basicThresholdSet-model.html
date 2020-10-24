@@ -1,0 +1,79 @@
+<div class="modal-content">
+    <div class="modal-header">
+        <button type="button" class="close" ng-click="cancel()">
+            &times;
+        </button>
+        <h4 class="modal-title" id="myModalLabel">报警阀值设置信息</h4>
+    </div>
+    <div class="modal-body">
+        <form id="ThresholdDetail-form" class="smart-form ng-pristine ng-valid" data-validator-option="validateOptions" novalidate="novalidate">
+            <div class="row">
+                <section class="col col-sm-4">
+                    <label class="label">仓房名称<span style="color: red;">*</span></label>
+                    <label class="select">
+                        <select ng-model="thresholdInfo.vCfCode" name="vCfCode"
+                                ng-options="store.storehouseCode as store.storehouseName for store in storelist"
+                                ng-disabled="isNotEdit" class="form-control">
+                            <option value="">--请选择--</option>
+                        </select>
+                    </label>
+                </section>
+                <section class="col col-sm-4">
+                    <label class="label">创建人<span style="color: red;">*</span></label>
+                    <label class="input">
+                        <input class="form-control" type="text" ng-model="thresholdInfo.wUpdatePerson" name="wUpdatePerson" ng-readonly="isNotEdit" required>
+                    </label>
+                </section>
+                <section class="col col-sm-4">
+                    <label class="label">归属模块：<span
+                            style="color: red;margin-left: 5px;text-align: center;">*</span></label>
+                    <label class="select">
+                        <select ng-model="thresholdInfo.wModule" name="wModule"
+                                class="form-control" required
+                                ng-options="enum.enumid as enum.enumname for enum in dicDataList[6966]">
+                            <option value="">--请选择--</option>
+                        </select>
+                    </label>
+                </section>
+            </div>
+            <div class="row">
+                <section class="col col-4">
+                    <label class="label">预警名称<span style="color: red;">*</span></label>
+                    <label class="select">
+                        <select ng-model="thresholdInfo.wName" name="wName"
+                                ng-options="enum.enumid as enum.enumname for enum in dicDataList[thresholdInfo.wModule]"
+                                required >
+                            <option value="">--请选择--</option><i></i>
+                        </select><i></i>
+                    </label>
+                </section>
+                <section class="col col-sm-4">
+                    <label class="label">预警阈值<span style="color: red;">*</span></label>
+                    <label class="input">
+                        <input class="form-control" type="text" ng-model="thresholdInfo.threshold" name="threshold" placeholder="例:18.12" validNumber="true" required>
+                    </label>
+                </section>
+                <section class="col col-sm-4">
+                    <label class="label">是否开启<span style="color: red;">*</span></label>
+                    <label class="select">
+                        <select ng-model="thresholdInfo.wState" name="wState"
+                                ng-options="x.id as x.name for x in [{id:0,name:'是'},{id:1,name:'否'}]" required>
+                            <option value="">--请选择--</option><!-- selected="" disabled="" 用于样式-->
+                        </select>
+                    </label>
+                </section>
+            </div>
+        </form>
+    </div>
+    <div class="modal-footer">
+        <p align="left">提示：测温设置粮温高限，粮温底限的前提下，温度预警才起作用。</p>
+        <button type="button" class="btn btn-primary" ng-click="save()">
+            提交
+        </button>
+        <button type="button" class="btn btn-default"  ng-click="cancel()">
+            取消
+        </button>
+    </div>
+</div>
+
+

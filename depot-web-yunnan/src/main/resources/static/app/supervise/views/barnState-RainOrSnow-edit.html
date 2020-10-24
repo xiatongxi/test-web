@@ -1,0 +1,183 @@
+<div id="content">
+	<section id="widget-grid" widget-grid>
+		<div class="row">
+			<article class="col-sm-12 col-md-12 col-lg-12">
+				<div jarvis-widget id="form-grid-widget" data-widget-colorbutton="false" data-widget-editbutton="false"
+					 data-widget-custombutton="false">
+					<div>
+						<div class="widget-body no-padding">
+							<form id="rainOrSnow-form" class="smart-form" data-validator-option="validateOptions" novalidate="novalidate">
+								<button type="submit" class="bv-hidden-submit" style="display: none; width: 0px; height: 0px;"></button>
+								<header>
+									<a href-void class="btn btn-default btn-xs" ng-click="retList()">
+										<i class="fa fa-angle-left"></i>&nbsp;返回&nbsp;
+									</a>
+									&nbsp;<strong>风雨雪前检查</strong>
+								</header>
+								<fieldset>
+									<div class="row">
+										<section class="col col-3">
+											<span>日期：</span>
+											<label class="input">
+												<input type="text" ng-model="rainOrSnow.checkDate" name="checkDate" data-smart-datepicker ng-disabled="true" placeholder="日期">
+											</label>
+										</section>
+										<section class="col col-3">
+											<label class="select">
+												<span>门窗是否关好：</span>
+												<label class="select">
+													<select name="preWindowClose" ng-model="rainOrSnow.preWindowClose" ng-disabled="true">
+														<option value="?" selected="" disabled="">请选择</option>
+														<option value="0">是</option>
+														<option value="1">否</option>
+													</select> <i></i> </label>
+											</label>
+										</section>
+										<section class="col col-3">
+											<label class="select">
+												<span>排水是否通畅：</span>
+												<label class="select">
+													<select name="preWaterClean" ng-model="rainOrSnow.preWaterClean" ng-disabled="true">
+														<option value="?" selected="" disabled="">请选择</option>
+														<option value="0">是</option>
+														<option value="1">否</option>
+													</select> <i></i> </label>
+											</label>
+										</section>
+									</div>
+								</fieldset>
+								<header>风雨雪中检查</header>
+								<fieldset>
+									<div class="row">
+										<section class="col col-3">
+											<span>天气情况：</span>
+											<label class="input">
+												<input type="text" ng-model="rainOrSnow.doingWeather" name="doingWeather" ng-disabled="true"
+													   placeholder="天气情况">
+											</label>
+										</section>
+										<section class="col col-3">
+											<label class="select">
+												<span>门窗是否关好：</span>
+												<label class="select">
+													<select name="doingWindowClose" ng-model="rainOrSnow.doingWindowClose" ng-disabled="true">
+														<option value="?" selected="" disabled="">请选择</option>
+														<option value="0">是</option>
+														<option value="1">否</option>
+													</select> <i></i> </label>
+											</label>
+										</section>
+										<section class="col col-3">
+											<label class="select">
+												<span>水沟是否通畅：</span>
+												<label class="select">
+													<select name="doingWaterClean" ng-model="rainOrSnow.doingWaterClean" ng-disabled="true">
+														<option value="?" selected="" disabled="">请选择</option>
+														<option value="0">是</option>
+														<option value="1">否</option>
+													</select> <i></i> </label>
+											</label>
+										</section>
+										<section class="col col-3">
+											<label class="select">
+												<span>仓房有无渗漏：</span>
+												<label class="select">
+													<select name="doingWaterIn" ng-model="rainOrSnow.doingWaterIn" ng-disabled="true">
+														<option value="?" selected="" disabled="">请选择</option>
+														<option value="0">无</option>
+														<option value="1">有</option>
+													</select> <i></i> </label>
+											</label>
+										</section>
+									</div>
+									<div class="row">
+										<section class="col col-3">
+											<span>发生部位：</span>
+											<label class="input">
+												<input type="text" ng-model="rainOrSnow.doingWaterInPosition" name="doingWaterInPosition" ng-disabled="true" placeholder="发生部位">
+											</label>
+										</section>
+									</div>
+									<div class="row">
+										<section class="col col-10">
+											<label class="input">
+												<span>采取措施：</span>
+												<input type="text" ng-model="rainOrSnow.doingWaterInSolution" name="doingWaterInSolution" ng-disabled="true" placeholder="采取措施">
+											</label>
+										</section>
+									</div>
+								</fieldset>
+								<header>风雨雪后检查</header>
+								<fieldset>
+									<div class="row">
+										<section class="col col-3">
+											<span>日期：</span>
+											<label class="input">
+												<input type="text" ng-model="rainOrSnow.postCheckDate" name="postCheckDate" data-smart-datepicker ng-disabled="true" placeholder="日期">
+											</label>
+										</section>
+										<section class="col col-3">
+											<span>仓温℃：</span>
+											<label class="input">
+												<input type="text" ng-model="rainOrSnow.postHouseTemp" name="postHouseTemp" ng-disabled="true" placeholder="仓温℃">
+											</label>
+										</section>
+										<section class="col col-3">
+											<span>仓湿%：</span>
+											<label class="input">
+												<input type="text" ng-model="rainOrSnow.postHouseWater" name="postHouseWater" ng-disabled="true" placeholder="仓湿%">
+											</label>
+										</section>
+										<section class="col col-3">
+											<label class="select">
+												<span>仓房有无渗漏：</span>
+												<label class="select">
+													<select name="postWaterIn" ng-model="rainOrSnow.postWaterIn"  ng-disabled="true">
+														<option value="?" selected="" disabled="">请选择</option>
+														<option value="0">无</option>
+														<option value="1">有</option>
+													</select> <i></i> </label>
+											</label>
+										</section>
+									</div>
+									<div class="row">
+										<section class="col col-3">
+											<span>发生部位：</span>
+											<label class="input">
+												<input type="text" ng-model="rainOrSnow.postWaterInPosition" name="postWaterInPosition" ng-disabled="true" placeholder="发生部位">
+											</label>
+										</section>
+									</div>
+									<div class="row">
+										<section class="col col-10">
+											<label class="input">
+												<span>采取措施：</span>
+												<input type="text" ng-model="rainOrSnow.postWaterInSolution" ng-disabled="true" name="postWaterInSolution" placeholder="采取措施">
+											</label>
+										</section>
+									</div>
+									<div class="row">
+										<section class="col col-3">
+											<span>检查人：</span>
+											<label class="input">
+												<input type="text" ng-model="rainOrSnow.checkSign" name="checkSign" ng-disabled="true" placeholder="检查人" disabled>
+											</label>
+										</section>
+									</div>
+								</fieldset>
+
+								<footer>
+									<div class="row">
+										<div class="col-md-12">
+											<a class="btn btn-default" href-void="" href="#" ng-click="retList()">取消</a>
+										</div>
+									</div>
+								</footer>
+							</form>
+						</div>
+					</div>
+				</div>
+			</article>
+		</div>
+	</section>
+</div>

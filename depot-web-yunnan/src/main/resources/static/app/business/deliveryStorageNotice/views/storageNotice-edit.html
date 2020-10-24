@@ -1,0 +1,307 @@
+<!-- MAIN CONTENT -->
+<div id="content" style=" border-width:5px; margin-left:2%;position:relative;margin-right:2%;">
+    <!-- widget grid -->
+    <section id="widget-grid" widget-grid>
+        <!-- START ROW -->
+        <div class="row">
+            <!-- NEW COL START -->
+            <article class="col-sm-12 col-md-12 col-lg-12">
+                <!-- Widget ID (each widget will need unique ID)-->
+                <div jarvis-widget id="form-grid-widget"
+                    data-widget-colorbutton="false" data-widget-editbutton="false"
+                    data-widget-custombutton="false">
+                    <!-- widget div-->
+                    <div>
+                        <!-- widget content -->
+                        <div class="widget-body no-padding">
+                            <form id="deliveryStorageNotice-form" class="smart-form ng-pristine ng-valid" data-validator-option="validateOptions" novalidate="novalidate" style=" border-width:5px; margin-left:2%;position:relative;margin-right:2%;">
+                                <header>
+									<a href-void class="btn btn-default btn-xs" ng-click="retList()">
+										<i class="fa fa-angle-left"></i>&nbsp;返回&nbsp;
+									</a>
+									&nbsp;<strong>入库通知单详情</strong>
+									<span class="pull-right font-xs">带<span style="color: red;">*</span>的部分必须填写</span>
+								</header>
+                                <fieldset>
+                                <table style="width:70%; border-width:5px; margin-left:15%;position:relative;margin-right:15%;">
+	                                <header>
+	                                	<h3>
+	                                		<strong>基本信息</strong>
+	                               		</h3>
+	                          		</header>
+                                	<table class="table table-striped table-bordered table-hover" width="100%">
+                                		<!--第一个tr开始 -->
+										<tr>
+											<!-- <th  width='10%' rowspan="2" >
+												<label class="label" style="margin-top: 9px;text-align: center;">基本信息</label>
+											</th> -->
+											<th width='10%'>
+												<label class="label" style="margin-top: 9px;text-align: center;">入库通知单编号<span style="color: red;">*</span></label>
+											</th>
+											<th width='20%'>
+												<section>
+		                                            <label class="input"> 
+		                                                <input class="form-control" type="text" ng-model="deliveryStorageNotice.billNumber" ng-readonly="true" 
+		                                                name="billNumber" placeholder="{{ billNumber.msg }}">
+		                                            </label>
+		                                        </section>
+											</th>
+											<th width='10%'>
+												<label class="label" style="margin-top: 9px;text-align: center;">计划编号</label>
+											</th>
+											<th width='20%'>
+												<section>
+                                                        <i class="icon-append fa fa-times" ng-click="removePlan()"></i>
+		                                                <input class="form-control" type="text" ng-model="deliveryStorageNotice.planNumber" ng-readonly="true" ng-disabled="isNotEdit" 
+		                                                name="planNumber"
+		                                                ng-click="getPlan()" placeholder="选择计划" >
+		                                        </section>
+											</th>
+											<th width='10%'>
+												<label class="label" style="margin-top: 9px;text-align: center;">合同编号</label>
+											</th>
+											<th width='20%'>
+												<section>
+                                                        <i class="icon-append fa fa-times" ng-click="removeContract()"></i>
+		                                                <input class="form-control" type="text" ng-model="deliveryStorageNotice.contract" ng-readonly="true" ng-disabled="isNotEdit" 
+		                                                name="contract"
+		                                                ng-click="getContract()" placeholder="选择合同" >
+		                                        </section>
+											</th>
+										</tr>
+										<!--第一个tr结束 -->
+										<tr>
+											<th width='10%'>
+												<label class="label" style="margin-top: 9px;text-align: center;">申请人</label>
+											</th>
+											<th width='20%'>
+												<section>
+		                                            <label class="input" style="margin-top: 9px;"> 
+		                                            	{{ deliveryStorageNotice.creater }}
+		                                            </label>
+		                                        </section>
+											</th>
+											<th>
+												<label label class="label" style="margin-top: 9px;text-align: center;">创建时间</label>
+											</th>
+											<th>
+												<section>
+		                                            <label class="input" style="margin-top: 9px;"> 
+		                                            	{{ deliveryStorageNotice.createTime | date:'yyyy-MM-dd HH:mm:ss' }}
+		                                            </label>
+		                                        </section>
+											</th>
+											<th>
+												<label class="label" style="margin-top: 9px;text-align: center;">运输方式<span style="color: red;">*</span></label>
+											</th>
+											<th>
+												<section>
+		                                            <label class="select"> 
+		                                                <select ng-model="deliveryStorageNotice.qualityStandard" ng-disabled="isNotEdit" name="qualityStandard"  
+														 ng-options="enum.enumid as enum.enumname for enum in dicDataList[5385]" required>
+		                                                    <option value="">--请选择--</option>
+		                                                </select>
+		                                            </label>
+		                                        </section>
+											</th>
+										</tr>
+										</table>
+
+										<header>
+                                	<h3>
+                                		<strong>购销信息</strong>
+                               		</h3>
+                          		</header>
+                                	<table class="table table-striped table-bordered table-hover"  >
+										<thead>
+												<tr>
+													<th data-hide="expand" align="center" width="5%">序号</th>
+													<th data-class="expand" align="center" width="7%">粮库名称</th>
+													<th data-class="expand" align="center" width="7%">仓房名称</th>
+													<th data-class="expand" align="center" width="7%">货位名称</th>
+													<th data-hide="expand" align="center" width="7%">粮油品种</th>
+													<th data-hide="expand" align="center" width="10%">明细品种</th>
+													<th data-hide="expand" align="center" width="8%">粮油性质</th>
+													<th data-hide="expand" align="center" width="5%">等级</th>
+													<th data-hide="expand" align="center" width="8%">数量(公斤)</th>
+													<th data-hide="expand" align="center" width="9%">剩余数量(公斤)</th>
+													<th data-hide="expand" align="center" width="9%">单价(元/公斤)</th>
+													<th data-hide="expand" align="center" width="8%">金额(元)</th>
+													<th data-hide="expand" align="center" width="8%" ng-hide="isNotEdit">操作</th> 
+												</tr>
+												</thead>
+												<tbody>
+												<tr ng-repeat="detailInfo in addedDetail">
+													<td style="display: none;" id="copyId_{{$index+1}}">{{idList[$index]}}</td>
+													<td>{{$index + 1}}</td>
+													<td>
+														 <span ng-if="detailInfo.state == depotInfo.orgId">{{depotInfo.orgName}}</span>
+														 <span ng-if="detailInfo.state != depotInfo.orgId">{{orgInfoAllData[detailInfo.state]}}</span>
+													</td>
+													<td id="houseName_{{$index+1}}">
+														{{detailInfo.houseName}}<input type="hidden" ng-model="detailInfo.houseId" ng-readonly="true">
+														
+													</td>
+													<td id="warehouseName_{{$index+1}}">
+													    {{detailInfo.warehouseName}}<input type="hidden" ng-model="detailInfo.warehouseId" ng-readonly="true">
+														
+													</td>
+													<td>{{dicData[detailInfo.grainKind]}}</td>
+													<td>{{dicData[detailInfo.grainDetailKind]}}</td>
+													<td>{{dicData[detailInfo.grainAttribute]}}</td>
+													<td>{{dicData[detailInfo.grainGrade]}}</td>
+													<td id="nums_{{$index+1}}">{{detailInfo.inCount}}</td>
+													<td>
+														 <p ng-if="detailInfo.planRemainingNumber!=null">{{detailInfo.planRemainingNumber}}</p>
+														 <p ng-if="detailInfo.remainingNumber!=null && detailInfo.planRemainingNumber==null">{{detailInfo.remainingNumber}}</p>
+													</td>
+													<td>{{detailInfo.inPrice}}</td>
+													<td>{{detailInfo.inDetailTotalPrice}}</td>
+													<td ng-hide="isNotEdit">
+														<a class="btn btn-primary"   ng-click="editRow(detailInfo,$event,deliveryStorageNotice)">编辑</a>
+	                                                	<a class="btn btn-primary"   ng-click="deleteRow(detailInfo)">删除</a>
+													</td> 
+												</tr>
+												</tbody>
+		                             </table>
+		                             <fieldset>
+                          			<table>
+                          					<tbody>
+                          						<tr>
+                          							<th>
+                          								<label label class="label" style="margin-top: 9px;text-align: center;">通知单数量(公斤):<span style="color: red;">*</span></label>
+                          							</th>
+                          							<th >
+														<section>
+				                                            <label class="input" style="margin-top:8px"> 
+		                                                <input class="form-control" type="text" ng-model="deliveryStorageNotice.shipingCount" ng-readonly="true" name="shipingCount">
+		                                            </label>
+				                                        </section>
+											        </th>
+                          							<th>
+                          								<label label class="label" style="margin-top: 9px;text-align: center;margin-left:65px;">通知单金额(元):<span style="color: red;">*</span></label>
+                          							</th>
+                          							<th>
+														<section>
+				                                             <label class="input" style="margin-top:8px"> 
+		                                                       <input class="form-control" type="text" ng-model="deliveryStorageNotice.moneyQuantity" ng-readonly="true" name="moneyQuantity">
+		                                                     </label>
+				                                        </section>
+											        </th>
+                          						</tr>
+                          					</tbody>
+                          			</table>
+
+                          			</fieldset>
+		                              <fieldset>
+										<table class="table table-striped table-bordered table-hover">
+										<!--第十个tr开始 -->
+										<tr>
+											<th rowspan="2">
+												<label label class="label" style="margin-top: 9px;text-align: center;">客户信息</label>
+											</th>
+											<th>
+												<label label class="label" style="margin-top: 9px;text-align: center;">客户名称<span style="color: red;">*</span></label>
+											</th>
+											<th>
+												<section>
+                                                    <i class="icon-append fa fa-times" ng-click="removeCustomer()"></i>
+	                                                <input class="form-control" type="text" ng-model="deliveryStorageNotice.deliveryCustomer"  ng-disable="isNotEdit" 
+	                                                name="deliveryCustomer" readOnlyButValid placeholder="请选择客户" ng-click="getCustomer()">
+	                                                <em><span style="color: #D56161;margin-top:6px;padding:0 1px;font-style:normal;font-size:11px;
+                                              			line-height:15px;" id="deliveryCustomer-error"></span></em>
+		                                        </section>
+											</th>
+											<th>
+												<label label class="label" style="margin-top: 9px;text-align: center;">证件号</label>
+											</th>
+											<th>
+												<section>
+		                                            <label class="input"> 
+		                                                <input class="form-control" type="text" ng-model="deliveryStorageNotice.identification" name="identification" ng-readonly="true" 
+                                                        placeholder="选择客户，由客户带出" >
+		                                            </label>
+		                                        </section>
+											</th>
+											<th>
+												<label class="label" style="margin-top: 9px;text-align: center;">联系电话</label>
+											</th>
+											<th>
+		                                        <section>
+		                                            <label class="input"> 
+		                                                <input class="form-control" type="text" ng-model="deliveryStorageNotice.mobile" ng-readonly="true" ng-disable="true" 
+		                                                name="mobile">
+		                                            </label>
+		                                        </section>
+											</th>
+										</tr>
+										<!--第十个tr结束 -->
+										
+										<tr>
+											<th>
+												<label label class="label" style="margin-top: 9px;text-align: center;">备注</label>
+											</th>
+											<th colspan="5">
+												<section>
+	                                                <label class="textarea">
+	                                                    <textarea class="form-control" ng-model="deliveryStorageNotice.billMemo" 
+	                                                    name="billMemo" ng-readonly="isNotEdit" rows="2" data-bv-field="review">
+	                                                    </textarea>
+	                                                </label>
+	                                            </section>
+											</th>
+										</tr>
+										
+										<!--第十八个tr开始 -->
+										<tr ng-hide="!isNotEdit">
+											<th>
+												<label label class="label" style="margin-top: 9px;text-align: center;">创建信息</label>
+											</th>
+											<th>
+												<label label class="label" style="margin-top: 9px;text-align: center;">开单时间</label>
+											</th>
+											<th colspan="2">
+												<section>
+		                                            <label class="input" style="margin-top: 9px;"> 
+		                                                {{ deliveryStorageNotice.billDate | date:'yyyy-MM-dd HH:mm:ss' }}
+		                                            </label>
+		                                        </section>
+											</th>
+											<th>
+												<label label class="label" style="margin-top: 9px;text-align: center;">开单人</label>
+											</th>
+											<th colspan="2">
+												<section>
+		                                            <label class="input" style="margin-top: 9px;">
+		                                            	{{ deliveryStorageNotice.billMan }}
+		                                            </label>
+		                                        </section>
+											</th>
+										</tr>
+										<!--第十八个tr结束 -->
+									</table>
+									 </fieldset>
+                                </table>
+								<span ng-if="deliveryStorageNotice.inApplication=='4' || deliveryStorageNotice.inApplication=='3'" >
+									<table width="100%">
+										<tr>
+											<th>
+												<label class="label" style="font-size:18px;margin-top:15px"><strong>暂停或终止原因：</strong></label>
+												<label class="input">
+													<input type="text" ng-model="deliveryStorageNotice.createDepot" name="createDepot" ng-readonly="isNotEdit">
+												</label>
+											</th>
+										</tr>
+									</table>
+								</span>
+                                </fieldset>
+                               
+                                
+                              <div ng-include="'app/act/util/historyList-audit.html'"></div>
+                            </form>
+                        </div>
+                    </div>
+            </article>
+        </div>
+    </section>
+</div>

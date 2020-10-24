@@ -1,0 +1,79 @@
+<div id="content">
+    <section id="widget-grid" widget-grid>
+        <div class="row">
+            <article class="col-sm-12 col-md-12 col-lg-12">
+                <div jarvis-widget id="form-grid-widget"
+                    data-widget-colorbutton="false" data-widget-editbutton="false"
+                    data-widget-custombutton="false">
+                    <div>
+                        <div class="widget-body no-padding">
+                            <form id="scheduleJob-form" class="smart-form ng-pristine ng-valid" data-validator-option="validateOptions" novalidate="novalidate">
+                                <header>
+									<a href-void class="btn btn-default btn-xs" ng-click="retList()">
+										<i class="fa fa-angle-left"></i>&nbsp;返回&nbsp;
+									</a>
+									&nbsp;<strong>定时任务</strong>
+									<span class="pull-right font-xs">带*的部分必须填写</span>
+								</header>
+								
+                                <fieldset>
+                                    <div class="row">
+                                        <section class="col col-4">
+                                            <label class="label">标题<span style="color: red;">*</span></label> 
+                                            <label class="input"> 
+                                                <input class="form-control" type="text" ng-model="scheduleJob.title" name="title" ng-readonly="isNotEdit" 
+                                                required>
+                                            </label>
+                                        </section>
+                                    </div>
+                                    <div class="row">
+                                        <section class="col col-4">
+                                            <label class="label">bean名称<span style="color: red;">*</span></label> 
+                                            <label class="input"> 
+                                                <input class="form-control" type="text" ng-model="scheduleJob.beanName" name="beanName" ng-readonly="isNotEdit" 
+                                                required>
+                                            </label>
+                                        </section>
+                                        <section class="col col-4">
+                                            <label class="label txt-bg-red">方法名称<span style="color: red;">*</span></label> 
+                                            <label class="input"> 
+                                                <input class="form-control" type="text" ng-model="scheduleJob.methodName" name="methodName" ng-readonly="isNotEdit" 
+                                                required>
+                                            </label>
+                                        </section>
+                                        <section class="col col-4">
+                                            <label class="label">cron表达式<span style="color: red;">*</span></label> 
+                                            <label class="input"> 
+                                                <input class="form-control" type="text" ng-model="scheduleJob.cronExpression" name="cronExpression" ng-readonly="isNotEdit"
+                                                required>
+                                            </label>
+                                        </section>
+                                    </div>
+                                    <div class="row">
+                                        <section class="col col-4">
+                                            <label class="label">备注</label> 
+                                            <label class="input"> 
+                                                <input class="form-control" type="text" ng-model="scheduleJob.remark" name="remark" ng-readonly="isNotEdit">
+                                            </label>
+                                        </section>
+                                    </div>
+                                </fieldset>
+                                
+                                
+                                
+                                <fieldset>
+                                </fieldset>
+                                
+                                <div>
+                                    <footer class="text-align-center">
+                                        <button type="button" class="btn btn-default" ng-click="retList()">取消</button>
+                                        <button type="button" class="btn btn-primary" ng-hide="isNotEdit" ng-click="save()">保存</button>
+                                    </footer>
+                               </div>
+                            </form>
+                        </div>
+                    </div>
+            </article>
+        </div>
+    </section>
+</div>

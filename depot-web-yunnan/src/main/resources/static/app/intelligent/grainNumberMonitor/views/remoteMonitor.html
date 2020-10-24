@@ -1,0 +1,176 @@
+<META HTTP-EQUIV="pragma" CONTENT="no-cache">
+<META HTTP-EQUIV="Cache-Control" CONTENT="no-cache, must-revalidate">
+<META HTTP-EQUIV="expires" CONTENT="0">
+<div id="content" >
+    <div class="row">
+        <div class="jarviswidget">
+            <div class="row col-sm-12">
+                <div class="row col-sm-12" id="needHei">
+                    <div class="col-sm-12 col-md-12 col-lg-9">
+                        <div class="jarviswidget jarviswidget-color-blueDark">
+                            <header>
+                                <h2 style="width: 98%;"> 远程监控通道 <a href="javascript:void(0);" ng-click="init()"><i class="fa fa-refresh"></i></a>
+                                    <a style="float: right;cursor: pointer;color: white;" ng-click="showQP()">&gt;&gt;全屏画面播放&lt;&lt;</a></h2>
+                            </header>
+                            <div>
+                                <div class="widget-body"  ID="throughDIV"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-12 col-md-12 col-lg-3">
+                        <ul id="myTab1" class="nav nav-tabs bordered">
+                            <li class="active" id="qiye-li">
+                                <a href="#trees" data-toggle="tab" aria-expanded="true">摄像头列表</a>
+                            </li>
+                            <li class="" id="geren-li">
+                                <a href="#operat" data-toggle="tab" aria-expanded="false">操作</a>
+                            </li>
+                        </ul>
+                        <div id="myTabContent1" class="tab-content padding-10"
+                             style="max-height: 454px;overflow-y: auto;overflow-x: hidden;">
+                            <div class="tab-pane fade in active" id="trees">
+                                <div class="row">
+                                    <tree-view tree-data="cameraTree" text-field="vCfCode"
+                                               value-field='id' item-clicked="itemClicked($item)"
+                                               item-checked-changed="itemCheckedChanged($item)"
+                                               can-checked="true" item-template-url="/cameraTree.html"></tree-view>
+                                </div>
+                            </div>
+                            <div class="tab-pane fade" id="operat">
+                                <div class="widget-body">
+                                    <div class="form-group">
+                                        <a class="btn btn-primary btn-sm" ng-click="getRoundRound()">
+                                            <span class="glyphicon glyphicon-refresh"></span>轮&#12288;&#12288;巡
+                                        </a>
+                                        <a class="btn btn-primary btn-sm" ng-click="stopRoundRound()">
+                                            <span class="glyphicon glyphicon-remove"></span>终止轮巡
+                                        </a>
+                                    </div>
+                                    <div class="form-group">
+                                        <a class="btn btn-primary btn-sm" ng-click="batchCameraByWinIndex()">
+                                            <i class="fa fa-camera"></i>窗口抓图
+                                        </a>
+                                        <a class="btn btn-primary btn-sm" ng-click="closeCameraByWinIndex()">
+                                            <i class="fa fa-times-circle"></i>窗口关闭
+                                        </a>
+                                    </div>
+                                    <div class="form-group">
+                                        <a class="btn btn-primary btn-sm" ng-click="batchAllCamera()">
+                                            <i class="fa fa-camera"></i>全部抓图
+                                        </a>
+                                        <a class="btn btn-primary btn-sm" ng-click="closeAllCamera()">
+                                            <i class="fa fa-times-circle"></i>全部关闭
+                                        </a>
+                                    </div>
+
+                                    <fieldset>
+                                        <div class="form-group">
+                                            <label>云台控制</label>
+                                            <div class="btn-group btn-group-sm btn-group-justified" data-toggle="buttons" >
+                                                <label class="btn btn-default" ng-mousedown="usePTZ(25,32,'0x0702',0)" ng-mouseup="usePTZ(25,32,'0x0908',1)" >↖</label>
+                                                <label class="btn btn-default" ng-mousedown="usePTZ(21,0,'0x0402',0)"  ng-mouseup="usePTZ(21,0,'0x0908',1)"  >↑</label>
+                                                <label class="btn btn-default" ng-mousedown="usePTZ(26,33,'0x0802',0)" ng-mouseup="usePTZ(26,33,'0x0908',1)" >↗</label>
+                                            </div>
+                                            <div class="btn-group btn-group-sm btn-group-justified" data-toggle="buttons" >
+                                                <label class="btn btn-default" ng-mousedown="usePTZ(23,2,'0x0504',0)" ng-mouseup="usePTZ(23,2,'0x0908',1)" >←</label>
+                                                <label class="btn btn-default"><i class="fa fa-refresh"></i></label>
+                                                <label class="btn btn-default" ng-mousedown="usePTZ(24,3,'0x0502',0)" ng-mouseup="usePTZ(24,3,'0x0908',1)" >→</label>
+                                            </div>
+                                            <div class="btn-group btn-group-sm btn-group-justified" data-toggle="buttons" >
+                                                <label class="btn btn-default" ng-mousedown="usePTZ(27,34,'0x0704',0)" ng-mouseup="usePTZ(27,34,'0x0908',1)">↙</label>
+                                                <label class="btn btn-default" ng-mousedown="usePTZ(22,1,'0x0404',0)"  ng-mouseup="usePTZ(22,1,'0x0908',1)" >↓</label>
+                                                <label class="btn btn-default" ng-mousedown="usePTZ(28,35,'0x0804',0)" ng-mouseup="usePTZ(28,35,'0x0908',1)">↘</label>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <a class="btn btn-primary btn-sm" ng-mousedown="usePTZ(10001,10001,'0x0302',0)" ng-mouseup="usePTZ(10001,10001,'0x0301',1)" >
+                                                <i class="fa fa-plus"></i> 聚焦
+                                            </a>
+                                            <a class="btn btn-primary btn-sm" ng-mousedown="usePTZ(10002,10002,'0x0304',0)" ng-mouseup="usePTZ(10002,10002,'0x0303',1)">
+                                                <i class="fa fa-minus"></i> 聚焦
+                                            </a>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <a class="btn btn-primary btn-sm" ng-mousedown="usePTZ(10003,10003,'0x0202',0)" ng-mouseup="usePTZ(10003,10003,'0x0201',1)" >
+                                                <i class="fa fa-plus"></i> 调焦
+                                            </a>
+                                            <a class="btn btn-primary btn-sm" ng-mousedown="usePTZ(10004,10004,'0x0204',0)" ng-mouseup="usePTZ(10004,10004,'0x0203',1)">
+                                                <i class="fa fa-minus"></i> 调焦
+                                            </a>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <a class="btn btn-primary btn-sm" ng-click="vedioBegin()" >
+                                                <i class="fa fa-video-camera"></i> 录像开始
+                                            </a>
+                                            <a class="btn btn-primary btn-sm" ng-click="vedioEnd()" >
+                                                <i class="fa fa-power-off"></i> 录像结束
+                                            </a>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label>窗口数量</label>
+                                            <select class="form-control" ng-change="changeWin()" ng-model="winsum">
+                                                <option value="1">-1-</option>
+                                                <option value="4" selected>-4-</option>
+                                                <option value="6">-6-</option>
+                                                <option value="8">-8-</option>
+                                                <option value="9">-9-</option>
+                                                <option value="10">-10-</option>
+                                                <option value="13">-13-</option>
+                                                <option value="16">-16-</option>
+                                                <option value="25">-25-</option>
+                                                <option value="36">-36-</option>
+                                                <option value="49">-49-</option>
+                                                <option value="64">-64-</option>
+                                            </select>
+                                        </div>
+                                    </fieldset>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/ng-template" id="/treeView.html">
+    <ul class="tree-view">
+        <li ng-repeat="item in treeData" ng-include="itemTemplateUrl" ></li>
+    </ul>
+</script>
+
+<script type="text/ng-template" id="/cameraTree.html">
+    <i ng-click="itemExpended(item, $event);" class="{{getItemIcon(item)}}">
+
+        <span ng-class="{true:'txt-color-white bg-color-orange'}[item.isChecked]" ng-click="warpCallback('itemClicked', item, $event);">{{item[textField]}}</span>
+    </i>
+    <ul ng-if="!isLeaf(item)" ng-show="item.isExpend">
+        <li ng-repeat="item in item.children" ng-include="itemTemplateUrl || '/treeItem.html'">
+        </li>
+    </ul>
+</script>
+
+<style>
+    ul li {
+        list-style-type : none;
+        cursor : pointer;
+        display: list-item;
+    }
+
+    ul li span {
+        border-buttom : 1px dotted #999;
+        border-radius: 5px;
+        display: inline-block;
+        padding: 1px 8px;
+        text-decoration: none;
+        line-height : 20px;
+    }
+
+    ul li span:hover {
+        background-color : #C0C0C0;
+    }
+</style>

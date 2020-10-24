@@ -1,0 +1,633 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>储粮信息点位图配置</title>
+    <script src="../../../util/jquery-1.10.2.min.js" type="text/javascript"></script>
+    <script type="text/javascript" src="../../../util/lufylegend-1.10.1.min.js"></script>
+    <link rel="stylesheet" href="../../../styles/css/bootstrap.min.css">
+    <style>
+        *{
+            padding: 0px;
+            margin: 0px;
+        }
+        #img-box{
+            position: absolute;
+            z-index: 1;
+            width: 100%;
+            height: 100%;
+            top:0%;
+            left:0%
+        }
+    </style>
+</head>
+<body id="body">
+<div id="div1" style="position:absolute;top:0px;left:0px;background: rgba(0,0,0,0.5);z-index: 999;padding:10px">
+    <button onclick="show_mo(this)" style="width: 100%" class="btn toggle_m"><i class="glyphicon glyphicon-asterisk"></i>设置</button>
+    <ul id="ul-box"   style="position: relative;z-index: 9999" class="list-group">
+        <li class="list-group-item "><label>仓位选择</label>
+            <select onchange="get_cw(this.value)" id="liangQuan"  class="form-control form-group-sm">
+            </select></li>
+        <li class="list-group-item" style="display:none"><label>左边距离</label><input id="left_m" oninput ="dom_re(document.getElementById('liangQuan').value)" onpropertychange="dom_re(document.getElementById('liangQuan').value)" value="1" type="range" step="0.01" name="points" min="1" max="100" /></li>
+        <li class="list-group-item" style="display:none"><label>上边距离</label><input id="top_m" oninput ="dom_re(document.getElementById('liangQuan').value)" onpropertychange="dom_re(document.getElementById('liangQuan').value)" type="range" value="1" step="0.01" name="points" min="1" max="100" /></li>
+        <li class="list-group-item" style="display:none"><label>宽</label><input id="width_m" oninput ="dom_re(document.getElementById('liangQuan').value)" onpropertychange="dom_re(document.getElementById('liangQuan').value)" type="range" value="1" step="0.01" name="points" min="1" max="100" /></li>
+        <li class="list-group-item" style="display:none"><label>高</label><input id="height_m" oninput ="dom_re(document.getElementById('liangQuan').value)" onpropertychange="dom_re(document.getElementById('liangQuan').value)" type="range" value="1" step="0.01" name="points" min="1" max="100" /></li>
+        <li class="list-group-item" style="display:none"><label>弧度</label><input id="rdu_m" oninput ="dom_re(document.getElementById('liangQuan').value)" onpropertychange="dom_re(document.getElementById('liangQuan').value)" value="1" type="range" step="0.01" name="points" min="1" max="100" /></li>
+        <li class="list-group-item"><button  style="width: 100%" onclick="sx_dom()" id="btn-sx" class="btn btn-info btn-sm">塑形</button></li>
+        <li has-permission="128" class="list-group-item"><button  style="width: 100%" onclick="cmt()" id="btn-sbmit" class="btn btn-info btn-sm">保存/修改</button></li>
+    </ul>
+</div>
+<div id="img-main" style="width: 100%;height:100%;position: relative">
+    <img id="myPicture" style="position: absolute;width: 100%;height: 100%;display: block"></div>
+<div id="img-box">
+    <div class="SXT" id="1_c"  style="width:9.0%;height:5.5%;opacity: 0.5;left:42.5%!important;top: 24.531111%;position: absolute;"></div>
+    <div class="SXT" id="2_c" style="width:18.5%;height:8.0%;opacity:0.5;left:31.8%!important;bottom: 37.531111%;position: absolute"></div>
+</div>
+</body>
+<!--canvas拉扯操作-->
+<script src="../../../util/matrix.js"></script>
+<script type="text/javascript">
+
+    var hasDot = false,
+        hasRect = false,
+        hasPic = true,
+        count = 1;
+    var dots = [];
+    var dotscopy , idots;
+    /**
+     * 鼠标拖动事件绑定
+     * @param e
+     */
+    window.onmousedown = function(e){
+        if(!dots.length)return;
+        var area = getArea(e);
+        var dot,i;
+        //鼠标事件触发区域
+        var qy = 40;
+        for (i = 0; i < dots.length; i++) {
+            dot = dots[i];
+            if (area.t >= (dot.y - qy) && area.t <= (dot.y + qy) && area.l >= (dot.x - qy) && area.l <= (dot.x + qy)) {
+                break;
+            } else {
+                dot = null;
+            }
+        }
+        if(!dot) return;
+        window.onmousemove = function(e){
+            var narea = getArea(e);
+            var nx = narea.l-area.l;
+            var ny = narea.t-area.t;
+
+            dot.x += nx;
+            dot.y += ny;
+
+            area = narea;
+
+            render();
+        };
+
+        window.onmouseup = function(){
+            window.onmousemove = null;
+            window.onmouseup = null;
+        }
+    };
+    /**
+     * 获取鼠标点击/移过的位置
+     * @param e
+     * @returns {{t: number, l: number}}
+     */
+    function getArea(e){
+        e = e || window.event;
+        var d=$("#cas").offset().top;
+        var f=$("#cas").offset().left
+        return {
+            t : e.clientY - d + document.body.scrollTop + document.documentElement.scrollTop,
+            l : e.clientX - f + document.body.scrollLeft + document.documentElement.scrollLeft
+        }
+    }
+
+    /**
+     * 画布渲染
+     */
+    function render(){
+        ctx.clearRect(0,0,canvas.width,canvas.height);
+
+        var ndots = rectsplit(count, dots[0], dots[1], dots[2], dots[3]);
+
+        ndots.forEach(function(d , i){
+            //获取平行四边形的四个点
+            var dot1 = ndots[i];
+            var dot2 = ndots[i + 1];
+            var dot3 = ndots[i + count + 2];
+            var dot4 = ndots[i + count + 1];
+
+            //获取初始平行四边形的四个点
+            var idot1 = idots[i];
+            var idot2 = idots[i + 1];
+            var idot3 = idots[i + count + 2];
+            var idot4 = idots[i + count + 1];
+
+            if (dot2 && dot3 && i%(count+1)<count){
+                //绘制三角形的下半部分
+                renderImage(idot3, dot3, idot2, dot2, idot4, dot4);
+
+                //绘制三角形的上半部分
+                renderImage(idot1, dot1, idot2, dot2, idot4, dot4);
+            }
+
+            if(hasDot){
+                ctx.save();
+                ctx.fillStyle = "red";
+                ctx.fillRect(d.x-1 , d.y-1 , 2 , 2);
+                ctx.save();
+            }
+        });
+    }
+
+    /**
+     * 计算矩阵，同时渲染图片
+     * @param arg_1
+     * @param _arg_1
+     * @param arg_2
+     * @param _arg_2
+     * @param arg_3
+     * @param _arg_3
+     */
+    function renderImage(arg_1 , _arg_1 , arg_2 , _arg_2 , arg_3 , _arg_3){
+        ctx.save();
+        //根据变换后的坐标创建剪切区域
+        ctx.beginPath();
+        ctx.moveTo(_arg_1.x, _arg_1.y);
+        ctx.lineTo(_arg_2.x, _arg_2.y);
+        ctx.lineTo(_arg_3.x, _arg_3.y);
+        ctx.closePath();
+        if(hasRect){
+            ctx.lineWidth =1;
+            ctx.strokeStyle = "#000";
+            ctx.stroke();
+        }
+        ctx.clip();
+
+        if(hasPic){
+            //传入变换前后的点坐标，计算变换矩阵
+            var result = matrix.getMatrix.apply(this , arguments);
+
+            //变形
+            ctx.transform(result.a , result.b , result.c , result.d , result.e , result.f);
+
+            //绘制图片
+            ctx.drawImage(img , idots[0].x , idots[0].y , img.width , img.height);
+        }
+
+        ctx.restore();
+    }
+
+
+    /**
+     * 将abcd四边形分割成n的n次方份，获取n等分后的所有点坐标
+     * @param n     多少等分
+     * @param a     a点坐标
+     * @param b     b点坐标
+     * @param c     c点坐标
+     * @param d     d点坐标
+     * @returns {Array}
+     */
+    function rectsplit(n , a , b , c , d){
+        //ad向量方向n等分
+        var ad_x = (d.x - a.x)/n;
+        var ad_y = (d.y - a.y)/n;
+        //bc向量方向n等分
+        var bc_x = (c.x - b.x)/n;
+        var bc_y = (c.y - b.y)/n;
+
+        var ndots = [];
+        var x1, y1, x2, y2, ab_x, ab_y;
+
+        //左边点递增，右边点递增，获取每一次递增后的新的向量，继续n等分，从而获取所有点坐标
+        for(var i=0;i<=n;i++){
+            //获得ad向量n等分后的坐标
+            x1 = a.x + ad_x * i;
+            y1 = a.y + ad_y * i;
+            //获得bc向量n等分后的坐标
+            x2 = b.x + bc_x * i;
+            y2 = b.y + bc_y * i;
+
+            for(var j=0;j<=n;j++){
+                //ab向量为：[x2 - x1 , y2 - y1]，所以n等分后的增量为除于n
+                ab_x = (x2 - x1)/n;
+                ab_y = (y2 - y1)/n;
+
+                ndots.push({
+                    x: x1 + ab_x * j,
+                    y: y1 + ab_y * j
+                })
+            }
+        }
+
+        return ndots;
+    }
+
+</script>
+<script type="text/javascript">
+    var obj = null;
+    var divObj = null;
+    var deltaX, deltaY,_startX,_startY;
+    function  get_td(obj,box){
+        obj = document.getElementById(obj);
+        box_g=$("#"+box)
+        divObj = document.getElementById(box);
+        obj.addEventListener('mousedown', function (event) {
+            //将鼠标位置转为文档坐标
+            var scroll = getScrollOffsets();
+            var startX = event.clientX + scroll.x;
+            var startY = event.clientY + scroll.y;
+
+            _startX = parseInt(startX);
+            _startY = parseInt(startY);
+            if (document.addEventListener) {
+                document.addEventListener("mousemove", moveHandler, true);
+                document.addEventListener("mouseup", upHandler, true);
+            } else if (document.attachEvent) {
+                obj.setCapture();
+                obj.attachEvent("onlosecapeture", upHandler);
+                obj.attachEvent("onmouseup", upHandler);
+                obj.attachEvent("onmousemove", moveHandler);
+
+            }
+
+            //处理了这个事件，不让任何其它元素看到它
+            if (event.stopPropagation) event.stopPropagation(); //标准模型
+            else event.cancelBubble = true;
+
+            //现在阻止任何默认操作
+            if (event.preventDefault) event.preventDefault();
+            else event.returnValue = false;
+        });
+        ;
+
+    };
+
+    function moveHandler(e) {
+        if (!e) e = window.event; //ie事件模型
+        var startX =parseInt(e.clientX);
+        var startY =parseInt(e.clientY);
+        deltaX = startX - _startX;
+        deltaY = startY - _startY;
+        $(box_g).width(($(box_g).width()+  deltaX ))
+        $(box_g).height(($(box_g).height() + deltaY))
+        $("#width_m").val(($(box_g).width()+  deltaX )/ $("#img-box").width() * 100)
+        $("#height_m").val(($(box_g).height()+ deltaY)/$("#img-box").height() * 100)
+        _startX = startX;
+        _startY = startY;
+        wh_gt();
+        if (e.stopPropagation) e.stopPropagation(); //标准模型
+        else e.cancelBubble = true;
+    }
+
+    function upHandler(e) {
+        if (!e) e = window.event; //ie事件模型
+        //注销捕获事件处理程序
+        if (document.removeEventListener) {
+            document.removeEventListener("mousemove", moveHandler, true);
+            document.removeEventListener("mouseup", upHandler, true);
+        } else if (document.detachEvent) {
+            obj.detachEvent("onlosecapeture", upHandler);
+            obj.detachEvent("onmouseup", upHandler);
+            obj.detachEvent("onmousemove", moveHandler);
+            obj.releaseCapture();
+        }
+
+
+        if (e.stopPropagation) e.stopPropagation(); //标准模型
+        else e.cancelBubble = true;
+    }
+
+    //以一个对象的x和y属性的方式返回滚动条的偏移量
+    function getScrollOffsets(w) {
+        // 使用指定的窗口，如果不带参数则使用当前窗口
+        w = w || window;
+        // 除了IE8及更早的版本以外，其它浏览器版本都能用
+        if (w.pageXOffset != null) return { x: w.pageXOffset, y: w.pageYOffset };
+
+        // 对标准模式下的IE（或任何浏览器）
+        var d = w.document;
+        if (document.compatMode == "CSS1Compat")
+            return { x: d.documentElement.scrollLeft, y: d.documentElement.scrollTop };
+
+        //对怪异模式下的浏览器
+        return { x: d.body.scrollLeft, y: d.body.scrollTop };
+    }
+    var navControl = null;
+
+
+</script>
+<script type="text/javascript">
+    //获取浏览器窗口高度
+    //窗体适应
+    WIN_WH()
+    //dom适应；
+    get_cw(document.getElementById('liangQuan').value);
+    $(".SXT").html("");
+    //设置窗口隐藏显示
+    function show_mo(obj){
+        $("#ul-box").toggle()
+    }
+    function get_textwh(dom){
+        for(var a=0;a<$(dom).length;a++){
+            var SXT=$(dom).eq(a);
+            var t=SXT.width();
+            var h=SXT.height();
+            var c=t*0.8;
+            var w= c/(SXT.text().length);
+            SXT.css("font-size",w);
+            SXT.css("line-height",h*0.8+"px");
+            SXT.css("text-align","center");
+        }
+    }
+
+    //获取当前仓位信息，并标注触发区域
+    function get_cw(obj){
+        $(".SXT").html("");
+        if (obj == "") {
+            return false
+        }
+        //这里我是将当前仓位的值作为当前仓位热点图的id
+        var  cw_xx={top:"50",left:"50",width:"4",height:"4",rdu_m:"0"}//通过当前仓位查找当前热点dom的位置信息
+        if(cw_xx==""){
+            cw_xx={top:"0",left:"0",width:"0",height:"0",rdu_m:"0"}
+        }
+
+        var liangQuanStyle="";//添加已经保存的位置
+        //修改dom.初始化赋值
+        $.ajax({
+            type: "get",
+            dataType: "json",
+            url: location.protocol+"//"+location.host+"/depot-supervise/depotStyle/getSinglePointChart",
+            data: {
+                indexid: $("#liangQuan").val(),
+                type: type
+            },
+            success: function (msg) {
+                if (msg.length != 0) {
+                    liangQuanStyle = msg[0].styles;
+                    $("#left_m").val(liangQuanStyle.match(/left:(.+?)%;/)[1]);
+                    $("#top_m").val(liangQuanStyle.match(/top:(.+?)%;/)[1]);
+                    $("#width_m").val(liangQuanStyle.match(/width:(.+?)%;/)[1]);
+                    $("#height_m").val(liangQuanStyle.match(/height:(.+?)%;/)[1]);
+//                    $("#rdu_m").val(liangQuanStyle.match(/border-radius:(.+?)%;/)[1]);
+                    $("#rdu_m").val(cw_xx.rdu_m);
+                }else{
+                    $("#left_m").val(cw_xx.left);
+                    $("#top_m").val(cw_xx.top);
+                    $("#width_m").val(cw_xx.width);
+                    $("#height_m").val(cw_xx.height);
+                    $("#rdu_m").val(cw_xx.rdu_m);
+                }
+                dom_re(obj)
+            }
+        });
+    }
+    //修改dom.初始化赋值
+    function dom_re(obj){
+        if (cw_d() == false) {
+            return
+        }
+        $("#img-box").html(
+            '<div class="SXT" oninput =dom_re('+obj+') id='+obj+' style="border-radius:'+$("#rdu_m").val()+'%;resize:both;opacity:0.5;background-color:#000;position:absolute;height:' + $("#height_m").val() + '%;width:' + $("#width_m").val() + '%;left:' + $("#left_m").val() + '%;top:'+ $("#top_m").val()+'%;position:absolute">' +
+            '<div id="'+obj+'_c" style="position: absolute; left: 1px; top: 1px; width: 10px; height:10px; cursor:' +
+            ' se-resize;z-index: 200001; background: #fff;opacity: 0.5"> </div>' +
+            '<!--<canvas style="border: 1px solid #fff;float:left" id="cas" width="100%" height="100%">--></div>');
+        //字体大小适应
+        get_textwh(".SXT")
+        var dom=document.getElementById(obj)
+        //添加拖到
+        dom_ap(dom)
+        //添加手动变形;
+        get_td(obj+"_c",obj);
+        /*  //添加角度变形
+          ondrop(obj)
+
+         /!* wh_gt()*!/*/
+    }
+    function sx_dom(){
+        var e=$(".SXT");
+        var w=(e.width());
+        var h=(e.height());
+        e.css("background","none");
+        e.html("");
+        $(".SXT").append('<canvas style="border: 1px solid #fff;float:left" id="cas" width='+w+' height='+h+'>')
+        canvas_can(document.getElementById("cas"))
+    }
+    //canvas高宽跟随变化
+    function wh_gt(){
+        canvas_can()
+    }
+    function canvas_can(e){
+        canvas = document.getElementById("cas");
+        if(!canvas){
+            return
+        }
+        ctx = canvas.getContext("2d");
+        img = new Image();
+        img.src = "/styles/img/cangfang_black.png";
+        img.onload = function(){
+            var img_w = e.width;
+            var img_h = e.height;
+            var left = (canvas.width - img_w)/2;
+            var top = (canvas.height - img_h)/2;
+
+            img.width = img_w;
+            img.height = img_h;
+
+            dots = [
+                { x:left, y:top },
+                { x:left + img_w, y:top },
+                { x:left + img_w, y:top + img_h},
+                { x:left, y:top + img_h}
+            ];
+
+            //保存一份不变的拷贝
+            dotscopy = [
+                { x:left, y:top },
+                { x:left + img_w, y:top },
+                { x:left + img_w, y:top + img_h},
+                { x:left, y:top + img_h}
+            ];
+
+            //获得所有初始点坐标
+            idots = rectsplit(count, dotscopy[0], dotscopy[1], dotscopy[2], dotscopy[3]);
+
+            render();
+            ctx.drawImage(img,0,0,img.width,img.height,0,0,canvas.width,canvas.height);
+        };
+    }
+    //判断sift是否按下；
+    function onkedo(e){
+        if (e.shiftKey==1)
+        {
+            return true
+        }
+    }
+    //为当前仓库添加鼠标拖到事件
+    function dom_ap(obj){
+        obj.onmousedown = function(ev) {
+            if (ev.target == this) {
+                var oevent = ev || event;
+                var distanceX = oevent.clientX - obj.offsetLeft;
+                var distanceY = oevent.clientY - obj.offsetTop;
+                var distanX = oevent.clientX;
+                var distanY=oevent.clientY;
+            }
+            document.onmousemove = function (ev) {
+                var oevent = ev || event;
+                var width = (oevent.clientX - distanceX) / $("#img-box").width() * 100;
+                var height = (oevent.clientY - distanceY) / $("#img-box").height() * 100;
+                //添加变形
+                if(onkedo(ev)==true) {
+                    /* $(obj).css("transform", "rotate(" + (oevent.clientY - distanX)  + "deg)")
+                      return*/
+                }
+                else {
+                    $("#left_m").val(width);
+                    $("#top_m").val(height);
+                    obj.style.left = width + '%';
+                    obj.style.top = height + '%';
+                }
+            };
+            document.onmouseup = function () {
+                document.onmousemove = null;
+                document.onmouseup = null;
+            };
+        } }
+    //判断当前是否选中仓位
+    function cw_d() {
+        if ($("#liangQuan").val() == "0" || $("#liangQuan").val() == " " || !$("#liangQuan").val()) {
+            alert("请选择仓位")
+            return false
+        }
+        return true;
+    }
+
+    var urls = window.location.href;
+    var type = urls.match(/\?.*type=([^&]*).*/)[1];
+    var id = urls.match(/\?.*id=([^&]*).*/)[1];
+    var image = urls.match(/\?.*image=([^&]*).*/)[1];
+    //保存当前仓房位置图
+    function  cmt(){
+        if(cw_d()){
+            var  w=$("#width_m").val().replace("%","");
+            var  h=$("#height_m").val().replace("%","");
+//            var  l= $("#left_m").val().replace("%","");
+//            var  t= $("#top_m").val().replace("%","");
+            var  s=$("#rdu_m").val().replace("%","");
+            var imgdata=canvas.toDataURL();
+            $(".SXT").css("width",w+"%");
+            $(".SXT").css("height",h+"%");
+            var style=$(".SXT").attr("style");
+            var l=style.match(/left: (\S*)%;/)[1];
+            var t=style.match(/top: (\S*)%;/)[1];
+
+            $.ajax({
+                type: "POST",
+                dataType: "json",
+                url: location.protocol+"//"+location.host+"/depot-supervise/depotStyle/addAreaPoint",
+                data: {
+                    indexid : $("#liangQuan").val(),
+                    type : type,
+                    styles: "border-radius:"+s+"%;resize: both;height:" + h + "%;width:" + w + "%;left:" + l + "%;top:"+ t +"%;position: absolute;",
+                    imgdata: imgdata,
+                    orgId: id
+                },
+                success: function (msg) {
+                    if(msg.status=="success"){
+                        alert("保存成功！",'提示');
+                        window.close();
+                    }
+                },
+                error: function () {
+                    alert("保存失败！",'提示');
+                }
+            });
+        };
+    }
+    window.onload = function(){
+        var div1 = document.getElementById("div1");
+        div1.onmousedown = function(ev){
+            if(ev.target==this) {
+                var oevent = ev || event;
+                var distanceX = oevent.clientX - div1.offsetLeft;
+                var distanceY = oevent.clientY - div1.offsetTop;
+            }
+            document.onmousemove = function(ev){
+                var oevent = ev || event;
+                div1.style.left = oevent.clientX - distanceX + 'px';
+                div1.style.top = oevent.clientY - distanceY + 'px';
+            };
+            document.onmouseup = function(){
+                document.onmousemove = null;
+                document.onmouseup = null;
+            };
+
+        };
+
+        //获取到连接里面的参数
+//        alert("服务器路径："+(document.URL).split("app")[0]);
+    }
+    //窗口适应
+    function WIN_WH() {
+        if (window.innerHeight)
+            document.getElementById("body").style.height = window.innerHeight;
+        else if ((document.body) && (document.body.clientHeight))
+            document.getElementById("body").style.width = document.body.clientHeight + "px";
+        ;
+        //通过深入Document内部对body进行检测，获取浏览器窗口高度
+        if (document.documentElement && document.documentElement.clientHeight)
+            document.getElementById("body").style.height = document.documentElement.clientHeight + "px";
+    }
+    $(window).resize(function () {
+        //窗体适应
+        WIN_WH()
+        //dom适应；
+        get_cw(document.getElementById('liangQuan').value)
+    })
+
+</script>
+<script type="text/javascript">
+
+    $(function(){
+        //动态获取背景图片
+        var element = document.getElementById('myPicture');
+        element.src = image;
+        getBarn();
+    });
+    //获取仓房数据
+    function getBarn(){
+        $.ajax({
+            type: "get",
+            dataType: "json",
+            url: location.protocol+"//"+location.host+"/depot-basic/Storehouse/getStorehouseList",
+            data: {
+                unitId : id
+            },
+            success: function (msg) {
+                getSelect(msg);
+            },
+            error: function () {
+                alert("查询仓房信息失败",'提示');
+            }
+        });
+    }
+
+    //循环下拉仓房信息
+    function getSelect(msg){
+        var ObjectSelect = $("#liangQuan");
+        ObjectSelect.html("");
+        ObjectSelect.append("<option selected value=''>--全部--</option>");
+        for(var i=0;i<msg.houseList.length;i++){
+            ObjectSelect.append("<option value='"+msg.houseList[i].storehouseId+"'>"+msg.houseList[i].storehouseName+"</option>");
+        }
+    }
+
+</script>
+
+</html>

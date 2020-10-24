@@ -1,0 +1,178 @@
+<link rel="stylesheet" href="styles/css/additionalHome/index.css">
+<link rel="stylesheet" href="styles/css/additionalHome/demo.css">
+<link rel="stylesheet" href="styles/css/additionalHome/jquery.flipster.css">
+<link rel="stylesheet" href="styles/css/additionalHome/flipsternavtabs.css">
+<div class="qualityCheck-main" ng-controller="storageCtrl">
+	<div class="information">
+	    <div class="informationContent">
+	        <div class="notice">
+	            <div class="notHeader">
+	                <div class="skew">
+	                    <img src="styles/img/qualityCheck/1icon-gg.png" alt="">
+	                    <span>待办</span>
+	                </div> 
+	                <div class="more">
+	                    <span ng-click="more()">更多</span>
+	                    <span>></span>
+	                </div>
+	            </div>
+	            <div class="list">
+	                <ul>
+	                    <li ng-repeat="approval in handleInfo.list">
+	                        <span style="cursor: pointer;" ng-click="auditPage(approval.projectId, approval.processInstanceId,approval.taskType, approval.taskId,approval.id, approval.result)">{{approval.taskTypeName}}</span>
+	                        <!-- <span>{{approval.applyTime | date:'yyyy-MM-dd HH:mm:ss'}}</span> -->
+	                        <span>{{approval.applyTime | date:'yyyy-MM-dd'}}</span>
+	                    </li>
+	                </ul>
+	            </div>
+	        </div>
+	        <div class="launch">
+	            <div class="notHeader">
+	                <div class="skew">
+	                    <img src="styles/img/qualityCheck/2icon-fq.png" alt="">
+	                    <span>发起</span>
+	                </div>
+	            </div>
+	            <div class="flipster" style="margin-top: 35px;">
+					<ul>
+						<li>
+							<a href="javaScript:void(0)" id="ventilate" ng-click="ventilateApply('ventilate')">
+                                <img src="styles/img/storage/1.png" alt="">
+                            </a>
+						</li>
+						<li>
+							<a href="javaScript:void(0)" id="fumigation" ng-click="fumigationApply('fumigation')">
+                                <img src="styles/img/storage/2.png" alt="">
+                            </a>
+						</li>
+						<li>
+							<a href="javaScript:void(0)" id="wareHouse" ng-click="wareHouseApply('wareHouse')">
+                                <img src="styles/img/storage/3.png" alt="">
+                            </a>
+						</li>
+						<li>
+							<a href="javaScript:void(0)" id="noticeIssued" ng-click="showAddNotify('noticeIssued')">
+                                <img src="styles/img/storage/5.png" alt="">
+                            </a>
+						</li>
+						<li>
+							<a href="javaScript:void(0)" id="publishDocument" ng-click="safeProduceTodo('publish','publishDocument')">
+                                <img src="styles/img/storage/4.png" alt="">
+                            </a>
+						</li>
+				  	</ul>
+				</div>
+	        </div>
+	    </div>
+	</div>
+	<div class="business">
+	    <div class="businessContent">
+	        <div class="title">
+	            <img src="styles/img/qualityCheck/yewu01.png" alt="">
+	            <span>业务概览</span>
+	            <img src="styles/img/qualityCheck/yewu02.png" alt="">
+	
+	        </div>
+	        <div class="cartlist">
+	            <div class="item">
+	                <div class="itemHeader">
+	                    <span>预警报警</span>
+	                </div>
+	                <div class="itemContent">
+	                    <img src="styles/img/storage/2icon1.png" alt="">
+	                    <div class="textList oneLine">
+	                        <span>全部:<span class="ml5" ng-click="warnWD()">{{warnTotal}}</span></span>
+	                    </div>
+	                </div>
+	            </div>
+	            <div class="item">
+	                <div class="itemHeader">
+	                    <span>通风作业</span>
+	                </div>
+	                <div class="itemContent">
+	                    <img src="styles/img/storage/2icon2.png" alt="">
+	                    <div class="textList">
+	                        <ul>
+	                            <li>全&nbsp;&nbsp;&nbsp;&nbsp;部:<i ng-click="ventilateTask()">{{ventilateTotal}}</i></li>
+	                            <li>已完成:<i>{{ventilateFinsh}}</i></li>
+	                            <li>进行中:<i>{{ventilateNoFinsh}}</i></li>
+	                        </ul>
+	                    </div>
+	                </div>
+	            </div>
+	            <div class="item">
+	                <div class="itemHeader">
+	                    <span>熏蒸作业</span>
+	                </div>
+	                <div class="itemContent">
+	                    <img src="styles/img/storage/2icon3.png" alt="">
+	                    <div class="textList">
+	                        <ul>
+	                            <li>全&nbsp;&nbsp;&nbsp;&nbsp;部:<i ng-click="fumigationTask()">{{fumigationTotal}}</i></li>
+	                            <li>已完成:<i>{{fumigationTaskFinsh}}</i></li>
+	                            <li>进行中:<i>{{fumigationTaskNoFinsh}}</i></li>
+	                        </ul>
+	                    </div>
+	                </div>
+	            </div>
+	            <div class="item">
+	                <div class="itemHeader">
+	                    <span>通知公告</span>
+	                </div>
+	                <div class="itemContent">
+	                    <img src="styles/img/storage/2icon4.png" alt="">
+	                    <div class="textList oneLine">
+	                        <span>全部:<span class="ml5" ng-click="safeProduceNotifyTodo()">{{safeProduceNumber}}</span></span>
+	                    </div>
+	                </div>
+	            </div>
+	            <div class="item">
+	                <div class="itemHeader">
+	                    <span>公共文档</span>
+	                </div>
+	                <div class="itemContent">
+	                    <img src="styles/img/storage/2icon5.png" alt="">
+	                    <div class="textList oneLine">
+	                        <span>全部:<span class="ml5" ng-click="safeProduceTodo('list')">{{documentsNumber}}</span></span>
+	                    </div>
+	                </div>
+	            </div>
+	        </div>
+	    </div>
+	</div>
+	<div class="Chart">
+	    <div class="curve">
+	        <div class="ChartTitle">
+	            <div class="titleRight">
+	                <img src="styles/img/qualityCheck/3icon-swqx.png" alt="">
+	                <span>三温曲线图</span>
+	            </div>
+	        </div>
+	        <div class="chartContent">
+	        	<select ng-change="initThree()" ng-model="houseId" 
+	        		ng-options="store.storehouseId as store.storehouseName for store in storehouseList">
+                </select>
+                <div id="Thermometer"></div>
+            </div>
+		</div>
+        <div class="Columnar">
+            <div class="ChartTitle">
+                <div class="titleRight">
+                    <img src="styles/img/qualityCheck/4icon-lspz.png" alt="">
+                    <span>粮食品种</span>
+                </div>
+            </div>
+            <div class="chartContent">
+                <div id="foodstuff"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+$(function(){ 
+	$(".flipster").flipster({ 
+		style: 'carousel', 
+		start: 0 }); 
+	});
+</script>
+

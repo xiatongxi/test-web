@@ -1,0 +1,83 @@
+<!-- MAIN CONTENT -->
+<div id="content">
+    <!-- widget grid -->
+    <section id="widget-grid" widget-grid>
+        <!-- START ROW -->
+        <div class="row">
+            <!-- NEW COL START -->
+            <article class="col-sm-12 col-md-12 col-lg-12">
+                <!-- Widget ID (each widget will need unique ID)-->
+                <div jarvis-widget id="form-grid-widget"
+                    data-widget-colorbutton="false" data-widget-editbutton="false"
+                    data-widget-custombutton="false">
+                    <!-- widget div-->
+                    <div>
+                        <!-- widget content -->
+                        <div class="widget-body no-padding">
+                            <form id="plan-form" class="smart-form ng-pristine ng-valid" data-validator-option="validateOptions" novalidate="novalidate">
+                                <header>
+									<a href-void class="btn btn-default btn-xs" ng-click="retList()">
+										<i class="fa fa-angle-left"></i>&nbsp;返回&nbsp;
+									</a>
+									&nbsp;<strong>表单详情</strong>
+								</header>
+                                <fieldset>
+                                    <div ng-repeat="param in enums.form.formProperties" class="col col-6" ng-switch="param.type.name">
+                                    	<div ng-switch-when="string">
+                                    	{{param.name}}:
+	                                    	<label class="input" > 
+	                                            <input class="form-control"  ng-model=param.value type="text"  ng-readonly="isNotEdit" name=param.id />
+	                                        </label>
+                                        </div>
+                                        <div ng-switch-when="long">
+                                    	{{param.name}}:
+	                                    	<select
+												id="islaunch" class="form-control" name="islaunch"
+												ng-model="product.islaunch">
+											<option>是否上市</option>
+											<option value="1">是</option>
+											<option value="0">否</option>
+										</select>
+                                        </div>
+                                        <div ng-switch-when="boolean">
+                                    	{{param.name}}:
+	                                    	<label class="input" > 
+	                                            <input class="form-control"  ng-model=param.value type="text"  ng-readonly="isNotEdit" name=param.id />
+	                                        </label>
+                                        </div>
+                                        <div ng-switch-when="date">
+                                    	{{param.name}}:
+	                                    	<label class="input" > 
+	                                            <input  ng-model=param.value type="text" class="form-control datepicker" data-smart-datepicker  ng-readonly="isNotEdit" name=param.id />
+	                                        </label>
+                                        </div>
+                                        <div ng-switch-when="enum" >
+                                    	{{param.name}}:
+                                    		<div >
+		                                    	<select id="islaunch"  class="form-control" name="param.id" ng-model="param.value">
+													<option>请选择</option>
+													<option value="paramsa" ng-repeat="paramsa in enums.enum_meiju">{{param.id}}</option>
+												</select>
+                                    		</div>
+                                    	
+                                        </div>
+                                    </div>
+                                </fieldset>
+                                
+                                <div class="modal-footer">
+							        <button class="btn btn-primary" ng-click="save()">
+							            保存
+							        </button>
+							        <button class="btn btn-primary" ng-click="choice()">
+							            选择审批人
+							        </button>
+							        <button class="btn btn-warning" ng-click="cancel()">取消</button>
+							    </div>
+                            </form>
+                        </div>
+                    </div>
+            </article>
+        </div>
+    </section>
+</div>
+

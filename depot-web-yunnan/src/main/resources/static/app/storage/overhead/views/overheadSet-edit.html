@@ -1,0 +1,69 @@
+<div class="modal-content">
+	<div class="modal-header">
+		<button type="button" class="close" ng-click="cancel()">
+			&times;</button>
+		<h4 class="modal-title" id="myModalLabel">编辑架空期信息</h4>
+	</div>
+
+	<div class="modal-body">
+		<form id="overheadSet-form" name='overheadSet-form'
+			class="smart-form ng-pristine ng-valid"
+			data-validator-option="validateOptions" novalidate="novalidate">
+			<fieldset>
+				<div class="row">
+					<section class="col col-6">
+						<label class="label">粮食性质：<span style="color: red;margin-left: 5px;text-align: center;">*</span></label>
+						<label class="select" id="grainAttribute-label">
+	                          <multi-select-tree 
+	                              disabled-tree="isNotEdit"
+	                              data-input-model="grainAttributeTreeData" 
+	                              data-output-model="overheadSet.lsxz"
+	                              data-default-label="请选择" name="lsxz" 
+	                              multi-select="false"
+	                               required>
+	                          </multi-select-tree>
+	                          <em><span style="color: #D56161;margin-top:6px;padding:0 1px;font-style:normal;font-size:11px;
+	                         line-height:15px;" id="grainAttribute-error"></span></em>
+	                     </label>
+					</section>
+					<section class="col col-6">
+						<label class="label"></label>
+						<label class="select"></label>
+					</section>
+				</div>
+				<div class="row">
+					<section class="col col-6">
+						<label class="label">架空期：<span style="color: red;margin-left: 5px;text-align: center;">*</span></label>
+						<label class="input">
+							<input type="text" ng-model="overheadSet.overheadPeriod" ng-readonly="isNotEdit"
+							name="overheadPeriod" required maxlength="3" />
+						</label>
+					</section>
+					<section class="col col-6">
+						<label class="label"></label>
+						<label class="select">架空期时间，单位：月！</label>
+					</section>
+				</div>
+				<div class="row">
+					<section class="col col-6">
+						<label class="label">架空期截止前：<span style="color: red;margin-left: 5px;text-align: center;">*</span></label>
+						<label class="input">
+							<input type="text" ng-model="overheadSet.warningDay" ng-readonly="isNotEdit"
+							name="warningDay" required maxlength="3" />
+						</label>
+					</section>
+					<section class="col col-6">
+						<label class="label"></label>
+						<label class="select">架空期截止前多少天提醒，单位：天！</label>
+					</section>
+				</div>
+			</fieldset>
+		</form>
+	</div>
+	<div class="modal-footer">
+		<button ng-click="save()" type="button" ng-hide="isNotEdit"
+			class="btn btn-primary">提交</button>
+		<button ng-click="cancel()" class="btn btn-default"
+			data-dismiss="modal">取消</button>
+	</div>
+</div>

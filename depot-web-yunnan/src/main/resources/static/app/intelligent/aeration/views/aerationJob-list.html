@@ -1,0 +1,100 @@
+<!-- MAIN CONTENT -->
+<div id="content">
+	<!-- widget grid -->
+	<section widget-grid id="widget-grid">
+
+
+		<div class="row">
+			<article class="col-sm-12">
+
+				<div jarvis-widget id="standard-datatable-widget"
+					data-widget-color="darken" data-widget-editbutton="false">
+					<header>
+						<span class="widget-icon"> <i class="fa fa-table"></i>
+						</span>
+						<h2>通风作业列表</h2>
+					</header>
+					<div>
+						<div class="widget-body no-padding">
+							<div id="DataTables_Table_1_wrapper"
+								class="dataTables_wrapper form-inline no-footer">
+								<div class="dt-toolbar">
+								    <div has-botton="2" class="col-xs-12 col-sm-1">
+                                        <a class="btn btn-primary btn-sm" ng-click="getAerationPlan()"><i class="fa fa-plus"></i>&nbsp;新&nbsp;增</a>
+                                    </div>
+									<div class="col-xs-12 col-sm-9">
+										<div class="form-group">
+										
+											<label> 作业编号:  
+	                                        	<input class="form-control input-sm" ng-model="aerationJob.taskNumber" name="taskNumber"/>
+	                                        </label>&emsp;
+											
+											<a class="btn btn-default btn-sm" ng-click="loadData()">
+												<i class="fa fa-search"></i>&nbsp;查&nbsp;询
+											</a>
+										</div>
+									</div>
+									<div class="col-sm-2 col-xs-6 hidden-xs">
+										<div class="dataTables_length">
+											<label>
+											每页显示 <select ng-change="loadData(pageInfo.pageNum=1)"
+													ng-options="num as num for num in [1,10,25,50,100]"
+													ng-model="pageInfo.pageSize" class="form-control input-sm">
+											</select> 条
+											</label>
+										</div>
+									</div>
+								</div>
+
+								<table class="table table-striped table-bordered table-hover"
+									width="100%">
+									<thead>
+										<tr>
+											<th data-class="expand">序号</th>
+											<th data-class="expand">作业编号</th>
+											<th data-class="expand">计划编号</th>
+											<th data-class="expand">作业开始时间</th>
+											<th data-class="expand">作业结束时间</th>
+											<th data-hide="expand">作业状态</th>
+											<th data-hide="expand">创建人</th>
+											<th data-hide="expand">创建时间</th>
+											<th data-hide="expand">操作</th>
+										</tr>
+									</thead>
+
+									<tbody>
+										<tr ng-repeat="aerationJob in pageInfo.list">
+											<td>{{$index + 1}}</td>
+											<td>{{aerationJob.taskNumber}}</td>
+											<td>{{aerationJob.aerationPlanNumber}}</td>
+											<td>{{aerationJob.taskStartTime}}</td>
+											<td>{{aerationJob.taskEndTime}}</td>
+											<td>
+												 <p ng-if="aerationJob.taskState==0"><span style="color: red">未开始</span></p>
+												 <p ng-if="aerationJob.taskState==1"><span style="color: green">正在进行</span></p>
+												 <p ng-if="aerationJob.taskState==2">结束</p>
+											</td>
+											<td>{{aerationJob.creator}}</td>
+											<td>{{aerationJob.creationTime | date:'yyyy-MM-dd HH:mm:ss' }}</td>
+											<td>
+													<a has-permission="401" has-botton="2" href-void ng-click="remove(aerationJob.id)" ng-show="aerationJob.taskState==0">
+														<i class="fa fa-trash-o"></i>删除
+													</a>
+													<a href-void ng-click="showView(aerationJob.id)" ng-show="aerationJob.taskState==2">
+													    <i class="fa fa-info-circle"></i>查看
+												   </a>
+											</td>
+										</tr>
+									</tbody>
+								</table>
+								<div smart-include="app/layout/partials/page.tpl.html"></div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</article>
+		</div>
+
+	</section>
+
+</div>

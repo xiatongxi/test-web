@@ -1,0 +1,166 @@
+<!-- MAIN CONTENT -->
+<div id="content">
+	<!-- widget grid -->
+	<section widget-grid id="widget-grid">
+
+		<div class="row">
+			<article class="col-sm-12">
+
+				<div jarvis-widget id="standard-datatable-widget"
+					data-widget-color="darken" data-widget-editbutton="false">
+					<header>
+						<span class="widget-icon"> <i class="fa fa-table"></i>
+						</span>
+						<h2>保管明细账列表</h2>
+					</header>
+					<div>
+						<div class="widget-body no-padding">
+							<div id="DataTables_Table_1_wrapper"
+								class="dataTables_wrapper form-inline no-footer">
+								<div class="dt-toolbar">
+									<div class="col-xs-12 col-sm-12">
+										<div class="form-group">
+											<label> 粮食品种:</label>
+											<label>
+												<label class="select">
+                                                    <multi-select-tree
+                                                        data-input-model="grainAttributeTreeDataLspz" 
+                                                        data-output-model="search.lspz"
+                                                        data-default-label="--粮食品种--" 
+                                                        name="lspz" 
+                                                        multi-select="false" >
+                                                    </multi-select-tree>
+                                                </label>&emsp;
+											</label>
+											<label> 粮食性质:
+                                                    <label class="select">
+                                                        <multi-select-tree
+                                                            data-input-model="grainAttributeTreeData" 
+                                                            data-output-model="search.hwxz"
+                                                            data-default-label="--粮食性质--" 
+                                                            select-only-leafs="true"
+                                                            name="hwxz" 
+                                                            multi-select="false" >
+                                                        </multi-select-tree>
+                                                    </label>&emsp;
+											</label>
+											<label> 日期:
+												<input type="text" ng-model="search.startDate" class="form-control datepicker" data-smart-datepicker> ~ 
+												<input type="text" ng-model="search.endDate" class="form-control datepicker" data-smart-datepicker>
+											</label>
+										</div>
+									</div>
+									<div class="col-sm-9 col-xs-12 hidden-xs">
+										<label style="margin-left: -14px;"> 仓房名称:</label>
+										<label>
+											<select ng-model="search.ch" class="form-control input-sm" 
+												ng-options="store.storehouseId as store.storehouseName for store in storelist" 
+												ng-change="loadWare(search.ch)">
+												<option value="">请选择</option>
+											</select>&emsp;
+										</label>
+										<label> 货位名称:
+											<select ng-model="search.hwh" class="form-control input-sm" 
+												ng-options="ware.warehouseId as ware.warehouseName for ware in warelist">
+												<option value="">请选择</option>
+											</select>&emsp;
+										</label>
+										<a class="btn btn-default btn-sm" ng-click="loadData()" ng-hide="Show">
+											<i class="fa fa-search"></i>&nbsp;查&nbsp;询</a>&emsp;
+										<a class="btn btn-primary btn-sm" ng-click="print()">
+												<span class="fa fa-print"></span>&nbsp;打&nbsp;印
+										</a>
+									</div>
+									<div class="col-sm-3 col-xs-6 hidden-xs">
+										<div class="dataTables_length">
+											<label>每页显示 <select ng-model="pageInfo.pageSize" ng-change="loadData()"
+												ng-options="num as num for num in [10,25,50,100]"
+												class="form-control input-sm"></select> 条
+											</label>
+										</div>
+									</div>
+								</div>
+
+								<table class="table table-striped table-bordered table-hover"
+									width="100%">
+									<thead>
+				                        <tr>
+				                            <th>序号</th>
+				                            <th>仓房编号</th>
+				                            <th>货位编号</th>
+				                            <th>粮食性质</th>
+				                            <th>粮食品种</th>
+				                            <th>日期</th>
+				                            <!-- <th>凭证号</th>
+				                            <th>摘要</th> -->
+				                            <th>等级</th>
+				                            <th>收入数量(公斤)</th>
+				                            <th>支出数量(公斤)</th>
+				                            <th>结余数量(公斤)</th>
+				                        </tr>
+			                        </thead>
+			                        
+			                        <tbody>
+			                        	<tr ng-repeat="account in pageInfo.list">
+			                        		<td>{{$index+1}}</td>
+			                        		<td>{{storehouseObj[account.ch].storehouseName}}</td>
+											<td>{{warehouseObj[account.hwh].warehouseName}}</td>
+			                        		<td>{{dicData[account.hwxz]}}</td>
+			                        		<td>{{dicData[account.pz]}}</td>
+			                        		<td>{{account.rq | date:'yyyy-MM-dd'}}</td>
+			                        		<!-- <td>{{account.crk_jjdh}}</td>
+			                        		<td>{{account.zy}}</td> -->
+			                        		<td>{{dicData[account.dj]}}</td>
+			                        		<td>{{account.srsl}}</td>
+			                        		<td>{{account.zcsl}}</td>
+			                        		<td>{{account.kcsl}}</td>
+			                        	</tr>
+			                        </tbody>
+								</table>
+								<div smart-include="app/layout/partials/page.tpl.html"></div>
+								
+								<div ng-hide="true" id="print">
+									<table width="100%" border="1" style="border-collapse:collapse;border:none;font-size: 17px;">
+										 <thead>
+					                        <tr>
+					                            <th>序号</th>
+					                            <th>仓房名称</th>
+					                            <th>货位名称</th>
+					                            <th>粮油性质</th>
+					                            <th>粮食品种</th>
+					                            <th>日期</th>
+					                            <!-- <th>凭证号</th>
+					                            <th>摘要</th> -->
+					                            <th>等级</th>
+					                            <th>收入数量(公斤)</th>
+					                            <th>支出数量(公斤)</th>
+					                            <th>结余数量(公斤)</th>
+					                        </tr>
+				                        </thead>
+				                        <tbody>
+				                        	<tr ng-repeat="accounts in printList">
+				                        		<td>{{$index+1}}</td>
+												<td>{{storehouseObj[accounts.ch].storehouseName}}</td>
+												<td>{{warehouseObj[accounts.hwh].warehouseName}}</td>
+				                        		<td>{{dicData[accounts.hwxz]}}</td>
+				                        		<td>{{dicData[accounts.pz]}}</td>
+				                        		<td>{{accounts.rq | date:'yyyy-MM-dd'}}</td>
+				                        		<!-- <td>{{accounts.crk_jjdh}}</td>
+				                        		<td>{{accounts.zy}}</td> -->
+				                        		<td>{{dicData[accounts.dj]}}</td>
+				                        		<td>{{accounts.srsl}}</td>
+				                        		<td>{{accounts.zcsl}}</td>
+				                        		<td>{{accounts.kcsl}}</td>
+				                        	</tr>
+				                        </tbody>
+									</table>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</article>
+		</div>
+	</section>
+</div>
+

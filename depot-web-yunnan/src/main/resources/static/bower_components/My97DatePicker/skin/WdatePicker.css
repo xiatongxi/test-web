@@ -1,0 +1,16 @@
+.Wdate{
+	border:#999 1px solid;
+	height:32px;
+}
+/* 2020年5月26日  范雄伟调样式注释，下面注释掉的是原来的样式 */
+/* .Wdate{ */
+/* 	border:#999 1px solid; */
+/* 	height:20px; */
+/* 	background:#fff url(datePicker.gif) no-repeat right; */
+/* } */
+.Wdate::-ms-clear{display:none;}
+
+.WdateFmtErr{
+	font-weight:bold;
+	color:red;
+}

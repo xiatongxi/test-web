@@ -1,0 +1,59 @@
+<div class="modal-content">
+    <div class="modal-header">
+        <button type="button" class="close" ng-click="cancel()">
+            &times;
+        </button>
+        <h4 class="modal-title" id="myModalLabel">验收列表</h4>
+    </div>
+    <div class="modal-body">
+		<div>
+           <div class="widget-body no-padding">
+           <div id="DataTables_Table_1_wrapper" class="table-responsive" style="overflow:auto;">
+                  <table class="table table-bordered">
+                  <thead>
+                   <tr>
+                   	   <th>序号</th>
+                       <th>验收申请单号</th>
+                       <th>仓房名称</th>
+                       <th>货位名称</th>
+                       <th>粮油品种</th>
+                       <th>粮油性质</th>
+                       <th>等级</th>
+                       <th>储粮数量（公斤）</th>
+                       <th>检验结果</th>
+                       <th>状态</th>
+<!--                        <th>操作</th> -->
+                   </tr>
+                  </thead>
+                  <tbody>
+                      <tr ng-repeat="check in pageInfo.list">
+                          <td>
+                              <input type="checkbox" ng-model="check.checked" ng-click="selectData($event, check)">{{$index + 1 + (pageInfo.pageNum-1) * pageInfo.pageSize}}
+                          </td>
+                          <td>{{check.ysdh}}</td>
+                          <td>{{check.houseName}}</td>
+                          <td>{{check.wareName}}</td>
+                          <td>{{dicData[check.lspz]}}</td>
+                          <td>{{dicData[check.yLsxz]}}</td>
+                          <td>{{dicData[check.lsdj]}}</td>
+                          <td>{{check.clsl}}</td>
+                          <td>{{check.zjjg}}</td>
+                          <td>{{check.ysStatus}}</td>
+                      </tr>
+                  </tbody>
+
+                  </table>
+				<div smart-include="app/layout/partials/page.tpl.html"></div>
+                  </div>
+                  </div>
+              </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-default"  ng-click="check()">
+        	确定
+        </button>
+        <button type="button" class="btn btn-default"  ng-click="cancel()">
+        	取消
+        </button>
+    </div>
+</div>

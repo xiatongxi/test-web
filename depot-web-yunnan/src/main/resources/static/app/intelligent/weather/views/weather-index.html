@@ -1,0 +1,77 @@
+<div>
+    <img src="styles/img/index/weather-index.png" style="width: 100%;height: 100%;"/>
+    <div id="ftemp" style="text-align: center;z-index:10;">
+        <font color="#333" size="5"><b>{{werther.ftemp}}</b></font>
+    </div>
+    <div id="fhumi" style="text-align: center;z-index:10;">
+        <font color="#333" size="5"><b>{{werther.fhumi}}</b></font>
+    </div>
+    <div id="fpressure" style="text-align: center;z-index:10;">
+        <font color="#333" size="5"><b>{{werther.frain}}</b></font>
+    </div>
+    <div id="fwinds" style="text-align: center;z-index:10;">
+        <font color="#333" size="5"><b>{{werther.fwinds}}</b></font>
+    </div>
+    <div id="updatetime" style="text-align: center;z-index:10;">
+        <font color="#333" size="14"><b>{{werther.updateTime | date:'yyyy-MM-dd HH:mm:ss'}}</b></font>
+    </div>
+    <div id="History" ng-click="shows()" style="text-align: center;z-index:10;">
+
+    </div>
+</div>
+<style>
+    #ftemp {
+        border: 0;
+        width: 3.5%;
+        height: 5%;
+        position: absolute;
+        background: #C5F57F;
+        top: 61.5%;
+        left: 25.3%;
+    }
+    #fhumi {
+        border: 0;
+        width: 3.5%;
+        height: 5%;
+        position: absolute;
+        background: #C5F57F;
+        top: 61.5%;
+        left: 39.5%;
+    }
+    #fpressure {
+        border: 0;
+        width: 3.5%;
+        height: 5%;
+        position: absolute;
+        background: #C5F57F;
+        top: 61.5%;
+        left: 54%;
+    }
+    #fwinds {
+        border: 0;
+        width: 3.5%;
+        height: 5%;
+        position: absolute;
+        background: #C5F57F;
+        top: 61.5%;
+        left: 68.5%;
+    }
+    #updatetime {
+        border: 0;
+        width: 40%;
+        height: 10%;
+        position: absolute;
+        background: #D4FC86;
+        top: 32%;
+        left: 35%;
+    }
+    #History {
+        border: 0;
+        width: 12.5%;
+        height: 5%;
+        position: absolute;
+        top: 85%;
+        left: 41%;
+    }
+
+</style>

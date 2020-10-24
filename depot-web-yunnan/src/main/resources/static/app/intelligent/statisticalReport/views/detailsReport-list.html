@@ -1,0 +1,207 @@
+<!-- MAIN CONTENT -->
+<div id="content">
+    <!-- widget grid -->
+    <section widget-grid id="widget-grid">
+        <div class="row">
+            <article class="col-sm-12">
+
+                <div jarvis-widget id="standard-datatable-widget" data-widget-color="darken"
+                     data-widget-editbutton="false">
+                    <header>
+                        <span class="widget-icon"> <i class="fa fa-table"></i> </span>
+                        <h2>详情报表&emsp;&emsp;<span style="color: red;">注:标红数值表示不在合理范围或设备异常.</span></h2>
+                    </header>
+                    <div>
+                        <div class="widget-body no-padding">
+                            <div id="DataTables_Table_1_wrapper" class="dataTables_wrapper form-inline no-footer">
+                                <div class="dt-toolbar">
+                                    <div class="col-xs-12 col-sm-9">
+                                        <div class="form-group">
+                                            <label>仓房：
+                                                <select ng-model="searchStorehouseCode" name="searchStorehouseCode"
+                                                        ng-init="searchStorehouseCode='001'"
+                                                        ng-options="store.storehouseCode as store.storehouseName for store in storelist"
+                                                        class="form-control">
+                                                </select>
+                                            </label>
+                                            <label>检测日期：<input style="width: 100px;" class="form-control" type="text"
+                                                               ng-model="searchStartDate" name="searchStartDate"
+                                                               data-smart-datepicker>
+                                                <a class="btn btn-default btn-sm" ng-click="loadData()"> <i
+                                                        class="fa fa-search"></i>&nbsp;查&nbsp;询</a>
+                                                <a class="btn btn-default btn-sm" ng-click="emptyTime()"> <i
+                                                        class=""></i>&nbsp;清&nbsp;空</a>
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <table class="table table-striped table-bordered table-hover" width="100%">
+                                    <tr>
+                                        <td data-class="expand" style="text-align:center;vertical-align:middle;"
+                                            rowspan="3">基本情况
+                                        </td>
+                                        <td data-class="expand" style="text-align:center;">仓房名称</td>
+                                        <td style="text-align:center;">{{ pageInfo.storehouseName }}</td>
+                                        <td data-class="expand" style="text-align:center;">仓房类型</td>
+                                        <td data-class="expand" style="text-align:center;">{{
+                                            dicData[pageInfo.storehouseType] }}
+                                        </td>
+                                        <td data-class="expand" style="text-align:center;">设计仓容（t）</td>
+                                        <td data-class="expand" style="text-align:center;">{{
+                                            storehouseCode[pageInfo.storeHouse].design_capacity }}
+                                        </td>
+                                        <td data-class="expand" style="text-align:center;">储粮品种</td>
+                                        <td data-class="expand" style="text-align:center;">{{
+                                            dicData[storehouseCode[pageInfo.storeHouse].pz] }}
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td data-class="expand" style="text-align:center;">储粮性质</td>
+                                        <td data-class="expand" style="text-align:center;">{{
+                                            dicData[storehouseCode[pageInfo.storeHouse].hwxz] }}
+                                        </td>
+                                        <td data-class="expand" style="text-align:center;">存储方式</td>
+                                        <td data-class="expand" style="text-align:center;">{{
+                                            dicData[pageInfo.keepingWay] }}
+                                        </td>
+                                        <td data-class="expand" style="text-align:center;">实存数量（t）</td>
+                                        <td data-class="expand" style="text-align:center;">
+                                            {{storehouseCode[pageInfo.storeHouse].kcsl ?
+                                            storehouseCode[pageInfo.storeHouse].kcsl/1000 : ''}}
+                                        </td>
+                                        <td data-class="expand" style="text-align:center;">入仓等级</td>
+                                        <td data-class="expand" style="text-align:center;">{{
+                                            dicData[storehouseCode[pageInfo.storeHouse].dj] }}
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td data-class="expand" style="text-align:center;">入仓时间</td>
+                                        <td data-class="expand" style="text-align:center;">
+                                            {{storehouseCode[pageInfo.storeHouse].rq}}
+                                        </td>
+                                        <td data-class="expand" style="text-align:center;">产地</td>
+                                        <td data-class="expand" style="text-align:center;">{{ dicData[pageInfo.location]
+                                            }}
+                                        </td>
+                                        <td data-class="expand" style="text-align:center;">入仓水分(%)</td>
+                                        <td data-class="expand" style="text-align:center;">{{pageInfo.water}}</td>
+                                        <td data-class="expand" style="text-align:center;">保管员</td>
+                                        <td data-class="expand" style="text-align:center;">{{keeperNames}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td data-class="expand" style="text-align:center;">气体</td>
+                                        <td data-class="expand" style="text-align:center;">检测时间</td>
+                                        <td data-class="expand" style="text-align:center;">{{pageInfo.valueTime}}</td>
+                                        <td data-class="expand" style="text-align:center;">PH3浓度(ppm)</td>
+                                        <td data-class="expand" style="text-align:center;">{{pageInfo.ph3avg}}</td>
+                                        <td data-class="expand" style="text-align:center;">O2浓度(%)</td>
+                                        <td data-class="expand" style="text-align:center;">{{pageInfo.o2avg}}</td>
+                                        <td data-class="expand" style="text-align:center;">CO2浓度(ppm)</td>
+                                        <td data-class="expand" style="text-align:center;">{{pageInfo.co2avg}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td data-class="expand" style="text-align:center;">虫情</td>
+                                        <td data-class="expand" style="text-align:center;">检测时间</td>
+                                        <td data-class="expand" style="text-align:center;">{{pageInfo.vUpdateTime}}</td>
+                                        <td data-class="expand" style="text-align:center;">最多虫数（头/点）</td>
+                                        <td data-class="expand" style="text-align:center;">{{pageInfo.maxvalues}}</td>
+                                        <td data-class="expand" style="text-align:center;">最少虫数（头/点）</td>
+                                        <td data-class="expand" style="text-align:center;">{{pageInfo.minvalues}}</td>
+                                        <td data-class="expand" style="text-align:center;">平均虫数（头/点）</td>
+                                        <td data-class="expand" style="text-align:center;">{{pageInfo.avgvalues}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td data-class="expand" style="text-align:center;vertical-align:middle;"
+                                            rowspan="3">粮情
+                                        </td>
+                                        <td data-class="expand" style="text-align:center;">检测时间</td>
+                                        <td data-class="expand" style="text-align:center;">{{pageInfo.time}}</td>
+                                        <td data-class="expand" style="text-align:center;">气温（℃）</td>
+                                        <td style="text-align:center;">
+                                            <div ng-if="pageInfo.outTemp==250">
+                                                <acronym title="设备异常"><span
+                                                        style="color: red;">-100</span></acronym>
+                                            </div>
+                                            <div ng-if="pageInfo.outTemp!=250">{{ pageInfo.outTemp }}</div>
+                                        </td>
+                                        <td data-class="expand" style="text-align:center;">仓温（℃）</td>
+                                        <td style="text-align:center;">
+                                            <div ng-if="pageInfo.inTemp==250">
+                                                <acronym title="设备异常"><span
+                                                        style="color: red;">-100</span></acronym>
+                                            </div>
+                                            <div ng-if="pageInfo.inTemp!=250">{{ pageInfo.inTemp }}</div>
+                                        </td>
+                                        <td data-class="expand" style="text-align:center;">气湿(%RH)</td>
+                                        <td style="text-align:center;">
+                                            <div ng-if="pageInfo.outH==250">
+                                                <acronym title="设备异常"><span
+                                                        style="color: red;">-1</span></acronym>
+                                            </div>
+                                            <div ng-if="pageInfo.outH!=250">{{ pageInfo.outH }}</div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td data-class="expand" style="text-align:center;">仓湿(%RH)</td>
+                                        <td style="text-align:center;">
+                                            <div ng-if="pageInfo.inH==250">
+                                                <acronym title="设备异常"><span
+                                                        style="color: red;">-1</span></acronym>
+                                            </div>
+                                            <div ng-if="pageInfo.inH!=250">{{ pageInfo.inH }}</div>
+                                        </td>
+                                        <td data-class="expand" style="text-align:center;">平均粮温（℃）</td>
+                                        <td data-class="expand" style="text-align:center;">{{pageInfo.avgTemp}}</td>
+                                        <td data-class="expand" style="text-align:center;">最高粮温（℃）</td>
+                                        <td style="text-align:center;">
+                                            <!--高温报警-->
+                                            <div ng-if="pageInfo.maxTemp >= warningValueList[pageInfo.storeHouse].high">
+                                                <div ng-if="pageInfo.maxTemp==250">
+                                                    <acronym title="设备异常"><span style="color: red;">-100</span></acronym>
+                                                </div>
+                                                <div ng-if="pageInfo.maxTemp!=250">
+                                                    <acronym
+                                                            title="粮温高限报警为: {{warningValueList[pageInfo.storeHouse].high}}℃"><span
+                                                            style="color: red;">{{ pageInfo.maxTemp }}</span></acronym>
+                                                </div>
+                                            </div>
+                                            <div ng-if="pageInfo.maxTemp < warningValueList[pageInfo.storeHouse].high">
+                                                <span>{{ pageInfo.maxTemp }}</span>
+                                            </div>
+                                            <div ng-if="warningValueList[pageInfo.storeHouse].high == null">
+                                                <span>{{ pageInfo.maxTemp }}</span>
+                                            </div>
+                                            <!--高温预警-->
+                                        </td>
+                                        <td data-class="expand" style="text-align:center;">最低粮温（℃）</td>
+                                        <td style="text-align:center;">
+                                            <!--低温报警-->
+                                            <div ng-if="pageInfo.minTemp <= warningValueList[pageInfo.storeHouse].low">
+                                                <acronym
+                                                        title="粮温低限报警为: {{warningValueList[pageInfo.storeHouse].low}}℃"><span
+                                                        style="color: red;">{{ pageInfo.minTemp }}</span></acronym>
+                                            </div>
+                                            <div ng-if="pageInfo.minTemp > warningValueList[pageInfo.storeHouse].low">
+                                                <span>{{ pageInfo.minTemp }}</span>
+                                            </div>
+                                            <div ng-if="warningValueList[pageInfo.storeHouse].low == null">
+                                                <span>{{ pageInfo.minTemp }}</span>
+                                            </div>
+                                            <!--低温预警-->
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td data-class="expand" style="text-align:center;">备注</td>
+                                        <td data-class="expand" style="text-align:center;" colspan="7">
+                                            {{pageInfo.remark}}
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </article>
+        </div>
+    </section>
+</div>

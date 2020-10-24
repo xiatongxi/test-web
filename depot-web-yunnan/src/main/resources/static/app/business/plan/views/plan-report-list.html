@@ -1,0 +1,114 @@
+<!-- MAIN CONTENT -->
+<div id="content">
+    <!-- widget grid -->
+    <section widget-grid id="widget-grid">
+
+
+        <div class="row">
+            <article class="col-sm-12">
+
+                <div jarvis-widget id="standard-datatable-widget" data-widget-color="darken" data-widget-editbutton="false">
+                    <header>
+                        <span class="widget-icon"> <i class="fa fa-table"></i> </span>
+                        <h2>计划上报列表</h2>
+                    </header>
+                    <div>
+                        <div class="widget-body no-padding">
+	                        <div id="DataTables_Table_1_wrapper" class="dataTables_wrapper form-inline no-footer">
+	                            <div class="dt-toolbar">
+	                                <div class="col-xs-12 col-sm-10">
+	                                    <div class="form-group">
+	                                        <!-- <label>
+	                                        	<a has-permission="52" href-void class="btn btn-primary btn-sm" ng-click="showAdd()"><i class="fa fa-plus"></i>&nbsp;新&nbsp;增</a>
+	                                        </label> -->
+	                                        <label> 计划编号:  
+	                                        	<input class="form-control input-sm" ng-model="searchCondition.planNumber" name="planNumber"/>
+	                                        </label>&emsp;
+                                           <!-- 	<label>
+                                           		<select class="form-control input-sm" ng-model="searchCondition.grainKind" name="grainKind"
+	                                                ng-options="enum.enumid as enum.enumname for enum in dicDataList[1061]">
+	                                                	<option value="">--粮食品种--</option>
+	                                                </select>
+											</label>&emsp; -->
+                                            <!-- <label>
+                                               	<select class="form-control input-sm" ng-model="searchCondition.auditState" name="auditState">
+                                                       <option value="">-- 审批状态--</option>
+                                                       <option value="0">待提交</option>
+                                                       <option value="1">审批中</option>
+                                                       <option value="2">审批结束</option>
+                                                       <option value="3">审批驳回</option>
+                                                       <option value="4">审批拒绝</option>
+                                                   </select>
+                                             </label>&emsp;
+                                             <label> -->
+                                             	<a class="btn btn-default btn-sm" ng-click="loadData()">
+													<i class="fa fa-search"></i>&nbsp;查&nbsp;询
+												</a>
+											 </label>
+											<!-- <label>
+												<a class="btn btn-default btn-sm" ng-click="clearConditions()">
+												<i class="fa fa-trash-o"></i>&nbsp;清&nbsp;空
+												</a>
+											</label> -->
+	                                    </div>
+	                                </div>
+									<div class="col-sm-2 col-xs-6 hidden-xs">
+										<div class="dataTables_length">
+											<label>每页显示 <select ng-model="pageInfo.pageSize" ng-change="loadData(pageInfo.pageNum=1)"
+																ng-options="num as num for num in [1,10,25,50,100]"
+																class="form-control input-sm"></select> 条
+											</label>
+										</div>
+									</div>
+                            	</div>
+
+	                        <table class="table table-striped table-bordered table-hover" width="100%">
+		                        <thead>
+			                        <tr>
+			                            <th>序号</th>
+			                            <th>计划编号</th>
+			                            <th>计划文号</th>
+			                            <th>计划执行类型</th>
+			                            <th>创建日期</th>
+			                            <th>审批状态</th>
+			                            <th>操作</th>
+			                        </tr>
+		                        </thead>
+		                        
+		                        <tbody>
+		                            <tr ng-repeat="plan in pageInfo.list">
+		                                <td>{{$index+1}}</td>
+		                                <td>{{plan.planNumber}}</td>
+		                                <td>{{plan.referenceNumber}}</td>
+		                                <td>{{ dicData[plan.executeType] }}</td>
+		                                <td>{{ plan.createTime | date:'yyyy-MM-dd' }}</td>
+		                                <td>
+		                                    <div>
+		                                    <div ng-show="{{plan.customerPlanState==null}}"><span style='color:red;'>未上报</span></div>
+		                                    <div ng-show="{{plan.customerPlanState>=50}} && {{plan.customerPlanState!=null}}"><span style='color:blue;'>上报通过</span></div>
+		                                    <div ng-show="{{plan.customerPlanState<50}} && {{plan.customerPlanState!=null}}"><span style='color:black;'>已上报</span></div>
+		                                    </div>
+		                                </td>
+		                                <td>
+		                                    <div ng-switch="{{plan.customerPlanState}}">
+			                                    <div ng-switch-when="50">
+			                                    	<a href-void ng-click="showReportView(plan.id,plan.processInstanceId)"><i class="fa fa-info-circle"></i>查看</a>
+			                                    </div> 
+			                                    <div ng-switch-default>
+			                                    	<a href-void ng-click="showView(plan.id,plan.processInstanceId)"><i class="fa fa-info-circle"></i>查看</a>
+ 			                                    	<a href-void ng-click="report(plan.id)" ng-show="{{plan.customerPlanState==null}}"><i class="fa fa-info-circle" ></i>上报</a>
+			                                    </div>
+		                                    </div>
+		                                </td>
+		                            </tr>
+		                        </tbody>
+	                        </table>
+							<div smart-include="app/layout/partials/page.tpl.html"></div>
+                        </div>
+                        </div>
+                    </div>
+                </div>
+            </article>
+        </div>
+    </section>
+</div>

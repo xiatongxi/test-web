@@ -1,0 +1,255 @@
+<!-- MAIN CONTENT -->
+<div id="content">
+
+	<!-- widget grid -->
+	<section id="widget-grid" widget-grid>
+
+		<!-- START ROW -->
+		<div class="row">
+
+			<!-- NEW COL START -->
+			<article class="col-sm-12 col-md-12 col-lg-12">
+
+				<!-- Widget ID (each widget will need unique ID)-->
+				<div jarvis-widget id="form-grid-widget"
+					 data-widget-colorbutton="false" data-widget-editbutton="false"
+					 data-widget-custombutton="false">
+
+					<!-- widget div-->
+					<div>
+
+						<!-- widget content -->
+						<div class="widget-body no-padding">
+							<form id="camera-form" class="smart-form ng-pristine ng-valid" data-validator-option="validateOptions" novalidate="novalidate">
+								<header>
+									<a href-void class="btn btn-default btn-xs" ng-click="retList()">
+										<i class="fa fa-angle-left"></i>&nbsp;返回&nbsp;
+									</a>
+									&nbsp;<strong>摄像头管理</strong>
+								</header>
+								<fieldset>
+									<div class="row">
+										<section class="col col-4">
+											<label class="label txt-bg-red">摄像头名称</label>
+											<label class="input">
+												<i class="icon-prepend fa fa-user"></i>
+												<input type="text" name="name" ng-model="cameraEdit.name"
+													   minlength="2" maxlength="20" required/>
+											</label>
+										</section>
+										<section class="col col-4">
+											<label class="label txt-bg-red">摄像头别名</label>
+											<label class="input">
+												<i class="icon-prepend fa fa-user"></i>
+												<input type="text" name="alias" ng-model="cameraEdit.alias"
+													   minlength="2" maxlength="20" required/>
+											</label>
+										</section>
+										<section class="col col-4">
+											<label>所属厂商</label>
+											<label class="select">
+												<select ng-model="cameraEdit.factory"
+														ng-options="enum.enumcode as enum.enumname for enum in parentObj[5330]"
+														class="form-control" required>
+													<option value="">--请选择--</option>
+												</select><i></i>
+											</label>
+										</section>
+									</div>
+									<div class="row">
+										<section class="col col-4">
+											<label class="label txt-bg-red">账号</label>
+											<label class="input">
+												<i class="icon-prepend fa fa-user"></i>
+												<input type="text" name="username" ng-model="cameraEdit.username"
+													   minlength="2" maxlength="20" required/>
+											</label>
+										</section>
+										<section class="col col-4">
+											<label class="label txt-bg-red">密码</label>
+											<label class="input">
+												<i class="icon-prepend fa fa-user"></i>
+												<input type="password" name="password" ng-model="cameraEdit.password"
+													   minlength="2" maxlength="20" required/>
+											</label>
+										</section>
+										<section class="col col-4">
+											<label class="label txt-bg-red">IP地址</label>
+											<label class="input">
+												<i class="icon-prepend fa fa-user"></i>
+												<input type="text" name="ip" ng-model="cameraEdit.ip"
+													   minlength="2" maxlength="20" required/>
+											</label>
+										</section>
+									</div>
+									<div class="row">
+										<section class="col col-4">
+											<label class="label txt-bg-red">子网掩码</label>
+											<label class="input">
+												<i class="icon-prepend fa fa-user"></i>
+												<input type="text" name="subnetmask" ng-model="cameraEdit.subnetmask"
+													   minlength="2" maxlength="20"/>
+											</label>
+										</section>
+										<section class="col col-4">
+											<label class="label txt-bg-red">网关</label>
+											<label class="input">
+												<i class="icon-prepend fa fa-user"></i>
+												<input type="text" name="gateway" ng-model="cameraEdit.gateway"
+													   minlength="2" maxlength="20"/>
+											</label>
+										</section>
+										<section class="col col-4">
+											<label class="label txt-bg-red">设备类型</label>
+											<label class="select">
+												<select ng-model="cameraEdit.type"
+														ng-options="enum.enumcode as enum.enumname for enum in parentObj[5331]"
+														class="form-control" required>
+													<option value="">--请选择--</option>
+												</select><i></i>
+											</label>
+										</section>
+									</div>
+									<div class="row">
+										<section class="col col-4">
+											<label class="label txt-bg-red">端口</label>
+											<label class="input">
+												<i class="icon-prepend fa fa-user"></i>
+												<input type="text" name="port" ng-model="cameraEdit.port"
+													   minlength="2" maxlength="20" required/>
+											</label>
+										</section>
+										<section class="col col-4">
+											<label class="label txt-bg-red">设备型号</label>
+											<label class="input">
+												<i class="icon-prepend fa fa-user"></i>
+												<input type="text" name="modelNumber" ng-model="cameraEdit.modelNumber"
+													   minlength="2" maxlength="20"/>
+											</label>
+										</section>
+										<section class="col col-4">
+											<label class="label txt-bg-red">所在位置</label>
+											<label class="select">
+												<select ng-model="cameraEdit.live" ng-change="changeEvent()"
+														ng-options="enum.enumcode as enum.enumname for enum in parentObj[5332]"
+														class="form-control" required>
+													<option value="">--请选择--</option>
+												</select><i></i>
+											</label>
+										</section>
+									</div>
+									<div class="row">
+										<section class="col col-4">
+											<label class="label txt-bg-red">设备序列号</label>
+											<label class="input">
+												<i class="icon-prepend fa fa-user"></i>
+												<input type="text" name="serialNumber" ng-model="cameraEdit.serialNumber"
+													   minlength="2" maxlength="20"/>
+											</label>
+										</section>
+										<section class="col col-4">
+											<label class="label txt-bg-red">安装位置</label>
+											<label class="input">
+												<i class="icon-prepend fa fa-user"></i>
+												<input type="text" name="installationSite" ng-model="cameraEdit.installationSite"
+													   minlength="2" maxlength="20"/>
+											</label>
+										</section>
+										<section class="col col-4">
+											<label class="label txt-bg-red">安装方式</label>
+											<label class="input">
+												<i class="icon-prepend fa fa-user"></i>
+												<input type="text" name="installationMethod" ng-model="cameraEdit.installationMethod"
+													   minlength="2" maxlength="20"/>
+											</label>
+										</section>
+									</div>
+									<div class="row">
+										<section class="col col-4">
+											<label class="label txt-bg-red">照射区域</label>
+											<label class="input">
+												<i class="icon-prepend fa fa-user"></i>
+												<input type="text" name="irradiatedArea" ng-model="cameraEdit.irradiatedArea"
+													   minlength="2" maxlength="20"/>
+											</label>
+										</section>
+										<section class="col col-4">
+											<label class="label txt-bg-red">取电位置</label>
+											<label class="input">
+												<i class="icon-prepend fa fa-user"></i>
+												<input type="text" name="powerPosition" ng-model="cameraEdit.powerPosition"
+													   minlength="2" maxlength="20"/>
+											</label>
+										</section>
+										<section class="col col-4">
+											<label class="label txt-bg-red">所属仓房</label>
+											<label class="select">
+												<select ng-model="cameraEdit.storehouseId" id="storehouseId"
+														ng-options="store.storehouseId as store.storehouseName for store in storelist"
+														class="form-control" required>
+													<option value="">--请选择--</option>
+												</select><i></i>
+											</label>
+										</section>
+										<!--<section class="col col-4">-->
+											<!--<label class="label txt-bg-red">所属组织机构</label>-->
+											<!--<label class="select">-->
+												<!--&lt;!&ndash;<input type="text" name="orgId" ng-model="cameraEdit.orgId" minlength="1" maxlength="20"/>&ndash;&gt;-->
+												<!--<select ng-model="cameraEdit.orgId"-->
+														<!--ng-options="org.orgId as org.orgName for org in orgList"-->
+														<!--class="form-control" required>-->
+													<!--<option value="">&#45;&#45;请选择&#45;&#45;</option>-->
+												<!--</select><i></i>-->
+											<!--</label>-->
+										<!--</section>-->
+									</div>
+								</fieldset>
+
+								<header>
+									<h3>
+										<strong>硬盘录像机信息</strong>
+										<a class="btn btn-primary" ng-click="addRow()"><i class="fa fa-plus"></i>添加</a>
+									</h3>
+								</header>
+								<fieldset>
+									<table class="table table-striped table-bordered table-hover"  >
+										<thead>
+										<tr>
+											<th data-class="expand">编号</th>
+											<th data-class="expand">名称</th>
+											<th data-class="expand">IP</th>
+											<th data-class="expand">类型</th>
+											<th data-class="expand">通道号</th>
+											<th data-hide="phone,tablet">操作</th>
+										</tr>
+										</thead>
+
+										<tbody>
+										<tr ng-repeat="detailInfo in addedDetail">
+											<td>{{detailInfo.id}}</td>
+											<td>{{detailInfo.name}}</td>
+											<td>{{detailInfo.username}}</td>
+											<td>{{detailInfo.factory=='200'?"海康":"大华"}}</td>
+											<td><input type="text" name="channelNumber" ng-model="cameraEdit.channelNumber" required/></td>
+											<td>
+												<div ng-show="isShow == '1'">
+													<a class="btn btn-primary" ng-click="deleteRow(detailInfo)">删除</a>
+												</div>
+											</td>
+										</tr>
+										</tbody>
+									</table>
+								</fieldset>
+
+								<footer class="text-align-center">
+									<button type="button" class="btn btn-default" ng-click="getEmptying()">取消</button>
+									<button ng-show="isShow == '1'" type="button" class="btn btn-primary" ng-click="saveData()">提交</button>
+								</footer>
+							</form>
+						</div>
+					</div>
+				</div>
+			</article>
+		</div>
+	</section>
+</div>

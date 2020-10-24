@@ -1,0 +1,130 @@
+<header id="header">
+	<div id="logo-group">
+		<!-- PLACE YOUR LOGO HERE -->
+		<span id="logo"> <img src="styles/img/home-1/logo.png"
+			alt="云南智能粮库管理平台">
+		</span>
+		<!-- END LOGO PLACEHOLDER -->
+	</div>
+
+
+	<!-- pulled right: nav area -->
+	<div class="pull-right user-right-bg" ng-controller="headerCtrl">
+
+		<div class="btn-group dropdown user-btn-group" style="width: 100%;" data-dropdown>
+			<div class="drop-div" data-toggle="dropdown" style="float:right;">
+				<img src="styles/img/home/user.png" alt="user" />&nbsp;
+				{{userInfo.realName}} <span class="caret"></span>
+			</div>
+			<div class="drop-div" style="float:right;padding-top: 5px;padding-right: 15px;">
+				<a ng-click="preview()">用户手册</a>
+			</div>
+			<div class="drop-div" style="float:right;padding-top: 5px;padding-right: 15px;">
+				<a ng-click="downApp()">移动端APP</a>
+			</div>
+			<ul class="dropdown-menu dropdown-menu-right">
+				<li><a href-void ng-click="switchTopMenu('1', 'app.system.pwd')">修改密码</a></li>
+				<li class="divider"></li>
+				<li><a href-void ng-click="exitLogin()">退出登录</a></li>
+			</ul>
+		</div>
+
+		<div class="header-nav">
+			<div id="navCarousel" class="carousel slide">
+				<div class="nav-oper nav-oper-prev">
+					<a href-void data-slide="prev"><i class="nav-prev"></i></a>
+                    <i class="nav-feng-line"></i>
+				</div>
+				<div class="carousel-inner">
+					<!-- Slide 1 -->
+					<div class="nav-item">
+						<div class="nav-li" ng-hide="isEmergency" role="presentation" ng-class="{true:'active'}[childSysId=='undefined' || childSysId==undefined] || childSysId==''">
+                            <a href-void ng-click="switchTopMenu()">
+								<i class="nav-icon"><img src="styles/img/home-1/nav-icon/shouy-icon.png" /></i>
+								首页</a>
+							<i class="nav-feng-line"></i>
+						</div>
+						<div has-func="8" ng-hide="isEmergency" class="nav-li" role="presentation" ng-class="{true:'active'}[childSysId==8]">
+							<a href-void ng-click="switchTopMenu(8, 'app.business.index')">
+								<i class="nav-icon"><img src="styles/img/home-1/nav-icon/liangkyw-icon.png" /></i>
+								综合业务</a>
+							<i class="nav-feng-line"></i>
+						</div>
+						<div has-func="124" class="nav-li" role="presentation">
+							<a href="javaScript:void(0)" ng-click="crk()">
+								<i class="nav-icon"><img src="styles/img/home-1/nav-icon/churk-icon.png" /></i>
+								出入库</a>
+							<i class="nav-feng-line"></i>
+						</div>
+						<div has-func="19" ng-hide="isEmergency" class="nav-li" role="presentation" ng-class="{true:'active'}[childSysId==19]">
+							<a href-void ng-click="switchTopMenu(19,'app.storage.index')">
+								<i class="nav-icon"><img src="styles/img/home-1/nav-icon/cangcyw.png" /></i>
+								仓储业务</a>
+							<i class="nav-feng-line"></i>
+						</div>
+						<div has-func="17" ng-hide="isEmergency" class="nav-li" role="presentation" ng-class="{true:'active'}[childSysId==17]">
+							<a href-void ng-click="switchTopMenu(17,'app.camera.index')">
+								<i class="nav-icon"><img src="styles/img/home-1/nav-icon/zhinaf-icon.png" /></i>
+								智能安防</a>
+							<i class="nav-feng-line"></i>
+						</div>
+						<div has-func="18" ng-hide="isEmergency" class="nav-li" role="presentation" ng-class="{true:'active'}[childSysId==18]">
+							<a href-void ng-click="switchTopMenu(18,'app.supervise.cameraPT')">
+								<i class="nav-icon"><img src="styles/img/home-1/nav-icon/yuancjg-icon.png" /></i>
+								粮库决策</a>
+							<i class="nav-feng-line"></i>
+						</div>
+						<div has-func="324" class="nav-li" role="presentation">
+							<a href="{{financeUrl}}" target="_blank">
+								<i class="nav-icon"><img src="styles/img/home-1/nav-icon/cwgl-icon.png" /></i>
+								财务管理</a>
+							<i class="nav-feng-line"></i>
+						</div>
+						<div has-func="23" ng-hide="isEmergency" class="nav-li" role="presentation" ng-class="{true:'active'}[childSysId==23]">
+							<a href-void ng-click="switchTopMenu(23,'app.synth.warehouseSource')">
+								<i class="nav-icon"><img alt="查询追溯" src="styles/img/home-1/nav-icon/chaxzs-icon.png" /></i>
+								查询追溯</a>
+                            <i class="nav-feng-line"></i>
+						</div>
+						<div has-func="218" class="nav-li" role="presentation" ng-class="{true:'active'}[childSysId==218]">
+							<a href-void ng-click="switchTopMenu(218,'app.intelligent.index')">
+								<i class="nav-icon"><img src="styles/img/home-1/nav-icon/yuancjg-icon.png" /></i>
+								智能仓房</a>
+							<i class="nav-feng-line"></i>
+						</div>
+						<div has-func="2" ng-hide="isEmergency" class="nav-li" role="presentation" ng-class="{true:'active'}[childSysId==2]">
+							<a href-void ng-click="switchTopMenu(2,'app.basic.index')">
+								<i class="nav-icon"><img src="styles/img/home-1/nav-icon/jicsj-icon.png" /></i>
+								基础数据</a>
+							<i class="nav-feng-line"></i>
+						</div>
+						<div has-func="1" ng-hide="isEmergency" class="nav-li" role="presentation" ng-class="{true:'active'}[childSysId==1]">
+							<a href-void ng-click="switchTopMenu(1,'app.system.user')">
+								<i class="nav-icon"><img src="styles/img/home-1/nav-icon/xitgl-icon.png" /></i>
+								系统管理</a>
+                            <i class="nav-feng-line"></i>
+						</div>
+						<div class="nav-li" role="presentation" id="isDepot" style="display: none;">
+							<a href="http://172.16.3.41:8087/kn/camera.html" target="_blank" id="swlk">
+								<i class="nav-icon"><img src="styles/img/home-1/nav-icon/lcgl.png" /></i>
+								三维粮库</a>
+							<i class="nav-feng-line"></i>
+						</div>
+						<div has-func="20" ng-hide="isEmergency" class="nav-li" role="presentation" ng-class="{true:'active'}[childSysId==20]">
+							<a href-void ng-click="switchTopMenu(20,'app.act')">
+								<i class="nav-icon"><img src="styles/img/home-1/nav-icon/lcgl.png" /></i>
+								流程管理</a>
+                            <i class="nav-feng-line"></i>
+						</div>
+					</div>
+				</div>
+				<div class="nav-oper nav-oper-next">
+					<a href-void data-slide="next"><i class="nav-next"></i></a>
+				</div>
+			</div>
+			<!-- nav end -->
+
+		</div>
+		<!-- end pulled right: nav area -->
+	</div>
+</header>

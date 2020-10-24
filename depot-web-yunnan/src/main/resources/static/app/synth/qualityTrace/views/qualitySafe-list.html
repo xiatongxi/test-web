@@ -1,0 +1,121 @@
+<!-- MAIN CONTENT -->
+<div id="content">
+	<!-- widget grid -->
+	<section widget-grid id="widget-grid">
+		<div class="row">
+			<article class="col-sm-12">
+
+				<div jarvis-widget id="standard-datatable-widget"
+					data-widget-color="darken" data-widget-editbutton="false">
+					<header>
+						<span class="widget-icon"> <i class="fa fa-table"></i>
+						</span>
+						<h2>质量安全追溯报告列表</h2>
+					</header>
+					<div>
+						<div class="widget-body no-padding">
+							<div id="DataTables_Table_1_wrapper"
+								class="dataTables_wrapper form-inline no-footer">
+								<div class="dt-toolbar">
+									<div class="col-xs-12 col-sm-9">
+										<div class="form-group">
+											<label>
+												仓房名称:
+												<select ng-model="storehouseId"
+													ng-options="storehouse.storehouseId as storehouse.storehouseName for storehouse in storelist"
+													class="form-control input-sm" ng-change="getWareList(storehouseId)">
+														<option value="">--请选择--</option>
+												</select>&emsp;
+											</label>
+											<label>
+												货位名称:
+												<select ng-model="wareId" class="form-control input-sm" 
+													ng-options="ware.warehouseId as ware.warehouseName for ware in warelist">
+													<option value="">请选择</option>
+												</select>&emsp;
+											</label>
+											<a class="btn btn-default btn-sm" ng-click="loadData()">
+												<i class="fa fa-search"></i>&nbsp;查&nbsp;询
+											</a>&emsp;
+										</div>
+									</div>
+									<div class="col-sm-3 col-xs-6 hidden-xs">
+										<div class="dataTables_length">
+											<label>每页显示 <select ng-model="pageInfo.pageSize" ng-change="loadData()"
+												ng-options="num as num for num in [10,25,50,100]"
+												class="form-control input-sm"></select> 条
+											</label>
+										</div>
+									</div>
+								</div>
+
+								<table class="table table-striped table-bordered table-hover"
+									width="100%">
+									<thead>
+										<tr>
+				                            <th>序号</th>
+				                            <th>粮库名称</th>
+				                            <th>仓房名称</th>
+				                            <th>粮油品种</th>
+				                            <th>库存数量</th>
+				                            <th>收获年度</th>
+				                            <th>入仓时间</th>
+				                            <th>操作</th>
+				                        </tr>
+									</thead>
+
+									<tbody>
+										<tr ng-repeat="fcbgz in pageInfo.list">
+											<td>{{$index+1}}</td>
+											<td>{{fcbgz.lkmc}}</td>
+											<td>{{storehouseObj[fcbgz.ch].storehouseName}}</td>
+											<td>{{dicData[fcbgz.pz]}}</td>
+											<td>{{fcbgz.kcsl}}</td>
+											<td>{{dicData[fcbgz.scnf]}}</td>
+											<td>{{fcbgz.cjsj | date :'yyyy/MM/dd'}}</td>
+											<td>
+											    <a href-void ng-click="view(fcbgz, '1')"><i class="fa fa-info-circle"></i>查看</a>&emsp;
+												<a href-void ng-click="view(fcbgz, '2')"><i class="fa fa-info-circle"></i>质检信息</a>&emsp;
+											    <a href-void ng-click="view(fcbgz, '3')"><i class="fa fa-info-circle"></i>粮情信息</a>&emsp;
+<!-- 											    <a href-void ng-click="view(fcbgz, '4')"><i class="fa fa-info-circle"></i>作业记录</a>&emsp; -->
+											    <a href-void ng-click="view(fcbgz, '5')"><i class="fa fa-info-circle"></i>报警信息</a>
+											</td>
+										</tr>
+									</tbody>
+
+								</table>
+								<div smart-include="app/layout/partials/page.tpl.html"></div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</article>
+		</div>
+
+	</section>
+
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="jyxxDetail_Model" tabindex="-1" role="dialog"
+	aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal"
+					aria-hidden="true">&times;</button>
+				<h4 class="modal-title" id="myModalLabel">化验详情</h4>
+			</div>
+			<div class="modal-body">
+				<div smart-include="app/synth/qualityTrace/views/jyxxDetail.html"></div>
+			</div>
+			<div class="modal-footer">
+<!-- 				<button ng-click="save()" type="button" class="btn btn-primary">提交</button> -->
+				<button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+			</div>
+		</div>
+		<!-- /.modal-content -->
+	</div>
+	<!-- /.modal-dialog -->
+</div>
+<!-- /.modal -->

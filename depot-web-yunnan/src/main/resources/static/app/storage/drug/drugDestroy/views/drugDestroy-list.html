@@ -1,0 +1,126 @@
+<!-- MAIN CONTENT -->
+<div id="content">
+    <section widget-grid id="widget-grid">
+        <div class="row">
+            <article class="col-sm-12">
+                <div jarvis-widget id="standard-datatable-widget" data-widget-color="darken" data-widget-editbutton="false">
+                    <header>
+                        <span class="widget-icon"> <i class="fa fa-table"></i> </span>
+                        <h2>药剂销毁列表 </h2>
+                    </header>
+                    <div>
+                        <div class="widget-body no-padding">
+                        <div id="DataTables_Table_1_wrapper" class="dataTables_wrapper form-inline no-footer" >
+                            <div class="dt-toolbar">
+                                <div class="col-xs-12 col-sm-10">
+                                    <div class="form-group">
+                                        <label>
+                                            <a has-permission="571" href-void class="btn btn-primary btn-sm" ng-click="showAdd()"><i class="fa fa-plus"></i>&nbsp;新&nbsp;增</a>
+                                        </label>&emsp;
+                                        <label>销毁类型:&emsp;
+                                            <select class="form-control input-sm" ng-model="searchCondition.destroyType" name="destroyType">
+                                                <option value="">--请选择--</option>
+                                                <option value="药剂销毁">药剂销毁</option>
+                                                <option value="空瓶/袋销毁">空瓶/袋销毁</option>
+                                            </select>
+                                        </label>&emsp;
+                                        <label>
+                                            销毁日期：<input style="width: 100px;" class="form-control" type="text" ng-model="searchCondition.startTime" data-smart-datepicker>
+                                            --&nbsp;<input style="width: 100px;" class="form-control" type="text" ng-model="searchCondition.endTime" data-smart-datepicker>
+                                        </label>
+                                        <label>
+                                            <a class="btn btn-default btn-sm" ng-click="loadData()"><i class="fa fa-search"></i>&nbsp;查&nbsp;询</a>
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="col-sm-2 col-xs-12 hidden-xs">
+                                    <div class="dataTables_length" id="DataTables_Table_8_length">
+                                        <label>每页显示 <select name="DataTables_Table_8_length" ng-change="change_pageSize(pageSizeChange)" ng-model="pageSizeChange"
+                                            aria-controls="DataTables_Table_8" class="form-control input-sm">
+                                                <option value="1">1</option>
+                                                <option value="10" ng-selected = "10">10</option>
+                                                <option value="25">25</option>
+                                                <option value="50">50</option>
+                                                <option value="100">100</option></select> 条
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+
+                        <table class="table table-striped table-bordered table-hover" width="100%">
+	                        <thead>
+		                        <tr>
+                                    <th>序号</th>
+		                            <th data-hide="expand"><i class="fa fa-fw  text-muted hidden-md hidden-sm hidden-xs"></i>销毁日期</th>
+		                            <th data-hide="expand"><i class="fa fa-fw  text-muted hidden-md hidden-sm hidden-xs"></i>药剂种类</th>
+		                            <th data-hide="expand"><i class="fa fa-fw  text-muted hidden-md hidden-sm hidden-xs"></i>药剂名称</th>
+		                            <th data-hide="expand"><i class="fa fa-fw  text-muted hidden-md hidden-sm hidden-xs"></i>药剂形态</th>
+		                            <th data-hide="expand"><i class="fa fa-fw  text-muted hidden-md hidden-sm hidden-xs"></i>销毁类型</th>
+		                            <th data-hide="expand"><i class="fa fa-fw  text-muted hidden-md hidden-sm hidden-xs"></i>销毁数量</th>
+		                            <th data-class="expand"><i class="fa fa-fw  text-muted hidden-md hidden-sm hidden-xs"></i>销毁原因</th>
+		                            <th data-class="expand"><i class="fa fa-fw  text-muted hidden-md hidden-sm hidden-xs"></i>销毁人</th>
+		                            <th data-hide="expand"> 操作</th>
+		                        </tr>
+	                        </thead>
+	                        
+	                        <tbody>
+	                            <tr ng-repeat="drugDestroy in pageInfo.list">
+                                    <td>{{$index + 1}}</td>
+	                                <td>{{drugDestroy.destroyDate | date:'yyyy-MM-dd' }}</td>
+	                                <td>{{dicData[drugDestroy.drugKind]}}</td>
+	                                <td>{{dicData[drugDestroy.drugName]}}</td>
+	                                <td>{{dicData[drugDestroy.drugType]}}</td>
+	                                <td>{{drugDestroy.destroyType}}</td>
+	                                <td>{{drugDestroy.destroyAmount}}</td>
+	                                <td>{{drugDestroy.destroyReason}}</td>
+	                                <td>{{drugDestroy.destroyPerson }}</td>
+	                                <td>
+	                                    <a has-permission="572" href-void ng-click="showView(drugDestroy.id)"><i class="fa fa-info-circle"></i>查看</a>
+	                                    <!--<a has-permission="573" href-void ng-click="showEdit(drugDestroy.id)" ng-hide="drugDestroy.destroyType =='药剂销毁'"><i class="fa fa-edit"></i>修改</a>
+	                                    <a has-permission="574" href-void ng-click="delete(drugDestroy.id)" ng-hide="drugDestroy.destroyType =='药剂销毁'"><i class="fa fa-trash-o"></i>删除</a>-->
+	                                </td>
+	                            </tr>
+	                        </tbody>
+                        </table>
+						<div class="dt-toolbar-footer">
+                                <div class="col-sm-4 col-xs-12 hidden-xs">
+                                    <div class="dataTables_info" role="status" aria-live="polite">
+                                        	显示 {{pageInfo.startRow}} - {{pageInfo.endRow}}条，共 {{pageInfo.total}} 条
+                                    </div>
+                                </div>
+                                <div class="col-xs-12 col-sm-8">
+                                    <div class="dataTables_paginate paging_simple_numbers">
+                                        <ul class="pagination">
+                                            <li class="previous"><a href="javascript:void(0);" ng-click="go_page('firstPage', pageInfo.pageNum, pageInfo.pageSize)"
+                                                aria-controls="DataTables_Table_9" data-dt-idx="0"
+                                                tabindex="0" id="DataTables_Table_9_first">首页</a></li>
+                                            <li></li>
+                                            
+                                            <li><a href="javascript:void(0);" class="previous" ng-click="go_page('previousPage', pageInfo.pageNum, pageInfo.pageSize)"
+                                                aria-controls="DataTables_Table_9" data-dt-idx="1"
+                                                tabindex="0" id="DataTables_Table_9_previous">上一页</a></li>
+                                            <li></li>
+                                            
+                                            <li ng-repeat="page in pageInfo.navigatepageNums" ng-class="{true:'active'}[pageInfo.pageNum==page]">
+                                                 <a href="javascript:void(0);" ng-click="go_page('loadPage', page, pageInfo.pageSize)">{{ page }}</a>
+                                            </li>  
+                                            <li><a href="javascript:void(0);" class="next"
+                                                aria-controls="DataTables_Table_9" data-dt-idx="10" ng-click="go_page('nextPage',pageInfo.pageNum, pageInfo.pageSize, pageInfo.pages)"
+                                                tabindex="0" id="DataTables_Table_9_next">下一页</a></li>
+                                            <li><a href="javascript:void(0);" 
+                                                aria-controls="DataTables_Table_9" data-dt-idx="11" ng-click="go_page('lastPage',pageInfo.pageNum, pageInfo.pageSize, pageInfo.pages)"
+                                                tabindex="0" id="DataTables_Table_9_last">尾页</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        </div>
+                    </div>
+                </div>
+            </article>
+        </div>
+
+    </section>
+    
+</div>

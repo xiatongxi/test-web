@@ -1,0 +1,97 @@
+<!-- MAIN CONTENT -->
+<div id="content">
+	<!-- widget grid -->
+	<section id="widget-grid" widget-grid>
+		<!-- START ROW -->
+		<div class="row">
+			<!-- NEW COL START -->
+			<article class="col-sm-12 col-md-12 col-lg-12">
+				<!-- Widget ID (each widget will need unique ID)-->
+				<div jarvis-widget id="form-grid-widget"
+					 data-widget-colorbutton="false" data-widget-editbutton="false"
+					 data-widget-custombutton="false">
+					<!-- widget div-->
+					<div>
+						<!-- widget content -->
+						<div class="widget-body no-padding">
+							<form id="payment-form" class="smart-form" data-validator-option="validateOptions" novalidate="novalidate">
+								<header>
+									<a href-void class="btn btn-default btn-xs" ng-click="back()"><i class="fa fa-angle-left"></i>&nbsp;返回&nbsp;</a>
+									<b>费用登记单</b>
+								</header>
+								<fieldset>
+									<div class="row">
+										<section class="col col-3">
+											<label class="label">仓房名称：<span style="color: red;">*</span></label>
+											<label class="select">
+												<select class="form-control" ng-model="payment.houseId" name="houseId" ng-change=change()
+														ng-options="store.storehouseId as store.storehouseName for store in storelist" class="form-control" required>
+													<option value="" disabled>--请选择--</option>
+												</select>
+											</label>
+										</section>
+
+										<section class="col col-3">
+											<label class="control-label">费用类型：<span style="color: red;">*</span></label>
+											<label class="select">
+												<select class="form-control" ng-model="payment.type" name="type" required
+														ng-options="enum.enumid as enum.enumname for enum in dicDataList[5322]">
+													<option value="" disabled>--请选择--</option>
+												</select>
+											</label>
+										</section>
+										<section class="col col-3">
+											<label class="control-label">单价（元）：<span style="color: red;">*</span></label>
+											<label class="input">
+												<input type="text" class="form-control" ng-model="payment.price" ng-change="clearNoNum(payment,'price')" name="price" required>
+											</label>
+										</section>
+										<section class="col col-3">
+											<label class="control-label">数量：<span style="color: red;">*</span></label>
+											<label class="input">
+												<input type="text" class="form-control" ng-model="payment.number" ng-change="clearNoNum(payment,'number')" name="number"
+													   onkeyup="this.value=this.value.replace(/[^0-9]+/,'');" required>
+											</label>
+										</section>
+									</div>
+									<div class="row">
+										<section class="col col-3">
+											<label class="control-label">责任保管员：<span style="color: red;">*</span></label>
+											<label class="input">
+												<input type="text" class="form-control" id="keeps" ng-model="payment.recorder" name="dutystoreman" maxlength="20" required>
+											</label>
+										</section>
+										<section class="col col-3">
+											<label class="label">产生时间：</label>
+											<label class="input">
+												<input type="text" ng-model="payment.payTime"
+													   class="form-control datepicker" data-smart-datepicker
+													   name="usedate" ng-readonly="true">
+											</label>
+										</section>
+										<section class="col col-3">
+											<label class="control-label">单位：</label>
+											<input type="text" class="form-control" ng-model="payment.unit">
+										</section>
+										<section class="col col-3">
+											<label class="control-label">费用总计（元）：</label>
+											<input type="text" ng-model="allPrice" class="form-control" readonly>
+										</section>
+									</div>
+								</fieldset>
+								<fieldset>
+									<label class="control-label">费用描述：</label>
+									<textarea class="form-control" maxlength="300" ng-model="payment.payContent" rows="8" placeholder="最多可输入300字"></textarea>
+								</fieldset>
+								<footer class="modal-footer text-align-center">
+									<a  class="btn btn-default" href-void="" href="#" ng-click="retList()">取消</a>
+									<a  id="cancel" class="btn btn-primary" href-void="" href="#" ng-click="saveData()">提交</a>
+								</footer>
+							</form>
+						</div>
+					</div>
+				</div>
+			</article>
+		</div>
+	</section>
+</div>

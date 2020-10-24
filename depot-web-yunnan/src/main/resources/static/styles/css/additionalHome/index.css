@@ -1,0 +1,461 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+body,html {
+    height: 100%;
+    background-color: #f2f4f6;
+    font-size: 15px;
+    font-family: "Microsoft YaHei"
+}
+header {
+    height: 80px;
+    background-color: #000;
+    width: 100%;
+    /* position: absolute; */
+    /* top:0; */
+}
+footer {
+    height: 40px;
+    background-color: #000;
+    width: 100%;
+    position: fixed;
+    bottom:0;
+}
+.mt10{
+    margin-top: 10px;
+}
+.mr100{
+    margin-right: 100px !important;
+}
+
+/*----------------头部start--------------------------*/
+.head{
+    height: 100%;
+    width: 1200px;
+    margin: 0 auto;
+    box-sizing:border-box;
+    /* background-color: red; */
+}
+.logo {
+    display: inline-block;
+}
+.logo img{
+    margin-top: 22.5px;
+}
+.user{
+    width: 500px;
+    height: 100%;
+    float: right;
+}
+.nav{
+width: 350px;
+height:80px;
+display: inline-block;
+}
+.people{
+width: 108px;
+height: 100%;
+float: right;
+position: relative;
+color:#fff;
+}
+.people img{
+    position: absolute;
+    top:50%;
+    transform:translateY(-50%);
+    } 
+.people span{
+    font-size: 14px;
+   line-height: 80px;
+   margin-left: 30px;
+    display: inline-block;
+}   
+.nav div{
+    float: left;
+    color:#fff;
+}
+.nav div span{
+    display: block;
+}
+.navList{
+    width: 280px;
+    height: 100%;
+    overflow: hidden;
+}
+.navUl{
+    width: 420px;
+}
+.navUl div{
+    float: left;
+}
+.left{
+   height:80px;
+    width: 22px;
+    display: inline-block;
+    /* background-color: yellow; */
+    position: relative;
+}
+.left img{
+    position: absolute;
+    top:50%;
+    transform:translateY(-50%);
+}
+
+.gzt{
+    width: 140px;
+    height: 60px;
+    display: inline-block;
+   margin-top: 12px;
+   text-align: center;
+   padding-top: 9px;
+   background-image:url(../../img/qualityCheck/pre.png);
+   box-sizing: border-box;
+
+}
+.zjyw{
+    width: 140px;
+    height: 60px;
+    display: inline-block;
+   margin-top: 12px;
+   text-align: center;
+   padding-top: 9px;
+   box-sizing: border-box;
+   background-image:url(../../img/qualityCheck/zj-bg.png);
+
+}
+
+/*----------------头部end--------------------------*/
+/*----------------中间start--------------------------*/
+.qualityCheck-main{
+    /* position: absolute;
+    top:0px;
+    bottom:40px;
+    height: auto; */
+    width: 100%;
+    background-color: #f2f4f6;
+}
+/*----------------中间end--------------------------*/
+/*----------------公告、发起tart--------------------------*/
+
+.information{
+    background-color: #dae6ef;
+    height: 250px;
+    width: 100%; 
+}
+.informationContent{
+    width: 1200px;
+    height: 100%;
+    margin:0 auto;
+    padding-top:10px;
+    padding-bottom:10px;
+    display: flex;
+    box-sizing: border-box;
+}
+.notice{
+    flex: 2;
+    height: 100%;
+    margin-right: 20px;
+    box-shadow: 0px 5px 9px #9C9C9C;
+}
+.notHeader{
+    height: 30px;
+    background-color: #313142;
+    width: 100%;
+    color:#fff;
+    position: relative;
+}
+.skew{
+    width: 105px;
+    /* background-color: yellow; */
+    height: 100%;
+    margin-left: 10px;
+    transform:skew(15deg,0);
+    border-left:4px solid #dae6ef;
+    border-right:4px solid #dae6ef;
+    box-sizing: border-box;
+    vertical-align:bottom;
+}
+.skew span,
+.skew img{
+    line-height: 30px;
+    display:inline-block;
+    transform:skew(-15deg,0);
+    margin-left: 5px;
+}
+.skew img{
+    margin-left: 17px;
+    transform:skew(-15deg,0);
+	vertical-align: unset;
+}
+.skew span{
+    letter-spacing:2px;
+}
+.more{
+    display: inline-block;
+    position: absolute;
+    right: 10px;
+    top: 0;
+    line-height: 30px;
+    cursor: pointer;
+}
+.list{
+    width: 100%;
+    height: 200px;
+    padding:5px 10px;
+    background-color: #f6f8ff;
+    font-size: 14.5px;
+    box-sizing: border-box;
+}
+.list ul{
+    list-style-type:none;
+}
+.list ul li{
+    padding:10px 20px;
+    box-sizing: border-box;
+    line-height: 17px;
+}
+.list ul li:hover{
+    background-color: #e6ecfd;
+}
+.list ul li:before{
+    content: "\2022";   
+    color: #3959b3;      
+    font-size: 16px;       
+} 
+.list ul li span:last-child{
+    color:#666666;
+    float: right;
+}
+
+.launch{
+    flex: 2;
+    height: 100%;
+    background-color:#fefefe;
+    box-shadow: 0px 5px 9px #9C9C9C;
+}
+.swiper{
+    height: 200px;
+    width: 100%;
+    padding:10px;
+    box-sizing: border-box;
+}
+.launchMain{
+    height: 200px;
+    width: 100%;
+    padding:10px;
+    box-sizing: border-box;
+}
+
+/*----------------公告。发起end--------------------------*/
+/*----------------业务概览start--------------------------*/
+.business{
+    background-color: #e9eef2;
+    height: 200px;
+    width: 100%; 
+}
+.businessContent{
+    width: 1200px;
+    height: 100%;
+    margin:0 auto;
+    padding-top:10px;
+    padding-bottom:20px;
+    /* background-color: #7292f2; */
+    box-sizing: border-box;
+}
+.title{
+    text-align: center;
+}
+.title span{
+    display: inline-block;
+    width: 70px;
+    font-size: 16px;
+}
+.cartlist{
+    width: 100%;
+    height: 138px;
+    /* background-color: pink; */
+    margin-top: 15px;
+    display: flex;
+}
+.item{
+    flex: 1;
+    margin-right: 37px;
+    height: 100%;
+    background-color: #f6f6f6;
+    border-radius: 10px;
+    box-shadow: 0px 5px 9px #9C9C9C;
+}
+.item:hover{
+    box-shadow: 0px 2px 11px #333333;
+    transform: scale(1.02,1.02)
+}
+.item:nth-child(5){
+    margin: 0;
+}
+.item:nth-child(2) .itemHeader{
+    background-color: #7292f2;
+}
+.item:nth-child(3) .itemHeader{
+    background-color: #b167f1;
+}
+.item:nth-child(4) .itemHeader{
+    background-color: #4fb2ab;
+}
+.item:nth-child(5) .itemHeader{
+    background-color: #47b5e3;
+}
+.oneLine{
+    line-height: 84px;
+}
+.oneLine .w2{
+    width: 3em;
+}
+.ml5{
+    margin-left: 5px;
+    color:#fe2800;
+    cursor: pointer;
+}
+.itemHeader{
+    width: 100%;
+    height: 30px;
+    text-align: center;
+    color:#fff;
+    line-height: 30px;
+    letter-spacing: 2px;
+    font-size: 16px;
+    border-top-right-radius: 10px;
+    border-top-left-radius: 10px;
+    box-shadow: 0px 1px 5px #9E9E9E;
+}
+.itemHeader{
+    background-color: #ea7266;
+}
+.itemContent{
+height: 108px;
+width: 100%;
+padding:10px 17px;
+box-sizing: border-box;
+color:#959595;
+}
+.itemContent img{
+    margin-top: 4px;
+}
+.textList{
+    float: right;
+    margin-right: 8px;
+    /* display: inline-block; */
+}
+.textList ul li span{
+    width: 3em;
+}
+
+.w2{
+    letter-spacing:1em; /*如果需要y个字两端对齐，则为(x-y)/(y-1),这里是（4-2）/(2-1)=2em */
+    margin-right:-1em; /*同上*/
+}
+.textList ul{
+    list-style: none;
+}
+.textList ul li{
+    line-height: 28px;
+}
+.textList ul li i{
+    font-style:normal;
+    display: inline-block;
+    margin-left: 5px;
+    cursor: pointer;
+}
+.textList ul li:nth-child(1) i{
+    color:#fe2800;
+}
+.textList ul li:nth-child(2) i{
+    color:#4c68ba;
+}
+.textList ul li:nth-child(3) i{
+    color:#669957;
+}
+/*----------------业务概览end--------------------------*/
+
+/*----------------图表start--------------------------*/
+
+.Chart{
+    height: 332px;
+    width: 1200px;
+    margin: 0 auto;
+    background-color: #f1f1f1;
+    padding-top:20px;
+    display: flex;
+    box-sizing: border-box;
+}
+.curve{
+    flex: 1;
+    background-color: #fff;
+    height: 100%;
+    margin-right: 10px;
+    box-shadow: 0px 1px 5px #9E9E9E;
+}
+.ChartTitle{
+    height: 30px;
+    background-color: #c2c2c3;
+    width: 100%;
+}
+.titleRight{
+    width: 130px;
+    height: 100%;
+    background-color: #313143;
+    border-radius: 5px;
+    padding-left: 10px;
+    position: relative;
+}
+.titleRight img{
+    position: absolute;
+    top:50%;
+    transform: translateY(-50%);
+}
+.titleRight span{
+    color:#fff;
+    margin-left: 32px;
+    display: inline-block;
+    line-height: 30px;
+}
+.chartContent{
+    height: 282px;
+    width: 100%;
+    /* background-color: pink; */
+    padding:10px 20px;
+    box-sizing: border-box;
+    position: relative;
+}
+.chartContent select {
+    width: 100px;
+    position: absolute;
+    top:12px;
+    left: 64px;
+    z-index: 2;
+}
+#Thermometer{
+    width: 100%;
+    height: 250px;
+}
+#foodstuff{
+    width: 100%;
+    height: 250px;
+}
+.Columnar{
+    flex: 1;
+    background-color: #fff;
+    height: 100%;
+    box-shadow: 0px 1px 5px #9E9E9E;
+}
+
+/*----------------图表end--------------------------*/
+
+/*----------------底部start--------------------------*/
+footer div{
+    color:#fff;
+    width: 400px;
+    line-height: 40px;
+    margin: 0 auto;
+}
+/*----------------底部end--------------------------*/

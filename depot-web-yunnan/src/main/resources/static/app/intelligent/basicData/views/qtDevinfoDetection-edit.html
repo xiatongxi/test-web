@@ -1,0 +1,160 @@
+<!-- MAIN CONTENT -->
+<div id="content">
+    <!-- widget grid -->
+    <section widget-grid id="widget-grid">
+        <div class="row">
+            <!-- NEW COL START -->
+            <article class="col-sm-12 col-md-12 col-lg-12">
+                <!-- Widget ID (each widget will need unique ID)-->
+                <div jarvis-widget id="form-grid-widget"
+                     data-widget-colorbutton="false" data-widget-editbutton="false"
+                     data-widget-custombutton="false">
+                    <!-- widget div-->
+                    <div>
+                        <!-- widget content -->
+                        <div class="widget-body no-padding">
+                            <form id="basicGrainSetEdit-form" class="smart-form ng-pristine ng-valid" data-validator-option="validateOptions" novalidate="novalidate">
+                                <header>
+                                    <a href-void class="btn btn-default btn-xs" ng-click="retList()"><i class="fa fa-angle-left"></i>&nbsp;返回&nbsp;</a>
+                                    &nbsp;<strong>气体液位信息设置详情</strong>
+                                    <span class="pull-right font-xs">带*的部分必须填写</span>
+                                </header>
+                                <table class="table table-striped table-bordered table-hover" width="100%">
+                                    <fieldset>
+                                        <div class="row" >
+                                            <section class="col col-3">
+                                                <label class="label">仓房名称:<span style="color: red;">*</span></label>
+                                                <label class="select">
+                                                    <select ng-model="qtDevinfo.vcfcode" name="vcfcode"
+                                                            ng-options="store.storehouseCode as store.storehouseName for store in storelist"
+                                                            ng-disabled="isNotEdit" class="form-control"
+                                                            required>
+                                                        <option value="">--请选择--</option>
+                                                    </select>
+                                                </label>
+                                            </section>
+                                            <section class="col col-3" ng-hide="isAdd">
+                                                <label class="label">设备编码:<span style="color: red;">*</span></label>
+                                                <label class="input">
+                                                    <input type="text" ng-model="qtDevinfo.vdevcode"
+                                                           ng-blur="itExistCode(qtDevinfo.vdevcode,'')"
+                                                           ng-disabled="true" name="vdevcode" maxlength="5" required>
+                                                </label>
+                                            </section>
+                                            <section class="col col-3">
+                                                <label class="label">设备名称:<span style="color: red;">*</span></label>
+                                                <label class="input">
+                                                    <input type="text" maxlength="50" ng-model="qtDevinfo.vdevname"
+                                                           ng-disabled="isNotEdit" name="vdevname" required>
+                                                </label>
+                                            </section>
+                                            <section class="col col-3">
+                                                <label class="label">设备类型：<span
+                                                        style="color: red;margin-left: 5px;text-align: center;">*</span></label>
+                                                <label class="select">
+                                                    <select ng-model="qtDevinfo.vdevkindcode" ng-disabled="isNotEdit" name="vdevkindcode"
+                                                            class="form-control" required
+                                                            ng-options="enum.gbcode as enum.enumname for enum in dicDataList[6961]">
+                                                        <option value="">--请选择--</option>
+                                                    </select>
+                                                </label>
+                                            </section>
+                                            <section class="col col-3">
+                                                <label class="label">设备状态:</label>
+                                                <label class="select">
+                                                    <select ng-model="qtDevinfo.valarmstatue" name="valarmstatue" ng-disabled="isNotEdit"
+                                                            ng-options="x.id as x.name for x in [{id:0,name:'正常'},{id:1,name:'异常'}]">
+                                                        <option value="">--请选择--</option>
+                                                    </select>
+                                                </label>
+                                            </section>
+                                            <section class="col col-3">
+                                                <label class="label">单位:</label>
+                                                <label class="input">
+                                                    <input type="text" name="vunit" ng-model="qtDevinfo.vunit"
+                                                           ng-disabled="isNotEdit" maxlength="50">
+                                                </label>
+                                            </section>
+                                            <section class="col col-3">
+                                                <label class="label">偏移值:</label>
+                                                <label class="input">
+                                                    <input type="text" ng-model="qtDevinfo.faddvalue" ng-disabled="isNotEdit"
+                                                           ng-keyup="clearNoNum(qtDevinfo,'faddvalue')"
+                                                           name="faddvalue" maxlength="10" placeholder="只能输入数字">
+                                                </label>
+                                            </section>
+                                            <section class="col col-3">
+                                                <label class="label">仓内/仓外:</label>
+                                                <label class="select">
+                                                    <select ng-model="qtDevinfo.inoutstorage" name="inoutstorage" ng-disabled="isNotEdit"
+                                                            ng-options="x.id as x.name for x in [{id:0,name:'仓内'},{id:1,name:'仓外'}]">
+                                                        <option value="">--请选择--</option>
+                                                    </select>
+                                                </label>
+                                            </section>
+                                            <section class="col col-3">
+                                                <label class="label">站点编码:&emsp;</label>
+                                                <label class="select">
+                                                    <select ng-model="qtDevinfo.sitecode" name="sitecode"
+                                                            ng-options="station.sitecode as station.sitename for station in stations"
+                                                            ng-disabled="isNotEdit" class="form-control">
+                                                        <option value="">--请选择--</option>
+                                                    </select>
+                                                </label>
+                                            </section>
+                                            <section class="col col-3">
+                                                <label class="label">通道号:</label>
+                                                <label class="input">
+                                                    <input type="text" ng-model="qtDevinfo.idevtdh" ng-disabled="isNotEdit" validNumber="true"
+                                                           ng-keyup="clearNoNum(qtDevinfo,'idevtdh')"
+                                                           name="idevtdh" maxlength="10" placeholder="只能输入数字">
+                                                </label>
+                                            </section>
+                                            <section class="col col-3">
+                                                <label class="label">通道检测结果:</label>
+                                                <label class="input">
+                                                    <input type="text" ng-model="qtDevinfo.fvalue" ng-disabled="isNotEdit" ng-keyup="clearNoNum(qtDevinfo,'fvalue')"
+                                                           name="fvalue" maxlength="10">
+                                                </label>
+                                            </section>
+                                            <section class="col col-3">
+                                                <label class="label">检测结果时间：</label>
+                                                <label class="input">
+                                                    <input type="text" ng-model="qtDevinfo.vvaluetime" name="vvaluetime"
+                                                           data-smart-datepicker ng-disabled="isNotEdit"
+                                                           placeholder="检测结果时间" >
+                                                </label>
+                                            </section>
+                                            <section class="col col-3">
+                                                <label class="label">操作状态:</label>
+                                                <label class="select">
+                                                    <select ng-model="qtDevinfo.vstatue" name="vstatue" ng-disabled="isNotEdit"
+                                                            ng-options="x.id as x.name for x in [{id:0,name:'关闭'},{id:1,name:'打开'},{id:2,name:'反正'},{id:3,name:'停止'}]">
+                                                        <option value="">--请选择--</option>
+                                                    </select>
+                                                </label>
+                                            </section>
+                                            <section class="col col-3">
+                                                <label class="label">备注:</label>
+                                                <label class="input">
+                                                    <input type="text" ng-model="qtDevinfo.remark" ng-disabled="isNotEdit"
+                                                           name="remark" maxlength="20">
+                                                </label>
+                                            </section>
+                                        </div>
+                                    </fieldset>
+                                    <div class="form-actions">
+                                        <footer class="text-align-center">
+                                            <button type="button" class="btn btn-default" ng-click="retList()">取消</button>
+                                            <button type="button" class="btn btn-primary" ng-hide="isNotEdit" ng-click="save()">保存</button>
+                                        </footer>
+                                    </div>
+                                </table>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </article>
+        </div>
+    </section>
+</div>

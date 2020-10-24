@@ -1,0 +1,112 @@
+<div class="modal-content">
+    <div class="modal-header">
+        <button type="button" class="close" ng-click="cancel()">
+            &times;
+        </button>
+        <h4 class="modal-title" id="myModalLabel">倒仓数据详情</h4>
+    </div>
+    <div class="modal-body">
+        <form id="storeWareDetail-form" class="smart-form ng-pristine ng-valid" data-validator-option="validateOptions" novalidate="novalidate">
+			<div class="row" >
+				<section class="col col-sm-4">
+					<label class="label">倒出仓房名称<span style="color: red;">*</span></label> 
+					<label class="select"> 
+	                    <select ng-model="changestorageDetail.houseId" name="houseId{{$index}}"
+                   				ng-options="store.storehouseId as store.storehouseName for store in storelist"
+                   				class="form-control" ng-change=getChangestorageData(changestorageDetail.houseId)>
+               					<option value="">--请选择--</option>
+           				</select>
+					</label>
+				</section>
+				<section class="col col-sm-4">
+					<label class="label">倒出货位名称<span style="color: red;">*</span></label> 
+					<label class="select"> 
+	                    <select ng-model="changestorageDetail.wareId" name="wareId{{$index}}" class="form-control"
+                          		ng-options="ware.warehouseId as ware.warehouseName for ware in warehouseList"
+                          		ng-change=getFoodBasicInfoList(changestorageDetail.houseId,changestorageDetail.wareId) required>
+                      		<option value="">--请选择--</option>
+                  		</select>
+					</label>
+				</section>
+				<section class="col col-sm-4">
+					<label class="label">粮油品种</label> 
+		            <label class="input">
+                           <input type="text" ng-model="dicData[changestorageDetail.lspz]" name="lspz{{$index}}" ng-readonly="true">
+				</section>
+			</div>
+			<div class="row">
+				<section class="col col-sm-4">
+					<label class="label">计划倒出数量<span style="color: red;">*</span></label>
+                         <label class="input">
+                           <input type="text" ng-model="changestorageDetail.pourOutNum"  ng-change=getPourInNum(changestorageDetail.pourOutNum) name="pourOutNum{{$index}}" required>
+                		 </label>
+                </section>
+				<section class="col col-sm-4">
+					<label class="label">入仓时间</label>
+                    <label class="select">
+                         <input type="text" ng-model="changestorageDetail.rksj" name="rksj{{$index}}" class="form-control datepicker" ng-readonly="true">
+                     </label>
+				</section>
+				<section class="col col-sm-4">
+					<label class="label">存储方式</label>
+                         <label class="select">
+							<select ng-model="changestorageDetail.ccfs" name="ccfs{{$index}}" ng-disabled="isNotEdit"
+								ng-options="enum.enumid as enum.enumname for enum in dicDataList[1056]"
+								class="form-control">
+								<option value="">--请选择--</option>
+							</select>
+						</label>
+				</section>
+			</div>
+			<div class="row">
+				<section class="col col-sm-4">
+					<label class="label">倒入仓房名称<span style="color: red;">*</span></label>
+		              <label class="select">
+           				<select ng-model="changestorageDetail.storehouseId" name="storehouseId{{$index}}"
+                   				ng-options="store.storehouseId as store.storehouseName for store in storelist"
+                   				class="form-control" ng-change="getChangeData(changestorageDetail.storehouseId)" required>
+               					<option value="">--请选择--</option>
+           				</select>
+       				</label>
+				</section>
+				<section class="col col-sm-4">
+					<label class="label">倒入货位名称<span style="color: red;">*</span></label> 
+		              <label class="select">
+                   		<select ng-model="changestorageDetail.warehouseId" name="warehouseId{{$index}}" class="form-control"
+                           		ng-options="ware.warehouseId as ware.warehouseName for ware in warehouList">
+                       		<option value="">--请选择--</option>
+                   		</select>
+                	 </label>
+				</section>
+				<section class="col col-sm-4">
+					<label class="label">计划倒入数量<span style="color: red;">*</span></label> 
+		              <label class="input">
+						<input type="text" ng-model="changestorageDetail.pourInNum" name="pourInNum{{$index}}" ng-change=getPourInNum(changestorageDetail.pourOutNum) required>
+					  </label>
+				</section>
+			</div>
+			<div class="row">
+			    <section class="col col-sm-4">
+					<label class="label">存储方式</label> 
+		              <label class="select">
+						<select ng-model="changestorageDetail.keepingWay" name="keepingWay{{$index}}" ng-disabled="isNotEdit"
+							ng-options="enum.enumid as enum.enumname for enum in dicDataList[1056]"
+							class="form-control">
+							<option value="">--请选择--</option>
+						</select>
+					 </label>
+				</section>
+			</div>
+		</form>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-primary" ng-hide="isNotEdit" ng-click="save()">
+        	提交
+        </button>
+        <button type="button" class="btn btn-default"  ng-click="cancel()">
+        	取消
+        </button>
+    </div>
+</div>
+
+

@@ -1,0 +1,120 @@
+<!-- MAIN CONTENT -->
+<div id="content">
+    <!-- widget grid -->
+    <section widget-grid id="widget-grid">
+
+        <div class="row">
+            <article class="col-sm-12">
+
+                <div jarvis-widget id="standard-datatable-widget"
+                     data-widget-color="darken" data-widget-editbutton="false">
+                    <header>
+						<span class="widget-icon"> <i class="fa fa-table"></i>
+						</span>
+                        <h2>分组管理（目前只用作<span style="color: red;">质量诊断</span>使用）</h2>
+                    </header>
+                    <div>
+                        <div class="widget-body no-padding">
+                            <div id="DataTables_Table_1_wrapper"
+                                 class="dataTables_wrapper form-inline no-footer">
+                                <div class="dt-toolbar">
+                                    <div class="col-xs-3 col-sm-3">
+                                        <a has-permission="90" class="btn btn-primary btn-sm" ng-click="showEditGroup()">
+                                            <span class="fa fa-plus"></span>&nbsp;新&nbsp;增</a>
+                                    </div>
+                                    <div class="col-sm-9 col-xs-9 hidden-xs">
+                                        <div class="dataTables_length">
+                                            <label>每页显示 <select ng-model="pageInfo.pageSize" ng-change="loadData()"
+                                                                ng-options="num as num for num in [10,25,50,100]"
+                                                                class="form-control input-sm"></select> 条
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <table class="table table-striped table-bordered table-hover"
+                                       width="100%">
+                                    <thead>
+                                    <tr>
+                                        <th data-hide="phone">编号</th>
+                                        <th data-hide="phone">分组名</th>
+                                        <th data-hide="phone,tablet"> 操作</th>
+                                    </tr>
+                                    </thead>
+
+                                    <tbody>
+                                    <tr ng-repeat="list in pageInfo.list">
+                                        <td>{{list.id}}</td>
+                                        <td>{{list.groupname}}</td>
+                                        <td>
+                                            <a has-permission="217" ng-click="showEditGroup(list.id,list.groupname)"><i class="fa fa-edit"></i>修改</a>
+                                            <a has-permission="344" ng-click="removebyid(list.id)"><i class="fa fa-trash-o"></i>删除</a>
+                                        </td>
+                                    </tr>
+                                    </tbody>
+
+                                </table>
+                                <div smart-include="app/layout/partials/page.tpl.html"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </article>
+        </div>
+
+    </section>
+
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="groupdModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="overflow:hidden">
+    <div class="modal-dialog" style="height:95%">
+        <div class="modal-content" style="height:100%">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                    &times;
+                </button>
+                <h4 class="modal-title" id="qualityKindModalLabel">分组设置</h4>
+            </div>
+            <div class="modal-body" style="height:80%;overflow-y:auto">
+
+                <form id="role-form" class="smart-form ng-pristine ng-valid" data-validator-option="validateOptions" novalidate="novalidate">
+                    <div class="row">
+                        <section class="col col-sm-12">
+                            <label class="label txt-bg-red">分组名称&nbsp;&nbsp;<em><span style="color: #D56161;font-style:normal;font-size:11px;" id="groupName-error"></span></em></label>
+                            <label class="input">
+                                <input type="hidden" ng-model="group.id"/>
+                                <input type="text" name="roleName" ng-model="group.groupname" minlength="2" maxlength="20" required ng-blur="isRepeat()"/>
+                            </label>
+                        </section>
+                    </div>
+                    <table id="cameratab" class="table table-striped table-bordered table-hover" width="98%">
+                        <thead>
+                        <tr>
+                            <th data-hide="phone">#</th>
+                            <th data-hide="phone">摄像头名称</th>
+                            <th data-hide="phone">摄像头IP</th>
+                        </tr>
+                        </thead>
+
+                        <tbody>
+                        <tr ng-repeat="list in groupcameralist">
+                            <td><input type="checkbox" name="cameraBox" value="{{list.cameraId}}" ng-checked="{{list.isjr}}"/></td>
+                            <td>{{list.alias}}</td>
+                            <td>{{list.cameraIp}}</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" ng-click="saveData()">
+                    提交
+                </button>
+                <button type="button" class="btn btn-default"  ng-click="back()">
+                    取消
+                </button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->

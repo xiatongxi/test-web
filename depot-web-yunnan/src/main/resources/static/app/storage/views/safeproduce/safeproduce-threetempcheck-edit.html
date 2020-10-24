@@ -1,0 +1,135 @@
+<form id="threetempCheck-form" name='threetempCheck-form' class="smart-form ng-pristine ng-valid" data-validator-option="validateOptions" ng-submit=' threetempCheck-form.$valid&&save( threetempCheck)' novalidate="novalidate">
+	<fieldset>
+		<div class="row">
+			<section class="col col-3">
+				<label class="label">仓房名称：<span style="color: red;">*</span></label>
+				<label class="select">
+					<select ng-model="threetempcheck.houseId" name="houseId" required
+							ng-options="store.storehouseId as store.storehouseName for store in storelist"
+							class="form-control" ng-disabled="isNotEdit">
+						<option value="">--请选择--</option>
+					</select>
+				</label>
+			</section>
+			<section class="col col-3">
+				<label class="label">检查时间：<span style="color: red;">*</span></label>
+				<label class="input">
+					<input type="text" ng-model="threetempcheck.checkDate" name="checkDate"  data-smart-datepicker  ng-disabled="isNotEdit"
+						   placeholder="检查时间" required>
+				</label>
+			</section>
+			<section class="col col-3">
+				<label class="label">检查人员：</label>
+				<!-- <label class="input">
+                    <input type="text" ng-model="threetempcheck.checkDate" name="checkDate" class="form-control datepicker" data-smart-datepicker options="datepickerOptions" data-date-format="yy-mm-dd"
+                           placeholder="日期">
+                    <input type="text" ng-model="threetempcheck.checkSign" name="checkSign"
+                           placeholder="检查人员">
+                </label> -->
+				<label class="select">
+					<select ng-model="threetempcheck.checkSign" name="checkSign" required
+							ng-options="keeper.id as keeper.name for keeper in checkSignList"
+							class="form-control" ng-disabled="isNotEdit">
+						<option value="">--请选择--</option>
+					</select>
+				</label>
+			</section>
+			<section class="col col-3">
+				<label class="select">
+					<label class="label">是否熏蒸：</label>
+					<label class="select">
+						<select name="xzflag" ng-model="threetempcheck.xzflag">
+							<option value="?" selected="" disabled="">请选择</option>
+							<option value="0">是</option>
+							<option value="1">否</option>
+						</select> <i></i> </label>
+				</label>
+			</section>
+
+		</div>
+		<div class="row">
+			<section class="col col-3">
+				<label class="label">粮温℃：<span style="color: red;">*</span></label>
+				<label class="input">
+					<!--<input type="text" ng-model="threetempcheck.checkDate" name="checkDate" class="form-control datepicker" data-smart-datepicker options="datepickerOptions" data-date-format="yy-mm-dd"
+                           placeholder="日期">-->
+					<input type="text" ng-model="threetempcheck.lsTemp" name="lsTemp"
+						   placeholder="粮温℃" required>
+				</label>
+			</section>
+			<section class="col col-3">
+				<label class="label">仓内温度℃：<span style="color: red;">*</span></label>
+				<label class="input">
+					<!--<input type="text" ng-model="threetempcheck.checkDate" name="checkDate" class="form-control datepicker" data-smart-datepicker options="datepickerOptions" data-date-format="yy-mm-dd"
+                           placeholder="日期">-->
+					<input type="text" ng-model="threetempcheck.inTemp" name="inTemp"
+						   placeholder="仓内温度℃" required>
+				</label>
+			</section>
+			<section class="col col-3">
+				<label class="label">仓外温度℃：<span style="color: red;">*</span></label>
+				<label class="input">
+					<!--<input type="text" ng-model="threetempcheck.checkDate" name="checkDate" class="form-control datepicker" data-smart-datepicker options="datepickerOptions" data-date-format="yy-mm-dd"
+                           placeholder="日期">-->
+					<input type="text" ng-model="threetempcheck.outTemp" name="outTemp"
+						   placeholder="仓外温度℃" required>
+				</label>
+			</section>
+			<section class="col col-3">
+				<label class="label">仓外湿度%：<span style="color: red;">*</span></label>
+				<label class="input">
+					<!--<input type="text" ng-model="threetempcheck.checkDate" name="checkDate" class="form-control datepicker" data-smart-datepicker options="datepickerOptions" data-date-format="yy-mm-dd"
+                           placeholder="日期">-->
+					<input type="text" ng-model="threetempcheck.outWater" name="outWater"
+						   placeholder="仓内湿度%" required>
+				</label>
+			</section>
+		</div>
+		<div class="row">
+			<section class="col col-3">
+				<label class="label">仓内湿度%：<span style="color: red;">*</span></label>
+				<label class="input">
+					<!--<input type="text" ng-model="threetempcheck.checkDate" name="checkDate" class="form-control datepicker" data-smart-datepicker options="datepickerOptions" data-date-format="yy-mm-dd"
+                           placeholder="日期">-->
+					<input type="text" ng-model="threetempcheck.inWater" name="inWater"
+						   placeholder="仓内湿度%" required>
+				</label>
+			</section>
+		</div>
+	</fieldset>
+	<header>粮温检查情况</header>
+	<fieldset>
+		<div class="row">
+			<section class="col col-3">
+				<label class="label">最高℃：<span style="color: red;">*</span></label>
+				<label class="input">
+					<input type="text" ng-model="threetempcheck.maxTemp" name="maxTemp"
+						   placeholder="最高℃" required>
+				</label>
+			</section>
+			<section class="col col-3">
+				<label class="label">最低℃：<span style="color: red;">*</span></label>
+				<label class="input">
+					<input type="text" ng-model="threetempcheck.minTemp" name="minTemp"
+						   placeholder="最低℃" required>
+				</label>
+			</section>
+			<section class="col col-3">
+				<label class="label">平均℃：<span style="color: red;">*</span></label>
+				<label class="input">
+					<input type="text" ng-model="threetempcheck.avgTemp" name="avgTemp"
+						   placeholder="平均℃" required>
+				</label>
+			</section>
+		</div>
+	</fieldset>
+	<div class="row">
+		<section class="col col-10">
+			<label class="label">处理方案或处理效果：</label>
+			<label class="textarea textarea-resizable">
+				<textarea rows="3" class="custom-scroll"  ng-model="threetempcheck.treatmentAdvice" name="treatmentAdvice"  ></textarea>
+			</label>
+		</section>
+	</div>
+	</fieldset>
+</form>

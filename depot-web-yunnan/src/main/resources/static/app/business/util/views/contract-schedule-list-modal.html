@@ -1,0 +1,48 @@
+<div class="modal-content">
+    <div class="modal-header">
+        <button type="button" class="close" ng-click="cancel()">
+            &times;
+        </button>
+        <h4 class="modal-title" id="myModalLabel">合同进度查询列表 </h4>
+    </div>
+	<div class="modal-body">
+		<div>
+			<div class="widget-body no-padding">
+				<div id="DataTables_Table_1_wrapper" class="table-responsive" style="overflow:auto;">
+					<table class="table table-striped table-bordered table-hover" width="100%">
+						<thead>
+							<tr>
+						        <th> 计划编号</th>
+						        <th> 合同编号</th>
+						        <th> 合同名称</th>
+						        <th> 合同类型</th>
+						        <th> 数量(公斤)</th>
+						        <th> 完成数量(公斤)</th>
+						        <th> 完成比(%)</th>
+						        <th> 生效日期</th>
+							</tr>
+						</thead>
+						<tbody>
+					    	<tr ng-repeat="contract in pageInfo.list">
+						        <td>{{contract.planNumber}}</td>
+						        <td>{{contract.contractNumber}}</td>
+						        <td>{{contract.contractTitle}}</td>
+						        <td>{{ dicData[contract.contractType] }}</td>
+						        <td>{{ contract.grainQuantity}}</td>
+						        <td>{{ contract.completeAmount }}</td>
+						        <td>{{ contract.completeRate }}</td>
+						        <td>{{ contract.agreeTime | date:'yyyy-MM-dd' }}</td>
+							</tr>
+						</tbody>
+					</table>
+					<div smart-include="app/layout/partials/page.tpl.html"></div>
+	                </div>
+                </div>
+			</div>
+		</div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-default"  ng-click="cancel()">
+        	取消
+        </button>
+    </div>
+</div>

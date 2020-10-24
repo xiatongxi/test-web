@@ -1,0 +1,186 @@
+<!-- MAIN CONTENT -->
+<div id="content">
+	<!-- widget grid -->
+	<section widget-grid id="widget-grid">
+		<div class="row">
+			<article class="col-sm-12 col-md-12 col-lg-12">
+				<div jarvis-widget id="form-grid-widget" data-widget-colorbutton="false" data-widget-editbutton="false"
+					 data-widget-custombutton="false">
+					<div class="dt-toolbar">
+						<header>
+							<a href-void class="btn btn-default btn-xs" ng-click="back()">
+								<i class="fa fa-angle-left"></i>&nbsp;返回&nbsp;
+							</a>
+							&nbsp;<h3><center>储备粮油专卡</center></h3>
+						</header>
+
+						<div class="panel-body col-sm-12">
+							<div class="row">
+								<table class="table table-striped table-bordered table-hover" width="100%">
+									<tr>
+										<td style="text-align:center;">
+											填卡单位
+										</td>
+										<td>
+											{{foodbasicinfo.recordUnite}}
+										</td>
+										<td style="text-align:center;">
+											填卡日期
+										</td>
+										<td>
+											{{foodbasicinfo.fillingTime}}
+										</td>
+										<td style="text-align:center;">
+											保管单位
+										</td>
+										<td>
+											{{storehouse.depotName}}
+										</td>
+										<td style="text-align:center;">
+											仓房名称
+										</td>
+										<td>
+											{{qualitycheck.storehouseName}}
+										</td>
+									</tr>
+									<tr>
+										<td style="text-align:center;">
+											货位名称
+										</td>
+										<td>
+											{{qualitycheck.warehouseName}}
+										</td>
+										<td  style="text-align:center;">
+											仓型
+										</td>
+										<td>
+											{{dicData[storehouse.storehouseType]}}
+										</td>
+										<td  style="vertical-align:middle;text-align:center;">
+											设计仓容
+										</td>
+										<td   style="vertical-align:middle;">
+											{{storehouse.designCapacity}}
+										</td>
+										<td   style="vertical-align:middle;text-align:center;">
+											储粮性质
+										</td>
+										<td   style="vertical-align:middle;">
+											{{dicData[keepaccount.hwxz]}}
+										</td>
+									</tr>
+									<tr>
+										<td   style="vertical-align:middle;text-align:center;">
+											品种
+										</td>
+										<td   style="vertical-align:middle;">
+											{{dicData[keepaccount.pz]}}
+										</td>
+										<td style="text-align:center;">
+											产地
+										</td>
+										<td>{{dicData[keepaccount.gb]}}</td>
+										<td style="vertical-align:middle;text-align:center;">
+											实际数量(kg)
+										</td>
+										<td style="vertical-align:middle;">
+											{{keepaccount.kcsl}}
+										</td>
+										<td style="text-align:center;">
+											入库价格
+										</td>
+										<td>{{foodbasicinfo.price}}</td>
+									</tr>
+									<tr>
+										<td style="text-align:center;">
+											收获年度
+										</td>
+										<td>{{qualitycheck.harvestTime}}</td>
+										<td style="text-align:center;">
+											入库时间
+										</td>
+										<td>{{qualitycheck.inputTime}}</td>
+										<td style="text-align:center;">
+											等级
+										</td>
+										<td>{{dicData[qualitycheck.level]}}</td>
+										<td style="text-align:center;">
+											水分(及挥发物)%
+										</td>
+										<td>{{qualitycheck.water}}</td>
+									</tr>
+									<tr>
+										<td style="text-align:center;">
+											杂质(不溶性杂质)%
+										</td>
+										<td>{{qualitycheck.impurity}}</td>
+										<td style="text-align:center;">
+											不完善粒(整精米率)%
+										</td>
+										<td>{{qualitycheck.badpart}}</td>
+										<td style="text-align:center;">
+											容重(出糙率%)
+										</td>
+										<td>{{qualitycheck.capacity}}</td>
+										<td style="text-align:center;">
+											脂肪酸值(酸价)
+										</td>
+										<td>{{qualitycheck.fatIndex}}</td>
+									</tr>
+									<tr>
+										<td style="text-align:center;">
+											过氧化值
+										</td>
+										<td>{{qualitycheck.peroxideValue}}</td>
+										<td style="text-align:center;">
+											保管方法
+										</td>
+										<td>{{foodbasicinfo.keepMethod}}</td>
+										<td style="text-align:center;">
+											保管员
+										</td>
+										<td>{{keeper.keeperNames}}</td>
+										<td style="text-align: center;">
+											粮(油)体积
+										</td>
+										<td>{{foodbasicinfo.disperseCapacity}}</td>
+									</tr>
+									<tr>
+										<td style="text-align:center;">
+											粮堆长
+										</td>
+										<td>{{storehouse.length}}</td>
+										<td style="text-align:center;">
+											粮堆(罐)宽
+										</td>
+										<td>{{storehouse.width}}</td>
+										<td style="text-align:center;">
+											粮堆(罐)高
+										</td>
+										<td>{{foodbasicinfo.height}}</td>
+										<td>
+										</td>
+										<td>
+										</td>
+									</tr>
+								</table>
+							</div>
+							<fieldset>
+								<div class="row">
+									<footer>
+										<div class="row">
+											<div class="col-md-12">
+												<a class="btn btn-default" href-void="" style="margin: 5px;float:right" href="#" ng-click="retList()">取消</a>
+												<a class="btn btn-primary" href-void="" style="margin: 5px;float:right" href="#" ng-click="submitSaveFoodCard()">提交</a>
+											</div>
+										</div>
+									</footer>
+								</div>
+							</fieldset>
+						</div>
+					</div>
+				</div>
+			</article>
+		</div>
+	</section>
+</div>

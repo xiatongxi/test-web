@@ -1,0 +1,273 @@
+<!-- MAIN CONTENT -->
+<div id="content" style=" border-width:5px; margin-left:2%;position:relative;margin-right:2%;">
+    <!-- widget grid -->
+    <section id="widget-grid" widget-grid>
+        <!-- START ROW -->
+        <div class="row">
+            <!-- NEW COL START -->
+            <article class="col-sm-12 col-md-12 col-lg-12">
+                <!-- Widget ID (each widget will need unique ID)-->
+                <div jarvis-widget id="form-grid-widget"
+                    data-widget-colorbutton="false" data-widget-editbutton="false"
+                    data-widget-custombutton="false">
+                    <div>
+                        <!-- widget content -->
+                        <div class="widget-body no-padding">
+                            <form id="lading-form" class="smart-form ng-pristine ng-valid" data-validator-option="validateOptions" novalidate="novalidate" style=" border-width:5px; margin-left:2%;position:relative;margin-right:2%;">
+                                <header>
+									<a href-void class="btn btn-default btn-xs" ng-click="retList()">
+										<i class="fa fa-angle-left"></i>&nbsp;返回&nbsp;
+									</a>
+									&nbsp;<strong>提货单</strong>
+									<span class="pull-right font-xs">带*的部分必须填写</span>
+								</header>
+                                <fieldset>
+                                <table style="width:70%; border-width:5px; margin-left:15%;position:relative;margin-right:15%;">
+                                	<table class="table table-striped table-bordered table-hover" width="100%">
+                                		<!--第一个tr开始 -->
+										<tr>
+											<th width='10%'>
+												<label class="label" style="margin-top: 9px;text-align: center;">提货单号<span style="color: red;">*</span></label>
+											</th>
+											<th width='20%'>
+												<section>
+		                                            <label class="input"> 
+		                                                <input class="form-control" type="text" ng-model="lading.ladingNumber" name="ladingNumber" ng-readonly="true"
+		                                                placeholder="{{ ladingNumber.msg }}"  required>
+		                                            </label>
+		                                        </section>
+											</th>
+											<th width='10%'>
+												<label class="label" style="margin-top: 9px;text-align: center;">汽车牌号<span style="color: red;">*</span></label>
+											</th>
+											<th width='20%'>
+												<section>
+		                                            <label class="input"> 
+		                                                <input class="form-control" type="text" ng-model="lading.carnumber" name="carnumber" ng-readonly="isNotEdit"
+		                                                minlength="2" maxlength="20" required>
+		                                            </label>
+		                                        </section>
+											</th>
+											<th width='10%'>
+												<label class="label" style="margin-top: 9px;text-align: center;">入站单号<span style="color: red;margin-left: 5px;text-align: center;">*</span></label>
+											</th>
+											<th width='20%'>
+												<section >
+                                                        <i class="icon-append fa fa-times" ng-click="removeInbound()"></i>
+			                                            <input class="form-control" type="text" ng-model="lading.inboundNumber" 
+			                                            ng-readonly="true" ng-disabled="isNotEdit" 
+			                                            ng-click="getInbound()" placeholder="请选择入站单号" 
+			                                            minlength="2" maxlength="20" required>
+		                                        </section>
+											</th>
+										</tr>
+										<!--第一个tr结束 -->
+										<!--第二个tr开始 -->
+										<tr>
+											<th>
+												<label label class="label" style="margin-top: 9px;text-align: center;">客户名称<span style="color: red;">*</span></label>
+											</th>
+											<th>
+												<section>
+		                                            <label class="input"> 
+		                                                <input class="form-control" type="text" ng-model="lading.customerName" name="customerName" ng-readonly="isNotEdit"
+		                                                minlength="2" maxlength="20" required readOnlyButValid>
+		                                            </label>
+		                                        </section>
+											</th>
+											<th>
+												<!-- <label label class="label" style="margin-top: 9px;text-align: center;">签订人<span style="color: red;">*</span></label> -->
+												<label label class="label" style="margin-top: 9px;text-align: center;">关联火车皮号</label>
+											</th>
+											<th>
+		                                        <section >
+                                                        <i class="icon-append fa fa-times" ng-click="removeHcph()"></i>
+			                                            <input class="form-control" type="text" ng-model="lading.trainNumber" 
+			                                            ng-readonly="true" ng-disabled="isNotEdit" 
+			                                            ng-click="gethcph()" placeholder="请选择火车皮号" required>
+			                                             
+		                                        </section>
+											</th>
+											<th>
+												<label class="label" style="margin-top: 9px;text-align: center;">粮油品种</label>
+											</th>
+											<th>
+												<section>
+		                                            <label class="select"> 
+									                   <select ng-model="lading.grainKind" ng-disabled="!warehouseIdEdit" ng-disabled="isnNotEdit"  
+							                              name="grainKind" ng-options="enum.enumid as enum.enumname for enum in dicDataList[1061]" >
+									                      <option value="">--请选择--</option>
+									                    </select>
+		             								</label>
+		                                        </section>
+		                                        
+											</th>
+										</tr>
+										<!--第二个tr结束 -->
+										<!--第三个tr开始 -->
+										<tr>
+											<th>
+												<label class="label" style="margin-top: 9px;text-align: center;">规格型号<span style="color: red;">*</span></label>
+											</th>
+											<th>
+												<section>
+		                                            <label class="input"> 
+		                                                <input type="text" ng-model="lading.model" name="model" class="form-control datepicker" 
+		                                                 ng-disabled="isNotEdit" readOnlyButValid required>
+		                                            </label>
+		                                        </section>
+											</th>
+											<th>
+												<label label class="label" style="margin-top: 9px;text-align: center;">卸载件数<span style="color: red;">*</span></label>
+											</th>
+											<th>
+												<section>
+		                                            <label class="input"> 
+		                                                <input class="form-control" type="text" ng-model="lading.unloadNumber" name="unloadNumber" ng-readonly="isNotEdit" readOnlyButValid required>
+		                                            </label>
+		                                        </section>
+											</th>
+											<th>
+												<label label class="label" style="margin-top: 9px;text-align: center;">站台<span style="color: red;">*</span></label>
+											</th>
+											<th>
+												<section>
+		                                            <label class="input"> 
+		                                                <input class="form-control" type="text" ng-model="lading.platform" name="platform" ng-readonly="isNotEdit" readOnlyButValid required>
+		                                            </label>
+		                                        </section>
+											</th>
+										</tr>
+										<!--第三个tr结束 -->
+										<tr>
+											<th>
+												<label class="label" style="margin-top: 9px;text-align: center;">货位<span style="color: red;">*</span></label>
+											</th>
+											<th>
+												<section>
+		                                            <label class="input"> 
+		                                                <input type="text" ng-model="lading.warehouseName" name="warehouseName" class="form-control datepicker" 
+		                                                 ng-disabled="isNotEdit" readOnlyButValid required>
+		                                                
+		                                            </label>
+		                                        </section>
+											</th>
+											<th>
+												<label label class="label" style="margin-top: 9px;text-align: center;">提货件数<span style="color: red;">*</span></label>
+											</th>
+											<th>
+												<section>
+		                                            <label class="input"> 
+		                                                <input class="form-control" type="number" ng-model="lading.goodsNumber" name="signingMan" ng-readonly="isNotEdit" required>
+		                                            </label>
+		                                        </section>
+											</th>
+											<th>
+												<label label class="label" style="margin-top: 9px;text-align: center;">计量方式<span style="color: red;">*</span></label>
+											</th>
+											<th>
+												<section>
+		                                            <input type="radio" name="measurementMethod" value="1" ng-model="lading.measurementMethod" />计件
+													<input type="radio" name="measurementMethod" value="2" ng-model="lading.measurementMethod" />称重
+													<div><span style="color: #D56161;margin-top:6px;padding:0 1px;font-style:normal;font-size:11px;
+                         line-height:15px;" id="measurementMethod-error"></span></div>
+		                                        </section>
+											</th>
+										</tr>
+										<tr>
+											<th>
+												<label class="label" style="margin-top: 9px;text-align: center;">业务类型</label>
+											</th>
+											<th>
+												<section>
+		                                            <label class="input"> 
+		                                                <input type="text" ng-model="lading.businessType" name="businessType" class="form-control datepicker" 
+		                                                 ng-disabled="isNotEdit" >
+		                                               
+		                                            </label>
+		                                        </section>
+											</th>
+											<th>
+												<label label class="label" style="margin-top: 9px;text-align: center;">销售类型</label>
+											</th>
+											<th>
+												<section>
+		                                            <label class="input"> 
+		                                                <input class="form-control" type="text" ng-model="lading.salesType" name="salesType" ng-readonly="isNotEdit">
+		                                            </label>
+		                                        </section>
+											</th>
+											<th>
+												<label label class="label" style="margin-top: 9px;text-align: center;">单件重量(公斤)<span style="color: red;">*</span></label>
+											</th>
+											<th>
+												<section>
+		                                            <label class="input"> 
+		                                                <input class="form-control" type="text" ng-model="lading.salesDepartment" name="salesDepartment" ng-readonly="true" required>
+		                                            </label>
+		                                        </section>
+											</th>
+										</tr>
+										<tr>
+											<th>
+												<label class="label" style="margin-top: 9px;text-align: center;">发运站<span style="color: red;">*</span></label>
+											</th>
+											<th>
+												<section>
+		                                            <label class="input"> 
+		                                                <input type="text" ng-model="lading.transportStation" name="transportStation" class="form-control datepicker" 
+		                                                 ng-readonly="isNotEdit" required>
+		                                            </label>
+		                                        </section>
+											</th>
+											<th>
+												<label label class="label" style="margin-top: 9px;text-align: center;">发货日期<span style="color: red;">*</span></label>
+											</th>
+											<th>
+												<section>
+		                                            <label class="input"> 
+		                                                <input class="form-control" type="text" ng-model="lading.deliveryDate" name="deliveryDate" data-smart-datepicker ng-disabled="isNotEdit" required>
+		                                            </label>
+		                                        </section>
+											</th>
+											<th>
+												<label label class="label" style="margin-top: 9px;text-align: center;">制单人<span style="color: red;">*</span></label>
+											</th>
+											<th>
+												<section>
+		                                            <label class="input"> 
+		                                                <input class="form-control" type="text" ng-model="lading.creater" name="creater" ng-readonly="isNotEdit" required>
+		                                            </label>
+		                                        </section>
+											</th>
+										</tr>
+										<tr>
+											<th>
+												<label class="label" style="margin-top: 9px;text-align: center;">制单日期<span style="color: red;">*</span></label>
+											</th>
+											<th>
+												<section>
+		                                            <label class="input" style="margin-top: 9px;"> 
+		                                            	{{ lading.billDate | date:'yyyy-MM-dd' }}
+		                                            </label>
+		                                        </section>
+											</th>
+											<th colspan="4">
+											</th>
+										</tr>
+									</table>
+                                </table>
+                                </fieldset>
+                                <div>
+                                    <footer class="text-align-center">
+                                        <button type="button" class="btn btn-default" ng-click="retList()">取消</button>
+                                        <button type="button" class="btn btn-primary" ng-hide="isNotEdit" ng-click="save()">保存</button>
+                                    </footer>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+            </article>
+        </div>
+    </section>
+</div>

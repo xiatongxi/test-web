@@ -1,0 +1,36 @@
+
+<div class="dt-toolbar-footer">
+	<div class="col-sm-4 col-xs-12 hidden-xs">
+		<div class="dataTables_info">
+			显示 {{pageInfo.startRow}} - {{pageInfo.endRow}}条，共 {{pageInfo.total}}条
+		</div>
+	</div>
+	<div class="col-xs-12 col-sm-8">
+		<div class="dataTables_paginate paging_simple_numbers">
+			<ul class="pagination">
+				<li ng-class="{true:'disabled'}[pageInfo.isFirstPage]">
+					<a href-void ng-click="goPage(1)">首页</a>
+				</li>
+
+				<li class="previous" ng-class="{true:'disabled'}[!pageInfo.hasPreviousPage]">
+					<a href-void ng-click="pageInfo.hasPreviousPage == true ? goPage(pageInfo.pageNum-1) : 1">上一页</a>
+				</li>
+
+				<li ng-repeat="page in pageInfo.navigatepageNums"
+					ng-class="{true:'active'}[pageInfo.pageNum==page]">
+					<a href-void ng-click="goPage(page)">{{page}}</a>
+				</li>
+					
+				<li class="next" ng-class="{true:'disabled'}[!pageInfo.hasNextPage]">
+					<a href-void ng-click="pageInfo.hasNextPage == true ? goPage(pageInfo.nextPage) : 1">下一页</a>
+				</li>
+				<li ng-class="{true:'disabled'}[pageInfo.isLastPage]">
+					<!--原代码-->
+					<!--<a href-void ng-click="goPage(pageInfo.lastPage)">尾页</a>-->
+					<!--更新后代码-->
+					<a href-void ng-click="goPage(pageInfo.pages)">尾页</a>
+				</li>
+			</ul>
+		</div>
+	</div>
+</div>

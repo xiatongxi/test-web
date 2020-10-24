@@ -1,0 +1,100 @@
+<div id="content">
+    <section id="widget-grid" widget-grid>
+        <div class="row">
+            <article class="col-sm-12 col-md-12 col-lg-12">
+                <div jarvis-widget id="form-grid-widget" data-widget-colorbutton="false" data-widget-editbutton="false"
+                     data-widget-custombutton="false">
+                    <div>
+                        <div class="widget-body no-padding">
+
+                            <form id="dcsQtInfo-form" class="smart-form" data-validator-option="validateOptions" novalidate="novalidate">
+                                <button type="submit" class="bv-hidden-submit" style="display: none; width: 0px; height: 0px;"></button>
+                                <header>
+                                    <a href-void class="btn btn-default btn-xs" ng-click="retList()"><i class="fa fa-angle-left"></i>&nbsp;返回&nbsp;</a>
+                                    &nbsp;<strong>多通道气体液位设置详情</strong>
+                                    <span class="pull-right font-xs">带*的部分必须填写</span>
+                                </header>
+                                <fieldset>
+                                    <div class="row">
+                                        <section class="col col-3">
+                                            <label class="label">仓房名称：<span style="color: red;">*</span></label>
+                                            <label class="select">
+                                                <select ng-model="dcsQtInfo.vCfCode" name="vCfCode" ng-disabled="isNotEdit"
+                                                        ng-options="store.storehouseCode as store.storehouseName for store in storelist"
+                                                        class="form-control" required>
+                                                    <option value="">--请选择--</option>
+                                                </select>
+                                            </label>
+                                        </section>
+                                        <section class="col col-3">
+                                            <label class="label">设备名称：<span style="color: red;">*</span></label>
+                                            <label class="input">
+                                                <input type="text" ng-model="dcsQtInfo.vDcsName" name="vDcsName" ng-disabled="isNotEdit" required/>
+                                            </label>
+                                        </section>
+                                        <section class="col col-3">
+                                            <label class="label">设备编码：</label>
+                                            <label class="input">
+                                                <input type="text" ng-model="dcsQtInfo.vDcsCode" placeholder="自动生成,无需填写." ng-readonly="true" />
+                                            </label>
+                                        </section>
+                                        <section class="col col-3">
+                                            <label class="label">站点编码：<span style="color: red;">*</span></label>
+                                            <label class="select">
+                                                <select ng-model="dcsQtInfo.vZdCode"
+                                                        ng-options="station.sitecode as station.sitename for station in stations"
+                                                        ng-disabled="isNotEdit" class="form-control" required>
+                                                    <option value="">--请选择--</option>
+                                                </select>
+                                            </label>
+                                        </section>
+                                    </div>
+                                    <div class="row">
+                                        <section class="col col-3">
+                                            <label class="label">开始通道：<span style="color: red;">*</span></label>
+                                            <label class="input">
+                                                <input type="text" ng-disabled="isNotEdit" ng-model="dcsQtInfo.iBeginTdh" validNumber="true" required />
+                                            </label>
+                                        </section>
+                                        <section class="col col-3">
+                                            <label class="label">结束通道：<span style="color: red;">*</span></label>
+                                            <label class="input">
+                                                <input type="text" ng-disabled="isNotEdit" ng-model="dcsQtInfo.iEndTdh" validNumber="true" required />
+                                            </label>
+                                        </section>
+                                        <section class="col col-3">
+                                            <label class="input">
+                                                <label class="label">更新人：</label>
+                                                <input type="text" ng-model="dcsQtInfo.vUpdatePerson" ng-readonly="true" required />
+                                            </label>
+                                        </section>
+                                        <section class="col col-3">
+                                            <label class="label">更新时间：</label>
+                                            <label class="input">
+                                                <input type="text" ng-model="dcsQtInfo.vUpdateTime" ng-readonly="true" required />
+                                            </label>
+                                        </section>
+                                    </div>
+                                    <div class="row">
+                                        <section class="col col-3">
+                                            <label class="label">描述：</label>
+                                            <label class="input">
+                                                <input type="text" ng-model="dcsQtInfo.vRemark" ng-disabled="isNotEdit">
+                                            </label>
+                                        </section>
+                                    </div>
+                                </fieldset>
+                                <footer>
+                                    <div>
+                                        <button type="button" class="btn btn-default" ng-click="retList()">取消</button>
+                                        <button type="button" class="btn btn-primary" ng-hide="isNotEdit" ng-click="save()">保存</button>
+                                    </div>
+                                </footer>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </article>
+        </div>
+    </section>
+</div>

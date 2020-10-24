@@ -1,0 +1,138 @@
+<!-- MAIN CONTENT -->
+<div id="content">
+    <!-- widget grid -->
+    <section widget-grid id="widget-grid">
+
+
+        <div class="row">
+            <article class="col-sm-12">
+                <legend ng-show="isShow=='1'">
+                    <a ng-click="returnUp()" href-void="" class="btn btn-default btn-xs" href="#">
+                        <i class="fa fa-angle-left"></i>&nbsp;返回&nbsp;
+                    </a>
+                </legend>
+                <div jarvis-widget id="standard-datatable-widget" data-widget-color="darken" data-widget-editbutton="false">
+                    <header>
+                        <span class="widget-icon"> <i class="fa fa-table"></i> </span>
+                        <h2>{{functionName}} </h2>
+                    </header>
+                    <div>
+                        <div class="widget-body no-padding">
+                            <div id="DataTables_Table_1_wrapper" class="dataTables_wrapper form-inline no-footer">
+                                <div class="dt-toolbar">
+                                    <div class="col-xs-12 col-sm-10">
+                                        <div class="form-group">
+                                            <label>
+                                                日期：<input style="width: 100px;" class="form-control" type="text" ng-model="searchCondition.searchStartDate" name="searchStartDate" data-smart-datepicker>
+                                                --&nbsp;<input style="width: 100px;" class="form-control" type="text" ng-model="searchCondition.searchEndDate" name="searchEndDate" data-smart-datepicker>
+
+                                            </label>
+                                            <label> 仓房名称:&emsp;
+                                                <select ng-model="searchCondition.houseId" class="form-control input-sm"
+                                                        ng-options="store.storehouseId as store.storehouseName for store in storelist"
+                                                        ng-change="loadWare()">
+                                                    <option value="">请选择</option>
+                                                </select>&emsp;
+                                            </label>
+                                            <label> 货位名称:&emsp;
+                                                <select ng-model="searchCondition.warehouseId" class="form-control input-sm"
+                                                        ng-options="ware.warehouseId as ware.warehouseName for ware in warelist">
+                                                    <option value="">请选择</option>
+                                                </select>&emsp;
+                                            </label>
+                                            <label>
+                                                <a class="btn btn-default btn-sm" ng-click="loadData()">
+                                                    <i class="fa fa-search"></i>&nbsp;查&nbsp;询
+                                                </a> &emsp;
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-2 col-xs-6 hidden-xs">
+                                        <div class="dataTables_length">
+                                            <label>每页显示 <select ng-model="pageInfo.pageSize" ng-change="loadData(pageInfo.pageNum=1)"
+                                                                ng-options="num as num for num in [1,10,25,50,100]"
+                                                                class="form-control input-sm"></select> 条
+                                            </label>
+                                        </div>
+                                    </div>
+                            </div>
+
+                        <table class="table table-striped table-bordered table-hover" width="100%">
+                        <thead>
+                        <tr>
+                        
+                            <th>填单日期</th>
+                            <th>仓房名称</th>
+                            <th>货位名称</th>
+                            <th>粮食品种</th>
+                            <th>粮食等级</th>
+                            <th>收购年度</th>
+                            <th>年度库存(千克)</th>
+                            <th>损益数量(千克)</th>
+                            <th>损益比例(%)</th>
+                            <th>实际库存</th>
+                            <th>操作</th>
+                        </tr>
+                        </thead>
+                        
+                        <tbody>
+                            <tr ng-repeat="profitlossSheet in pageInfo.list">
+                                <td>{{profitlossSheet.fillTime | date:'yyyy-MM-dd HH:mm:ss'}}</td>
+                                <td>{{storehouseObj[profitlossSheet.houseId].storehouseName}}</td>
+                                <td>{{warehouseObj[profitlossSheet.warehouseId].warehouseName}}</td>
+                                <td>{{dicData[profitlossSheet.grainKind]}}</td>
+                                <td>{{ dicData[profitlossSheet.grainGrade]}}</td>
+                                <td>{{ dicData[profitlossSheet.productionYear]}}</td>
+                                <td>{{ profitlossSheet.inventoryYear }}</td>
+                                <td>{{ profitlossSheet.incomeTonnage }}</td>
+                                <td>{{ profitlossSheet.profitRatio }}</td>
+                                <td>{{ profitlossSheet.actualStock }}</td>
+                                <td>
+                                    <a href-void ng-click="showView(profitlossSheet.id)"><i class="fa fa-info-circle"></i>查看</a>
+                                </td>
+                            </tr>
+                        </tbody>
+
+                        </table>
+				<div class="dt-toolbar-footer">
+                                <div class="col-sm-6 col-xs-12 hidden-xs">
+                                    <div class="dataTables_info" role="status" aria-live="polite">
+                                        显示 {{pageInfo.startRow}} - {{pageInfo.endRow}}条，共 {{pageInfo.total}} 条
+                                    </div>
+                                </div>
+                                <div class="col-xs-12 col-sm-6">
+                                    <div class="dataTables_paginate paging_simple_numbers">
+                                        <ul class="pagination">
+                                            <li ><a href="javascript:void(0);" ng-click="go_page('firstPage', pageInfo.pageNum, pageInfo.pageSize)"
+                                                aria-controls="DataTables_Table_9" data-dt-idx="0"
+                                                tabindex="0" id="DataTables_Table_9_first">首页</a></li>
+                                            <li></li>
+                                            
+                                            <li><a href="javascript:void(0);" class="previous" ng-click="go_page('previousPage', pageInfo.pageNum, pageInfo.pageSize)"
+                                                aria-controls="DataTables_Table_9" data-dt-idx="1"
+                                                tabindex="0" id="DataTables_Table_9_previous">上一页</a></li>
+                                            <li></li>
+                                            
+                                            <li ng-repeat="page in pageInfo.navigatepageNums" ng-class="{true:'active'}[p_current==page]">
+                                                 <a href="javascript:void(0);" ng-click="go_page('loadPage', page, pageInfo.pageSize)">{{ page }}</a>
+                                            </li>  
+                                            <li><a href="javascript:void(0);" class="next"
+                                                aria-controls="DataTables_Table_9" data-dt-idx="10" ng-click="go_page('nextPage',pageInfo.pageNum, pageInfo.pageSize, pageInfo.pages)"
+                                                tabindex="0" id="DataTables_Table_9_next">下一页</a></li>
+                                            <li><a href="javascript:void(0);" 
+                                                aria-controls="DataTables_Table_9" data-dt-idx="11" ng-click="go_page('lastPage',pageInfo.pageNum, pageInfo.pageSize, pageInfo.pages)"
+                                                tabindex="0" id="DataTables_Table_9_last">尾页</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        </div>
+                    </div>
+                </div>
+            </article>
+        </div>
+
+    </section>
+    
+</div>

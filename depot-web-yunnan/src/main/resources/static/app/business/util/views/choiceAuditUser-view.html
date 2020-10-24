@@ -1,0 +1,16 @@
+<div class="modal-content">
+    <div class="modal-header">
+        <h4 class="modal-title" id="myModalLabel">选择审批人</h4>
+    </div>
+    <div class="modal-body">
+      
+  	<select class="form-control" ng-model="assignment.assignee" ng-options="user.userId as user.realName for user in userList.data">
+  		<option value="">-- 请选择 --</option>
+  	</select>
+
+    </div>
+    <div class="modal-footer">
+        <button ng-click="choiceUser(assignment.assignee)" type="button" class="btn btn-primary">确认</button>
+        <button ng-click="cancel()" type="button" class="btn btn-default">取消 </button>
+    </div>
+</div>

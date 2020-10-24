@@ -1,0 +1,85 @@
+<!-- MAIN CONTENT -->
+<div id="content">
+    <!-- widget grid -->
+    <section widget-grid id="widget-grid">
+        <div class="row">
+            <article class="col-sm-12">
+
+                <div jarvis-widget id="standard-datatable-widget" data-widget-color="darken" data-widget-editbutton="false">
+                    <header>
+                        <span class="widget-icon"> <i class="fa fa-table"></i> </span>
+                        <h2>
+                        	<span ng-show="type==1">管理制度文件</span>
+                        	<span ng-show="type==2">应急预案文件</span>
+                        	<span ng-show="type==3">安全生产责任书</span>
+                         </h2>
+                    </header>
+                    <div>
+                        <div class="widget-body no-padding">
+                        <div id="DataTables_Table_1_wrapper" class="dataTables_wrapper form-inline no-footer">
+							<div class="dt-toolbar">
+								<div class="col-xs-12 col-sm-6">
+									<div class="form-group">
+										<label> 文件名称:&emsp;<input type="search" ng-model="search.fileName"
+											class="form-control input-sm" placeholder=""> &emsp;
+										</label>
+										<a class="btn btn-default btn-sm" ng-click="loadData()">
+											<i class="fa fa-search"></i>&nbsp;查&nbsp;询</a>
+									</div>
+								</div>
+								<div class="col-xs-3 col-sm-2">
+									<a has-permission="465" class="btn btn-primary btn-sm" ng-click="showAddmsm()">
+										<span class="fa fa-upload"></span>&nbsp;制度上传</a>
+								</div>
+								<div class="col-sm-4 col-xs-6 hidden-xs">
+									<div class="dataTables_length">
+										<label>每页显示 <select ng-model="pageInfo.pageSize" ng-change="loadData(pageInfo.pageNum=1)"
+															ng-options="num as num for num in [10,25,50,100]"
+															class="form-control input-sm"></select> 条
+										</label>
+									</div>
+								</div>
+							</div>
+
+						<table class="table table-striped table-bordered table-hover" width="100%">
+                        <thead>
+                        <tr>
+                            <th data-hide="expand">文件名称</th>
+                            <th data-class="expand"> 操作时间</th>
+                            <th data-class="expand">操作人</th>
+                            <th data-hide="expand"> 来源</th>
+                            <th data-hide="expand"> 备注</th>
+                            <th data-hide="expand"> 操作</th>
+                        </tr>
+                        </thead>
+
+                        <tbody>
+                        	<tr ng-repeat="safeproduce in pageInfo.list">
+                        		<td>{{safeproduce.fileName}}</td>
+                        		<td>{{safeproduce.operationTime | date:'yyyy-MM-dd'}}</td>
+                        		<td>{{safeproduce.operator}}</td>
+                        		<td>{{safeproduce.source}}</td>
+                        		<td>{{safeproduce.remarks}}</td>
+                        		<td class="padding-5">
+                        			<a has-permission="466" class="btn btn-xs btn-default no-margin" href-void ng-click="preview(safeproduce.id)"><i class="fa fa-edit"></i>查看</a>
+                        			<a has-permission="467" class="btn btn-xs btn-default no-margin" href-void ng-click="download(safeproduce)"><i class="fa fa-download"></i>下载</a>
+                        			<a has-permission="468" ng-show="safeproduce.operator==userInfo.realName" class="btn btn-xs btn-default no-margin" href-void ng-click="delete(safeproduce.id, safeproduce.fileUrl)"><i class="fa fa-trash-o"></i> 删除</a>
+                        		</td>
+                        	</tr>
+                        </tbody>
+
+                        </table>
+								
+						<div smart-include="app/layout/partials/page.tpl.html"></div>
+						</div>
+						</div>
+                    </div>
+                </div>
+            </article>
+        </div>
+    </section>
+	<form id="download-form" method="post" target="_blank">
+		<input type="hidden" name="fileName" id="fileName">
+		<input type="hidden" name="filePaths" id="filePaths">
+	</form>
+</div>

@@ -1,0 +1,99 @@
+<div id="content" class="hb-vie">
+	<section id="widget-grid" widget-grid>
+		<div class="row">
+			<article class="col-sm-12 col-md-12 col-lg-12">
+				<div jarvis-widget id="form-grid-widget"
+					data-widget-colorbutton="false" data-widget-editbutton="false"
+					data-widget-custombutton="false">
+					<header>
+						<h2>保管员信息展示</h2>
+					</header>
+
+					<div class="form-group">
+						<label> 仓房名称:&emsp;
+							<select ng-model="searchouseId.storehouseId" class="form-control input-sm" ng-change="loadKeeperInfoByHouse()"
+									ng-options="store.storehouseId as store.storehouseName for store in storelist"
+									ng-change="loadWare()">
+								<option value="" disabled>请选择</option>
+							</select>&emsp;
+						</label>
+					</div>
+
+					<div ng-repeat="keeper in keeperlist">
+						<div class="col-sm-5">
+							<img style="width: 100%" class="img-responsive"
+								src="{{keeper.avatorUrl}}">
+							<div>
+								<div class="row">
+									<li style="width: 100%; margin-left: -3px" class="list-group-item add-listclass col-sm-12 font-lg">
+										<div class="input-group input-group-sm text-right">
+											<span class="input-group-addon">
+												<span class="font-lg"><i class="glyphicon glyphicon-th-large"></i>责任保管员:
+											    </span>
+												<span class="font-lg">{{keeper.name}}</span>
+											</span>
+										</div>
+									</li>
+								</div>
+								<div class="row"></div>
+							</div>
+						</div>
+						<div class="col-sm-7">
+							<div class="panel">
+								<div style="overflow: hidden;" class="panel-heading">
+									<h3 style="line-height: 30px" class="panel-title font-xl">保管员基本信息</h3>
+								</div>
+								<div class="panel-body">
+									<ul class="list-group .add-listclass">
+										<style>
+											.hb-vie .glyphicon {
+												margin-right: 5px;
+											}
+
+											.hb-vie .add-listclass {
+												border: none !important;
+												border-bottom: 1px solid #f5f5f5 !important;
+												margin-bottom: 0px !important;
+												margin-left: 1%;
+											}
+											</style>
+										<li class="list-group-item add-listclass col-sm-12">
+											<span class="font-lg text-right col-sm-4">出生年月：</span>
+											<span class="font-lg col col-sm-8">{{keeper.birthday | date :'yyyy-MM-dd'}}</span>
+										</li>
+										<li class="list-group-item add-listclass col-sm-12">
+											<span class="font-lg text-right col-sm-4">性别：</span>
+											<span class="font-lg col col-sm-8">{{keeper.sex}}</span>
+										</li>
+										<li class="list-group-item add-listclass col-sm-12">
+											<span class="font-lg text-right col-sm-4">政治面貌：</span>
+											<span class="font-lg col col-sm-8">{{keeper.political}}</span></li>
+										<li class="list-group-item add-listclass col-sm-12">
+											<span class="font-lg text-right col-sm-4">联系方式：</span>
+											<span class="font-lg col col-sm-8">{{keeper.phone}}</span></li>
+										<li class="list-group-item add-listclass col-sm-12">
+											<span class="font-lg text-right col-sm-4">保管工作年限：</span>
+											<span class="font-lg col col-sm-8">{{keeper.workYear}}</span></li>
+										<li class="list-group-item add-listclass col-sm-12">
+											<span class="font-lg text-right col-sm-4">邮箱：</span>
+											<span class="font-lg col col-sm-8">{{keeper.email}}</span></li>
+									</ul>
+								</div>
+								<div style="overflow: hidden;" class="panel-heading">
+									<h3 style="line-height: 30px" class="panel-title">
+										<a href-void class="btn btn-primary btn-sm"
+											style="float: right"
+											ng-click="showKeeperView(keeper.id)"><span
+											style="color: #ffffff">详情</span></a>
+									</h3>
+								</div>
+
+							</div>
+						</div>
+					</div>
+
+				</div>
+			</article>
+		</div>
+	</section>
+</div>

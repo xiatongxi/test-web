@@ -1,0 +1,182 @@
+<!-- MAIN CONTENT -->
+<div id="content">
+
+	<!-- widget grid -->
+	<section id="widget-grid" widget-grid>
+
+		<!-- START ROW -->
+		<div class="row">
+
+			<!-- NEW COL START -->
+			<article class="col-sm-12 col-md-12 col-lg-12">
+
+				<!-- Widget ID (each widget will need unique ID)-->
+				<div jarvis-widget id="form-grid-widget"
+					 data-widget-colorbutton="false" data-widget-editbutton="false"
+					 data-widget-custombutton="false">
+
+					<!-- widget div-->
+					<div>
+
+						<!-- widget content -->
+						<div class="widget-body no-padding">
+							<form id="movieForm" class="smart-form ng-pristine ng-valid" data-validator-option="validateOptions" novalidate="novalidate">
+								<header>
+									<a href-void class="btn btn-default btn-xs" ng-click="showList()">
+										<i class="fa fa-angle-left"></i>&nbsp;返回&nbsp;
+									</a>
+									&nbsp;<strong>录像机管理</strong>
+								</header>
+								<fieldset>
+									<div class="row">
+										<section class="col col-4">
+											<label class="label txt-bg-red">NVR名称</label>
+											<label class="input">
+												<input type="text" name="name" ng-model="nvr.name"
+													   minlength="2" maxlength="20" required/>
+											</label>
+										</section>
+										<section class="col col-4">
+											<label class="label txt-bg-red">NVR别名</label>
+											<label class="input">
+												<input type="text" name="alias" ng-model="nvr.alias"
+													   minlength="2" maxlength="20" required/>
+											</label>
+										</section>
+										<section class="col col-4">
+											<label>所属厂商</label>
+											<label class="select">
+												<select ng-model="nvr.factory"
+														ng-options="enum.enumcode as enum.enumname for enum in parentObj[5408]"
+														class="form-control" required>
+													<option value="">--请选择--</option>
+												</select><i></i>
+											</label>
+										</section>
+									</div>
+									<div class="row">
+										<section class="col col-4">
+											<label class="label txt-bg-red">负责部门</label>
+											<label class="input">
+												<input type="text" name="department" ng-model="nvr.department"
+													   minlength="2" maxlength="20" required/>
+											</label>
+										</section>
+										<section class="col col-4">
+											<label class="label txt-bg-red">NVR型号</label>
+											<label class="input">
+												<input type="text" name="modelNum" ng-model="nvr.modelNum"
+													   minlength="2" maxlength="20" required/>
+											</label>
+										</section>
+										<section class="col col-4">
+											<label class="label txt-bg-red">设备类型</label>
+											<label class="select">
+												<select ng-model="nvr.type"
+														ng-options="enum.enumcode as enum.enumname for enum in parentObj[5333]"
+														class="form-control" required>
+													<option value="">--请选择--</option>
+												</select><i></i>
+											</label>
+										</section>
+									</div>
+									<div class="row">
+										<section class="col col-4">
+											<label class="label txt-bg-red">序列号</label>
+											<label class="input">
+												<input type="text" name="serialno" ng-model="nvr.serialno"
+													   minlength="2" maxlength="20"/>
+											</label>
+										</section>
+										<section class="col col-4">
+											<label class="label txt-bg-red">安装日期</label>
+											<div class="input-group">
+												<input type="text" id="completeDate" name="installTime" ng-model="nvr.installTime"
+													   class="form-control" data-smart-datepicker>
+												<span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+											</div>
+										</section>
+										<section class="col col-4">
+											<label class="label txt-bg-red">IP地址</label>
+											<label class="input">
+												<input type="text" name="ip" ng-model="nvr.ip"
+													   minlength="2" maxlength="20"/>
+											</label>
+										</section>
+									</div>
+									<div class="row">
+										<section class="col col-4">
+											<label class="label txt-bg-red">网关地址</label>
+											<label class="input">
+												<input type="text" name="gateway" ng-model="nvr.gateway"
+													   minlength="2" maxlength="20" required/>
+											</label>
+										</section>
+										<section class="col col-4">
+											<label class="label txt-bg-red">子网掩码</label>
+											<label class="input">
+												<input type="text" name="subnetMask" ng-model="nvr.subnetMask"
+													   minlength="2" maxlength="20"/>
+											</label>
+										</section>
+										<section class="col col-4">
+											<label class="label txt-bg-red">登陆账号</label>
+											<label class="input">
+												<input type="text" name="username" ng-model="nvr.username"
+													   minlength="2" maxlength="20"/>
+											</label>
+										</section>
+									</div>
+									<div class="row">
+										<section class="col col-4">
+											<label class="label txt-bg-red">登陆密码</label>
+											<label class="input">
+												<input type="password" name="password" ng-model="nvr.password"
+													   minlength="2" maxlength="20"/>
+											</label>
+										</section>
+										<section class="col col-4">
+											<label class="label txt-bg-red">HTTP端口</label>
+											<label class="input">
+												<input type="text" name="port" ng-model="nvr.port"
+													   minlength="2" maxlength="20"/>
+											</label>
+										</section>
+										<section class="col col-4">
+											<label class="label txt-bg-red">NVR管理员</label>
+											<label class="input">
+												<input type="text" name="warden" ng-model="nvr.warden"
+													   minlength="2" maxlength="20"/>
+											</label>
+										</section>
+									</div>
+									<div class="row">
+										<section class="col col-4">
+											<label class="label txt-bg-red">安装位置</label>
+											<label class="input">
+												<input type="text" name="position" ng-model="nvr.position"
+													   minlength="2" maxlength="20"/>
+											</label>
+										</section>
+										<section class="col col-4">
+											<label class="label txt-bg-red">摄像头数量</label>
+											<label class="input">
+												<input type="text" name="quantity" ng-model="nvr.quantity"
+													   minlength="1" maxlength="20"/>
+											</label>
+										</section>
+									</div>
+								</fieldset>
+
+								<footer class="text-align-center">
+									<button type="button" class="btn btn-default" ng-click="showList()">取消</button>
+									<button ng-show="isShow == '0'" type="button" class="btn btn-primary" ng-click="saveData()">提交</button>
+								</footer>
+							</form>
+						</div>
+					</div>
+				</div>
+			</article>
+		</div>
+	</section>
+</div>

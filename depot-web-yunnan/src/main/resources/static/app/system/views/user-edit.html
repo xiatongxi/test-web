@@ -1,0 +1,227 @@
+<!-- MAIN CONTENT -->
+<style>
+.error{
+	color: red;
+}
+</style>
+<div id="content">
+
+	<!-- widget grid -->
+	<section id="widget-grid" widget-grid>
+
+		<!-- START ROW -->
+		<div class="row">
+
+			<!-- NEW COL START -->
+			<article class="col-sm-12 col-md-12 col-lg-12">
+
+				<!-- Widget ID (each widget will need unique ID)-->
+				<div jarvis-widget id="form-grid-widget"
+					data-widget-colorbutton="false" data-widget-editbutton="false"
+					data-widget-custombutton="false">
+
+					<!-- widget div-->
+					<div>
+
+						<!-- widget content -->
+						<div class="widget-body no-padding">
+							<form id="user-form" class="smart-form ng-pristine ng-valid" data-validator-option="validateOptions" novalidate="novalidate">
+							
+								<header>
+									<a href-void class="btn btn-default btn-xs" ng-click="back()">
+										<i class="fa fa-angle-left"></i>&nbsp;返回&nbsp;
+									</a>
+									&nbsp;用户基本信息
+									<span class="pull-right font-xs">带*的部分必须填写</span>
+								</header>
+								<fieldset>
+									<div class="row">
+										<section class="col col-4">
+											<label class="label txt-bg-red">登录账号<span style="color: red;">*</span></label> 
+											<label class="input"> 
+												<i class="icon-prepend fa fa-user"></i>
+												<input type="text" name="username" ng-model="user.username" 
+													 minlength="2" maxlength="20" required validUsername="true" />
+												<b class="tooltip tooltip-bottom-right">2-20位字母、数字和下划线</b>
+											</label>
+										</section>
+										<section class="col col-4">
+											<label class="label">用户姓名<span style="color: red;">*</span></label> 
+											<label class="input"> 
+												<i class="icon-prepend fa fa-user"></i>
+												<input type="text" name="realName" ng-model="user.realName" maxlength="20" required>
+											</label>
+										</section>
+										<section class="col col-4">
+											<label class="label">用户别名<span style="color: red;">*</span></label> 
+											<label class="input"> 
+												<i class="icon-prepend fa fa-user"></i>
+												<input type="text" ng-model="user.userAlias" name="userAlias" maxlength="20" required>
+											</label>
+										</section>
+									</div>
+									<div class="row">
+									<section class="col col-4">
+										<label class="label">性别</label> 
+										<label class="select"> 
+<!-- 											<select ng-model="user.sex" ng-options='x.id as x.name for x  in [{id:1,name:"男"},{id:2,name:"女"}]'> -->
+<!-- 												<option value="">请选择</option> -->
+<!-- 											</select> -->
+											<select ng-model="user.sex" ng-options="enum.enumid as enum.enumname for enum in dicDataList[5287]"
+												class="form-control">
+													<option value="">--请选择--</option>
+											</select>
+											<i></i>
+										</label>
+									</section>
+									<section class="col col-4">
+									   <label class="label">所属组织<span style="color: red;">*</span></label> 
+									    <multi-select-tree  data-input-model="data2" data-default-label="请选择"
+													multi-select="false" data-output-model="user.orgId" 
+													data-callback="selectOnly(item, selectedItems)">
+											 </multi-select-tree>
+									</section>
+										<!-- <section class="col col-4">
+											<label class="label">所属公司*</label> 
+											<label class="select"> 
+												<select ng-model="parentOrgId" ng-options="org.orgId as org.orgName for org in orglist | filter:{orgClassId:5317}" 
+												ng-change="changeCompany()" required>
+													<option value="">请选择</option>
+												</select><i></i>
+											</label>
+										</section>
+										<section class="col col-4">
+											<label class="label">所属粮库</label> 
+											<label class="select"> 
+												<select ng-model="user.orgId" ng-options="org.orgId as org.orgName for org in depotlist">
+													<option value="">请选择</option>
+												</select><i></i>
+											</label>
+										</section> -->
+										
+										 <section class="col col-4">
+											<label class="label">角色（可多选）</label> 
+											 <multi-select-tree data-input-model="data4" data-default-label="请选择"
+                                                    select-only-leafs="true"
+													multi-select="true" data-output-model="userRole.roleIds"
+													data-callback="selectOnly1Or2(item, selectedItems)">
+											 </multi-select-tree>
+											<!-- <label class="select"> 
+												<select data-smart-select2 multiple style="width:100%" class="select2" ng-model="user.roleIds" required>
+													<optgroup id="role{{role.roleId}}" ng-repeat="role in rolelist | filter:{hasChildren:true}" label="{{role.roleName}}">
+										                <option value="{{role.roleId}}">{{role.roleName}}</option>
+										                <option ng-repeat="roleson in rolelist | filter:{parentId:role.roleId}" value="{{roleson.roleId}}">{{roleson.roleName}}</option>
+										            </optgroup>
+										            <option ng-repeat="role in rolelist | filter:{hasChildren:false}" value="{{role.roleId}}">{{role.roleName}}</option>										            
+												</select><i></i>
+											</label> -->
+										</section> 
+										
+									</div>
+									<div class="row">
+										<section class="col col-4">
+											<label class="label">固定电话</label> 
+											<label class="input"> 
+												<i class="icon-prepend fa fa-phone"></i>
+												<input type="tel" ng-model="user.telphone" maxlength="30">
+											</label>
+										</section>
+										
+										<section class="col col-4">
+											<label class="label">手机号<span style="color: red;">*</span></label> 
+											<label class="input"> 
+												<i class="icon-prepend fa fa-mobile-phone"></i>
+												<input type="text" ng-model="user.mobile" name="mobile" maxlength="20" ng-blur="validPhone()" required>
+											</label>
+										</section>
+										<section class="col col-4">
+											<label class="label">QQ号码</label> 
+											<label class="input"> 
+												<i class="icon-prepend fa fa-qq"></i> 
+												<input type="text" ng-model="user.qqNumber" minlength="4" maxlength="12">
+											</label>
+										</section>
+									</div>
+									<div class="row" id="userPwd">
+										<section class="col col-6">
+											<label class="label">密码<span style="color: red;">*</span></label> 
+											<label class="input"> 
+												<i class="icon-prepend fa fa-key"></i> 
+												<input type="password" id="newPassword" name="newPassword"
+													ng-model="user.password" minlength="7" maxlength="20" required  validUsePwd="true" />
+											</label>
+										</section>
+										<section class="col col-6">
+											<label class="label">确认密码<span style="color: red;">*</span></label> 
+											<label class="input"> 
+												<i class="icon-prepend fa fa-key"></i> 
+												<input type="password" name="newPassword1" ng-model="newPassword1" 
+													 minlength="7" maxlength="20" required  />
+											</label>
+										</section>
+									</div>
+									<div class="row">
+										<section class="col col-6">
+											<label class="label">地址</label> 
+											<label class="input"> 
+												<i class="icon-prepend fa fa-map-marker"></i> 
+												<input type="text" ng-model="user.address" maxlength="30">
+											</label>
+										</section>
+										<section class="col col-6">
+											<label class="label">电子邮箱</label> 
+											<label class="input"> 
+												<i class="icon-prepend fa fa-envelope-o"></i> 
+												<input type="email" ng-model="user.email" maxlength="60">
+											</label>
+										</section>
+									</div>
+									<div class="row">
+										<section class="col col-6">
+											<label class="label">用户头像</label> 
+											<div class="input input-file">
+									            <span class="button">
+									            	<input type="file" nv-file-select="" uploader="uploader" accept="image/*">
+									                	浏览
+									            </span><input type="text" name="imgUrl" ng-model="user.imgUrl" placeholder="" readonly="">
+									        </div>
+										</section>
+										<section class="col col-6">
+											<label class="label">电子签名</label> 
+											<div class="input input-file">
+									            <span class="button">
+									            	<input type="file" nv-file-select="" uploader="uploader" accept="image/*">
+									                	浏览
+									            </span><input type="text" name="sigature" ng-model="user.sigature" placeholder="" readonly="">
+									        </div>
+										</section>
+									</div>
+									<div class="row">
+										<section class="col col-6">
+											<label class="label">人员类型</label> 
+											<label class="select"> 
+												<select ng-model="user.status" class="form-control">
+														<option value="1">库级领导</option>
+														<option value="2">经营人员</option>
+														<option value="3">仓储人员</option>
+														<option value="4">质检人员</option>
+														<option value="5">保卫人员</option>
+														<option value="6">中转人员</option>
+												</select>
+												<i></i>
+											</label>
+										</section>
+									</div>
+								</fieldset>
+								
+					            <footer class="text-align-center">
+					                <button type="button" class="btn btn-primary" ng-click="save()">提交</button>
+					                <button type="button" class="btn btn-default" ng-click="back()">取消</button>
+					            </footer>
+							</form>
+						</div>
+					</div>
+			</article>
+		</div>
+	</section>
+</div>

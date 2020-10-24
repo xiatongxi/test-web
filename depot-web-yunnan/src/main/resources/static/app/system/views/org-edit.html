@@ -1,0 +1,443 @@
+<!-- MAIN CONTENT -->
+<div id="content">
+
+	<!-- widget grid -->
+	<section id="widget-grid" widget-grid>
+
+		<!-- START ROW -->
+		<div class="row">
+
+			<!-- NEW COL START -->
+			<article class="col-sm-12 col-md-12 col-lg-12">
+
+				<!-- Widget ID (each widget will need unique ID)-->
+				<div jarvis-widget id="form-grid-widget"
+					data-widget-colorbutton="false" data-widget-editbutton="false"
+					data-widget-custombutton="false">
+
+					<!-- widget div-->
+					<div>
+
+						<!-- widget content -->
+						<div class="widget-body no-padding">
+							<form id="org-form" class="smart-form ng-pristine ng-valid" data-validator-option="validateOptions" novalidate="novalidate">
+							
+								<header>
+									<a href-void class="btn btn-default btn-xs" ng-click="back()">
+										<i class="fa fa-angle-left"></i>&nbsp;返回&nbsp;
+									</a>
+									&nbsp;组织基本信息
+									<span class="pull-right font-xs">带*的部分必须填写</span>
+								</header>
+								<fieldset>
+									<div class="row">
+										<section class="col col-4">
+											<label class="label">单位类型<span style="color: red;">*</span></label> 
+											<label class="select"> 
+												<select name="orgClassId" ng-model="orgInfo.orgClassId" 
+													ng-options="enum.enumid as enum.enumname for enum in dicDataList[5316]" required>
+													<option value="">请选择</option>
+												</select><i></i>
+											</label>
+										</section>
+										<section class="col col-4">
+											<label class="label txt-bg-red">组织名称<span style="color: red;">*</span></label> 
+											<label class="input"> 
+												<input type="text" name="orgName" ng-model="orgInfo.orgName" 
+													 minlength="2" maxlength="50" required />
+											</label>
+										</section>
+										<section class="col col-4">
+											<label class="label txt-bg-red">组织简称</label> 
+											<label class="input"> 
+												<input type="text" name="shortName" ng-model="orgInfo.shortName" 
+													 maxlength="20" />
+											</label>
+										</section>
+									</div>
+									<div class="row">
+										<section class="col col-4">
+											<label class="label">组织代码<span style="color: red;">*</span></label> 
+											<label class="input"> 
+												<input type="text" name="orgCode" ng-model="orgInfo.orgCode" ng-blur="validCode()" required>
+											</label>
+										</section>
+										<section class="col col-4">
+											<label class="label">单位性质</label> 
+											<label class="select"> 
+												<select ng-model="orgInfo.companyNature" ng-options='enum.enumid as enum.enumname for enum in dicDataList[1059]'>
+													<option value="">请选择</option>
+												</select><i></i>
+											</label>
+										</section>
+										<section class="col col-4">
+											<label class="label">业务类型</label> 
+											<label class="select"> 
+												<select ng-model="orgInfo.busiType" ng-options='enum.enumid as enum.enumname for enum in dicDataList[323]'>
+													<option value="">请选择</option>
+												</select><i></i>
+											</label>
+										</section>
+									</div>
+									<div class="row">
+										<section class="col col-4">
+											<label class="label">联系人<span style="color: red;">*</span></label> 
+											<label class="input"> 
+												<i class="icon-prepend fa fa-user"></i>
+												<input type="tel" name="chargePerson" ng-model="orgInfo.chargePerson" maxlength="20" required>
+											</label>
+										</section>
+										<section class="col col-4">
+											<label class="label">联系电话</label> 
+											<label class="input"> 
+												<i class="icon-prepend fa fa-phone"></i>
+												<input type="tel" name="contzct" ng-model="orgInfo.contact" maxlength="30" validPhone=true>
+											</label>
+										</section>
+										<section class="col col-4">
+											<label class="label">传真</label> 
+											<label class="input"> 
+												<i class="icon-prepend fa fa-fax"></i>
+												<input type="tel" name="fax" ng-model="orgInfo.fax" maxlength="30" validFax=true>
+											</label>
+										</section>
+									</div>
+									<div class="row">
+										<section class="col col-4">
+											<label class="label">组织机构代码<span style="color: red;">*</span></label> 
+											<label class="input"> 
+												<input type="text" name="companyOrgCode" ng-model="orgInfo.companyOrgCode" validLength=true required>
+											</label>
+										</section>
+										<section class="col col-4">
+											<label class="label">社会信用代码</label> 
+											<label class="input"> 
+												<input type="text" name="creditCode" ng-model="orgInfo.creditCode" maxlength="30">
+											</label>
+										</section>
+										<section class="col col-4">
+											<label class="label">邮政编码<span style="color: red;">*</span></label> 
+											<label class="input"> 
+												<i class="icon-prepend fa fa-map-marker"></i> 
+												<input type="text" name="post" ng-model="orgInfo.post" validPost=true maxlength="6" required>
+											</label>
+										</section>
+									</div>
+									<div class="row">
+										<section class="col col-4">
+											<label class="label">行政区划(省/直辖市)<span style="color: red;">*</span></label> 
+											<label class="select"> 
+												<select id="province" ng-model="province" name="province" ng-options='enum.enumid as enum.enumname for enum in dicDataList[1010]' required>
+													<option value="">请选择</option>
+												</select><i></i>
+											</label>
+										</section>
+										<section class="col col-4">
+											<label class="label">行政区划(地市)</label> 
+											<label class="select"> 
+												<select id="city" ng-model="city" ng-options='enum.enumid as enum.enumname for enum in dicDataList[province]'>
+													<option value="">请选择</option>
+												</select><i></i>
+											</label>
+										</section>
+										<section class="col col-4">
+											<label class="label">行政区划(县区)</label> 
+											<label class="select"> 
+												<select id="county" ng-model="county" ng-options='enum.enumid as enum.enumname for enum in dicDataList[city]'>
+													<option value="">请选择</option>
+												</select><i></i>
+											</label>
+										</section>
+									</div>
+									<div class="row">
+										<section class="col col-4">
+											<label class="label">地址<span style="color: red;">*</span></label> 
+											<label class="input"> 
+												<i class="icon-prepend fa fa-map-marker"></i> 
+												<input type="text" name="address" ng-model="orgInfo.address" maxlength="50" required>
+											</label>
+										</section>
+										<section class="col col-4">
+											<label class="label">经度<span style="color: red;">*</span></label> 
+											<label class="input"> 
+												<i class="icon-prepend fa fa-globe"></i> 
+												<input type="text" name="longitude" ng-model="orgInfo.longitude" placeholder="格式如：101.123450 小数最后一位为0"
+													maxlength="10" required isLong=true>
+											</label>
+										</section>
+										<section class="col col-4">
+											<label class="label">纬度<span style="color: red;">*</span></label> 
+											<label class="input"> 
+												<i class="icon-prepend fa fa-globe"></i> 
+												<input type="text" name="latitude" ng-model="orgInfo.latitude" placeholder="格式如：31.123450 小数最后一位为0"
+													maxlength="10" required isLa=true>
+											</label>
+										</section>
+									</div>
+									<div class="row">
+										<section class="col col-4">
+											<label class="label">办公电话<span style="color: red;">*</span></label> 
+											<label class="input"> 
+												<i class="icon-prepend fa fa-phone"></i> 
+												<input type="text" name="officePhone" ng-model="orgInfo.officePhone" maxlength="20" validPhone=true required>
+											</label>
+										</section>
+										<section class="col col-4">
+											<label class="label">注册地址</label> 
+											<label class="input"> 
+												<i class="icon-prepend fa fa-map-marker"></i>
+												<input type="text" name="registeredAddress" ng-model="orgInfo.registeredAddress" maxlength="512">
+											</label>
+										</section>
+										<section class="col col-4">
+											<label class="label">电子邮箱</label> 
+											<label class="input"> 
+												<i class="icon-prepend fa fa-envelope-o fa-fw"></i> 
+												<input type="text" name="mailBox" ng-model="orgInfo.mailBox" maxlength="30" validEmail=true>
+											</label>
+										</section>
+									</div>
+									
+									<div class="row">
+										<section class="col col-4">
+											<label class="label">企业官方网站地址</label> 
+											<label class="input"> 
+												<input type="text" name="officialWebsite" ng-model="orgInfo.officialWebsite" maxlength="128" validWebsite=true>
+											</label>
+										</section>
+										<section class="col col-4">
+											<label class="label">注册日期<span style="color: red;">*</span></label> 
+											<label class="input">
+												<input type="text" ng-model="orgInfo.registDate" class="form-control" data-smart-datepicker
+												name="registDate" required>
+											</label>
+										</section>
+										<section class="col col-4">
+											<label class="label">信息登记人</label> 
+											<label class="input"> 
+												<input type="text" name="infoRegist" ng-model="orgInfo.infoRegist" readonly>
+											</label>
+										</section>
+									</div>
+									<div class="row">
+										<section class="col col-md-12">
+											<label class="label">备注</label> 
+											<label class="textarea"> 
+												<textarea rows="5" name="remark" ng-model="orgInfo.remark" 
+													placeholder="最多输入200个字符" maxlength="200"></textarea>
+											</label>
+										</section>
+									</div>
+								</fieldset>
+								<header ng-show="orgInfo.orgClassId==5318">库点信息</header>
+								<fieldset ng-show="orgInfo.orgClassId==5318">
+									<div class="row">
+										<section class="col col-4">
+											<label class="label">库点类别<span style="color: red;">*</span></label> 
+											<label class="select"> 
+												<select name="depotClass" ng-model="orgInfo.depotClass" 
+													ng-options='enum.enumid as enum.enumname for enum in dicDataList[319]' required>
+													<option value="">请选择</option>
+												</select><i></i>
+											</label>
+										</section>
+										<section class="col col-4">
+											<label class="label">建成日期</label> 
+							                <div class="input-group">
+							                	<input type="text" name="completeDate" ng-model="orgInfo.completeDate" 
+							                		class="form-control" data-smart-datepicker ng-readonly="true">
+							                    <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+							                </div>
+										</section>
+										<section class="col col-4">
+											<label class="label">启用日期</label> 
+							                <div class="input-group">
+							                	<input type="text" name="useDate" ng-model="orgInfo.useDate" 
+							                		class="form-control" data-smart-datepicker ng-readonly="true">
+							                    <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+							                </div>
+										</section>
+									</div>
+									
+									<div class="row">
+										<section class="col col-4">
+											<label class="label">设计仓容(T)<span style="color: red;">*</span></label> 
+											<label class="input"> 
+												<input type="text" name="designCapacity" ng-model="orgInfo.designCapacity" maxlength="8" validNumber=true required>
+											</label>
+										</section>
+										<section class="col col-4">
+											<label class="label">有效仓容(T)<span style="color: red;">*</span></label> 
+											<label class="input"> 
+												<input type="text" name="effectiveCapacity" ng-model="orgInfo.effectiveCapacity" maxlength="8" validNumber=true required>
+											</label>
+										</section>
+										<section class="col col-4">
+											<label class="label">库点面积(平方米)<span style="color: red;">*</span></label>
+											<label class="input"> 
+												<input type="number" name="depotArea" ng-model="orgInfo.depotArea" validNumber=true max="99999999" required>
+											</label>
+										</section>
+									</div>
+									
+									<div class="row">
+										<section class="col col-4">
+											<label class="label">是否租库</label> 
+											<label class="select"> 
+												<select ng-model="orgInfo.whetherRent" ng-options='x.id as x.name for x  in [{id:1,name:"是"},{id:0,name:"否"}]'>
+													<option value="">请选择</option>
+												</select><i></i>
+											</label>
+										</section>
+										<section class="col col-4">
+											<label class="label">企业登记注册类型</label> 
+											<label class="select"> 
+												<select name="depotClass" ng-model="orgInfo.registType" 
+													ng-options='enum.enumid as enum.enumname for enum in dicDataList[1033]'>
+													<option value="">请选择</option>
+												</select><i></i>
+											</label>
+										</section>
+										<section class="col col-4">
+											<label class="label">是否具有独立法人资格</label> 
+											<label class="select"> 
+												<select ng-model="orgInfo.qualification" ng-options='x.id as x.name for x  in [{id:1,name:"是"},{id:0,name:"否"}]'>
+													<option value="">请选择</option>
+												</select><i></i>
+											</label>
+										</section>
+									</div>
+									
+									<div class="row">
+										<section class="col col-4">
+											<label class="label">法人<span style="color: red;">*</span></label> 
+											<label class="input"> 
+												<i class="icon-prepend fa fa-user"></i>
+												<input type="text" name="legalPerson" ng-model="orgInfo.legalPerson" maxlength="30" required>
+											</label>
+										</section>
+										<section class="col col-4">
+											<label class="label">工商登记编号</label> 
+											<label class="input"> 
+												<i class="icon-prepend fa fa-user"></i>
+												<input type="text" name="registNumber" ng-model="orgInfo.registNumber" maxlength="30">
+											</label>
+										</section>
+										<section class="col col-4">
+											<label class="label">注册资本(万元)</label>
+											<label class="input"> 
+												<i class="icon-prepend fa fa-cny"></i>
+												<input type="text" name="registCapital" ng-model="orgInfo.registCapital" validInteger=true maxlength="30">
+											</label>
+										</section>
+									</div>
+									
+									<div class="row">
+										<section class="col col-4">
+											<label class="label">法人身份证号</label> 
+											<label class="input"> 
+												<input type="text" name="corporateCapacity" ng-model="orgInfo.corporateCapacity" validCard=true>
+											</label>
+										</section>
+										<section class="col col-4">
+											<label class="label">资产总额(万元)</label>
+											<label class="input"> 
+												<i class="icon-prepend fa fa-cny"></i>
+												<input type="text" name="totalAssets" ng-model="orgInfo.totalAssets" maxlength="11" validInteger=true>
+											</label>
+										</section>
+										<section class="col col-4">
+											<label class="label">库区产权</label> 
+											<label class="select"> 
+												<select ng-model="orgInfo.depotProperty" class="form-control" ng-init="orgInfo.depotProperty='1'">
+													<option value="1">自有</option>
+													<option value="2">租赁</option>
+													<option value="9">其他</option>
+												</select><i></i>
+											</label>
+										</section>
+									</div>
+									
+									<div class="row">
+										<section class="col col-4">
+                                            <label class="label">开户行名称</label> 
+                                            <label class="input"> 
+                                                <input class="form-control" type="text" ng-model="orgInfo.bankName" name="bankName">
+                                            </label>
+                                        </section>
+                                        <section class="col col-4">
+                                            <label class="label">银行账户名称</label> 
+                                            <label class="input"> 
+                                                <input class="form-control" type="text" ng-model="orgInfo.accountName" name="accountName">
+                                            </label>
+                                        </section>
+										<section class="col col-4">
+                                            <label class="label">开票信息(发票抬头)</label> 
+                                            <label class="input"> 
+                                                <input class="form-control" type="text" ng-model="orgInfo.invoiceTitle" name="invoiceTitle">
+                                            </label>
+                                        </section>
+									</div>
+									
+									<div class="row">
+                                        <section class="col col-4">
+                                            <label class="label">开户账号</label> 
+                                            <label class="input"> 
+                                                <input class="form-control" type="text" ng-model="orgInfo.accountNumber" name="accountNumber">
+                                            </label>
+                                        </section>
+										<section class="col col-4">
+											<label class="label">在岗人数</label> 
+											<label class="input"> 
+												<input type="text" name="workNumber" ng-model="orgInfo.workNumber" validInteger=true maxlength="10">
+											</label>
+										</section>
+										<section class="col col-4">
+											<label class="label">仓房数<span style="color: red;">*</span></label> 
+											<label class="input"> 
+												<input type="text" name="houseNumber" ng-model="orgInfo.houseNumber" maxlength="11" validHouseAndWare=true required>
+											</label>
+										</section>
+									</div>
+
+									<div class="row">
+										<section class="col col-4">
+											<label class="label">油罐数<span style="color: red;">*</span></label> 
+											<label class="input"> 
+												<input type="text" name="tankNumber" ng-model="orgInfo.tankNumber" maxlength="11" validHouseAndWare=true required>
+											</label>
+										</section>
+										<section class="col col-4">
+											<label class="label">首页库区图</label>
+											<div class="input input-file">
+									            <span class="button">
+									            	<input type="file" nv-file-select="" uploader="uploader" accept="image/*">
+									                	浏览
+									            </span><input type="text" name="birdsEye" ng-model="orgInfo.birdsEye" placeholder="" readonly="">
+									        </div>
+										</section>
+										<section class="col col-4">
+											<label class="label">粮库决策/智能仓房库区图</label>
+											<div class="input input-file">
+									            <span class="button">
+									            	<input type="file" nv-file-select="" uploader="uploader" accept="image/*">
+									                	浏览
+									            </span><input type="text" name="birdsRemote" ng-model="orgInfo.birdsRemote" placeholder="" readonly="">
+											</div>
+										</section>
+									</div>
+								</fieldset>
+								
+					            <footer class="text-align-center">
+					                <button type="button" class="btn btn-primary" ng-click="save()">提交</button>
+					                <button type="button" class="btn btn-default" ng-click="back()">取消</button>
+					            </footer>
+							</form>
+							<div id="dtBox"></div>
+						</div>
+					</div>
+				</div>
+			</article>
+		</div>
+	</section>
+</div>

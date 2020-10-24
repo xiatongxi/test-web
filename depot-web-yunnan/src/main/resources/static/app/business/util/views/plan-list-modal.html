@@ -1,0 +1,51 @@
+<div class="modal-content">
+    <div class="modal-header">
+        <button type="button" class="close" ng-click="cancel()">
+            &times;
+        </button>
+        <h4 class="modal-title" id="myModalLabel">计划列表</h4>
+    </div>
+    <div class="modal-body">
+		<div>
+           <div class="widget-body no-padding">
+           <div id="DataTables_Table_1_wrapper" class="table-responsive" style="overflow:auto;">
+                  <table class="table table-bordered">
+                  <thead>
+                   <tr>
+                       <th> 计划编号</th>
+                       <th> 计划文号</th>
+                       <th> 计划执行类型</th>
+                       <th> 创建时间</th>
+                       <th> 要求数量(公斤)</th>
+                       <th> 操作</th>
+                   </tr>
+                  </thead>
+                  
+                  <tbody>
+                      <tr ng-repeat="plan in pageInfo.list">
+                          <td>{{ plan.planNumber}}</td>
+                          <td>{{ plan.referenceNumber}}</td>
+                          <td>{{ dicData[plan.executeType] }}</td>
+                          <td>{{ plan.createTime | date:'yyyy-MM-dd'}}</td>
+                          <td>
+		                       <span ng-if="plan.executeType==3155">{{ plan.outAmount }}</span>
+		                       <span ng-if="plan.executeType==3154 || plan.executeType==3156">{{ plan.inAmount }}</span>
+		                  </td>
+                          <td>
+                              <a href-void ng-click="selectPlan(plan)"><i class="fa fa-edit"></i>选择</a>
+                          </td>
+                      </tr>
+                  </tbody>
+
+                  </table>
+				<div smart-include="app/layout/partials/page.tpl.html"></div>
+                  </div>
+                  </div>
+              </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-default"  ng-click="cancel()">
+        	取消
+        </button>
+    </div>
+</div>

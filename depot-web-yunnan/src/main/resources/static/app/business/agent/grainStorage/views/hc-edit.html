@@ -1,0 +1,155 @@
+<!-- MAIN CONTENT -->
+<div id="content">
+
+	<!-- widget grid -->
+	<section id="widget-grid" widget-grid>
+
+		<!-- START ROW -->
+		<div class="row">
+
+			<!-- NEW COL START -->
+			<article class="col-sm-12 col-md-12 col-lg-12">
+
+				<!-- Widget ID (each widget will need unique ID)-->
+				<div jarvis-widget id="form-grid-widget"
+					 data-widget-colorbutton="false" data-widget-editbutton="false"
+					 data-widget-custombutton="false">
+
+					<!-- widget div-->
+					<div>
+
+						<!-- widget content -->
+						<div class="widget-body no-padding">
+							<form id="agentHc-form" class="smart-form ng-pristine ng-valid" data-validator-option="validateOptions" novalidate="novalidate">
+								<header>
+									<a href-void class="btn btn-default btn-xs" ng-click="retList()">
+										<i class="fa fa-angle-left"></i>&nbsp;返回&nbsp;
+									</a>
+									&nbsp;<strong>火车出入库信息管理</strong>
+								</header>
+								<fieldset>
+									<div class="row">
+										<section class="col col-4">
+											<label class="label txt-bg-red">代储点名称<span style="color: red;">*</span></label>
+											<label class="select">
+												<select ng-model="agentHcEdit.agentId" required name="agentId"
+														ng-options="agent.id as agent.agentName for agent in agentData.list"
+														class="form-control" ng-change="getAgentDepotData(agentHcEdit.agentId)">
+													<option value="">--请选择--</option>
+												</select>
+											</label>
+										</section>
+										<section class="col col-4">
+											<label class="label txt-bg-red">粮库名称<span style="color: red;">*</span></label>
+											<label class="select">
+												<select ng-model="agentHcEdit.agentDepotId" name="agentDepotId" required
+														ng-options="depot.depotId as depot.depotName for depot in depotList"
+														class="form-control" ng-change="getHouseList(agentHcEdit.agentDepotId)">
+													<option value="">--请选择--</option>
+												</select>
+											</label>
+										</section>
+										<section class="col col-4">
+											<label class="label txt-bg-red">仓房名称<span style="color: red;">*</span></label>
+											<label class="select">
+												<select ng-model="agentHcEdit.storehouseId" name="storehouseId" required
+														ng-options="store.storehouseId as store.storehouseName for store in storehouseList"
+														class="form-control" ng-change="getWareList(agentHcEdit.storehouseId)">
+													<option value="">--请选择--</option>
+												</select>
+											</label>
+										</section>
+									</div>
+									<div class="row">
+										<section class="col col-4">
+											<label class="label txt-bg-red">货位名称<span style="color: red;">*</span></label>
+											<label class="select">
+												<select ng-model="agentHcEdit.warehouseId" name="warehouseId" required
+														ng-options="ware.warehouseId as ware.warehouseName for ware in warelist"
+														class="form-control">
+													<option value="">--请选择--</option>
+												</select>
+											</label>
+										</section>
+										<section class="col col-4">
+											<label class="label txt-bg-red">通知单编号<span style="color: red;">*</span></label>
+											<label class="input">
+												<i class="icon-prepend fa fa-user"></i>
+												<input type="text" name="notice" ng-model="agentHcEdit.notice"
+													   minlength="2" maxlength="20" required/>
+											</label>
+										</section>
+										<section class="col col-4">
+											<label class="label txt-bg-red">入站单号<span style="color: red;">*</span></label>
+											<label class="input">
+												<i class="icon-prepend fa fa-user"></i>
+												<input type="text" name="inbound" ng-model="agentHcEdit.inbound"
+													   minlength="2" maxlength="20" required/>
+											</label>
+										</section>
+									</div>
+									<div class="row">
+										<section class="col col-4">
+											<label class="label txt-bg-red">火车皮号</label>
+											<label class="input">
+												<i class="icon-prepend fa fa-user"></i>
+												<input type="text" name="trainNo" ng-model="agentHcEdit.trainNo"/>
+											</label>
+										</section>
+										<section class="col col-4">
+											<label class="label txt-bg-red">业务类型<span style="color: red;">*</span></label>
+											<label class="select">
+												<select ng-model="agentHcEdit.businessType" required
+														ng-options="x.id as x.name for x in [{id:'火车入仓',name:'火车入仓'},{id:'火车出仓',name:'火车出仓'}]"
+														class="form-control">
+													<option value="">--请选择--</option>
+												</select>
+											</label>
+										</section>
+										<section class="col col-4">
+											<label class="label txt-bg-red">粮油品种<span style="color: red;">*</span></label>
+											<label class="select">
+												<select ng-model="agentHcEdit.lspz" name="lspz" required
+														ng-options="enum.enumid as enum.enumname for enum in dicDataList[1061]"
+														class="form-control">
+													<option value="">--请选择--</option>
+												</select>
+											</label>
+										</section>
+									</div>
+									<div class="row">
+										<section class="col col-4">
+											<label class="label txt-bg-red">数量(公斤)</label>
+											<label class="input">
+												<i class="icon-prepend fa fa-user"></i>
+												<input type="text" name="credit" ng-model="agentHcEdit.grainNumber"/>
+											</label>
+										</section>
+										<section class="col col-4">
+											<label class="label txt-bg-red">出入库日期</label>
+											<label class="input">
+												<label class="input">
+													<input type="text" ng-model="agentHcEdit.crkTime" class="form-control datepicker" data-smart-datepicker>
+												</label>
+											</label>
+										</section>
+									</div>
+								</fieldset>
+
+								<footer class="text-align-center">
+									<button ng-show="isShow == '1'" type="button" class="btn btn-primary" ng-click="saveData()">提交</button>
+									<button type="button" class="btn btn-default" ng-click="getEmptying()">取消</button>
+								</footer>
+							</form>
+						</div>
+					</div>
+				</div>
+			</article>
+		</div>
+	</section>
+	<form id="download-form" method="post" target="_blank" style=" border-width:5px; margin-left:2%;position:relative;margin-right:2%;">
+		<input type="hidden" name="filePath" id="filePath">
+		<input type="hidden" name="originalFileName" id="originalFileName">
+		<input type="hidden" name="type" id="type">
+	</form>
+</div>

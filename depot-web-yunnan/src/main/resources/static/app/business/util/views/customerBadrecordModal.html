@@ -1,0 +1,73 @@
+<div class="modal-content">
+    <div class="modal-header">
+        <button type="button" class="close" ng-click="cancel()">
+            &times;
+        </button>
+        <h4 class="modal-title" id="myModalLabel">客户不良记录详情</h4>
+    </div>
+    <div class="modal-body">
+
+        <form id="customerBadrecord-form" class="smart-form ng-pristine ng-valid" data-validator-option="validateOptions" novalidate="novalidate">
+			<div class="row">
+				<section class="col col-sm-12">
+					<label class="label txt-bg-red">客户姓名</label> 
+					<input type="hidden" ng-model="customerBadrecord.orgId">
+					<label class="input"> 
+						{{customerBadrecord.name}}
+					</label>
+				</section>
+			</div>
+                              
+                              
+			<div class="row">
+				<section class="col col-6">
+					<label class="label">发生日期</label> 
+					<label class="input"> 
+						<input type="text" ng-model="customerBadrecord.happenDate" name="happenDate" class="form-control datepicker" data-smart-datepicker
+						ng-readonly="true" ng-disabled="isNotEdit">
+					</label>
+				</section>
+				<section class="col col-6">
+					<label class="label">涉粮数量</label> 
+					<label class="input">
+                    	<input type="text" ng-model="customerBadrecord.foodAmount" name="foodAmount" ng-readonly="isNotEdit" placeholder="" required validNumber="true">
+					</label>
+				</section>
+			</div>
+			<div class="row">
+				<section class="col col-6">
+					<label class="label">涉及金额</label> 
+					<label class="input"> 
+                    	<input type="text" ng-model="customerBadrecord.moneyAmount" name="moneyAmount" ng-readonly="isNotEdit" placeholder="" required validNumber="true">
+					</label>
+				</section>
+				<section class="col col-6">
+					<label class="label">记录类型</label> 
+					<label class="input">
+                    	<input type="text" ng-model="customerBadrecord.recordType" name="recordType" ng-readonly="isNotEdit" placeholder="" required>
+					</label>
+				</section>
+			</div>
+			
+			<div class="row">
+				<section class="col col-6">
+					<label class="label">描述</label> 
+					<label class="textarea"> 
+                		<textarea ng-model="customerBadrecord.recordInfo" rows="3" name="recordInfo" ng-readonly="isNotEdit" placeholder=""></textarea>
+					</label>
+				</section>
+			</div>
+		</form>
+
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-primary" ng-hide="isNotEdit" ng-click="save()">
+        	提交
+        </button>
+        <button type="button" class="btn btn-default"  ng-click="cancel()">
+        	取消
+        </button>
+    </div>
+</div>
+
+

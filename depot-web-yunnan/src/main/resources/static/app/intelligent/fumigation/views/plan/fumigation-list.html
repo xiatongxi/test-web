@@ -1,0 +1,94 @@
+<!-- MAIN CONTENT -->
+<div id="content">
+    <!-- widget grid -->
+    <section widget-grid id="widget-grid">
+        <div class="row">
+            <article class="col-sm-12">
+                <legend ng-show="isShow=='1'">
+                    <a ng-click="returnUp()" href-void="" class="btn btn-default btn-xs" href="#">
+                        <i class="fa fa-angle-left"></i>&nbsp;返回&nbsp;
+                    </a>
+                </legend>
+
+                <div jarvis-widget id="standard-datatable-widget" data-widget-color="darken" data-widget-editbutton="false">
+                    <header>
+                        <span class="widget-icon"> <i class="fa fa-table"></i> </span>
+                        <h2>熏蒸方案记录</h2>
+                    </header>
+                    <div>
+                        <div class="widget-body no-padding">
+                            <div id="DataTables_Table_1_wrapper" class="dataTables_wrapper form-inline no-footer">
+                                <div class="dt-toolbar">
+                                    <div class="col-xs-12 col-sm-8">
+                                        <div class="form-group">
+                                            <label> 仓房名称:&emsp;
+                                                <select ng-model="storehouseId" class="form-control input-sm"
+                                                        ng-options="store.storehouseId as store.storehouseName for store in storelist">
+                                                    <option value="">请选择</option>
+                                                </select>&emsp;
+                                            </label>
+                                            <a class="btn btn-default btn-sm" ng-click="loadData()">
+                                                <i class="fa fa-search"></i>&nbsp;查&nbsp;询</a>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-sm-3 col-xs-6 hidden-xs">
+                                        <div class="dataTables_length">
+                                            <label>每页显示 <select ng-model="pageInfo.pageSize" ng-change="loadData()"
+                                                                ng-options="num as num for num in [10,25,50,100]"
+                                                                class="form-control input-sm"></select> 条
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <table class="table table-striped table-bordered table-hover" width="100%">
+                                    <thead>
+                                    <tr>
+                                        <th data-class="expand" style="text-align:center;">序号</th>
+                                        <th data-class="expand" style="text-align:center;">方案类型</th>
+                                        <th data-class="expand" style="text-align:center;">仓房名称</th>
+                                        <th data-class="expand" style="text-align:center;">保管员</th>
+                                        <th data-class="expand" style="text-align:center;">作业方式</th>
+                                        <th data-class="expand" style="text-align:center;">状态</th>
+                                        <th data-class="expand" style="text-align:center;">创建时间</th>
+                                        <th data-class="expand" style="text-align:center;"> 操作</th>
+                                    </tr>
+                                    </thead>
+
+                                    <tbody>
+                                    <tr ng-repeat="planQuery in pageInfo.list">
+                                        <td style="text-align:center;">{{ $index + 1 }}</td>
+                                        <td style="text-align:center;">
+                                            <div ng-switch="{{planQuery.planType}}">
+                                                <div ng-switch-when="1"><span style='color:green;'>熏蒸</span></div>
+                                                <div ng-switch-when="2"><span style='color:blue;'>施药</span></div>
+                                                <div ng-switch-default>{{planQuery.planType}}</div>
+                                            </div>
+                                        </td>
+                                        <td style="text-align:center;">{{ storehouseObj[planQuery.houseId].storehouseName }}</td>
+                                        <td style="text-align:center;">{{ planQuery.keeperName }}</td>
+                                        <td style="text-align:center;">
+                                            <div ng-switch="{{planQuery.planType}}">
+                                                <div ng-switch-when="1"><span style='color:green;'>{{dicData[planQuery.way]}}</span></div>
+                                                <div ng-switch-default>{{planQuery.way}}</div>
+                                            </div>
+                                        </td>
+                                        <td style="text-align:center;">{{ planQuery.state }}</td>
+                                        <td style="text-align:center;">{{ planQuery.createTime | date:'yyyy-MM-dd HH:mm:ss' }}</td>
+                                        <td style="text-align:center;">
+                                            <a href-void ng-click="getPlanQueryEdit(planQuery.planType,planQuery.id,planQuery.state,'detail')"><i class=""></i>详情</a>
+                                        </td>
+                                    </tr>
+                                    </tbody>
+
+                                </table>
+                                <div smart-include="app/layout/partials/page.tpl.html"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </article>
+        </div>
+    </section>
+</div>

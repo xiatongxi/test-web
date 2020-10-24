@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>仓储作业点位图配置</title>
+    <script src="../../../util/jquery-1.10.2.min.js" type="text/javascript"></script>
+    <link rel="stylesheet" href="../../../styles/css/bootstrap.min.css">
+    <style>
+        *{
+            padding: 0px;
+            margin: 0px;
+        }
+        #img-box{
+            position: absolute;
+            z-index: 1;
+            width:100%;
+            height:100%;
+            top:0%;
+            left:0%
+        }
+    </style>
+</head>
+<body id="body">
+<div id="div1" style="position:absolute;top:0px;left:0px;background: rgba(0,0,0,0.5);z-index: 999;padding:10px;">
+    <button onclick="show_mo(this)" style="width: 100%" class="btn toggle_m"><i class="glyphicon glyphicon-asterisk"></i>设置</button>
+    <ul id="ul-box"   style="position: relative;z-index: 9999;" class="list-group">
+        <li class="list-group-item "><label>仓位选择</label>
+            <select onchange="get_cw(this.value)" id="barn"  class="form-control form-group-sm">
+            </select></li>
+        <li class="list-group-item"><button  style="width: 100%" onclick="append_dom(document.getElementById('barn').value)" class="btn btn-info btn-sm">新增</button></li>
+        <li style="display: none" class="list-group-item"><label>宽</label><input id="width_m" oninput ="dom_re(document.getElementById('barn').value)" onpropertychange="dom_re(document.getElementById('barn').value)" step ="0.01" type="range" value="1" name="points" min="1" max="100" /></li>
+        <li style="display: none" class="list-group-item"><label>高</label><input id="height_m" oninput ="dom_re(document.getElementById('barn').value)" onpropertychange="dom_re(document.getElementById('barn').value)" step ="0.01" type="range" value="1" name="points" min="1" max="100" /></li>
+        <li style="display: none" class="list-group-item "><label>左边距离</label><input id="left_m" class="cop_do" oninput ="dom_re(document.getElementById('barn').value)" onpropertychange="dom_re(document.getElementById('barn').value)" value="1" type="range" step="0.01"  name="points" min="1" max="100" /></li>
+        <li style="display: none" class="list-group-item"><label>上边距离</label><input id="top_m" class="cop_do"  step ="0.01" oninput ="dom_re(document.getElementById('barn').value)" onpropertychange="dom_re(document.getElementById('barn').value)" type="range" value="1" name="points" min="1" max="100" /></li>
+        <li class="list-group-item "><label>作业类型</label>
+            <select id="img_type" onchange="get_type(qwertyui,this.value)" class="form-control form-group-sm">
+                <option value="../../../styles/img/zy_tf.gif">通风</option>
+                <option value="../../../styles/img/zy_xz.gif">熏蒸</option>
+                <option value="../../../styles/img/zy_rk.gif">入库</option>
+                <option value="../../../styles/img/zy_ck.gif">出库</option>
+                <option value="../../../styles/img/zy_nhl.gif">内环流</option>
+            </select></li>
+        <li has-permission="127" class="list-group-item"><button  style="width: 100%" onclick="cmt()" class="btn btn-info btn-sm">保存/修改</button></li>
+    </ul>
+</div>
+<div id="img-main" style="width: 100%;height:100%;position: relative">
+    <img id="myPicture" style="position: absolute;width: 100%;height: 100%;display: block"></div>
+<div id="img-box">
+    <div class="SXT" id="001"></div>
+    <div class="SXT" id="002"></div>
+</div>
+</body>
+<script type="text/javascript">
+    var obj = null;
+    var divObj = null;
+    var qwertyui=null;
+    var deltaX, deltaY,_startX,_startY;
+    function  get_td(obj,box){
+        obj = document.getElementById(obj);
+        box_g=$("#"+box)
+        divObj = document.getElementById(box);
+        obj.addEventListener('mousedown', function (event) {
+            //将鼠标位置转为文档坐标
+            var scroll = getScrollOffsets();
+            var startX = event.clientX + scroll.x;
+            var startY = event.clientY + scroll.y;
+
+            _startX = parseInt(startX);
+            _startY = parseInt(startY);
+            if (document.addEventListener) {
+                document.addEventListener("mousemove", moveHandler, true);
+                document.addEventListener("mouseup", upHandler, true);
+            } else if (document.attachEvent) {
+                obj.setCapture();
+                obj.attachEvent("onlosecapeture", upHandler);
+                obj.attachEvent("onmouseup", upHandler);
+                obj.attachEvent("onmousemove", moveHandler);
+
+            }
+
+            //处理了这个事件，不让任何其它元素看到它
+            if (event.stopPropagation) event.stopPropagation(); //标准模型
+            else event.cancelBubble = true;
+
+            //现在阻止任何默认操作
+            if (event.preventDefault) event.preventDefault();
+            else event.returnValue = false;
+        });
+        ;
+
+    };
+
+    function moveHandler(e) {
+        if (!e) e = window.event; //ie事件模型
+        var startX =parseInt(e.clientX);
+        var startY =parseInt(e.clientY);
+        deltaX = startX - _startX;
+        deltaY = startY - _startY;
+        $(box_g).width(($(box_g).width()+  deltaX ))
+        $(box_g).height(($(box_g).height() + deltaY))
+        $("#width_m").val(($(box_g).width()+  deltaX )/ $("#img-box").width() * 100)
+        $("#height_m").val(($(box_g).height()+ deltaY)/$("#img-box").height() * 100)
+        _startX = startX;
+        _startY = startY;
+        if (e.stopPropagation) e.stopPropagation(); //标准模型
+        else e.cancelBubble = true;
+    }
+
+    function upHandler(e) {
+        if (!e) e = window.event; //ie事件模型
+        //注销捕获事件处理程序
+        if (document.removeEventListener) {
+            document.removeEventListener("mousemove", moveHandler, true);
+            document.removeEventListener("mouseup", upHandler, true);
+        } else if (document.detachEvent) {
+            obj.detachEvent("onlosecapeture", upHandler);
+            obj.detachEvent("onmouseup", upHandler);
+            obj.detachEvent("onmousemove", moveHandler);
+            obj.releaseCapture();
+        }
+
+        if (e.stopPropagation) e.stopPropagation(); //标准模型
+        else e.cancelBubble = true;
+    }
+
+    //以一个对象的x和y属性的方式返回滚动条的偏移量
+    function getScrollOffsets(w) {
+        // 使用指定的窗口，如果不带参数则使用当前窗口
+        w = w || window;
+        // 除了IE8及更早的版本以外，其它浏览器版本都能用
+        if (w.pageXOffset != null) return { x: w.pageXOffset, y: w.pageYOffset };
+
+        // 对标准模式下的IE（或任何浏览器）
+        var d = w.document;
+        if (document.compatMode == "CSS1Compat")
+            return { x: d.documentElement.scrollLeft, y: d.documentElement.scrollTop };
+
+        //对怪异模式下的浏览器
+        return { x: d.body.scrollLeft, y: d.body.scrollTop };
+    }
+    var navControl = null;
+
+
+</script>
+<script type="text/javascript">
+    //获取浏览器窗口高度
+    //窗体初始化；
+    WIN_WH();
+    //dom/事件/初始化
+    get_cw(document.getElementById('barn').value)
+    //获取当前仓房作业信息，并标注作业位置
+    function get_cw(obj) {
+        $(".SXT").html("");
+        if (obj == "") {
+            return false
+        }
+        //这里我是将当前仓位的值作为当前仓位热点图的id
+        var cw_xx = []//通过当前仓位查找当前热点dom的位置信息
+        var warehousingStyle="";//添加已经保存的位置
+        var imgDZ = {3.1 : "../../../styles/img/zy_tf.gif",3.2 : "../../../styles/img/zy_xz.gif",3.3 : "../../../styles/img/zy_rk.gif",3.4 : "../../../styles/img/zy_ck.gif",3.5 : "../../../styles/img/zy_nhl.gif"};
+        //修改dom.初始化赋值
+        $.ajax({
+            type: "get",
+            dataType: "json",
+            url: location.protocol+"//"+location.host+"/depot-supervise/depotStyle/getAllSinglePointChart",
+            data: {
+                indexid: $("#barn").val()
+            },
+            success: function (msg) {
+                for(var i=0;i<msg.length;i++){
+                    warehousingStyle = msg[i].styles;
+                    //初始化位置参数
+                    var arr  =
+                        {
+                            top : warehousingStyle.match(/top:(.+?)%;/)[1],
+                            left : warehousingStyle.match(/left:(.+?)%;/)[1],
+                            img : imgDZ[msg[i].type],
+                            width : warehousingStyle.match(/width:(.+?)%;/)[1],
+                            height : warehousingStyle.match(/height:(.+?)%;/)[1],
+                            dom_event : "xz()",
+                            event_type : "click"
+                        };
+                    cw_xx.push(arr);
+                }
+                $("#img-box").html("");
+                if(cw_xx.length==0){
+                    cw_xx = [{top: "20", left: "20", img: "../../../styles/img/zy_tf.gif",width:"4",height:"4", dom_event: "xz()", event_type: "click"}]
+                }
+                for(i=0;i<cw_xx.length;i++){
+                    //初始化dom位置
+                    dom_re(obj+i,cw_xx[i]);
+                }
+            }
+        });
+    }
+
+    //设置窗口隐藏显示
+    function show_mo(obj) {
+        $("#ul-box").toggle()
+    }
+
+    //新增
+    function append_dom(obj){
+        //获取当前的仓库;
+        var  data={top: "20", left: "20",width:"4",height:"4",img: $("#img_type").val()}
+        var obj=obj+Math.random()*10000000000000000;
+        dom_re(obj,data);
+    }
+    function dom_re(obj,data) {
+        if (cw_d() == false) {
+            return
+        }
+        $("#img-box").append('<div onclick="funck(this)" class="SXT"  id=' + obj + ' style="border-radius:100%;background-color:#000;position: absolute;left:' + data.left + '%;top:' + data.top + '%;height:' + data.height + '%;width:' + data.width + '%;background-size: cover">' +
+            '<div id='+obj+'_c style="position: absolute; left: 1px; top: 1px; width: 10px; height:10px;z-index: 200001; background: #fff;opacity: 0.5"> </div></div>');
+        //初始化图标类型;
+        var img=data.img;
+        get_type(obj,img);
+        //字体大小适应
+        get_textwh(".SXT");
+        var dom=document.getElementById(obj);
+        //添加拖到
+        dom_ap(dom);
+        //添加手动变形;
+        get_td(obj+"_c",obj);
+        //添加替换作业类型的id
+        qwertyui=obj;
+    }
+    function funck(obj){
+        qwertyui=$(obj).attr("id");
+    }
+    //为当前仓库添加鼠标拖到事件
+    function dom_ap(obj){
+        obj.onmousedown = function(ev) {
+            if (ev.target == this) {
+                var oevent = ev || event;
+
+                var distanceX = oevent.clientX - obj.offsetLeft;
+                var distanceY = oevent.clientY - obj.offsetTop;
+            }
+            document.onmousemove = function (ev) {
+                var oevent = ev || event;
+                var width = (oevent.clientX - distanceX) / $("#img-box").width() * 100;
+                var height = (oevent.clientY - distanceY) / $("#img-box").height() * 100;
+                $("#left_m").val(width);
+                $("#top_m").val(height);
+                obj.style.left = width + '%';
+                obj.style.top = height + '%';
+            };
+            document.onmouseup = function () {
+                document.onmousemove = null;
+                document.onmouseup = null;
+            };
+        }}
+    //获得当前通风作业的类型
+    function get_type(obj,img) {
+        if(obj==null){
+            return
+        }
+        if(!obj||!img){
+            return
+        }
+        var e = $('#' + obj );
+        /*     e.height(e.width());*/
+        e.css("background-image", "url(" + img + ")");
+        e.css("background-size", "cover");
+    }
+    //判断仓位是否初始化
+    function cw_d() {
+        if ($("#barn").val() == "0" || $("#barn").val() == " " || !$("#barn").val()) {
+            alert("请选择仓位");
+            return false
+        }
+        return true;
+    }
+
+    var urls = window.location.href;
+    var type = urls.match(/\?.*type=([^&]*).*/)[1];
+    var id = urls.match(/\?.*id=([^&]*).*/)[1];
+    var image = urls.match(/\?.*image=([^&]*).*/)[1];
+    //保存当前仓房位置图
+    function cmt(){
+        if(cw_d()){
+            var  w=$("#width_m").val().replace("%","");
+            var  h=$("#height_m").val().replace("%","");
+            var  l= $("#left_m").val().replace("%","");
+            var  t= $("#top_m").val().replace("%","");
+
+            var stylesDZ = {"zy_tf.gif" : "3.1","zy_xz.gif" : "3.2","zy_rk.gif" : "3.3","zy_ck.gif" : "3.4","zy_nhl.gif" : "3.5"};
+            var data=[];
+            for(var i=0;i<$(".SXT").length;i++){
+                w = getbfbw($(".SXT").eq(i).css("width"));
+                h = getbfbh($(".SXT").eq(i).css("height"));
+                l = getbfbw($(".SXT").eq(i).css("left"));
+                t = getbfbh($(".SXT").eq(i).css("top"));
+                //获取作业图片类型
+                var str = $(".SXT").eq(i).css("background-image");
+                var PictureNums = str.substring(str .lastIndexOf("\/")+1,str.lastIndexOf("\""));
+                data[i]={
+                    type : stylesDZ[PictureNums],
+                    styles : "border-radius:100%;background-color:#000;position: absolute;left:"+l+"%;top:"+t+"%;height:"+h+"%;width:"+w+"%;background-size: cover"
+                }
+            }
+
+            $.ajax({
+                type: "POST",
+                dataType: "json",
+                url: location.protocol+"//"+location.host+"/depot-supervise/depotStyle/addPoint",
+                data: {
+                    indexid : $("#barn").val(),
+                    pointData : JSON.stringify(data),
+                    orgId: id
+                },
+                success: function (msg) {
+                    if(msg.status=="success"){
+                        alert("保存成功！",'提示');
+                        window.close();
+                    }
+                },
+                error: function () {
+                    alert("保存失败！",'提示');
+                }
+            });
+        };
+    }
+    function getbfbh(e){
+        return  parseInt(e)/parseInt($("#img-box").height()) * 100
+    }
+    function getbfbw(e){
+        return  parseInt(e)/parseInt($("#img-box").width()) * 100
+    }
+    //窗口适应
+    function WIN_WH() {
+        if (window.innerHeight)
+            document.getElementById("body").style.height = window.innerHeight;
+        else if ((document.body) && (document.body.clientHeight))
+            document.getElementById("body").style.width = document.body.clientHeight + "px";
+        ;
+        //通过深入Document内部对body进行检测，获取浏览器窗口高度
+        if (document.documentElement && document.documentElement.clientHeight)
+            document.getElementById("body").style.height = document.documentElement.clientHeight + "px";
+    }
+    $(window).resize(function () {
+        //窗体适应
+        WIN_WH()
+        //dom适应；
+        get_cw(document.getElementById('barn').value)
+    })
+    //设置窗口可拖动
+    window.onload = function () {
+        var div1 = document.getElementById("div1");
+        div1.onmousedown = function (ev) {
+            if (ev.target == this) {
+                var oevent = ev || event;
+                var distanceX = oevent.clientX - div1.offsetLeft;
+                var distanceY = oevent.clientY - div1.offsetTop;
+            }
+            document.onmousemove = function (ev) {
+                var oevent = ev || event;
+                div1.style.left = oevent.clientX - distanceX + 'px';
+                div1.style.top = oevent.clientY - distanceY + 'px';
+            };
+            document.onmouseup = function () {
+                document.onmousemove = null;
+                document.onmouseup = null;
+            };
+
+        };
+    }
+
+    //字体适应
+    function get_textwh(dom) {
+        for (var a = 0; a < $(dom).length; a++) {
+            var SXT = $(dom).eq(a)
+            var t = SXT.width();
+            var h = SXT.height();
+            var c = t * 0.8;
+            var w = c / (SXT.text().length)
+            SXT.css("font-size", w)
+            SXT.css("line-height", h * 0.8 + "px")
+            SXT.css("text-align", "center")
+        }
+    }
+</script>
+<script type="text/javascript">
+
+    $(function(){
+        //动态获取背景图片
+        var element = document.getElementById('myPicture');
+        element.src = image;
+        getBarn();
+    });
+    //获取仓房数据
+    function getBarn(){
+        $.ajax({
+            type: "get",
+            dataType: "json",
+            url: location.protocol+"//"+location.host+"/depot-basic/Storehouse/getStorehouseList",
+            data: {
+                unitId : id
+            },
+            success: function (msg) {
+                getSelect(msg);
+            },
+            error: function () {
+                alert("查询仓房信息失败",'提示');
+            }
+        });
+    }
+
+    //循环下拉仓房信息
+    function getSelect(msg){
+        console.log(msg);
+        var ObjectSelect = $("#barn");
+        ObjectSelect.html("");
+        ObjectSelect.append("<option selected value=''>--全部--</option>");
+        for(var i=0;i<msg.houseList.length;i++){
+            ObjectSelect.append("<option value='"+msg.houseList[i].storehouseId+"'>"+msg.houseList[i].storehouseName+"</option>");
+        }
+    }
+
+</script>
+</html>

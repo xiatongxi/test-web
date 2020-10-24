@@ -1,0 +1,118 @@
+<!-- MAIN CONTENT -->
+<div id="content">
+    <!-- widget grid -->
+    <section widget-grid id="widget-grid">
+
+        <div class="row">
+            <article class="col-sm-12">
+				<legend ng-show="isShow=='1'">
+					<a ng-click="returnUp()" href-void="" class="btn btn-default btn-xs" href="#">
+						<i class="fa fa-angle-left"></i>&nbsp;返回&nbsp;
+					</a>
+				</legend>
+                <div jarvis-widget id="standard-datatable-widget" data-widget-color="darken" data-widget-editbutton="false">
+                    <header>
+                        <span class="widget-icon"> <i class="fa fa-table"></i> </span>
+                        <h2> 出入库记录列表 </h2>
+                    </header>
+                    <div>
+						<div class="widget-body no-padding">
+							<div id="DataTables_Table_1_wrapper"
+								class="dataTables_wrapper form-inline no-footer">
+								<div class="dt-toolbar">
+									<div class="col-xs-12 col-sm-10">
+										<div class="form-group">
+		                                    <label>
+		                                    	<select class="form-control" ng-model="search.sjcf" ng-options="store.storehouseId as store.storehouseName for store in storelist">
+		                                    			<option value="">仓房名称</option>
+		                                            </select>&emsp;
+		                                    	<select class="form-control" ng-model="search.cazylx" ng-options="x.id as x.name for x in [{id:'1',name:'入库'},{id:'3',name:'出库'}]">
+		                                    			<option value="">业务类型</option>
+		                                            </select>&emsp;
+		                                    	<select class="form-control" style="width:100px" ng-model="search.pz" ng-options="enum.enumid as enum.enumname for enum in dicDataList[1061]">
+		                                    			<option value="">粮食品种</option>
+		                                            </select>&emsp;
+		                                        	出入库日期：<input type="text" class="form-control" ng-model="search.beginDate" size="10" data-smart-datepicker> - 
+		                                        	<input type="text" class="form-control" ng-model="search.endDate" size="10" data-smart-datepicker>
+		                                    </label>
+											<a class="btn btn-default btn-sm" ng-click="loadData()">
+												<i class="fa fa-search"></i>&nbsp;查&nbsp;询</a>
+										</div>
+									</div>
+									<div class="col-sm-2 col-xs-12 hidden-xs">
+										<div class="dataTables_length">
+											<label>每页显示 <select ng-model="pageInfo.pageSize" ng-change="loadData()"
+												ng-options="num as num for num in [10,25,50,100]"
+												class="form-control input-sm"></select> 条
+											</label>
+										</div>
+									</div>
+								</div>
+
+								<table class="table table-striped table-bordered table-hover" width="100%">
+									<thead>
+									<tr>
+										<th>序号</th>
+										<th>出入库流水单号</th>
+										<th>计划文件号</th>
+										<th>业务类型</th>
+										<th>仓房名称</th>
+										<th>货位号</th>
+										<th>品种</th>
+										<th>数量（kg）</th>
+										<th>出入库日期</th>
+										<th>操作</th>
+									</tr>
+									</thead>
+									<tbody>
+										<tr ng-repeat="record in pageInfo.list">
+											<td>{{$index+1}}</td>
+											<td>{{record.bizno}}</td>
+											<td>{{record.kybgh}}</td>
+											<td><span ng-if="record.cazylx=='1'">入库</span><span ng-if="record.cazylx=='3'">出库</span></td>
+											<td>{{storeMap[record.sjcf]}}</td>
+											<td>{{wareMap[record.sjhw]}}</td>
+											<td>{{dicData[record.pz]}}</td>
+											<td>{{record.xxklhjz}}</td>
+											<td>{{record.rcrq | date:'yyyy-MM-dd'}}</td>
+											<td>
+												<a ui-sref="app.supervise.operation.detail({dataid:record.dataid})"><i class="fa fa-info-circle"></i>查看</a>
+											</td>
+										</tr>
+									</tbody>
+	
+								</table>
+								<div smart-include="app/layout/partials/page.tpl.html"></div>
+							</div>
+                    	</div>
+                    </div>
+                </div>
+            </article>
+        </div>
+
+    </section>
+    
+</div>
+
+
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                    &times;
+                </button>
+                <h4 class="modal-title" id="myModalLabel">通道信息列表</h4>
+            </div>
+            <div class="modal-body">
+                <div smart-include="app/monitor/views/nvr-through-list.html"></div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">
+                   	 取消
+                </button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->

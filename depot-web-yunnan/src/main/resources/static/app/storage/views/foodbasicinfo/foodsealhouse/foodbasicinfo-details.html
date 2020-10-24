@@ -1,0 +1,88 @@
+<!-- MAIN CONTENT -->
+<div id="content">
+	<!-- widget grid -->
+	<section widget-grid id="widget-grid">
+		<div class="row">
+			<article class="col-sm-12 col-md-12 col-lg-12">
+				<div jarvis-widget id="form-grid-widget" data-widget-colorbutton="false" data-widget-editbutton="false"
+					 data-widget-custombutton="false">
+					<div>
+						<header>
+                            <a href-void class="btn btn-default btn-xs" ng-click="back()">
+                                <i class="fa fa-angle-left"></i>&nbsp;返回&nbsp;
+                            </a>
+							&nbsp;<strong>储粮专卡</strong>
+						</header>
+						<div class="panel-body col-sm-12">
+							<style>
+								.list-group .add-listclass{
+									border: none !important;
+									border-bottom: 1px solid #f5f5f5 !important;
+									margin-bottom: 0px !important;
+								}
+								.zhuank-img{ position:absolute; top:-30px; right:80px; border:1px solid #ccc;z-index: 99; }
+							</style>
+							<script type="text/javascript">
+                                $(function(){
+                                    $("#img-1").click(function(e){
+                                        e.stopPropagation();
+                                        if(e.currentTarget.id == "img-1"){
+                                            $("#img-1").stop().animate({"width":"180px" , "height":"180px"});
+                                            $(".zhuank-img").stop().animate({"width":"180px" , "height":"180px"});
+                                        }
+                                    });
+                                    $(document).on('click',function(e){
+                                        $("#img-1").stop().animate({"width":"90px" , "height":"90px"});
+                                        $(".zhuank-img").stop().animate({"width":"90px" , "height":"90px"});
+                                    });
+                                });
+							</script>
+							<div class="zhuank-img">
+								<img id="img-1" src="{{foodbasicinfo.authCode}}" style="width: 90px; height: 90px; padding: 2px;">
+							</div>
+							<div class="row">
+								<header style="padding-left:0px" class="panel-heading">
+									<h4>粮食基本信息 </h4>
+								</header>
+								<ul class="list-group ">
+									<li class="list-group-item add-listclass col-sm-3"><span>填卡单位：</span><span class="txt-color-green">{{foodbasicinfo.recordUnite}}</span></li>
+									<li class="list-group-item add-listclass col-sm-3"><span>保管单位：</span><span class="txt-color-green">{{foodbasicinfo.keepUnite}}</span></li>
+									<li class="list-group-item add-listclass col-sm-3"><span>仓房名称：</span><span class="txt-color-green">{{foodbasicinfo.storehouseName}}</span></li>
+									<li class="list-group-item add-listclass col-sm-3"><span>货位名称：</span><span class="txt-color-green">{{foodbasicinfo.wareHouseName}}</span></li>
+									<li class="list-group-item add-listclass col-sm-3"><span>仓型：</span><span class="txt-color-green">{{dicData[foodbasicinfo.houseType]}}</span></li>
+									<li class="list-group-item add-listclass col-sm-3"><span>设计仓容(t)：</span><span class="txt-color-green">{{foodbasicinfo.designHouseCapacity}}</span></li>
+									<li class="list-group-item add-listclass col-sm-3"><span>储粮性质：</span><span class="txt-color-green">{{dicData[foodbasicinfo.quality]}}</span></li>
+									<li class="list-group-item add-listclass col-sm-3"><span>品种：</span><span class="txt-color-green">{{dicData[foodbasicinfo.subType]}}</span></li>
+									<li class="list-group-item add-listclass col-sm-3"><span>实际数量(Kg)：</span><span class="txt-color-green">{{foodbasicinfo.number}}</span></li>
+									<li class="list-group-item add-listclass col-sm-3"><span>折合标准数量(t)：</span><span class="txt-color-green">{{foodbasicinfo.standNumber}}</span></li>
+									<li class="list-group-item add-listclass col-sm-3"><span>价位(元/Kg)：</span><span class="txt-color-green">{{foodbasicinfo.price}}</span></li>
+									<li class="list-group-item add-listclass col-sm-3"><span>产地：</span><span class="txt-color-green">{{dicData[foodbasicinfo.placeOfOrigin]}}</span></li>
+									<li class="list-group-item add-listclass col-sm-3"><span>入仓时间：</span><span class="txt-color-green">{{foodbasicinfo.inputYear}}</span></li>
+									<li class="list-group-item add-listclass col-sm-3"><span>储存地点：</span><span class="txt-color-green">{{foodbasicinfo.storageLocation}}</span></li>
+									<li class="list-group-item add-listclass col-sm-3"><span>收获年度：</span><span class="txt-color-green">{{dicData[foodbasicinfo.growYear]}}</span></li>
+									<li class="list-group-item add-listclass col-sm-3"><span>水分(%)：</span><span class="txt-color-green">{{foodbasicinfo.water}}</span></li>
+									<li class="list-group-item add-listclass col-sm-3"><span>杂质(%)：</span><span class="txt-color-green">{{foodbasicinfo.impurity}}</span></li>
+									<li class="list-group-item add-listclass col-sm-3"><span>不完善粒(整精米率%)：</span><span class="txt-color-green">{{foodbasicinfo.unsound}}</span></li>
+									<li class="list-group-item add-listclass col-sm-3"><span>容重(出糙率%或纯粮率%)：</span><span class="txt-color-green">{{foodbasicinfo.weight}}</span></li>
+									<li class="list-group-item add-listclass col-sm-3"><span>等级：</span><span class="txt-color-green">{{dicData[foodbasicinfo.level]}}</span></li>
+									<li class="list-group-item add-listclass col-sm-3"><span>保管方式：</span><span class="txt-color-green">{{foodbasicinfo.keepMethod}}</span></li>
+									<!--<li class="list-group-item add-listclass col-sm-3"><span>保管员签字：</span><span class="txt-color-green">{{foodbasicinfo.storehouseId}}</span></li>-->
+									<!--<li class="list-group-item add-listclass col-sm-3"><span>装粮线高度(m)：</span><span class="txt-color-green">{{foodbasicinfo.lineHeight}}</span></li>-->
+									<li class="list-group-item add-listclass col-sm-3"><span>粮堆体积(㎥)：</span><span class="txt-color-green">{{foodbasicinfo.disperseCapacity}}</span></li>
+									<li class="list-group-item add-listclass col-sm-3"><span>长(m)：</span><span class="txt-color-green">{{foodbasicinfo.length}}</span></li>
+									<li class="list-group-item add-listclass col-sm-3"><span>宽/直径(m)：</span><span class="txt-color-green">{{foodbasicinfo.width}}</span></li>
+									<li class="list-group-item add-listclass col-sm-3"><span>粮高(m)：</span><span class="txt-color-green">{{foodbasicinfo.height}}</span></li>
+									<li class="list-group-item add-listclass col-sm-3"><span>包存粮包数：</span><span class="txt-color-green">{{foodbasicinfo.packNum}}</span></li>
+									<li class="list-group-item add-listclass col-sm-3"><span>平均包重(Kg)：</span><span class="txt-color-green">{{foodbasicinfo.packAverageWeight}}</span></li>
+									<li class="list-group-item add-listclass col-sm-3"><span>填卡日期：</span><span class="txt-color-green">{{foodbasicinfo.fillingTime}}</span></li>
+								</ul>
+							</div>
+
+						</div>
+					</div>
+				</div>
+			</article>
+		</div>
+	</section>
+</div>
+

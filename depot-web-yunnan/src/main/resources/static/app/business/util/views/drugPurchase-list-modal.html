@@ -1,0 +1,56 @@
+<div class="modal-content">
+    <div class="modal-header">
+        <button type="button" class="close" ng-click="cancel()">
+            &times;
+        </button>
+        <h4 class="modal-title" id="myModalLabel">药剂信息维护列表</h4>
+    </div>
+    <div class="modal-body">
+        <div>
+            <div class="widget-body no-padding">
+                <div id="DataTables_Table_1_wrapper" class="table-responsive" style="overflow:auto;">
+                    <form class="smart-form">
+                        <table class="table table-bordered">
+                            <thead>
+                            <tr>
+                                <th> 序号</th>
+                                <th> 药剂编号</th>
+                                <th> 药剂名称</th>
+                                <th> 药剂种类</th>
+                                <th> 药剂形态</th>
+                                <th> 药剂包装</th>
+                                <th> 药剂单位</th>
+                                <th> 规格型号</th>
+                                <th> 操作</th>
+                            </tr>
+                            </thead>
+
+                            <tbody>
+                            <tr ng-repeat="drugInfo in pageInfo.list">
+                                <td>{{ $index+1}}</td>
+                                <td>{{drugInfo.drugNumber}}</td><!--药剂编号-->
+                                <td>{{dicData[drugInfo.drugName]}}</td><!--药剂名称-->
+                                <td>{{dicData[drugInfo.drugKind]}}</td><!--药剂种类-->
+                                <td>{{dicData[drugInfo.drugType]}}</td><!--药剂形态-->
+                                <td>{{dicData[drugInfo.drugPacking]}}</td><!--药剂包装-->
+                                <td>{{dicData[drugInfo.drugUnit]}}</td><!--药剂单位-->
+                                <td>{{drugInfo.drugSpecification}}</td><!--规格型号-->
+                                <!--<td>{{drugPurchase.createTime | date:'yyyy-MM-dd'}}</td>--><!--申请日期-->
+                                <td>
+                                    <a href-void ng-click="selectDrugInfo(drugInfo)"><i class="fa fa-edit"></i>选择</a>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </form>
+                    <div smart-include="app/layout/partials/page.tpl.html"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-default" ng-click="cancel()">
+            取消
+        </button>
+    </div>
+</div>

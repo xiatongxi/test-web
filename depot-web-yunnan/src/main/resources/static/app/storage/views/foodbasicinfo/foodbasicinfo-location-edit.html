@@ -1,0 +1,46 @@
+<form id="foodinfoLocation-form"   name=' foodinfoLocation-form' class="smart-form ng-pristine ng-valid" ng-submit=' foodinfoLocation-form.$valid&&save( foodinfoLocation)' novalidate="novalidate">
+    <fieldset>
+        <div class="row"  >
+            <section class="col col-6">
+                <label class="label">变更日期：<span style="color: red;">*</span></label>
+                <label class="input">
+                    <input type="text" ng-model="foodinfoLocation.changeTime" name="changeTime" data-smart-datepicker required
+                           placeholder="变更日期">
+                </label>
+            </section>
+            <section class="col col-6">
+                <label class="label">原货位号：<span style="color: red;">*</span></label>
+                <label class="input">
+                    <input type="text" ng-model="warehouseName" name="warehouseName" ng-disabled="true" required>
+                </label>
+            </section>
+        </div>
+        <div class="row">
+            <section class="col col-6">
+                <label class="label">仓房名称：<span style="color: red;">*</span></label>
+                <label class="input">
+                    <select ng-model="foodinfoLocation.newHouseId"  ng-change=change() required
+                            ng-options="store.storehouseId as store.storehouseName for store in storehouseList"
+                            class="form-control" ng-disabled="isNotEdit">
+                        <option value="">--请选择--</option>
+                    </select>
+                </label>
+            </section>
+            <section class="col col-6">
+                <label class="label">新货位号：<span style="color: red;">*</span></label>
+                <label class="input">
+                    <select ng-model="foodinfoLocation.newWarehouseId" class="form-control"  required
+                            ng-options="ware.warehouseId as ware.warehouseName for ware in warehouseList">
+                        <option value="">--请选择--</option>
+                    </select>
+                </label>
+            </section>
+        </div>
+        <section >
+            <label class="label">描述</label>
+            <label class="textarea"> <i class="icon-append fa fa-comment"></i>
+                <textarea rows="5" ng-model="foodinfoLocation.remarks" name="remarks" placeholder="备注"></textarea>
+            </label>
+        </section>
+    </fieldset>
+</form>

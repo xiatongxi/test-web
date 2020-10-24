@@ -1,0 +1,652 @@
+<!-- MAIN CONTENT -->
+<div id="content">
+	<!-- widget grid -->
+	<section id="widget-grid" widget-grid>
+		<!-- START ROW -->
+		<div class="row">
+			<!-- NEW COL START -->
+			<article class="col-sm-12 col-md-12 col-lg-12">
+				<!-- Widget ID (each widget will need unique ID)-->
+				<div jarvis-widget id="form-grid-widget"
+					data-widget-colorbutton="false" data-widget-editbutton="false"
+					data-widget-custombutton="false">
+					<!-- widget div-->
+					<div>
+						<!-- widget content -->
+						<div class="widget-body no-padding">
+							<form id="storehouse-form" name='storehouse-form'
+								class="smart-form ng-pristine ng-valid"
+								ng-submit='storehouse-form.$valid&&save(storehouse)'
+								novalidate="novalidate">
+								<header>
+									<a href-void class="btn btn-default btn-xs" ng-click="returnTop()">
+										<i class="fa fa-angle-left"></i>&nbsp;返回&nbsp;
+									</a>
+									&nbsp;<strong>仓储状态信息</strong>
+								</header>
+
+								<fieldset>
+									<table class="table table-striped table-bordered table-hover" width="100%">
+										<tr>
+											<th colspan="2" rowspan="4">
+												<img id="img" src="{{storehouse.storeImg}}" style="width: 400px;height: 300px;"/>
+											</th>
+											<th>
+												<label class="label" style="margin-top: 9px;text-align: center;">所属粮库名称</label>
+											</th>
+											<th>
+												<label class="input">
+													<input type="text" ng-model="storehouse.depotName" name="depotName" ng-disabled="true">
+												</label>
+											</th>
+											<th>
+												<label class="label" style="margin-top: 9px;text-align: center;">仓房编码</label>
+											</th>
+											<th>
+												<label class="input">
+													<input type="text" maxlength="3" ng-model="storehouse.storehouseCode"
+													name="storehouseCode" required ng-disabled="true">
+												</label>
+											</th>
+										</tr>
+										<tr>
+											<th>
+												<label class="label" style="margin-top: 9px;text-align: center;">仓房名称<span style="color: red;margin-left: 5px;text-align: center;">*</span></label>
+											</th>
+											<th>
+												<label class="input">
+													<input type="text" ng-model="storehouse.storehouseName" name="storehouseName" ng-disabled="true">
+												</label>
+											</th>
+											<th>
+												<label class="label" style="margin-top: 9px;text-align: center;">保管员</label>
+											</th>
+											<th>
+												<label class="input">
+													<input type="text" ng-model="storehouse.dutystoreman" ng-disabled="true"/>
+												</label>
+											</th>
+										</tr>
+										<tr>
+											<th>
+												<label class="label" style="margin-top: 9px;text-align: center;">仓房状态</label>
+											</th>
+											<th>
+												<label class="select">
+													<select ng-model="storehouse.storehouseState" ng-disabled="true"
+															name="storehouseState" ng-options="enum.enumid as enum.enumname for enum in dicDataList[1001]">
+														<option value="">--请选择--</option>
+													</select>
+												</label>
+											</th>
+											<th>
+												<label class="label" style="margin-top: 9px;text-align: center;">交付使用日期</label>
+											</th>
+											<th>
+												<label class="input">
+													<input type="text" ng-model="storehouse.usedate" class="datepicker" data-smart-datepicker
+														   name="usedate" ng-disabled="true">
+												</label>
+											</th>
+										</tr>
+										<tr>
+											<th>
+												<label class="label" style="margin-top: 9px;text-align: center;">仓房类型</label>
+											</th>
+											<th>
+												<label class="select">
+													<select ng-model="storehouse.storehouseType" ng-disabled="true"
+															name="storehouseType" ng-options="enum.enumid as enum.enumname for enum in dicDataList[1064]">
+														<option value="">--请选择--</option>
+													</select>
+												</label>
+											</th>
+											<th>
+												<label class="label" style="margin-top: 9px;text-align: center;">仓房类型明细</label>
+											</th>
+											<th>
+												<label class="select">
+													<select ng-model="storehouse.storehouseTypeMx" ng-disabled="true"
+															ng-options="enum.enumid as enum.enumname for enum in dicDataList[storehouse.storehouseType]">
+														<option value="">--请选择--</option>
+													</select>
+												</label>
+											</th>
+										</tr>
+
+									</table>
+								</fieldset>
+
+								<header>仓房设计信息</header>
+								<fieldset>
+									<table class="table table-striped table-bordered table-hover" width="100%">
+										<tr>
+											<th colspan="2">
+												<label class="label" style="margin-top: 9px;text-align: center;">结构</label>
+											</th>
+											<th colspan="2">
+												<label class="label" style="margin-top: 9px;text-align: center;">仓外</label>
+											</th>
+											<th colspan="2">
+												<label class="label" style="margin-top: 9px;text-align: center;">仓内</label>
+											</th>
+											<th colspan="3">
+												<label class="label" style="margin-top: 9px;text-align: center;">其它</label>
+											</th>
+										</tr>
+
+										<tr>
+											<th>
+												<label class="label" style="margin-top: 9px;text-align: center;">墙体</label>
+											</th>
+											<th>
+												<label class="select">
+													<select ng-model="storehouse.wall" ng-disabled="true"
+														ng-options="enum.enumid as enum.enumname for enum in dicDataList[1037]">
+														<option value="">--请选择--</option>
+													</select>
+												</label>
+											</th>
+											<th>
+												<label class="label" style="margin-top: 9px;text-align: center;">长(m)</label>
+											</th>
+											<th>
+												<label class="input">
+													<input type="number" ng-model="storehouse.storeOutsideLength" ng-disabled="true"/>
+												</label>
+											</th>
+											<th>
+												<label class="label" style="margin-top: 9px;text-align: center;">长(m)</label>
+											</th>
+											<th>
+												<label class="input">
+													<input type="number" ng-model="storehouse.length" ng-disabled="true"/>
+												</label>
+											</th>
+											<th colspan="2">
+												<label class="label" style="margin-top: 9px;text-align: center;">库门数量</label>
+											</th>
+											<th>
+												<label class="input">
+													<input type="number" ng-model="storehouse.houseDoorNum" ng-disabled="true" name="houseDoorNum">
+												</label>
+											</th>
+										</tr>
+
+										<tr>
+											<th>
+												<label class="label" style="margin-top: 9px;text-align: center;">房顶</label>
+											</th>
+											<th>
+												<label class="input">
+													<input type="text" ng-model="storehouse.roof" ng-disabled="true"
+														maxlength="30" />
+												</label>
+											</th>
+											<th>
+												<label class="label" style="margin-top: 9px;text-align: center;">宽(m)</label>
+											</th>
+											<th>
+												<label class="input">
+													<input type="number" ng-model="storehouse.storeOutsideWidth" ng-disabled="true"/>
+												</label>
+											</th>
+											<th>
+												<label class="label" style="margin-top: 9px;text-align: center;">宽(m)</label>
+											</th>
+											<th>
+												<label class="input">
+													<input type="number" ng-model="storehouse.width" ng-disabled="true" name="width"/>
+												</label>
+											</th>
+											<th colspan="2">
+												<label class="label" style="margin-top: 9px;text-align: center;">库门位置</label>
+											</th>
+											<th>
+												<label class="input">
+													<input type="text" ng-model="storehouse.houseDootPosition" ng-disabled="true"
+												name="houseDoorNum">
+												</label>
+											</th>
+										</tr>
+
+										<tr>
+											<th>
+												<label class="label" style="margin-top: 9px;text-align: center;">房架</label>
+											</th>
+											<th>
+												<label class="input">
+													<input type="text" ng-model="storehouse.house" ng-disabled="true"
+														maxlength="30" />
+												</label>
+											</th>
+											<th>
+												<label class="label" style="margin-top: 9px;text-align: center;">檐高(m)</label>
+											</th>
+											<th>
+												<label class="input">
+													<input type="number" ng-model="storehouse.storeOutsideHeigth" ng-disabled="true"/>
+												</label>
+											</th>
+											<th>
+												<label class="label" style="margin-top: 9px;text-align: center;">檐高(m)</label>
+											</th>
+											<th>
+												<label class="input">
+													<input type="number" ng-model="storehouse.heigth" ng-disabled="true" name="height">
+												</label>
+											</th>
+											<th colspan="2">
+												<label class="label" style="margin-top: 9px;text-align: center;">库门高度(m)</label>
+											</th>
+											<th>
+												<label class="input">
+													<input type="number" ng-model="storehouse.houseDoorHeigth" ng-disabled="true" name="houseDoorHeight">
+												</label>
+											</th>
+										</tr>
+
+										<tr>
+											<th>
+												<label class="label" style="margin-top: 9px;text-align: center;">地面</label>
+											</th>
+											<th>
+												<label class="input">
+													<input type="text" ng-model="storehouse.ground" ng-disabled="true"
+														maxlength="30" />
+												</label>
+											</th>
+											<th>
+												<label class="label" style="margin-top: 9px;text-align: center;">顶高(m)</label>
+											</th>
+											<th>
+												<label class="input">
+													<input type="number" ng-model="storehouse.storeOutsideTopHeigth" ng-disabled="true"/>
+												</label>
+											</th>
+											<th>
+												<label class="label" style="margin-top: 9px;text-align: center;">装粮线高(m)</label>
+											</th>
+											<th>
+												<label class="input">
+													<input type="number" ng-model="storehouse.grainLineHeigth" ng-disabled="true" name="height">
+												</label>
+											</th>
+											<th colspan="2">
+												<label class="label" style="margin-top: 9px;text-align: center;">库门宽度(m)</label>
+											</th>
+											<th>
+												<label class="input">
+													<input type="number" ng-model="storehouse.houseDoorWidth" ng-disabled="true" name="houseDoorWidth">
+												</label>
+											</th>
+										</tr>
+
+										<tr>
+											<th>
+												<label class="label" style="margin-top: 9px;text-align: center;">设计仓容(吨)</label>
+											</th>
+											<th>
+												<label class="input">
+													<input type="number" ng-model="storehouse.designCapacity" ng-disabled="true" name="designCapacity">
+												</label>
+											</th>
+											<th>
+												<label class="label" style="margin-top: 9px;text-align: center;">筒仓外径(m)</label>
+											</th>
+											<th>
+												<label class="input">
+													<input type="number" ng-model="storehouse.outsideSiloDiameter" ng-disabled="true"/>
+												</label>
+											</th>
+											<th>
+												<label class="label" style="margin-top: 9px;text-align: center;">筒仓内径(m)</label>
+											</th>
+											<th>
+												<label class="input">
+													<input type="number" ng-model="storehouse.siloDiameter" ng-disabled="true" name="height">
+												</label>
+											</th>
+											<th colspan="2">
+												<label class="label" style="margin-top: 9px;text-align: center;">通风方式</label>
+											</th>
+											<th>
+												<label class="select">
+													<select ng-model="storehouse.drafttype" ng-disabled="true"
+														ng-options="enum.enumid as enum.enumname for enum in dicDataList[5218]">
+														<option value="">--请选择--</option>
+													</select>
+												</label>
+											</th>
+										</tr>
+
+										<tr>
+											<th>
+												<label class="label" style="margin-top: 9px;text-align: center;">保管方式</label>
+											</th>
+											<th>
+												<label class="select">
+													<select ng-model="storehouse.keepingWay" ng-disabled="true"
+														ng-options="enum.enumid as enum.enumname for enum in dicDataList[1056]">
+														<option value="">--请选择--</option>
+													</select>
+												</label>
+											</th>
+											<th>
+												<label class="label" style="margin-top: 9px;text-align: center;">外墙面积(㎡)</label>
+											</th>
+											<th>
+												<label class="input">
+													<input type="number" ng-model="storehouse.outerWallArea" ng-disabled="true"/>
+												</label>
+											</th>
+											<th>
+												<label class="label" style="margin-top: 9px;text-align: center;">仓内体积(m³)</label>
+											</th>
+											<th>
+												<label class="input">
+													<input type="number" ng-model="storehouse.binVolume" ng-disabled="true" name="height">
+												</label>
+											</th>
+											<th rowspan="2" style="width: 30px;">
+												<label class="label" style="margin-top: 20px;text-align: center;">隔热措施</label>
+											</th>
+											<th>
+												<label class="label" style="margin-top: 9px;text-align: center;">仓顶</label>
+											</th>
+											<th>
+												<label class="input">
+													<input type="text" ng-model="storehouse.heatinsulationstepRoof" ng-disabled="true" />
+												</label>
+											</th>
+										</tr>
+
+										<tr>
+											<th>
+												<label class="label" style="margin-top: 9px;text-align: center;">装粮高度(m)</label>
+											</th>
+											<th>
+												<label class="input">
+													<input type="number" ng-model="storehouse.grainHeigth" ng-disabled="true">
+												</label>
+											</th>
+											<th>
+												<label class="label" style="margin-top: 9px;text-align: center;">扣除体积(m³)</label>
+											</th>
+											<th>
+												<label class="input">
+													<input type="number" ng-model="storehouse.deductVolume" ng-disabled="true"/>
+												</label>
+											</th>
+											<th>
+												<label class="label" style="margin-top: 9px;text-align: center;">粮堆体积(m³)</label>
+											</th>
+											<th>
+												<label class="input">
+													<input type="number" ng-model="storehouse.grainPileVolume" ng-disabled="true" name="height">
+												</label>
+											</th>
+											<th>
+												<label class="label" style="margin-top: 9px;text-align: center;">仓窗</label>
+											</th>
+											<th>
+												<label class="input">
+													<input type="text" ng-model="storehouse.heatinsulationstepWindow" ng-disabled="true" />
+												</label>
+											</th>
+										</tr>
+										
+									</table>
+								</fieldset>
+
+								<header>
+									<h3>
+										<strong>粮情情况</strong>
+									</h3>
+								</header>
+								<fieldset>
+									<table class="table table-striped table-bordered table-hover"  >
+										<thead>
+										<tr>
+											<th data-class="expand" style="text-align:center;">仓房名称</th>
+											<th data-class="expand" style="text-align:center;">检测时间</th>
+											<th data-class="expand" style="text-align:center;">内温(℃)</th>
+											<th data-class="expand" style="text-align:center;">内湿(%RH)</th>
+											<th data-class="expand" style="text-align:center;">外温(℃)</th>
+											<th data-class="expand" style="text-align:center;">外湿(%RH)</th>
+											<th data-class="expand" style="text-align:center;">平均温(℃)</th>
+										</tr>
+										</thead>
+
+										<tbody>
+										<tr ng-repeat="thermometryData in temperature.list">
+											<td style="text-align:center;">{{storeHouseCodeObj[thermometryData.storehouse].storehouseName}}</td>
+											<td style="text-align:center;">{{thermometryData.time | date:'yyyy-MM-dd HH:mm:ss' }}</td>
+											<td style="text-align:center;">{{thermometryData.intemp}}</td>
+											<td style="text-align:center;">{{thermometryData.inh}}</td>
+											<td style="text-align:center;">{{thermometryData.outtemp}}</td>
+											<td style="text-align:center;">{{thermometryData.outh}}</td>
+											<td style="text-align:center;">{{thermometryData.avg}}</td>
+										</tr>
+										</tbody>
+									</table>
+								</fieldset>
+
+								<header>
+									<h3>
+										<strong>数量管理</strong>
+									</h3>
+								</header>
+								<fieldset>
+									<table class="table table-striped table-bordered table-hover"  >
+										<thead>
+										<tr>
+											<th>粮权所属</th>
+											<th>仓房名称</th>
+											<th>货位名称</th>
+											<th>粮油性质</th>
+											<th>粮油品种</th>
+											<th>粮油等级</th>
+											<th>收获年度</th>
+											<th>库存数量</th>
+										</tr>
+										</thead>
+
+										<tbody>
+										<tr ng-repeat="numbermanage in numbermanage.list">
+											<!--粮权所属 -->
+											<td>{{numbermanage.lkmc}}</td>
+											<td>{{storehouseObj[numbermanage.ch].storehouseName}}</td>
+											<td>{{warehouseObj[numbermanage.hwh].warehouseName}}</td>
+											<td>{{dicData[numbermanage.hwxz]}}</td>
+											<td>{{dicData[numbermanage.pz]}}</td>
+											<td>{{ dicData[numbermanage.dj]}}</td>
+											<!--收获年度-->
+											<td>{{ numbermanage.rq | date:'yyyy'}}</td>
+											<td>{{ numbermanage.kcsl }}</td>
+										</tr>
+										</tbody>
+									</table>
+								</fieldset>
+
+								<header>
+									<h3>
+										<strong>火车出入库</strong>
+									</h3>
+								</header>
+								<fieldset>
+									<table class="table table-striped table-bordered table-hover"  >
+										<thead>
+										<tr>
+											<th>入站单号</th>
+											<th>火车皮号</th>
+											<th>业务类型</th>
+											<th>粮油品种</th>
+											<th>数量(kg)</th>
+											<th>仓房名称</th>
+											<th>货位名称</th>
+											<th>出入库日期</th>
+										</tr>
+										</thead>
+										<tbody>
+										<tr ng-repeat="hcData in hcData.list">
+											<td>{{hcData.bizNo}}</td><!--入站单号-->
+											<td>{{hcData.hcph}}</td><!--火车皮号-->
+											<td>{{hcData.ywlx}}</td>
+											<td>{{hcData.lspz}}</td><!--粮油品种-->
+											<td>{{hcData.count}}</td><!--数量(kg)-->
+											<td>{{hcData.houseName}}</td><!--仓房名称-->
+											<td>{{hcData.wareName}}</td><!--货位名称-->
+											<td>{{hcData.rq | date:'yyyy-MM-dd'}}</td><!--出入库日期-->
+										</tr>
+										</tbody>
+									</table>
+								</fieldset>
+
+								<header>
+									<h3>
+										<strong>汽车出入库</strong>
+									</h3>
+								</header>
+								<fieldset>
+									<table class="table table-striped table-bordered table-hover"  >
+										<thead>
+										<tr>
+											<th>业务单号</th>
+											<th>汽车牌号</th>
+											<th>业务类型</th>
+											<th>粮油品种</th>
+											<th>数量(kg)</th>
+											<th>仓房名称</th>
+											<th>货位名称</th>
+											<th>出入库日期</th>
+										</tr>
+										</thead>
+										<tbody>
+										<tr ng-repeat="qcData in qcData.list">
+											<td>{{qcData.bizNo}}</td><!--业务单号-->
+											<td>{{qcData.cphm}}</td><!--汽车牌号-->
+											<td>{{qcData.ywlx}}</td><!--业务类型-->
+											<td>{{qcData.lspz}}</td><!--粮油品种-->
+											<td>{{qcData.count}}</td><!--数量(kg)-->
+											<td>{{qcData.houseName}}</td><!--仓房名称-->
+											<td>{{qcData.wareName}}</td><!--货位名称-->
+											<td>{{qcData.rq | date:'yyyy-MM-dd'}}</td><!--出入库日期-->
+										</tr>
+										</tbody>
+									</table>
+								</fieldset>
+
+								<header>
+									<h3>
+										<strong>气体浓度情况</strong>
+									</h3>
+								</header>
+								<fieldset>
+									<table class="table table-striped table-bordered table-hover"  >
+										<thead>
+										<tr>
+											<th data-class="expand" style="text-align:center;">序号</th>
+											<th data-class="expand" style="text-align:center;">仓房名称</th>
+											<th data-class="expand" style="text-align:center;">采集时间</th>
+											<th data-class="expand" style="text-align:center;">磷化氢(ppm)</th>
+											<th data-class="expand" style="text-align:center;">氧气(%)</th>
+											<th data-class="expand" style="text-align:center;">二氧化碳(%)</th>
+										</tr>
+										</thead>
+										<tbody>
+										<tr ng-repeat="qcData in gas.list">
+											<td style="text-align:center;">{{ $index + 1 }}</td>
+											<td style="text-align:center;">{{ storeHouseCodeObj[qcData.vCfCode].storehouseName }}</td>
+											<td style="text-align:center;">{{ qcData.vValueTime | date:'yyyy-MM-dd HH:mm:ss'}}</td>
+											<td style="text-align:center;">{{ qcData.ph3avg}}</td>
+											<td style="text-align:center;">{{ qcData.co2avg }}</td>
+											<td style="text-align:center;">{{ qcData.o2avg }}</td>
+										</tr>
+										</tbody>
+									</table>
+								</fieldset>
+
+								<header>
+									<h3>
+										<strong>作业状态</strong>
+									</h3>
+								</header>
+								<fieldset>
+									<table class="table table-striped table-bordered table-hover"  >
+										<thead>
+										<tr>
+											<th data-class="expand" style="text-align:center;">序号</th>
+											<th data-class="expand" style="text-align:center;">方案类型</th>
+											<th data-class="expand" style="text-align:center;">仓房名称</th>
+											<th data-class="expand" style="text-align:center;">保管员</th>
+											<th data-class="expand" style="text-align:center;">作业方式</th>
+											<th data-class="expand" style="text-align:center;">状态</th>
+											<th data-class="expand" style="text-align:center;">创建时间</th>
+										</tr>
+										</thead>
+										<tbody>
+										<tr ng-repeat="planQuery in planQuery.list">
+											<td style="text-align:center;">{{ $index + 1 }}</td>
+											<td style="text-align:center;">
+												<div ng-switch="{{planQuery.planType}}">
+													<div ng-switch-when="1"><span style='color:green;'>熏蒸</span></div>
+													<div ng-switch-when="2"><span style='color:blue;'>施药</span></div>
+													<div ng-switch-default>{{planQuery.planType}}</div>
+												</div>
+											</td>
+											<td style="text-align:center;">{{ storehouseObj[planQuery.houseId].storehouseName }}</td>
+											<td style="text-align:center;">{{ planQuery.keeperName }}</td>
+											<td style="text-align:center;">
+												<div ng-switch="{{planQuery.planType}}">
+													<div ng-switch-when="1"><span style='color:green;'>{{dicData[planQuery.way]}}</span></div>
+													<div ng-switch-default>{{planQuery.way}}</div>
+												</div>
+											</td>
+											<td style="text-align:center;">{{ planQuery.state }}</td>
+											<td style="text-align:center;">{{ planQuery.createTime }}</td>
+										</tr>
+										</tbody>
+									</table>
+								</fieldset>
+
+								<!--<header>-->
+									<!--<h3>-->
+										<!--<strong>业务操作</strong>-->
+									<!--</h3>-->
+								<!--</header>-->
+								<!--<fieldset>-->
+									<!--<table class="table table-striped table-bordered table-hover"  >-->
+										<!--<thead>-->
+										<!--<tr>-->
+											<!--<th>粮情检测</th>-->
+											<!--<th>气体检测</th>-->
+											<!--<th>内环流控制</th>-->
+											<!--<th>数量监控</th>-->
+											<!--<th>智能安防</th>-->
+											<!--<th>照明控制</th>-->
+										<!--</tr>-->
+										<!--</thead>-->
+										<!--<tbody>-->
+										<!--<tr ng-repeat="qcData in qcData.list">-->
+											<!--<td></td>-->
+											<!--<td></td>-->
+											<!--<td></td>-->
+											<!--<td></td>-->
+											<!--<td></td>-->
+											<!--<td></td>-->
+										<!--</tr>-->
+										<!--</tbody>-->
+									<!--</table>-->
+								<!--</fieldset>-->
+								<footer class="modal-footer text-align-center">
+									<button ng-click="returnTop()" class="btn btn-default btn-lg" data-dismiss="modal">取消</button>
+								</footer>
+							</form>
+						</div>
+					</div>
+				</div>
+			</article>
+		</div>
+	</section>
+</div>

@@ -1,0 +1,494 @@
+<div id="content">
+	<!-- widget grid -->
+	<section id="widget-grid" widget-grid>
+		<div class="row">
+			<article class="col-sm-12 col-md-12 col-lg-12">
+				<div jarvis-widget id="form-grid-widget"
+					data-widget-colorbutton="false" data-widget-editbutton="false"
+					data-widget-custombutton="false">
+					<div>
+						<!-- widget content -->
+						<div class="widget-body no-padding">
+							<form id="taskApply-form" name='taskApply-form'
+								class="smart-form ng-pristine ng-valid"
+								data-validator-option="validateOptions" novalidate="novalidate">
+								<header>
+									<a href-void class="btn btn-default btn-xs" ng-click="retList()">
+										<i class="fa fa-angle-left"></i>&nbsp;返回&nbsp;
+									</a>
+									&nbsp;<strong>通风计划申请</strong>
+									<span class="pull-right font-xs">带*的部分必须填写</span>
+								</header>
+								<header ng-hide="isNext">仓房情况</header>
+								<fieldset ng-hide="isNext">
+									<input ng-model="taskApply.id" type="hidden" />
+									<table class="table table-striped table-bordered table-hover" width="100%">
+										<tr>
+											<th>
+												<label class="label" style="margin-top: 9px;text-align: right;">所属粮库：</label>
+											</th>
+											<th>
+												<label class="input">
+													<input ng-model="depotInfo.orgName" name="depotName" class="form-control" ng-disabled="true">
+													<input ng-model="taskApplyPlan.areationPlanNumber" name="areationPlanNumber" class="form-control" ng-disabled="true" ng-hide="true">
+												</label>
+												<!-- <label class="input" hidden="true">
+												</label> -->
+											</th>
+											<th>
+												<label class="label" style="margin-top: 9px;text-align: right;">仓房名称：<span style="color: red;margin-left: 5px;text-align: center;">*</span></label>
+											</th>
+											<th>
+												<label class="select">
+													<select ng-model="taskApplyPlan.vCfCode" required ng-change="storeData(taskApplyPlan.vCfCode)" ng-disabled="isNotEdit"
+													ng-options="store.storehouseCode as store.storehouseName for store in storelist"
+													class="form-control" ng-disabled="isNotEditHouseId">
+														<option value="">--请选择--</option>
+													</select>
+												</label>
+											</th>
+											<th>
+												<label class="label" style="margin-top: 9px;text-align: right;">仓房类型：</label>
+											</th>
+											<th>
+												<label class="select">
+													<select ng-model="taskApply.houseType"
+														ng-options="enum.enumid as enum.enumname for enum in dicDataList[1064]"
+														class="form-control" ng-disabled="true">
+													</select>
+												</label>
+											</th>
+											<th>
+												<label class="label" style="margin-top: 9px;text-align: right;">仓房尺寸(㎡)：</label>
+											</th>
+											<th>
+												<label class="input" style="widows: 150px;">
+													<input type="number" ng-model="taskApply.houseSize" ng-readonly="true"
+														name="houseSize" oninput="if(value.length>9) value=value.slice(0,9)" class="form-control">
+												</label>
+											</th>
+										</tr>
+									</table>
+								</fieldset>
+								<header ng-hide="isNext">储粮基本情况</header>
+								<fieldset ng-hide="isNext">
+									<table class="table table-striped table-bordered table-hover" width="100%">
+										<tr>
+											<th>
+												<label class="label" class="label" style="margin-top: 9px;text-align: right;">粮食品种：</label>
+											</th>
+											<th>
+												<label class="select">
+													<select ng-model="taskApply.goodsKinds" 
+													ng-options="enum.enumid as enum.enumname for enum in dicDataList[1061]"
+													class="form-control" ng-disabled="true">
+													</select>
+												</label>
+											</th>
+											<th>
+												<label class="label" style="margin-top: 9px;text-align: right;width: 100px;">粮食数量(吨)：</label>
+											</th>
+											<th>
+												<label class="input">
+													<input type="text" ng-model="taskApply.goodsNumber" ng-disabled="true"
+														name="goodsNumber" placeholder="" class="form-control">
+												</label>
+											</th>
+											<th>
+												<label class="label" class="label" style="margin-top: 9px;text-align: right;width: 100px;">装粮高度(m)：</label>
+											</th>
+											<th>
+												<label class="input">
+													<input type="number" ng-model="taskApply.ladeLineHeight" ng-disabled="true"
+													name="ladeLineHeight" maxlength="5" class="form-control">
+												</label>
+											</th>
+											<th>
+												<label class="label" class="label" style="margin-top: 9px;text-align: right;">堆装形式：</label>
+											</th>
+											<th>
+												<label class="select">
+													<select ng-model="taskApplyPlan.packingmode" ng-disabled="isNotEdit"
+														ng-options="enum.enumid as enum.enumname for enum in dicDataList[5411]"
+														class="form-control">
+														<option value="">--请选择--</option>
+													</select>
+												</label>
+											</th>
+										</tr>
+										<tr>
+											<th>
+												<label class="label" class="label" style="margin-top: 9px;text-align: right;width: 100px;">最高粮温(℃)：</label>
+											</th>
+											<th>
+												<label class="input">
+													<input type="number" ng-model="taskApply.maxFootTemperature" ng-disabled="true"
+													name="maxFootTemperature" oninput="if(value.length>9) value=value.slice(0,9)" class="form-control">
+												</label>
+											</th>
+											<th>
+												<label class="label" class="label" style="margin-top: 9px;text-align: right;width: 100px;">最低粮温(℃)：</label>
+											</th>
+											<th>
+												<label class="input">
+													<input type="number" ng-model="taskApply.minFootTemperature" ng-disabled="true"
+													name="minFootTemperature" oninput="if(value.length>9) value=value.slice(0,9)" class="form-control">
+												</label>
+											</th>
+											<th>
+												<label class="label" class="label" style="margin-top: 9px;text-align: right;width: 100px;">平均粮温(℃)：</label>
+											</th>
+											<th>
+												<label class="input">
+													<input type="number" ng-model="taskApply.avgFootTemperature" ng-disabled="true"
+													name="avgFootTemperature" oninput="if(value.length>9) value=value.slice(0,9)" class="form-control">
+												</label>
+											</th>
+											<th>
+												<label class="label" class="label" style="margin-top: 9px;text-align: right;width: 100px;">仓内温(%)：</label>
+											</th>
+											<th>
+												<label class="input">
+													<input type="number" ng-model="taskApplyPlan.maxAter" ng-disabled="true"
+													name="maxAter" oninput="if(value.length>5) value=value.slice(0,5)" class="form-control">
+												</label>
+											</th>
+										</tr>
+										<tr>
+											<th>
+												<label class="label" class="label" style="margin-top: 9px;text-align: right;width: 100px;">仓内湿(%)：</label>
+											</th>
+											<th>
+												<label class="input">
+													<input type="number" ng-model="taskApplyPlan.minWater" ng-disabled="true"
+													name="minWater" oninput="if(value.length>5) value=value.slice(0,5)" class="form-control">
+												</label>
+											</th>
+											<th></th>
+											</th><th>
+											<th>
+												<label class="label" class="label" style="margin-top: 9px;text-align: right;"></label>
+											</th>
+											<th>
+												<label class="input"></label>
+											</th>
+											<th>
+												<label class="label" class="label" style="margin-top: 9px;text-align: right;"></label>
+											</th>
+											<th>
+												<label class="input"></label>
+											</th>
+										</tr>
+									</table>
+								</fieldset>
+								
+								<fieldset ng-hide="isLast">
+									<table class="table table-striped table-bordered table-hover" width="100%">
+										<tr>
+											<th>
+												<label class="label" class="label" style="margin-top: 8px;text-align: right;">计划开始通风时间：<span style="color: red;margin-left: 5px;text-align: center;">*</span></label>
+											</th>
+											<th>
+												<label class="input">
+													<input type="text" ng-model="taskApplyPlan.testTime"  ng-disabled="isNotEdit"
+														name="testTime" class="form-control" data-format="yyyy-MM-dd hh:mm:ss" data-field="datetime">
+												</label>
+											</th>
+											<th>
+												<label class="label" class="label" style="margin-top: 8px;text-align: right;">计划结束通风时间：<span style="color: red;margin-left: 5px;text-align: center;">*</span></label>
+											</th>
+											<th>
+												<label class="input">
+													<input type="text" ng-model="taskApplyPlan.endTime"  ng-disabled="isNotEdit"
+														name="endTime" class="form-control" data-format="yyyy-MM-dd hh:mm:ss" data-field="datetime">
+												</label>
+											</th>
+											<th>
+												<label class="label" class="label" style="margin-top: 9px;text-align: right;">通风方式：<span style="color: red;margin-left: 5px;text-align: center;">*</span></label>
+											</th>
+											<th>
+												<label class="select">
+													<select ng-model="taskApplyPlan.ventilationMode" required name="ventilationMode"
+														ng-options="enum.enumid as enum.enumname for enum in dicDataList[5218]"
+														class="form-control" ng-disabled="isNotEdit">
+														<option value="">--请选择--</option>
+													</select>
+												</label>
+											</th>
+											<th>
+												<label class="label" style="margin-top: 9px;text-align: right;">通风目的：</label>
+											</th>
+											<th>
+												<label class="select">
+													<select ng-model="taskApplyPlan.aerationTarget" required name="aerationTarget"
+													ng-options="enum.enumid as enum.enumname for enum in dicDataList[5219]"
+													class="form-control" ng-disabled="isNotEdit">
+														<option value="">--请选择--</option>
+													</select>
+												</label>
+											</th>
+										</tr>
+										<tr>
+										    <th>
+												<label class="label" class="label" style="margin-top: 9px;text-align: right;">通风作业负责人：<span style="color: red;">*</span></label>
+											</th>
+											<th>
+												<label class="input">
+													<input type="text" ng-model="taskApplyPlan.tfzyfzr" ng-readonly="isNotEdit"
+													name="tfzyfzr" class="form-control" required/>
+												</label>
+											</th>
+											<th>
+												<label class="label" class="label" style="margin-top: 9px;text-align: right;">申请人：</label>
+											</th>
+											<th>
+												<label class="input">
+													<input type="text" ng-model="taskApplyPlan.applyPerson" ng-readonly="true"
+													name="applePerson" maxlength="30" class="form-control">
+													<input type="hidden" ng-model="taskApplyPlan.aid" ng-readonly="true"
+													name="applePerson" maxlength="30" class="form-control">
+												</label>
+											</th>
+											<th>
+												<label class="label" class="label" style="margin-top: 9px;text-align: right;">申请日期：</label>
+											</th>
+											<th>
+												<label class="input">
+													<input type="text" ng-model="taskApplyPlan.applyTime" ng-readonly="true"
+													name="applyTime" class="form-control datepicker" />
+												</label>
+											</th>
+											<th>
+												<label class="label" class="label" style="margin-top: 9px;text-align: right;">粮堆孔隙度：</label>
+											</th>
+											<th>
+												<label class="input">
+													<input type="number" ng-model="taskApplyPlan.ldkxd" ng-readonly="isNotEdit"
+													name="ldkxd" class="form-control" min="0" onkeyup="this.value= this.value.match(/\d+(\.\d{0,2})?/) ? this.value.match(/\d+(\.\d{0,2})?/)[0] : ''"/>
+												</label>
+											</th>
+										</tr>
+										<tr>
+											<th>
+												<label class="label" class="label" style="margin-top: 9px;text-align: right;">通风类型：<span style="color: red;margin-left: 5px;text-align: center;">*</span></label>
+											</th>
+											<th>
+												<label class="select">
+													<select ng-model="taskApplyPlan.tflx" required name="tflx"
+													class="form-control" ng-disabled="isNotEdit">
+														<option value="">--请选择--</option>
+														<option value="1">自然空气通风</option>
+														<option value="2">加热空气通风</option>
+														<option value="3">冷却空气通风</option>
+														<option value="4">内循环控温</option>
+														<option value="5">空调控温通风</option>
+														<option value="6">维持通风</option>
+													</select>
+												</label>
+											</th>
+											<th>
+												<label class="label" class="label" style="margin-top: 9px;text-align: right;">风网类型：<span style="color: red;margin-left: 5px;text-align: center;">*</span></label>
+											</th>
+											<th>
+												<label class="select">
+													<select ng-model="taskApplyPlan.fwlx" required name="fwlx"
+													class="form-control" ng-disabled="isNotEdit">
+														<option value="">--请选择--</option>
+														<option value="1">地槽</option>
+														<option value="2">地上笼</option>
+														<option value="3">移动式</option>
+														<option value="4">内循环控温</option>
+														<option value="5">空调控温通风</option>
+														<option value="6">维持通风</option>
+														<option value="9">其他</option>
+													</select>
+												</label>
+											</th>
+											<th>
+												<label class="label" class="label" style="margin-top: 9px;text-align: right;">风网设置方式：</label>
+											</th>
+											<th>
+												<label class="input">
+													<input type="text" ng-model="taskApplyPlan.fwszfs" ng-readonly="isNotEdit"
+													name="fwszfs" class="form-control" />
+												</label>
+											</th>
+											<th>
+												<label class="label" class="label" style="margin-top: 9px;text-align: right;">主风道截面积：</label>
+											</th>
+											<th>
+												<label class="input">
+													<input type="text" ng-model="taskApplyPlan.zfdjmj" ng-readonly="isNotEdit"
+													name="zfdjmj" class="form-control" />
+												</label>
+											</th>
+										</tr>
+										<tr>
+											<th>
+												<label class="label" class="label" style="margin-top: 9px;text-align: right;">风网开孔率：</label>
+											</th>
+											<th>
+												<label class="input">
+													<input type="number" ng-model="taskApplyPlan.fwkkl" ng-readonly="isNotEdit"
+													name="fwkkl" class="form-control" min="0" onkeyup="this.value= this.value.match(/\d+(\.\d{0,2})?/) ? this.value.match(/\d+(\.\d{0,2})?/)[0] : ''"/>
+												</label>
+											</th>
+											<th>
+												<label class="label" class="label" style="margin-top: 9px;text-align: right;">空气途径比：</label>
+											</th>
+											<th>
+												<label class="input">
+													<input type="number" ng-model="taskApplyPlan.kqtjb" ng-readonly="isNotEdit"
+													name="kqtjb" class="form-control" min="0" onkeyup="this.value= this.value.match(/\d+(\.\d{0,2})?/) ? this.value.match(/\d+(\.\d{0,2})?/)[0] : ''"/>
+												</label>
+											</th>
+											<th>
+												<label class="label" class="label" style="margin-top: 9px;text-align: right;">通风口设置个数：</label>
+											</th>
+											<th>
+												<label class="input">
+													<input type="number" ng-model="taskApplyPlan.tfkszgs" ng-readonly="isNotEdit"
+													name="tfkszgs" class="form-control" min="0" onkeyup="this.value= this.value.match(/\d+(\.\d{0,2})?/) ? this.value.match(/\d+(\.\d{0,2})?/)[0] : ''"/>
+												</label>
+											</th>
+											<th>
+												<label class="label" class="label" style="margin-top: 9px;text-align: right;">通风机型号：</label>
+											</th>
+											<th>
+												<label class="input">
+													<input type="text" ng-model="taskApplyPlan.tfjxh" ng-readonly="isNotEdit"
+													name="tfjxh" class="form-control" />
+												</label>
+											</th>
+										</tr>
+										<tr>
+											
+											<th>
+												<label class="label" class="label" style="margin-top: 9px;text-align: right;">通风机台数：</label>
+											</th>
+											<th>
+												<label class="input">
+													<input type="number" ng-model="taskApplyPlan.tfjts" ng-readonly="isNotEdit"
+													name="tfjts" class="form-control" min="0" onkeyup="this.value= this.value.match(/\d+(\.\d{0,2})?/) ? this.value.match(/\d+(\.\d{0,2})?/)[0] : ''"/>
+												</label>
+											</th>
+											<th>
+												<label class="label" class="label" style="margin-top: 9px;text-align: right;">单台风机额定全压：</label>
+											</th>
+											<th>
+												<label class="input">
+													<input type="number" ng-model="taskApplyPlan.dtfjedqy" ng-readonly="isNotEdit"
+													name="dtfjedqy" class="form-control" min="0" onkeyup="this.value= this.value.match(/\d+(\.\d{0,2})?/) ? this.value.match(/\d+(\.\d{0,2})?/)[0] : ''"/>
+												</label>
+											</th>
+											<th>
+												<label class="label" class="label" style="margin-top: 9px;text-align: right;">单台风机额定风量：</label>
+											</th>
+											<th>
+												<label class="input">
+													<input type="number" ng-model="taskApplyPlan.dtfjedfl" ng-readonly="isNotEdit"
+													name="dtfjedfl" class="form-control" min="0" onkeyup="this.value= this.value.match(/\d+(\.\d{0,2})?/) ? this.value.match(/\d+(\.\d{0,2})?/)[0] : ''"/>
+												</label>
+											</th>
+											<th>
+												<label class="label" class="label" style="margin-top: 9px;text-align: right;">单台风机额定功率：</label>
+											</th>
+											<th>
+												<label class="input">
+													<input type="number" ng-model="taskApplyPlan.dtfjedgl" ng-readonly="isNotEdit"
+													name="dtfjedgl" class="form-control" min="0" onkeyup="this.value= this.value.match(/\d+(\.\d{0,2})?/) ? this.value.match(/\d+(\.\d{0,2})?/)[0] : ''"/>
+												</label>
+											</th>
+										</tr>
+										<tr>
+											
+											<th>
+												<label class="label" class="label" style="margin-top: 9px;text-align: right;">送风方式：<span style="color: red;">*</span></label>
+											</th>
+											<th>
+												<label class="select">
+													<select ng-model="taskApplyPlan.sffs" required name="sffs"
+													class="form-control" ng-disabled="isNotEdit">
+														<option value="">--请选择--</option>
+														<option value="1">压入式通风</option>
+														<option value="2">吸出式通风</option>
+														<option value="3">压入与吸出相结合式通风 </option>
+														<option value="4">环流通风</option>
+														<option value="9">其他</option>
+													</select>
+												</label>
+											</th>
+											<th>
+												<label class="label" class="label" style="margin-top: 9px;text-align: right;">单台风机实测风量：</label>
+											</th>
+											<th>
+												<label class="input">
+													<input type="number" ng-model="taskApplyPlan.dtfjscfl" ng-readonly="isNotEdit"
+													name="dtfjscfl" class="form-control" min="0" onkeyup="this.value= this.value.match(/\d+(\.\d{0,2})?/) ? this.value.match(/\d+(\.\d{0,2})?/)[0] : ''"/>
+												</label>
+											</th>
+											<th>
+												<label class="label" class="label" style="margin-top: 9px;text-align: right;">单台风机轴功率：</label>
+											</th>
+											<th>
+												<label class="input">
+													<input type="number" ng-model="taskApplyPlan.dtfjzgl" ng-readonly="isNotEdit"
+													name="dtfjzgl" class="form-control" min="0" onkeyup="this.value= this.value.match(/\d+(\.\d{0,2})?/) ? this.value.match(/\d+(\.\d{0,2})?/)[0] : ''"/>
+												</label>
+											</th>
+											<th>
+												<label class="label" class="label" style="margin-top: 9px;text-align: right;">总风量：</label>
+											</th>
+											<th>
+												<label class="input">
+													<input type="number" ng-model="taskApplyPlan.zfl" ng-readonly="isNotEdit"
+													name="zfl" class="form-control" min="0" onkeyup="this.value= this.value.match(/\d+(\.\d{0,2})?/) ? this.value.match(/\d+(\.\d{0,2})?/)[0] : ''"/>
+												</label>
+											</th>
+										</tr>
+										<tr>
+											<th>
+												<label class="label" class="label" style="margin-top: 9px;text-align: right;">单位通风量：</label>
+											</th>
+											<th>
+												<label class="input">
+													<input type="number" ng-model="taskApplyPlan.dwtfl" ng-readonly="isNotEdit"
+													name="dwtfl" class="form-control" min="0" onkeyup="this.value= this.value.match(/\d+(\.\d{0,2})?/) ? this.value.match(/\d+(\.\d{0,2})?/)[0] : ''"/>
+												</label>
+											</th>
+											<th>
+												<label class="label" class="label" style="margin-top: 9px;text-align: right;">实测系统阻力：</label>
+											</th>
+											<th>
+												<label class="input">
+													<input type="number" ng-model="taskApplyPlan.scxtzl" ng-readonly="isNotEdit"
+													name="scxtzl" class="form-control" min="0" onkeyup="this.value= this.value.match(/\d+(\.\d{0,2})?/) ? this.value.match(/\d+(\.\d{0,2})?/)[0] : ''"/>
+												</label>
+											</th>
+											<th></th>
+											<th></th>
+											<th></th>
+											<th></th>
+										</tr>
+										<tr>
+											<th>
+												<label class="label" class="label" style="margin-top: 9px;text-align: right;">备注：</label>
+											</th>
+											<th colspan="7">
+												<label class="textarea">
+													<textarea rows="5" ng-model="taskApplyPlan.remark" ng-readonly="isNotEdit" name="remark" oninput="if(value.length>255) value=value.slice(0,255)"></textarea>
+												</label>
+											</th>
+										</tr>
+									</table>
+								</fieldset>
+								<div ng-include="'app/storage/aeration/views/historyList-approval.html'"></div>
+								<div id="dtBox"></div><!-- 时间控件：有时分秒 -->
+							</form>
+						</div>
+					</div>
+				</div>
+			</article>
+		</div>
+	</section>
+</div>

@@ -1,0 +1,61 @@
+<div class="modal-content">
+    <div class="modal-header">
+        <button type="button" class="close" ng-click="cancel()">
+            &times;
+        </button>
+        <h4 class="modal-title" id="myModalLabel">选择火车皮号</h4>
+    </div>
+    <div class="modal-body">
+                    <div>
+                        <div class="widget-body no-padding">
+                        <div id="DataTables_Table_1_wrapper" class="dataTables_wrapper form-inline no-footer">
+                            <div class="dt-toolbar">
+                                <div class="col-xs-12 col-sm-6">
+                                    <div class="dataTables_filter">
+                                        <label>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+
+                        <table class="table table-striped table-bordered table-hover" width="100%">
+                        <thead>
+                        <tr>
+                            <th> 序号</th>
+                            <th> 火车皮号</th>
+                            <th> 粮油品种</th>
+                            <th> 规格型号</th>
+                            <th> 卸载件数</th>
+                            <th> 站台</th>
+                            <th> 货位</th>
+                            <th> 操作</th>
+                        </tr>
+                        </thead>
+                        
+                        <tbody>
+                            <tr ng-repeat="train in pageInfo">
+                                <td>{{ $index+1}}</td>
+                                <td>{{ train.hcph}}</td>
+                                <td>{{ dicData[train.lypz]}}</td>
+                                <td>{{ train.ggxh}}</td>
+                                <td>{{ train.xzjs}}</td>
+                                <td>{{ train.zt}}</td>
+                                <td>{{ train.hw}}</td>
+                                <td>
+                                    <a href-void ng-click="selectContract(train)"><i class="fa fa-edit"></i>选择</a>
+                                </td>
+                            </tr>
+                        </tbody>
+
+                        </table>
+						<!-- <div smart-include="app/layout/partials/page.tpl.html"></div> -->
+                        </div>
+                        </div>
+                    </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-default"  ng-click="cancel()">
+        	取消
+        </button>
+    </div>
+</div>

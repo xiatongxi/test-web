@@ -1,0 +1,127 @@
+<div id="content">
+    <section id="widget-grid" widget-grid>
+        <div class="row">
+            <article class="col-sm-12 col-md-12 col-lg-12">
+                <div jarvis-widget id="form-grid-widget"
+                    data-widget-colorbutton="false" data-widget-editbutton="false"
+                    data-widget-custombutton="false">
+                    <div>
+                        <div class="widget-body no-padding">
+                            <form id="drugPurchase-form" class="smart-form ng-pristine ng-valid" data-validator-option="validateOptions" novalidate="novalidate">
+                                <header>
+									<a href-void class="btn btn-default btn-xs" ng-click="retList()">
+										<i class="fa fa-angle-left"></i>&nbsp;返回&nbsp;
+									</a>
+									&nbsp;<strong>药剂采购详情</strong>
+									<span class="pull-right font-xs">带*的部分必须填写</span>
+								</header>
+                                <fieldset>
+                                    <div class="row">
+                                        <section class="col col-4">
+                                            <label class="label txt-bg-red">采购申请编号<span style="color: red;">*</span></label> 
+                                            <label class="input"> 
+                                                <input class="form-control" type="text" ng-model="drugPurchase.applyNumber" ng-readonly="true" ng-disabled="true"
+                                                name="applyNumber" placeholder="{{ applyNumber.msg }}">
+                                            </label>
+                                        </section>
+                                    </div>
+                                </fieldset>
+                                <header>
+                                    <h3>
+                                        <strong>采购申请种类</strong>
+                                        &nbsp;&nbsp; <a class="btn btn-primary btn-circle" ng-hide="isNotEdit" ng-click="addRow()">新增</a>
+                                    </h3>
+                                </header>
+                                <fieldset><!--track by $index-->
+                                    <div ng-repeat="detailInfo in addedDetail track by $index">
+                                        <input type="hidden" ng-model="detailInfo.id" ng-readonly="isNotEdit">
+                                        <input type="hidden" ng-model="detailInfo.drugType" ng-readonly="isNotEdit">
+                                        <div class="row">
+                                            <section class="col col-2">
+                                                <label class="label txt-bg-red">药剂编号<span style="color: red;">*</span></label>
+                                                <label class="input">
+                                                    <!--<i class="icon-append fa fa-times" ng-click="removePlan()"></i>ng-readonly="true" -->
+                                                    <input class="form-control" type="text" ng-model="detailInfo.drugNumber"
+                                                           ng-readonly="readOnlyValid" ng-disabled="isNotEdit" name="drugNumber"
+                                                           ng-click="getPlan($index)" placeholder="请选择药剂编号"
+                                                           minlength="2" maxlength="50" required>
+                                                </label>
+                                            </section>
+                                            <section class="col col-2">
+                                                <label class="label">药剂种类<span style="color: red;">*</span></label>
+                                                <label class="select"> 
+	                                                <select ng-model="detailInfo.drugKind" ng-disabled="true" name="drugKind{{$index}}"
+	                                                ng-options="enum.enumid as enum.enumname for enum in dicDataList[5498]" required >
+	                                                	<option value="">--药剂种类--</option><i></i>
+	                                                </select><i></i>
+	                                            </label>
+                                            </section>
+                                            <section class="col col-2">
+                                                <label class="label">药剂名称<span style="color: red;">*</span></label>
+                                                <label class="select"> 
+	                                                <select ng-model="detailInfo.drugName" ng-disabled="true" name="drugName{{$index}}"
+	                                                ng-options="enum.enumid as enum.enumname for enum in dicDataList[detailInfo.drugKind]" required >
+	                                                	<option value="">--药剂名称--</option><i></i>
+	                                                </select><i></i>
+	                                            </label>
+                                            </section>
+                                            <section class="col col-1">
+                                                <label class="label">药剂形态<span style="color: red;">*</span></label>
+	                                            <label class="select"> 
+	                                                <select ng-model="detailInfo.drugType" ng-disabled="true" name="drugType{{$index}}"
+	                                                ng-options="enum.enumid as enum.enumname for enum in dicDataList[5499]" required >
+	                                                	<option value="">形态</option><i></i>
+	                                                </select><i></i>
+	                                            </label>
+                                            </section>
+                                            <section class="col col-1">
+                                                <label class="label">药剂单位<span style="color: red;">*</span></label> 
+	                                            <label class="select"> 
+	                                                <select ng-model="detailInfo.drugUnit" ng-disabled="true" name="drugUnit{{$index}}"
+	                                                ng-options="enum.enumid as enum.enumname for enum in dicDataList[5500]" required >
+	                                                	<option value="">单位</option><i></i>
+	                                                </select><i></i>
+	                                            </label>
+                                            </section>
+                                            <section class="col col-1">
+                                                <label class="label">预计单价<span style="color: red;">*</span></label>
+                                                <label class="input">
+                                                    <input type="text" ng-model="detailInfo.applyPrice" name="applyPrice{{$index}}" ng-readonly="isNotEdit" ng-disabled="isNotEdit"
+                                                    validNumber="true" required ng-change="countApplyAmount($index)">
+                                                </label>
+                                            </section>
+                                            <section class="col col-1">
+                                                <label class="label">申请数量<span style="color: red;">*</span></label>
+                                                <label class="input">
+                                                    <input type="text" ng-model="detailInfo.applyCount" name="applyCount{{$index}}" ng-readonly="isNotEdit" ng-disabled="isNotEdit"
+                                                           validInt="true" required ng-change="countApplyAmount($index)">
+                                                </label>
+                                            </section>
+                                            <section class="col col-1">
+                                                <label class="label">预计金额</label>
+                                                <label class="input">
+                                                    <input type="text" ng-model="detailInfo.applyAmount" name="applyAmount{{$index}}" ng-readonly="true" ng-disabled="true" required>
+                                                </label>
+                                            </section>
+                                            <section class="col col-1">
+                                                <label class="label"> </label>
+                                                <label class="input">
+                                                    <a class="btn btn-primary btn-circle" ng-hide="isNotEdit" ng-click="deleteRow(detailInfo)">删除</a>
+                                                </label>
+                                            </section>
+                                        </div>
+                                    </div>
+                                </fieldset>
+
+                                <!--审批详情显示-->
+                                <fieldset></fieldset>
+                                <div ng-include="'app/act/util/auditInfoList.html'" ></div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </article>
+        </div>
+    </section>
+</div>
+

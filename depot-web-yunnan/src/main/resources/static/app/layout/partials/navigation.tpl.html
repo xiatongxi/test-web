@@ -1,0 +1,1849 @@
+<aside id="left-panel">
+
+    <!-- User info -->
+    <!--     <div login-info></div> -->
+    <!-- end user info -->
+
+    <nav>
+        <!-- NOTE: Notice the gaps after each icon usage <i></i>..
+        Please note that these links work a bit different than
+        traditional href="" links. See documentation for details.
+        -->
+
+        <ul data-smart-menu>
+            <li data-menu-collapse id="menu-1" ng-show="childSysId==1">
+                <a has-func="1" href="#" style="margin-left: 5px;">
+                    <i class="nav-icon"><img style="margin-bottom: -12px;" src="styles/img/home-1/nav-icon/xitgl-icon.png" /></i>
+                    <span class="menu-item-parent">系统管理</span>
+                </a>
+                <ul>
+                    <li has-func="3" data-ui-sref-active="active" class="active">
+                        <a data-ui-sref="app.system.user">用户管理</a>
+                    </li>
+                    <li has-func="4" data-ui-sref-active="active">
+                        <a data-ui-sref="app.system.role">角色管理</a>
+                    </li>
+                    <li has-func="5" data-ui-sref-active="active">
+                        <a data-ui-sref="app.system.func">功能管理</a>
+                    </li>
+                    <li has-func="15" data-ui-sref-active="active">
+                        <a data-ui-sref="app.system.org">组织机构管理</a>
+                    </li>
+                    <li has-func="16" data-ui-sref-active="active">
+                        <a data-ui-sref="app.system.power">权限管理</a>
+                    </li>
+                    <!-- <li has-func="290" data-ui-sref-active="active">
+                        <a data-ui-sref="app.system.orgPower">机构授权管理</a>
+                    </li> -->
+                    <li data-ui-sref-active="active">
+                        <a data-ui-sref="app.system.pwd">修改密码</a>
+                    </li>
+                    <li has-func="287" data-ui-sref-active="active">
+                        <a data-ui-sref="app.system.resetPwd">重置密码</a>
+                    </li>
+                    <li has-func="290" data-ui-sref-active="active">
+                        <a data-ui-sref="app.system.systemLog">日志管理</a>
+                    </li>
+                    <li has-func="217" data-ui-sref-active="active">
+                        <a data-ui-sref="app.system.depotUrl">库端url配置</a>
+                    </li>
+                </ul>
+            </li>
+            <li data-menu-collapse id="menu-2" ng-show="childSysId==2">
+                <a href="#" style="margin-left: 5px;">
+                    <i class="nav-icon"><img style="margin-bottom: -12px;" src="styles/img/home-1/nav-icon/jicsj-icon.png" /></i>
+                    <span class="menu-item-parent">基础数据</span>
+                </a>
+                <ul>
+                    <li data-ui-sref-active="active" class="active">
+                        <a data-ui-sref="app.basic.index">业务介绍</a>
+                    </li>
+                    <li has-func="6" data-ui-sref-active="active">
+                        <a data-ui-sref="app.basic.enumList">数据字典</a>
+                    </li>
+                    <li has-func="7" data-ui-sref-active="active">
+                        <a data-ui-sref="app.basic.storehouseList({type:2})">仓房管理</a>
+                    </li>
+                    <li has-func="22" data-ui-sref-active="active">
+                        <a data-ui-sref="app.basic.warehouseList">货位管理</a>
+                    </li>
+                    <li has-func="325" data-ui-sref-active="active">
+                        <a data-ui-sref="app.basic.tankList">油罐管理</a>
+                    </li>
+                    <li has-func="154" data-ui-sref-active="active">
+                        <a data-ui-sref="app.basic.equipmentEquipmentPoolList">设备器材库</a>
+                    </li>
+                    <li has-func="24" data-ui-sref-active="active">
+                        <a data-ui-sref="app.basic.keeperList">员工信息管理</a>
+                    </li>
+                    <li has-func="27" data-ui-sref-active="active">
+                        <!--<a data-ui-sref="app.nvr.list">硬盘录像机管理</a>-->
+                        <a data-ui-sref="app.basic.nvrList">硬盘录像机管理</a>
+                    </li>
+                    <li has-func="26" data-ui-sref-active="active">
+                        <!--<a data-ui-sref="app.camera.list">摄像头管理</a>-->
+                        <a data-ui-sref="app.basic.cameraList">摄像头管理</a>
+                    </li>
+                    <li has-func="28" data-ui-sref-active="active">
+                        <!-- <li has-func="28" data-ui-sref-active="active">
+                            <a data-ui-sref="app.basic.uploadUserAndCf">导出用户和仓房货位信息</a>
+                        </li>
+                        </li> -->
+                    <li has-func="29" data-ui-sref-active="active">
+                        <a data-ui-sref="app.basic.codeRule.list">编码规则</a>
+                    </li>
+                    <li has-func="179" data-ui-sref-active="active">
+                        <a data-ui-sref="app.basic.scheduleJob.list">定时任务</a>
+                    </li>
+                    <!--                     <li has-func="" data-ui-sref-active="active"> -->
+                    <!--                         <a data-ui-sref="app.basic.processList">工作流程配置</a> -->
+                    <!--                     </li> -->
+                </ul>
+            </li>
+
+            <!---------------------------------------- 综合业务相关--------------------------------- -->
+            <li data-menu-collapse id="menu-8" ng-show="childSysId==8">
+                <a href="#" style="margin-left: 5px;">
+                    <i class="nav-icon"><img style="margin-bottom: -12px;" src="styles/img/home-1/nav-icon/liangkyw-icon.png" /></i>
+                    <span class="menu-item-parent">综合业务管理</span>
+                </a>
+                <ul>
+                    <li class="active">
+                        <a data-ui-sref="app.business.index">业务介绍</a>
+                    </li>
+                    <!--待办事项  -->
+                    <li data-menu-collapse>
+                        <a has-func="40" href="#">
+                            <i class="fa fa-fw fa-folder-open"></i>待办与审批
+                        </a>
+                        <ul>
+                            <li has-func="41">
+                                <a data-ui-sref="app.business.handle-view">待办事项</a>
+                            </li>
+                            <li has-func="42">
+                                <a data-ui-sref="app.business.handles-view">已办事项</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li data-menu-collapse>
+                        <a has-func="9" href="#">
+                            <i class="fa fa-fw fa-folder-open"></i>计划管理
+                        </a>
+                        <ul>
+                            <li has-func="11">
+                                <a data-ui-sref="app.business.plan">计划申请</a>
+                            </li>
+                            <li has-func="12">
+                                <a data-ui-sref="app.business.plan-audit">计划审批</a>
+                            </li>
+                            <li has-func="28">
+                                <a data-ui-sref="app.business.plan-audit-pass">已审批计划管理</a>
+                            </li>
+                            <li has-func="28">
+                                <a data-ui-sref="app.business.plan-report">计划上报</a>
+                            </li>
+                        </ul>
+                    </li>
+
+                    <li data-menu-collapse>
+                        <a has-func="272" href="#">
+                            <i class="fa fa-fw fa-folder-open"></i>储备粮计划
+                        </a>
+                        <ul>
+                            <li has-func="273" data-menu-collapse>
+                                <a href="#">
+                                    <i class="fa fa-lg fa-fw fa-folder-open"></i>年度轮换计划
+                                </a>
+                                <ul>
+                                    <li has-func="276" data-ui-sref-active="active">
+                                        <a data-ui-sref="app.business.grainReservesPlan-rotation-apply">计划申请</a>
+                                    </li>
+                                    <li has-func="277" data-ui-sref-active="active">
+                                        <a data-ui-sref="app.business.grainReservesPlan-rotation-audit">计划审批</a>
+                                    </li>
+                                    <li has-func="278" data-ui-sref-active="active">
+                                        <a data-ui-sref="app.business.grainReservesPlan-rotation-pass">已审批计划</a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li has-func="274" data-menu-collapse>
+                                <a href="#">
+                                    <i class="fa fa-lg fa-fw fa-folder-open"></i>销售计划
+                                </a>
+                                <ul>
+                                    <li has-func="279" data-ui-sref-active="active">
+                                        <a data-ui-sref="app.business.grainReservesPlan-sales-apply">计划申请</a>
+                                    </li>
+                                    <li has-func="280" data-ui-sref-active="active">
+                                        <a data-ui-sref="app.business.grainReservesPlan-sales-audit">计划审批</a>
+                                    </li>
+                                    <li has-func="281" data-ui-sref-active="active">
+                                        <a data-ui-sref="app.business.grainReservesPlan-sales-pass">已审批计划</a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li has-func="275" data-menu-collapse>
+	                            <a href="#">
+	                                <i class="fa fa-lg fa-fw fa-folder-open"></i>收储计划
+	                            </a>
+	                            <ul>
+	                                <li has-func="282" data-ui-sref-active="active">
+	                                    <a data-ui-sref="app.business.grainReservesPlan-acquisition-apply">计划申请</a>
+	                                </li>
+	                                <li has-func="283" data-ui-sref-active="active">
+	                                    <a data-ui-sref="app.business.grainReservesPlan-acquisition-audit">计划审批</a>
+	                                </li>
+	                                <li has-func="284" data-ui-sref-active="active">
+	                                    <a data-ui-sref="app.business.grainReservesPlan-acquisition-pass">已审批计划</a>
+	                                </li>
+	                            </ul>
+	                        </li>
+                        </ul>
+                    </li>
+
+
+                    <li data-menu-collapse>
+                        <a has-func="10" href="#">
+                            <i class="fa fa-fw fa-folder-open"></i>合同管理
+                        </a>
+                        <ul>
+                            <li has-func="13">
+                                <a data-ui-sref="app.business.contract">合同申请</a>
+                            </li>
+                            <li has-func="14">
+                                <a data-ui-sref="app.business.contract-audit">合同审批</a>
+                            </li>
+                            <li has-func="29">
+                                <a data-ui-sref="app.business.contract-change">合同变更</a>
+                            </li>
+                            <li has-func="30">
+                                <a data-ui-sref="app.business.contract-change-audit">合同变更审批</a>
+                            </li>
+                            <li has-func="31">
+                                <a data-ui-sref="app.business.contract-audit-pass">已审批合同管理</a>
+                            </li>
+
+                            <li has-func="260" data-menu-collapse>
+                                <a href="#">
+                                    <i class="fa fa-lg fa-fw fa-folder-open"></i>合同履约管理
+                                </a>
+                                <ul>
+                                    <li has-func="261" data-ui-sref-active="active">
+                                        <a data-ui-sref="app.business.contract-pay-recevice">合同收付款管理</a>
+                                    </li>
+                                    <li has-func="262" data-ui-sref-active="active">
+                                        <a data-ui-sref="app.business.contract-performance">合同履约详情</a>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+
+                    <li data-menu-collapse>
+                        <a has-func="32" href="#">
+                            <i class="fa fa-fw fa-folder-open"></i>出入库通知单管理
+                        </a>
+                        <ul>
+                            <li has-func="33">
+                                <a data-ui-sref="app.business.deliveryStorageNotice">出入库通知单申请</a>
+                            </li>
+                            <li has-func="34">
+                                <a data-ui-sref="app.business.deliveryStorageNotice-audit">出入库通知单审批</a>
+                            </li>
+                            <li has-func="35">
+                                <a data-ui-sref="app.business.deliveryStorageNotice-audit-pass">已审批通知单管理</a>
+                            </li>
+                        </ul>
+                    </li>
+
+
+
+
+                    <li data-menu-collapse>
+                        <a has-func="263" href="#">
+                            <i class="fa fa-lg fa-fw fa-folder-open"></i>中转业务管理
+                        </a>
+                        <ul>
+                            <li has-func="264" data-menu-collapse>
+                                <a href="#">
+                                    <i class="fa fa-lg fa-fw fa-folder-open"></i>中转合同
+                                </a>
+                                <ul>
+                                    <li has-func="267">
+                                        <a data-ui-sref="app.business.transferContract">合同申请</a>
+                                    </li>
+                                    <li has-func="268">
+                                        <a data-ui-sref="app.business.transferContract-audit">合同审批</a>
+                                    </li>
+                                    <li has-func="269">
+                                        <a data-ui-sref="app.business.transferContract-change">合同变更</a>
+                                    </li>
+                                    <li has-func="270">
+                                        <a data-ui-sref="app.business.transferContract-change-audit">合同变更审批</a>
+                                    </li>
+                                    <li has-func="271">
+                                        <a data-ui-sref="app.business.transferContract-audit-pass">已审批合同管理</a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li has-func="265" data-ui-sref-active="active">
+                                <a data-ui-sref="app.business.transferNotice">发运中转通知单</a>
+                            </li>
+                            <li has-func="266" data-ui-sref-active="active">
+                                <a data-ui-sref="app.business.lading">提货单</a>
+                            </li>
+                        </ul>
+                    </li>
+
+                    <li data-menu-collapse>
+                        <a has-func="36" href="#">
+                            <i class="fa fa-fw fa-folder-open"></i>业务进度查询
+                        </a>
+                        <ul>
+                            <li has-func="37">
+                                <a data-ui-sref="app.business.plan-schedule">计划执行进度</a>
+                            </li>
+                            <li has-func="38">
+                                <a data-ui-sref="app.business.contract-schedule">合同执行进度</a>
+                            </li>
+                            <li has-func="39">
+                                <a data-ui-sref="app.business.deliveryStorageNotice-schedule">通知单执行进度</a>
+                            </li>
+                        </ul>
+                    </li>
+
+                    <li data-menu-collapse>
+                        <a has-func="43" href="#">
+                            <i class="fa fa-fw fa-folder-open"></i>客户管理
+                        </a>
+                        <ul>
+                            <li has-func="44">
+                                <a data-ui-sref="app.business.customer.list">客户档案管理</a>
+                            </li>
+                            <li has-func="45">
+                                <a data-ui-sref="app.business.customer.badrecord">客户不良记录管理</a>
+                            </li>
+                            <li has-func="46">
+                                <a data-ui-sref="app.business.customer.blackList">客户黑名单管理</a>
+                            </li>
+                        </ul>
+                    </li>
+
+                    <li data-menu-collapse>
+                        <a has-func="303" href="#">
+                            <i class="fa fa-fw fa-folder-open"></i>经营管理
+                        </a>
+                        <ul>
+                            <li has-func="304" data-menu-collapse>
+                                <a href="#">
+                                    <i class="fa fa-lg fa-fw fa-folder-open"></i>计划管理
+                                </a>
+                                <ul>
+                                    <li has-func="307" data-ui-sref-active="active">
+                                        <a data-ui-sref="app.business.management.plan-apply">计划申请</a>
+                                    </li>
+                                    <li has-func="308" data-ui-sref-active="active">
+                                        <a data-ui-sref="app.business.management.plan-audit">计划审批</a>
+                                    </li>
+                                    <li has-func="309" data-ui-sref-active="active">
+                                        <a data-ui-sref="app.business.management.plan-pass">已审批计划</a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li has-func="305" data-menu-collapse>
+                                <a href="#">
+                                    <i class="fa fa-lg fa-fw fa-folder-open"></i>客户管理
+                                </a>
+                                <ul>
+                                    <li has-func="310">
+                                        <a data-ui-sref="app.business.management.customer.list">客户档案管理</a>
+                                    </li>
+                                    <li has-func="311">
+                                        <a data-ui-sref="app.business.management.customer.badrecord">客户不良记录管理</a>
+                                    </li>
+                                    <li has-func="312">
+                                        <a data-ui-sref="app.business.management.customer.blackList">客户黑名单管理</a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li data-menu-collapse>
+                                <a has-func="306" href="#">
+                                    <i class="fa fa-fw fa-folder-open"></i>合同管理
+                                </a>
+                                <ul>
+                                    <li has-func="313">
+                                        <a data-ui-sref="app.business.management.contract.list">合同申请</a>
+                                    </li>
+                                    <li has-func="314">
+                                        <a data-ui-sref="app.business.management.contract-audit">合同审批</a>
+                                    </li>
+                                    <li has-func="315">
+                                        <a data-ui-sref="app.business.management.contract-change">合同变更</a>
+                                    </li>
+                                    <li has-func="316">
+                                        <a data-ui-sref="app.business.management.contract-change-audit">合同变更审批</a>
+                                    </li>
+                                    <li has-func="317">
+                                        <a data-ui-sref="app.business.management.contract-pass">已审批合同</a>
+                                    </li>
+
+                                    <li has-func="318" data-menu-collapse>
+                                        <a href="#">
+                                            <i class="fa fa-lg fa-fw fa-folder-open"></i>合同履约管理
+                                        </a>
+                                        <ul>
+                                            <li has-func="319" data-ui-sref-active="active">
+                                                <a data-ui-sref="app.business.management.contract.pay-recevice">合同收付款管理</a>
+                                            </li>
+                                            <li has-func="320" data-ui-sref-active="active">
+                                                <a data-ui-sref="app.business.management.contract.pay-performance">合同履约详情</a>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+
+                    <li data-menu-collapse>
+                        <a has-func="295" href="#">
+                            <i class="fa fa-fw fa-folder-open"></i>预警报警
+                        </a>
+                        <ul>
+                            <li has-func="296" data-menu-collapse>
+                                <a href="#">
+                                    <i class="fa fa-lg fa-fw fa-folder-open"></i>轮换预警管理
+                                </a>
+                                <ul>
+                                    <li has-func="297" data-ui-sref-active="active"><a
+                                            data-ui-sref="app.business.plan-warning-time">预警时间</a></li>
+                                    <li has-func="298" data-ui-sref-active="active"><a
+                                            data-ui-sref="app.business.plan-warning-list">预警列表</a></li>
+                                </ul>
+                            </li>
+                            <li has-func="299">
+                                <a data-ui-sref="app.supervise.situation.insect">虫害报警</a>
+                            </li>
+                            <li has-func="300">
+                                <a data-ui-sref="app.supervise.situation.gas">气体浓度报警</a>
+                            </li>
+                            <li has-func="301">
+                                <a data-ui-sref="app.supervise.situation.temperature">温度报警</a>
+                            </li>
+                            <li has-func="302">
+                                <a data-ui-sref="app.numbermanage.numbermanage.emptyPoliceList">库存空仓报警</a>
+                            </li>
+                        </ul>
+                    </li>
+
+                    <!-- 设备器材管理开始 -->
+                    <li data-menu-collapse>
+                        <a has-func="158" href="#">
+                            <i class="fa fa-lg fa-fw fa-folder-open"></i>设备器材管理
+                        </a>
+                        <ul>
+                            <li has-func="159" data-ui-sref-active="active">
+                                <a data-ui-sref="app.business.deviceInputList">设备入库登记</a>
+                            </li>
+                            <li has-func="160" data-ui-sref-active="active">
+                                <a data-ui-sref="app.business.deviceGetList">设备领用</a>
+                            </li>
+                            <li has-func="161" data-menu-collapse>
+                                <a href="#">
+                                    <i class="fa fa-lg fa-fw fa-folder-open"></i>设备管理
+                                </a>
+                                <ul>
+                                    <li has-func="162" data-ui-sref-active="active"><a
+                                            data-ui-sref="app.business.deviceKeepList">设备保养</a></li>
+                                    <li has-func="163" data-ui-sref-active="active"><a
+                                            data-ui-sref="app.business.deviceRepairList">设备维修</a></li>
+                                    <li has-func="164" data-ui-sref-active="active"><a
+                                            data-ui-sref="app.business.deviceOutList">设备报废</a></li>
+                                </ul>
+                            </li>
+                            <li has-func="165" data-ui-sref-active="active">
+                                <a data-ui-sref="app.business.deviceAccountList">设备管理台账</a>
+                            </li>
+                            <li has-func="166" data-ui-sref-active="active">
+                                <a data-ui-sref="app.business.deviceCheckList">盘点单</a>
+                            </li>
+                        </ul>
+                    </li>
+
+
+
+
+                    <li has-func="285" data-ui-sref-active="active">
+                        <a data-ui-sref="app.business.productionEquipment">生产装备汇总统计分析</a>
+                    </li>
+
+                </ul>
+            </li>
+            <li data-menu-collapse id="menu-17" ng-show="childSysId==17">
+                <a href="#" style="margin-left: 5px;">
+                    <i class="nav-icon"><img style="margin-bottom: -12px;" src="styles/img/home-1/nav-icon/zhinaf-icon.png" /></i>
+                    <span class="menu-item-parent">智能安防</span>
+                </a>
+                <ul>
+                    <li data-ui-sref-active="active">
+                        <a data-ui-sref="app.camera.index">业务介绍</a>
+                    </li>
+                    <li has-func="47" data-ui-sref-active="active">
+                        <a data-ui-sref="app.camera.play">监控通道</a>
+                    </li>
+                    <li has-func="48" data-ui-sref-active="active">
+                        <a data-ui-sref="app.cameraRecord.list">录像管理</a>
+                    </li>
+                    <!--<li has-func="49" data-ui-sref-active="active">-->
+                    <!--<a data-ui-sref="app.cameraGroup.list">分组管理</a>-->
+                    <!--</li>-->
+                    <!--<li data-menu-collapse>-->
+                    <!--<a has-func="50" href="#">-->
+                    <!--<i class="fa fa-fw fa-folder-open"></i>质量诊断-->
+                    <!--</a>-->
+                    <!--<ul>-->
+                    <!--<li has-func="51">-->
+                    <!--<a data-ui-sref="app.qualityDlag.playList">诊断计划</a>-->
+                    <!--</li>-->
+                    <!--<li has-func="52">-->
+                    <!--<a data-ui-sref="app.qualityDlag.resultNewList">最新诊断结果</a>-->
+                    <!--</li>-->
+                    <!--<li has-func="53">-->
+                    <!--<a data-ui-sref="app.qualityDlag.kindList">阈值管理</a>-->
+                    <!--</li>-->
+                    <!--</ul>-->
+                    <!--</li>-->
+                    <!-- <li data-menu-collapse>
+                        <a href="#" has-func="321">
+                            <i class="fa fa-fw fa-folder-open"></i>日志管理
+                        </a>
+                        <ul>
+                            <li>
+                                <a data-ui-sref="app.log.list">日志查询</a>
+                            </li>
+                        </ul>
+                    </li> -->
+                    <!--<li data-menu-collapse>-->
+                    <!--<a has-func="54" href="#">-->
+                    <!--<i class="fa fa-fw fa-folder-open"></i>报警管理-->
+                    <!--</a>-->
+                    <!--<ul>-->
+                    <!--<li has-func="56">-->
+                    <!--<a data-ui-sref="app.alarm.list">报警记录信息</a>-->
+                    <!--</li>-->
+                    <!--</ul>-->
+                    <!--</li>-->
+                    <li data-menu-collapse>
+                        <a has-func="57" href="#">
+                            <i class="fa fa-fw fa-folder-open"></i>配置管理
+                        </a>
+                        <ul>
+                            <li has-func="126">
+                                <a data-ui-sref="app.cameraSetting.set">路径设置</a>
+                            </li>
+                            <!--<li data-menu-collapse has-func="127">-->
+                            <!--<a href="#"><i class="fa fa-lg fa-fw fa-folder-open"></i>报警设置</a>-->
+                            <!--<ul>-->
+                            <!--<li data-ui-sref-active="active" has-func="143">-->
+                            <!--<a data-ui-sref="app.cameraSetting.alarmList">接收人设置</a>-->
+                            <!--</li>-->
+                            <!--<li data-ui-sref-active="active" has-func="144">-->
+                            <!--<a data-ui-sref="app.alarm.setting">发送方式设置</a>-->
+                            <!--</li>-->
+                            <!--</ul>-->
+                            <!--</li>-->
+                        </ul>
+                    </li>
+                    <li has-func="58" data-ui-sref-active="active">
+                        <!--<a href="app/monitor/MonitorMFC-右键管理员运行.exe">控件下载</a>-->
+                        <a href="app/monitor/nvrPlay-请使用管理员运行.exe" title="监控控件">控件下载</a>
+                    </li>
+                    <li has-func="58" data-ui-sref-active="active">
+                        <a href="app/monitor/VideoWebPlugin.exe" title="流媒体监控控件">流媒体控件下载</a>
+                    </li>
+                </ul>
+            </li>
+            <li data-menu-collapse id="menu-18" ng-show="childSysId==18">
+                <a href="#" style="margin-left: 5px;">
+                    <i class="nav-icon"><img style="margin-bottom: -12px;" src="styles/img/home-1/nav-icon/yuancjg-icon.png" /></i>
+                    <span class="menu-item-parent">粮库决策管理</span>
+                </a>
+                <ul>
+                    <li data-menu-collapse>
+                        <a has-func="63" href="#"><i class="fa fa-fw fa-folder-open"></i>粮库综合展示</a>
+                        <ul>
+                            <li has-func="59" data-ui-sref-active="active">
+                                <a data-ui-sref="app.supervise.cameraPT">2.5维展示</a>
+                            </li>
+                            <li has-func="59" data-ui-sref-active="active">
+                                <a data-ui-sref="app.supervise.monitorPT({showType:1})">视频监控平面图</a>
+                            </li>
+                            <li has-func="59" data-ui-sref-active="active">
+                                <a data-ui-sref="app.supervise.grainPT({showType:2})">粮库平面图</a>
+                            </li>
+                            <li has-func="81" data-ui-sref-active="active">
+                                <a data-ui-sref="app.supervise.houseStatePT">仓房粮温状态</a>
+                            </li>
+                            <li data-menu-collapse>
+                                <a has-func="61" href="#">
+                                    <i class="fa fa-fw fa-folder-open"></i>预警显示
+                                </a>
+                                <ul>
+                                    <li has-func="">
+                                        <a data-ui-sref="app.supervise.warning.basicThresholdSetList">预警阀值</a>
+                                    </li>
+                                    <li has-func="77">
+                                        <a data-ui-sref="app.supervise.warning.record">预警记录</a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li data-menu-collapse>
+                            <li has-func="">
+                                <a data-ui-sref="app.supervise.storageStateList">仓储状态查看</a>
+                            </li>
+                            </li>
+                            <!--<li has-func="59" data-ui-sref-active="active">-->
+                            <!--<a data-ui-sref="app.supervise.warnPrompt">预警提示</a>-->
+                            <!--</li>-->
+                            <li data-menu-collapse>
+                                <a has-func="60" href="#">
+                                    <i class="fa fa-fw fa-folder-open"></i>视频监控
+                                </a>
+                                <ul>
+                                    <li has-func="73">
+                                        <a data-ui-sref="app.supervise.camera.play">实时监控</a>
+                                    </li>
+                                    <!--<li has-func="74">-->
+                                    <!--<a data-ui-sref="app.supervise.camera.alarmList">报警信息发送记录</a>-->
+                                    <!--</li>-->
+                                </ul>
+                            </li>
+                            <li data-menu-collapse>
+                                <a has-func="61" href="#">
+                                    <i class="fa fa-fw fa-folder-open"></i>粮情监测
+                                </a>
+                                <ul>
+                                    <li has-func="75">
+                                        <a data-ui-sref="app.supervise.situation.grainTempList">粮情列表</a>
+                                    </li>
+                                    <li has-func="76">
+                                        <a data-ui-sref="app.supervise.situation.threeTempChart">粮情三温趋势图</a>
+                                    </li>
+                                    <li has-func="77">
+                                        <a data-ui-sref="app.supervise.situation.temperature">粮温预警</a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li  data-menu-collapse>
+                                <a has-func="62" href="#"><i class="fa fa-fw fa-folder-open"></i>仓储作业</a>
+                                <ul>
+                                    <li has-func="78">
+                                        <a data-ui-sref="app.supervise.operation.ccZy">仓储作业记录</a>
+                                    </li>
+                                    <li has-func="79" data-menu-collapse>
+                                        <a href="#">
+                                            <i class="fa fa-lg fa-fw fa-folder-open"></i>出入库记录
+                                        </a>
+                                        <!--三级菜单开始-->
+                                        <ul>
+                                            <li has-func="79" data-ui-sref-active="active">
+                                                <a data-ui-sref="app.supervise.operation.trainList">火车出入库记录</a>
+                                            </li>
+                                            <li has-func="79" data-ui-sref-active="active">
+                                                <a data-ui-sref="app.supervise.operation.truckList">汽车出入库记录</a>
+                                            </li>
+                                        </ul>
+                                        <!--三级菜单结束-->
+                                    </li>
+                                </ul>
+                            </li>
+                            <li data-menu-collapse>
+                                <a has-func="63" href="#"><i class="fa fa-fw fa-folder-open"></i>储粮信息</a>
+                                <ul>
+                                    <li has-func="80">
+                                        <a data-ui-sref="app.supervise.storage.plan">计划状态</a>
+                                    </li>
+                                    <li has-func="82">
+                                        <a data-ui-sref="app.supervise.storage.keeperList">库级人员信息</a>
+                                    </li>
+                                    <li has-func="83">
+                                        <a data-ui-sref="app.supervise.storage.inventory">库存统计</a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li data-menu-collapse>
+                                <a has-func="64" href="#">
+                                    <i class="fa fa-fw fa-folder-open"></i>基本信息设置
+                                </a>
+                                <ul>
+                                    <li has-func="84">
+                                        <a target="_blank" href="app/supervise/views/camera-point.html?type=1&id={{depotInfo.orgId}}&image={{depotInfo.birdsRemote}}">视频监控点位图配置</a>
+                                    </li>
+                                    <li has-func=85>
+                                        <a target="_blank" href="app/supervise/views/grainSituation-point.html?type=2&id={{depotInfo.orgId}}&image={{depotInfo.birdsRemote}}">粮情监测点位图配置</a>
+                                    </li>
+                                    <li has-func="86">
+                                        <a target="_blank" href="app/supervise/views/warehousing-point.html?type=3&id={{depotInfo.orgId}}&image={{depotInfo.birdsRemote}}">仓储作业点位图配置</a>
+                                    </li>
+                                    <li has-func="87">
+                                        <a target="_blank" href="app/supervise/views/liangQuan-point.html?type=4&id={{depotInfo.orgId}}&image={{depotInfo.birdsRemote}}">储粮信息点位图配置</a>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                    <!--决策支持系统-->
+                    <li data-menu-collapse>
+                        <a has-func="197" href="#"><i class="fa fa-fw fa-folder-open"></i>决策支持</a>
+                        <ul>
+                            <li has-func="198">
+                                <a data-ui-sref="app.supervise.decisionSupport.storeSuperviseList">库存监管统计</a>
+                            </li>
+                            <!--粮食购销统计-->
+                            <li has-func="199" data-menu-collapse>
+                                <a has-func="" href="#">
+                                    <i class="fa fa-lg fa-fw fa-folder-open"></i>粮食购销统计
+                                </a>
+                                <!--三级菜单开始-->
+                                <ul>
+                                    <li has-func="200">
+                                        <a data-ui-sref="app.supervise.decisionSupport.SalesStatistics.plan-schedule">计划执行进度</a>
+                                    </li>
+                                    <li has-func="201">
+                                        <a data-ui-sref="app.supervise.decisionSupport.SalesStatistics.contract-schedule">合同执行进度</a>
+                                    </li>
+                                    <li has-func="202">
+                                        <a data-ui-sref="app.supervise.decisionSupport.SalesStatistics.deliveryStorageNotice-schedule">通知单执行进度</a>
+                                    </li>
+                                </ul>
+                                <!--三级菜单结束-->
+                            </li>
+                            <!--结束-->
+                            <!--质量追溯统计-->
+                            <li has-func="203">
+                                <a data-ui-sref="app.supervise.decisionSupport.qualityTraceList">质量追溯统计</a>
+                            </li>
+                            <!--出入库监管统计-->
+                            <li has-func="204" data-ui-sref-active="active">
+                                <a data-ui-sref="app.supervise.decisionSupport.cycleFoodCount">出入库监管统计</a>
+                            </li>
+<!--                             <li has-func="205"> -->
+<!--                                 <a data-ui-sref="app.supervise.decisionSupport.dynamicFood">动态粮情统计</a> -->
+<!--                             </li> -->
+                        </ul>
+                    </li>
+
+                    <li data-menu-collapse >
+                        <a has-func="400" href="#" >
+                            <i class="fa fa-fw fa-folder-open"></i>遗留系统对接
+                        </a>
+                        <ul >
+                            <li  has-func="401" data-ui-sref-active="active">
+                                <a data-ui-sref="app.system.docking({type:1})">(昆)汽车出入库</a>
+                            </li>
+                            <li  has-func="402" data-ui-sref-active="active">
+                                <a  data-ui-sref="app.system.docking({type:2})">(昆)火车出入库</a>
+                            </li>
+                            <li  has-func="403" data-ui-sref-active="active">
+                                <a  data-ui-sref="app.system.docking({type:3})">(昆)库存数量库</a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </li>
+
+
+            <li data-menu-collapse id="menu-19" ng-show="childSysId==19">
+                <a href="#" style="margin-left: 5px;">
+                    <i class="nav-icon"><img style="margin-bottom: -12px;" src="styles/img/home-1/nav-icon/cangcyw.png" /></i>
+                    <span class="menu-item-parent">仓储业务</span>
+                </a>
+                <ul>
+                    <li class="active">
+                        <a data-ui-sref="app.storage.index">业务介绍</a>
+                    </li>
+                    <li data-menu-collapse>
+                        <a has-func="65" href="#">
+                            <i class="fa fa-lg fa-fw fa-folder-open"></i>仓储管理
+                        </a>
+                        <ul>
+                            <li has-func="88" data-menu-collapse>
+                                <a href="#">
+                                    <i class="fa fa-lg fa-fw fa-folder-open"></i>仓房信息
+                                </a>
+                                <!--三级菜单开始-->
+                                <ul>
+                                    <li has-func="95" data-ui-sref-active="active">
+                                        <a data-ui-sref="app.storage.storehouse.houseinfo({type:1})">仓房基本信息</a>
+                                    </li>
+                                    <li has-func="96" data-ui-sref-active="active">
+                                        <a data-ui-sref="app.storage.storehouse.hcklist">仓房检查记录</a>
+                                    </li>
+                                    <li has-func="132" data-ui-sref-active="active">
+                                        <a data-ui-sref="app.storage.storehouse.hrplist">仓房维修记录</a>
+                                    </li>
+                                </ul>
+                                <!--三级菜单结束-->
+                            </li>
+                            <li data-menu-collapse>
+                                <a has-func="89" href="#">
+                                    <i class="fa fa-lg fa-fw fa-folder-open"></i>保管员管理
+                                </a>
+                                <!--三级菜单开始-->
+                                <ul>
+                                    <li has-func="97" data-ui-sref-active="active">
+                                        <a data-ui-sref="app.storage.keeper.keeperList">保管员信息</a>
+                                    </li>
+                                    <li has-func="98" data-ui-sref-active="active">
+                                        <a data-ui-sref="app.storage.keeper.keepertransferlist">保管员移交记录</a>
+                                    </li>
+                                </ul>
+                                <!--三级菜单结束-->
+                            </li>
+                            <!--库存识别码管理开始-->
+                            <li has-func="91">
+                                <a data-ui-sref="app.storage.foodbasicinfo.fshlist">库存识别码管理</a>
+                            </li>
+                            <!--库存识别码管理结束-->
+
+                            <!--储粮专卡-->
+                            <li has-func="90">
+                                <a data-ui-sref="app.storage.foodbasicinfo.foodbasicinfolist">储粮专卡</a>
+                            </li>
+                            <!--储粮专卡-->
+
+                            <!--安全生产开始-->
+                            <li data-menu-collapse><!--原: 安全生产-->
+                                <a has-func="94" href="#"><i class="fa fa-lg fa-fw fa-folder-open"></i>
+                                    粮食安全生产管理</a>
+                                <!--三级菜单开始-->
+                                <ul>
+                                    <li has-func="110" data-ui-sref-active="active">
+                                        <a data-ui-sref="app.storage.safeproduce.list({type:1})">安全生产管理制度</a>
+                                    </li>
+                                    <li has-func="111" data-ui-sref-active="active">
+                                        <a data-ui-sref="app.storage.safeproduce.list({type:2})">安全生产应急预案</a>
+                                    </li>
+                                    <li has-func="112" data-ui-sref-active="active">
+                                        <a data-ui-sref="app.storage.safeproduce.list({type:3})">安全生产管理责任</a>
+                                    </li>
+                                    <li has-func="180" data-ui-sref-active="active">
+                                        <a data-ui-sref="app.storage.safeproduce.notifyList">安全生产通告</a>
+                                    </li>
+                                    <li has-func="181" data-ui-sref-active="active">
+                                        <a data-ui-sref="app.storage.safeproduce.recordList">粮库危险作业备案</a>
+                                    </li>
+                                    <li has-func="182" data-ui-sref-active="active">
+                                        <a data-ui-sref="app.storage.safeproduce.safeAccidentManageList">安全生产事故管理</a>
+                                    </li>
+                                    <!--备案及实施情况的管理-->
+                                    <li data-menu-collapse>
+                                        <a has-func="185" href="#">
+                                            <i class="fa fa-lg fa-fw fa-folder-open"></i>备案管理
+                                        </a>
+                                        <ul>
+                                            <li has-func="186" data-ui-sref-active="active">
+                                                <a data-ui-sref="app.storage.safeproduce.recordManage.fumigationPlan">熏蒸方案</a>
+                                            </li>
+                                            <li has-func="187" data-ui-sref-active="active">
+                                                <a data-ui-sref="app.storage.safeproduce.recordManage.fumigationProcess">熏蒸过程</a>
+                                            </li>
+                                            <li has-func="188" data-ui-sref-active="active">
+                                                <a data-ui-sref="app.storage.safeproduce.recordManage.fumigationDealWith">善后工作</a>
+                                            </li>
+                                        </ul>
+                                    </li>
+
+                                    <li data-menu-collapse><!--原名: 粮情检查管理-->
+                                        <a has-func="118" href="#">
+                                            <i class="fa fa-lg fa-fw fa-folder-open"></i>
+                                            安全检查
+                                        </a>
+                                        <ul>
+                                            <li has-func="118" data-ui-sref-active="active">
+                                                <a data-ui-sref="app.storage.safeproduce.safeCheck.fbelist">节前安全检查</a>
+                                            </li>
+                                            <li has-func="184" data-ui-sref-active="active">
+                                                <a data-ui-sref="app.storage.safeproduce.safeCheck.wrslist">风雨雪三查</a>
+                                            </li>
+                                            <li has-func="119" data-ui-sref-active="active">
+                                                <a data-ui-sref="app.storage.safeproduce.safeCheck.ttplist">三温检查</a>
+                                            </li>
+                                            <li has-func="120" data-ui-sref-active="active">
+                                                <a data-ui-sref="app.storage.safeproduce.safeCheck.otherchecklist">其他检查</a>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                                <!--三级菜单结束-->
+                            </li>
+                            <!--安全生产结束-->
+                            <!--转储管理开始-->
+                            <li has-func="256" data-ui-sref-active="active">
+                                <a data-ui-sref="app.storage.dumpList">转储管理</a>
+                            </li>
+                            <!--转储管理结束-->
+                            <!--倒仓作业开始-->
+                            <li data-menu-collapse>
+                                <a has-func="257" href="#"><i class="fa fa-lg fa-fw fa-folder-open"></i>
+                                    倒仓作业
+                                </a>
+                                <!--三级菜单开始-->
+                                <ul>
+                                    <li has-func="258" data-ui-sref-active="active">
+                                        <a data-ui-sref="app.storage.changestorage.changeList">倒仓申请</a>
+                                    </li>
+                                    <li has-func="259" data-ui-sref-active="active">
+                                        <a data-ui-sref="app.storage.changestorage.changestorework">倒仓作业</a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <!--倒仓作业结束-->
+                            <!-- 架空期管理 start -->
+                            <li data-menu-collapse>
+                                <a has-func="291" href="#"><i class="fa fa-lg fa-fw fa-folder-open"></i>
+                                    架空期管理
+                                </a>
+                                <ul>
+                                    <li has-func="292" data-ui-sref-active="active">
+                                        <a data-ui-sref="app.storage.overhead.getList">架空期查询</a>
+                                    </li>
+                                    <li has-func="293" data-ui-sref-active="active">
+                                        <a data-ui-sref="app.storage.overhead.getApplyList">延期申请</a>
+                                    </li>
+                                    <li has-func="294" data-ui-sref-active="active">
+                                        <a data-ui-sref="app.storage.overhead.setList">设置管理</a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <!-- 架空期管理 end -->
+                        </ul>
+                    </li>
+                    <!-- 质量管理开始 -->
+                    <li data-menu-collapse>
+                        <a has-func="66" href="#">
+                            <i class="fa fa-lg fa-fw fa-folder-open"></i>质量管理
+                        </a>
+                        <ul>
+                            <li data-menu-collapse>
+                                <a has-func="146" href="#">
+                                    <i class="fa fa-lg fa-fw fa-folder-open"></i>库内检验
+                                </a>
+                                <ul>
+                                    <li has-func="147" data-ui-sref-active="active">
+                                        <a data-ui-sref="app.storage.qualitycheck.fck.fcklist({type:0})">初检</a>
+                                    </li>
+                                    <li has-func="148" data-ui-sref-active="active">
+                                        <a data-ui-sref="app.storage.qualitycheck.spr.sprlist({type:2})">春秋普查</a>
+                                    </li>
+                                    <li has-func="149" data-ui-sref-active="active">
+                                        <a data-ui-sref="app.storage.qualitycheck.daklist({type:4})">日常检验</a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li data-menu-collapse>
+                                <a has-func="150" href="#">
+                                    <i class="fa fa-lg fa-fw fa-folder-open"></i>第三方检验
+                                </a>
+                                <ul>
+                                    <li has-func="151" data-ui-sref-active="active">
+                                        <a data-ui-sref="app.storage.qualitycheck.ack.acklist({type:1})">验收</a>
+                                    </li>
+                                    <li has-func="152" data-ui-sref-active="active">
+                                        <a data-ui-sref="app.storage.qualitycheck.trklist({type:5})">第三方检查</a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li data-ui-sref-active="active">
+                                <a has-func="153" data-ui-sref="app.storage.qualitycheck.out.outlist({type:3})">出库检验</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <!-- 质量管理结束 -->
+                    <!-- 验收管理开始 -->
+                    <li data-menu-collapse>
+                        <a has-func="288" href="#">
+                            <i class="fa fa-lg fa-fw fa-folder-open"></i>验收管理
+                        </a>
+                        <ul>
+                            <li has-func="289" data-ui-sref-active="active">
+                                <a data-ui-sref="app.storage.acceptanceList">验收申请</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <!-- 验收管理结束 -->
+                    <li data-menu-collapse>
+                        <a has-func="67" href="#">
+                            <i class="fa fa-lg fa-fw fa-folder-open"></i>
+                            数量管理
+                        </a>
+                        <ul>
+<!--                             <li has-func="121" data-ui-sref-active="active"> -->
+<!--                                 <a data-ui-sref="app.numbermanage.numbermanage">损益单</a> -->
+<!--                             </li> -->
+                            <li has-func="122" data-ui-sref-active="active">
+                                <a data-ui-sref="app.numbermanage.numbermanage.numberManage-list">库存数量管理</a>
+                            </li>
+                            <!--<li has-func="79">
+                                <a data-ui-sref="app.supervise.operation.list">出入库记录</a>
+                            </li>-->
+                            <li data-menu-collapse>
+                                <a has-func="79" href="#">
+                                    <i class="fa fa-lg fa-fw fa-folder-open"></i>出入库记录
+                                </a>
+                                <!--三级菜单开始-->
+                                <ul>
+                                    <li has-func="79" data-ui-sref-active="active">
+                                        <a data-ui-sref="app.supervise.operation.trainList">火车出入库记录</a>
+                                    </li>
+                                    <li has-func="79" data-ui-sref-active="active">
+                                        <a data-ui-sref="app.supervise.operation.truckList">汽车出入库记录</a>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+
+                    <li data-menu-collapse>
+                        <a has-func="92" href="#"><i class="fa fa-lg fa-fw fa-folder-open"></i>
+                            保管账
+                        </a>
+                        <!--三级菜单开始-->
+                        <ul>
+                            <li has-func="155" data-ui-sref-active="active">
+                                <a ui-sref="app.storage.account.keepDetailedAccount">保管明细账</a>
+                            </li>
+                            <li has-func="99" data-ui-sref-active="active">
+                                <a ui-sref="app.storage.account.houseKeepAccount">分仓保管账</a>
+                            </li>
+                            <li has-func="100" data-ui-sref-active="active">
+                                <a ui-sref="app.storage.account.keepTotalAccount">保管总账</a>
+                            </li>
+                        </ul>
+                        <!--三级菜单结束-->
+                    </li>
+                    <!-- 设备器材管理结束 -->
+                    <li data-menu-collapse>
+                        <a has-func="137" href="#">
+                            <i class="fa fa-lg fa-fw fa-folder-open"></i>粮情分析报告
+                        </a>
+                        <!--三级菜单开始-->
+                        <ul>
+                            <li has-func="138" data-ui-sref-active="active">
+                                <a data-ui-sref="app.storage.grainAnalysis.weekList">周粮情分析</a>
+                            </li>
+                            <li has-func="139" data-ui-sref-active="active">
+                                <a data-ui-sref="app.storage.grainAnalysis.monthList">月粮情分析</a>
+                            </li>
+                            <li has-func="142" data-ui-sref-active="active">
+                                <a data-ui-sref="app.storage.grainAnalysis.yearList">年粮情分析</a>
+                            </li>
+                        </ul>
+                        <!--三级菜单结束-->
+                    </li>
+                    <!--原 药剂管理-->
+                    <li data-menu-collapse>
+                        <a has-func="168" href="#">
+                            <i class="fa fa-fw fa-folder-open"></i>化学药剂管理
+                        </a>
+                        <ul>
+                            <li has-func="170">
+                                <a data-ui-sref="app.storage.drug.info">药剂信息维护</a>
+                            </li>
+                            <li has-func="169">
+                                <a data-ui-sref="app.storage.drug.purchase">药剂采购申请</a>
+                            </li>
+                            <li has-func="190">
+                                <a data-ui-sref="app.storage.drug.purchaseAudit">药剂采购审批</a>
+                            </li>
+                            <li has-func="171">
+                                <a data-ui-sref="app.storage.drug.storage">药剂入库</a>
+                            </li>
+                            <li has-func="191">
+                                <a data-ui-sref="app.storage.drug.useApply">药剂领用申请</a>
+                            </li>
+                            <li has-func="192">
+                                <a data-ui-sref="app.storage.drug.useApplyAudit">药剂领用审批</a>
+                            </li>
+                            <li has-func="172">
+                                <a data-ui-sref="app.storage.drug.use">药剂领用登记</a>
+                            </li>
+                            <li has-func="193">
+                                <a data-ui-sref="app.storage.drug.restore">药剂归还</a>
+                            </li>
+                            <li has-func="194">
+                                <a data-ui-sref="app.storage.drug.drugDestroy">药剂销毁</a>
+                            </li>
+                            <li has-func="174">
+                                <a data-ui-sref="app.storage.drug.standingBook">药剂台账</a>
+                            </li>
+                            <li has-func="173">
+                                <a data-ui-sref="app.storage.drug.check">药剂盘点</a>
+                            </li>
+                            <li has-func="195">
+                                <a data-ui-sref="app.storage.drug.shelf">药房管理</a>
+                            </li>
+                            <!--<li data-menu-collapse>
+		                        <a has-func="" href="#">
+		                            <i class="fa fa-fw fa-folder-open"></i>药剂仓房货架号
+		                        </a>
+		                        <ul>
+		                        	&lt;!&ndash; <li has-func="">
+		                                <a data-ui-sref="app.storage.drug.storageHouse">仓房管理</a>
+		                            </li> &ndash;&gt;
+		                            <li has-func="">
+		                                <a data-ui-sref="app.storage.drug.shelf">货架号管理</a>
+		                            </li>
+		                        </ul>
+		                    </li>-->
+                        </ul>
+                    </li>
+                    <!-- 代储点管理开始 -->
+                    <li has-func="234" data-menu-collapse>
+                        <a href="#">
+                            <i class="fa fa-lg fa-fw fa-folder-open"></i>代储点管理
+                        </a>
+                        <ul>
+                            <li data-menu-collapse>
+                                <a has-func="207" href="#">
+                                    <i class="fa fa-lg fa-fw fa-folder-open"></i>基础信息管理
+                                </a>
+                                <ul>
+                                    <li has-func="235" data-ui-sref-active="active">
+                                        <a data-ui-sref="app.business.agent.basic.agentList">代储企业管理</a>
+                                    </li>
+                                    <li has-func="236" data-ui-sref-active="active">
+                                        <a data-ui-sref="app.business.agent.basic.agentDepotList">代储粮库管理</a>
+                                    </li>
+                                    <li has-func="238" data-ui-sref-active="active">
+                                        <a data-ui-sref="app.business.agent.basic.storehouseList({type:2,libraryType:'1'})">代储仓房管理</a>
+                                    </li>
+                                    <li has-func="239" data-ui-sref-active="active">
+                                        <a data-ui-sref="app.business.agent.basic.warehouseList({libraryType:1})">代储货位管理</a>
+                                    </li>
+                                    <li has-func="240" data-ui-sref-active="active">
+                                        <a data-ui-sref="app.business.agent.basic.agentTankList">油罐信息</a>
+                                    </li>
+                                    <li has-func="241" data-ui-sref-active="active">
+                                        <a data-ui-sref="app.business.agent.basic.agentPeopleList">人员信息</a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li data-menu-collapse>
+                                <a has-func="207" href="#">
+                                    <i class="fa fa-lg fa-fw fa-folder-open"></i>储粮信息
+                                </a>
+                                <ul>
+                                    <li has-func="237" data-menu-collapse>
+                                        <a href="#">
+                                            <i class="fa fa-lg fa-fw fa-folder-open"></i>出入库记录
+                                        </a>
+                                        <!--三级菜单开始-->
+                                        <ul>
+                                            <li has-func="238" data-ui-sref-active="active">
+                                                <a data-ui-sref="app.business.agent.grainStorage.crk.trainList">火车出入库</a>
+                                            </li>
+                                            <li has-func="239" data-ui-sref-active="active">
+                                                <a data-ui-sref="app.business.agent.grainStorage.crk.carList">汽车出入库</a>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                    <li has-func="238" data-ui-sref-active="active">
+                                        <a data-ui-sref="app.business.agent.grainStorage.numberList">库存数量管理</a>
+                                    </li>
+                                    <li has-func="237" data-menu-collapse>
+                                        <a href="#">
+                                            <i class="fa fa-lg fa-fw fa-folder-open"></i>质量管理
+                                        </a>
+                                        <!--三级菜单开始-->
+                                        <ul>
+                                            <li data-menu-collapse>
+                                                <a has-func="146" href="#">
+                                                    <i class="fa fa-lg fa-fw fa-folder-open"></i>库内检验
+                                                </a>
+                                                <ul>
+                                                    <li has-func="147" data-ui-sref-active="active">
+                                                        <a data-ui-sref="app.business.agent.grainStorage.quality.fck.fcklist({type:0})">初检</a>
+                                                    </li>
+                                                    <li has-func="148" data-ui-sref-active="active">
+                                                        <a data-ui-sref="app.business.agent.grainStorage.quality.spr.sprlist({type:2})">春秋普查</a>
+                                                    </li>
+                                                    <li has-func="149" data-ui-sref-active="active">
+                                                        <a data-ui-sref="app.business.agent.grainStorage.quality.daklist({type:4})">日常检验</a>
+                                                    </li>
+                                                </ul>
+                                            </li>
+                                            <li data-menu-collapse>
+                                                <a has-func="150" href="#">
+                                                    <i class="fa fa-lg fa-fw fa-folder-open"></i>第三方检验
+                                                </a>
+                                                <ul>
+                                                    <li has-func="151" data-ui-sref-active="active">
+                                                        <a data-ui-sref="app.business.agent.grainStorage.quality.ack.acklist({type:1})">验收</a>
+                                                    </li>
+                                                    <li has-func="152" data-ui-sref-active="active">
+                                                        <a data-ui-sref="app.business.agent.grainStorage.quality.trklist({type:5})">第三方检查</a>
+                                                    </li>
+                                                </ul>
+                                            </li>
+                                            <li data-ui-sref-active="active">
+                                                <a has-func="153" data-ui-sref="app.business.agent.grainStorage.quality.out.outlist({type:3})">出库检验</a>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                    <li data-menu-collapse>
+                                        <a has-func="327" href="#">
+                                            <i class="fa fa-lg fa-fw fa-folder-open"></i>保管账
+                                        </a>
+                                        <ul>
+                                            <li has-func="328" data-ui-sref-active="active">
+                                                <a data-ui-sref="app.business.agent.grainStorage.bgz.bgmxz">保管明细账</a>
+                                            </li>
+                                            <li has-func="329" data-ui-sref-active="active">
+                                                <a data-ui-sref="app.business.agent.grainStorage.bgz.fcbgz">分仓保管账</a>
+                                            </li>
+                                            <li has-func="330" data-ui-sref-active="active">
+                                                <a data-ui-sref="app.business.agent.grainStorage.bgz.bgzz">保管总账</a>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li data-menu-collapse>
+                                <a has-func="207" href="#">
+                                    <i class="fa fa-lg fa-fw fa-folder-open"></i>粮情信息
+                                </a>
+                                <ul>
+                                    <li has-func="235" data-ui-sref-active="active">
+                                        <a data-ui-sref="app.business.agent.temperature.dataList">粮情数据</a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li data-menu-collapse>
+                                <a has-func="207" href="#">
+                                    <i class="fa fa-lg fa-fw fa-folder-open"></i>视频监控
+                                </a>
+                                <ul>
+                                    <li has-func="235" data-ui-sref-active="active">
+                                        <a data-ui-sref="app.business.agent.monitor.play">实时画面</a>
+                                    </li>
+                                    <li has-func="235" data-ui-sref-active="active">
+                                        <a data-ui-sref="app.business.agent.monitor.record">回放画面</a>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                    <!-- 代储点管理结束 -->
+                    <li has-func="69" data-ui-sref-active="active">
+                        <a data-ui-sref="app.storage.payment.list"> 费用管理</a>
+                    </li>
+                    <!--<li has-func="125" data-ui-sref-active="active">
+                        <a href="http://192.168.60.120:8088/jckz/init-huangFu.html?_U=ystest&_T=e10adc3949ba59abbe56e057f20f883e" target="_blank"> 智能仓房</a>
+                    </li>-->
+                </ul>
+            </li>
+
+            <li data-menu-collapse id="menu-23" ng-show="childSysId==23">
+                <a has-func="23" href="#" style="margin-left: 5px;">
+                    <i class="nav-icon"><img style="margin-bottom: -12px;" src="styles/img/home-1/nav-icon/chaxzs-icon.png" /></i>
+                    <span class="menu-item-parent">查询追溯</span>
+                </a>
+                <ul>
+                    <!--                     <li has-func="129" data-ui-sref-active="active"> -->
+                    <!--                         <a data-ui-sref="app.synth.foodstuffTraces.foodstuffTracesList">储粮信息查询</a> -->
+                    <!--                     </li> -->
+                    <!--                     <li has-func="130" data-ui-sref-active="active"> -->
+                    <!--                         <a data-ui-sref="app.synth.plan">计划信息查询</a> -->
+                    <!--                     </li> -->
+                    <!--                     <li has-func="131" data-ui-sref-active="active"> -->
+                    <!--                         <a data-ui-sref="app.synth.person">人员信息查询</a> -->
+                    <!--                     </li> -->
+                    <!--                     <li has-func="140" data-ui-sref-active="active"> -->
+                    <!--                         <a data-ui-sref="app.synth.barn">粮库信息查询</a> -->
+                    <!--                     </li> -->
+                    <!--库内质量追溯-->
+                    <li data-menu-collapse>
+                        <a has-func="207" href="#">
+                            <i class="fa fa-lg fa-fw fa-folder-open"></i>库内质量追溯
+                        </a>
+                        <ul>
+                            <li has-func="208" data-ui-sref-active="active">
+                                <a data-ui-sref="app.synth.warehouseSource">以入库为源头追溯</a>
+                            </li>
+                            <li has-func="209" data-ui-sref-active="active">
+                                <a data-ui-sref="app.synth.qualitySafe">质量安全追溯报告</a>
+                            </li>
+                            <li has-func="210" data-ui-sref-active="active">
+                                <a data-ui-sref="app.synth.qualityEvent">质量事件数据管理</a>
+                            </li>
+                            <li has-func="211" data-ui-sref-active="active">
+                                <a data-ui-sref="app.synth.qualityEventAnalyze">质量事件追溯分析</a>
+                            </li>
+                            <li has-func="212" data-ui-sref-active="active">
+                                <a data-ui-sref="app.synth.qualityCredit">质量信用评价</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <!--结束-->
+                    <!--粮食安全追溯-->
+                    <li data-menu-collapse>
+                        <a has-func="213" href="#">
+                            <i class="fa fa-lg fa-fw fa-folder-open"></i>粮食安全追溯
+                        </a>
+                        <ul>
+                            <li has-func="214" data-ui-sref-active="active">
+                                <a data-ui-sref="app.synth.lifecycle">粮食生命周期管理</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <!--结束-->
+                    <!--识别码业务应用-->
+                    <li data-menu-collapse>
+                        <a has-func="215" href="#">
+                            <i class="fa fa-lg fa-fw fa-folder-open"></i>识别码管理
+                        </a>
+                        <ul>
+                            <li has-func="216" data-ui-sref-active="active">
+                                <a data-ui-sref="app.synth.identifyCode">粮食安全生命周期分析</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <!--结束-->
+                </ul>
+            </li>
+
+            <!--智能仓房-->
+            <li data-menu-collapse id="menu-218" ng-show="childSysId==218">
+                <a has-func="218" href="#" style="margin-left: 5px;">
+                    <i class="nav-icon"><img style="margin-bottom: -12px;" src="styles/img/home-1/nav-icon/yuancjg-icon.png" /></i>
+                    <span class="menu-item-parent">智能仓房</span>
+                </a>
+                <ul>
+                    <!--粮情检查-->
+                    <li data-menu-collapse>
+                        <a has-func="219" href="#">
+                            <i class="fa fa-lg fa-fw fa-folder-open"></i>粮情检查
+                        </a>
+                        <ul>
+                            <li has-func="327" data-ui-sref-active="active">
+                                <a data-ui-sref="app.intelligent.grainInspect.comprehensive">粮情综合展示</a>
+                            </li>
+                            <li has-func="328" data-ui-sref-active="active">
+                                <a data-ui-sref="app.intelligent.grainInspect.grainAnalyzeList">粮情检查分析</a>
+                            </li>
+                            <li has-func="329" data-ui-sref-active="active">
+                                <a data-ui-sref="app.intelligent.grainInspect.reportFormsList">粮情报表</a>
+                            </li>
+                            <li has-func="330" data-ui-sref-active="active">
+                                <a data-ui-sref="app.intelligent.grainInspect.realTimeData">实时数据查询</a>
+                            </li>
+                            <li has-func="331" data-ui-sref-active="active">
+                                <a data-ui-sref="app.intelligent.grainInspect.pastRecordsData">历史数据查询</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <!--粮情检测-->
+                    <li data-menu-collapse>
+                        <a has-func="220" href="#">
+                            <i class="fa fa-lg fa-fw fa-folder-open"></i>粮情检测
+                        </a>
+                        <ul>
+                            <li has-func="332" data-ui-sref-active="active">
+                                <a data-ui-sref="app.intelligent.grainDetection.humitureDetectionList">温湿度检测</a>
+                            </li>
+                            <li has-func="333" data-ui-sref-active="active">
+                                <a data-ui-sref="app.intelligent.grainDetection.temperatureRecordList">测温记录</a>
+                            </li>
+                            <li has-func="334" data-ui-sref-active="active">
+                                <a data-ui-sref="app.intelligent.grainDetection.grainConditionList">粮情数据</a>
+                            </li>
+                            <li has-func="335" data-ui-sref-active="active">
+                                <a data-ui-sref="app.intelligent.grainDetection.dewDetectionList">水分检测</a>
+                            </li>
+                            <li has-func="336" data-ui-sref-active="active">
+                                <a data-ui-sref="app.intelligent.grainDetection.insectPestDetectionList">虫害监测</a>
+                            </li>
+                            <li has-func="337" data-ui-sref-active="active">
+                                <a data-ui-sref="app.intelligent.grainDetection.warningThreshold">报警信息</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <!--熏蒸作业-->
+                    <li data-menu-collapse>
+                        <a has-func="221" href="#">
+                            <i class="fa fa-lg fa-fw fa-folder-open"></i>熏蒸信息
+                        </a>
+                        <ul>
+                            <li data-menu-collapse>
+                                <a has-func="244" href="#">
+                                    <i class="fa fa-lg fa-fw fa-folder-open"></i>熏蒸方案
+                                </a>
+                                <!--三级菜单开始-->
+                                <ul>
+                                    <li has-func="245" data-ui-sref-active="active">
+                                        <a data-ui-sref="app.intelligent.fumigation.fumigationPlanList">熏蒸方案申请</a>
+                                    </li>
+                                    <li has-func="246" data-ui-sref-active="active">
+                                        <a data-ui-sref="app.intelligent.fumigation.fumigationApproveList">熏蒸方案审批</a>
+                                    </li>
+                                    <li has-func="247" data-ui-sref-active="active">
+                                        <a data-ui-sref="app.intelligent.fumigation.pesticidePlanList">施药方案申请</a>
+                                    </li>
+                                    <li has-func="248" data-ui-sref-active="active">
+                                        <a data-ui-sref="app.intelligent.fumigation.pesticideApproveList">施药方案实施</a>
+                                    </li>
+                                    <li has-func="255" data-ui-sref-active="active">
+                                        <a data-ui-sref="app.intelligent.fumigation.fumigationList">熏蒸方案记录</a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li data-menu-collapse>
+                                <a has-func="249" href="#">
+                                    <i class="fa fa-lg fa-fw fa-folder-open"></i>熏蒸作业
+                                </a>
+                                <!--三级菜单开始-->
+                                <ul>
+                                    <li has-func="250" data-ui-sref-active="active">
+                                        <a data-ui-sref="app.intelligent.fumigation.fumHomeWorkProcess">熏蒸作业过程</a>
+                                    </li>
+                                    <li has-func="251" data-ui-sref-active="active">
+                                        <a data-ui-sref="app.intelligent.fumigation.aerationControl">熏蒸通风控制</a>
+                                    </li>
+                                    <li has-func="252" data-ui-sref-active="active">
+                                        <a data-ui-sref="app.intelligent.fumigation.fumHomeWorkAfter">熏蒸作业善后</a>
+                                    </li>
+                                    <li has-func="253" data-ui-sref-active="active">
+                                        <a data-ui-sref="app.intelligent.fumigation.fumHomeWorkSingle">熏蒸作业单</a>
+                                    </li>
+                                    <!-- <li has-func="254" data-ui-sref-active="active">
+                                         <a data-ui-sref="app.intelligent.fumigation.detectionList({type:'xz'})">能耗检测</a>
+                                     </li>-->
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                    <!--气体检测-->
+                    <li data-menu-collapse>
+                        <a has-func="222" href="#">
+                            <i class="fa fa-lg fa-fw fa-folder-open"></i>气体检测
+                        </a>
+                        <ul>
+                            <li has-func="338" data-ui-sref-active="active">
+                                <a data-ui-sref="app.intelligent.gasDetection.gasDetectionList">气体检测</a>
+                            </li>
+                            <li has-func="339" data-ui-sref-active="active">
+                                <a data-ui-sref="app.intelligent.gasDetection.recordList">气体检测记录</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <!--粮食数量监测-->
+                    <li data-menu-collapse>
+                        <a has-func="223" href="#">
+                            <i class="fa fa-lg fa-fw fa-folder-open"></i>粮食数量监测
+                        </a>
+                        <ul>
+                            <li has-func="340" data-ui-sref-active="active">
+                                <a data-ui-sref="app.intelligent.numberMonitor.monitorWarning">数量检测分析预警</a>
+                            </li>
+                            <li has-func="341" data-ui-sref-active="active">
+                                <a data-ui-sref="app.intelligent.numberMonitor.warningHistory">数量检测历史记录</a>
+                            </li>
+                            <!-- <li has-func="" data-ui-sref-active="active">
+                                 <a data-ui-sref="app.intelligent.numberMonitor.definitionTV">高清成像</a>
+                             </li>
+                             <li has-func="" data-ui-sref-active="active">
+                                 <a data-ui-sref="app.intelligent.numberMonitor.remoteMonitor">远程监控</a>
+                             </li>-->
+                        </ul>
+                    </li>
+                    <!--能耗监测-->
+                    <li data-menu-collapse>
+                        <a has-func="224" href="#">
+                            <i class="fa fa-lg fa-fw fa-folder-open"></i>能耗监测
+                        </a>
+                        <ul>
+                            <li data-menu-collapse>
+	                            <a has-func="342" href="#">
+	                                <i class="fa fa-lg fa-fw fa-folder-open"></i>能耗电表
+	                            </a>
+	                            <ul>
+	                                <li has-func="346" data-ui-sref-active="active">
+	                                    <a data-ui-sref="app.intelligent.energyMonitor.ammeterSetting">能耗电表设置</a>
+	                                </li>
+	                                <li has-func="347" data-ui-sref-active="active">
+	                                    <a data-ui-sref="app.intelligent.energyMonitor.meterQuery">能耗电表查询</a>
+	                                </li>
+	                            </ul>
+                            </li>
+                            <li has-func="343" data-ui-sref-active="active">
+                                <a data-ui-sref="app.intelligent.energyMonitor.detectionList({type:'all'})">能耗检测</a>
+                            </li>
+                            <li data-menu-collapse>
+	                            <a has-func="344" href="#">
+	                                <i class="fa fa-lg fa-fw fa-folder-open"></i>能耗分析
+	                            </a>
+	                            <ul>
+	                                <li has-func="348" data-ui-sref-active="active">
+	                                    <a data-ui-sref="app.intelligent.energyMonitor.trendList">能耗趋势</a>
+	                                </li>
+	                                <li has-func="349" data-ui-sref-active="active">
+	                                    <a data-ui-sref="app.intelligent.energyMonitor.timePointComparison">能耗时间点对比</a>
+	                                </li>
+	                                <li has-func="350" data-ui-sref-active="active">
+	                                    <a data-ui-sref="app.intelligent.energyMonitor.timeComparison">能耗时间段对比</a>
+	                                </li>
+	                            </ul>
+                            </li>
+                            <li data-menu-collapse>
+	                            <a has-func="345" href="#">
+	                                <i class="fa fa-lg fa-fw fa-folder-open"></i>能耗统计
+	                            </a>
+	                            <ul>
+	                                <li has-func="351" data-ui-sref-active="active">
+	                                    <a data-ui-sref="app.intelligent.energyMonitor.dailyConsumption">按时段统计能耗</a>
+	                                </li>
+	                                <!-- <li has-func="" data-ui-sref-active="active">
+	                                    <a data-ui-sref="app.intelligent.energyMonitor.taskConsumption">按作业统计能耗</a>
+	                                </li> -->
+	                            </ul>
+                            </li>
+                        </ul>
+                    </li>
+                    <!--统计报表-->
+                    <li data-menu-collapse>
+                        <a has-func="225" href="#">
+                            <i class="fa fa-lg fa-fw fa-folder-open"></i>统计报表
+                        </a>
+                        <ul>
+                            <li has-func="352" data-ui-sref-active="active">
+                                <a data-ui-sref="app.intelligent.statisticalReport.summaryReport">汇总报表</a>
+                            </li>
+                            <li has-func="353" data-ui-sref-active="active">
+                                <a data-ui-sref="app.intelligent.statisticalReport.detailsReport">详情报表</a>
+                            </li>
+                            <li has-func="354" data-ui-sref-active="active">
+                                <a data-ui-sref="app.intelligent.statisticalReport.submitReport">上报报表</a>
+                            </li>
+                        </ul>
+
+                    </li>
+
+                    <!-- 智能通风开始 -->
+                    <li data-menu-collapse>
+                        <a has-func="226" href="#">
+                            <i class="fa fa-lg fa-fw fa-folder-open"></i>智能通风
+                        </a>
+                        <ul>
+                            <li data-menu-collapse>
+	                            <a has-func="389" href="#">
+	                                <i class="fa fa-lg fa-fw fa-folder-open"></i>通风计划
+	                            </a>
+	                            <ul>
+	                                <li has-func="393" data-ui-sref-active="active">
+	                                    <a data-ui-sref="app.intelligent.aeration.plan.apply({approvalState:00})">通风计划申请</a>
+	                                </li>
+	                                <li has-func="394" data-ui-sref-active="active">
+	                                    <a data-ui-sref="app.intelligent.aeration.plan.audit">通风计划审批</a>
+	                                </li>
+	                                <li has-func="395" data-ui-sref-active="active">
+	                                    <a data-ui-sref="app.intelligent.aeration.plan.auditPass({approvalState:4})">已审批通风计划</a>
+	                                </li>
+	                            </ul>
+                            </li>
+                            <li data-menu-collapse>
+	                            <a has-func="390" href="#">
+	                                <i class="fa fa-lg fa-fw fa-folder-open"></i>通风控制
+	                            </a>
+	                            <ul>
+	
+	                                <li has-func="396" data-ui-sref-active="active">
+	                                    <a data-ui-sref="app.intelligent.aeration.control.aerationJob">通风作业</a>
+	                                </li>
+	                                <li has-func="397" data-ui-sref-active="active">
+	                                    <a data-ui-sref="app.intelligent.aeration.control.aerationControl({approvalState:4})">通风控制</a>
+	                                </li>
+	                                <li has-func="397" data-ui-sref-active="active">
+	                                    <a data-ui-sref="app.intelligent.aeration.control.operationRecord">通风记录</a>
+	                                </li>
+	                                <li has-func="398" data-ui-sref-active="active">
+	                                    <a data-ui-sref="app.intelligent.aeration.control.aerationRecord">设备通风记录</a>
+	                                </li>
+	                                <!-- <li has-func="" data-ui-sref-active="active">
+	                                    <a data-ui-sref="app.intelligent.aeration.control.detectionList({type:'tf'})">能耗检测</a>
+	                                </li>-->
+	                            </ul>
+                            </li>
+                            <li data-menu-collapse>
+	                            <a has-func="391" href="#">
+	                                <i class="fa fa-lg fa-fw fa-folder-open"></i>通风分析
+	                            </a>
+	                            <ul>
+	                                <li has-func="399" data-ui-sref-active="active">
+	                                    <a data-ui-sref="app.intelligent.aeration.analyze.compare">通风效果对比</a>
+	                                </li>
+	                            </ul>
+                            </li>
+
+                            <li has-func="392" data-ui-sref-active="active">
+                                <a data-ui-sref="app.intelligent.aeration.control.aerationParameter">通风参数值设置</a>
+                            </li>
+
+
+                            <!-- <li has-func="" data-ui-sref-active="active">
+                                <a data-ui-sref="app.intelligent.energyMonitor.detectionList">能耗检测</a>
+                            </li>
+                            <li has-func="" data-ui-sref-active="active">
+                                <a data-ui-sref="app.intelligent.energyMonitor.analyzeList">能耗分析</a>
+                            </li>
+                            <li has-func="" data-ui-sref-active="active">
+                                <a data-ui-sref="">能耗统计</a>
+                            </li> -->
+                        </ul>
+                    </li>
+                    <!-- 智能通风结束 -->
+
+                    <!--气象环境监测开始-->
+                    <li data-menu-collapse>
+                        <a has-func="227" href="#">
+                            <i class="fa fa-lg fa-fw fa-folder-open"></i>气象环境监测
+                        </a>
+                        <ul>
+                            <li has-func="355" data-ui-sref-active="active">
+                                <a data-ui-sref="app.intelligent.weather.weatherManager">气象管理</a>
+                            </li>
+                            <li has-func="356" data-ui-sref-active="active">
+                                <a data-ui-sref="app.intelligent.weather.weatherDetection">气象检测</a>
+                            </li>
+                            <li has-func="357" data-ui-sref-active="active">
+                                <a data-ui-sref="app.intelligent.weather.weatherDeviceManager">气象设备管理</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <!--气象环境监测结束-->
+                    <!--低温储粮-->
+                    <li data-menu-collapse>
+                        <a has-func="228" href="#">
+                            <i class="fa fa-lg fa-fw fa-folder-open"></i>低温储粮
+                        </a>
+                        <ul>
+                            <li has-func="358" data-ui-sref-active="active">
+                                <a data-ui-sref="app.intelligent.coldStorage.airConditionControl">空调控制</a>
+                            </li>
+                            <li has-func="359" data-ui-sref-active="active">
+                                <a data-ui-sref="app.intelligent.coldStorage.airConditionJobHistory">空调作业记录</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <!--内环流-->
+                    <!--  <li data-menu-collapse>
+                          <a has-func="229" href="#">
+                              <i class="fa fa-lg fa-fw fa-folder-open"></i>内环流
+                          </a>
+                          <ul>
+                              <li has-func="" data-ui-sref-active="active">
+                                  <a data-ui-sref="app.intelligent.insideCirculation.insideCirculationControl">内环流控制</a>
+                              </li>
+                              <li has-func="" data-ui-sref-active="active">
+                                  <a data-ui-sref="app.intelligent.insideCirculation.insideCirculationRecord">内环流记录</a>
+                              </li>
+                          </ul>
+                      </li>-->
+                    <!--气调管理-->
+                    <!-- <li data-menu-collapse>
+                         <a has-func="230" href="#">
+                             <i class="fa fa-lg fa-fw fa-folder-open"></i>气调管理
+                         </a>
+                         <ul>
+                             <li has-func="" data-ui-sref-active="active">
+                                 <a data-ui-sref="app.intelligent.controlledAtmosphere.control">气调控制</a>
+                             </li>
+                             <li has-func="" data-ui-sref-active="active">
+                                 <a data-ui-sref="app.intelligent.controlledAtmosphere.record">气调作业记录</a>
+                             </li>
+                             <li has-func="" data-ui-sref-active="active">
+                                 <a data-ui-sref="app.intelligent.controlledAtmosphere.nitrogenChargingControl">充氮控制</a>
+                             </li>
+                             <li has-func="" data-ui-sref-active="active">
+                                 <a data-ui-sref="app.intelligent.controlledAtmosphere.nitrogenChargingRecord">充氮作业记录</a>
+                             </li>
+                         </ul>
+                     </li>-->
+                    <!--智能检测开始-->
+                    <li data-menu-collapse>
+                        <a has-func="231" href="#">
+                            <i class="fa fa-lg fa-fw fa-folder-open"></i>智能监测
+                        </a>
+                        <ul>
+                            <li has-func="360" data-ui-sref-active="active">
+                                <a data-ui-sref="app.intelligent.intelligentDetection.grain({type:'0'})">粮情监测</a>
+                            </li>
+                            <li has-func="361" data-ui-sref-active="active">
+                                <a data-ui-sref="app.intelligent.intelligentDetection.insect({type:'1'})">虫害监测</a>
+                            </li>
+                            <li has-func="362" data-ui-sref-active="active">
+                                <a data-ui-sref="app.intelligent.intelligentDetection.gas({type:'2'})">气体监测</a>
+                            </li>
+                            <li has-func="363" data-ui-sref-active="active">
+                                <a data-ui-sref="app.intelligent.intelligentDetection.energy({type:'3'})">能耗监测</a>
+                            </li>
+                            <li has-func="364" data-ui-sref-active="active">
+                                <a data-ui-sref="app.intelligent.intelligentDetection.dew({type:'5'})">水分监测</a>
+                            </li>
+                            <li has-func="365" data-ui-sref-active="active">
+                                <a data-ui-sref="app.intelligent.intelligentDetection.meteorology({type:'6'})">气象监测</a>
+                            </li>
+                            <li has-func="366" data-ui-sref-active="active">
+                                <a data-ui-sref="app.intelligent.intelligentDetection.number({type:'4'})">数量监测</a>
+                            </li>
+                            <li has-func="367" data-ui-sref-active="active">
+                                <a data-ui-sref="app.intelligent.intelligentDetection.numberResult({type:'7'})">数量结果监测</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <!--智能检测结束-->
+                    <!--综合查询开始-->
+                    <li data-menu-collapse>
+                        <a has-func="232" href="#">
+                            <i class="fa fa-lg fa-fw fa-folder-open"></i>综合查询
+                        </a>
+                        <ul>
+                            <li has-func="368" data-ui-sref-active="active">
+                                <a data-ui-sref="app.intelligent.comprehensive.grain">测温记录</a>
+                            </li>
+                            <li has-func="369" data-ui-sref-active="active">
+                                <a data-ui-sref="app.intelligent.comprehensive.insect">害虫记录</a>
+                            </li>
+                            <li has-func="370" data-ui-sref-active="active">
+                                <a data-ui-sref="app.intelligent.comprehensive.gas">气体记录</a>
+                            </li>
+                            <li has-func="371" data-ui-sref-active="active">
+                                <a data-ui-sref="app.intelligent.comprehensive.energy({type:'all'})">能耗记录</a>
+                            </li>
+                            <li has-func="372" data-ui-sref-active="active">
+                                <a data-ui-sref="app.intelligent.comprehensive.warning">报警记录</a>
+                            </li>
+                            <li has-func="373" data-ui-sref-active="active">
+                                <a data-ui-sref="app.intelligent.comprehensive.device">设备操作记录</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <!--综合查询结束-->
+                    <!--基础数据-->
+                    <li data-menu-collapse>
+                        <a has-func="233" href="#">
+                            <i class="fa fa-lg fa-fw fa-folder-open"></i>基础数据
+                        </a>
+                        <ul>
+                            <!--暂时不用-->
+                            <!-- <li has-func="" data-ui-sref-active="active">
+                                 <a data-ui-sref="app.intelligent.basicData.basicWareHouseSet">仓房信息设置</a>
+                             </li>-->
+                            <li has-func="374" data-ui-sref-active="active">
+                                <a data-ui-sref="app.intelligent.basicData.basicTemperaturAalarmList">报警信息设置</a>
+                            </li> 
+	                        <li has-func="375" data-ui-sref-active="active">
+	                            <a data-ui-sref="app.intelligent.basicData.basicGrainSetList">粮油信息设置</a>
+	                        </li>
+                            <li data-menu-collapse>
+                                <a has-func="" href="#">
+                                    <a has-func="376" href="#">
+                                        <i class="fa fa-lg fa-fw fa-folder-open"></i>设备参数管理
+                                    </a>
+                                    <ul>
+                                        <li has-func="381" data-ui-sref-active="active">
+                                            <a data-ui-sref="app.intelligent.basicData.parameter.basicGasSet">气调设备设置</a>
+                                        </li>
+                                        <li has-func="382" data-ui-sref-active="active">
+                                            <a data-ui-sref="app.intelligent.basicData.parameter.basicNitrogenSet">氮气房参数设置</a>
+                                        </li>
+                                        <li has-func="383" data-ui-sref-active="active">
+                                            <a data-ui-sref="app.intelligent.basicData.parameter.quantityDetection">数量检测设置</a>
+                                        </li>
+                                        <li has-func="384" data-ui-sref-active="active">
+                                            <a data-ui-sref="app.intelligent.basicData.parameter.insectPestDetection">虫害检测设置</a>
+                                        </li>
+                                        <li has-func="385" data-ui-sref-active="active">
+                                            <a data-ui-sref="app.intelligent.basicData.parameter.qtDevinfo">气体液位设置</a>
+                                        </li>
+                                        <li has-func="386" data-ui-sref-active="active">
+                                            <a data-ui-sref="app.intelligent.basicData.parameter.dcsQtInfo">多通道气体液位设置</a>
+                                        </li>
+                                        <li has-func="387" data-ui-sref-active="active">
+                                            <a data-ui-sref="app.intelligent.basicData.parameter.ktinfo">空调设置</a>
+                                        </li>
+                                    </ul>
+                            </li>
+                            <!--<li has-func="" data-ui-sref-active="active">-->
+                            <!--<a data-ui-sref="app.intelligent.basicgraindistributionset">粮情传感器分布设置</a>-->
+                            <!--</li>-->
+                            <li has-func="377" data-ui-sref-active="active">
+                                <a data-ui-sref="app.intelligent.basicData.basicThresholdSetList">报警阀值设置</a>
+                            </li>
+                            <li has-func="378" data-ui-sref-active="active">
+                                <a data-ui-sref="app.intelligent.basicData.StationSet">通讯设置</a>
+                            </li>
+                            <li has-func="379" data-ui-sref-active="active">
+                                <a data-ui-sref="app.intelligent.basicData.stationType">站点类型</a>
+                            </li>
+                            <!--点位图规划-->
+                            <li data-menu-collapse>
+	                            <a has-func="380" href="#">
+	                                <i class="fa fa-fw fa-folder-open"></i>基本信息设置
+	                            </a>
+	                            <ul>
+	                                <li has-func="388">
+	                                    <a target="_blank" href="app/intelligent/index-supervise/views/grainSituation-index.html?type=2&id={{depotInfo.orgId}}&image={{depotInfo.birdsRemote}}">监测点位图配置</a>
+	                                </li>
+	                                <!--  <li has-func="">
+	                                      <a target="_blank" href="app/intelligent/index-supervise/views/grainSituation-index.html?type=1&id={{depotInfo.orgId}}&image={{depotInfo.birdsRemote}}">气体监测点位图配置</a>
+	                                  </li>
+	                                  <li has-func="">
+	                                      <a target="_blank" href="app/intelligent/index-supervise/views/grainSituation-index.html?type=3&id={{depotInfo.orgId}}&image={{depotInfo.birdsRemote}}">虫害监测点位图配置</a>
+	                                  </li>
+	                                  <li has-func="">
+	                                      <a target="_blank" href="app/intelligent/index-supervise/views/grainSituation-index.html?type=4&id={{depotInfo.orgId}}&image={{depotInfo.birdsRemote}}">报警监测点位图配置</a>
+	                                  </li>-->
+	                            </ul>
+                            </li>
+                            <!--点位图规划结束-->
+                        </ul>
+                    </li>
+                    <!--基础数据结束-->
+
+                </ul>
+            </li>
+
+            <li data-menu-collapse id="menu-20" ng-show="childSysId==20">
+                <a href="#" style="margin-left: 5px;">
+                    <i class="nav-icon"><img style="margin-bottom: -12px;" src="styles/img/home-1/nav-icon/lcgl.png" /></i>
+                    <span class="menu-item-parent">流程管理</span>
+                </a>
+                <ul>
+                    <li has-func="70" data-ui-sref-active="active">
+                        <a data-ui-sref="app.act">模型管理</a>
+                    </li>
+                    <li has-func="71" data-ui-sref-active="active">
+                        <a data-ui-sref="app.process.list">流程管理</a>
+                    </li>
+                    <li has-func="72" data-ui-sref-active="active">
+                        <a data-ui-sref="app.task.list">任务管理</a>
+                    </li>
+                    <li has-func="73" data-ui-sref-active="active">
+                        <a data-ui-sref="app.dynamicForm.list">动态表单</a>
+                    </li>
+                </ul>
+            </li>
+
+        </ul>
+
+        <!-- NOTE: This allows you to pull menu items from server -->
+        <!-- <ul data-smart-menu-items="/api/menu-items.json"></ul> -->
+    </nav>
+
+    <span class="minifyme" data-action="minifyMenu" minify-menu>
+    <i class="fa fa-arrow-circle-left hit"></i>
+  </span>
+
+</aside>
+

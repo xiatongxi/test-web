@@ -1,0 +1,79 @@
+<!-- MAIN CONTENT -->
+<div id="content">
+    <!-- widget grid -->
+    <section widget-grid id="widget-grid">
+
+
+        <div class="row">
+            <article class="col-sm-12">
+
+                <div jarvis-widget id="standard-datatable-widget" data-widget-color="darken" data-widget-editbutton="false">
+                    <header>
+                        <span class="widget-icon"> <i class="fa fa-table"></i> </span>
+                        <h2>报警接收人列表 </h2>
+                    </header>
+                    <div>
+                        <div class="widget-body no-padding">
+                        <div id="DataTables_Table_1_wrapper" class="dataTables_wrapper form-inline no-footer">
+							<div class="dt-toolbar">
+								<div class="col-xs-3 col-sm-1">
+									<a has-permission="428" class="btn btn-primary btn-sm" ui-sref="app.cameraSetting.alarmEdit"><i class="fa fa-plus"></i>&nbsp;新&nbsp;增</a>
+								</div>
+								<div class="col-xs-12 col-sm-8">
+									<div class="form-group">
+										<label> 接收角色:&emsp;
+											<input class="form-control input-sm" ng-model="alarm.alarmRole" placeholder=""> &emsp;
+										</label>
+										<a class="btn btn-default btn-sm" ng-click="loadAlarmData()">
+											<i class="fa fa-search"></i>&nbsp;查&nbsp;询
+										</a>
+									</div>
+								</div>
+								<!--<div class="col-xs-3 col-sm-1">-->
+									<!--&lt;!&ndash;<a has-permission="1" class="btn btn-primary btn-sm"&ndash;&gt;-->
+									<!--<a has-permission="428" class="btn btn-primary btn-sm"-->
+									   <!--ui-sref="app.cameraSetting.alarmEdit">-->
+										<!--<span class="fa fa-plus"></span>&nbsp;新&nbsp;增</a>-->
+								<!--</div>-->
+								<div class="col-sm-3 col-xs-6 hidden-xs">
+									<div class="dataTables_length">
+										<label>每页显示 <select ng-model="pageInfo.pageSize" ng-change="loadData()"
+															ng-options="num as num for num in [10,25,50,100]"
+															class="form-control input-sm"></select> 条
+										</label>
+									</div>
+								</div>
+							</div>
+
+						<table class="table table-striped table-bordered table-hover" width="100%">
+                        <thead>
+                        <tr>
+                            <th data-class="expand">接收人</th>
+                            <th data-class="expand">接收角色</th>
+                            <th data-class="expand">接收电话</th>
+                            <th data-class="expand">操作</th>
+                        </tr>
+                        </thead>
+
+                        <tbody>
+                        	<tr ng-repeat="alarm in pageInfo.list">
+								<td>{{alarm.alarmMan}}</td>
+								<td>{{alarm.alarmRole}}</td>
+                        		<td>{{alarm.alarmPhone}}</td>
+								<td>
+									<a has-permission="429" href-void ng-click="deleteAlarmPhone(alarm.id)"><i class="fa fa-trash-o"></i>删除</a>
+								</td>
+                        	</tr>
+                        </tbody>
+                        </table>
+						<div smart-include="app/layout/partials/page.tpl.html"></div>
+                    </div>
+                </div>
+					</div>
+				</div>
+            </article>
+        </div>
+
+    </section>
+
+</div>

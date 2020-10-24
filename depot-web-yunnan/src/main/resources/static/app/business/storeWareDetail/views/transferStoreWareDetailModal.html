@@ -1,0 +1,58 @@
+<div class="modal-content">
+    <div class="modal-header">
+        <button type="button" class="close" ng-click="cancel()">
+            &times;
+        </button>
+        <h4 class="modal-title" id="myModalLabel">明细详情</h4>
+    </div>
+    <div class="modal-body">
+        <form id="storeWareDetail-form" class="smart-form ng-pristine ng-valid" data-validator-option="validateOptions" novalidate="novalidate">
+			<div class="row" >
+				
+				<section class="col col-sm-4">
+					<label class="label">粮油品种<span style="color: red;">*</span></label> 
+		             <label class="select"> 
+		                   <select ng-model="storeWareDetail.grainKind"  ng-disabled="isnNotEdit"  
+                             ng-change="getGrainDetailKind(storeWareDetail.grainKind)" name="grainKind"
+		                      ng-options="enum.enumid as enum.enumname for enum in dicDataList[1061]" required>
+		                      <option value="">--请选择--</option>
+		                    </select>
+		             </label>
+				</section>
+				<section class="col col-sm-4">
+					<label class="label">明细品种<span style="color: red;">*</span></label> 
+		            <label class="select" id="grainDetailKind-label">
+                        <multi-select-tree 
+                            disabled-tree="isNotEdit"
+                            data-input-model="grainDetailKindTreeData" 
+                            data-output-model="storeWareDetail.grainDetailKind"
+                            data-default-label="请选择" name="grainDetailKind" 
+                            multi-select="false"
+                            select-only-leafs="true"
+                            data-callback="selectOnlyDetailKind(item, selectedItems)" required>
+                        </multi-select-tree>
+                          <em><span style="color: #D56161;margin-top:6px;padding:0 1px;font-style:normal;font-size:11px;
+                         line-height:15px;" id="grainDetailKind-error"></span></em>
+                    </label>
+				</section>
+				<section class="col col-sm-4">
+					<label class="label">数量<span style="color: red;">*</span></label> 
+		              <label class="input"> 
+                          <input class="form-control" type="text" ng-model="storeWareDetail.inCount" ng-readonly="isNotEdit"
+                           validNumber="true" name="count" required>
+                      </label>
+				</section>
+			</div>
+		</form>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-primary" ng-hide="isNotEdit" ng-click="save()">
+        	提交
+        </button>
+        <button type="button" class="btn btn-default"  ng-click="cancel()">
+        	取消
+        </button>
+    </div>
+</div>
+
+

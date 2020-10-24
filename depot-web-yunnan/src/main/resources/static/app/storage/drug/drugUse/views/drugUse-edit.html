@@ -1,0 +1,172 @@
+<!-- MAIN CONTENT -->
+<div id="content">
+    <section id="widget-grid" widget-grid>
+        <div class="row">
+            <article class="col-sm-12 col-md-12 col-lg-12">
+                <div jarvis-widget id="form-grid-widget"
+                    data-widget-colorbutton="false" data-widget-editbutton="false"
+                    data-widget-custombutton="false">
+                    <!-- widget div-->
+                    <div>
+                        <!-- widget content -->
+                        <div class="widget-body no-padding">
+                            <form id="drugUse-form" class="smart-form ng-pristine ng-valid" data-validator-option="validateOptions" novalidate="novalidate">
+                                <header>
+									<a href-void class="btn btn-default btn-xs" ng-click="retList()">
+										<i class="fa fa-angle-left"></i>&nbsp;返回&nbsp;
+									</a>
+									&nbsp;<strong>药剂领用登记详情</strong>
+									<span class="pull-right font-xs">带*的部分必须填写</span>
+								</header>
+                                <header><h3><strong>药剂基本信息</strong></h3></header>
+                                <fieldset>
+                                    <div class="row">
+                                        <section class="col col-4">
+                                            <label class="label txt-bg-red">领用申请编号<span style="color: red;">*</span></label>
+                                            <label class="input">
+                                                <i class="icon-append fa fa-times" ng-click="removePlan()"></i>
+                                                <input class="form-control" type="text" ng-model="drugUse.applyNumber"
+                                                       ng-readonly="true" ng-disabled="isNotEdit"
+                                                       ng-click="getPlan()" placeholder="请选择申请"
+                                                       minlength="2" maxlength="50" required>
+                                            </label>
+                                        </section>
+                                        <section class="col col-4">
+                                            <label class="label">药剂种类<span style="color: red;">*</span></label>
+                                            <label class="select"> 
+                                            	<select ng-model="drugUse.drugKind" ng-readonly="true" ng-disabled="true" name="drugKind"
+                                             	ng-options="enum.enumid as enum.enumname for enum in dicDataList[5498]" required >
+                                             		<option value="">--请选择--</option><i></i>
+                                             	</select><i></i>
+                                         	</label>
+                                         </section>
+                                         <section class="col col-4">
+                                            <label class="label">药剂名称<span style="color: red;">*</span></label> 
+                                            <label class="select"> 
+                                            	<select ng-model="drugUse.drugName" ng-readonly="true" ng-disabled="true" name="drugName"
+                                             	ng-options="enum.enumid as enum.enumname for enum in dicDataList[drugUse.drugKind]" 
+                                             	ng-change="getShelfList()" required >
+                                             		<option value="">--请选择--</option><i></i>
+                                             	</select><i></i>
+                                         	</label>
+                                        </section>
+                                    </div>
+                                </fieldset>
+                                
+                                <header><h3><strong>领用明细</strong></h3></header>
+                                <fieldset>
+                                	<table class="table table-striped table-bordered table-hover" width="100%">
+				                        <thead>
+					                        <tr>
+					                        	<th class="col-sm-2"> 药剂编号</th>
+					                        	<th class="col-sm-1"> 药剂形态</th>
+					                        	<th class="col-sm-1"> 药剂包装</th>
+					                            <th class="col-sm-2"> 规格型号</th>
+					                            <th class="col-sm-2"> 生产厂家</th>
+					                            <th class="col-sm-1"> 货位号</th>
+					                            <th class="col-sm-1"> 库存数量</th>
+					                            <th class="col-sm-1"> 申请数量</th>
+					                            <th class="col-sm-1"> 领用数量</th>
+					                        </tr>
+				                        </thead>
+				                        
+				                        <tbody>
+				                            <tr ng-repeat="detailInfo in addedDetail">
+				                                <td>{{ detailInfo.drugNumber }}</td>
+				                                <td>{{ dicData[detailInfo.drugType] }}</td>
+				                                <td>{{ dicData[detailInfo.drugPacking] }}</td>
+				                                <td>{{ detailInfo.drugSpecification }}</td>
+				                                <td>{{ detailInfo.manufacturer }}</td>
+                                                <td>{{ shelfMap[detailInfo.shelfId].shelfName }}</td><!--货架号-->
+                                                <td>{{ detailInfo.shelfAmount}}</td>
+				                                <td>{{ detailInfo.useCount }}</td>
+				                                <td>
+				                                	<input class="form-control" type="text" ng-model="detailInfo.useCount" ng-readonly="isNotEdit" ng-disabled="true" name="useCount{{$index}}"
+				                                	ng-change="sumUseCount()">
+                                            	</td>
+				                            </tr>
+				                        </tbody>
+			                        </table>
+                                </fieldset>
+                                
+                                <header><h3><strong>领用详情</strong></h3></header>
+                                <fieldset>
+			                        <div class="row">
+                                        <section class="col col-4">
+                                            <label class="label">领用总数量</label> 
+                                            <label class="input"> 
+                                                <input class="form-control" type="text" ng-model="drugUse.sumCount" name="sumCount" ng-readonly="true" ng-disabled="true" placeholder="通过填写明细数量获取"
+                                                required>
+                                            </label>
+                                        </section>
+                                        <section class="col col-4">
+                                            <label class="label">记账人</label>
+                                            <label class="input">
+                                                <input class="form-control" type="text" ng-model="drugUse.user" name="user" ng-readonly="true" ng-disabled="true">
+                                            </label>
+                                        </section>
+                                    </div>
+                               		<section>
+                               		    <label class="label">领用备注</label>
+                                           <label class="textarea">
+                                               <textarea class="form-control" ng-model="drugUse.remark" name="remark" ng-readonly="isNotEdit" ng-disabled="isNotEdit" rows="2" data-bv-field="review"></textarea>
+                                           </label>
+                                    </section>
+                              		<div class="row">
+                                        <section class="col col-4">
+                                            <label class="label">领用人</label> 
+                                            <label class="input"> 
+                                                <input class="form-control" type="text" ng-model="userInfoData[drugUse.creater]" name="creater" ng-disabled="isNotEdit">
+                                            </label>
+                                        </section>
+                                        <section class="col col-4">
+                                            <label class="label">领用日期</label> 
+                                            <label class="input"> 
+                                                <input class="form-control" type="text" ng-model="drugUse.useDate" name="useDate" ng-readonly="true" ng-disabled="true">
+                                            </label>
+                                        </section>
+                                        <section class="col col-4">
+                                            <label class="label">领用部门</label> 
+                                            <label class="input">
+                                                <input class="form-control" type="text" ng-model="drugUse.useDepartment" name="useDepartment" ng-disabled="isNotEdit">
+                                            </label>
+                                        </section>
+                                    </div>
+                                    <div class="row">
+                                    </div>
+                                </fieldset>
+                                
+                                <header ng-hide="!isNotEdit"><h3><strong>创建信息</strong></h3></header>
+                                <fieldset>
+                                    <div class="row" ng-hide="!isNotEdit">
+                                        <section class="col col-4">
+                                            <label class="label">登记人</label> 
+                                            <label class="input">
+                                            	{{ userInfoData[drugUse.creater] }}
+                                            </label>
+                                        </section>
+                                        <section class="col col-4">
+                                            <label class="label">登记时间</label> 
+                                            <label class="input">
+                                            	{{ drugUse.createTime }}
+                                            </label>
+                                        </section>
+                                    </div>
+                                </fieldset>
+                                
+                                <div><!--class="form-actions"-->
+                                    <footer class="text-align-center">
+                                        <button type="button" class="btn btn-default" ng-click="retList()">取消</button>
+                                        <button type="button" class="btn btn-primary" ng-hide="isNotEdit" ng-click="save()">保存</button>
+                                    </footer>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </article>
+        </div>
+    </section>
+</div>
+
+

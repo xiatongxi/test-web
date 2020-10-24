@@ -1,0 +1,117 @@
+<!-- MAIN CONTENT -->
+<div id="content">
+    <!-- widget grid -->
+    <section widget-grid id="widget-grid">
+        <div class="row">
+            <article class="col-sm-12">
+
+                <div jarvis-widget id="standard-datatable-widget" data-widget-color="darken" data-widget-editbutton="false">
+                    <header>
+                        <span class="widget-icon"> <i class="fa fa-table"></i> </span>
+                        <h2>设备报废列表 </h2>
+                    </header>
+                    <div>
+                        <div class="widget-body no-padding">
+                        <div id="DataTables_Table_1_wrapper" class="dataTables_wrapper form-inline no-footer">
+							<div class="dt-toolbar">
+								<div class="col-xs-12 col-sm-10">
+									<div class="form-group">
+										<!-- <label> 类别:&emsp;
+											<select ng-model="search.deviceTypeId" class="form-control input-sm"
+													ng-options="enum.enumid as enum.enumname for enum in dicDataList[5473]">
+												<option value="">请选择</option>
+											</select>
+										</label> -->
+										<!-- <label> 机械及器材名称:&emsp;
+											<select ng-model="search.first" class="form-control input-sm"
+													ng-options="enum.enumid as enum.enumname for enum in dicDataList[search.deviceTypeId]"
+													ng-change="loadWare()">
+												<option value="">请选择</option>
+											</select>
+											<select ng-model="search.second" class="form-control input-sm" ng-show="search.first!=null"
+													ng-options="enum.enumid as enum.enumname for enum in dicDataList[search.first]"
+													ng-change="loadWare()">
+												<option value="">请选择</option>
+											</select>
+											<select ng-model="search.third" class="form-control input-sm" ng-show="search.second!=null"
+													ng-options="enum.enumid as enum.enumname for enum in dicDataList[search.second]"
+													ng-change="loadWare()">
+												<option value="">请选择</option>
+											</select>
+											<select ng-model="search.deviceName" class="form-control input-sm" ng-show="search.third!=null"
+													ng-options="enum.enumid as enum.enumname for enum in dicDataList[search.third]"
+													ng-change="loadWare()">
+												<option value="">请选择</option>
+											</select>
+										</label> -->
+										<!-- <a class="btn btn-default btn-sm" ng-click="loadData()">
+											<i class="fa fa-search"></i>&nbsp;查&nbsp;询</a> -->
+									</div>
+								</div>
+								<!-- <div class="col-xs-2 col-sm-1">
+									<a href-void class="btn btn-primary btn-sm" ng-click="moreOut()"><i class="fa fa-times-circle-o"></i>&nbsp;批&nbsp;量&nbsp;报&nbsp;废</a>
+								</div> -->
+								<div class="col-sm-2 col-xs-6 hidden-xs">
+									<div class="dataTables_length">
+										<label>每页显示 <select ng-model="pageInfo.pageSize" ng-change="loadData()"
+															ng-options="num as num for num in [10,25,50,100]"
+															class="form-control input-sm"></select> 条
+										</label>
+									</div>
+								</div>
+							</div>
+
+						<table class="table table-striped table-bordered table-hover" width="100%">
+                        <thead>
+                        <tr>
+                            <th data-hide="phone">序号</th>
+							<th data-class="expand">设备名称</th>
+							<th data-class="expand">规格型号</th>
+                            <th data-class="expand">设备编号</th>
+                            <th data-hide="phone">生产日期</th>
+                            <th data-hide="phone,tablet">入库日期</th>
+                            <th data-hide="phone,tablet">设备状态</th>
+                            <th data-hide="phone,tablet">设备使用年限(年)</th>
+                            <th data-hide="phone,tablet">生产厂家</th>
+                            <th data-hide="phone,tablet">单价</th>
+                            <!-- <th data-hide="phone,tablet">存放地点</th> -->
+                            <th data-hide="phone,tablet"> 操作</th>
+                        </tr>
+                        </thead>
+                        
+                        <tbody>
+                        	<tr ng-repeat="device in pageInfo.list">
+								<!-- <th align="center">
+								<input type="checkbox" ng-if="device.status ==0" disabled="disabled" name="deviceOutIds" ng-checked="isSelected(device.id)" ng-click="updateSelection($event,device.id)"><input type="checkbox" ng-if="device.status !=0" name="deviceOutIds" ng-checked="isSelected(device.id)" ng-click="updateSelection($event,device.id)">
+								{{$index + 1 + (pageInfo.pageNum-1) * pageInfo.pageSize}}</th> -->
+								<th align="center">{{$index + 1 + (pageInfo.pageNum-1) * pageInfo.pageSize}}</th>
+								<td>{{dicData[device.deviceName]}}</td>
+								<td>{{device.model}}</td>
+								<td>{{device.number}}</td>
+								<td>{{device.produceTime | date :'yyyy-MM-dd'}}</td>
+								<td>{{device.inputTime | date :'yyyy-MM-dd'}}</td>
+								<td>{{device.status==1?'报废':'正常'}}</td>
+								<td>{{device.serviceLife}}</td>
+								<td>{{device.producer}}</td>
+								<td>{{device.devicePrice}}</td>
+								<!-- <td>{{device.positionName}}</td> -->
+								<td>
+									<span ng-show="{{device.status != 1}}">
+									  <a has-permission="516" href-void ng-click="showOut(device.id)"><i class="fa fa-times-circle"></i>报废</a>
+                        			</span>
+                        		</td>
+                        	
+                        	</tr>
+                        </tbody>
+
+                        </table>
+							<div smart-include="app/layout/partials/page.tpl.html"></div>
+						</div>
+                    	</div>
+                    </div>
+                </div>
+            </article>
+        </div>
+    </section>
+</div>
+

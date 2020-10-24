@@ -1,0 +1,45 @@
+<!-- MAIN CONTENT -->
+<div id="content">
+    <!-- widget grid -->
+    <section widget-grid id="widget-grid">
+        <div class="row">
+            <article class="col-sm-12">
+                <div jarvis-widget id="standard-datatable-widget" data-widget-color="darken" data-widget-editbutton="false">
+                    <header>
+                        <span class="widget-icon"> <i class="fa fa-table"></i> </span>
+                        <h2>气体检测分布图</h2>
+                    </header>
+                    <div>
+                        <div class="widget-body no-padding">
+                            <div id="DataTables_Table_1_wrapper" class="dataTables_wrapper form-inline no-footer">
+                                <div class="dt-toolbar">
+                                    <div class="col-xs-12 col-sm-10">
+                                        <div class="form-group">
+                                            <label>
+                                                <a class="btn btn-primary btn-sm" ng-click="retList()"> <i class="fa fa-reply"></i>返&nbsp;回</a>&nbsp;
+                                            </label>&emsp;
+                                            <label> 仓房名称:&emsp;
+                                                <select ng-model="search.vCfCode"
+                                                        ng-options="store.storehouseCode as store.storehouseName for store in storelist"
+                                                        ng-disabled="isNotEdit" class="form-control">
+                                                    <option value="">--请选择--</option>
+                                                </select>&emsp;
+                                            </label>
+                                            <label>检查日期：<input style="width: 100px;" class="form-control" type="text" ng-model="search.startTime" name="startTime" data-smart-datepicker>
+                                                --&nbsp;<input style="width: 100px;" class="form-control" type="text" ng-model="search.endTime" name="endTime" data-smart-datepicker>
+                                                <a class="btn btn-default btn-sm" ng-click="loadData()"> <i class="fa fa-search"></i>&nbsp;查&nbsp;询</a>
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-12 col-sm-9 picture-mar1 mar-top2" style="height: 400px"
+                                     home-module id="showChartsGasDetection">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </article>
+        </div>
+    </section>
+</div>

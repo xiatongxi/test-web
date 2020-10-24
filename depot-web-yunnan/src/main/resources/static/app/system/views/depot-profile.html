@@ -1,0 +1,126 @@
+<!-- MAIN CONTENT -->
+<div id="content">
+
+    <!-- widget grid -->
+    <section id="widget-grid" widget-grid>
+
+        <!-- START ROW -->
+        <div class="row">
+
+            <!-- NEW COL START -->
+            <article class="col-sm-12 col-md-12 col-lg-12">
+
+                <!-- Widget ID (each widget will need unique ID)-->
+                <div jarvis-widget id="form-grid-widget"
+                     data-widget-colorbutton="false" data-widget-editbutton="false"
+                     data-widget-custombutton="false">
+
+                    <!-- widget div-->
+                    <div>
+
+                        <!-- widget content -->
+                        <section class="widget-body no-padding">
+                            <form id="org-form" class="smart-form ng-pristine ng-valid" data-validator-option="validateOptions" novalidate="novalidate">
+
+                                <header>
+                                    <a href-void class="btn btn-default btn-xs" ng-click="back()">
+                                        <i class="fa fa-angle-left"></i>&nbsp;返回&nbsp;
+                                    </a>
+                                    &nbsp;粮库图片
+                                </header>
+                                <fieldset>
+
+                                    <div class="col-md-12" style="margin: -10px 10px 0px 0px">
+                                        <div><input type="file" nv-file-select="" uploader="uploader" multiple /></div>
+                                        <p>文件数: {{ uploader.queue.length }}</p>
+
+                                        <table class="table">
+                                            <thead>
+                                            <tr>
+                                                <th width="40%">文件名</th>
+                                                <th ng-show="uploader.isHTML5">大小</th>
+                                                <th ng-show="uploader.isHTML5">进度</th>
+                                                <th>状态</th>
+                                                <th>操作</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            <tr ng-repeat="item in uploader.queue">
+                                                <td>
+                                                    <strong>{{ item.file.name }}</strong>
+                                                    <!-- Image preview -->
+                                                    <!--auto height-->
+                                                    <div ng-src="item.imgUrl"></div>
+                                                    <!--auto width-->
+                                                    <!--<div ng-show="uploader.isHTML5" ng-thumb="{ file: item._file, height: 100 }"></div>-->
+                                                    <!--fixed width and height -->
+                                                    <!--<div ng-thumb="{ file: item.file, width: 100, height: 100 }"></div>-->
+                                                </td>
+                                                <td ng-show="uploader.isHTML5" nowrap>{{ item.file.size/1024/1024|number:2 }} MB</td>
+                                                <td ng-show="uploader.isHTML5">
+                                                    <div class="progress" style="margin-bottom: 0;">
+                                                        <div class="progress-bar" role="progressbar" ng-style="{ 'width': item.progress + '%' }">{{item.progress}}%</div>
+                                                    </div>
+                                                </td>
+                                                <td class="text-center">
+                                                    <span ng-show="item.isSuccess"><i class="glyphicon glyphicon-ok"></i></span>
+                                                    <span ng-show="item.isCancel"><i class="glyphicon glyphicon-ban-circle"></i></span>
+                                                    <span ng-show="item.isError"><i class="glyphicon glyphicon-remove"></i></span>
+                                                </td>
+                                                <td nowrap>
+                                                    <button type="button" class="btn btn-success btn-xs" ng-click="item.upload()" ng-disabled="item.isReady || item.isUploading || item.isSuccess">
+                                                        <span class="glyphicon glyphicon-upload"></span> 上传
+                                                    </button>
+                                                    <button type="button" class="btn btn-warning btn-xs" ng-click="item.cancel()" ng-disabled="!item.isUploading">
+                                                        <span class="glyphicon glyphicon-ban-circle"></span> 取消
+                                                    </button>
+                                                    <button type="button" class="btn btn-danger btn-xs" ng-click="item.remove()">
+                                                        <span class="glyphicon glyphicon-trash"></span> 删除
+                                                    </button>
+                                                </td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+
+                                        <div>
+                                            <div>
+                                                总进度:
+                                                <div class="progress" style="margin:10px 0px">
+                                                    <div class="progress-bar" role="progressbar" ng-style="{ 'width': uploader.progress + '%' }">{{uploader.progress}}%</div>
+                                                </div>
+                                            </div>
+                                            <button type="button" class="btn btn-success btn-sm" ng-click="uploader.uploadAll()" ng-disabled="!uploader.getNotUploadedItems().length">
+                                                <span class="glyphicon glyphicon-upload"></span> 全部上传
+                                            </button>
+                                            <button type="button" class="btn btn-warning btn-sm" ng-click="uploader.cancelAll()" ng-disabled="!uploader.isUploading">
+                                                <span class="glyphicon glyphicon-ban-circle"></span> 全部取消
+                                            </button>
+                                            <button type="button" class="btn btn-danger btn-sm" ng-click="uploader.clearQueue()" ng-disabled="!uploader.queue.length">
+                                                <span class="glyphicon glyphicon-trash"></span> 全部删除
+                                            </button>
+                                        </div>
+
+                                    </div>
+                                </fieldset>
+                                <header>
+                                    粮库简介
+                                </header>
+                                <fieldset>
+                                    <section>
+                                        <textarea style="width:100%;height: 200px;" name="ckeditor" ng-model="briefIntroduction">
+                                        </textarea>
+                                    </section>
+                                </fieldset>
+
+                                <footer class="text-align-center">
+                                    <button type="button" class="btn btn-primary" ng-click="save()">提交</button>
+                                    <button type="button" class="btn btn-default" ng-click="back()">取消</button>
+                                </footer>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </article>
+        </div>
+    </section>
+</div>

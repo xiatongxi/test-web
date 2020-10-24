@@ -1,0 +1,165 @@
+<!-- MAIN CONTENT -->
+<div id="content">
+	<!-- widget grid -->
+	<section widget-grid id="widget-grid">
+
+
+		<div class="row">
+			<article class="col-sm-12">
+
+				<div jarvis-widget id="standard-datatable-widget"
+					data-widget-color="darken" data-widget-editbutton="false">
+					<header>
+						<span class="widget-icon"> <i class="fa fa-table"></i>
+						</span>
+						<h2>通风记录列表</h2>
+					</header>
+					<div>
+						<div class="widget-body no-padding">
+							<div id="DataTables_Table_1_wrapper"
+								class="dataTables_wrapper form-inline no-footer">
+								<div class="dt-toolbar">
+									<div class="col-xs-12 col-sm-9">
+										<div class="form-group">
+											<label>
+												仓房名称：
+												<select ng-model="aerationTaskRecord.vCfCode"
+													ng-options="store.storehouseCode as store.storehouseName for store in storelist"
+													class="form-control input-sm">
+														<option value="">--请选择--</option>
+												</select>
+											</label>
+											<label>
+												设备类型：
+												<select type="search" class="form-control input-sm" ng-model="aerationTaskRecord.vDevKindCode"
+                                                        ><!--ng-options=""-->
+                                                    <option value="">--请选择--</option>
+                                                    <option value="自然通风窗">自然通风窗</option>
+                                                    <option value="轴流风机窗">轴流风机窗</option>
+                                                    <option value="轴流风机">轴流风机</option>
+                                                    <option value="底部通风口">底部通风口</option>
+                                                    <option value="全部通风窗">全部通风窗</option>
+                                                    <option value="全部轴流风机窗">全部轴流风机窗</option>
+                                                    <option value="混流风机">混流风机</option>
+                                                </select>&thinsp;
+												
+											</label>
+											<a class="btn btn-default btn-sm" ng-click="loadData()">
+												<i class="fa fa-search"></i>&nbsp;查&nbsp;询
+											</a>
+										</div>
+									</div>
+									<div class="col-sm-3 col-xs-6 hidden-xs">
+										<div class="dataTables_length">
+											<label>
+											每页显示 <select ng-change="loadData(pageInfo.pageNum=1)"
+													ng-options="num as num for num in [1,10,25,50,100]"
+													ng-model="pageInfo.pageSize" class="form-control input-sm">
+											</select> 条
+											</label>
+										</div>
+									</div>
+								</div>
+
+								<table class="table table-striped table-bordered table-hover"
+									width="100%">
+									<thead>
+										<tr>
+											<th data-class="expand">序号</th>
+											<th data-class="expand">仓房名称</th>
+											<th data-class="expand">设备名称</th>
+											<th data-class="expand">设备类型</th>
+											<th data-class="expand">操作</th>
+											<!-- <th data-hide="expand">操作人</th> -->
+											<th data-hide="expand">操作时间</th>
+										</tr>
+									</thead>
+
+									<tbody>
+										<tr ng-repeat="aerationRecord in pageInfo.list">
+											<td>{{$index + 1}}</td>
+											<td>{{storeHouseCodeObj[aerationRecord.vCfCode].storehouseName}}</td>
+											<td>{{aerationRecord.vDevName}}</td>
+											<td>
+												 <p ng-if="aerationRecord.vDeviceCode==01">通风窗</p>
+												 <p ng-if="aerationRecord.vDeviceCode==02">轴流窗</p>
+												 <p ng-if="aerationRecord.vDeviceCode==03">轴流风机</p>
+												 <p ng-if="aerationRecord.vDeviceCode==04">通风口</p>
+												 <p ng-if="aerationRecord.vDeviceCode==05">环流风机</p>
+												 <p ng-if="aerationRecord.vDeviceCode==06">离心风机</p>
+												 <p ng-if="aerationRecord.vDeviceCode==07">混流风机</p>
+											</td>
+											<td>
+												 <p ng-if="aerationRecord.vState==1">打开</p>
+												 <p ng-if="aerationRecord.vState==0">关闭</p>
+											</td>
+											<!-- <td>{{aerationRecord.vUpdatePerson}}</td> -->
+											<td>{{aerationRecord.vUpdateTime | date :'yyyy-MM-dd HH:mm:ss'}}</td>
+										</tr>
+									</tbody>
+
+								</table>
+								<div smart-include="app/layout/partials/page.tpl.html"></div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</article>
+		</div>
+
+	</section>
+
+</div>
+
+
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog"
+	aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal"
+					aria-hidden="true">&times;</button>
+				<h4 class="modal-title" id="myModalLabel">计划</h4>
+			</div>
+			<div class="modal-body">
+
+<!-- 				<div smart-include="app/basic/storehouse/views/Storehouse-edit.html"></div> -->
+
+			</div>
+			<div class="modal-footer">
+				<button ng-click="save()" type="button" class="btn btn-primary">提交</button>
+				<button type="button" class="btn btn-default" data-dismiss="modal">
+					取消</button>
+			</div>
+		</div>
+		<!-- /.modal-content -->
+	</div>
+	<!-- /.modal-dialog -->
+</div>
+<!-- /.modal -->
+
+
+<!-- UserList -->
+<div class="modal fade" id="myUserList" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                    &times;
+                </button>
+                <h4 class="modal-title" id="myModalLabel">选择审批人</h4>
+            </div>
+            <div class="modal-body">
+	         	<select class="form-control" ng-model="assignment.assignee" ng-options="user.userId as user.username for user in userList">
+	         		<option value="">-- 请选择 --</option>
+	         	</select>
+
+            </div>
+            <div class="modal-footer">
+                <button ng-click="submit(assignment.assignee)" type="button" class="btn btn-primary">提交</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">取消 </button>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,131 @@
+*{
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+.swiper{
+	position: relative;
+	width: 100%;
+	box-sizing: border-box;
+}
+.wrapper{
+width: 100%;
+height: 100%;
+position: relative;
+}
+.wrapper .main{
+	position: relative;
+	width: 100%;
+	height: 155px;
+	/* overflow: hidden; */
+}
+.wrapper .main div{
+	position: absolute;
+	top: 28px;
+	left: 1190px;
+	width: 530px;
+	height: 100px;	
+}
+.wrapper .main a {
+	position: absolute;
+	display: block;
+	height: 100%;
+	width: 100%;
+}
+.wrapper .main a img{
+	position: absolute;
+	width: 100%;
+	z-index: 1;
+}
+.wrapper .main a .over{
+	position: absolute;
+	display: block;
+	width: 55%;
+	/* height: 100%; */
+	z-index: 2;
+	background-color: black;
+	opacity: 0.3;
+}
+.btn{
+	width: 100%;
+	height: 50px;
+}
+.wrapper .btn ul{
+	position: absolute;
+	left: 46%;
+	/* margin-top: 10px; */
+	margin-left: -65px;
+}
+.wrapper .btn ul li{
+    width: 25px;
+	height: 25px;
+	line-height: 25px;
+    border-radius: 50%;
+	float: left;
+	margin-right: 50px;
+	text-align: center;
+}
+.dashLine{
+	position: absolute;
+    left: 284px;
+    top: 169px;
+    width: 38px;
+    height: 2px;
+    border-top: 1px dashed #333;
+}
+.dashLine02{
+	position: absolute;
+    left: 361px;
+    top: 169px;
+    width: 38px;
+    height: 2px;
+    border-top: 1px dashed #333;
+}
+.one{
+	border: 1px solid #c4b34d;
+	color:#c4b34d;	
+}
+.two{
+	border: 1px solid #4d8be0;
+    color:#4d8be0;	
+
+}
+.three{
+	border: 1px solid #81af5b;
+	color:#81af5b;	
+}
+.one.move{
+	background-color: #c4b34d;
+	color:#fff;
+}
+.two.move{
+	background-color: #4d8be0;
+	color:#fff;
+}
+.three.move{
+	background-color:  #81af5b;
+	color:#fff;
+}
+.wrapper .change{
+	top: 135px;
+	height: 40px;
+	width: 30px;
+	position: absolute;
+	z-index: 4;
+	opacity: 0.7;
+	line-height: 40px;
+	background-color: gray;
+	text-align: center;
+	color: #fff;
+}
+.wrapper .change:hover{
+	opacity: 0.9;
+	cursor: pointer;
+}
+.wrapper .left{
+	left: 10px;
+}
+.wrapper .right{
+	right: 10px;
+}
+

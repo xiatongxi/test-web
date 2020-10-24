@@ -1,0 +1,109 @@
+<!-- MAIN CONTENT -->
+<div style="margin-bottom:140px" id="content">
+    <!-- widget grid -->
+    <section id="widget-grid" widget-grid>
+        <!-- START ROW -->
+        <div class="row">
+            <!-- NEW COL START -->
+            <article class="col-sm-12 col-md-12 col-lg-12">
+                <!-- Widget ID (each widget will need unique ID)-->
+                <div jarvis-widget id="form-grid-widget"
+                    data-widget-colorbutton="false" data-widget-editbutton="false"
+                    data-widget-custombutton="false">
+                    <!-- widget div-->
+                    <div>
+                        <!-- widget content -->
+                        <div class="widget-body no-padding">
+                            <form id="plan-form" class="smart-form ng-pristine ng-valid" data-validator-option="validateOptions" novalidate="novalidate">
+                                <header>
+                                    <a href-void class="btn btn-default btn-xs" ng-click="retList()">
+                                        <i class="fa fa-angle-left"></i>&nbsp;返回&nbsp;
+                                    </a>
+                                    &nbsp;<strong>结果详情</strong>
+                                </header>
+
+                                <fieldset>
+                                    <div class="row">
+                                        <section class="col col-5">
+                                            <img src="{{resultEdit.img}}" data-smart-jcrop="" data-selection="apiDemoSelection" data-options="apiDemoOptions" alt="[Jcrop Example]" class="pull-left ng-isolate-scope" style="display: block; visibility: visible; width: 300px; height: 400px;">
+                                        </section>
+
+                                        <section class="col col-3">
+                                            <section>
+                                                <label class="label">图像模糊：{{resultEdit.blur}}</label>
+                                            </section>
+
+                                            <section>
+                                                <label class="label">偏色异常：{{resultEdit.chroma}}</label>
+                                            </section>
+
+                                            <section>
+                                                <label class="label">画面冻结：{{resultEdit.freeze}}</label>
+                                            </section>
+
+                                            <section>
+                                                <label class="label">场景变更：{{resultEdit.scene}}</label>
+                                            </section>
+
+                                            <section>
+                                                <label class="label">信号丢失：{{resultEdit.signals}}</label>
+                                            </section>
+
+                                            <section>
+                                                <label class="label">云台失控：{{resultEdit.ptz}}</label>
+                                            </section>
+
+                                            <section>
+                                                <label class="label">对比度：{{resultEdit.contrast}}</label>
+                                            </section>
+
+                                            <section>
+                                                <label class="label">图像过亮：{{resultEdit.bright}}</label>
+                                            </section>
+
+                                        </section>
+
+                                        <section class="col col-3">
+
+                                            <section>
+                                                <label class="label">图像过暗：{{resultEdit.dark}}</label>
+                                            </section>
+
+                                            <section>
+                                                <label class="label">黑白图像：{{resultEdit.mono}}</label>
+                                            </section>
+
+                                            <section>
+                                                <label class="label">噪音干扰：{{resultEdit.noise}}</label>
+                                            </section>
+
+                                            <section>
+                                                <label class="label">条纹干扰：{{resultEdit.stripe}}</label>
+                                            </section>
+
+                                            <section>
+                                                <label class="label">视频抖动：{{resultEdit.shake}}</label>
+                                            </section>
+
+                                            <section>
+                                                <label class="label">视频巨变：{{resultEdit.flash}}</label>
+                                            </section>
+
+                                            <section>
+                                                <label class="label">视频遮挡：{{resultEdit.cover}}</label>
+                                            </section>
+
+                                        </section>
+                                    </div>
+                                </fieldset>
+                                <footer class="text-align-center">
+                                    <button type="button" class="btn btn-default" ng-click="cancel()">取消</button>
+                                </footer>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </article>
+        </div>
+    </section>
+</div>

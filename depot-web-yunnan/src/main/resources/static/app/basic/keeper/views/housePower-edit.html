@@ -1,0 +1,46 @@
+<div class="modal-content">
+	<div class="modal-header">
+		<button type="button" class="close" ng-click="cancel()">
+			&times;</button>
+		<h4 class="modal-title" id="myModalLabel">保管员仓房权限信息</h4>
+	</div>
+	<div class="modal-body">
+		<form id="basicEnum-form" name='basicEnum-form'
+			class="smart-form ng-pristine ng-valid"
+			ng-submit='basicEnum-form.$valid&&save(basicEnum)'
+			novalidate="novalidate">
+
+			<fieldset>
+				<section>
+					<label class="label">复选框勾上的便是当前保管员所管理的仓房</label><br />
+					<br />
+
+					<div class="row">
+						<div class="col col-4" ng-repeat="store in housePowerList">
+							<label class="checkbox">
+								<span ng-if="store.delFlag==5">
+									<input type="checkbox" name="checkbox" ng-click="updateSelection($event,store.storehouseId)"
+										checked="checked" /> 
+									<i></i>{{store.storehouseName}}
+								</span> 
+								<span ng-if="store.delFlag!=5"> 
+									<input type="checkbox" name="checkbox" ng-click="updateSelection($event,store.storehouseId)" /> 
+									<i></i>{{store.storehouseName}}
+								</span>
+							</label>
+						</div>
+						<br />
+						<br />
+
+					</div>
+				</section>
+
+			</fieldset>
+		</form>
+		<div class="modal-footer">
+			<button type="button" class="btn btn-primary" ng-click="save()">
+				提交</button>
+			<button type="button" class="btn btn-default" ng-click="cancel()">
+				取消</button>
+		</div>
+	</div>

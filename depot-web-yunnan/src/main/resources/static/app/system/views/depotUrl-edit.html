@@ -1,0 +1,89 @@
+<!-- MAIN CONTENT -->
+<div id="content">
+
+	<!-- widget grid -->
+	<section id="widget-grid" widget-grid>
+
+		<!-- START ROW -->
+		<div class="row">
+
+			<!-- NEW COL START -->
+			<article class="col-sm-12 col-md-12 col-lg-12">
+
+				<!-- Widget ID (each widget will need unique ID)-->
+				<div jarvis-widget id="form-grid-widget"
+					data-widget-colorbutton="false" data-widget-editbutton="false"
+					data-widget-custombutton="false">
+
+					<!-- widget div-->
+					<div>
+
+						<!-- widget content -->
+						<div class="widget-body no-padding">
+							<form id="depotUrl-form" class="smart-form ng-pristine ng-valid" data-validator-option="validateOptions" novalidate="novalidate">
+								<header>
+									<a href-void class="btn btn-default btn-xs" ng-click="back()">
+										<i class="fa fa-angle-left"></i>&nbsp;返回&nbsp;
+									</a>
+									&nbsp;url配置信息
+									<span class="pull-right font-xs">带*的部分必须填写</span>
+								</header>
+								<fieldset>
+									<div class="row">
+										<section class="col col-4">
+											<label class="label txt-bg-red">内网url*</label> 
+											<label class="input"> 
+												<i class="icon-prepend fa fa-user"></i>
+												<input type="text" name="intranetUrl" ng-model="urlConfig.intranetUrl" 
+													 minlength="17" maxlength="60" required validIntranetUrl="true" />
+												<b class="tooltip tooltip-bottom-right">例：http://10.20.106.160:9028/depot-intelligent</b>
+											</label>
+										</section>
+										<section class="col col-4">
+											<label class="label">外网url</label> 
+											<label class="input"> 
+												<i class="icon-prepend fa fa-user"></i>
+												<input type="text" name="extranetUrl" ng-model="urlConfig.extranetUrl" maxlength="60">
+											</label>
+										</section>
+										<section class="col col-4">
+										   <label class="label">所属组织</label> 
+										    <multi-select-tree  data-input-model="data2" data-default-label="请选择"
+														multi-select="false" data-output-model="urlConfig.orgId" 
+														data-callback="selectOnly1Or2(item, selectedItems)">
+												 </multi-select-tree>
+										</section>
+									</div>
+									<div class="row">
+										<section class="col col-4">
+											<label class="label">使用类型</label> 
+											<label class="select"> 
+												<select ng-model="urlConfig.userType" class="form-control">
+														<option value="1">库级</option>
+														<option value="2">出入库</option>
+												</select>
+												<i></i>
+											</label>
+										</section>
+										<section class="col col-4">
+											<label class="label">备注</label> 
+											<label class="input"> 
+												<i class="icon-prepend fa fa-user"></i>
+												<input type="text" ng-model="urlConfig.remark" name="remark">
+											</label>
+										</section>
+									</div>
+							
+								</fieldset>
+								
+					            <footer class="text-align-center">
+					                <button type="button" class="btn btn-primary" ng-click="save()">提交</button>
+					                <button type="button" class="btn btn-default" ng-click="back()">取消</button>
+					            </footer>
+							</form>
+						</div>
+					</div>
+			</article>
+		</div>
+	</section>
+</div>

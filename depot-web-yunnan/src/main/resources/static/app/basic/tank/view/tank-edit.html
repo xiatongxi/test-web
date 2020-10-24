@@ -1,0 +1,233 @@
+<!-- MAIN CONTENT -->
+<div id="content">
+
+    <!-- widget grid -->
+    <section id="widget-grid" widget-grid>
+
+        <!-- START ROW -->
+        <div class="row">
+
+            <!-- NEW COL START -->
+            <article class="col-sm-12 col-md-12 col-lg-12">
+
+                <!-- Widget ID (each widget will need unique ID)-->
+                <div jarvis-widget id="form-grid-widget"
+                     data-widget-colorbutton="false" data-widget-editbutton="false"
+                     data-widget-custombutton="false">
+
+                    <!-- widget div-->
+                    <div>
+
+                        <!-- widget content -->
+                        <div class="widget-body no-padding">
+                            <form id="basicTank-form" name='basicStorehouse-form'
+                                  class="smart-form ng-pristine ng-valid"
+                                  ng-submit='basicStorehouse-form.$valid&&save(basicStorehouse)'
+                                  novalidate="novalidate">
+                                <header>
+                                    <a href-void class="btn btn-default btn-xs" ng-click="returnTop()">
+                                        <i class="fa fa-angle-left"></i>&nbsp;返回&nbsp;
+                                    </a>
+                                    &nbsp;<strong>油罐基础信息</strong>
+                                    <span class="pull-right font-xs">带*的部分必须填写</span>
+                                </header>
+
+                                <fieldset>
+                                    <table class="table table-striped table-bordered table-hover" width="100%">
+                                        <tr>
+                                            <th>
+                                                <label class="label" style="margin-top: 9px;text-align: center;">油罐编码<span style="color: red;margin-left: 5px;text-align: center;">*</span></label>
+                                            </th>
+                                            <th>
+                                                <label class="input">
+                                                <!-- ng-keyup="checkUp('ygbm')" -->
+                                                    <input type="text" maxlength="3" ng-model="tank.storagetankCode" name="storagetankCode"
+                                                            required ng-readonly="isNotEdit"
+                                                           oninput="if(value.length>3) value=value.slice(0,3)" 
+                                                           onkeyup="this.value= this.value.match(/\d{0,3}/) ? this.value.match(/\d{0,3}/)[0] : ''" />
+                                                </label>
+                                            </th>
+                                            <th>
+                                                <label class="label" style="margin-top: 9px;text-align: center;">油罐名称<span style="color: red;margin-left: 5px;text-align: center;">*</span></label>
+                                            </th>
+                                            <th>
+                                                <label class="input">
+                                                    <input type="text" ng-model="tank.storagetankName"
+                                                           name="storagetankName" maxlength="20" required ng-readonly="isNotEdit">
+                                                </label>
+                                            </th>
+                                            <th>
+                                                <label class="label" style="margin-top: 9px;text-align: center;">库区编码<span style="color: red;margin-left: 5px;text-align: center;">*</span></label>
+                                            </th>
+                                            <th>
+                                                <label class="input">
+                                                    <input type="text" ng-model="tank.orgCode"
+                                                           name="orgCode" required ng-readonly="true">
+                                                </label>
+                                            </th>
+                                        </tr>
+                                        <tr>
+                                            <th>
+                                                <label class="label" style="margin-top: 9px;text-align: center;">油罐容量(吨)<span style="color: red;margin-left: 5px;text-align: center;">*</span></label>
+                                            </th>
+                                            <th>
+                                                <label class="input">
+                                                    <input type="number" maxlength="9" ng-model="tank.tankCapacity" name="tankCapacity" ng-readonly="isNotEdit" 
+                                                    oninput="if(value.length>9) value=value.slice(0,9)" required validThan0=true
+                                                    onkeyup="this.value= this.value.match(/\d+(\.\d{0,2})?/) ? this.value.match(/\d+(\.\d{0,2})?/)[0] : ''" />
+                                                </label>
+                                            </th>
+                                            <th>
+                                                <label class="label" style="margin-top: 9px;text-align: center;">附属设施是否完好<span style="color: red;margin-left: 5px;text-align: center;">*</span></label>
+                                            </th>
+                                            <th>
+                                                <label class="select">
+                                                    <select ng-model="tank.facilitiesType" ng-disabled="isNotEdit" name="facilitiesType"
+                                                            ng-options="enum.enumid as enum.enumname for enum in dicDataList[1035]"
+                                                            class="form-control" required>
+                                                        <option value="">--请选择--</option>
+                                                    </select>
+                                                </label>
+                                            </th>
+                                            <th>
+                                                <label class="label" style="margin-top: 9px;text-align: center;">油罐类型<span style="color: red;margin-left: 5px;text-align: center;">*</span></label>
+                                            </th>
+                                            <th>
+                                                <label class="select">
+                                                    <select ng-model="tank.tankType" ng-disabled="isNotEdit" name="tankType" required
+                                                            ng-options="enum.enumid as enum.enumname for enum in dicDataList[7020]"
+                                                            class="form-control">
+                                                        <option value="">--请选择--</option>
+                                                    </select>
+                                                </label>
+                                            </th>
+                                        </tr>
+                                        <tr>
+	                                        <th>
+	                                            <label class="label" style="margin-top: 9px;text-align: center;">有无加热装置<span style="color: red;margin-left: 5px;text-align: center;">*</span></label>
+	                                        </th>
+	                                        <th>
+	                                            <label class="select">
+	                                                <select ng-model="tank.heatingType" ng-disabled="isNotEdit" name="heatingTyp" required
+	                                                        ng-options="enum.enumid as enum.enumname for enum in dicDataList[1035]"
+	                                                        class="form-control">
+	                                                    <option value="">--请选择--</option>
+	                                                </select>
+	                                            </label>
+	                                        </th>
+	                                        <th>
+	                                            <label class="label" style="margin-top: 9px;text-align: center;">直径(米)<span style="color: red;margin-left: 5px;text-align: center;">*</span></label>
+	                                        </th>
+	                                        <th>
+	                                            <label class="input">
+	                                                <input type="number" ng-model="tank.diameter" name="diameter" ng-readonly="isNotEdit"
+	                                                oninput="if(value.length>5) value=value.slice(0,5)" required validThan0=true
+	                                                onkeyup="this.value= this.value.match(/\d+(\.\d{0,2})?/) ? this.value.match(/\d+(\.\d{0,2})?/)[0] : ''" />
+	                                            </label>
+	                                        </th>
+	                                        <th>
+	                                            <label class="label" style="margin-top: 9px;text-align: center;">高度(米)<span style="color: red;margin-left: 5px;text-align: center;">*</span></label>
+	                                        </th>
+	                                        <th>
+	                                            <label class="input">
+	                                                <input type="number" ng-model="tank.height" name="height" ng-readonly="isNotEdit"
+	                                                oninput="if(value.length>5) value=value.slice(0,5)" required validThan0=true
+	                                                onkeyup="this.value= this.value.match(/\d+(\.\d{0,2})?/) ? this.value.match(/\d+(\.\d{0,2})?/)[0] : ''" />
+	                                            </label>
+	                                        </th>
+	                                    </tr>
+	                                    <tr>
+	                                        <th>
+	                                            <label class="label" style="margin-top: 9px;text-align: center;">检定方式<span style="color: red;margin-left: 5px;text-align: center;">*</span></label>
+	                                        </th>
+	                                        <th>
+	                                            <label class="select">
+	                                                <select ng-model="tank.checkWay" ng-disabled="isNotEdit" name="checkWay"
+	                                                        ng-options="enum.enumid as enum.enumname for enum in dicDataList[6997]"
+	                                                        class="form-control" required>
+	                                                    <option value="">--请选择--</option>
+	                                                </select>
+	                                            </label>
+	                                        </th>
+	                                        <th>
+	                                            <label class="label" style="margin-top: 9px;text-align: center;">焊接方式<span style="color: red;margin-left: 5px;text-align: center;">*</span></label>
+	                                        </th>
+	                                        <th>
+	                                            <label class="select">
+	                                                <select ng-model="tank.weldWay" ng-disabled="isNotEdit" name="weldWay"
+	                                                        ng-options="enum.enumid as enum.enumname for enum in dicDataList[7001]"
+	                                                        class="form-control" required>
+	                                                    <option value="">--请选择--</option>
+	                                                </select>
+	                                            </label>
+	                                        </th>
+	<!--                                         <th> -->
+	<!--                                             <label class="label" style="margin-top: 9px;text-align: center;">油罐使用情况</label> -->
+	<!--                                         </th> -->
+	<!--                                         <th> -->
+	<!--                                             <label class="select"> -->
+	<!--                                                 <select ng-model="tank.tankApply" ng-disabled="isNotEdit" -->
+	<!--                                                         ng-options="enum.enumid as enum.enumname for enum in dicDataList[7004]" -->
+	<!--                                                         class="form-control"> -->
+	<!--                                                     <option value="">--请选择--</option> -->
+	<!--                                                 </select> -->
+	<!--                                             </label> -->
+	<!--                                         </th> -->
+											<th>
+	                                            <label class="label" style="margin-top: 9px;text-align: center;">油罐状态<span style="color: red;margin-left: 5px;text-align: center;">*</span></label>
+	                                        </th>
+	                                        <th>
+	                                            <label class="select">
+	                                                <select ng-model="tank.tankStatus" ng-disabled="isNotEdit" name="tankStatus"
+	                                                        ng-options="enum.enumid as enum.enumname for enum in dicDataList[7012]"
+	                                                        class="form-control" required>
+	                                                    <option value="">--请选择--</option>
+	                                                </select>
+	                                            </label>
+	                                        </th>
+	                                    </tr>
+	                                    <tr>
+	                                        <th>
+	                                            <label class="label" style="margin-top: 9px;text-align: center;">建造日期<span style="color: red;margin-left: 5px;text-align: center;">*</span></label>
+	                                        </th>
+	                                        <th>
+	                                            <label class="input">
+													<input type="text" ng-model="tank.builddate"
+													class="form-control datepicker" data-smart-datepicker
+													name="builddate" ng-disabled="isNotEdit" required>
+												</label>
+	                                        </th>
+	                                    </tr>
+<!--                                     <tr> -->
+<!--                                         <th> -->
+<!--                                             <label class="label" style="margin-top: 9px;text-align: center;">油罐状态</label> -->
+<!--                                         </th> -->
+<!--                                         <th> -->
+<!--                                             <label class="select"> -->
+<!--                                                 <select ng-model="tank.tankStatus" ng-disabled="isNotEdit" -->
+<!--                                                         ng-options="enum.enumid as enum.enumname for enum in dicDataList[7012]" -->
+<!--                                                         class="form-control"> -->
+<!--                                                     <option value="">--请选择--</option> -->
+<!--                                                 </select> -->
+<!--                                             </label> -->
+<!--                                         </th> -->
+<!--                                         <th></th> -->
+<!--                                         <th></th> -->
+<!--                                         <th></th> -->
+<!--                                         <th></th> -->
+<!--                                     </tr> -->
+
+                                    </table>
+                                </fieldset>
+
+                                <footer class="modal-footer text-align-center">
+                                    <a class="btn btn-default btn-lg" href-void="" href="#" data-dismiss="modal" ng-click="back()">取消</a>
+                                    <button ng-click="save()" type="button" class="btn btn-primary btn-lg" ng-hide="isNotEdit">提交</button>
+                                </footer>
+                            </form>
+                        </div>
+                    </div>
+            </article>
+        </div>
+    </section>
+</div>

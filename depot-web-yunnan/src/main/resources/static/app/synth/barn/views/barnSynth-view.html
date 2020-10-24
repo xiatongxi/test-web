@@ -1,0 +1,305 @@
+<!-- MAIN CONTENT -->
+<div id="content">
+	<!-- widget grid -->
+	<section id="widget-grid" widget-grid>
+		<!-- START ROW -->
+		<div class="row">
+			<!-- NEW COL START -->
+			<article class="col-sm-12 col-md-12 col-lg-12">
+
+				<!-- Widget ID (each widget will need unique ID)-->
+				<div jarvis-widget id="form-grid-widget"
+					data-widget-colorbutton="false" data-widget-editbutton="false"
+					data-widget-custombutton="false">
+					<!-- widget div-->
+					<div>
+						<!-- widget content -->
+						<div class="widget-body no-padding saf-asc-bodybg">
+							<form id="foodInfo-form" name='foodInfo-form'
+								class="smart-form ng-pristine ng-valid"
+								data-validator-option="validateOptions" novalidate="novalidate">
+								<header>
+									<a href-void class="btn btn-default btn-xs" ng-click="upReturn()">
+										<i class="fa fa-angle-left"></i>&nbsp;返回&nbsp;
+									</a>
+									&nbsp;<strong>粮库信息追溯</strong>
+								</header>
+                                <div class="saf-asc-row2">
+                                    <h3>粮库信息</h3>
+                                    <table>
+										<tr>
+											<td class="label-td" style="width:120px;">粮库名称：</td><td style="width:150px;">{{library.orgName}}</td>
+											<td class="label-td" style="width:140px;">单位负责人：</td><td style="width:150px;">{{library.chargePerson}}</td>
+											<td class="label-td" style="width:120px;">企业经营类型：</td><td style="width:150px;">{{dicData[library.busiType]}}</td>
+											<td class="label-td" style="width:100px;">单位性质：</td><td>{{dicData[library.companyNature]}}</td>
+										</tr>
+										<tr>
+											<td class="label-td">设计库容：</td><td>{{library.designCapacity}}</td>
+											<td class="label-td">社会统一信用代码：</td><td>{{library.creditCode}}</td>
+											<td class="label-td">登记时间：</td><td>{{library.registDate | date:'yyyy-MM-dd'}}</td>
+											<td class="label-td">联系人：</td><td>{{library.chargePerson}}</td>
+										</tr>
+										<tr>
+											<td class="label-td">联系电话：</td><td>{{library.contact}}</td>
+											<td class="label-td">下属企业个数（个）：</td><td>{{nums}}</td>
+											<td class="label-td">单位地址：</td><td>{{library.address}}</td>
+										</tr>
+				                    </table>
+                                </div>
+
+								<div class="text-center">
+                                	<div class="saf-asc-row3">
+					                	<ul class="timeline-box timeline-box4">
+					                    	<li class="lisqy-xx timeline-bom-msg" ng-click="getList('enterprise')"><!-- 隶属企业信息 -->
+					                            <div class="timeline-time"></div>
+					                            <i class="timeline-icon"></i>
+					                        </li>
+					                        <li class="cangf-xx">
+					                            <i class="timeline-icon" ng-click="getList('barn')"></i><!-- 仓房（货位）信息 -->
+					                            <div class="timeline-time"></div>
+					                        </li>
+					                        <li class="kunry-xx timeline-bom-msg" ng-click="getList('personne')"><!-- 库内人员信息 -->
+					                            <div class="timeline-time"></div>
+					                            <i class="timeline-icon"></i>
+					                        </li>
+					                        <li class="yew-xx" ng-click="getList('business')"><!-- 业务信息 -->
+					                            <i class="timeline-icon"></i>
+					                            <div class="timeline-time"></div>
+					                        </li>
+					                        <li class="anq-gl timeline-bom-msg" ng-click="getList('security')"><!-- 安全管理 -->
+					                            <div class="timeline-time"></div>
+					                            <i class="timeline-icon"></i>
+					                        </li>
+					                        <li class="feiy-gl" ng-click="getList('cost')"><!-- 费用管理 -->
+					                            <i class="timeline-icon"></i>
+					                            <div class="timeline-time"></div>
+					                        </li>
+					                    </ul>
+					                </div>
+                                    <!--/saf-asc-row3-->
+                                </div>
+                                <div class="saf-asc-row4">
+                                	<!-- ******隶属企业信息****** -->
+	                				<table class="table table-bordered" id="enterprise">
+	                                    <thead>
+					                        <tr>
+					                            <th> 序号</th>
+					                            <th> 粮库名称</th>
+					                            <th> 单位负责人</th>
+					                            <th> 企业经营类型</th>
+					                            <th> 设计库容（万吨）</th>
+					                            <th> 企业地址</th>
+					                            <th> 联系电话</th>
+					                        </tr>
+				                        </thead>
+				                        
+				                        <tbody>
+											<tr ng-repeat="library in libraryList.list">
+												<td>{{$index+1}}</td>
+												<td>{{library.orgName}}</td>
+												<td>{{library.chargePerson}}</td>
+												<td>{{dicData[library.busiType]}}</td>
+												<td>{{library.designCapacity}}</td>
+												<td>{{library.address}}</td>
+												<td>{{library.contact}}</td>
+											</tr>
+				                        </tbody>
+	                                </table>
+
+	                                <!-- ******仓房（货位）信息****** -->
+	                                <table class="table table-bordered" id="barn" style="display: none;">
+	                                    <thead>
+					                        <tr>
+					                        
+					                            <th> 仓房名称</th>
+					                            <th> 仓房类型</th>
+					                            <th> 设计仓容（吨）</th>
+					                            <th> 建筑结构</th>
+					                            <th> 通风方式</th>
+					                            <th> 隔热方式</th>
+					                            <th> 仓房状态</th>
+					                            <th> 交付使用日期</th>
+					                            <th> 保管员</th>
+					                            <th> 操作</th>
+					                        </tr>
+					                        </thead>
+					                        
+					                        <tbody>
+					                            <tr ng-repeat="barn in barnList">
+					                                <td>{{barn.storehouseName}}</td>
+					                                <td>{{ dicData[barn.storehouseType] }}</td>
+					                                <td>{{barn.designCapacity}}</td>
+					                                <td>{{barn.architectureType}}</td>
+					                                <td>{{ dicData[barn.drafttype] }}</td>
+					                                <td>{{ barn.heatinsulationstepRoof}}</td>
+					                                <td>{{ dicData[barn.storehouseState]}}</td>
+													<td>{{ barn.usedate | date:'yyyy-MM-dd' }}</td>
+													<td>{{ barn.dutystoreman}}</td>
+													<td><a href-void ng-click="lookUp('barn', barn.storehouseId, '0', '1')"><i class="fa fa-edit"></i>查看</a></td>
+					                            </tr>
+					                        </tbody>
+	                                </table>
+
+									<!-- ******库内人员信息****** -->
+	                                <table class="table table-bordered" id="personne" style="display: none;">
+										<thead>
+										<tr>
+											<th>序号</th>
+											<th>姓名</th>
+											<th>性别</th>
+											<th>联系电话</th>
+											<th>邮箱</th>
+											<th>出生日期</th>
+											<th>工作年限</th>
+											<th>操作</th>
+										</tr>
+										</thead>
+
+										<tbody>
+										<tr ng-repeat="keeper in personneList.list">
+											<td>{{$index+1}}</td>
+											<td>{{keeper.name}}</td>
+											<td>{{dicData[keeper.sex]}}</td>
+											<td>{{keeper.phone}}</td>
+											<td>{{keeper.email}}</td>
+											<td>{{keeper.birthday | date:'yyyy-MM-dd'}}</td>
+											<td>{{keeper.workYear}}</td>
+											<td><a href-void ng-click="lookUp('personne',keeper.id)"><i class="fa fa-edit"></i>查看</a></td>
+										</tr>
+										</tbody>
+	                                </table>
+
+									<!-- ******业务信息****** -->
+	                                <table class="table table-bordered" id="business" style="display: none;">
+	                                    <thead>
+					                        <tr>
+
+					                            <th> 创建日期</th>
+					                            <th> 分类</th>
+					                            <th> 编号</th>
+					                            <th> 类型</th>
+					                            <th> 粮食性质</th>
+					                            <th> 粮食品种</th>
+					                            <th> 等级</th>
+					                            <th> 数量</th>
+					                            <th> 操作</th>
+					                        </tr>
+					                        </thead>
+
+					                        <tbody>
+					                            <tr ng-repeat="business in businessList">
+					                                <td>{{business.createTime | date:'yyyy-MM-dd'}}</td>
+					                                <td>{{business.businessType=='1'?"计划":"合同"}}</td>
+					                                <td>{{business.number}}</td>
+					                                <td>{{ dicData[business.types] }}</td>
+					                                <td>{{ dicData[business.attribute] }}</td>
+					                                <td>{{ dicData[business.kind] }}</td>
+					                                <td>{{ dicData[business.grade]}}</td>
+					                                <td>{{ business.amount}}</td>
+													<td><a href-void ng-click="lookUp('contract',business.id,business.businessType,business.lcId)"><i class="fa fa-edit"></i>查看</a></td>
+					                            </tr>
+					                        </tbody>
+	                                </table>
+	                                
+	                                <!-- 安全管理  -->
+	                                <table  class="table table-bordered" id="security" style="display: none;">
+		                                <thead>
+					                        <tr>
+												<th>序号</th>
+					                            <th> 安全责任区</th>
+					                            <th> 责任人</th>
+					                            <th> 检测类型</th>
+					                            <th> 检测时间</th>
+					                            <th> 操作</th>
+					                        </tr>
+				                        </thead>
+				                        
+				                        <tbody>
+				                            <tr ng-repeat="check in checkList">
+												<td>{{$index+1}}</td>
+				                                <td>{{check.houseName}}</td>
+				                                <td>{{check.sign}}</td>
+												<td>
+													<div ng-switch="{{check.checkType}}">
+														<div ng-switch-when="1">其他检查</div>
+														<div ng-switch-when="2">三温检查</div>
+													</div>
+												</td>
+				                                <td>{{ check.createTime | date:'yyyy-MM-dd'}}</td>
+												<td><a href-void ng-click="lookUp('notice', check.id, check.checkType,'0')"><i class="fa fa-edit"></i>查看</a></td>
+				                            </tr>
+				                        </tbody>
+	                                </table>
+
+									<!-- 费用管理  -->
+	                                <table  class="table table-bordered" id="cost" style="display: none;">
+		                                <thead>
+					                        <tr>
+					                            <th> 产生时间</th>
+					                            <th> 费用类型</th>
+					                            <th> 单价</th>
+					                            <th> 数量</th>
+					                            <th> 费用总计</th>
+					                            <th> 费用描述</th>
+					                            <th> 责任保管员</th>
+					                        </tr>
+				                        </thead>
+
+				                        <tbody>
+				                            <tr ng-repeat="payment in paymentsList">
+				                                <td>{{ payment.payTime | date:'yyyy-MM-dd'}}</td>
+				                                <td>{{ dicData[payment.type] }}</td>
+				                                <td>{{ payment.price}}</td>
+				                                <td>{{ payment.number}}</td>
+				                                <td>{{ payment.price*payment.number }}</td>
+				                                <td>{{ payment.payContent}}</td>
+				                                <td>{{ payment.recorder}}</td>
+				                            </tr>
+				                        </tbody>
+	                                </table>
+                                </div>
+							</form>
+						</div>
+					</div>
+				</div>
+			</article>
+		</div>
+	</section>
+</div>
+
+
+<div class="modal fade" id="threetempCheckModal" tabindex="-1" role="dialog"
+	 aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content" style="width:700px;">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal"
+						aria-hidden="true">&times;</button>
+				<h4 class="modal-title" id="myModalLabel2">三温检查查看</h4>
+			</div>
+			<div class="modal-body">
+				<div smart-include="app/storage/views/safeproduce/safeproduce-threetempcheck-edit.html"></div>
+			</div>
+		</div>
+		<!-- /.modal-content -->
+	</div>
+	<!-- /.modal-dialog -->
+</div>
+
+<div class="modal fade" id="foodotherCheckModal" tabindex="-1" role="dialog"
+	 aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content" style="width:700px;">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal"
+						aria-hidden="true">&times;</button>
+				<h4 class="modal-title" id="myModalLabel3">其他检查查看</h4>
+			</div>
+			<div class="modal-body">
+				<div smart-include="app/storage/views/safeproduce/safeproduce-foodothercheck-edit.html"></div>
+			</div>
+		</div>
+		<!-- /.modal-content -->
+	</div>
+	<!-- /.modal-dialog -->
+</div>

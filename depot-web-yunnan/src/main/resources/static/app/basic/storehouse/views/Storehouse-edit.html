@@ -1,0 +1,613 @@
+<!-- MAIN CONTENT -->
+<div id="content">
+
+	<!-- widget grid -->
+	<section id="widget-grid" widget-grid>
+
+		<!-- START ROW -->
+		<div class="row">
+
+			<!-- NEW COL START -->
+			<article class="col-sm-12 col-md-12 col-lg-12">
+
+				<!-- Widget ID (each widget will need unique ID)-->
+				<div jarvis-widget id="form-grid-widget"
+					data-widget-colorbutton="false" data-widget-editbutton="false"
+					data-widget-custombutton="false">
+
+					<!-- widget div-->
+					<div>
+
+						<!-- widget content -->
+						<div class="widget-body no-padding">
+							<form id="basicStorehouse-form" name='basicStorehouse-form'
+								class="smart-form ng-pristine ng-valid"
+								ng-submit='basicStorehouse-form.$valid&&save(basicStorehouse)'
+								novalidate="novalidate">
+								<header>
+									<a href-void class="btn btn-default btn-xs" ng-click="returnTop()">
+										<i class="fa fa-angle-left"></i>&nbsp;返回&nbsp;
+									</a>
+									&nbsp;<strong>仓房基础信息</strong>
+									<span class="pull-right font-xs">带*的部分必须填写</span>
+								</header>
+
+								<fieldset>
+									<table class="table table-striped table-bordered table-hover" width="100%">
+										<tr>
+											<th>
+												<label class="label" style="margin-top: 9px;text-align: center;">所属粮库名称</label>
+											</th>
+											<th>
+												<label class="input" ng-show="basicStorehouse.libraryType == 0">
+													<input type="text" ng-model="basicStorehouse.depotName" name="depotName" ng-readonly="true">
+												</label>
+												<label class="select" ng-hide="basicStorehouse.libraryType == 0">
+													<select ng-model="basicStorehouse.depotId" required ng-disabled="basicStorehouse.libraryType == 0 || isNotEdit"
+															ng-options="depot.depotId as depot.depotName for depot in depotList" id="depotId"
+															class="form-control">
+														<option value="">--请选择--</option>
+													</select>
+												</label>
+											</th>
+											<th>
+												<label class="label" style="margin-top: 9px;text-align: center;">仓房编号<span style="color: red;margin-left: 5px;text-align: center;">*</span></label>
+											</th>
+											<th>
+												<label class="input">
+													<input type="text" maxlength="3" ng-model="basicStorehouse.storehouseCode"
+													ng-blur="storehouseCode()" ng-keyup="checkUp()" required ng-readonly="isNotEdit">
+												</label>
+											</th>
+											<th>
+												<label class="label" style="margin-top: 9px;text-align: center;">仓房名称<span style="color: red;margin-left: 5px;text-align: center;">*</span></label>
+											</th>
+											<th>
+												<label class="input">
+													<input type="text" ng-model="basicStorehouse.storehouseName"
+													name="storehouseName" maxlength="20" required ng-readonly="isNotEdit">
+												</label>
+											</th>
+										</tr>
+										<tr>
+											<th>
+												<label class="label" style="margin-top: 9px;text-align: center;">保管员</label>
+											</th>
+											<th>
+												<label class="input">
+													<input type="text" ng-model="basicStorehouse.dutystoreman" ng-readonly="basicStorehouse.libraryType == 0 || isNotEdit" />
+												</label>
+											</th>
+											<th>
+												<label class="label" style="margin-top: 9px;text-align: center;">仓房状态<span style="color: red;margin-left: 5px;text-align: center;">*</span></label>
+											</th>
+											<th>
+												<label class="select">
+													<select ng-model="basicStorehouse.storehouseState" ng-disabled="isNotEdit"
+														ng-options="enum.enumid as enum.enumname for enum in dicDataList[1001]"
+														class="form-control" name="storehouseState" required>
+														<option value="">--请选择--</option>
+													</select>
+												</label>
+											</th>
+											<th>
+												<label class="label" style="margin-top: 9px;text-align: center;">交付使用日期<span style="color: red;margin-left: 5px;text-align: center;">*</span></label>
+											</th>
+											<th>
+												<label class="input">
+													<input type="text" ng-model="basicStorehouse.usedate"
+													class="form-control datepicker" data-smart-datepicker
+													name="usedate" ng-disabled="isNotEdit" required>
+												</label>
+											</th>
+										</tr>
+										<tr>
+											<th>
+												<label class="label" style="margin-top: 9px;text-align: center;">仓房类型<span style="color: red;margin-left: 5px;text-align: center;">*</span></label>
+											</th>
+											<th>
+												<label class="select">
+													<select ng-model="basicStorehouse.storehouseType" ng-disabled="isNotEdit" id="storehouseType"
+														ng-options="enum.enumid as enum.enumname for enum in dicDataList[1064]" name="storehouseType"
+														class="form-control" ng-change="change()" required>
+														<option value="">--请选择--</option>
+													</select>
+												</label>
+											</th>
+											<th>
+												<label class="label" style="margin-top: 9px;text-align: center;">仓房类型明细</label>
+											</th>
+											<th>
+												<label class="select">
+													<select ng-model="basicStorehouse.storehouseTypeMx" ng-disabled="isNotEdit"
+														ng-options="enum.enumid as enum.enumname for enum in dicDataList[basicStorehouse.storehouseType]"
+														class="form-control">
+														<option value="">--请选择--</option>
+													</select>
+												</label>
+											</th>
+											<th>
+												<label class="label" style="margin-top: 9px;text-align: center;" ng-show="false">仓房图片</label>
+											</th>
+											<th>
+												<div class="input input-file" ng-show="false">
+													<span class="button">
+														<input type="file" nv-file-select="" uploader="uploader" accept="image/*" ng-disabled="isNotEdit">
+															浏览
+													</span><input type="text" name="storeImg" ng-model="basicStorehouse.storeImg" placeholder="" readonly="">
+												</div>
+											</th>
+										</tr>
+
+									</table>
+								</fieldset>
+
+								<header>仓房设计信息</header>
+								<fieldset>
+									<table class="table table-striped table-bordered table-hover" width="100%">
+										<tr>
+											<th colspan="3">
+												<label class="label" style="margin-top: 9px;text-align: center;">结构</label>
+											</th>
+											<th colspan="2">
+												<label class="label" style="margin-top: 9px;text-align: center;">仓外</label>
+											</th>
+											<th colspan="2">
+												<label class="label" style="margin-top: 9px;text-align: center;">仓内</label>
+											</th>
+											<th colspan="2">
+												<label class="label" style="margin-top: 9px;text-align: center;">其它</label>
+											</th>
+										</tr>
+
+										<tr>
+											<th colspan="2">
+												<label class="label" style="margin-top: 9px;text-align: center;">墙体<span style="color: red;margin-left: 5px;text-align: center;">*</span></label>
+											</th>
+											<th>
+												<label class="select">
+													<select ng-model="basicStorehouse.wall" ng-disabled="isNotEdit" name="wall"
+														ng-options="enum.enumid as enum.enumname for enum in dicDataList[1037]"
+														class="form-control" required>
+														<option value="">--请选择--</option>
+													</select>
+												</label>
+											</th>
+											<th>
+												<label class="label" style="margin-top: 9px;text-align: center;">长(m)<span style="color: red;margin-left: 5px;text-align: center;">*</span></label>
+											</th>
+											<th>
+												<label class="input">
+													<input type="number" ng-model="basicStorehouse.storeOutsideLength" ng-readonly="isNotEdit"
+														oninput="if(value.length>5) value=value.slice(0,5)" name="storeOutsideLength" required
+														onblur="this.value= this.value.match(/\d+(\.\d{0,2})?/) ? this.value.match(/\d+(\.\d{0,2})?/)[0] : ''" />
+												</label>
+											</th>
+											<th>
+												<label class="label" style="margin-top: 9px;text-align: center;">长(m)<span style="color: red;margin-left: 5px;text-align: center;">*</span></label>
+											</th>
+											<th>
+												<label class="input">
+													<input type="number" ng-model="basicStorehouse.length" ng-readonly="isNotEdit"
+													oninput="if(value.length>5) value=value.slice(0,5)" name="length" required
+													onblur="this.value= this.value.match(/\d+(\.\d{0,2})?/) ? this.value.match(/\d+(\.\d{0,2})?/)[0] : ''" />
+												</label>
+											</th>
+											<th>
+												<label class="label" style="margin-top: 9px;text-align: center;">库门数量<span style="color: red;margin-left: 5px;text-align: center;">*</span></label>
+											</th>
+											<th>
+												<label class="input">
+													<input type="number" ng-model="basicStorehouse.houseDoorNum" ng-readonly="isNotEdit"
+														name="houseDoorNum" oninput="if(value.length>1) value=value.slice(0,1)" required>
+												</label>
+											</th>
+										</tr>
+
+										<tr>
+											<th colspan="2">
+												<label class="label" style="margin-top: 9px;text-align: center;">房顶<span style="color: red;margin-left: 5px;text-align: center;">*</span></label>
+											</th>
+											<th>
+												<!-- <label class="input">
+													<input type="text" ng-model="basicStorehouse.roof" ng-readonly="isNotEdit"
+														maxlength="30" name="roof" required/>
+												</label> -->
+												<label class="select">
+													<select ng-model="basicStorehouse.roof" ng-disabled="isNotEdit" name="roof"
+														ng-options="enum.enumid as enum.enumname for enum in dicDataList[1037]"
+														class="form-control" required>
+														<option value="">--请选择--</option>
+													</select>
+												</label>
+											</th>
+											<th>
+												<label class="label" style="margin-top: 9px;text-align: center;">宽(m)<span style="color: red;margin-left: 5px;text-align: center;">*</span></label>
+											</th>
+											<th>
+												<label class="input">
+													<input type="number" ng-model="basicStorehouse.storeOutsideWidth" ng-readonly="isNotEdit"
+														oninput="if(value.length>5) value=value.slice(0,5)" name="storeOutsideWidth" required 
+														onblur="this.value= this.value.match(/\d+(\.\d{0,2})?/) ? this.value.match(/\d+(\.\d{0,2})?/)[0] : ''" />
+												</label>
+											</th>
+											<th>
+												<label class="label" style="margin-top: 9px;text-align: center;">宽(m)<span style="color: red;margin-left: 5px;text-align: center;">*</span></label>
+											</th>
+											<th>
+												<label class="input">
+													<input type="number" ng-model="basicStorehouse.width" ng-readonly="isNotEdit"
+														name="width" oninput="if(value.length>5) value=value.slice(0,5)" required 
+														onblur="this.value= this.value.match(/\d+(\.\d{0,2})?/) ? this.value.match(/\d+(\.\d{0,2})?/)[0] : ''" />
+												</label>
+											</th>
+											<th>
+												<label class="label" style="margin-top: 9px;text-align: center;">库门位置</label>
+											</th>
+											<th>
+												<label class="input">
+													<input type="text" ng-model="basicStorehouse.houseDootPosition" ng-readonly="isNotEdit"
+												name="houseDoorNum">
+												</label>
+											</th>
+										</tr>
+
+										<tr>
+											<th colspan="2">
+												<label class="label" style="margin-top: 9px;text-align: center;">房架<span style="color: red;margin-left: 5px;text-align: center;">*</span></label>
+											</th>
+											<th>
+												<!-- <label class="input">
+													<input type="text" ng-model="basicStorehouse.house" ng-readonly="isNotEdit"
+														maxlength="30" name="house" required/>
+												</label> -->
+												<label class="select">
+													<select ng-model="basicStorehouse.house" ng-disabled="isNotEdit" name="house"
+														ng-options="enum.enumid as enum.enumname for enum in dicDataList[1037]"
+														class="form-control" required>
+														<option value="">--请选择--</option>
+													</select>
+												</label>
+											</th>
+											<th>
+												<label class="label" style="margin-top: 9px;text-align: center;">檐高(m)<span style="color: red;margin-left: 5px;text-align: center;">*</span></label>
+											</th>
+											<th>
+												<label class="input">
+													<input type="number" ng-model="basicStorehouse.storeOutsideHeigth" ng-readonly="isNotEdit" validTop=true 
+														oninput="if(value.length>5) value=value.slice(0,5)" name="storeOutsideHeigth" required validOutTop=true
+														onblur="this.value= this.value.match(/\d+(\.\d{0,2})?/) ? this.value.match(/\d+(\.\d{0,2})?/)[0] : ''" />
+												</label>
+											</th>
+											<th>
+												<label class="label" style="margin-top: 9px;text-align: center;">檐高(m)<span style="color: red;margin-left: 5px;text-align: center;">*</span></label>
+											</th>
+											<th>
+												<label class="input">
+													<input type="number" ng-model="basicStorehouse.heigth" ng-readonly="isNotEdit" validTop=true 
+														oninput="if(value.length>5) value=value.slice(0,5)" name="heigth" required validGrainHeigth=true
+														onblur="this.value= this.value.match(/\d+(\.\d{0,2})?/) ? this.value.match(/\d+(\.\d{0,2})?/)[0] : ''" />
+												</label>
+											</th>
+											<th>
+												<label class="label" style="margin-top: 9px;text-align: center;">库门高度(m)</label>
+											</th>
+											<th>
+												<label class="input">
+													<input type="number" ng-model="basicStorehouse.houseDoorHeigth" ng-readonly="isNotEdit"
+														name="houseDoorHeight" oninput="if(value.length>4) value=value.slice(0,4)"
+														onblur="this.value= this.value.match(/\d+(\.\d{0,2})?/) ? this.value.match(/\d+(\.\d{0,2})?/)[0] : ''" />
+												</label>
+											</th>
+										</tr>
+
+										<tr>
+											<th colspan="2">
+												<label class="label" style="margin-top: 9px;text-align: center;">地面<span style="color: red;margin-left: 5px;text-align: center;">*</span></label>
+											</th>
+											<th>
+												<!-- <label class="input">
+													<input type="text" ng-model="basicStorehouse.ground" ng-readonly="isNotEdit"
+														maxlength="30" name="ground" required/>
+												</label> -->
+												<label class="select">
+													<select ng-model="basicStorehouse.ground" ng-disabled="isNotEdit" name="ground"
+														ng-options="enum.enumid as enum.enumname for enum in dicDataList[1037]"
+														class="form-control" required>
+														<option value="">--请选择--</option>
+													</select>
+												</label>
+											</th>
+											<th>
+												<label class="label" style="margin-top: 9px;text-align: center;">顶高(m)<span style="color: red;margin-left: 5px;text-align: center;">*</span></label>
+											</th>
+											<th>
+												<label class="input">
+													<input type="number" ng-model="basicStorehouse.storeOutsideTopHeigth" ng-readonly="isNotEdit" validHeigth=true
+														oninput="if(value.length>5) value=value.slice(0,5)" name="storeOutsideTopHeigth" required validOutTop=true
+														onblur="this.value= this.value.match(/\d+(\.\d{0,2})?/) ? this.value.match(/\d+(\.\d{0,2})?/)[0] : ''" />
+												</label>
+											</th>
+											<th>
+												<label class="label" style="margin-top: 9px;text-align: center;">装粮线高(m)<span style="color: red;margin-left: 5px;text-align: center;">*</span></label>
+											</th>
+											<th>
+												<label class="input">
+													<input type="number" ng-model="basicStorehouse.grainLineHeigth" ng-readonly="isNotEdit" validHeigth=true
+														oninput="if(value.length>5) value=value.slice(0,5)" name="grainLineHeigth" required validGrainHeigth=true
+														onblur="this.value= this.value.match(/\d+(\.\d{0,2})?/) ? this.value.match(/\d+(\.\d{0,2})?/)[0] : ''" />
+												</label>
+											</th>
+											<th>
+												<label class="label" style="margin-top: 9px;text-align: center;">库门宽度(m)</label>
+											</th>
+											<th>
+												<label class="input">
+													<input type="number" ng-model="basicStorehouse.houseDoorWidth" ng-readonly="isNotEdit"
+														name="houseDoorWidth" oninput="if(value.length>5) value=value.slice(0,5)" 
+														onblur="this.value= this.value.match(/\d+(\.\d{0,2})?/) ? this.value.match(/\d+(\.\d{0,2})?/)[0] : ''" />
+												</label>
+											</th>
+										</tr>
+
+										<tr>
+											<th colspan="2">
+												<label class="label" style="margin-top: 9px;text-align: center;">设计仓容(吨)<span style="color: red;margin-left: 5px;text-align: center;">*</span></label>
+											</th>
+											<th>
+												<label class="input">
+												<input  type="number" step="1"  min="0" ng-model="basicStorehouse.designCapacity" ng-readonly="isNotEdit" name="designCapacity"
+												onblur="this.value= this.value.match(/\d+(\.\d{0,4})?/) ? this.value.match(/\d+(\.\d{0,4})?/)[0] : ''" required validThan0=true>
+												</label>
+											</th>
+											<th>
+												<label class="label" style="margin-top: 9px;text-align: center;">实际仓容(吨)</label>
+											</th>
+											<th>
+												<label class="input">
+												<input  type="number" step="1"  min="0" ng-model="basicStorehouse.actualCapacity" ng-readonly="isNotEdit" name="actualCapacity"
+												onblur="this.value= this.value.match(/\d+(\.\d{0,4})?/) ? this.value.match(/\d+(\.\d{0,4})?/)[0] : ''">
+												</label>
+											</th>
+											<th>
+												<label class="label" style="margin-top: 9px;text-align: center;">筒仓外径(m)<span style="color: red;margin-left: 5px;text-align: center;">*</span></label>
+											</th>
+											<th>
+												<label class="input">
+													<input type="number" ng-model="basicStorehouse.outsideSiloDiameter" ng-readonly="isNotEdit"
+														oninput="if(value.length>5) value=value.slice(0,5)" name="outsideSiloDiameter" required
+														onblur="this.value= this.value.match(/\d+(\.\d{0,2})?/) ? this.value.match(/\d+(\.\d{0,2})?/)[0] : ''" />
+												</label>
+											</th>
+											<th>
+												<label class="label" style="margin-top: 9px;text-align: center;">筒仓内径(m)<span style="color: red;margin-left: 5px;text-align: center;">*</span></label>
+											</th>
+											<th>
+												<label class="input">
+													<input type="number" ng-model="basicStorehouse.siloDiameter" ng-readonly="isNotEdit"
+														oninput="if(value.length>5) value=value.slice(0,5)" name="siloDiameter" required
+														onblur="this.value= this.value.match(/\d+(\.\d{0,2})?/) ? this.value.match(/\d+(\.\d{0,2})?/)[0] : ''" />
+												</label>
+											</th>
+										</tr>
+										<tr>
+											<th colspan="2">
+												<label class="label" style="margin-top: 9px;text-align: center;">通风方式</label>
+											</th>
+											<th>
+												<label class="select">
+													<select ng-model="basicStorehouse.drafttype" ng-disabled="isNotEdit"
+													ng-options="enum.enumid as enum.enumname for enum in dicDataList[5218]"
+													class="form-control">
+													<option value="">--请选择--</option>
+												</select>
+												</label>
+											</th>
+											<th>
+												<label class="label" style="margin-top: 9px;text-align: center;">保管方式<span style="color: red;margin-left: 5px;text-align: center;">*</span></label>
+											</th>
+											<th>
+												<label class="select">
+													<select ng-model="basicStorehouse.keepingWay" ng-disabled="isNotEdit" name="keepingWay" required
+														ng-options="enum.enumid as enum.enumname for enum in dicDataList[1056]"
+														class="form-control">
+														<option value="">--请选择--</option>
+													</select>
+												</label>
+											</th>
+											<th>
+												<label class="label" style="margin-top: 9px;text-align: center;">外墙面积(㎡)</label>
+											</th>
+											<th>
+												<label class="input">
+													<input type="number" ng-model="basicStorehouse.outerWallArea" ng-readonly="isNotEdit"
+														onblur="this.value= this.value.match(/\d+(\.\d{0,4})?/) ? this.value.match(/\d+(\.\d{0,4})?/)[0] : ''" />
+												</label>
+											</th>
+											<th>
+												<label class="label" style="margin-top: 9px;text-align: center;">仓内体积(m³)<span style="color: red;margin-left: 5px;text-align: center;">*</span></label>
+											</th>
+											<th>
+												<label class="input">
+													<input type="number" ng-model="basicStorehouse.binVolume" ng-readonly="isNotEdit" name="binVolume" required validThan0=true
+														onblur="this.value= this.value.match(/\d+(\.\d{0,4})?/) ? this.value.match(/\d+(\.\d{0,4})?/)[0] : ''">
+												</label>
+											</th>
+										</tr>
+
+										<tr>
+											<th rowspan="2">
+												<label class="label" style="margin-top: 20px;text-align: center;">隔热措施</label>
+											</th>
+											<th>
+												<label class="label" style="margin-top: 9px;text-align: center;">仓顶</label>
+											</th>
+											<th>
+												<label class="input">
+													<input type="text" ng-model="basicStorehouse.heatinsulationstepRoof"
+													ng-readonly="isNotEdit" />
+												</label>
+											</th>
+											<th>
+												<label class="label" style="margin-top: 9px;text-align: center;">装粮高度(m)</label>
+											</th>
+											<th>
+												<label class="input">
+													<input type="number" ng-model="basicStorehouse.grainHeigth" ng-readonly="isNotEdit"
+														oninput="if(value.length>5) value=value.slice(0,5)" 
+														onblur="this.value= this.value.match(/\d+(\.\d{0,2})?/) ? this.value.match(/\d+(\.\d{0,2})?/)[0] : ''" />
+												</label>
+											</th>
+											<th>
+												<label class="label" style="margin-top: 9px;text-align: center;">扣除体积(m³)</label>
+											</th>
+											<th>
+												<label class="input">
+													<input type="number" ng-model="basicStorehouse.deductVolume" ng-readonly="isNotEdit"
+														onblur="this.value= this.value.match(/\d+(\.\d{0,4})?/) ? this.value.match(/\d+(\.\d{0,4})?/)[0] : ''" />
+												</label>
+											</th>
+											<th>
+												<label class="label" style="margin-top: 9px;text-align: center;">粮堆体积(m³)</label>
+											</th>
+											<th>
+												<label class="input">
+													<input type="number" ng-model="basicStorehouse.grainPileVolume" ng-readonly="isNotEdit"
+														name="grainPileVolume" onblur="this.value= this.value.match(/\d+(\.\d{0,4})?/) ? this.value.match(/\d+(\.\d{0,4})?/)[0] : ''">
+												</label>
+											</th>
+										</tr>
+
+										<tr>
+											<th>
+												<label class="label" style="margin-top: 9px;text-align: center;">仓窗</label>
+											</th>
+											<th>
+												<label class="input">
+													<input type="text" ng-model="basicStorehouse.heatinsulationstepWindow"
+													ng-readonly="isNotEdit" />
+												</label>
+											</th>
+											<th>
+												<label class="label" style="margin-top: 9px;text-align: center;">能否散装储存</label>
+											</th>
+											<th>
+												<label class="select">
+													<select ng-model="basicStorehouse.nfszcc" ng-disabled="isNotEdit"
+														ng-options="enum.id as enum.value for enum in falseEnum"
+														class="form-control">
+													</select>
+												</label>
+											</th>
+											<th>
+												<label class="label" style="margin-top: 9px;text-align: center;">有无防鼠防雀防虫装置及设施</label>
+											</th>
+											<th>
+												<label class="select">
+													<select ng-model="basicStorehouse.ywfsfqfczz" ng-disabled="isNotEdit"
+														ng-options="enum.id as enum.value for enum in falseEnum"
+														class="form-control">
+													</select>
+												</label>
+											</th>
+											<th>
+												<label class="label" style="margin-top: 9px;text-align: center;">有无防火防爆防盗设施</label>
+											</th>
+											<th>
+												<label class="select">
+													<select ng-model="basicStorehouse.ywfhfbfdss" ng-disabled="isNotEdit"
+														ng-options="enum.id as enum.value for enum in falseEnum"
+														class="form-control">
+													</select>
+												</label>
+											</th>
+										</tr>
+
+										<tr>
+											<th colspan="2">
+												<label class="label" style="margin-top: 9px;text-align: center;">隔热保温措施</label>
+											</th>
+											<th colspan="7">
+												<label class="textarea"> <i class="icon-append fa fa-comment"></i>
+										           	<textarea rows="5" ng-model="basicStorehouse.grbwcs" name="grbwcs" oninput="if(value.length>512) value=value.slice(0,512)" placeholder="描述"></textarea>
+										       	</label>
+											</th>
+										</tr>
+										<tr>
+											<th colspan="2">
+												<label class="label" style="margin-top: 9px;text-align: center;">有无粮情检测设施</label>
+											</th>
+											<th>
+												<label class="select">
+													<select ng-model="basicStorehouse.ywlqjcss" ng-disabled="isNotEdit"
+														ng-options="enum.id as enum.value for enum in falseEnum"
+														class="form-control">
+													</select>
+												</label>
+											</th>
+											<th>
+												<label class="label" style="margin-top: 9px;text-align: center;">有无机械通风设施</label>
+											</th>
+											<th>
+												<label class="select">
+													<select ng-model="basicStorehouse.ywjxtfss" ng-disabled="isNotEdit"
+														ng-options="enum.id as enum.value for enum in falseEnum"
+														class="form-control">
+													</select>
+												</label>
+											</th>
+											<th>
+												<label class="label" style="margin-top: 9px;text-align: center;">能否环流熏蒸杀虫</label>
+											</th>
+											<th>
+												<label class="select">
+													<select ng-model="basicStorehouse.nfhlxzsc" ng-disabled="isNotEdit"
+														ng-options="enum.id as enum.value for enum in falseEnum"
+														class="form-control">
+													</select>
+												</label>
+											</th>
+											<th>
+												<label class="label" style="margin-top: 9px;text-align: center;">能否富氮低氧气调储粮</label>
+											</th>
+											<th>
+												<label class="select">
+													<select ng-model="basicStorehouse.nffddyqtcl" ng-disabled="isNotEdit"
+														ng-options="enum.id as enum.value for enum in falseEnum"
+														class="form-control">
+													</select>
+												</label>
+											</th>
+										</tr>
+										<tr>
+											<th colspan="2">
+												<label class="label" style="margin-top: 9px;text-align: center;">能否仓外测虫</label>
+											</th>
+											<th>
+												<label class="select">
+													<select ng-model="basicStorehouse.nfcwcc" ng-disabled="isNotEdit"
+														ng-options="enum.id as enum.value for enum in falseEnum"
+														class="form-control">
+													</select>
+												</label>
+											</th>
+											<th></th>
+											<th></th>
+											<th></th>
+											<th></th>
+											<th></th>
+											<th></th>
+										</tr>
+									</table>
+								</fieldset>
+								<footer class="modal-footer text-align-center">
+									<button ng-click="returnTop()" class="btn btn-default btn-lg" data-dismiss="modal">取消</button>
+									<button ng-click="save()" type="button" class="btn btn-primary btn-lg" ng-hide="isNotEdit">提交</button>
+								</footer>
+							</form>
+						</div>
+					</div>
+			</article>
+		</div>
+	</section>
+</div>

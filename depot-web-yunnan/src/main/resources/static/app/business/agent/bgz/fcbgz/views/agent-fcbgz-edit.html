@@ -1,0 +1,191 @@
+<!-- MAIN CONTENT -->
+<div id="content">
+
+	<!-- widget grid -->
+	<section id="widget-grid" widget-grid>
+
+		<!-- START ROW -->
+		<div class="row">
+
+			<!-- NEW COL START -->
+			<article class="col-sm-12 col-md-12 col-lg-12">
+
+				<!-- Widget ID (each widget will need unique ID)-->
+				<div jarvis-widget id="form-grid-widget"
+					 data-widget-colorbutton="false" data-widget-editbutton="false"
+					 data-widget-custombutton="false">
+
+					<!-- widget div-->
+					<div>
+
+						<!-- widget content -->
+						<div class="widget-body no-padding">
+							<form id="agentFcbgz-form" class="smart-form ng-pristine ng-valid" data-validator-option="validateOptions" novalidate="novalidate">
+								<header>
+									<a href-void class="btn btn-default btn-xs" ng-click="retList()">
+										<i class="fa fa-angle-left"></i>&nbsp;返回&nbsp;
+									</a>
+									&nbsp;<strong>分仓保管账详情</strong>
+								</header>
+								<fieldset>
+									<div class="row">
+										<section class="col col-4">
+											<label class="label txt-bg-red">代储点名称<span style="color: red;">*</span></label>
+											<label class="select">
+												<select ng-model="fcbgz.agentId" required name="agentId" ng-disabled="true" 
+														ng-options="agent.id as agent.agentName for agent in agentData.list"
+														class="form-control" ng-change="getAgentDepotData(fcbgz.agentId)">
+													<option value="">--请选择--</option>
+												</select>
+											</label>
+										</section>
+										<section class="col col-4">
+											<label class="label txt-bg-red">粮库名称<span style="color: red;">*</span></label>
+											<label class="select">
+												<select ng-model="fcbgz.dckId" name="dckId" required ng-disabled="true" 
+														ng-options="depot.depotId as depot.depotName for depot in depotList"
+														class="form-control" ng-change="getHouseList(fcbgz.szlkOrgId)">
+													<option value="">--请选择--</option>
+												</select>
+											</label>
+										</section>
+										<section class="col col-4">
+											<label class="label txt-bg-red">仓房名称<span style="color: red;">*</span></label>
+											<label class="select">
+												<select ng-model="fcbgz.houseId" name="houseId" required ng-disabled="true" 
+														ng-options="store.storehouseId as store.storehouseName for store in storehouseList"
+														class="form-control" ng-change="getWareList(fcbgz.houseId)">
+													<option value="">--请选择--</option>
+												</select>
+											</label>
+										</section>
+									</div>
+									<div class="row">
+										<section class="col col-4">
+											<label class="label txt-bg-red">货位名称<span style="color: red;">*</span></label>
+											<label class="select">
+												<select ng-model="fcbgz.wareId" name="wareId" required ng-disabled="true" 
+														ng-options="ware.warehouseId as ware.warehouseName for ware in warelist"
+														class="form-control">
+													<option value="">--请选择--</option>
+												</select>
+											</label>
+										</section>
+										<section class="col col-4">
+											<label class="label">粮油品种<span style="color: red;">*</span></label>
+											<label class="select">
+												<multi-select-tree
+														disabled-tree="true"
+														data-input-model="grainAttributeTreeLspzData"
+														data-output-model="fcbgz.lspz"
+														data-default-label="--请选择--"
+														name="nature"
+														select-only-leafs="true"
+														multi-select="false" required>
+												</multi-select-tree>
+												<em><span style="color: #D56161;margin-top:6px;padding:0 1px;font-style:normal;font-size:11px;
+						                         line-height:15px;" id="grainAttribute_lspz-error"></span></em>
+											</label>
+										</section>
+										<section class="col col-4">
+											<label class="label">粮油性质<span style="color: red;">*</span></label>
+											<label class="select">
+												<multi-select-tree
+														disabled-tree="true"
+														data-input-model="grainAttributeTreeLsxzData"
+														data-output-model="fcbgz.lsxz"
+														data-default-label="--请选择--"
+														name="nature"
+														select-only-leafs="true"
+														multi-select="false" required>
+												</multi-select-tree>
+												<em><span style="color: #D56161;margin-top:6px;padding:0 1px;font-style:normal;font-size:11px;
+						                         line-height:15px;" id="grainAttribute_lsxz-error"></span></em>
+											</label>
+										</section>
+									</div>
+									<div class="row">
+										<section class="col col-4">
+											<label class="label txt-bg-red">粮食等级<span style="color: red;">*</span></label>
+											<label class="select">
+												<select ng-model="fcbgz.lsdj" name="lspz" required ng-disabled="true" 
+														ng-options="enum.enumid as enum.enumname for enum in dicDataList[1002]"
+														class="form-control">
+													<option value="">--请选择--</option>
+												</select>
+											</label>
+										</section>
+										<section class="col col-4">
+											<label class="label txt-bg-red">收入数量(公斤)<span style="color: red;">*</span></label>
+											<label class="input">
+												<i class="icon-prepend fa fa-user"></i>
+												<input type="number" name="number" ng-model="fcbgz.srsl" required ng-disabled="true" 
+												onkeyup="this.value= this.value.match(/\d+(\.\d{0,4})?/) ? this.value.match(/\d+(\.\d{0,4})?/)[0] : ''" />
+											</label>
+										</section>
+										<section class="col col-4">
+											<label class="label txt-bg-red">支出数量(公斤)<span style="color: red;">*</span></label>
+											<label class="input">
+												<i class="icon-prepend fa fa-user"></i>
+												<input type="number" name="number" ng-model="fcbgz.zcsl" required ng-disabled="true" 
+												onkeyup="this.value= this.value.match(/\d+(\.\d{0,4})?/) ? this.value.match(/\d+(\.\d{0,4})?/)[0] : ''" />
+											</label>
+										</section>
+									</div>
+									<div class="row">
+										<section class="col col-4">
+											<label class="label txt-bg-red">库存数量(公斤)<span style="color: red;">*</span></label>
+											<label class="input">
+												<i class="icon-prepend fa fa-user"></i>
+												<input type="number" name="kcsl" ng-model="fcbgz.kcsl" ng-disabled="true" required
+												onkeyup="this.value= this.value.match(/\d+(\.\d{0,4})?/) ? this.value.match(/\d+(\.\d{0,4})?/)[0] : ''" />
+											</label>
+										</section>
+										<section class="col col-4">
+											<label class="label txt-bg-red">记账人<span style="color: red;">*</span></label>
+											<label class="input">
+												<i class="icon-prepend fa fa-user"></i>
+												<input type="text" name="jzr" ng-model="fcbgz.jzr" ng-disabled="disabled" required />
+											</label>
+										</section>
+										<section class="col col-4">
+											<label class="label txt-bg-red">记账日期<span style="color: red;">*</span></label>
+											<label class="input">
+												<label class="input">
+													<input type="text" ng-model="fcbgz.jzsj" ng-disabled="disabled" required class="form-control datepicker" data-smart-datepicker>
+												</label>
+											</label>
+										</section>
+									</div>
+									<div class="row" ng-hide="shenhe">
+										<section class="col col-4">
+											<label class="label txt-bg-red">审核人<span style="color: red;">*</span></label>
+											<label class="input">
+												<i class="icon-prepend fa fa-user"></i>
+												<input type="text" name="shr" ng-model="fcbgz.shr" ng-disabled="disabled" required />
+											</label>
+										</section>
+										<section class="col col-4">
+											<label class="label txt-bg-red">审核日期<span style="color: red;">*</span></label>
+											<label class="input">
+												<label class="input">
+													<input type="text" ng-model="fcbgz.shsj" name="shsj" ng-disabled="disabled" required class="form-control datepicker" data-smart-datepicker>
+												</label>
+											</label>
+										</section>
+									</div>
+								</fieldset>
+
+								<footer class="text-align-center">
+									<button type="button" class="btn btn-default" ng-click="retList()">取消</button>
+									<button ng-show="isShow == '1'" type="button" class="btn btn-primary" ng-click="saveData()">提交</button>
+								</footer>
+							</form>
+						</div>
+					</div>
+				</div>
+			</article>
+		</div>
+	</section>
+
+</div>

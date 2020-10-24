@@ -1,0 +1,44 @@
+<div jarvis-widget="" id="wid-id-0" data-widget-colorbutton="false" data-widget-editbutton="false" data-widget-deletebutton="false" data-widget-sortable="false" class="jarviswidget" role="widget">
+	<div role="content">
+		<!-- widget content -->
+		<div class="widget-body"><div class="jarviswidget-editbox"><input class="form-control" type="text"></div>
+			<legend>
+				报警信息设置
+			</legend>
+			<form class="smart-form">
+				<fieldset>
+					<div class="row">
+						<div class="toggle" style="padding-left:15px;">
+							<span>报警方式</span>
+							<span style="padding-left:35px;">短信报警</span>
+							<!--<span style="padding-left:35px;">系统推送</span>-->
+						</div>
+						<section class="col col-2">
+							<label class="toggle">
+								<input id="oneSmsAlarm" type="checkbox" ng-model="alarmType[0].smsalarm" ng-checked="alarmType[0].smsalarm">
+								<i data-swchon-text="开" data-swchoff-text="关"></i>质量诊断</label>
+							<!--<label class="toggle">-->
+								<!--<input id="twoSmsAlarm" type="checkbox"  ng-model="alarmType[1].smsalarm" ng-checked="alarmType[1].smsalarm">-->
+								<!--<i data-swchon-text="开" data-swchoff-text="关"></i>行为分析</label>-->
+						</section>
+						<!--<section class="col col-1">-->
+							<!--<label class="toggle">-->
+								<!--<input id="oneSystemAlarm" type="checkbox"  ng-model="alarmType[0].systemalarm" ng-checked="alarmType[0].systemalarm">-->
+								<!--<i data-swchon-text="开" data-swchoff-text="关"></i>&nbsp&nbsp&nbsp&nbsp</label>-->
+							<!--<label class="toggle">-->
+								<!--<input id="twoSystemAlarm" type="checkbox"  ng-model="alarmType[1].systemalarm" ng-checked="alarmType[1].systemalarm">-->
+								<!--<i data-swchon-text="开" data-swchoff-text="关"></i>&nbsp&nbsp&nbsp&nbsp</label>-->
+						<!--</section>-->
+					</div>
+				</fieldset>
+				<footer has-permission="432" >
+					<button type="submit" class="btn btn-primary" ng-click="saveAlarmData()">
+						保存
+					</button>
+				</footer>
+			</form>
+		</div>
+
+	</div>
+
+</div>

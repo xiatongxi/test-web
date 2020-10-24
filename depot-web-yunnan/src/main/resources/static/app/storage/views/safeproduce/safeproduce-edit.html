@@ -1,0 +1,65 @@
+<div class="modal-content">
+	<div class="modal-header">
+		<button type="button" class="close" ng-click="cancel()">&times;</button>
+		<h4 class="modal-title" id="myModalLabel">上传管理制度文件</h4>
+	</div>
+	<div class="modal-body">
+		<form id="safeProduce-form" name='safeProduce-form' class="smart-form ng-pristine ng-valid" ng-submit='safeProduce-form.$valid&&save(safeProduce)' novalidate="novalidate">
+
+		    <fieldset>
+		        <div class="row">
+		            <section class="col col-sm-12">
+		                <label class="label">文件名称<span style="color: red;">*</span></label>
+		                <label class="input">
+		                    <input type="text" ng-model="safeProduce.fileName" name="fileName" placeholder="文件名称" maxlength="30">
+		                </label>
+		            </section>
+		        </div>
+		        <div class="row">
+		            <section class="col col-sm-12">
+		                <label class="label">
+		                	选择文件&nbsp;
+		                	<a href-void class="btn btn-default" ng-click="addFile()" ng-hide="addFileSign"> <i class="fa fa-plus"></i>添加</a>
+							&emsp;<span style="color: red;">注:上传文件不能大于20MB</span>
+		                </label>
+						<div class="input input-file" ng-repeat="linenumber in linenumbers">
+				            <span class="button">
+				            	<input type="file" nv-file-select="" uploader="uploader" accept="application/msword,application/pdf,text/plain,application/msexcel,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,application/vnd.openxmlformats-officedocument.wordprocessingml.document,application/vnd.ms-excel"
+				            		onchange="this.parentNode.nextSibling.value = this.value">
+				                	浏览
+				            </span><input type="text" name="imgUrl" placeholder="" readonly=""
+				            	ng-click="clickInput(linenumber)">
+				        	<br>
+				        </div>
+		            </section>
+		        </div>
+
+				<div class="row">
+					<section class="col col-sm-12">
+						<div class="progress" style="margin-bottom: 0;margin-top:-30px;">
+							<div class="progress-bar" role="progressbar" ng-style="{ 'width': fileItem.progress + '%' }">{{fileItem.progress}}%</div>
+						</div>
+						<td ng-show="uploader.isHTML5" nowrap>{{ fileItem.file.size/1024/1024|number:2 }} MB&nbsp;
+							<span ng-show="fileItem.isSuccess"><i class="glyphicon glyphicon-ok">上传成功</i></span>
+							<!--<span ng-show="fileItem.isCancel"><i class="glyphicon glyphicon-ban-circle">取消上传</i></span>-->
+							<span ng-show="fileItem.isError"><i class="glyphicon glyphicon-remove">{{fileItem.file.size/1024/1024 >= 20?'文件大于20MB,':'网络原因或服务器限制,'}}上传失败</i></span>
+						</td>
+					</section>
+				</div>
+		
+		        <div class="row">
+		            <section class="col col-sm-12">
+		                <label class="label">备 注<span style="color: red;">*</span></label>
+		                <label class="textarea"> <i class="icon-append fa fa-comment"></i>
+		                    <textarea rows="5" ng-model="safeProduce.remarks" name="remarks" placeholder="备注"></textarea>
+		                </label>
+		            </section>
+		        </div>
+		    </fieldset>
+		</form>
+	</div>
+	<div class="modal-footer">
+		<button ng-click="save()" type="button" class="btn btn-primary">提交</button>
+		<button ng-click="cancel()" type="button" class="btn btn-default">取消</button>
+	</div>
+</div>

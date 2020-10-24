@@ -1,0 +1,493 @@
+<div id="content" style=" border-width:5px; margin-left:2%;position:relative;margin-right:2%;">
+    <section id="widget-grid" widget-grid>
+        <div class="row">
+            <article class="col-sm-12 col-md-12 col-lg-12">
+                <div jarvis-widget id="form-grid-widget"
+                    data-widget-colorbutton="false" data-widget-editbutton="false"
+                    data-widget-custombutton="false">
+                    <div>
+                        <div class="widget-body no-padding">
+                            <form id="plan-form" class="smart-form ng-pristine ng-valid" data-validator-option="validateOptions" novalidate="novalidate" style=" border-width:5px; margin-left:2%;position:relative;margin-right:2%;">
+                                <header>
+									<a href-void class="btn btn-default btn-xs" ng-click="retList()">
+										<i class="fa fa-angle-left"></i>&nbsp;返回&nbsp;
+									</a>
+									&nbsp;<strong>计划详情</strong>
+									<span class="pull-right font-xs">带*的部分必须填写</span>
+								</header>
+								
+                                <table style="width:70%; border-width:5px; margin-left:15%;position:relative;margin-right:15%;">
+                                <header>
+                                	<h3>
+                                		<strong>基础信息</strong>
+                               		</h3>
+                          		</header>
+                                <fieldset>
+                                	<table class="table table-striped table-bordered table-hover" width="100%">
+                                		<!--第一个tr开始 -->
+										<tr>
+											<!-- <th rowspan="5" width='10%'>
+												<label class="label" style="margin-top: 50%;text-align: center;">基本信息</label>
+												<input class="form-control" type="hidden" ng-model="plan.attributeType" ng-readonly="isNotEdit" name="type"
+		                                                required>
+											</th> -->
+											<th width='10%'>
+												<label class="label" style="margin-top: 9px;text-align: center;">企业名称<span style="color: red;margin-left: 5px;text-align: center;">*</span></label>
+											</th>
+											<th width='20%'>
+												<section>
+		                                            <label class="input"> 
+		                                                <input class="form-control" type="text" ng-model="plan.planCustomer" ng-readonly="isNotEdit" name="planCustomer"
+		                                                required>
+		                                                <input class="form-control" type="hidden" ng-model="plan.attributeType" ng-readonly="isNotEdit" name="type"
+		                                                required>
+		                                            </label>
+		                                        </section>
+											</th>
+											<th>
+												<label label class="label" style="margin-top: 9px;text-align: center;">计划类型<span style="color: red;">*</span></label>
+											</th>
+											<th>
+												<section>
+		                                            <label class="select"> 
+		                                                <select ng-model="plan.executeType" name="executeType" ng-disabled="Edit"  ng-change="planTypeChange()"
+														ng-readonly="isNotEdit" ng-options="enum.enumid as enum.enumname for enum in dicDataList[1050]" required >
+		                                                    <option value="">--请选择--</option>
+		                                                </select><i></i>
+		                                            </label>
+		                                        </section>
+											</th>
+											<th width='10%'>
+												<label class="label" style="margin-top: 9px;text-align: center;">计划编号<span style="color: red;">*</span></label>
+											</th>
+											<th width='20%'>
+												<section>
+		                                            <label class="input"> 
+		                                                <input class="form-control" type="text" ng-model="plan.planNumber" name="planNumber" 
+		                                                ng-readonly="true"  placeholder="{{ planNumber.msg }}" 
+		                                                required>
+		                                                <!-- <b class="tooltip tooltip-bottom-right">2-20位字母、数字和下划线</b> -->
+		                                            </label>
+		                                        </section>
+											</th>
+										</tr>
+										<!--第一个tr结束 -->
+										<!--第二个tr开始 -->
+										<tr>
+											<th width='10%'>
+												<label class="label" style="margin-top: 9px;text-align: center;">计划名称<span style="color: red;margin-left: 5px;text-align: center;">*</span></label>
+											</th>
+											<th width='20%'>
+												<section>
+		                                            <label class="input"> 
+		                                                <input class="form-control" type="text" ng-model="plan.planTitle" ng-readonly="isNotEdit" name="planTitle"
+		                                                required>
+		                                            </label>
+		                                        </section>
+											</th>
+										   <th width='10%'>
+												<label class="label" style="margin-top: 9px;text-align: center;">计划文号<span style="color: red;">*</span></label>
+											</th>
+											<th width='20%'>
+												<section>
+		                                            <label class="input"> 
+		                                                <input class="form-control" type="text" ng-model="plan.referenceNumber" ng-readonly="isNotEdit" name="referenceNumber" required>
+		                                            </label>
+		                                        </section>
+											</th>
+											
+											<th width='10%'>
+												<label class="label" style="margin-top: 9px;text-align: center;">计划年度<span style="color: red;">*</span></label>
+											</th>
+											<th width='20%'>
+												<section>
+			                                        <label class="select">
+								                        <select ng-model="plan.jhnd" ng-disabled="isNotEdit" name="jhnd" 
+								                         ng-options="enum.enumid as enum.enumname for enum in dicDataList[1004]"  required>
+								                         <option value="">--请选择--</option><i></i>
+								                         </select><i></i>
+	                         						</label>
+		                                        </section>
+											</th>
+										</tr>
+										<!--第二个tr结束 -->
+										<!--第三个tr开始 -->
+										<tr>
+										    <th width='10%'>
+												<label class="label" style="margin-top: 9px;text-align: center;">计划开始日期<span style="color: red;">*</span></label>
+											</th>
+											<th width='20%'>
+												<section>
+		                                            <label class="input"> 
+		                                            	<input type="text" ng-model="plan.kszxrq" name="kszxrq" class="form-control datepicker"
+		                                                data-smart-datepicker ng-readonly="true" ng-disabled="isNotEdit" required>
+		                                            </label>
+		                                        </section>
+											</th>
+											<th width='10%'>
+												<label class="label" style="margin-top: 9px;text-align: center;">计划截止日期<span style="color: red;">*</span></label>
+											</th>
+											<th width='20%'>
+												<section>
+		                                            <label class="input"> 
+		                                            	<input type="text" ng-model="plan.jzzxrq" name="jzzxrq" class="form-control datepicker"
+		                                                data-smart-datepicker ng-readonly="true" ng-disabled="isNotEdit" required>
+		                                            </label>
+		                                        </section>
+											</th>
+											<th width='10%'>
+												<label class="label" style="margin-top: 9px;text-align: center;">申请人</label>
+											</th>
+											<th width='20%'>
+												<section>
+		                                            <label class="input" style="margin-top: 9px;"> 
+		                                            	{{ plan.creater }}
+		                                            </label>
+		                                        </section>
+											</th>
+											</tr>
+											<tr>
+											<th width='10%'>
+												<label class="label" style="margin-top: 9px;text-align: center;">申请部门</label>
+											</th>
+											<th width='20%'>
+												<section>
+		                                            <label class="input"> 
+		                                                <input class="form-control" type="text" ng-model="plan.createUnit" ng-readonly="isNotEdit" name="createUnit">
+		                                            </label>
+		                                        </section>
+											</th>
+											<th>
+												<label label class="label" style="margin-top: 9px;text-align: center;">创建时间</label>
+											</th>
+											<th>
+												<section>
+		                                            <label class="input" style="margin-top: 9px;"> 
+		                                            	{{ plan.createTime | date:'yyyy-MM-dd HH:mm:ss' }}
+		                                            </label>
+		                                        </section>
+											</th>
+											<th></th>
+											<th></th>
+										</tr>
+									</table>
+                               </fieldset>
+                                
+                                <header>
+                                	<h3>
+                                		<strong>粮食信息</strong>
+                          		    </h3>
+                          		</header>
+                          		<fieldset>
+                                	<table class="table table-striped table-bordered table-hover"  >
+										<thead>
+												<tr>
+													<th data-hide="expand" align="center" width="5%">序号</th>
+													<th data-class="expand" align="center" width="9%">承储库点</th>
+													<th data-class="expand" align="center" width="7%">仓房名称</th>
+													<th data-class="expand" align="center" width="7%">货位名称</th>
+													<th data-hide="expand" align="center" width="7%">粮油品种</th>
+													<th data-hide="expand" align="center" width="10%">明细品种</th>
+													<th data-hide="expand" align="center" width="8%">粮油性质</th>
+													<th data-hide="expand" align="center" width="5%">等级</th>
+													<th data-hide="expand" align="center" width="9%">收获年度</th>
+													<th data-hide="expand" align="center" width="9%">入库时间</th>
+													<th data-hide="expand" align="center" width="9%">粮食产地</th>
+													<th data-hide="expand" align="center" width="8%" ng-hide="isNotEdit">操作</th>
+												</tr>
+												</thead>
+
+												<tbody>
+												<tr ng-repeat="detailInfo in addedDetail">
+													<td>{{$index + 1}}</td>
+													<td>{{orgInfoAllData[detailInfo.state]}}</td>
+													<td>
+													  <span ng-show="{{detailInfo.warehouseName!=null}}">
+													  	{{detailInfo.houseName}}<input type="hidden" ng-model="detailInfo.warehouseId" ng-readonly="true">
+													  </span>
+													  <span ng-show="{{detailInfo.warehouseName==null}}">----</span>
+													</td>
+													<td>
+													    <span ng-show="{{detailInfo.warehouseName!=null}}">{{detailInfo.warehouseName}}<input type="hidden" ng-model="detailInfo.warehouseId" ng-readonly="true"></span>
+														<span ng-show="{{detailInfo.warehouseName==null}}">----</span>
+													</td>
+													<td>{{dicData[detailInfo.grainKind]}}</td>
+													<td>{{dicData[detailInfo.grainDetailKind]}}</td>
+													<td>{{dicData[detailInfo.grainAttribute]}}</td>
+													<td>{{dicData[detailInfo.grainGrade]}}</td>
+													<td>{{dicData[detailInfo.grainAnnual]}}</td>
+													<td>{{detailInfo.inputTime | date:'yyyy-MM-dd'}}</td>
+													<td>{{dicData[detailInfo.grainProducingArea]}}</td>
+													<td ng-hide="isNotEdit">
+														<a class="btn btn-primary" ng-hide="isNotEdit" ng-click="editRow(detailInfo)">编辑</a>
+	                                                	<a class="btn btn-primary" ng-hide="isNotEdit" ng-click="deleteRow(detailInfo)">删除</a>
+													</td>
+												</tr>
+												</tbody>
+		                             </table>
+                          		</fieldset>
+                                  
+                                <header>
+                                	<h3>
+                                		<strong>购销信息</strong>
+                               		</h3>
+                          		</header>
+                          		<fieldset>
+                                	<table class="table table-striped table-bordered table-hover"  >
+										<thead>
+												<tr>
+													<th data-hide="expand" align="center" width="4%">序号</th>
+													<th data-class="expand" align="center">承储库点</th>
+													<th data-class="expand" align="center">仓房名称</th>
+													<th data-class="expand" align="center">货位名称</th>
+													<th data-hide="expand" align="center">粮油品种</th>
+													<th data-hide="expand" align="center" ng-show="plan.executeType!=3156">数量(公斤)</th>
+													<th data-hide="expand" align="center" ng-show="plan.executeType!=3156">单价(元/公斤)</th>
+													<th data-hide="expand" align="center" ng-show="plan.executeType!=3156">总价(元)</th>
+													<th data-hide="expand" align="center" ng-show="plan.executeType==3156">轮入数量(公斤)</th>
+													<th data-hide="expand" align="center" ng-show="plan.executeType==3156">轮入单价(元/公斤)</th>
+													<th data-hide="expand" align="center" ng-show="plan.executeType==3156">轮入总价(元)</th>
+													<th data-hide="expand" align="center" ng-show="plan.executeType==3156">轮出数量(公斤)</th>
+													<th data-hide="expand" align="center" ng-show="plan.executeType==3156">轮出单价(元/公斤)</th>
+													<th data-hide="expand" align="center" ng-show="plan.executeType==3156">轮出总价(元)</th>
+												</tr>
+												</thead>
+
+												<tbody>
+												<tr ng-repeat="detailInfo in addedDetail">
+													<td>{{$index + 1}}</td>
+													<td>{{depotInfo.orgName}}</td>
+													<td>
+													<span ng-show="{{detailInfo.warehouseName!=null}}">
+													  	{{detailInfo.houseName}}<input type="hidden" ng-model="detailInfo.warehouseId" ng-readonly="true">
+													</span>
+													  <span ng-show="{{detailInfo.warehouseName==null}}">----</span>
+													</td>
+													<td>
+													    <span ng-show="{{detailInfo.warehouseName!=null}}">{{detailInfo.warehouseName}}<input type="hidden" ng-model="detailInfo.warehouseId" ng-readonly="true"></span>
+														<span ng-show="{{detailInfo.warehouseName==null}}">----</span>
+													</td>
+													<td>{{dicData[detailInfo.grainKind]}}</td>
+													<td ng-show="plan.executeType!=3156">
+														<span ng-show="{{detailInfo.inCount!=null}}">{{detailInfo.inCount}}</span>
+														<span ng-show="{{detailInfo.outCount!=null}}">{{detailInfo.outCount}}</span>
+													</td>
+													<td ng-show="plan.executeType!=3156">
+														<span ng-show="{{detailInfo.inPrice!=null}}">{{detailInfo.inPrice}}</span>
+														<span ng-show="{{detailInfo.outPrice!=null}}">{{detailInfo.outPrice}}</span>
+													</td>
+													<td ng-show="plan.executeType!=3156">
+														<span ng-show="{{detailInfo.inDetailTotalPrice!=null}}">{{detailInfo.inDetailTotalPrice}}</span>
+														<span ng-show="{{detailInfo.outDetailTotalPrice!=null}}">{{detailInfo.outDetailTotalPrice}}</span>
+													</td>
+													<td ng-show="plan.executeType==3156">{{detailInfo.inCount}}</td>
+													<td ng-show="plan.executeType==3156">{{detailInfo.inPrice}}</td>
+													<td ng-show="plan.executeType==3156">{{detailInfo.inDetailTotalPrice}}</td>
+													<td ng-show="plan.executeType==3156">{{detailInfo.outCount}}</td>
+													<td ng-show="plan.executeType==3156">{{detailInfo.outPrice}}</td>
+													<td ng-show="plan.executeType==3156">{{detailInfo.outDetailTotalPrice}}</td>
+												</tr>
+												</tbody>
+		                             </table>
+                          		</fieldset>
+                          		
+                          		<fieldset>
+                          			<table>
+	                          			<tr ng-show="plan.executeType==3156">
+	                          				<th style="width:12%">
+	                          					<label class="label" style="margin-top: 9px;text-align: center;margin-left:8px;">轮入总数量(公斤)：</label>
+	                          				</th>
+	                          				<th>	
+	                          					<section>
+		                                            <label class="input" style="margin-top:8px"> 
+		                                                <input class="form-control" type="text" ng-model="plan.inAmount" ng-readonly="true" name="inAmount">
+		                                            </label>
+		                                        </section>
+	                          				</th>
+	                          				<th style="width:12%">
+	                          					<label class="label" style="margin-top: 9px;text-align: center;margin-left:8px;">轮入预计总金额(元)：</label>
+	                          				</th>
+	                          				<th>	
+	                          					<section>
+		                                            <label class="input" style="margin-top:8px"> 
+		                                                <input class="form-control" type="text" ng-model="plan.inTotalPrice" ng-readonly="true" name="inTotalPrice">
+		                                            </label>
+		                                        </section>
+	                          				</th>
+	                          				<th style="width:12%">
+	                          					<label class="label" style="margin-top: 9px;text-align: center;margin-left:8px;">轮出总数量(公斤)：</label>
+	                          				</th>
+	                          				<th>	
+	                          					<section>
+		                                            <label class="input" style="margin-top:8px"> 
+		                                                <input class="form-control" type="text" ng-model="plan.outAmount" ng-readonly="true" name="outAmount">
+		                                            </label>
+		                                        </section>
+	                          				</th>
+	                          				
+	                          				<th style="width:12%">
+	                          					<label class="label" style="margin-top: 9px;text-align: center;margin-left:8px;">轮出预计总金额(元)：</label>
+	                          				</th>
+	                          				<th>	
+	                          					<section>
+		                                            <label class="input" style="margin-top:8px"> 
+		                                                <input class="form-control" type="text" ng-model="plan.outTotalPrice" ng-readonly="true" name="outTotalPrice">
+		                                            </label>
+		                                        </section>
+	                          				</th>
+	                          			</tr>
+	                          			<tr>
+	                          				<th style="width:12%">
+	                          					<label class="label" style="margin-top: 9px;text-align: center;margin-left:8px;">轮换计划下发总数量(公斤)：</label>
+	                          				</th>
+	                          				<th>	
+	                          					<section>
+		                                            <label class="input" style="margin-top:8px"> 
+		                                                <input class="form-control" type="text" ng-model="plan.totalQuantity" ng-readonly="true" name="totalQuantity">
+		                                            </label>
+		                                        </section>
+	                          				</th>
+	                          				<th style="width:12%">
+	                          					<label class="label" style="margin-top: 9px;text-align: center;margin-left:8px;">省级备注：</label>
+	                          				</th>
+	                          				<th>	
+	                          					<section>
+		                                            <label class="input" style="margin-top:8px"> 
+		                                                <input class="form-control" type="text" ng-model="plan.provinceRemark" ng-readonly="true" name="provinceRemark">
+		                                            </label>
+		                                        </section>
+	                          				</th>
+	                          				
+	                          				<!-- <th style="width:12%">
+	                          					<label class="label" style="margin-top: 9px;text-align: center;margin-left:8px;">企业级备注：</label>
+	                          				</th>
+	                          				<th>	
+	                          					<section>
+		                                            <label class="input" style="margin-top:8px"> 
+		                                                <input class="form-control" type="text" ng-model="plan.enterpriseRemark" ng-readonly="true" name="enterpriseRemark">
+		                                            </label>
+		                                        </section>
+	                          				</th> -->
+	                          			</tr>
+	                          			
+                          		   </table>
+                          			<table width="100%">
+                          				<tr>
+	                          				<th>
+												<label class="label" style="font-size:18px"><strong>计划描述：</strong></label>
+												<label class="input">
+													<input type="text" ng-model="plan.planDesc" name="planDesc" ng-readonly="isNotEdit">
+												</label>
+	                          				</th>
+	                          			</tr>
+                          			</table>
+									<span ng-if="plan.inApplication=='4' || plan.inApplication=='3' " >
+										<table width="100%">
+											<tr>
+												<th>
+													<label class="label" style="font-size:18px;margin-top:15px"><strong>暂停或终止原因：</strong></label>
+													<label class="input">
+														<input type="text" ng-model="plan.refuseReason" name="refuseReason" ng-readonly="isNotEdit">
+													</label>
+												</th>
+											</tr>
+										</table>
+									</span>
+                                </fieldset>
+                                
+					            <header>
+                                	<h3>
+                                		<strong>附件信息</strong>
+                                		<a href-void class="btn btn-primary" ng-hide="isNotEdit" ng-click="addFile()"> <i class="fa fa-plus"></i>文件 </a>
+                               		</h3>
+                          		</header>
+					            <fieldset>
+						            
+                                	<table ng-hide="isNotEdit" class="table table-striped table-bordered table-hover" ng-repeat="linenumber in linenumbers" ng-click="clickFileInput(linenumber)" >
+		                                <!--第四3个tr开始 -->
+										<tr>
+											<th width='10%' >
+												<label class="label" style="margin-top: 9px;text-align: center;">附件</label>
+											</th>
+											<th colspan="4">
+												<section>
+									            	<div class="input input-file" style="margin-top: 9px; text-align: center; margin-right: 22px;">
+											            <span class="button" >
+											            	<input type="file" nv-file-select="" uploader="uploader" accept="*" options="id" id="fileInputId{{linenumber}}"
+											            		onchange="if (this.value != '')this.parentNode.nextSibling.value = this.value">
+											                	上传
+											            </span><input type="text" name="imgUrl" placeholder="" readonly="">
+										        	</div>
+									            </section>
+											</th>
+											<th width='10%' class="text-align-center">
+													<div class="input input-file" style="margin-top: 9px; text-align: center; margin-right: 16px;">
+														<span class="button"  ng-click="showFileByLinenumber(linenumber)">预览
+											            </span>
+													</div>
+													<!-- <button type="button" style="margin-top: 9px; text-align: center; margin-right: 22px;" class="btn btn-primary" ng-click="deleteFileByLinenumber(linenumber)">删除
+													</button> -->
+											</th>
+											
+											<th width='10%'>
+	                                                <!-- <span class="button" style="margin-top: 9px; text-align: center; margin-right: 22px;" ng-click="deleteFileByLinenumber(linenumber)">删除
+										            </span> -->
+										            <div class="input input-file" style="margin-top: 9px; text-align: center; margin-right: 16px;">
+														<span class="button"  ng-click="deleteFileByLinenumber(linenumber)">删除
+											            </span>
+													</div>
+											</th>
+											
+										</tr>
+										<!--第四3个tr结束 -->
+		                             </table>
+                                
+                                	<!--回显文件的表格  -->
+                                	
+                                	<table class="table table-striped table-bordered table-hover" ng-repeat="file in fileList" >
+		                                <!--第四3个tr开始 -->
+										<tr>
+											<th width='10%' >
+												<label class="label" style="margin-top: 9px;text-align: center;">附件</label>
+											</th>
+											<th colspan="5">
+												<section >
+										            <input class="form-control" type="text" ng-model="file.originalFileName" readonly="">
+		                                		</section>
+											</th>
+											<th width='10%' >
+												<section style="margin-top: 9px; text-align: center; margin-right: 22px;">
+							                        <a class="btn btn-default" href-void ng-click="download(file.filePath, file.originalFileName)"><i class="fa fa-download"></i>下载</a>
+		                                		</section>
+											</th>
+											
+											<th width='10%'>
+												<section style="margin-top: 9px; text-align: center; margin-right: 22px;">
+							                        <a class="btn btn-default" href-void ng-click="showFile(file.filePath)"><i class="fa fa-download"></i>预览</a>
+		                                		</section>
+											</th>
+											<th width='10%'>
+												<section  ng-hide="isNotEdit" style="margin-top: 9px; text-align: center; margin-right: 22px;">
+							                        <a class="btn btn-default" href-void ng-click="deleteFile(file)"><i class="fa fa-trash-o"></i>删除</a>
+		                                		</section>
+											</th>
+											
+										</tr>
+										<!--第四3个tr结束 -->
+		                             </table>
+		                             </fieldset>
+		                             </table>
+                    			<div ng-include="'app/act/util/historyList-audit.html'"></div>
+                            </form>
+                        </div>
+                    </div>
+            </article>
+        </div>
+    </section>
+   	<form id="download-form" method="post" target="_blank" style=" border-width:5px; margin-left:2%;position:relative;margin-right:2%;">
+		<input type="hidden" name="filePath" id="filePath">
+		<input type="hidden" name="originalFileName" id="originalFileName">
+		<input type="hidden" name="type" id="type">
+	</form>
+</div>
+

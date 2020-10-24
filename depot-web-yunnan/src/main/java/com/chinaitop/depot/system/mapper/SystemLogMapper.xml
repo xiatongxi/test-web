@@ -1,0 +1,465 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.chinaitop.depot.system.mapper.SystemLogMapper" >
+  <resultMap id="BaseResultMap" type="com.chinaitop.depot.system.model.SystemLog" >
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="org_id" property="orgId" jdbcType="INTEGER" />
+    <result column="user_id" property="userId" jdbcType="INTEGER" />
+    <result column="user_zh" property="userZh" jdbcType="VARCHAR" />
+    <result column="user_name" property="userName" jdbcType="VARCHAR" />
+    <result column="user_role" property="userRole" jdbcType="VARCHAR" />
+    <result column="user_address" property="userAddress" jdbcType="VARCHAR" />
+    <result column="dl_time" property="dlTime" jdbcType="TIMESTAMP" />
+    <result column="zx_time" property="zxTime" jdbcType="TIMESTAMP" />
+    <result column="func_id" property="funcId" jdbcType="INTEGER" />
+    <result column="func_name" property="funcName" jdbcType="VARCHAR" />
+    <result column="btn_id" property="btnId" jdbcType="INTEGER" />
+    <result column="method_name" property="methodName" jdbcType="VARCHAR" />
+    <result column="oper_result" property="operResult" jdbcType="VARCHAR" />
+    <result column="parameter" property="parameter" jdbcType="VARCHAR" />
+    <result column="rtn_param" property="rtnParam" jdbcType="VARCHAR" />
+    <result column="describes" property="describes" jdbcType="VARCHAR" />
+    <result column="type" property="type" jdbcType="VARCHAR" />
+    <result column="device_ip" property="deviceIp" jdbcType="VARCHAR" />
+    <result column="system_identify" property="systemIdentify" jdbcType="VARCHAR" />
+    <result column="operation_time" property="operationTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, org_id, user_id, user_zh, user_name, user_role, user_address, dl_time, zx_time, 
+    func_id, func_name, btn_id, method_name, oper_result, parameter, rtn_param, describes, 
+    type, device_ip, system_identify, operation_time
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.chinaitop.depot.system.model.SystemLogExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from system_log
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from system_log
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from system_log
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.chinaitop.depot.system.model.SystemLogExample" >
+    delete from system_log
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.chinaitop.depot.system.model.SystemLog" >
+    insert into system_log (id, org_id, user_id, 
+      user_zh, user_name, user_role, 
+      user_address, dl_time, zx_time, 
+      func_id, func_name, btn_id, 
+      method_name, oper_result, parameter, 
+      rtn_param, describes, type, 
+      device_ip, system_identify, operation_time
+      )
+    values (#{id,jdbcType=VARCHAR}, #{orgId,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, 
+      #{userZh,jdbcType=VARCHAR}, #{userName,jdbcType=VARCHAR}, #{userRole,jdbcType=VARCHAR}, 
+      #{userAddress,jdbcType=VARCHAR}, #{dlTime,jdbcType=TIMESTAMP}, #{zxTime,jdbcType=TIMESTAMP}, 
+      #{funcId,jdbcType=INTEGER}, #{funcName,jdbcType=VARCHAR}, #{btnId,jdbcType=INTEGER}, 
+      #{methodName,jdbcType=VARCHAR}, #{operResult,jdbcType=VARCHAR}, #{parameter,jdbcType=VARCHAR}, 
+      #{rtnParam,jdbcType=VARCHAR}, #{describes,jdbcType=VARCHAR}, #{type,jdbcType=VARCHAR}, 
+      #{deviceIp,jdbcType=VARCHAR}, #{systemIdentify,jdbcType=VARCHAR}, #{operationTime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.chinaitop.depot.system.model.SystemLog" >
+    insert into system_log
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="orgId != null" >
+        org_id,
+      </if>
+      <if test="userId != null" >
+        user_id,
+      </if>
+      <if test="userZh != null" >
+        user_zh,
+      </if>
+      <if test="userName != null" >
+        user_name,
+      </if>
+      <if test="userRole != null" >
+        user_role,
+      </if>
+      <if test="userAddress != null" >
+        user_address,
+      </if>
+      <if test="dlTime != null" >
+        dl_time,
+      </if>
+      <if test="zxTime != null" >
+        zx_time,
+      </if>
+      <if test="funcId != null" >
+        func_id,
+      </if>
+      <if test="funcName != null" >
+        func_name,
+      </if>
+      <if test="btnId != null" >
+        btn_id,
+      </if>
+      <if test="methodName != null" >
+        method_name,
+      </if>
+      <if test="operResult != null" >
+        oper_result,
+      </if>
+      <if test="parameter != null" >
+        parameter,
+      </if>
+      <if test="rtnParam != null" >
+        rtn_param,
+      </if>
+      <if test="describes != null" >
+        describes,
+      </if>
+      <if test="type != null" >
+        type,
+      </if>
+      <if test="deviceIp != null" >
+        device_ip,
+      </if>
+      <if test="systemIdentify != null" >
+        system_identify,
+      </if>
+      <if test="operationTime != null" >
+        operation_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="orgId != null" >
+        #{orgId,jdbcType=INTEGER},
+      </if>
+      <if test="userId != null" >
+        #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="userZh != null" >
+        #{userZh,jdbcType=VARCHAR},
+      </if>
+      <if test="userName != null" >
+        #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="userRole != null" >
+        #{userRole,jdbcType=VARCHAR},
+      </if>
+      <if test="userAddress != null" >
+        #{userAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="dlTime != null" >
+        #{dlTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="zxTime != null" >
+        #{zxTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="funcId != null" >
+        #{funcId,jdbcType=INTEGER},
+      </if>
+      <if test="funcName != null" >
+        #{funcName,jdbcType=VARCHAR},
+      </if>
+      <if test="btnId != null" >
+        #{btnId,jdbcType=INTEGER},
+      </if>
+      <if test="methodName != null" >
+        #{methodName,jdbcType=VARCHAR},
+      </if>
+      <if test="operResult != null" >
+        #{operResult,jdbcType=VARCHAR},
+      </if>
+      <if test="parameter != null" >
+        #{parameter,jdbcType=VARCHAR},
+      </if>
+      <if test="rtnParam != null" >
+        #{rtnParam,jdbcType=VARCHAR},
+      </if>
+      <if test="describes != null" >
+        #{describes,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null" >
+        #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="deviceIp != null" >
+        #{deviceIp,jdbcType=VARCHAR},
+      </if>
+      <if test="systemIdentify != null" >
+        #{systemIdentify,jdbcType=VARCHAR},
+      </if>
+      <if test="operationTime != null" >
+        #{operationTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.chinaitop.depot.system.model.SystemLogExample" resultType="java.lang.Integer" >
+    select count(*) from system_log
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update system_log
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=VARCHAR},
+      </if>
+      <if test="record.orgId != null" >
+        org_id = #{record.orgId,jdbcType=INTEGER},
+      </if>
+      <if test="record.userId != null" >
+        user_id = #{record.userId,jdbcType=INTEGER},
+      </if>
+      <if test="record.userZh != null" >
+        user_zh = #{record.userZh,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userName != null" >
+        user_name = #{record.userName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userRole != null" >
+        user_role = #{record.userRole,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userAddress != null" >
+        user_address = #{record.userAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="record.dlTime != null" >
+        dl_time = #{record.dlTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.zxTime != null" >
+        zx_time = #{record.zxTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.funcId != null" >
+        func_id = #{record.funcId,jdbcType=INTEGER},
+      </if>
+      <if test="record.funcName != null" >
+        func_name = #{record.funcName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.btnId != null" >
+        btn_id = #{record.btnId,jdbcType=INTEGER},
+      </if>
+      <if test="record.methodName != null" >
+        method_name = #{record.methodName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.operResult != null" >
+        oper_result = #{record.operResult,jdbcType=VARCHAR},
+      </if>
+      <if test="record.parameter != null" >
+        parameter = #{record.parameter,jdbcType=VARCHAR},
+      </if>
+      <if test="record.rtnParam != null" >
+        rtn_param = #{record.rtnParam,jdbcType=VARCHAR},
+      </if>
+      <if test="record.describes != null" >
+        describes = #{record.describes,jdbcType=VARCHAR},
+      </if>
+      <if test="record.type != null" >
+        type = #{record.type,jdbcType=VARCHAR},
+      </if>
+      <if test="record.deviceIp != null" >
+        device_ip = #{record.deviceIp,jdbcType=VARCHAR},
+      </if>
+      <if test="record.systemIdentify != null" >
+        system_identify = #{record.systemIdentify,jdbcType=VARCHAR},
+      </if>
+      <if test="record.operationTime != null" >
+        operation_time = #{record.operationTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update system_log
+    set id = #{record.id,jdbcType=VARCHAR},
+      org_id = #{record.orgId,jdbcType=INTEGER},
+      user_id = #{record.userId,jdbcType=INTEGER},
+      user_zh = #{record.userZh,jdbcType=VARCHAR},
+      user_name = #{record.userName,jdbcType=VARCHAR},
+      user_role = #{record.userRole,jdbcType=VARCHAR},
+      user_address = #{record.userAddress,jdbcType=VARCHAR},
+      dl_time = #{record.dlTime,jdbcType=TIMESTAMP},
+      zx_time = #{record.zxTime,jdbcType=TIMESTAMP},
+      func_id = #{record.funcId,jdbcType=INTEGER},
+      func_name = #{record.funcName,jdbcType=VARCHAR},
+      btn_id = #{record.btnId,jdbcType=INTEGER},
+      method_name = #{record.methodName,jdbcType=VARCHAR},
+      oper_result = #{record.operResult,jdbcType=VARCHAR},
+      parameter = #{record.parameter,jdbcType=VARCHAR},
+      rtn_param = #{record.rtnParam,jdbcType=VARCHAR},
+      describes = #{record.describes,jdbcType=VARCHAR},
+      type = #{record.type,jdbcType=VARCHAR},
+      device_ip = #{record.deviceIp,jdbcType=VARCHAR},
+      system_identify = #{record.systemIdentify,jdbcType=VARCHAR},
+      operation_time = #{record.operationTime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.chinaitop.depot.system.model.SystemLog" >
+    update system_log
+    <set >
+      <if test="orgId != null" >
+        org_id = #{orgId,jdbcType=INTEGER},
+      </if>
+      <if test="userId != null" >
+        user_id = #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="userZh != null" >
+        user_zh = #{userZh,jdbcType=VARCHAR},
+      </if>
+      <if test="userName != null" >
+        user_name = #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="userRole != null" >
+        user_role = #{userRole,jdbcType=VARCHAR},
+      </if>
+      <if test="userAddress != null" >
+        user_address = #{userAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="dlTime != null" >
+        dl_time = #{dlTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="zxTime != null" >
+        zx_time = #{zxTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="funcId != null" >
+        func_id = #{funcId,jdbcType=INTEGER},
+      </if>
+      <if test="funcName != null" >
+        func_name = #{funcName,jdbcType=VARCHAR},
+      </if>
+      <if test="btnId != null" >
+        btn_id = #{btnId,jdbcType=INTEGER},
+      </if>
+      <if test="methodName != null" >
+        method_name = #{methodName,jdbcType=VARCHAR},
+      </if>
+      <if test="operResult != null" >
+        oper_result = #{operResult,jdbcType=VARCHAR},
+      </if>
+      <if test="parameter != null" >
+        parameter = #{parameter,jdbcType=VARCHAR},
+      </if>
+      <if test="rtnParam != null" >
+        rtn_param = #{rtnParam,jdbcType=VARCHAR},
+      </if>
+      <if test="describes != null" >
+        describes = #{describes,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null" >
+        type = #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="deviceIp != null" >
+        device_ip = #{deviceIp,jdbcType=VARCHAR},
+      </if>
+      <if test="systemIdentify != null" >
+        system_identify = #{systemIdentify,jdbcType=VARCHAR},
+      </if>
+      <if test="operationTime != null" >
+        operation_time = #{operationTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.chinaitop.depot.system.model.SystemLog" >
+    update system_log
+    set org_id = #{orgId,jdbcType=INTEGER},
+      user_id = #{userId,jdbcType=INTEGER},
+      user_zh = #{userZh,jdbcType=VARCHAR},
+      user_name = #{userName,jdbcType=VARCHAR},
+      user_role = #{userRole,jdbcType=VARCHAR},
+      user_address = #{userAddress,jdbcType=VARCHAR},
+      dl_time = #{dlTime,jdbcType=TIMESTAMP},
+      zx_time = #{zxTime,jdbcType=TIMESTAMP},
+      func_id = #{funcId,jdbcType=INTEGER},
+      func_name = #{funcName,jdbcType=VARCHAR},
+      btn_id = #{btnId,jdbcType=INTEGER},
+      method_name = #{methodName,jdbcType=VARCHAR},
+      oper_result = #{operResult,jdbcType=VARCHAR},
+      parameter = #{parameter,jdbcType=VARCHAR},
+      rtn_param = #{rtnParam,jdbcType=VARCHAR},
+      describes = #{describes,jdbcType=VARCHAR},
+      type = #{type,jdbcType=VARCHAR},
+      device_ip = #{deviceIp,jdbcType=VARCHAR},
+      system_identify = #{systemIdentify,jdbcType=VARCHAR},
+      operation_time = #{operationTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>

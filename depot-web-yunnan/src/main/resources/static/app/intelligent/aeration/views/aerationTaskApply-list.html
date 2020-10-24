@@ -1,0 +1,172 @@
+<!-- MAIN CONTENT -->
+<div id="content">
+	<!-- widget grid -->
+	<section widget-grid id="widget-grid">
+
+
+		<div class="row">
+			<article class="col-sm-12">
+
+				<div jarvis-widget id="standard-datatable-widget"
+					data-widget-color="darken" data-widget-editbutton="false">
+					<header>
+						<span class="widget-icon"> <i class="fa fa-table"></i>
+						</span>
+						<h2>通风作业申请列表</h2>
+					</header>
+					<div>
+						<div class="widget-body no-padding">
+							<div id="DataTables_Table_1_wrapper"
+								class="dataTables_wrapper form-inline no-footer">
+								<div class="dt-toolbar">
+									<div class="col-xs-12 col-sm-9">
+										<div class="form-group">
+											<a has-permission="147" has-botton="2" class="btn btn-primary btn-sm" ng-click="edit('',2,0)">
+												<span class="fa fa-plus"></span>&nbsp;新&nbsp;增
+											</a>&emsp;
+											<label>
+												作业状态：
+												<select ng-model="aerationTask.state"
+													ng-options="enum.key as enum.value for enum in applyStatuses"
+													class="form-control input-sm">
+														<option value="">--请选择--</option>
+												</select>
+											</label>
+											<a class="btn btn-default btn-sm" ng-click="loadData()">
+												<i class="fa fa-search"></i>&nbsp;查&nbsp;询
+											</a>
+										</div>
+									</div>
+									<div class="col-sm-3 col-xs-6 hidden-xs">
+										<div class="dataTables_length">
+											<label>
+											每页显示 <select ng-change="loadData(pageInfo.pageNum=1)"
+													ng-options="num as num for num in [1,10,25,50,100]"
+													ng-model="pageInfo.pageSize" class="form-control input-sm">
+											</select> 条
+											</label>
+										</div>
+									</div>
+								</div>
+
+								<table class="table table-striped table-bordered table-hover"
+									width="100%">
+									<thead>
+										<tr>
+											<th data-class="expand">通风计划编号</th>
+											<th data-class="expand">仓房名称</th>
+											<th data-class="expand">申请时间</th>
+											<th data-class="expand">开始通风时间</th>
+											<th data-class="expand">结束通风时间</th>
+											<th data-hide="expand">通风方式</th>
+											<th data-hide="expand">状态</th>
+											<th data-hide="expand">操作</th>
+										</tr>
+									</thead>
+
+									<tbody>
+										<tr ng-repeat="apply in pageInfo.list ">
+											<td>{{apply.areationPlanNumber}}</td>
+											<!-- <td>{{storehouseObj[apply.vCfCode].storehouseName}}</td> -->
+											<td>{{ storeHouseCodeObj[apply.vCfCode].storehouseName }}</td>
+											<td>{{apply.applyTime | date :'yyyy-MM-dd'}}</td>
+											<td>{{apply.testTime | date :'yyyy-MM-dd HH:mm:ss'}}</td>
+											<td>{{apply.endTime | date :'yyyy-MM-dd HH:mm:ss'}}</td>
+											<td>{{dicData[apply.ventilationMode]}}</td>
+											<td>
+												<div ng-switch="{{apply.state}}">
+				                                    <div ng-switch-when="1">未提交</div>
+				                                    <div ng-switch-when="2">待审批</div>
+				                                    <div ng-switch-when="3">审批中</div>
+				                                    <div ng-switch-when="4">审批通过</div>
+				                                    <div ng-switch-when="0">审批驳回</div>
+				                                    <div ng-switch-when="5">作业结束</div>
+				                                    <div ng-switch-when="6">拒绝</div>
+				                                    <div ng-switch-default>{{apply.state}}</div>
+				                                </div>
+											</td>
+											<td>
+												<!-- 只有未提交和驳回的数据可以提交和修改 -->
+												<span has-botton="2" ng-if="apply.state < 2">
+													<a has-permission="463" href-void ng-click="choices(apply)" >
+														<i class="fa fa-pencil-square"></i>提交
+													</a>
+													<a has-permission="274" href-void ng-click="edit(apply.id, 0, 0)">
+														<i class="fa fa-edit"></i>修改
+													</a>
+													<a has-permission="401" href-void ng-click="remove(apply.id)">
+														<i class="fa fa-trash-o"></i>删除
+													</a>
+												</span>
+												<a href-void ng-click="edit(apply.id,1,0)">
+													<i class="fa fa-info-circle"></i>查看
+												</a>
+											</td>
+										</tr>
+									</tbody>
+
+								</table>
+								<div smart-include="app/layout/partials/page.tpl.html"></div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</article>
+		</div>
+
+	</section>
+
+</div>
+
+
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog"
+	aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal"
+					aria-hidden="true">&times;</button>
+				<h4 class="modal-title" id="myModalLabel">计划</h4>
+			</div>
+			<div class="modal-body">
+
+<!-- 				<div smart-include="app/basic/storehouse/views/Storehouse-edit.html"></div> -->
+
+			</div>
+			<div class="modal-footer">
+				<button ng-click="save()" type="button" class="btn btn-primary">提交</button>
+				<button type="button" class="btn btn-default" data-dismiss="modal">
+					取消</button>
+			</div>
+		</div>
+		<!-- /.modal-content -->
+	</div>
+	<!-- /.modal-dialog -->
+</div>
+<!-- /.modal -->
+
+
+<!-- UserList -->
+<div class="modal fade" id="myUserList" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                    &times;
+                </button>
+                <h4 class="modal-title" id="myModalLabel">选择审批人</h4>
+            </div>
+            <div class="modal-body">
+	         	<select class="form-control" ng-model="assignment.assignee" ng-options="user.userId as user.username for user in userList">
+	         		<option value="">-- 请选择 --</option>
+	         	</select>
+
+            </div>
+            <div class="modal-footer">
+                <button ng-click="submit(assignment.assignee)" type="button" class="btn btn-primary">提交</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">取消 </button>
+            </div>
+        </div>
+    </div>
+</div>

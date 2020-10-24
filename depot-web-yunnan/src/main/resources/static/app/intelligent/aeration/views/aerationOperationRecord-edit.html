@@ -1,0 +1,427 @@
+<div id="content">
+	<!-- widget grid -->
+	<section id="widget-grid" widget-grid>
+		<div class="row">
+			<article class="col-sm-12 col-md-12 col-lg-12">
+				<div jarvis-widget id="form-grid-widget"
+					data-widget-colorbutton="false" data-widget-editbutton="false"
+					data-widget-custombutton="false">
+					<div>
+						<!-- widget content -->
+						<div class="widget-body no-padding">
+							<form id="operationRecord-form" name='operationRecord-form'
+								class="smart-form ng-pristine ng-valid"
+								data-validator-option="validateOptions" novalidate="novalidate">
+								<header>
+									<a href-void class="btn btn-default btn-xs" ng-click="retList()">
+										<i class="fa fa-angle-left"></i>&nbsp;返回&nbsp;
+									</a>
+									&nbsp;<strong>通风记录新增</strong>
+									<span class="pull-right font-xs">带*的部分必须填写</span>
+								</header>
+								<fieldset>
+									<table class="table table-striped table-bordered table-hover" width="100%">
+										<tr>
+											<th>
+												<label class="label" style="margin-top: 9px;text-align: right;">作业编号：<span style="color: red;margin-left: 5px;text-align: center;">*</span></label>
+											</th>
+											<th>
+												<label class="select">
+													<select ng-model="operationRecord.operationId" required ng-change="getCh(operationRecord.operationId)" ng-disabled="isNotEdit"
+													ng-options="jobNumber.taskNumber as jobNumber.taskNumber for jobNumber in JobNumberList"
+													class="form-control" ng-disabled="isNotEditHouseId">
+														<option value="">--请选择--</option>
+													</select>
+												</label>
+											</th>
+											<th>
+												<label class="label" style="margin-top: 9px;text-align: right;">仓房名称：</label>
+											</th>
+											<th>
+												<label class="select">
+													<select ng-model="operationRecord.vCfCode"  ng-readonly="true"
+													ng-options="store.storehouseCode as store.storehouseName for store in storelist"
+													class="form-control" ng-disabled="true">
+														<option value="">--请选择--</option>
+													</select>
+												</label>
+											</th>
+											<!-- <th>
+												<label class="label" style="margin-top: 9px;text-align: right;">作业申请日期：</label>
+											</th>
+											<th>
+												<label class="input" style="widows: 150px;">
+													<input type="number" ng-model="taskApply.houseSize" ng-readonly="true"
+														name="houseSize" oninput="if(value.length>9) value=value.slice(0,9)" class="form-control">
+												</label>
+											</th>
+											<th>
+												<label class="label" class="label" style="margin-top: 9px;text-align: right;">作业申请人：</label>
+											</th>
+											<th>
+												<label class="input">
+													<input type="text" ng-model="taskApplyPlan.tfzyry" ng-readonly="isNotEdit"
+													name="tfzyry" class="form-control"/>
+												</label>
+											</th> -->
+											<th>
+												<label class="label" class="label" style="margin-top: 9px;text-align: right;">作业前平均粮温(℃)：<span style="color: red;margin-left: 5px;text-align: center;">*</span></label>
+											</th>
+											<th>
+												<label class="input">
+													<input type="number" ng-model="operationRecord.zyqpjlw" ng-readonly="isNotEdit"
+													name="zyqpjlw" class="form-control" required/>
+												</label>
+											</th>
+											<th>
+												<label class="label" class="label" style="margin-top: 9px;text-align: right;">作业后平均粮温(℃)：<span style="color: red;margin-left: -5px;text-align: center;">*</span></label>
+											</th>
+											<th>
+												<label class="input">
+													<input type="number" ng-model="operationRecord.jshpjlw" ng-readonly="isNotEdit"
+													name="jshpjlw" class="form-control" required max="operationRecord.zyqpjlw"/>
+												</label>
+											</th>
+										</tr>
+										<tr>
+											<th>
+												<label class="label" class="label" style="margin-top: 9px;text-align: right;">作业第一阶段气温(℃)：</label>
+											</th>
+											<th>
+												<label class="input">
+													<input type="number" ng-model="operationRecord.zydyjdqw" ng-readonly="isNotEdit"
+													name="zydyjdqw" class="form-control"/>
+												</label>
+											</th>
+											<th>
+												<label class="label" class="label" style="margin-top: 9px;text-align: right;">作业第一阶段平均气湿(%)：<span style="color: red;margin-left: -5px;text-align: center;">*</span></label>
+											</th>
+											<th>
+												<label class="input">
+													<input type="number" ng-model="operationRecord.zydyjdpjqs" ng-readonly="isNotEdit"
+													name="zydyjdpjqs" class="form-control" min="0" required/>
+												</label>
+											</th>
+											<th>
+												<label class="label" class="label" style="margin-top: 9px;text-align: right;">作业第一阶段通风前平均粮温(℃)：</label>
+											</th>
+											<th>
+												<label class="input">
+													<input type="number" ng-model="operationRecord.zydyjdtfqpjlw" ng-readonly="isNotEdit"
+													name="zydyjdtfqpjlw" class="form-control"/>
+												</label>
+											</th>
+											<th>
+												<label class="label" class="label" style="margin-top: 9px;text-align: right;">作业第一阶段作业时长(小时)：</label>
+											</th>
+											<th>
+												<label class="input">
+													<input type="number" ng-model="operationRecord.zydyjdzysc" ng-readonly="isNotEdit"
+													name="zydyjdzysc" class="form-control"/>
+												</label>
+											</th>
+										</tr>
+										<tr>
+											<th>
+												<label class="label" class="label" style="margin-top: 9px;text-align: right;">作业第二阶段气温(℃)：</label>
+											</th>
+											<th>
+												<label class="input">
+													<input type="number" ng-model="operationRecord.zydejdqw" ng-readonly="isNotEdit"
+													name="zydejdqw" class="form-control"/>
+												</label>
+											</th>
+											<th>
+												<label class="label" class="label" style="margin-top: 9px;text-align: right;">作业第二阶段平均气湿(%)：<span style="color: red;margin-left: -5px;text-align: center;">*</span></label>
+											</th>
+											<th>
+												<label class="input">
+													<input type="number" ng-model="operationRecord.zydejdpjqs" ng-readonly="isNotEdit"
+													name="zydejdpjqs" class="form-control" min="0" required/>
+												</label>
+											</th>
+											<th>
+												<label class="label" class="label" style="margin-top: 9px;text-align: right;">作业第二阶段通风前平均粮温(℃)：</label>
+											</th>
+											<th>
+												<label class="input">
+													<input type="number" ng-model="operationRecord.zydejdtfqpjlw" ng-readonly="isNotEdit"
+													name="zydejdtfqpjlw" class="form-control"/>
+												</label>
+											</th>
+											<th>
+												<label class="label" class="label" style="margin-top: 9px;text-align: right;">作业第二阶段作业时长(小时)：</label>
+											</th>
+											<th>
+												<label class="input">
+													<input type="number" ng-model="operationRecord.zydejdzysc" ng-readonly="isNotEdit"
+													name="zydejdzysc" class="form-control"/>
+												</label>
+											</th>
+										</tr>
+										<tr>
+											<th>
+												<label class="label" class="label" style="margin-top: 9px;text-align: right;">作业第三阶段气温(℃)：</label>
+											</th>
+											<th>
+												<label class="input">
+													<input type="number" ng-model="operationRecord.zydsjdqw" ng-readonly="isNotEdit"
+													name="zydsjdqw" class="form-control"/>
+												</label>
+											</th>
+											<th>
+												<label class="label" class="label" style="margin-top: 9px;text-align: right;">作业第三阶段平均气湿(%)：<span style="color: red;margin-left: -5px;text-align: center;">*</span></label>
+											</th>
+											<th>
+												<label class="input">
+													<input type="number" ng-model="operationRecord.zydsjdpjqs" ng-readonly="isNotEdit"
+													name="zydsjdpjqs" class="form-control" min="0" required/>
+												</label>
+											</th>
+											<th>
+												<label class="label" class="label" style="margin-top: 9px;text-align: right;">作业第三阶段通风前平均粮温(℃)：</label>
+											</th>
+											<th>
+												<label class="input">
+													<input type="number" ng-model="operationRecord.zydsjdtfqpjlw" ng-readonly="isNotEdit"
+													name="zydsjdtfqpjlw" class="form-control"/>
+												</label>
+											</th>
+											<th>
+												<label class="label" class="label" style="margin-top: 9px;text-align: right;">作业第三阶段作业时长(小时)：</label>
+											</th>
+											<th>
+												<label class="input">
+													<input type="number" ng-model="operationRecord.zydsjdzysc" ng-readonly="isNotEdit"
+													name="zydsjdzysc" class="form-control"/>
+												</label>
+											</th>
+										</tr>
+										<tr>
+											<th>
+												<label class="label" class="label" style="margin-top: 9px;text-align: right;">作业第四阶段气温(℃)：</label>
+											</th>
+											<th>
+												<label class="input">
+													<input type="number" ng-model="operationRecord.zydsijdqw" ng-readonly="isNotEdit"
+													name="zydsijdqw" class="form-control"/>
+												</label>
+											</th>
+											<th>
+												<label class="label" class="label" style="margin-top: 9px;text-align: right;">作业第四阶段平均气湿(%)：<span style="color: red;margin-left: -5px;text-align: center;">*</span></label>
+											</th>
+											<th>
+												<label class="input">
+													<input type="number" ng-model="operationRecord.zydsijdpjqs" ng-readonly="isNotEdit"
+													name="zydsijdpjqs" class="form-control" min="0" required/>
+												</label>
+											</th>
+											<th>
+												<label class="label" class="label" style="margin-top: 9px;text-align: right;">作业第四阶段通风前平均粮温(℃)：</label>
+											</th>
+											<th>
+												<label class="input">
+													<input type="number" ng-model="operationRecord.zydsijdtfqpjlw" ng-readonly="isNotEdit"
+													name="zydsijdtfqpjlw" class="form-control"/>
+												</label>
+											</th>
+											<th>
+												<label class="label" class="label" style="margin-top: 9px;text-align: right;">作业第四阶段作业时长(小时)：</label>
+											</th>
+											<th>
+												<label class="input">
+													<input type="number" ng-model="operationRecord.zydsijdzysc" ng-readonly="isNotEdit"
+													name="zydsijdzysc" class="form-control"/>
+												</label>
+											</th>
+										</tr>
+										<tr>
+											<th>
+												<label class="label" class="label" style="margin-top: 9px;text-align: right;">降温幅度(℃)：<span style="color: red;margin-left: -5px;text-align: center;">*</span></label>
+											</th>
+											<th>
+												<label class="input">
+													<input type="number" ng-model="operationRecord.jwfd" ng-readonly="isNotEdit"
+													name="jwfd" class="form-control" min="0" required/>
+												</label>
+											</th>
+											<th>
+												<label class="label" class="label" style="margin-top: 9px;text-align: right;">吨粮降温能耗(千瓦/摄氏度*吨)：<span style="color: red;margin-left: -5px;text-align: center;">*</span></label>
+											</th>
+											<th>
+												<label class="input">
+													<input type="number" ng-model="operationRecord.dljwnh" ng-readonly="isNotEdit"
+													name="dljwnh" class="form-control" min="0" required/>
+												</label>
+											</th>
+										
+											<th>
+												<label class="label" class="label" style="margin-top: 9px;text-align: right;">失水率(%)：<span style="color: red;margin-left: -5px;text-align: center;">*</span></label>
+											</th>
+											<th>
+												<label class="input">
+													<input type="number" ng-model="operationRecord.sslssl" ng-readonly="isNotEdit"
+													name="sslssl" class="form-control" min="0" required/>
+												</label>
+											</th>
+											<th>
+												<label class="label" class="label" style="margin-top: 9px;text-align: right;">保水效果评价结果：</label>
+											</th>
+											<th>
+												<label class="input">
+													<input type="number" ng-model="operationRecord.bsxgpjjg" ng-readonly="isNotEdit"
+													name="bsxgpjjg" class="form-control"/>
+												</label>
+											</th>
+										</tr>
+										<tr>
+											<th>
+												<label class="label" class="label" style="margin-top: 9px;text-align: right;">通风降温均匀性评价_整仓：</label>
+											</th>
+											<th>
+												<label class="input">
+													<input type="number" ng-model="operationRecord.tfjwjyxpjzc" ng-readonly="isNotEdit"
+													name="tfjwjyxpjzc" class="form-control"/>
+												</label>
+											</th>
+											<th>
+												<label class="label" class="label" style="margin-top: 9px;text-align: right;">通风降温均匀性评价_上层：</label>
+											</th>
+											<th>
+												<label class="input">
+													<input type="number" ng-model="operationRecord.zydsjdzysc" ng-readonly="isNotEdit"
+													name="zydsjdzysc" class="form-control"/>
+												</label>
+											</th>
+										
+											<th>
+												<label class="label" class="label" style="margin-top: 9px;text-align: right;">通风降温均匀性评价_中（间）层：</label>
+											</th>
+											<th>
+												<label class="input">
+													<input type="number" ng-model="operationRecord.tfjwjyxpjzjc" ng-readonly="isNotEdit"
+													name="tfjwjyxpjzjc" class="form-control"/>
+												</label>
+											</th>
+											<th>
+												<label class="label" class="label" style="margin-top: 9px;text-align: right;">通风降温均匀性评价_下层：</label>
+											</th>
+											<th>
+												<label class="input">
+													<input type="number" ng-model="operationRecord.tfjwjyxpjxc" ng-readonly="isNotEdit"
+													name="tfjwjyxpjxc" class="form-control"/>
+												</label>
+											</th>
+										</tr>
+										<tr>
+											<th>
+												<label class="label" class="label" style="margin-top: 9px;text-align: right;">作业前平均水分(%)：<span style="color: red;margin-left: 5px;text-align: center;">*</span></label>
+											</th>
+											<th>
+												<label class="input">
+													<input type="number" ng-model="operationRecord.zyqpjsf" ng-readonly="isNotEdit"
+													name="zyqpjsf" class="form-control" required min="0.001"/>
+												</label>
+											</th>
+											<th>
+												<label class="label" class="label" style="margin-top: 9px;text-align: right;">结束后平均水分(%)：<span style="color: red;margin-left: 5px;text-align: center;">*</span></label>
+											</th>
+											<th>
+												<label class="input">
+													<input type="number" ng-model="operationRecord.zyhpjsf" ng-readonly="isNotEdit"
+													name="zyhpjsf" class="form-control" required />
+												</label>
+											</th>
+										
+											<th>
+												<label class="label" class="label" style="margin-top: 9px;text-align: right;">降水幅度(%)：<span style="color: red;margin-left: 5px;text-align: center;">*</span></label>
+											</th>
+											<th>
+												<label class="input">
+													<input type="number" ng-model="operationRecord.jsfd" ng-readonly="isNotEdit"
+													name="jsfd" class="form-control" required min="0"/>
+												</label>
+											</th>
+											<th>
+												<label class="label" class="label" style="margin-top: 9px;text-align: right;">吨粮降水能耗(千瓦/1%*吨)：<span style="color: red;margin-left: 5px;text-align: center;">*</span></label>
+											</th>
+											<th>
+												<label class="input">
+													<input type="number" ng-model="operationRecord.dljsnh" ng-readonly="isNotEdit"
+													name="dljsnh" class="form-control" required min="0"/>
+												</label>
+											</th>
+										</tr>
+										<tr>
+											<th>
+												<label class="label" class="label" style="margin-top: 9px;text-align: right;">通风降水均匀性分析_整仓：</label>
+											</th>
+											<th>
+												<label class="input">
+													<input type="number" ng-model="operationRecord.tfjsjyxfxzc" ng-readonly="isNotEdit"
+													name="tfjsjyxfxzc" class="form-control"/>
+												</label>
+											</th>
+											<th>
+												<label class="label" class="label" style="margin-top: 9px;text-align: right;">通风降水均匀性分析_上层：</label>
+											</th>
+											<th>
+												<label class="input">
+													<input type="number" ng-model="operationRecord.tfjsjyxfxsc" ng-readonly="isNotEdit"
+													name="tfjsjyxfxsc" class="form-control"/>
+												</label>
+											</th>
+										
+											<th>
+												<label class="label" class="label" style="margin-top: 9px;text-align: right;">通风降水均匀性分析_中（间）层：</label>
+											</th>
+											<th>
+												<label class="input">
+													<input type="number" ng-model="operationRecord.tfjsjyxfxzjc" ng-readonly="isNotEdit"
+													name="tfjsjyxfxzjc" class="form-control"/>
+												</label>
+											</th>
+											<th>
+												<label class="label" class="label" style="margin-top: 9px;text-align: right;">通风降水均匀性分析_下层：</label>
+											</th>
+											<th>
+												<label class="input">
+													<input type="number" ng-model="operationRecord.tfjsjyxfxxc" ng-readonly="isNotEdit"
+													name="tfjsjyxfxxc" class="form-control"/>
+												</label>
+											</th>
+										</tr>
+										<tr>
+											<th>
+												<label class="label" class="label" style="margin-top: 9px;text-align: right;">总耗电量：<span style="color: red;margin-left: 5px;text-align: center;">*</span></label>
+											</th>
+											<th>
+												<label class="input">
+													<input type="number" ng-model="operationRecord.zhdl" ng-readonly="isNotEdit"
+													name="zhdl" class="form-control" required min="0"/>
+												</label>
+											</th>
+											<th></th>
+											<th></th>
+											<th></th>
+											<th></th>
+											<th></th>
+											<th></th>
+										</tr>
+										
+									</table>
+								</fieldset>
+									<footer class="modal-footer text-align-center">
+										    <button ng-click="retList()" class="btn btn-default"
+											data-dismiss="modal">取消</button>
+											<button ng-click="save()" type="button" ng-hide="isNotEdit"
+											class="btn btn-primary">保存</button>
+									</footer>
+							</form>
+						</div>
+					</div>
+				</div>
+			</article>
+		</div>
+	</section>
+</div>

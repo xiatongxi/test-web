@@ -1,0 +1,182 @@
+<!-- MAIN CONTENT -->
+<div id="content">
+    <!-- widget grid -->
+    <section widget-grid id="widget-grid">
+        <div class="row">
+            <!-- NEW COL START -->
+            <article class="col-sm-12 col-md-12 col-lg-12">
+                <!-- Widget ID (each widget will need unique ID)-->
+                <div jarvis-widget id="form-grid-widget"
+                     data-widget-colorbutton="false" data-widget-editbutton="false"
+                     data-widget-custombutton="false">
+                    <!-- widget div-->
+                    <div>
+                        <!-- widget content -->
+                        <div class="widget-body no-padding">
+                            <form id="basicStorehouseView-form" class="smart-form ng-pristine ng-valid" data-validator-option="validateOptions" novalidate="novalidate">
+                                <header>
+                                    <a href-void class="btn btn-default btn-xs" ng-click="retList()"><i class="fa fa-angle-left"></i>&nbsp;返回&nbsp;</a>
+                                    &nbsp;<strong>通信信息设置详情</strong>
+                                    <span class="pull-right font-xs">带*的部分必须填写</span>
+                                </header>
+                                <table class="table table-striped table-bordered table-hover" width="100%">
+                                    <fieldset>
+                                        <div class="row">
+                                            <section class="col col-3">
+                                                <label class="label">仓房名称<span style="color: red;">*</span></label>
+                                                <label class="select">
+                                                    <select ng-model="station.vCfCode" name="vCfCode"
+                                                            ng-options="store.storehouseCode as store.storehouseName for store in storelist"
+                                                            ng-disabled="isNotEdit" class="form-control"
+                                                            required>
+                                                        <option value="">--请选择--</option>
+                                                    </select>
+                                                </label>
+                                            </section>
+                                            <section class="col col-3">
+                                                <label class="label">站点地址号:</label> <label class="input">
+                                                    <input type="text" name="address" ng-model="station.address" ng-disabled="isNotEdit" maxlength="20">
+                                                </label>
+                                            </section>
+                                            <section class="col col-3">
+                                                <label class="label">站点名称：<span style="color: red;margin-left: 5px;text-align: center;">*</span></label> <label class="input">
+                                                <input type="text" maxlength="20"
+                                                       ng-model="station.sitename"
+                                                       ng-blur="itExistCode('',station.sitename)"
+                                                       ng-disabled="isNotEdit"
+                                                       name="sitename" required>
+                                            </label>
+                                            </section>
+                                            <section class="col col-3" ng-hide="showAdd">
+                                                <label class="label">站点编号：<span style="color: red;margin-left: 5px;text-align: center;">*</span></label> <label class="input">
+                                                <input type="text" maxlength="5"
+                                                       ng-model="station.sitecode"
+                                                       ng-blur="itExistCode(station.sitecode,'')"
+                                                       ng-disabled="true"
+                                                       name="sitecode" required>
+                                            </label>
+                                            </section>
+                                            <section class="col col-3">
+                                                <label class="label">站点类型(可多选):</label>
+                                                <label class="input">
+                                                    <input type="text" name="vZdType" ng-click="pushType()" ng-model="station.vZdType" ng-disabled="isNotEdit" maxlength="200">
+                                                </label>
+                                                <!--<label class="select">
+                                                    <select ng-model="station.vZdType" ng-click="pushType()" size="1" multiple ng-disabled="isNotEdit"
+                                                            ng-options="typeName as typeName for typeName in ['液位','粮情','油情']">
+                                                    </select>
+                                                </label>-->
+                                            </section>
+                                            <section class="col col-3">
+                                                <label class="label">设备品牌:</label> <label class="input">
+                                                <input type="text" ng-model="station.brand"
+                                                       ng-disabled="isNotEdit"
+                                                       name="brand" maxlength="20">
+                                            </label>
+                                            </section>
+                                            <section class="col col-3">
+                                                <label class="label">设备型号:</label> <label class="input">
+                                                    <input type="text" ng-model="station.model"
+                                                           ng-disabled="isNotEdit"
+                                                           name="model" maxlength="20">
+                                                </label>
+                                            </section>
+                                            <section class="col col-3">
+                                                <label class="label">通信类型:&emsp;</label>
+                                                <label class="select">
+                                                    <label class="select">
+                                                        <select ng-model="station.signaltype" name="signaltype" ng-disabled="isNotEdit"
+                                                                ng-options="x.name as x.name for x in [{id:0,name:'网络通讯'},{id:1,name:'串口通讯'},{id:2,name:'OPC通讯'}]">
+                                                            <option value="" selected="" disabled="">--请选择--</option>
+                                                        </select>
+                                                    </label>
+                                                </label>
+                                            </section>
+                                            <section class="col col-3">
+                                                <label class="label">服务地址:</label> <label class="input">
+                                                <input type="text" ng-model="station.serviceip"
+                                                       ng-disabled="isNotEdit"
+                                                       name="serviceip" maxlength="20">
+                                            </label>
+                                            </section>
+                                            <section class="col col-3">
+                                                <label class="label">端口:</label> <label class="input">
+                                                <input type="text" ng-model="station.serviceport"
+                                                       ng-disabled="isNotEdit"
+                                                       name="serviceport" maxlength="10" validNumber="true">
+                                            </label>
+                                            </section>
+                                            <section class="col col-3">
+                                                <label class="label">串口号:</label> <label class="input">
+                                                    <input type="text" ng-model="station.stringslogan"
+                                                           ng-disabled="isNotEdit"
+                                                           name="stringslogan" maxlength="20" validNumber="true">
+                                                </label>
+                                            </section>
+                                            <section class="col col-3">
+                                                <label class="label">波特率:</label> <label class="input">
+                                                    <input type="text" ng-model="station.porterrate"
+                                                           ng-disabled="isNotEdit"
+                                                           name="porterrate" maxlength="20">
+                                                </label>
+                                            </section>
+                                            <section class="col col-3">
+                                                <label class="label">数据位:</label> <label class="input">
+                                                <input type="text" ng-model="station.databit"
+                                                       ng-disabled="isNotEdit"
+                                                       name="databit" maxlength="20">
+                                            </label>
+                                            </section>
+                                            <section class="col col-3">
+                                                <label class="label">校验位:</label> <label class="input">
+                                                <input type="text" ng-model="station.checkbit"
+                                                       ng-disabled="isNotEdit"
+                                                       name="checkbit" maxlength="20">
+                                            </label>
+                                            </section>
+                                            <section class="col col-3">
+                                                <label class="label">本地/远程:&emsp;</label>
+                                                <label class="select">
+                                                    <label class="select">
+                                                        <select ng-model="station.islocal" name="islocal" ng-disabled="isNotEdit"
+                                                                ng-options="x.id as x.name for x in [{id:0,name:'本地'},{id:1,name:'远程'}]">
+                                                            <option value="" selected="" disabled="">--请选择--</option>
+                                                        </select>
+                                                    </label>
+                                                </label>
+                                            </section>
+                                            <section class="col col-3">
+                                                <label class="label">是否在线:&emsp;</label>
+                                                <label class="select">
+                                                    <label class="select">
+                                                        <select ng-model="station.isline" name="isline" ng-disabled="isNotEdit"
+                                                                ng-options="x.id as x.name for x in [{id:0,name:'离线'},{id:1,name:'在线'}]">
+                                                            <option value="" selected="" disabled="">--请选择--</option>
+                                                        </select>
+                                                    </label>
+                                                </label>
+                                            </section>
+                                            <section class="col col-3">
+                                                <label class="label">描述:</label> <label class="input">
+                                                <input type="text" ng-model="station.remark"
+                                                       ng-disabled="isNotEdit"
+                                                       name="remark" maxlength="20">
+                                            </label>
+                                            </section>
+                                        </div>
+                                    </fieldset>
+                                    <div class="form-actions">
+                                        <footer class="text-align-center">
+                                            <button type="button" class="btn btn-default" ng-click="retList()">取消</button>
+                                            <button type="button" class="btn btn-primary" ng-hide="isNotEdit" ng-click="save()">保存</button>
+                                        </footer>
+                                    </div>
+                                </table>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </article>
+        </div>
+    </section>
+</div>

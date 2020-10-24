@@ -1,0 +1,34 @@
+<div class="modal-content">
+	<div class="modal-header">
+		<button type="button" class="close" ng-click="cancel()">
+			&times;</button>
+		<h4 class="modal-title" id="myModalLabel">编辑代储企业信息</h4>
+	</div>
+
+	<div class="modal-body">
+		<form id="warehouse-form" name='warehouse-form'
+			  class="smart-form ng-pristine ng-valid"
+			  data-validator-option="validateOptions" novalidate="novalidate">
+			<fieldset>
+				<div class="row">
+					<section class="col col-4">
+						<label class="label txt-bg-red">代储企业名称
+							<label class="select">
+								<select ng-model="agentId" required
+										ng-options="agent.id as agent.agentName for agent in agentData.list">
+									<option value="" style="text-align: center;">-请选择-</option>
+								</select>&emsp;
+							</label>
+						</label>
+					</section>
+				</div>
+			</fieldset>
+		</form>
+	</div>
+	<div class="modal-footer">
+		<button ng-click="save()" type="button" ng-hide="isNotEdit"
+				class="btn btn-primary">提交</button>
+		<button ng-click="cancel()" class="btn btn-default"
+				data-dismiss="modal">取消</button>
+	</div>
+</div>

@@ -1,0 +1,85 @@
+<!-- MAIN CONTENT -->
+<div id="content">
+	<!-- widget grid -->
+	<section widget-grid id="widget-grid">
+		<div class="row">
+			<article class="col-sm-12 col-md-12 col-lg-12">
+				<div jarvis-widget id="form-grid-widget" data-widget-colorbutton="false" data-widget-editbutton="false"
+					 data-widget-custombutton="false">
+					<div>
+						<div class="panel-body col-sm-12">
+							<header>
+								<a href-void class="btn btn-default btn-xs" ng-click="back()">
+									<i class="fa fa-angle-left"></i>&nbsp;返回&nbsp;
+								</a>
+
+							</header>
+							<style>
+								.list-group .add-listclass{
+									border: none !important;
+									border-bottom: 1px solid #f5f5f5 !important;
+									margin-bottom: 0px !important;
+								}
+							</style>
+							<fieldset>
+							<div class="row">
+								<header style="padding-left:0px" class="panel-heading">
+									<h3>粮食基本信息 </h3>
+								</header>
+								<ul class="list-group ">
+									<li class="list-group-item add-listclass col-sm-3"><span>粮权所属单位：</span><span class="txt-color-green">{{foodbasicinfo.recordUnite}}</span></li>
+									<li class="list-group-item add-listclass col-sm-3"><span>保管单位：</span><span class="txt-color-green">{{storehouse.depotName}}</span></li>
+									<li class="list-group-item add-listclass col-sm-3"><span>仓房名称：</span><span class="txt-color-green">{{qualitycheck.storehouseName}}</span></li>
+									<li class="list-group-item add-listclass col-sm-3"><span>货位名称：</span><span class="txt-color-green">{{qualitycheck.wareHouseName}}</span></li>
+									<li class="list-group-item add-listclass col-sm-3"><span>仓型：</span><span class="txt-color-green">{{dicData[storehouse.storehouseType]}}</span></li>
+									<li class="list-group-item add-listclass col-sm-3"><span>设计仓容(t)：</span><span class="txt-color-green">{{storehouse.designCapacity}}</span></li>
+									<li class="list-group-item add-listclass col-sm-3"><span>储粮性质：</span><span class="txt-color-green">{{dicData[keepaccount.hwxz]}}</span></li>
+									<li class="list-group-item add-listclass col-sm-3"><span>品种：</span><span class="txt-color-green">{{dicData[keepaccount.pz]}}</span></li>
+									<li class="list-group-item add-listclass col-sm-3"><span>实际数量(Kg)：</span><span class="txt-color-green">{{keepaccount.kcsl}}</span></li>
+									<li class="list-group-item add-listclass col-sm-3"><span>折合标准数量(t)：</span><span class="txt-color-green">{{keepaccount.kcsl*0.001}}</span></li>
+									<li class="list-group-item add-listclass col-sm-3"><span>价位(元/Kg)：</span><span class="txt-color-green">{{foodbasicinfo.price}}</span></li>
+									<li class="list-group-item add-listclass col-sm-3"><span>产地：</span><span class="txt-color-green">{{dicData[keepaccount.gb]}}</span></li>
+									<li class="list-group-item add-listclass col-sm-3"><span>入仓时间：</span><span class="txt-color-green">{{qualitycheck.inputTime}}</span></li>
+									<li class="list-group-item add-listclass col-sm-3"><span>储存地点：</span><span class="txt-color-green">{{foodbasicinfo.storageLocation}}</span></li>
+									<li class="list-group-item add-listclass col-sm-3"><span>收获年度：</span><span class="txt-color-green">{{qualitycheck.harvestTime}}</span></li>
+									<li class="list-group-item add-listclass col-sm-3"><span>水分(%)：</span><span class="txt-color-green">{{qualitycheck.water}}</span></li>
+									<li class="list-group-item add-listclass col-sm-3"><span>杂质(%)：</span><span class="txt-color-green">{{qualitycheck.impurity}}</span></li>
+									<li class="list-group-item add-listclass col-sm-3"><span>不完善粒(整精米率%)：</span><span class="txt-color-green">{{qualitycheck.badpart}}</span></li>
+									<li class="list-group-item add-listclass col-sm-3"><span>容重(出糙率%或纯粮率%)：</span><span class="txt-color-green">{{qualitycheck.capacity}}</span></li>
+									<li class="list-group-item add-listclass col-sm-3"><span>等级：</span><span class="txt-color-green">{{dicData[qualitycheck.level]}}</span></li>
+									<li class="list-group-item add-listclass col-sm-3"><span>保管方式：</span><span class="txt-color-green">{{foodbasicinfo.keepMethod}}</span></li>
+									<!--<li class="list-group-item add-listclass col-sm-3"><span>保管员签字：</span><span class="txt-color-green">{{foodbasicinfo.storehouseId}}</span></li>-->
+									<!--<li class="list-group-item add-listclass col-sm-3"><span>装粮线高度(m)：</span><span class="txt-color-green">{{storehouse.lineHeight}}</span></li>-->
+									<li class="list-group-item add-listclass col-sm-3"><span>粮堆体积(㎥)：</span><span class="txt-color-green">{{foodbasicinfo.disperseCapacity}}</span></li>
+									<li class="list-group-item add-listclass col-sm-3"><span>长(m)：</span><span class="txt-color-green">{{storehouse.length}}</span></li>
+									<li class="list-group-item add-listclass col-sm-3"><span>宽/直径(m)：</span><span class="txt-color-green">{{storehouse.width}}</span></li>
+									<li class="list-group-item add-listclass col-sm-3"><span>粮高(m)：</span><span class="txt-color-green">{{foodbasicinfo.height}}</span></li>
+									<li class="list-group-item add-listclass col-sm-3"><span>包存粮包数：</span><span class="txt-color-green">{{foodbasicinfo.packNum}}</span></li>
+									<li class="list-group-item add-listclass col-sm-3"><span>平均包重(Kg)：</span><span class="txt-color-green">{{foodbasicinfo.packAverageWeight}}</span></li>
+									<li class="list-group-item add-listclass col-sm-3"><span>填卡日期：</span><span class="txt-color-green">{{foodbasicinfo.fillingTime}}</span></li>
+								</ul>
+
+							</div>
+							</fieldset>
+							<fieldset>
+								<div class="row">
+									<footer>
+										<div class="row">
+											<div class="col-md-12">
+												<a class="btn btn-default" href-void="" href="#" style="margin: 5px;float:right" ng-click="retList()">取消</a>
+												<a class="btn btn-primary" href-void="" href="#" style="margin: 5px;float:right" ng-click="submitSaveFoodCard()">提交</a>
+											</div>
+										</div>
+									</footer>
+								</div>
+							</fieldset>
+						</div>
+
+					</div>
+				</div>
+			</article>
+		</div>
+
+
+	</section>
+</div>

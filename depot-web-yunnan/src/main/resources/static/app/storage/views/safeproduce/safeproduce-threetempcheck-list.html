@@ -1,0 +1,169 @@
+<!-- MAIN CONTENT -->
+<div id="content">
+	<!-- widget grid -->
+	<section widget-grid id="widget-grid">
+		<div class="row">
+			<article class="col-sm-12">
+
+				<div jarvis-widget id="standard-datatable-widget" data-widget-color="darken" data-widget-editbutton="false">
+					<header>
+						<span class="widget-icon"> <i class="fa fa-table"></i> </span>
+						<h2>三温检查记录列表</h2>
+					</header>
+					<div>
+						<div class="widget-body no-padding">
+							<div id="DataTables_Table_1_wrapper" class="dataTables_wrapper form-inline no-footer">
+								<div class="dt-toolbar" ng-show="isDisb">
+									<div class="col-xs-12 col-sm-9">
+										<div class="form-group">
+											<a class="btn btn-primary btn-sm" style="margin:0px 0px 6px 0px" ng-click="returnUp()">
+												<span class="fa fa-reply"></span>&nbsp;返&nbsp;回
+											</a>
+										</div>
+									</div>
+								</div>
+								<div class="dt-toolbar" ng-hide="isDisb">
+									<!--一体化调用-->
+									<!--<div class="col-xs-3 col-sm-1" has-permission="592">
+										<a href-void class="btn btn-primary btn-sm" ng-click="addthreetempFromYTH()"><i class="fa fa-plus"></i>&nbsp;更&nbsp;新</a>
+									</div>-->
+
+									<div class="col-xs-12 col-sm-9">
+										<div class="form-group">
+											<label> 仓房名称:&emsp;
+												<select ng-model="search.storehouseId" class="form-control input-sm"
+														ng-options="store.storehouseCode as store.storehouseName for store in storelist"
+														ng-change="loadWare()">
+													<option value="">请选择</option>
+												</select>&emsp;
+											</label>
+										</div>
+										<div class="form-group">
+											<label>
+												日期：<input style="width: 100px;" class="form-control" type="text" ng-model="threetempcheck.searchStartDate" name="searchStartDate" data-smart-datepicker>
+												--&nbsp;<input style="width: 100px;" class="form-control" type="text" ng-model="threetempcheck.searchEndDate" name="searchEndDate" data-smart-datepicker>
+												<a class="btn btn-default btn-sm" ng-click="loadData()"> <i class="fa fa-search"></i>&nbsp;查&nbsp;询</a>
+											</label>
+										</div>
+									</div>
+
+									<!--<div class="col-xs-3 col-sm-1">
+                                    <a href-void class="btn btn-primary btn-sm" ng-click="showCharData()">三温图</a>
+                                    </div>-->
+									<div class="col-sm-3 col-xs-4 hidden-xs">
+										<div class="dataTables_length">
+											<label>每页显示 <select ng-model="pageInfo.pageSize" ng-change="loadData()"
+																ng-options="num as num for num in [10,25,50,100]"
+																class="form-control input-sm"></select> 条
+											</label>
+										</div>
+									</div>
+								</div>
+
+								<table class="table table-striped table-bordered table-hover" width="100%">
+									<thead>
+									<tr>
+										<th rowspan="2">
+											<i class="fa fa-fw text-muted hidden-md hidden-sm hidden-xs"></i> 检查时间
+										</th>
+										<th rowspan="2">
+											<i class="fa fa-fw text-muted hidden-md hidden-sm hidden-xs"></i> 仓房名称
+										</th>
+										<th colspan="2">
+											<i class="fa fa-fw text-muted hidden-md hidden-sm hidden-xs"></i> 湿度%
+										</th>
+										<th colspan="2">
+											<i class="fa fa-fw text-muted hidden-md hidden-sm hidden-xs"></i> 温度%
+										</th>
+										<th colspan="3">
+											<i class="fa fa-fw text-muted hidden-md hidden-sm hidden-xs"></i> 粮温检查情况
+										</th>
+										<th rowspan="2"> 操作</th>
+									</tr>
+									<tr>
+										<th>仓内</th>
+										<th>仓外</th>
+										<th>仓内</th>
+										<th>仓外</th>
+										<th>最高</th>
+										<th>最低</th>
+										<th>平均</th>
+									</tr>
+									</thead>
+
+									<tbody>
+									<tr ng-repeat="threetempcheck in pageInfo.list">
+										<td>{{threetempcheck.checkDate | date:'yyyy-MM-dd HH:mm:ss'}}</td>
+										<td>{{storeHouseCodeObj[threetempcheck.houseId].storehouseName}}</td>
+
+										<td>{{threetempcheck.inWater}}</td>
+										<td>{{threetempcheck.outWater}}</td>
+
+										<td>{{threetempcheck.inTemp}}</td>
+										<td>{{threetempcheck.outTemp}}</td>
+
+										<td>{{threetempcheck.maxTemp}}</td>
+										<td>{{threetempcheck.minTemp}}</td>
+										<td>{{threetempcheck.avgTemp}}</td>
+										<td>
+											<a has-permission="593" href-void ng-click="showCharData(threetempcheck.houseId,threetempcheck.checkDate)"><i class="fa fa-info-circle"></i>查看三温图</a>
+											<!--<a has-permission="287" href-void ng-click="showAddthreeTemp(threetempcheck.id)"><i class="fa fa-edit"></i>修改</a>
+                                            <a has-permission="414" href-void ng-click="remove(threetempcheck.id)"><i class="fa fa-trash-o"></i>删除</a>-->
+										</td>
+									</tr>
+									</tbody>
+
+								</table>
+								<div smart-include="app/layout/partials/page.tpl.html"></div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</article>
+		</div>
+
+	</section>
+
+</div>
+
+<div class="modal fade" id="threetempCheckModal" tabindex="-1" role="dialog"
+	 aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content" style="width:700px;">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal"
+						aria-hidden="true">&times;</button>
+				<h4 class="modal-title" id="myModalLabel2">新增三温检查</h4>
+			</div>
+			<div class="modal-body">
+				<div smart-include="app/storage/views/safeproduce/safeproduce-threetempcheck-edit.html"></div>
+			</div>
+			<div class="modal-footer" id="operation">
+				<button ng-click="savethreetempcheck()" type="button" class="btn btn-primary">提交</button>
+				<button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+			</div>
+		</div>
+		<!-- /.modal-content -->
+	</div>
+	<!-- /.modal-dialog -->
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="threeTemperature" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog" >
+		<div class="modal-content"  style="width:700px; height:600px">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+					&times;
+				</button>
+				<h4 class="modal-title" id="myModalLabel">三温变化时间图</h4>
+			</div>
+			<div class="modal-body" style="height:550px;">
+				<!--<a class="btn btn-default btn-sm" ng-click="loadThreeTemperature()"> <i class="fa fa-search"></i>&nbsp;查&nbsp;询</a>-->
+				<div class="gsi-graph-view-chart" id="gsi-graph-view-chart" style="width:600px;height:500px;"></div>
+			</div>
+		</div>
+		&lt;!&ndash; /.modal-content &ndash;&gt;
+	</div>
+	&lt;!&ndash; /.modal-dialog &ndash;&gt;
+</div>

@@ -1,0 +1,348 @@
+<div id="content" style=" border-width:5px; margin-left:2%;position:relative;margin-right:2%;">
+	<section id="widget-grid" widget-grid>
+		<div class="row">
+			<article class="col-sm-12 col-md-12 col-lg-12">
+				<div jarvis-widget id="form-grid-widget"
+					 data-widget-colorbutton="false" data-widget-editbutton="false"
+					 data-widget-custombutton="false">
+					<div>
+						<div class="widget-body no-padding">
+							<form id="pesticidePlan-form" class="smart-form ng-pristine ng-valid" data-validator-option="validateOptions" novalidate="novalidate" style=" border-width:5px; margin-left:2%;position:relative;margin-right:2%;">
+								<header>
+									<a href-void class="btn btn-default btn-xs" ng-click="retList()">
+										<i class="fa fa-angle-left"></i>&nbsp;返回&nbsp;
+									</a>
+									&nbsp;<strong>施药方案申请详情</strong>
+									<span class="pull-right font-xs">带*的部分必须填写</span>
+								</header>
+								<fieldset>
+
+									<table style="width:70%; border-width:5px; margin-left:15%;position:relative;margin-right:15%;">
+										<table class="table table-striped table-bordered table-hover" width="100%" style="padding: 0;" >
+											<!--第一个tr开始 -->
+											<tr>
+												<th rowspan="3" width='10%'>
+													<label class="label" style="margin-top: 50%;text-align: center;">仓房情况</label>
+												</th>
+												<th width='15%'>
+													<label class="label" style="margin-top: 9px;text-align: center;">熏蒸编号<span style="color: red;">*</span></label>
+												</th>
+												<th width='15%'>
+													<section >
+														<label class="input">
+															<input type="text" ng-model="fumigation.id"
+																   name="fumigationId" ng-disabled="true">
+														</label>
+													</section>
+												</th>
+												<th>
+													<label class="label" style="margin-top: 9px;text-align: center;">仓房名称<span style="color: red;">*</span></label>
+												</th>
+												<th width='15%'>
+													<section>
+														<label class="select">
+															<select ng-model="fumigation.houseId" name="houseId"
+																	ng-options="store.storehouseId as store.storehouseName for store in storelist" ng-disabled="true">
+																<option value="">--请选择--</option>
+															</select>
+														</label>
+													</section>
+												</th>
+												<th width='15%'>
+													<label class="label" style="margin-top: 9px;text-align: center;">仓房类型<span style="color: red;margin-left: 5px;text-align: center;">*</span></label>
+												</th>
+												<th width='15%'>
+													<section>
+														<label class="select">
+															<select ng-model="storehouse.houseType" name="houseType" ng-disabled="true"
+																	ng-options="enum.enumid as enum.enumname for enum in dicDataList[1064]">
+																<option value="">--请选择--</option>
+															</select><i></i>
+														</label>
+													</section>
+												</th>
+											</tr>
+											<!--第一个tr结束 -->
+											<!--第二个tr开始 -->
+											<tr>
+												<th width='15%'>
+													<label label class="label" style="margin-top: 9px;text-align: center;">保管员</label>
+												</th>
+												<th width='15%'>
+													<section>
+														<label class="select">
+															<select ng-model="fumigation.keeper" name="keeper" ng-disabled="true"
+																	ng-options="keeper.id as keeper.name for keeper in keeperList">
+																<option value="">--请选择--</option>
+															</select><i></i>
+														</label>
+													</section>
+												</th>
+												<th>
+													<label label class="label" style="margin-top: 9px;text-align: center;">粮食品种<span style="color: red;">*</span></label>
+												</th>
+												<th>
+													<section>
+														<label class="select">
+															<select ng-model="fumigation.grainKind" name="grainKind"
+																	ng-options="enum.enumid as enum.enumname for enum in dicDataList[1061]" required >
+																<option value="">--请选择--</option>
+															</select><i></i>
+														</label>
+													</section>
+												</th>
+												<th>
+													<label label class="label" style="margin-top: 9px;text-align: center;">数量(吨)</label>
+												</th>
+												<th>
+													<section>
+														<label class="input">
+															<input class="form-control" type="text" ng-model="fumigation.grainCount"
+																   name="grainCount" validNumber="true">
+														</label>
+													</section>
+												</th>
+											</tr>
+											<tr>
+												<th>
+													<label label class="label" style="margin-top: 9px;text-align: center;">储存日期</label>
+												</th>
+												<th>
+													<section>
+														<label class="input">
+															<input type="text"  ng-model="fumigation.grainStorageTime" name="grainStorageTime"
+																   data-field="datetime" data-format="yyyy-MM-dd hh:mm:ss">
+														</label>
+													</section>
+												</th>
+												<th></th>
+												<th></th>
+												<th></th>
+												<th></th>
+											</tr>
+
+											<tr>
+												<th rowspan="2" width='10%'>
+													<label label class="label" style="margin-top: 9px;text-align: center;">粮情检查</label>
+												</th>
+												<th >
+													<label label class="label" style="margin-top: 9px;text-align: center;">主要害虫<span style="color: red;">*</span></label>
+												</th>
+												<th>
+													<section>
+														<label class="select">
+															<select ng-model="pesticide.majorInsectPests" name="majorInsectPests"
+																	ng-options="enum.enumid as enum.enumname for enum in dicDataList[5267]" required>
+																<option value="">--请选择--</option>
+															</select><i></i>
+														</label>
+													</section>
+												</th>
+												<th>
+													<label label class="label" style="margin-top: 9px;text-align: center;">害虫密度(头/公斤)</label>
+												</th>
+												<th>
+													<section>
+														<label class="input">
+															<input class="form-control" type="text" ng-model="pesticide.insectDensity"
+																   name="insectDensity" placeholder="" validNumber="true">
+														</label>
+													</section>
+												</th>
+												<th>
+													<label class="label" style="margin-top: 9px;text-align: center;">发生部位</label>
+												</th>
+												<th>
+													<section>
+														<label class="input">
+															<input class="form-control" type="text" ng-model="pesticide.occurrencePlace"
+																   name="occurrencePlace" placeholder="">
+														</label>
+													</section>
+												</th>
+											</tr>
+											<!--第十六个tr结束 -->
+											<!--第十七个tr开始 -->
+											<tr>
+												<th>
+													<label label class="label" style="margin-top: 9px;text-align: center;">生虫日期<span style="color: red;">*</span></label>
+												</th>
+												<th>
+													<section>
+														<label class="input">
+															<input type="text"  ng-model="pesticide.insectProductTime" name="insectProductTime"
+																   data-field="datetime" data-format="yyyy-MM-dd hh:mm:ss" required>
+														</label>
+													</section>
+												</th>
+												<th></th>
+												<th></th>
+												<th></th>
+												<th></th>
+											</tr>
+											<!--第七个tr开始 -->
+											<tr>
+												<th rowspan="5" width='10%'>
+													<label class="label" style="margin-top: 9px;text-align: center;">作业安排</label>
+												</th>
+												<th>
+													<label class="label" style="margin-top: 9px;text-align: center;">药剂名称<span style="color: red;">*</span></label>
+												</th>
+												<th>
+													<section>
+														<label class="select">
+															<select ng-model="pesticide.drugName" name="drugName"
+																	ng-options="enum.enumid as enum.enumname for enum in dicDataList[3024]"
+																	required>
+																<option value="">--请选择--</option>
+															</select><i></i>
+														</label>
+													</section>
+												</th>
+												<th>
+													<label class="label" style="margin-top: 9px;text-align: center;">药剂纯度(%)</label>
+												</th>
+												<th>
+													<section>
+														<label class="input">
+															<input class="form-control" type="text" ng-model="pesticide.drugPurity"
+																   name="drugPurity" placeholder="" validNumber="true">
+														</label>
+													</section>
+												</th>
+												<th>
+													<label class="label" style="margin-top: 9px;text-align: center;">施药方式<span style="color: red;">*</span></label>
+												</th>
+												<th>
+													<section>
+														<label class="input">
+															<input class="form-control" type="text" ng-model="pesticide.useDrugType"
+																   name="useDrugType" placeholder="" required>
+														</label>
+													</section>
+												</th>
+											</tr>
+											<!--第六个tr结束 -->
+											<!--第七个tr开始 -->
+											<tr>
+												<th>
+													<label label class="label" style="margin-top: 9px;text-align: center;">计划施药开始时间</label>
+												</th>
+												<th>
+													<section>
+														<label class="input">
+															<input type="text"  ng-model="pesticide.plannDrugStartTime" name="plannDrugStartTime"
+																   data-field="datetime" data-format="yyyy-MM-dd hh:mm:ss">
+														</label>
+													</section>
+												</th>
+												<th>
+													<label label class="label" style="margin-top: 9px;text-align: center;">计划施药截止至时间</label>
+												</th>
+												<th>
+													<section>
+														<label class="input">
+															<input type="text"  ng-model="pesticide.plannDrugUseUpTime" name="plannDrugUseUpTime"
+																   data-field="datetime" data-format="yyyy-MM-dd hh:mm:ss">
+														</label>
+													</section>
+												</th>
+												<th>
+													<label label class="label" style="margin-top: 9px;text-align: center;">计划用药量<span style="color: red;">*</span></label>
+												</th>
+												<th>
+													<section>
+														<label class="input">
+															<input class="form-control" type="text" ng-model="pesticide.plannDrugCount"
+																   name="plannDrugCount" placeholder="" ng-disabled="true">
+														</label>
+													</section>
+												</th>
+											</tr>
+											<!--第七个tr结束 -->
+
+											<tr>
+												<th>
+													<label class="label" style="margin-top: 9px;text-align: center;">密闭方法</label>
+												</th>
+												<th>
+													<section>
+														<label class="input">
+															<input class="form-control" type="text" ng-model="pesticide.sealType"
+																   name="sealType" placeholder="">
+														</label>
+													</section>
+												</th>
+												<th>
+													<label label class="label" style="margin-top: 9px;text-align: center;">设定浓度(ppm)</label>
+												</th>
+												<th>
+													<section>
+														<label class="input">
+															<input class="form-control" type="text" ng-model="pesticide.settingConcentration"
+																   name="settingConcentration" placeholder="" validNumber="true" >
+														</label>
+													</section>
+												</th>
+												<th>
+													<label label class="label" style="margin-top: 9px;text-align: center;">浓度检测方法</label>
+												</th>
+												<th>
+													<section>
+														<label class="input">
+															<input class="form-control" type="text" ng-model="pesticide.concentrationCheckType"
+																   name="concentrationCheckType" placeholder="">
+														</label>
+													</section>
+												</th>
+											</tr>
+											<!--第七个tr开始 -->
+											<tr>
+												<th>
+													<label label class="label" style="margin-top: 9px;text-align: center;">散气方式</label>
+												</th>
+												<th>
+													<section>
+														<label class="input">
+															<input class="form-control" type="text" ng-model="pesticide.bulkGasType"
+																   name="bulkGasType">
+														</label>
+													</section>
+												</th>
+												<th>
+													<label label class="label" style="margin-top: 9px;text-align: center;">施药人数</label>
+												</th>
+												<th>
+													<section>
+														<label class="input">
+															<input class="form-control" type="text" ng-model="pesticide.drugUserNumber"
+																   name="drugUse" validNumber="true">
+														</label>
+													</section>
+												</th>
+												<th>
+													<label label class="label" style="margin-top: 9px;text-align: center;">施药操作人员<span style="color: red;">*</span></label>
+												</th>
+												<th>
+													<section>
+														<label class="input">
+															<input class="form-control" type="text" ng-model="pesticide.pesticideOperator"
+																   name="fumigationOperator" required>
+														</label>
+													</section>
+												</th>
+											</tr>
+										</table>
+									</table>
+
+								</fieldset>
+								<div ng-include="'app/storage/aeration/views/historyList-approval.html'"></div>
+								<div id="dtBox"></div><!-- 时间控件：有时分秒 -->
+							</form>
+						</div>
+					</div>
+					</div>
+			</article>
+		</div>
+	</section>
+</div>

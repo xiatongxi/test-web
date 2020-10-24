@@ -1,0 +1,65 @@
+
+<link rel="stylesheet" type="text/css" media="screen"
+	href="styles/css/login.css">
+<div class="comtain-informatin">
+	<div class="comtain">
+		<div class="con-left">
+			<img src="styles/img/login/images.png" />
+		</div>
+		<div class="con">
+			<form id="login-form" class="smart-form client-form" novalidate="novalidate">
+				<div class="con-messon">
+					<a><img src="styles/img/login/logo-emergency.png" style="height: 31px;width: 237px;"/></a>
+				</div>
+				<div class="comtain-right">
+					<div class="comtain-message">
+						<p>应急用户登录</p>
+					</div>
+					<fieldset>
+						<section>
+							<div class="input-group">
+								<span class="input-group-addon">
+									<img src="styles/img/login/user_icon_bg.png" />
+								</span> 
+								<input type="text" class="form-control input-item  xiigm" name="username"
+									ng-model="username" required placeholder="用户名" />
+
+							</div>
+
+							<section>
+								<div class="input-group passon-con">
+									<span class="input-group-addon">
+										<img src="styles/img/login/key_icon_bg.png" />
+									</span> 
+									<input type="Password" class="form-control input-item mima" 
+										name="Password" ng-model="password" required placeholder="密码" />
+
+								</div>
+
+								<section>
+									<div class="box-information1">
+										<div class="input-group box-cesstion">
+											<span class="input-group-addon" id="sizing-addon2">
+											<img src="styles/img/login/yanzhengma_icon_bg.png" /></span>
+											<input type="text" class="form-control  form-contro2  mimars" ng-model="yzm" placeholder="验证码" />
+										</div>
+										<a class="span-information">
+											<img id="validateCode" src="{{file}}" ng-click="onload()" alt="" />
+										</a>
+									</div>
+								</section>
+								<div class="login-btn-box">
+
+									<button type="button" class="reset-btn  " ng-click="login()">登&nbsp;&nbsp;录</button>
+									<button type="reset" class="login-btn" value="">重&nbsp;&nbsp;置</button>
+								</div>
+
+							</section>
+
+						</section>
+					</fieldset>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>

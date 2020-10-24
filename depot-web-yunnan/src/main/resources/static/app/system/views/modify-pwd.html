@@ -1,0 +1,87 @@
+<!-- MAIN CONTENT -->
+<style type="text/css">
+  #passStrength{
+  	height: 15px;
+  	line-height: 15px;
+    width: 120px;
+    border: 1px solid #ccc;
+    margin-left: 50%;
+    padding-top: -57px;
+    text-align: center;
+    font-weight: bold;
+    color: #fff;
+    position: absolute;
+    padding-top: -23px;
+    top: 129px;
+  }
+  .strengthLv1{background:red;height:6px;width:40px;}
+  .strengthLv2{background:orange;height:6px;width:80px;}
+  .strengthLv3{background:green;height:6px;width:120px;}
+</style>
+<div id="content">
+
+	<!-- widget grid -->
+	<section id="widget-grid" widget-grid>
+
+		<!-- START ROW -->
+		<div class="row"> 
+
+			<!-- NEW COL START -->
+			<article class="col-sm-12 col-md-12 col-lg-12">
+
+				<!-- Widget ID (each widget will need unique ID)-->
+				<div jarvis-widget id="form-grid-widget"
+					data-widget-colorbutton="false" data-widget-editbutton="false"
+					data-widget-custombutton="false">
+
+					<!-- widget div-->
+					<div>
+
+						<!-- widget content -->
+						<div class="widget-body no-padding">
+							<form id="pwd-form" class="smart-form" novalidate="novalidate">
+							
+								<header>修改密码</header>
+								<fieldset>
+									<div class="row"> 
+										<section class="col col-6">
+											<label class="label txt-bg-red">原密码</label> 
+											<label class="input"> 
+												<input type="password" name="oldPassword" ng-model="oldPassword" 
+													 maxlength="20" required validPassword="true" />
+											</label>
+										</section>
+									</div>
+									<div class="row">
+										<section class="col col-6">
+											<label class="label txt-bg-red">新密码(7位以上，大小写字母+数字+特殊字符)</label> 
+											<label class="input"> 
+												<input type="password" id="newPassword" name="newPassword" ng-change="qdyz()"
+													ng-model="newPassword" minlength="7" maxlength="20" required  />
+											</label>
+										</section>
+									</div>
+									<div id="passStrength"></div>
+									<div class="row">
+										<section class="col col-6">
+											<label class="label txt-bg-red">确认新密码</label> 
+											<label class="input"> 
+												<input type="password" name="newPassword1" ng-model="newPassword1" 
+													 minlength="7" maxlength="20" required  />
+											</label>
+										</section>
+									</div>
+							
+								</fieldset>
+								
+					            <footer class="text-align-center">
+					                <button type="button" class="btn btn-primary" ng-click="submit()">提交</button>
+					                <!-- <button type="button" class="btn btn-default" ng-click="back()">取消</button> -->
+					            </footer>
+							</form>
+						</div>
+					</div>
+			</article>
+		</div>
+	</section>
+</div>

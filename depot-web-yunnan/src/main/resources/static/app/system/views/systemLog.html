@@ -1,0 +1,84 @@
+<!-- MAIN CONTENT -->
+<div id="content">
+	<!-- widget grid -->
+	<section widget-grid id="widget-grid">
+
+		<div class="row">
+			<article class="col-sm-12">
+
+				<div jarvis-widget id="standard-datatable-widget"
+					data-widget-color="darken" data-widget-editbutton="false">
+					<header>
+						<span class="widget-icon"> <i class="fa fa-table"></i>
+						</span>
+						<h2>日志列表</h2>
+					</header>
+					<div>
+						<div class="widget-body no-padding">
+							<div id="DataTables_Table_1_wrapper"
+								class="dataTables_wrapper form-inline no-footer">
+								<div class="dt-toolbar">
+									<div class="col-xs-12 col-sm-9">
+										<div class="form-group">
+											<label></label>
+<!-- 											<a class="btn btn-default btn-sm" ng-click="loadData()"> -->
+<!-- 												<i class="fa fa-search"></i>&nbsp;查&nbsp;询</a> -->
+										</div>
+									</div>
+									<div class="col-sm-3 col-xs-6 hidden-xs">
+										<div class="dataTables_length">
+											<label>每页显示 <select ng-model="pageInfo.pageSize" ng-change="loadData(pageInfo.pageNum=1)"
+												ng-options="num as num for num in [10,25,50,100]"
+												class="form-control input-sm"></select> 条
+											</label>
+										</div>
+									</div>
+								</div>
+
+								<table class="table table-striped table-bordered table-hover"
+									width="100%">
+									<thead>
+				                        <tr>
+				                            <th data-class="expand">日志类型</th>
+				                            <th data-class="expand">用户名称</th>
+				                            <th data-class="expand">用户角色</th>
+				                            <th data-class="expand">所属机构行政区划编码</th>
+				                            <th data-class="expand">登录时间</th>
+				                            <th data-class="expand">注销时间</th>
+				                            <th data-class="expand">菜单名称</th>
+				                            <th data-class="expand">请求参数</th>
+				                            <th data-class="expand">操作时间</th>
+				                        </tr>
+			                        </thead>
+			                        
+			                        <tbody>
+			                        	<tr ng-repeat="log in pageInfo.list">
+			                        		<td data-class="expand">
+			                        		<span ng-if="log.type==1">登录日志</span>
+			                        		<span ng-if="log.type==2">操作日志</span>
+			                        		<span ng-if="log.type==3">访问日志</span>
+			                        		</td>
+			                        		<td>{{log.userName}}</td>
+				                            <td>{{log.userRole}}</td>
+				                            <td>{{log.userAddress}}</td>
+				                            <td>{{log.dlTime | date:'yyyy-MM-dd HH:mm:ss'}}</td>
+				                            <td>{{log.zxTime | date:'yyyy-MM-dd HH:mm:ss'}}</td>
+				                            <td>{{log.funcName}}</td>
+				                            <td>{{log.parameter}}</td>
+				                            <td>{{log.operationTime | date:'yyyy-MM-dd HH:mm:ss'}}</td>
+			                        	</tr>
+			                        </tbody>
+
+								</table>
+								<div smart-include="app/layout/partials/page.tpl.html"></div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</article>
+		</div>
+
+	</section>
+
+</div>
+

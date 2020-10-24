@@ -1,0 +1,124 @@
+<div id="content">
+    <section id="widget-grid" widget-grid>
+        <div class="row">
+            <article class="col-sm-12 col-md-12 col-lg-12">
+                <div jarvis-widget id="form-grid-widget" data-widget-colorbutton="false" data-widget-editbutton="false"
+                     data-widget-custombutton="false">
+                    <div>
+                        <div class="widget-body no-padding">
+                            <form id="safeProduceAccident-form" class="smart-form" data-validator-option="validateOptions" novalidate="novalidate">
+                                <button type="submit" class="bv-hidden-submit" style="display: none; width: 0px; height: 0px;"></button>
+                                <header>
+                                    <a href-void class="btn btn-default btn-xs" ng-click="back()">
+                                        <i class="fa fa-angle-left"></i>&nbsp;返回&nbsp;
+                                    </a>
+                                    &nbsp;<strong>安全事故管理详情</strong>
+                                </header>
+                                <fieldset>
+                                    <div class="row">
+                                        <section class="col col-4">
+                                            <label class="label">库区名称：<span style="color: red;">*</span></label>
+                                            <label class="input">
+                                                <input type="text" ng-model="safeProduceAccident.warehouseName" name="warehouseName" ng-disabled="isNotEdit" ng-readonly="true">
+                                            </label>
+                                        </section>
+                                        <section class="col col-4">
+                                            <label class="label">仓房名称：<span style="color: red;">*</span></label>
+                                            <label class="select">
+                                                <select ng-model="safeProduceAccident.houseId" name="houseId" required ng-change=change()
+                                                        ng-options="store.storehouseId as store.storehouseName for store in storelist"
+                                                        class="form-control" ng-disabled="isNotEdit">
+                                                    <option value="">--请选择--</option>
+                                                </select>
+                                            </label>
+                                        </section>
+                                        <section class="col col-4">
+                                            <label class="label">货位名称：<span style="color: red;">*</span></label>
+                                            <label class="select">
+                                                <select ng-model="safeProduceAccident.warehouseId" name="warehouseId" class="form-control" ng-disabled="isNotEdit" required
+                                                        ng-options="ware.warehouseId as ware.warehouseName for ware in warehouseList">
+                                                    <option value="">--请选择--</option>
+                                                </select>
+                                            </label>
+                                        </section>
+                                    </div>
+                                    <div class="row">
+                                        <section class="col col-12">
+                                            <label class="label">储粮安全隐患:</label>
+                                            <label class="textarea textarea-resizable">
+                                                <textarea rows="15" cols="147" class="custom-scroll"  ng-model="safeProduceAccident.dangerDescription" ng-disabled="isNotEdit" name="dangerDescription"></textarea>
+                                            </label>
+                                        </section>
+                                    </div>
+                                    <div class="row">
+                                        <section class="col col-12">
+                                            <label class="label">整改方案:</label>
+                                            <label class="textarea textarea-resizable">
+                                                <textarea rows="15" cols="147" class="custom-scroll"  ng-model="safeProduceAccident.improvementProgram" ng-disabled="isNotEdit" name="improvementProgram"></textarea>
+                                            </label>
+                                        </section>
+                                    </div>
+                                    <div class="row">
+                                        <section class="col col-12">
+                                            <label class="label">整改情况:</label>
+                                            <label class="textarea textarea-resizable">
+                                                <textarea rows="15" cols="147" class="custom-scroll"  ng-model="safeProduceAccident.improvementCondition"  ng-disabled="isNotEdit" name="improvementCondition"></textarea>
+                                            </label>
+                                        </section>
+                                    </div>
+                                    <div class="row">
+                                        <section class="col col-4">
+                                            <label class="label">整改负责人：<span style="color: red;">*</span></label>
+                                            <label class="input">
+                                                <input type="text" ng-model="safeProduceAccident.bossHead" name="bossHead" ng-disabled="isNotEdit" required>
+                                            </label>
+                                        </section>
+                                        <section class="col col-4">
+                                            <label class="label">检查人：<span style="color: red;">*</span></label>
+                                            <label class="input">
+                                                <input type="text" ng-model="safeProduceAccident.checkPerson" name="checkPerson" ng-disabled="isNotEdit" required>
+                                            </label>
+                                        </section>
+                                        <section class="col col-4">
+                                            <label class="label">企业负责人：<span style="color: red;">*</span></label>
+                                            <label class="input">
+                                                <input type="text" ng-model="safeProduceAccident.enterpriseBossHead" name="enterpriseBossHead"  ng-disabled="isNotEdit" required>
+                                            </label>
+                                        </section>
+                                    </div>
+                                    <div class="row">
+                                        <section class="col col-4">
+                                            <label class="label">整改时间：<span style="color: red;">*</span></label>
+                                            <label class="input">
+                                                <input type="text" ng-model="safeProduceAccident.improvementTime" name="improvementTime" readOnlyButValid ng-disabled="isNotEdit"
+                                                       data-smart-datepicker required>
+                                            </label>
+                                        </section>
+                                        <section class="col col-4">
+                                            <label class="label">检查时间：<span style="color: red;">*</span></label>
+                                            <label class="input">
+                                                <input type="text" ng-model="safeProduceAccident.checkTime" name="checkTime" readOnlyButValid ng-disabled="isNotEdit"
+                                                       data-smart-datepicker required>
+                                            </label>
+                                        </section>
+                                        <section class="col col-4">
+                                            <label class="label">填报日期：<span style="color: red;">*</span></label>
+                                            <label class="input">
+                                                <input type="text" ng-model="safeProduceAccident.reportedTime" name="reportedTime" ng-disabled="isNotEdit" ng-readonly="true"
+                                                       data-smart-datepicker>
+                                            </label>
+                                        </section>
+                                    </div>
+                                </fieldset>
+                                <footer class="modal-footer text-align-center">
+                                    <button ng-click="back()" class="btn btn-default btn-lg" data-dismiss="modal">取消</button>
+                                    <button ng-click="saveData()" type="button" class="btn btn-primary btn-lg" ng-hide="isNotEdit">提交</button>
+                                </footer>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </article>
+        </div>
+    </section>
+</div>

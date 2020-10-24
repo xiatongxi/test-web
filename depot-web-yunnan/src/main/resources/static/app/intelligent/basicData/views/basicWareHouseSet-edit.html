@@ -1,0 +1,180 @@
+<!-- MAIN CONTENT -->
+<div id="content">
+    <!-- widget grid -->
+    <section widget-grid id="widget-grid">
+        <div class="row">
+            <!-- NEW COL START -->
+            <article class="col-sm-12 col-md-12 col-lg-12">
+                <!-- Widget ID (each widget will need unique ID)-->
+                <div jarvis-widget id="form-grid-widget"
+                     data-widget-colorbutton="false" data-widget-editbutton="false"
+                     data-widget-custombutton="false">
+                    <!-- widget div-->
+                    <div>
+                        <!-- widget content -->
+                        <div class="widget-body no-padding">
+                            <form name='basicStorehouseView-form' id="basicStorehouseView-form" class="smart-form ng-pristine ng-valid"
+                                  data-validator-option="validateOptions" novalidate="novalidate">
+                                <header>
+                                    <a href-void class="btn btn-default btn-xs" ng-click="returnTop()"><i
+                                            class="fa fa-angle-left"></i>&nbsp;返回&nbsp;</a>
+                                    &nbsp;<strong>仓房信息设置详情</strong>
+                                    <span class="pull-right font-xs">带*的部分必须填写</span>
+                                </header>
+                                <table class="table table-striped table-bordered table-hover" width="100%">
+                                    <fieldset>
+                                        <div class="row">
+                                            <section class="col col-3">
+                                                <label class="label">库点编码：<span
+                                                        style="color: red;margin-left: 5px;text-align: center;">*</span></label>
+                                                <label class="input">
+                                                    <input type="text" maxlength="20"
+                                                           ng-model="basicStorehouse.depotName"
+                                                           ng-disabled="isNotEdit"
+                                                           name="depotName" required>
+                                                </label>
+                                            </section>
+                                            <section class="col col-3">
+                                                <label class="label">仓房编码：<span
+                                                        style="color: red;margin-left: 5px;text-align: center;">*</span></label>
+                                                <label class="input">
+                                                    <input type="text" maxlength="5"
+                                                           ng-model="basicStorehouse.storehouseCode"
+                                                           ng-disabled="isNotEdit"
+                                                           ng-blur="itExistCode(basicStorehouse.storehouseCode)"
+                                                           name="storehouseCode" required>
+                                                </label>
+                                            </section>
+                                            <section class="col col-3">
+                                                <label class="label">仓房名称：<span
+                                                        style="color: red;margin-left: 5px;text-align: center;">*</span></label>
+                                                <label class="input">
+                                                    <input type="text" name="storehouseName" ng-model="basicStorehouse.storehouseName"
+                                                           ng-disabled="isNotEdit"
+                                                           ng-blur="itExistName(basicStorehouse.storehouseName)"
+                                                           required>
+                                                </label>
+                                            </section>
+                                            <section class="col col-3">
+                                                <label class="label">仓房类型：<span
+                                                        style="color: red;margin-left: 5px;text-align: center;">*</span></label>
+                                                <label class="select">
+                                                    <select ng-model="basicStorehouse.storehouseType" ng-disabled="isNotEdit"
+                                                            ng-options="enum.enumid as enum.enumname for enum in dicDataList[1064]"
+                                                            class="form-control">
+                                                        <option value="">--请选择--</option>
+                                                    </select>
+                                                </label>
+                                            </section>
+                                        </div>
+                                        <div class="row">
+                                            <section class="col col-3">
+                                                <label class="label">仓房结构：<span
+                                                        style="color: red;margin-left: 5px;text-align: center;">*</span></label>
+                                                <label class="input">
+                                                    <input type="text" ng-model="basicStorehouse.architectureType"
+                                                           ng-disabled="isNotEdit"
+                                                           name="architectureType" maxlength="20" required>
+                                                </label>
+                                            </section>
+                                            <section class="col col-3">
+                                                <label class="label">保管员:</label> <label class="input">
+                                                <input type="text" ng-model="basicStorehouse.dutystoreman"
+                                                       ng-disabled="isNotEdit"
+                                                       name="dutystoreman" maxlength="20">
+                                            </label>
+                                            </section>
+                                            <section class="col col-3">
+                                                <label class="label">仓长:</label> <label class="input">
+                                                <input type="text" ng-model="basicStorehouse.storeOutsideLength"
+                                                       ng-disabled="isNotEdit"
+                                                       name="storeOutsideLength" maxlength="10" ng-keyup="clearNoNum(basicStorehouse,'storeOutsideLength')">
+                                            </label>
+                                            </section>
+                                            <section class="col col-3">
+                                                <label class="label">仓宽:</label> <label class="input">
+                                                <input type="text" ng-model="basicStorehouse.storeOutsideWidth"
+                                                       ng-disabled="isNotEdit"
+                                                       name="storeOutsideWidth" maxlength="10" ng-keyup="clearNoNum(basicStorehouse,'storeOutsideWidth')">
+                                            </label>
+                                            </section>
+                                        </div>
+                                        <div class="row">
+                                            <section class="col col-3">
+                                                <label class="label">仓高:</label> <label class="input">
+                                                <input type="text" ng-model="basicStorehouse.storeOutsideHeigth"
+                                                       ng-disabled="isNotEdit"
+                                                       name="storeOutsideHeigth" maxlength="10" ng-keyup="clearNoNum(basicStorehouse,'storeOutsideHeigth')">
+                                            </label>
+                                            </section>
+                                            <section class="col col-3">
+                                                <label class="label">设计仓容:</label> <label class="input">
+                                                <input type="text" ng-model="basicStorehouse.designCapacity"
+                                                       ng-disabled="isNotEdit"
+                                                       name="designCapacity" maxlength="10" ng-keyup="clearNoNum(basicStorehouse,'designCapacity')">
+                                            </label>
+                                            </section>
+                                            <section class="col col-3">
+                                                <label class="label">实际仓容:</label> <label class="input">
+                                                <input type="text" ng-model="basicStorehouse.actualCapacity"
+                                                       ng-disabled="isNotEdit"
+                                                       name="actualCapacity" maxlength="10" ng-keyup="clearNoNum(basicStorehouse,'actualCapacity')">
+                                            </label>
+                                            </section>
+                                            <section class="col col-3">
+                                                <label class="label">建造年代：<span style="color: red;">*</span></label>
+                                                <label class="input">
+                                                    <input type="text" ng-model="basicStorehouse.usedate" name="usedate"
+                                                           data-smart-datepicker ng-disabled="isNotEdit"
+                                                           placeholder="建造年代" required>
+                                                </label>
+                                            </section>
+                                        </div>
+                                        <div class="row">
+                                            <section class="col col-3">
+                                                <label class="label">仓房状态:</label>
+                                                <label class="select">
+                                                    <select ng-model="basicStorehouse.storehouseState" ng-disabled="isNotEdit"
+                                                            ng-options="enum.enumid as enum.enumname for enum in dicDataList[1001]"
+                                                            class="form-control">
+                                                        <option value="">--请选择--</option>
+                                                    </select>
+                                                </label>
+                                            </section>
+                                            <!--<section class="col col-3">-->
+                                                <!--<label class="label">类型:&emsp;<span style="color: red;margin-left: 5px;text-align: center;">*</span></label>-->
+                                                <!--<label class="select">-->
+                                                    <!--<select ng-model="wHouse.type" name="type" required>-->
+                                                        <!--<option value="">&#45;&#45;请选择&#45;&#45;</option>-->
+                                                        <!--<option value="仓房">仓房</option>-->
+                                                        <!--<option value="油罐">油罐</option>-->
+                                                    <!--</select>-->
+                                                <!--</label>-->
+                                            <!--</section>-->
+                                            <section class="col col-3">
+                                                <label class="label">描述:</label> <label class="input">
+                                                <input type="text" ng-model="basicStorehouse.remark"
+                                                       ng-disabled="isNotEdit"
+                                                       name="remark" maxlength="50">
+                                            </label>
+                                            </section>
+                                        </div>
+                                    </fieldset>
+                                    <div class="form-actions">
+                                        <footer class="text-align-center">
+                                            <button type="button" class="btn btn-default" ng-click="returnTop()">取消
+                                            </button>
+                                            <button type="button" class="btn btn-primary" ng-hide="isNotEdit"
+                                                    ng-click="save()">保存
+                                            </button>
+                                        </footer>
+                                    </div>
+                                </table>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </article>
+        </div>
+    </section>
+</div>

@@ -1,0 +1,1647 @@
+<div id="content">
+	<section id="widget-grid" widget-grid>
+		<div class="row">
+			<article class="col-sm-12 col-md-12 col-lg-12">
+				<div jarvis-widget id="form-grid-widget" data-widget-colorbutton="false" data-widget-editbutton="false"
+					 data-widget-custombutton="false">
+					<div>
+						<div class="widget-body no-padding">
+							<form id="qualitycheck-form" class="smart-form" data-validator-option="validateOptions" novalidate="novalidate">
+								<button type="submit" class="bv-hidden-submit" style="display: none; width: 0px; height: 0px;"></button>
+								<header>
+									<a href-void class="btn btn-default btn-xs" ng-click="back()"><i class="fa fa-angle-left"></i>&nbsp;返回&nbsp;</a>
+								</header>
+								<header>基础信息</header>
+								<fieldset>
+									<div class="row">
+										<section class="col col-3" ng-hide="isAgentData">
+											<label class="label">仓房名称：<span style="color: red;">*</span></label>
+											<label class="select">
+												<select ng-model="qualitycheck.houseId" name="houseId" id="houseNameDis" required ng-change=change()
+														ng-options="store.ch as store.storehouseName for store in storehouseList"
+														class="form-control" >
+													<option value="">--请选择--</option>
+												</select>
+											</label>
+										</section>
+
+										<section class="col col-3" ng-hide="isAgentData">
+											<label class="label">货位名称：</label>
+											<label class="select">
+												<select ng-model="qualitycheck.warehouseId" name="warehouseId" class="form-control" ng-change=changeGetInfo()
+														id="wareNameDis" ng-options="ware.warehouseId as ware.warehouseName for ware in warehouseList">
+													<option value="">--请选择--</option>
+												</select>
+											</label>
+										</section>
+
+										<section class="col col-3" ng-show="isAgentData">
+											<label class="label">仓房名称：<span style="color: red;">*</span></label>
+											<label class="input">
+												<input type="text" ng-model="storeName" name="storeName" ng-readonly="true">
+											</label>
+										</section>
+
+										<section class="col col-3" ng-show="isAgentData">
+											<label class="label">货位名称：</label>
+											<label class="input">
+												<input type="text" ng-model="wareName" name="wareName" ng-readonly="true">
+											</label>
+										</section>
+
+										<section class="col col-3">
+											<label class="select">
+												<label class="label">粮油品种：<span style="color: red;">*</span></label>
+												<label class="select">
+													<select ng-model="qualitycheck.subType" ng-disabled="true"
+															ng-options="enum.enumid as enum.enumname for enum in dicDataList[1061]" required>
+														<option value="">-- 粮油品种 --</option>
+													</select>
+												</label>
+											</label>
+										</section>
+										<section class="col col-3">
+											<label class="select">
+												<label class="label">明细品种：</label>
+												<label class="input">
+													<input type="text" ng-disabled="true" ng-value="dicData[qualitycheck.subTypeDetailed]" required>
+													<input type="hidden" ng-disabled="true" ng-model="qualitycheck.subTypeDetailed">
+												</label>
+											</label>
+										</section>
+
+									</div>
+									<div class="row">
+										<section class="col col-3">
+											<label class="input">
+												<label class="label">数量：<span style="color: red;">*</span></label>
+												<input type="text" ng-model="qualitycheck.number" name="number" ng-readonly="true"
+													   placeholder="数量" required>
+											</label>
+										</section>
+										<section class="col col-3">
+											<label class="label">入仓日期：<span style="color: red;">*</span></label>
+											<label class="input">
+												<input type="text" ng-model="qualitycheck.inputTime" name="inputTime" data-smart-datepicker ng-disabled="true"
+													   placeholder="入仓日期" required>
+											</label>
+										</section>
+										<section class="col col-3">
+											<label class="label">收货年度：<span style="color: red;">*</span></label>
+											<label class="select">
+												<select name="harvestTime" ng-model="qualitycheck.harvestTime" ng-readonly="true"
+														ng-options="enum.enumname as enum.enumname for enum in dicDataList[1004]" required>
+													<option value="" selected="" disabled="">请选择</option>
+												</select> <i></i>
+											</label>
+										</section>
+										<section class="col col-3">
+											<label class="label">产地：</label>
+											<label class="input">
+												<input type="text"  ng-readonly="true" value="{{dicData[qualitycheck.location]}}">
+											</label>
+										</section>
+									</div>
+									<div class="row">
+										<section class="col col-3">
+											<label class="label">保管员：<span style="color: red;">*</span></label>
+											<label class="input">
+												<input type="text" ng-model="qualitycheck.keeper" name="keeper" id="keeps" placeholder="保管员" required>
+											</label>
+										</section>
+									</div>
+								</fieldset>
+
+						<!--品种切换开始--><!--小麦及混合小麦，玉米，稻谷，大豆，油-->
+							<div ng-show="qualitycheck.subType==3164">
+								<header>检验信息</header>
+								<fieldset>
+									<div class="row">
+										<section class="col col-3">
+											<label class="label">扦样日期：</label>
+											<label class="input">
+												<input type="text" ng-model="qualitycheck.chooseTime" name="chooseTime" data-smart-datepicker ng-disabled="isNotEdit"
+													   placeholder="扦样日期">
+											</label>
+										</section>
+										<section class="col col-3">
+											<label class="label">扦样人：</label>
+											<label class="input">
+												<input type="text" ng-model="qualitycheck.chooser" name="chooser" ng-readonly="isNotEdit"
+													   placeholder="扦样人">
+											</label>
+										</section>
+										<section class="col col-3">
+											<label class="label">检验日期：<span style="color: red;">*</span></label>
+											<label class="input">
+												<input type="text" ng-model="qualitycheck.checkTime" name="checkTime" data-smart-datepicker ng-disabled="isNotEdit"
+													   placeholder="检验日期" required>
+											</label>
+										</section>
+										<section class="col col-3">
+											<label class="label">检验人：<span style="color: red;">*</span></label>
+											<label class="input">
+												<input type="text" ng-model="qualitycheck.checker" name="checker" ng-readonly="isNotEdit"
+													   placeholder="检验人" required>
+											</label>
+										</section>
+									</div>
+
+									<div class="row">
+										<section class="col col-3">
+											<label class="label">报告出具日期：</label>
+											<label class="input">
+												<input type="text" ng-model="qualitycheck.checkResultTime" ng-disabled="isNotEdit" name="checkResultTime" data-smart-datepicker
+													   placeholder="报告出具日期">
+											</label>
+										</section>
+										<section class="col col-3">
+											<label class="select">
+												<label class="label">检验结论：<span style="color: red;">*</span></label>
+												<label class="select">
+													<select name="checkResult" ng-disabled="isNotEdit" ng-readonly="isNotEdit" ng-model="qualitycheck.checkResult" required>
+														<option value="" selected="" disabled="">请选择</option>
+														<option value="0">合格</option>
+														<option value="1">不合格</option>
+													</select> <i></i> </label>
+											</label>
+										</section>
+										<section class="col col-3">
+											<label class="label">检验机构：</label>
+											<label class="input">
+												<input type="text" ng-model="qualitycheck.acceptUnite" ng-readonly="isNotEdit" name="acceptUnite"
+													   placeholder="检验机构">
+											</label>
+										</section>
+										<section class="col col-3">
+											<label class="label">检验标准依据：<span style="color: red;">*</span></label>
+											<label class="input">
+												<input type="text"  ng-readonly="true" value="{{dicData[qualitycheck.inspectionStandardBasis]}}">
+											</label>
+											<!--<label class="select">
+												<select ng-model="qualitycheck.inspectionStandardBasis" name="inspectionStandardBasis" required
+														ng-options="enum.enumid as enum.enumname for enum in dicDataList[5519]"
+														class="form-control" ng-disabled="isNotEdit">
+													<option value="">&#45;&#45;请选择&#45;&#45;</option>
+												</select>
+											</label>-->
+										</section>
+									</div>
+									<div class="row">
+										<section class="col col-3">
+											<label class="select">
+												<label class="label">储存品质：<span style="color: red;">*</span></label>
+												<label class="select">
+													<select name="storeQuality" ng-model="qualitycheck.storeQuality" ng-readonly="isNotEdit"  ng-disabled="isNotEdit" required>
+														<option value="" selected="" disabled="">请选择</option>
+														<option value="0">宜存</option>
+														<option value="1">不宜存</option>
+													</select> <i></i> </label>
+											</label>
+										</section>
+										<section class="col col-3">
+											<label class="select">
+												<label class="label">指标类别：<span style="color: red;">*</span></label>
+												<label class="select">
+													<select name="zblb" ng-model="qualitycheck.zblb" ng-readonly="isNotEdit"  ng-disabled="isNotEdit" required>
+														<option value="">请选择</option>
+														<option value="1">质量指标检验</option>
+														<option value="2">储存品质检验</option>
+														<option value="3">食品安全检验</option>
+													</select> <i></i> </label>
+											</label>
+										</section>
+										<section class="col col-3">
+											<label class="label">扦样区域：<span style="color: red;">*</span></label>
+											<label class="input">
+												<input type="text" ng-model="qualitycheck.qyqy" ng-readonly="isNotEdit" name="qyqy"
+													   placeholder="扦样区域" required>
+											</label>
+										</section>
+										<section class="col col-3">
+											<label class="select">
+												<label class="label">监督人姓名：</label>
+												<label class="input">
+													<input type="text" ng-model="qualitycheck.jdrxm" ng-readonly="isNotEdit" name="jdrxm"  placeholder="监督人姓名">
+												</label>
+											</label>
+
+										</section>
+									</div>
+									<div class="row">
+										<section class="col col-3">
+											<label class="label">是否正常存储年限：<span style="color: red;">*</span></label>
+											<label class="select">
+												<select name="sfzcccnx" ng-model="qualitycheck.sfzcccnx" ng-readonly="isNotEdit"  ng-disabled="isNotEdit" required>
+													<option value="">请选择</option>
+													<option value="0">否</option>
+													<option value="1">是</option>
+												</select> <i></i> </label>
+										</section>
+									</div>
+								</fieldset>
+
+								<header>
+									<h3>
+										<strong>检测信息</strong>&nbsp;&nbsp;
+										<a class="btn btn-primary btn-sm" ng-click="addTR(qualitycheck.id)" ng-hide="isNotEdit">+&nbsp;&nbsp;检测项</a>
+									</h3>
+								</header>
+								<fieldset>
+									<div class="col-xs-10 col-sm-10">
+										<table class="table table-striped table-bordered table-hover" width="80%">
+											<tr>
+												<th  style="text-align: center;">检测项</th>
+												<th  style="text-align: center;">检测值</th>
+											</tr>
+											<tr>
+												<td>
+													<label class="label" style="margin-top: 9px;text-align: center;">水分(%)</label>
+												</td>
+												<td>
+													<section class="col col-6">
+														<label class="label"> </label>
+														<label class="input">
+															<input type="text" ng-model="qualitycheck.water" name="water" ng-readonly="isNotEdit" required>
+														</label>
+													</section>
+												</td>
+											</tr>
+											<tr>
+												<td>
+													<label class="label" style="margin-top: 9px;text-align: center;">容重(g/L)</label>
+												</td>
+												<td>
+													<section class="col col-6">
+														<label class="label"> </label>
+														<label class="input">
+															<input type="text" ng-model="qualitycheck.capacity" name="capacity" ng-readonly="isNotEdit" required>
+														</label>
+													</section>
+												</td>
+											</tr>
+											<tr>
+												<td>
+													<label class="label" style="margin-top: 9px;text-align: center;">杂质(%)</label>
+												</td>
+												<td>
+													<section class="col col-6">
+														<label class="label"> </label>
+														<label class="input">
+															<input type="text" ng-model="qualitycheck.impurity" name="impurity" ng-readonly="isNotEdit" required>
+														</label>
+													</section>
+												</td>
+											</tr>
+											<tr>
+												<td>
+													<label class="label" style="margin-top: 9px;text-align: center;">矿物质(%)</label>
+												</td>
+												<td>
+													<section class="col col-6">
+														<label class="label"> </label>
+														<label class="input">
+															<input type="text" ng-model="qualitycheck.mineral" name="mineral" ng-readonly="isNotEdit" required>
+														</label>
+													</section>
+												</td>
+											</tr>
+											<tr>
+												<td>
+													<label class="label" style="margin-top: 9px;text-align: center;">不完善颗粒(%)</label>
+												</td>
+												<td>
+													<section class="col col-6">
+														<label class="label"> </label>
+														<label class="input">
+															<input type="text" ng-model="qualitycheck.badpart" name="badpart" ng-readonly="isNotEdit" required>
+														</label>
+													</section>
+												</td>
+											</tr>
+											<tr>
+												<td>
+													<label class="label" style="margin-top: 9px;text-align: center;">色泽气味</label>
+												</td>
+												<td>
+													<section class="col col-6">
+														<label class="label"> </label>
+														<label class="input">
+															<input type="text" ng-model="qualitycheck.colorsmell" name="colorsmell" ng-readonly="isNotEdit" required>
+														</label>
+													</section>
+												</td>
+											</tr>
+											<tr ng-repeat="checkSon in addCheckSon">
+												<!--<input type="hidden" ng-model="checkSon.qualitycheckId" />-->
+												<input type="hidden" ng-model="checkSon.qualitycheckId" />
+												<input type="hidden" ng-model="checkSon.id" />
+												<td style="margin-top: 9px;">
+													<section class="col col-6"  style="float: none;margin: auto;">
+														<select ng-model="checkSon.numbering" name="numbering{{$index}}" required
+																ng-options="enum.enumid as enum.enumname for enum in dicDataList[2779]"
+																class="form-control" ng-disabled="isNotEdit">
+															<option value="">--请选择--</option>
+														</select>
+													</section>
+
+												</td>
+												<td  style="margin-top: 9px;text-align: center;">
+													<section class="col col-6">
+														<label class="input">
+															<input type="text" ng-model="checkSon.setValue" name="setValue{{$index}}" ng-readonly="isNotEdit" required>
+														</label>
+													</section>
+													<!--<a ng-hide="checkSon.qualitycheckId!=1" class="btn btn-primary" href-void="" href="#" ng-click="addTR()">增加</a>
+                                                    <a ng-hide="checkSon.qualitycheckId==1" class="btn btn-primary btn-sm" ng-click="deleteTR(checkSon)">删除</a>-->
+													<section class="col col-3">
+														<label class="input">
+															<a ng-hide="isNotEdit" class="btn btn-primary btn-sm" ng-click="deleteTR(checkSon)">-&nbsp;&nbsp;检测项</a>
+														</label>
+													</section>
+												</td>
+											</tr>
+										</table>
+										<div class="row">
+											<section class="col col-3">
+												<label class="select">
+													<label class="label" style="margin-top: 11px">粮油等级：<span style="color: red;">*</span></label>
+													<label class="select">
+														<select ng-model="qualitycheck.level" ng-disabled="isNotEdit" ng-readonly="isNotEdit"
+																ng-options="enum.enumid as enum.enumname for enum in dicDataList[1002]" required>
+															<option value="">-- 粮油等级 --</option>
+														</select>
+													</label>
+												</label>
+											</section>
+											<section class="col col-3">
+												<label class="select">
+													<label class="label" style="margin-top: 11px">是否虫粮：<span style="color: red;">*</span></label>
+													<label class="select">
+														<select name="isPest" ng-disabled="isNotEdit" ng-readonly="isNotEdit" ng-model="qualitycheck.isPest">
+															<option value="" selected="" disabled="">请选择</option>
+															<option value="0">是</option>
+															<option value="1">否</option>
+														</select> <i></i> </label>
+												</label>
+											</section>
+										</div>
+										<div class="row">
+											<section class="col col-10">
+												<label class="input">
+													<span>备注：</span>
+													<input type="text" ng-model="qualitycheck.remarks" name="remarks" placeholder="备注" ng-readonly="isNotEdit">
+												</label>
+											</section>
+										</div>
+									</div>
+								</fieldset>
+							</div>
+							<div ng-show="qualitycheck.subType==3165">
+								<header>检验信息</header>
+								<fieldset>
+									<div class="row">
+										<section class="col col-3">
+											<label class="label">扦样日期：</label>
+											<label class="input">
+												<input type="text" ng-model="qualitycheck.chooseTime" name="chooseTime" data-smart-datepicker ng-disabled="isNotEdit"
+													   placeholder="扦样日期">
+											</label>
+										</section>
+										<section class="col col-3">
+											<label class="label">扦样人：</label>
+											<label class="input">
+												<input type="text" ng-model="qualitycheck.chooser" name="chooser" ng-readonly="isNotEdit"
+													   placeholder="扦样人">
+											</label>
+										</section>
+										<section class="col col-3">
+											<label class="label">检验日期：<span style="color: red;">*</span></label>
+											<label class="input">
+												<input type="text" ng-model="qualitycheck.checkTime" name="checkTime" data-smart-datepicker ng-disabled="isNotEdit"
+													   placeholder="检验日期" required>
+											</label>
+										</section>
+										<section class="col col-3">
+											<label class="label">检验人：<span style="color: red;">*</span></label>
+											<label class="input">
+												<input type="text" ng-model="qualitycheck.checker" name="checker" ng-readonly="isNotEdit"
+													   placeholder="检验人" required>
+											</label>
+										</section>
+									</div>
+
+									<div class="row">
+										<section class="col col-3">
+											<label class="label">报告出具日期：</label>
+											<label class="input">
+												<input type="text" ng-model="qualitycheck.checkResultTime" ng-disabled="isNotEdit" name="checkResultTime" data-smart-datepicker
+													   placeholder="报告出具日期">
+											</label>
+										</section>
+										<section class="col col-3">
+											<label class="select">
+												<label class="label">检验结论：<span style="color: red;">*</span></label>
+												<label class="select">
+													<select name="checkResult" ng-disabled="isNotEdit" ng-disabled="isNotEdit" ng-model="qualitycheck.checkResult" required>
+														<option value="" selected="" disabled="">请选择</option>
+														<option value="0">合格</option>
+														<option value="1">不合格</option>
+													</select> <i></i> </label>
+											</label>
+										</section>
+										<section class="col col-3">
+											<label class="label">检验机构：</label>
+											<label class="input">
+												<input type="text" ng-model="qualitycheck.acceptUnite" ng-disabled="isNotEdit" name="acceptUnite"
+													   placeholder="检验机构">
+											</label>
+										</section>
+										<section class="col col-3">
+											<label class="label">检验标准依据：<span style="color: red;">*</span></label>
+											<label class="input">
+												<input type="text" ng-readonly="true" value="{{dicData[qualitycheck.inspectionStandardBasis]}}">
+											</label>
+											<!--<label class="select">
+												<select ng-model="qualitycheck.inspectionStandardBasis" name="inspectionStandardBasis" required
+														ng-options="enum.enumid as enum.enumname for enum in dicDataList[5520]"
+														class="form-control" ng-disabled="isNotEdit">
+													<option value="">&#45;&#45;请选择&#45;&#45;</option>
+												</select>
+											</label>-->
+										</section>
+									</div>
+									<div class="row">
+										<section class="col col-3">
+											<label class="select">
+												<label class="label">储存品质：<span style="color: red;">*</span></label>
+												<label class="select">
+													<select name="storeQuality" ng-model="qualitycheck.storeQuality" ng-readonly="isNotEdit"  ng-disabled="isNotEdit" required>
+														<option value="" selected="" disabled="">请选择</option>
+														<option value="0">宜存</option>
+														<option value="1">不宜存</option>
+													</select> <i></i> </label>
+											</label>
+										</section>
+										<section class="col col-3">
+											<label class="select">
+												<label class="label">指标类别：<span style="color: red;">*</span></label>
+												<label class="select">
+													<select name="zblb" ng-model="qualitycheck.zblb" ng-readonly="isNotEdit"  ng-disabled="isNotEdit" required>
+														<option value="">请选择</option>
+														<option value="1">质量指标检验</option>
+														<option value="2">储存品质检验</option>
+														<option value="3">食品安全检验</option>
+													</select> <i></i> </label>
+											</label>
+										</section>
+										<section class="col col-3">
+											<label class="label">扦样区域：<span style="color: red;">*</span></label>
+											<label class="input">
+												<input type="text" ng-model="qualitycheck.qyqy" ng-readonly="isNotEdit" name="qyqy"
+													   placeholder="扦样区域" required>
+											</label>
+										</section>
+										<section class="col col-3">
+											<label class="select">
+												<label class="label">监督人姓名：</label>
+												<label class="input">
+													<input type="text" ng-model="qualitycheck.jdrxm" ng-readonly="isNotEdit" name="jdrxm"  placeholder="监督人姓名">
+												</label>
+											</label>
+
+										</section>
+									</div>
+									<div class="row">
+										<section class="col col-3">
+											<label class="label">是否正常存储年限：<span style="color: red;">*</span></label>
+											<label class="select">
+												<select name="sfzcccnx" ng-model="qualitycheck.sfzcccnx" ng-readonly="isNotEdit"  ng-disabled="isNotEdit" required>
+													<option value="">请选择</option>
+													<option value="0">否</option>
+													<option value="1">是</option>
+												</select> <i></i> </label>
+										</section>
+									</div>
+								</fieldset>
+
+								<header>
+									<h3>
+										<strong>检测信息</strong>&nbsp;&nbsp;
+										<a class="btn btn-primary btn-sm" ng-click="addTR(qualitycheck.id)" ng-hide="isNotEdit">+&nbsp;&nbsp;检测项</a>
+									</h3>
+								</header>
+								<fieldset>
+									<div class="col-xs-10 col-sm-10">
+										<table class="table table-striped table-bordered table-hover" width="80%">
+											<tr>
+												<th  style="text-align: center;">检测项</th>
+												<th  style="text-align: center;">检测值</th>
+											</tr>
+											<tr>
+												<td>
+													<label class="label" style="margin-top: 9px;text-align: center;">水分(%)</label>
+												</td>
+												<td>
+													<section class="col col-6">
+														<label class="label"> </label>
+														<label class="input">
+															<input type="text" ng-model="qualitycheck.water" name="water" ng-readonly="isNotEdit" required>
+														</label>
+													</section>
+												</td>
+											</tr>
+											<tr>
+												<td>
+													<label class="label" style="margin-top: 9px;text-align: center;">容重(g/L)</label>
+												</td>
+												<td>
+													<section class="col col-6">
+														<label class="label"> </label>
+														<label class="input">
+															<input type="text" ng-model="qualitycheck.capacity" name="capacity" ng-readonly="isNotEdit" required>
+														</label>
+													</section>
+												</td>
+											</tr>
+											<tr>
+												<td>
+													<label class="label" style="margin-top: 9px;text-align: center;">杂质(%)</label>
+												</td>
+												<td>
+													<section class="col col-6">
+														<label class="label"> </label>
+														<label class="input">
+															<input type="text" ng-model="qualitycheck.impurity" name="impurity" ng-readonly="isNotEdit" required>
+														</label>
+													</section>
+												</td>
+											</tr>
+											<tr>
+												<td>
+													<label class="label" style="margin-top: 9px;text-align: center;">不完善粒(%)</label>
+												</td>
+												<td>
+													<section class="col col-6">
+														<label class="label"> </label>
+														<label class="input">
+															<input type="text" ng-model="qualitycheck.badpart" name="badpart" ng-readonly="isNotEdit" required>
+														</label>
+													</section>
+												</td>
+											</tr>
+											<tr>
+												<td>
+													<label class="label" style="margin-top: 9px;text-align: center;">生霉粒(%)</label>
+												</td>
+												<td>
+													<section class="col col-6">
+														<label class="label"> </label>
+														<label class="input">
+															<input type="text" ng-model="qualitycheck.mildewCount" name="mildewCount" ng-readonly="isNotEdit" required>
+														</label>
+													</section>
+												</td>
+											</tr>
+											<tr>
+												<td>
+													<label class="label" style="margin-top: 9px;text-align: center;">色泽气味</label>
+												</td>
+												<td>
+													<section class="col col-6">
+														<label class="label"> </label>
+														<label class="input">
+															<input type="text" ng-model="qualitycheck.colorsmell" name="colorsmell" ng-readonly="isNotEdit" required>
+														</label>
+													</section>
+												</td>
+											</tr>
+											<tr ng-repeat="checkSon in addCheckSon">
+												<!--<input type="hidden" ng-model="checkSon.qualitycheckId" />-->
+												<input type="hidden" ng-model="checkSon.qualitycheckId" />
+												<input type="hidden" ng-model="checkSon.id" />
+												<td style="margin-top: 9px;">
+													<section class="col col-6" style="float: none;margin: auto;">
+														<select ng-model="checkSon.numbering" name="numbering{{$index}}" required
+																ng-options="enum.enumid as enum.enumname for enum in dicDataList[2780]"
+																class="form-control" ng-disabled="isNotEdit">
+															<option value="">--请选择--</option>
+														</select>
+													</section>
+
+												</td>
+												<td  style="margin-top: 9px;text-align: center;">
+													<section class="col col-6">
+														<label class="input">
+															<input type="text" ng-model="checkSon.setValue" name="setValue{{$index}}" ng-readonly="isNotEdit" required>
+														</label>
+													</section>
+														<!--<a ng-hide="checkSon.qualitycheckId!=1" class="btn btn-primary" href-void="" href="#" ng-click="addTR()">增加</a>
+														<a ng-hide="checkSon.qualitycheckId==1" class="btn btn-primary btn-sm" ng-click="deleteTR(checkSon)">删除</a>-->
+													<section class="col col-3">
+														<label class="input">
+															<a ng-hide="isNotEdit" class="btn btn-primary btn-sm" ng-click="deleteTR(checkSon)">-&nbsp;&nbsp;检测项</a>
+														</label>
+													</section>
+												</td>
+											</tr>
+										</table>
+										<div class="row">
+											<section class="col col-3">
+												<label class="select">
+													<label class="label" style="margin-top: 11px">粮油等级：<span style="color: red;">*</span></label>
+													<label class="select">
+														<select ng-model="qualitycheck.level" ng-disabled="isNotEdit" ng-readonly="isNotEdit"
+																ng-options="enum.enumid as enum.enumname for enum in dicDataList[1002]" required>
+															<option value="">-- 粮油等级 --</option>
+														</select>
+													</label>
+												</label>
+											</section>
+											<section class="col col-3">
+												<label class="select">
+													<label class="label" style="margin-top: 11px">是否虫粮：<span style="color: red;">*</span></label>
+													<label class="select">
+														<select name="isPest" ng-disabled="isNotEdit" ng-readonly="isNotEdit" ng-model="qualitycheck.isPest">
+															<option value="" selected="" disabled="">请选择</option>
+															<option value="0">是</option>
+															<option value="1">否</option>
+														</select> <i></i> </label>
+												</label>
+											</section>
+										</div>
+										<div class="row">
+											<section class="col col-10">
+												<label class="input">
+													<span>备注：</span>
+													<input type="text" ng-model="qualitycheck.remarks" name="remarks" placeholder="备注" ng-readonly="isNotEdit">
+												</label>
+											</section>
+								     	</div>
+									</div>
+								</fieldset>
+							</div>
+							<div ng-show="qualitycheck.subType==3166">
+								<header>检验信息</header>
+								<fieldset>
+									<div class="row">
+										<section class="col col-3">
+											<label class="label">扦样日期：</label>
+											<label class="input">
+												<input type="text" ng-model="qualitycheck.chooseTime" name="chooseTime" data-smart-datepicker ng-disabled="isNotEdit"
+													   placeholder="扦样日期">
+											</label>
+										</section>
+										<section class="col col-3">
+											<label class="label">扦样人：</label>
+											<label class="input">
+												<input type="text" ng-model="qualitycheck.chooser" name="chooser" ng-readonly="isNotEdit"
+													   placeholder="扦样人">
+											</label>
+										</section>
+										<section class="col col-3">
+											<label class="label">检验日期：<span style="color: red;">*</span></label>
+											<label class="input">
+												<input type="text" ng-model="qualitycheck.checkTime" name="checkTime" data-smart-datepicker ng-disabled="isNotEdit"
+													   placeholder="检验日期" required>
+											</label>
+										</section>
+										<section class="col col-3">
+											<label class="label">检验人：<span style="color: red;">*</span></label>
+											<label class="input">
+												<input type="text" ng-model="qualitycheck.checker" name="checker" ng-readonly="isNotEdit"
+													   placeholder="检验人" required>
+											</label>
+										</section>
+									</div>
+
+									<div class="row">
+										<section class="col col-3">
+											<label class="label">报告出具日期：</label>
+											<label class="input">
+												<input type="text" ng-model="qualitycheck.checkResultTime" ng-disabled="isNotEdit" name="checkResultTime" data-smart-datepicker
+													   placeholder="报告出具日期">
+											</label>
+										</section>
+										<section class="col col-3">
+											<label class="select">
+												<label class="label">检验结论：<span style="color: red;">*</span></label>
+												<label class="select">
+													<select name="checkResult" ng-disabled="isNotEdit" ng-readonly="isNotEdit" ng-model="qualitycheck.checkResult" required>
+														<option value="">请选择</option>
+														<option value="0">合格</option>
+														<option value="1">不合格</option>
+													</select> <i></i> </label>
+											</label>
+										</section>
+										<section class="col col-3">
+											<label class="label">检验机构：</label>
+											<label class="input">
+												<input type="text" ng-model="qualitycheck.acceptUnite" ng-readonly="isNotEdit" name="acceptUnite"
+													   placeholder="检验机构">
+											</label>
+										</section>
+										<section class="col col-3">
+											<label class="label">检验标准依据：<span style="color: red;">*</span></label>
+											<label class="input">
+												<input type="text"  ng-readonly="true" value="{{dicData[qualitycheck.inspectionStandardBasis]}}">
+											</label>
+										</section>
+									</div>
+									<div class="row">
+										<section class="col col-3">
+											<label class="select">
+												<label class="label">储存品质：<span style="color: red;">*</span></label>
+												<label class="select">
+													<select name="storeQuality" ng-model="qualitycheck.storeQuality" ng-readonly="isNotEdit"  ng-disabled="isNotEdit" required>
+														<option value="">请选择</option>
+														<option value="0">宜存</option>
+														<option value="1">不宜存</option>
+													</select> <i></i> </label>
+											</label>
+										</section>
+										<section class="col col-3">
+											<label class="select">
+												<label class="label">指标类别：<span style="color: red;">*</span></label>
+												<label class="select">
+													<select name="zblb" ng-model="qualitycheck.zblb" ng-readonly="isNotEdit"  ng-disabled="isNotEdit" required>
+														<option value="">请选择</option>
+														<option value="1">质量指标检验</option>
+														<option value="2">储存品质检验</option>
+														<option value="3">食品安全检验</option>
+													</select> <i></i> </label>
+											</label>
+										</section>
+										<section class="col col-3">
+											<label class="label">扦样区域：<span style="color: red;">*</span></label>
+											<label class="input">
+												<input type="text" ng-model="qualitycheck.qyqy" ng-readonly="isNotEdit" name="qyqy"
+													   placeholder="扦样区域" required>
+											</label>
+										</section>
+										<section class="col col-3">
+											<label class="select">
+												<label class="label">监督人姓名：</label>
+												<label class="input">
+													<input type="text" ng-model="qualitycheck.jdrxm" ng-readonly="isNotEdit" name="jdrxm"  placeholder="监督人姓名">
+												</label>
+											</label>
+
+										</section>
+									</div>
+									<div class="row">
+										<section class="col col-3">
+											<label class="label">是否正常存储年限：<span style="color: red;">*</span></label>
+											<label class="select">
+												<select name="sfzcccnx" ng-model="qualitycheck.sfzcccnx" ng-readonly="isNotEdit"  ng-disabled="isNotEdit" required>
+													<option value="">请选择</option>
+													<option value="0">否</option>
+													<option value="1">是</option>
+												</select> <i></i> </label>
+										</section>
+									</div>
+								</fieldset>
+
+								<header>
+									<h3>
+										<strong>检测信息</strong>&nbsp;&nbsp;
+										<a class="btn btn-primary btn-sm" ng-click="addTR(qualitycheck.id)" ng-hide="isNotEdit">+&nbsp;&nbsp;检测项</a>
+									</h3>
+								</header>
+								<fieldset>
+									<div class="col-xs-10 col-sm-10">
+										<table class="table table-striped table-bordered table-hover" width="80%">
+											<tr>
+												<th  style="text-align: center;">检测项</th>
+												<th  style="text-align: center;">检测值</th>
+											</tr>
+											<tr>
+												<td>
+													<label class="label" style="margin-top: 9px;text-align: center;">出糙率</label>
+												</td>
+												<td>
+													<section class="col col-6">
+														<label class="label"> </label>
+														<label class="input">
+															<input type="text" ng-model="qualitycheck.huskedRation" name="huskedRation" ng-readonly="isNotEdit">
+														</label>
+													</section>
+												</td>
+											</tr>
+											<tr>
+												<td>
+													<label class="label" style="margin-top: 9px;text-align: center;">整精米率(g/L)</label>
+												</td>
+												<td>
+													<section class="col  col-6">
+														<label class="label"> </label>
+														<label class="input">
+															<input type="text" ng-model="qualitycheck.fullGoodRation" name="fullGoodRation" ng-readonly="isNotEdit">
+														</label>
+													</section>
+												</td>
+											</tr>
+											<tr>
+												<td>
+													<label class="label" style="margin-top: 9px;text-align: center;">杂质(%)</label>
+												</td>
+												<td>
+													<section class="col col-6">
+														<label class="label"> </label>
+														<label class="input">
+															<input type="text" ng-model="qualitycheck.impurity" name="impurity" ng-readonly="isNotEdit" required>
+														</label>
+													</section>
+												</td>
+											</tr>
+											<tr>
+												<td>
+													<label class="label" style="margin-top: 9px;text-align: center;">水分(%)</label>
+												</td>
+												<td>
+													<section class="col col-6">
+														<label class="label"> </label>
+														<label class="input">
+															<input type="text" ng-model="qualitycheck.water" name="water" ng-readonly="isNotEdit" required>
+														</label>
+													</section>
+												</td>
+											</tr>
+											<tr>
+												<td>
+													<label class="label" style="margin-top: 9px;text-align: center;">黄粒米(%)</label>
+												</td>
+												<td>
+													<section class="col col-6">
+														<label class="label"> </label>
+														<label class="input">
+															<input type="text" ng-model="qualitycheck.yellowPart" name="yellowPart" ng-readonly="isNotEdit">
+														</label>
+													</section>
+												</td>
+											</tr>
+											<tr>
+												<td>
+													<label class="label" style="margin-top: 9px;text-align: center;">谷外糙米(%)</label>
+												</td>
+												<td>
+													<section class="col  col-6">
+														<label class="label"> </label>
+														<label class="input">
+															<input type="text" ng-model="qualitycheck.outHuskedRation" name="outHuskedRation" ng-readonly="isNotEdit">
+														</label>
+													</section>
+												</td>
+											</tr>
+											<tr>
+												<td>
+													<label class="label" style="margin-top: 9px;text-align: center;">互混率(%)</label>
+												</td>
+												<td>
+													<section class="col col-6">
+														<label class="label"> </label>
+														<label class="input">
+															<input type="text" ng-model="qualitycheck.intermixingRate" name="intermixingRate" ng-readonly="isNotEdit">
+														</label>
+													</section>
+												</td>
+											</tr>
+											<tr>
+												<td>
+													<label class="label" style="margin-top: 9px;text-align: center;">色泽气味</label>
+												</td>
+												<td>
+													<section class="col col-6">
+														<label class="label"> </label>
+														<label class="input">
+															<input type="text" ng-model="qualitycheck.colorsmell" name="colorsmell" ng-readonly="isNotEdit">
+														</label>
+													</section>
+												</td>
+											</tr>
+											<tr ng-repeat="checkSon in addCheckSon">
+												<input type="hidden" ng-model="checkSon.qualitycheckId" />
+												<input type="hidden" ng-model="checkSon.id" />
+												<td style="margin-top: 9px;">
+													<section class="col col-6"  style="float: none;margin: auto;">
+														<select ng-model="checkSon.numbering" name="numbering{{$index}}" required
+																ng-options="enum.enumid as enum.enumname for enum in dicDataList[2779]"
+																class="form-control" ng-disabled="isNotEdit">
+															<option value="">--请选择--</option>
+														</select>
+													</section>
+
+												</td>
+												<td  style="margin-top: 9px;text-align: center;">
+													<section class="col col-6">
+														<label class="input">
+															<input type="text" ng-model="checkSon.setValue" name="setValue{{$index}}" ng-readonly="isNotEdit" required>
+														</label>
+													</section>
+													<section class="col col-3">
+														<label class="input">
+															<a ng-hide="isNotEdit" class="btn btn-primary btn-sm" ng-click="deleteTR(checkSon)">-&nbsp;&nbsp;检测项</a>
+														</label>
+													</section>
+												</td>
+											</tr>
+										</table>
+										<div class="row">
+											<section class="col col-3">
+												<label class="select">
+													<label class="label" style="margin-top: 11px">粮油等级：<span style="color: red;">*</span></label>
+													<label class="select">
+														<select ng-model="qualitycheck.level" ng-disabled="isNotEdit" ng-readonly="isNotEdit"
+																ng-options="enum.enumid as enum.enumname for enum in dicDataList[1002]" required>
+															<option value="">-- 粮油等级 --</option>
+														</select>
+													</label>
+												</label>
+											</section>
+											<section class="col col-3">
+												<label class="select">
+													<label class="label" style="margin-top: 11px">是否虫粮：<span style="color: red;">*</span></label>
+													<label class="select">
+														<select name="isPest" ng-disabled="isNotEdit" ng-readonly="isNotEdit" ng-model="qualitycheck.isPest">
+															<option value="" selected="" disabled="">请选择</option>
+															<option value="0">是</option>
+															<option value="1">否</option>
+														</select> <i></i> </label>
+												</label>
+											</section>
+										</div>
+										<div class="row">
+											<section class="col col-10">
+												<label class="input">
+													<span>备注：</span>
+													<input type="text" ng-model="qualitycheck.remarks" name="remarks" placeholder="备注" ng-readonly="isNotEdit">
+												</label>
+											</section>
+										</div>
+									</div>
+								</fieldset>
+							</div>
+							<div ng-show="qualitycheck.subType==2777">
+								<header>检验信息</header>
+								<fieldset>
+									<div class="row">
+										<section class="col col-3">
+											<label class="label">扦样日期：</label>
+											<label class="input">
+												<input type="text" ng-model="qualitycheck.chooseTime" name="chooseTime" data-smart-datepicker ng-disabled="isNotEdit"
+													   placeholder="扦样日期">
+											</label>
+										</section>
+										<section class="col col-3">
+											<label class="label">扦样人：</label>
+											<label class="input">
+												<input type="text" ng-model="qualitycheck.chooser" name="chooser" ng-readonly="isNotEdit"
+													   placeholder="扦样人">
+											</label>
+										</section>
+										<section class="col col-3">
+											<label class="label">检验日期：<span style="color: red;">*</span></label>
+											<label class="input">
+												<input type="text" ng-model="qualitycheck.checkTime" name="checkTime" data-smart-datepicker ng-disabled="isNotEdit"
+													   placeholder="检验日期" required>
+											</label>
+										</section>
+										<section class="col col-3">
+											<label class="label">检验人：<span style="color: red;">*</span></label>
+											<label class="input">
+												<input type="text" ng-model="qualitycheck.checker" name="checker" ng-readonly="isNotEdit"
+													   placeholder="检验人" required>
+											</label>
+										</section>
+									</div>
+
+									<div class="row">
+										<section class="col col-3">
+											<label class="label">报告出具日期：</label>
+											<label class="input">
+												<input type="text" ng-model="qualitycheck.checkResultTime" ng-disabled="isNotEdit" name="checkResultTime" data-smart-datepicker
+													   placeholder="报告出具日期">
+											</label>
+										</section>
+										<section class="col col-3">
+											<label class="select">
+												<label class="label">检验结论：<span style="color: red;">*</span></label>
+												<label class="select">
+													<select name="checkResult" ng-disabled="isNotEdit" ng-readonly="isNotEdit" ng-model="qualitycheck.checkResult" required>
+														<option value="" selected="" disabled="">请选择</option>
+														<option value="0">合格</option>
+														<option value="1">不合格</option>
+													</select> <i></i> </label>
+											</label>
+										</section>
+										<section class="col col-3">
+											<label class="label">检验机构：</label>
+											<label class="input">
+												<input type="text" ng-model="qualitycheck.acceptUnite" ng-readonly="isNotEdit" name="acceptUnite"
+													   placeholder="检验机构">
+											</label>
+										</section>
+										<section class="col col-3">
+											<label class="label">检验标准依据：<span style="color: red;">*</span></label>
+											<label class="input">
+												<input type="text"  ng-readonly="true" value="{{dicData[qualitycheck.inspectionStandardBasis]}}">
+											</label>
+										</section>
+									</div>
+									<div class="row">
+										<section class="col col-3">
+											<label class="select">
+												<label class="label">储存品质：<span style="color: red;">*</span></label>
+												<label class="select">
+													<select name="storeQuality" ng-model="qualitycheck.storeQuality" ng-readonly="isNotEdit"  ng-disabled="isNotEdit" required>
+														<option value="" selected="" disabled="">请选择</option>
+														<option value="0">宜存</option>
+														<option value="1">不宜存</option>
+													</select> <i></i> </label>
+											</label>
+										</section>
+										<section class="col col-3">
+											<label class="select">
+												<label class="label">指标类别：<span style="color: red;">*</span></label>
+												<label class="select">
+													<select name="zblb" ng-model="qualitycheck.zblb" ng-readonly="isNotEdit"  ng-disabled="isNotEdit" required>
+														<option value="">请选择</option>
+														<option value="1">质量指标检验</option>
+														<option value="2">储存品质检验</option>
+														<option value="3">食品安全检验</option>
+													</select> <i></i> </label>
+											</label>
+										</section>
+										<section class="col col-3">
+											<label class="label">扦样区域：<span style="color: red;">*</span></label>
+											<label class="input">
+												<input type="text" ng-model="qualitycheck.qyqy" ng-readonly="isNotEdit" name="qyqy"
+													   placeholder="扦样区域" required>
+											</label>
+										</section>
+										<section class="col col-3">
+											<label class="select">
+												<label class="label">监督人姓名：</label>
+												<label class="input">
+													<input type="text" ng-model="qualitycheck.jdrxm" ng-readonly="isNotEdit" name="jdrxm"  placeholder="监督人姓名">
+												</label>
+											</label>
+
+										</section>
+									</div>
+									<div class="row">
+										<section class="col col-3">
+											<label class="label">是否正常存储年限：<span style="color: red;">*</span></label>
+											<label class="select">
+												<select name="sfzcccnx" ng-model="qualitycheck.sfzcccnx" ng-readonly="isNotEdit"  ng-disabled="isNotEdit" required>
+													<option value="">请选择</option>
+													<option value="0">否</option>
+													<option value="1">是</option>
+												</select> <i></i> </label>
+										</section>
+									</div>
+								</fieldset>
+
+								<header>
+									<h3>
+										<strong>检测信息</strong>&nbsp;&nbsp;
+										<a class="btn btn-primary btn-sm" ng-click="addTR(qualitycheck.id)" ng-hide="isNotEdit">+&nbsp;&nbsp;检测项</a>
+									</h3>
+								</header>
+								<fieldset>
+									<div class="col-xs-10 col-sm-10">
+										<table class="table table-striped table-bordered table-hover" width="80%">
+											<tr>
+												<th  style="text-align: center;">检测项</th>
+												<th  style="text-align: center;">检测值</th>
+											</tr>
+											<tr>
+												<td>
+													<label class="label" style="margin-top: 9px;text-align: center;">完整粒率(%)</label>
+												</td>
+												<td>
+													<section class="col col-6">
+														<label class="input">
+															<input type="text" ng-model="qualitycheck.goodpart" name="goodpart" ng-readonly="isNotEdit">
+														</label>
+													</section>
+												</td>
+											</tr>
+											<tr>
+												<td>
+													<label class="label" style="margin-top: 9px;text-align: center;">损伤粒率(g/L)</label>
+												</td>
+												<td>
+													<section class="col col-6">
+														<label class="input">
+															<input type="text" ng-model="qualitycheck.damageRatio" name="damageRatio" ng-readonly="isNotEdit">
+														</label>
+													</section>
+												</td>
+											</tr>
+											<tr>
+												<td>
+													<label class="label" style="margin-top: 9px;text-align: center;">热损伤粒率(%)</label>
+												</td>
+												<td>
+													<section class="col  col-6">
+														<label class="input">
+															<input type="text" ng-model="qualitycheck.hotDamageRatio" name="hotDamageRatio" ng-readonly="isNotEdit">
+														</label>
+													</section>
+												</td>
+											</tr>
+											<tr>
+												<td>
+													<label class="label" style="margin-top: 9px;text-align: center;">杂质(%)</label>
+												</td>
+												<td>
+													<section class="col col-6">
+														<label class="label"> </label>
+														<label class="input">
+															<input type="text" ng-model="qualitycheck.impurity" name="impurity" ng-readonly="isNotEdit" required>
+														</label>
+													</section>
+												</td>
+											</tr>
+											<tr>
+												<td>
+													<label class="label" style="margin-top: 9px;text-align: center;">水分(%)</label>
+												</td>
+												<td>
+													<section class="col col-6">
+														<label class="label"> </label>
+														<label class="input">
+															<input type="text" ng-model="qualitycheck.water" name="water" ng-readonly="isNotEdit" required>
+														</label>
+													</section>
+												</td>
+											</tr>
+											<tr>
+												<td>
+													<label class="label" style="margin-top: 9px;text-align: center;">色泽气味</label>
+												</td>
+												<td>
+													<section class="col col-6">
+														<label class="label"> </label>
+														<label class="input">
+															<input type="text" ng-model="qualitycheck.colorsmell" name="colorsmell" ng-readonly="isNotEdit">
+														</label>
+													</section>
+												</td>
+											</tr>
+											<tr ng-repeat="checkSon in addCheckSon">
+												<input type="hidden" ng-model="checkSon.qualitycheckId" />
+												<input type="hidden" ng-model="checkSon.id" />
+												<td style="margin-top: 9px;">
+													<section class="col col-6"  style="float: none;margin: auto;">
+														<select ng-model="checkSon.numbering" name="numbering{{$index}}" required
+																ng-options="enum.enumid as enum.enumname for enum in dicDataList[2779]"
+																class="form-control" ng-disabled="isNotEdit">
+															<option value="">--请选择--</option>
+														</select>
+													</section>
+
+												</td>
+												<td  style="margin-top: 9px;text-align: center;">
+													<section class="col col-6">
+														<label class="input">
+															<input type="text" ng-model="checkSon.setValue" name="setValue{{$index}}" ng-readonly="isNotEdit" required>
+														</label>
+													</section>
+													<section class="col col-3">
+														<label class="input">
+															<a ng-hide="isNotEdit" class="btn btn-primary btn-sm" ng-click="deleteTR(checkSon)">-&nbsp;&nbsp;检测项</a>
+														</label>
+													</section>
+												</td>
+											</tr>
+										</table>
+										<div class="row">
+											<section class="col col-3">
+												<label class="select">
+													<label class="label" style="margin-top: 11px">粮油等级：<span style="color: red;">*</span></label>
+													<label class="select">
+														<select ng-model="qualitycheck.level" ng-disabled="isNotEdit" ng-readonly="isNotEdit"
+																ng-options="enum.enumid as enum.enumname for enum in dicDataList[1002]" required>
+															<option value="">-- 粮油等级 --</option>
+														</select>
+													</label>
+												</label>
+											</section>
+											<section class="col col-3">
+												<label class="select">
+													<label class="label" style="margin-top: 11px">是否虫粮：<span style="color: red;">*</span></label>
+													<label class="select">
+														<select name="isPest" ng-disabled="isNotEdit" ng-readonly="isNotEdit" ng-model="qualitycheck.isPest">
+															<option value="" selected="" disabled="">请选择</option>
+															<option value="0">是</option>
+															<option value="1">否</option>
+														</select> <i></i> </label>
+												</label>
+											</section>
+										</div>
+										<div class="row">
+											<section class="col col-10">
+												<label class="input">
+													<span>备注：</span>
+													<input type="text" ng-model="qualitycheck.remarks" name="remarks" placeholder="备注" ng-readonly="isNotEdit">
+												</label>
+											</section>
+										</div>
+									</div>
+								</fieldset>
+							</div>
+							<div ng-show="qualitycheck.subType==6905">
+									<header>检验信息</header>
+									<fieldset>
+										<div class="row">
+											<section class="col col-3">
+												<label class="label">扦样日期：</label>
+												<label class="input">
+													<input type="text" ng-model="qualitycheck.chooseTime" name="chooseTime" data-smart-datepicker ng-disabled="isNotEdit"
+														   placeholder="扦样日期">
+												</label>
+											</section>
+											<section class="col col-3">
+												<label class="label">扦样人：</label>
+												<label class="input">
+													<input type="text" ng-model="qualitycheck.chooser" name="chooser" ng-readonly="isNotEdit"
+														   placeholder="扦样人">
+												</label>
+											</section>
+											<section class="col col-3">
+												<label class="label">检验日期：<span style="color: red;">*</span></label>
+												<label class="input">
+													<input type="text" ng-model="qualitycheck.checkTime" name="checkTime" data-smart-datepicker ng-disabled="isNotEdit"
+														   placeholder="检验日期" required>
+												</label>
+											</section>
+											<section class="col col-3">
+												<label class="label">检验人：<span style="color: red;">*</span></label>
+												<label class="input">
+													<input type="text" ng-model="qualitycheck.checker" name="checker" ng-readonly="isNotEdit"
+														   placeholder="检验人" required>
+												</label>
+											</section>
+										</div>
+
+										<div class="row">
+											<section class="col col-3">
+												<label class="label">报告出具日期：</label>
+												<label class="input">
+													<input type="text" ng-model="qualitycheck.checkResultTime" ng-disabled="isNotEdit" name="checkResultTime" data-smart-datepicker
+														   placeholder="报告出具日期">
+												</label>
+											</section>
+											<section class="col col-3">
+												<label class="select">
+													<label class="label">检验结论：<span style="color: red;">*</span></label>
+													<label class="select">
+														<select name="checkResult" ng-disabled="isNotEdit" ng-readonly="isNotEdit" ng-model="qualitycheck.checkResult" required>
+															<option value="" selected="" disabled="">请选择</option>
+															<option value="0">合格</option>
+															<option value="1">不合格</option>
+														</select> <i></i> </label>
+												</label>
+											</section>
+											<section class="col col-3">
+												<label class="label">检验机构：</label>
+												<label class="input">
+													<input type="text" ng-model="qualitycheck.acceptUnite" ng-readonly="isNotEdit" name="acceptUnite"
+														   placeholder="检验机构">
+												</label>
+											</section>
+											<section class="col col-3">
+												<label class="label">检验标准依据：<span style="color: red;">*</span></label>
+												<label class="input">
+													<input type="text"  ng-readonly="true" value="{{dicData[qualitycheck.inspectionStandardBasis]}}">
+												</label>
+											</section>
+										</div>
+										<div class="row">
+											<section class="col col-3">
+												<label class="select">
+													<label class="label">储存品质：<span style="color: red;">*</span></label>
+													<label class="select">
+														<select name="storeQuality" ng-model="qualitycheck.storeQuality" ng-readonly="isNotEdit"  ng-disabled="isNotEdit" required>
+															<option value="" selected="" disabled="">请选择</option>
+															<option value="0">宜存</option>
+															<option value="1">不宜存</option>
+														</select> <i></i> </label>
+												</label>
+											</section>
+											<section class="col col-3">
+												<label class="select">
+													<label class="label">指标类别：<span style="color: red;">*</span></label>
+													<label class="select">
+														<select name="zblb" ng-model="qualitycheck.zblb" ng-readonly="isNotEdit"  ng-disabled="isNotEdit" required>
+															<option value="">请选择</option>
+															<option value="1">质量指标检验</option>
+															<option value="2">储存品质检验</option>
+															<option value="3">食品安全检验</option>
+														</select> <i></i> </label>
+												</label>
+											</section>
+											<section class="col col-3">
+												<label class="label">扦样区域：<span style="color: red;">*</span></label>
+												<label class="input">
+													<input type="text" ng-model="qualitycheck.qyqy" ng-readonly="isNotEdit" name="qyqy"
+														   placeholder="扦样区域" required>
+												</label>
+											</section>
+											<section class="col col-3">
+												<label class="select">
+													<label class="label">监督人姓名：</label>
+													<label class="input">
+														<input type="text" ng-model="qualitycheck.jdrxm" ng-readonly="isNotEdit" name="jdrxm"  placeholder="监督人姓名">
+													</label>
+												</label>
+
+											</section>
+										</div>
+										<div class="row">
+											<section class="col col-3">
+												<label class="label">是否正常存储年限：<span style="color: red;">*</span></label>
+												<label class="select">
+													<select name="sfzcccnx" ng-model="qualitycheck.sfzcccnx" ng-readonly="isNotEdit"  ng-disabled="isNotEdit" required>
+														<option value="">请选择</option>
+														<option value="0">否</option>
+														<option value="1">是</option>
+													</select> <i></i> </label>
+											</section>
+										</div>
+									</fieldset>
+
+									<header>
+										<h3>
+											<strong>检测信息</strong>&nbsp;&nbsp;
+											<a class="btn btn-primary btn-sm" ng-click="addTR(qualitycheck.id)" ng-hide="isNotEdit">+&nbsp;&nbsp;检测项</a>
+										</h3>
+									</header>
+									<fieldset>
+										<div class="col-xs-10 col-sm-10">
+											<table class="table table-striped table-bordered table-hover" width="80%">
+												<tr>
+													<th  style="text-align: center;">检测项</th>
+													<th  style="text-align: center;">检测值</th>
+												</tr>
+												<tr>
+													<td>
+														<label class="label" style="margin-top: 9px;text-align: center;">色泽</label>
+													</td>
+													<td>
+														<section class="col col-6">
+															<label class="input">
+																<input type="text" ng-model="qualitycheck.colorsmell" name="colorsmell" ng-readonly="isNotEdit">
+															</label>
+														</section>
+													</td>
+												</tr>
+												<tr>
+													<td>
+														<label class="label" style="margin-top: 9px;text-align: center;">气味、滋味</label>
+													</td>
+													<td>
+														<section class="col col-6">
+															<label class="input">
+																<input type="text" ng-model="qualitycheck.smelltaste" name="smelltaste" ng-readonly="isNotEdit">
+															</label>
+														</section>
+													</td>
+												</tr>
+												<tr>
+													<td>
+														<label class="label" style="margin-top: 9px;text-align: center;">透明度</label>
+													</td>
+													<td>
+														<section class="col  col-6">
+															<label class="input">
+																<input type="text" ng-model="qualitycheck.transparency" name="transparency" ng-readonly="isNotEdit">
+															</label>
+														</section>
+													</td>
+												</tr>
+												<tr>
+													<td>
+														<label class="label" style="margin-top: 9px;text-align: center;">水分及挥发物(%)</label>
+													</td>
+													<td>
+														<section class="col col-6">
+															<label class="label"> </label>
+															<label class="input">
+																<input type="text" ng-model="qualitycheck.water" name="water" ng-readonly="isNotEdit" required>
+															</label>
+														</section>
+													</td>
+												</tr>
+												<tr>
+													<td>
+														<label class="label" style="margin-top: 9px;text-align: center;">不溶性杂质(%)</label>
+													</td>
+													<td>
+														<section class="col col-6">
+															<label class="label"> </label>
+															<label class="input">
+																<input type="text" ng-model="qualitycheck.impurity" name="impurity" ng-readonly="isNotEdit" required>
+															</label>
+														</section>
+													</td>
+												</tr>
+												<tr>
+													<td>
+														<label class="label" style="margin-top: 9px;text-align: center;">酸值(KOH)(mg/g)</label>
+													</td>
+													<td>
+														<section class="col col-6">
+															<label class="label"> </label>
+															<label class="input">
+																<input type="text" ng-model="qualitycheck.fatIndex" name="fatIndex" ng-readonly="isNotEdit">
+															</label>
+														</section>
+													</td>
+												</tr>
+												<tr>
+													<td>
+														<label class="label" style="margin-top: 9px;text-align: center;">过氧化值（mmol/kg）</label>
+													</td>
+													<td>
+														<section class="col col-6">
+															<label class="label"> </label>
+															<label class="input">
+																<input type="text" ng-model="qualitycheck.peroxideValue" name="peroxideValue" ng-readonly="isNotEdit">
+															</label>
+														</section>
+													</td>
+												</tr>
+												<tr>
+													<td>
+														<label class="label" style="margin-top: 9px;text-align: center;">烟点℃</label>
+													</td>
+													<td>
+														<section class="col col-6">
+															<label class="label"> </label>
+															<label class="input">
+																<input type="text" ng-model="qualitycheck.smokePoint" name="smokePoint" ng-readonly="isNotEdit">
+															</label>
+														</section>
+													</td>
+												</tr>
+												<tr>
+													<td>
+														<label class="label" style="margin-top: 9px;text-align: center;">冷冻实验（0℃储藏5.5h）</label>
+													</td>
+													<td>
+														<section class="col col-6">
+															<label class="label"> </label>
+															<label class="input">
+																<input type="text" ng-model="qualitycheck.reezeTest" name="reezeTest" ng-readonly="isNotEdit">
+															</label>
+														</section>
+													</td>
+												</tr>
+												<tr>
+													<td>
+														<label class="label" style="margin-top: 9px;text-align: center;">溶剂残留量（mg/kg）</label>
+													</td>
+													<td>
+														<section class="col col-6">
+															<label class="label"> </label>
+															<label class="input">
+																<input type="text" ng-model="qualitycheck.residualSolvent" name="residualSolvent" ng-readonly="isNotEdit">
+															</label>
+														</section>
+													</td>
+												</tr>
+												<tr>
+													<td>
+														<label class="label" style="margin-top: 9px;text-align: center;">铅（Pb）</label>
+													</td>
+													<td>
+														<section class="col col-6">
+															<label class="label"> </label>
+															<label class="input">
+																<input type="text" ng-model="qualitycheck.lead" name="lead" ng-readonly="isNotEdit">
+															</label>
+														</section>
+													</td>
+												</tr>
+												<tr>
+													<td>
+														<label class="label" style="margin-top: 9px;text-align: center;">总砷（以As计）</label>
+													</td>
+													<td>
+														<section class="col col-6">
+															<label class="label"> </label>
+															<label class="input">
+																<input type="text" ng-model="qualitycheck.totalArsenic" name="totalArsenic" ng-readonly="isNotEdit">
+															</label>
+														</section>
+													</td>
+												</tr>
+												<tr>
+													<td>
+														<label class="label" style="margin-top: 9px;text-align: center;">黄曲霉毒素 （ug/kg）</label>
+													</td>
+													<td>
+														<section class="col col-6">
+															<label class="label"> </label>
+															<label class="input">
+																<input type="text" ng-model="qualitycheck.aflatoxin" name="aflatoxin" ng-readonly="isNotEdit">
+															</label>
+														</section>
+													</td>
+												</tr>
+												<tr>
+													<td>
+														<label class="label" style="margin-top: 9px;text-align: center;">特丁基对二苯酚(g/kg)</label>
+													</td>
+													<td>
+														<section class="col col-6">
+															<label class="label"> </label>
+															<label class="input">
+																<input type="text" ng-model="qualitycheck.butylPhenol" name="butylPhenol" ng-readonly="isNotEdit">
+															</label>
+														</section>
+													</td>
+												</tr>
+
+												<tr ng-repeat="checkSon in addCheckSon">
+													<input type="hidden" ng-model="checkSon.qualitycheckId" />
+													<input type="hidden" ng-model="checkSon.id" />
+													<td style="margin-top: 9px;">
+														<section class="col col-6"  style="float: none;margin: auto;">
+															<select ng-model="checkSon.numbering" name="numbering{{$index}}" required
+																	ng-options="enum.enumid as enum.enumname for enum in dicDataList[2779]"
+																	class="form-control" ng-disabled="isNotEdit">
+																<option value="">--请选择--</option>
+															</select>
+														</section>
+
+													</td>
+													<td  style="margin-top: 9px;text-align: center;">
+														<section class="col col-6">
+															<label class="input">
+																<input type="text" ng-model="checkSon.setValue" name="setValue{{$index}}" ng-readonly="isNotEdit" required>
+															</label>
+														</section>
+														<section class="col col-3">
+															<label class="input">
+																<a ng-hide="isNotEdit" class="btn btn-primary btn-sm" ng-click="deleteTR(checkSon)">-&nbsp;&nbsp;检测项</a>
+															</label>
+														</section>
+													</td>
+												</tr>
+											</table>
+											<div class="row">
+												<section class="col col-3">
+													<label class="select">
+														<label class="label" style="margin-top: 11px">粮油等级：<span style="color: red;">*</span></label>
+														<label class="select">
+															<select ng-model="qualitycheck.level" ng-disabled="isNotEdit" ng-readonly="isNotEdit"
+																	ng-options="enum.enumid as enum.enumname for enum in dicDataList[1002]" required>
+																<option value="">-- 粮油等级 --</option>
+															</select>
+														</label>
+													</label>
+												</section>
+												<section class="col col-3">
+													<label class="select">
+														<label class="label" style="margin-top: 11px">是否虫粮：<span style="color: red;">*</span></label>
+														<label class="select">
+															<select name="isPest" ng-disabled="isNotEdit" ng-readonly="isNotEdit" ng-model="qualitycheck.isPest">
+																<option value="" selected="" disabled="">请选择</option>
+																<option value="0">是</option>
+																<option value="1">否</option>
+															</select> <i></i> </label>
+													</label>
+												</section>
+											</div>
+											<div class="row">
+												<section class="col col-10">
+													<label class="input">
+														<span>备注：</span>
+														<input type="text" ng-model="qualitycheck.remarks" name="remarks" placeholder="备注" ng-readonly="isNotEdit">
+													</label>
+												</section>
+											</div>
+										</div>
+									</fieldset>
+								</div>
+						<!--品种切换结束-->
+								<footer>
+									<div class="row">
+										<div class="col-md-12">
+											<a class="btn btn-default" href-void="" href="#" ng-click="back()">取消</a>
+											<a class="btn btn-primary" href-void="" href="#" ng-click="saveData(5)"  ng-hide="isNotEdit">提交</a>
+										</div>
+									</div>
+								</footer>
+						    </form>
+					    </div>
+					</div>
+				</div>
+			</article>
+		</div>
+	</section>
+</div>

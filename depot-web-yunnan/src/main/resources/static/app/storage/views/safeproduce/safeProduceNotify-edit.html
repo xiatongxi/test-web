@@ -1,0 +1,65 @@
+<div id="content">
+    <section id="widget-grid" widget-grid>
+        <div class="row">
+            <article class="col-sm-12 col-md-12 col-lg-12">
+                <div jarvis-widget id="form-grid-widget" data-widget-colorbutton="false" data-widget-editbutton="false"
+                     data-widget-custombutton="false">
+                    <div>
+                        <div class="widget-body no-padding">
+                            <form id="safeProduceNotify-form" class="smart-form" data-validator-option="validateOptions" novalidate="novalidate">
+                                <button type="submit" class="bv-hidden-submit" style="display: none; width: 0px; height: 0px;"></button>
+                                <header>
+                                    <a href-void class="btn btn-default btn-xs" ng-click="backLayer()">
+                                        <i class="fa fa-angle-left"></i>&nbsp;返回&nbsp;
+                                    </a>
+                                    &nbsp;<strong>安全生产通告编辑</strong>
+                                </header>
+                                <fieldset>
+                                    <div class="row">
+                                        <section class="col col-3">
+                                            <label class="label">文件名称：<span style="color: red;">*</span></label>
+                                            <label class="input">
+                                                <input type="text" ng-model="safeProduceNotify.fileName" name="fileName"  ng-disabled="isNotEdit" required>
+                                            </label>
+                                        </section>
+                                        <section class="col col-3">
+                                            <label class="label">通告时间：<span style="color: red;">*</span></label>
+                                            <label class="input">
+                                                <input type="text" ng-model="safeProduceNotify.operationTime" name="operationTime" ng-readonly="true" ng-disabled="isNotEdit"
+                                                       data-smart-datepicker required>
+                                            </label>
+                                        </section>
+                                        <section class="col col-3">
+                                            <label class="label">通告人：</label>
+                                            <label class="input">
+                                                <input type="text" ng-model="safeProduceNotify.operator" name="operator" ng-disabled="true">
+                                            </label>
+                                        </section>
+                                        <section class="col col-3">
+                                            <label class="label">通告来源：</label>
+                                            <label class="input">
+                                                <input type="text" ng-model="safeProduceNotify.source" name="source" ng-disabled="true">
+                                            </label>
+                                        </section>
+                                    </div>
+                                    <div class="row">
+                                        <section class="col col-12">
+                                            <label class="label">通告信息</label>
+                                            <label class="textarea textarea-resizable">
+                                                <textarea rows="15" cols="147" class="custom-scroll"  ng-model="safeProduceNotify.notify"  ng-disabled="isNotEdit" name="notify"></textarea>
+                                            </label>
+                                        </section>
+                                    </div>
+                                </fieldset>
+                                <footer class="modal-footer text-align-center">
+                                    <button ng-click="back()" class="btn btn-default btn-lg" data-dismiss="modal">取消</button>
+                                    <button ng-click="saveData()" type="button" class="btn btn-primary btn-lg" ng-hide="isNotEdit">提交</button>
+                                </footer>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </article>
+        </div>
+    </section>
+</div>

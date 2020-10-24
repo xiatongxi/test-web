@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>云南智能出入库管理平台</title>
+</head>
+<script type="text/javascript">
+	function setIframe(){
+		var urls = window.location.search.substr(1).split("param=")[1];
+		document.getElementById("external-frame").src = urls;
+	}
+</script>
+<body onload="setIframe()">
+	<iframe width="100%" height="700px" frameborder="0" scrolling="no" name="mainFrame"  id="external-frame" ></iframe>
+</body>
+</html>

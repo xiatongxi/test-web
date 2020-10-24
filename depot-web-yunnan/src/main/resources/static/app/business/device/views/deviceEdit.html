@@ -1,0 +1,105 @@
+<div id="content">
+	<section id="widget-grid" widget-grid>
+		<div class="row">
+			<article class="col-sm-12 col-md-12 col-lg-12">
+				<div jarvis-widget id="form-grid-widget" data-widget-colorbutton="false" data-widget-editbutton="false"
+					 data-widget-custombutton="false">
+					<div>
+						<div class="widget-body no-padding">
+							<form id="deviceCheck-form" class="smart-form" data-validator-option="validateOptions" novalidate="novalidate">
+								<header id="headId">{{pddTitleName}}</header>
+								<fieldset>
+									<div class="row">
+										<section class="col col-3">
+											<label class="label">存放位置：<span style="color: red;">*</span></label>
+											<label class="select">
+												<select ng-model="deviceCheck.depotId" name="depotId" ng-change="getCount()"
+														ng-options="equipmentEquipmentPool.id as equipmentEquipmentPool.putPosition for equipmentEquipmentPool in equipmentEquipmentPool "
+														class="form-control" ng-disabled="isNotEdit" required>
+													<option value="-1">--请选择--</option>
+												</select>
+											</label>
+										</section>
+										<section class="col col-3">
+                                            <label class="label">盘点单号：</label>
+                                            <label class="input">
+                                                <input type="text" ng-model="deviceCheck.checkNumber" placeholder="盘点单号" ng-readonly="true" required>
+                                            </label>
+										</section>
+									</div>
+									<div class="row">
+										<section class="col col-3">
+											<label class="label">盘点种类：</label>
+											<label class="select">
+												<select ng-model="deviceCheck.deviceType" name="deviceType" ng-options="enum.enumid as enum.enumname for enum in dicDataList[5473]" ng-change="changePdzl()"
+														class="form-control" ng-disabled="isNotEdit" >
+													<option value="">--请选择--</option>
+												</select>
+											</label>
+										 <em><span style="color: #D56161;margin-top:6px;padding:0 1px;font-style:normal;font-size:11px;line-height:15px;" id="deviceType-error"></span></em>
+										</section>
+										<section class="col col-3">
+                                            <label class="label">盘点时间：</label>
+                                            <label class="input">
+                                                <!--<input class="form-control" type="text" ng-model="deviceCheck.checkDate | date:'yyyy-MM-dd HH:mm:ss'" data-smart-datepicker ng-disabled="isNotEdit" required>-->
+                                                <input class="form-control" type="text" ng-model="deviceCheck.checkDate" ng-disabled="isNotEdit" required>
+                                            </label>
+										</section>
+										<section class="col col-3">
+                                            <label class="input">
+												<label class="label">负责人：<span style="color: red;">*</span></label>
+												<input type="text" ng-model="deviceCheck.checkPerson" name="number" ng-disabled="isNotEdit"  required>
+											</label>
+										</section>
+									</div>
+
+								</fieldset>
+                                <fieldset>
+                                    <div class="row col-md-12" style="margin: 0 auto;">
+										<table class="table table-striped table-bordered table-hover" width="100%">
+											<thead>
+												<tr>
+													<th data-hide="phone">序号</th>
+													<th data-class="expand">器材名称</th>
+													<th data-class="expand">规格型号</th>
+													<th data-class="expand">库存数量</th>
+													<th data-class="expand">实际库存数量</th>
+													<th data-hide="phone,tablet"> 盘点情况</th>
+													<th data-hide="phone,tablet"> 原因</th>
+												</tr>
+											</thead>
+
+											<tbody>
+												<tr ng-model="childZl" ng-repeat="deviceList in childZl">
+													<td align="center">{{$index + 1}}</td>
+													<td>{{dicData[deviceList.deviceName == 'null'?"":deviceList.deviceName]}}</td>
+													<td>{{deviceList.model}}</td>
+													<td>{{deviceList.storeCount}}</td>
+													<td><input name="reallyCount" type="text" ng-model="deviceList.reallyCount" ng-disabled="isNotEdit" style="width:100px;"/></td>
+													<td>
+														<label ng-show="deviceList.storeCount*1<deviceList.reallyCount*1">盘盈</label>
+														<label ng-show="deviceList.storeCount*1>deviceList.reallyCount*1">盘亏</label>
+														<label ng-show="deviceList.storeCount*1==deviceList.reallyCount*1">账实相符</label>
+													</td>
+													<td><input name="reason" type="text" ng-model="deviceList.reason" ng-disabled="isNotEdit" style="width: auto;"/></td>
+												</tr>
+											</tbody>
+										</table>
+                                    </div>
+                                </fieldset>
+								<footer>
+									<div class="row">
+										<div class="col-md-12">
+											<a style="margin-right: 20px;" class="btn btn-default" href-void="" href="#" ng-click="back()">返回</a>
+											<a style="margin-right: 20px;" class="btn btn-primary" href-void="" href="#" ng-click="saveData()"  ng-hide="isNotEdit">确定</a>
+										</div>
+									</div>
+								</footer>
+						    </form>
+					    </div>
+					</div>
+				</div>
+			</article>
+		</div>
+	</section>
+</div>

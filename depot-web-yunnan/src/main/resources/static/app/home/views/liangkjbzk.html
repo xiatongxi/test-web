@@ -1,0 +1,46 @@
+<div class="col-sm-12 home-module mar-top2" ng-controller="depotProfileCtrl">
+	
+    <div class="col-center col-center-6">
+        <h3>粮库基本状况</h3>
+        <div class="home-module-content">
+            <div class="video-mon">
+                <div class="product-image">
+                    <div id="myCarousel-2" class="carousel slide" data-smart-ride-carousel>
+                        <ol class="carousel-indicators">
+                            <li data-target="#myCarousel-2" data-slide-to="0" class="active"></li>
+                            <li data-target="#myCarousel-2" data-slide-to="1" class=""></li>
+                            <li data-target="#myCarousel-2" data-slide-to="2" class=""></li>
+                            <li data-target="#myCarousel-2" data-slide-to="3" class=""></li>
+                        </ol>
+                        <div class="carousel-inner">
+                            <!-- Slide 1 -->
+                            <div class="item active">
+                                <img src="{{imagelist[0].imgUrl}}"/>
+                            </div>
+                            <!-- Slide 2 -->
+                            <div class="item">
+                                <img src="{{imagelist[1].imgUrl}}"/>
+                            </div>
+                            <!-- Slide 3 -->
+                            <div class="item">
+                                <img src="{{imagelist[2].imgUrl}}"/>
+                            </div>
+                            <div class="item">
+                                <img src="{{imagelist[3].imgUrl}}"/>
+                            </div>
+                        </div>
+                        
+                    </div>
+                </div>
+                <!--*******product-image********-->
+                
+                <div class="liangkjbzk-line"></div>
+                <div class="liangkjbzk-con">
+                    <p ng-bind="depotInfo.briefIntroduction"></p>
+                </div>
+            </div>
+        </div>
+        
+        
+    </div>
+</div>

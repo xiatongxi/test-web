@@ -1,0 +1,48 @@
+<div class="modal-content">
+    <div class="modal-header">
+        <button type="button" class="close" ng-click="cancel()">
+            &times;
+        </button>
+        <h4 class="modal-title" id="myModalLabel">药剂货架号详情</h4>
+    </div>
+    <div class="modal-body">
+        <form id="drugShelf-form" class="smart-form ng-pristine ng-valid" data-validator-option="validateOptions" novalidate="novalidate">
+			<div class="row">
+				<section class="col col-sm-12">
+					<label class="label">仓房名称<span style="color: red;">*</span></label>
+					<label class="input">
+						<span>默认药剂仓房</span>
+					</label>
+					<!-- <label class="select">
+						<select ng-model="drugShelf.storageHouseId" name="storageHouseId"
+							ng-options="storageHouse.id as storageHouse.storageHouseName for storageHouse in drugStorageHouseList.list"
+							ng-disabled="isNotEdit" class="form-control"
+							required>
+							<option value="">--请选择--</option>
+						</select>
+					</label> -->
+				</section>
+			</div>
+			<div class="row">
+				<section class="col col-sm-12">
+					<label class="label">货架号名称<span style="color: red;">*</span></label> 
+					<label class="input">
+                    	<input type="text" ng-model="drugShelf.shelfName" name="shelfName" ng-readonly="isNotEdit"
+                    	required>
+					</label>
+				</section>
+			</div>
+		</form>
+    </div>
+    
+    <div class="modal-footer">
+        <button type="button" class="btn btn-primary" ng-hide="isNotEdit" ng-click="save()">
+        	 保存
+        </button>
+        <button type="button" class="btn btn-default"  ng-click="cancel()">
+        	取消
+        </button>
+    </div>
+</div>
+
+

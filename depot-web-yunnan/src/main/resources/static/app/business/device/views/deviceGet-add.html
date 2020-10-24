@@ -1,0 +1,166 @@
+<div id="content">
+	<section id="widget-grid" widget-grid>
+		<div class="row">
+			<article class="col-sm-12 col-md-12 col-lg-12">
+				<div jarvis-widget id="form-grid-widget" data-widget-colorbutton="false" data-widget-editbutton="false"
+					 data-widget-custombutton="false">
+					<div>
+						<div class="widget-body no-padding">
+							<form id="deviceGet-form" class="smart-form" data-validator-option="validateOptions" novalidate="novalidate">
+								<button type="submit" class="bv-hidden-submit" style="display: none; width: 0px; height: 0px;"></button>
+								<header>
+									<a href-void class="btn btn-default btn-xs" ng-click="back()"><i class="fa fa-angle-left"></i>&nbsp;返回&nbsp;</a>
+									&nbsp;<strong>领用信息</strong>
+								</header>
+								<fieldset>
+									<div class="row">
+										
+										<section class="col col-3">
+											<label class="label">类型：<span style="color: red;">*</span></label>
+											<label class="select">
+												<select ng-model="contentBean.deviceTypeId" name="deviceTypeId"  ng-change="nameChange()"
+														ng-options="enum.enumid as enum.enumname for enum in dicDataList[5473]"
+														class="form-control" ng-disabled="isNotEdit" required>
+													<option value="">--请选择--</option>
+												</select>
+											</label>
+										</section>
+										<section class="col col-3">
+											<label class="label">名称：<span style="color: red;">*</span></label>
+											<label class="select">
+												<select ng-model="contentBean.deviceName" name="deviceName"  ng-change="shelfChange()"
+														ng-options="content.enumName as content.enumName for content in nameGetList"
+														class="form-control" ng-disabled="isNotEdit" required>
+													<option value="">--请选择--</option>
+												</select>
+											</label>
+										</section>
+										<section class="col col-3">
+											<label class="label">货架：<span style="color: red;">*</span></label>
+											<label class="select">
+												<select ng-model="deviceInput.shelfId" name="shelId" class="form-control" ng-change="modelChange()"
+														ng-disabled="isNotEdit" required
+														ng-options="deviceInput.shelfId as deviceInput.shelfId for deviceInput in ShelfGetList">
+													<option value="">--请选择--</option>
+												</select><!-- ng-change="modelChange()" -->
+											</label>
+										</section>
+										<section class="col col-3">
+									<label class="label">规格型号：<span style="color: red;">*</span></label>
+											<label class="select">
+												<select ng-model="contentBean.model" name="model" class="form-control" ng-change="numberChange()"
+														ng-disabled="isNotEdit" required
+														ng-options="contentBean.model as contentBean.model for contentBean in ModelGetList">
+													<option value="">--请选择--</option>
+												</select>
+											</label>
+										</section>
+									</div>
+									<div class="row">
+									
+										<section class="col col-3">
+										<label class="label">设备编号：<span style="color: red;">*</span></label>
+											<label class="select">
+												<select ng-model="contentBean.number" name="model" class="form-control" ng-change="useCountChange()"
+														ng-options="contentBean.number as contentBean.number for contentBean in numberGetList"
+														ng-disabled="isNotEdit" required>
+													<option value="">--请选择--</option>
+												</select>
+											</label>
+										</section>
+										<section class="col col-3">
+											<label class="label">领用日期：<span style="color: red;">*</span></label>
+											<label class="input">
+												<input type="text" ng-model="deviceGet.getTime" name="getTime" data-smart-datepicker ng-disabled="isNotEdit"
+													   placeholder="领用日期" required>
+											</label>
+										</section>
+										<section class="col col-3">
+												<label class="input">
+													<label class="label">经手人：</label>
+													<input type="text" ng-model="deviceGet.handler" name="handler" ng-readonly="isNotEdit"
+														   placeholder="经手人">
+												</label>
+										</section>
+										<section class="col col-3">
+												<label class="input">
+													<label class="label">记账人：</label>
+													<input type="text" ng-model="deviceGet.bookKeeper" name="bookKeeper" ng-readonly="isNotEdit"
+														   placeholder="记账人">
+												</label>
+										</section>
+										
+									</div>
+									<div class="row">
+										<section class="col col-3">
+												<label class="input">
+													<label class="label">审核人：</label>
+													<input type="text" ng-model="deviceGet.collator" name="collator" ng-readonly="isNotEdit"
+														   placeholder="审核人">
+												</label>
+										</section>
+										<section class="col col-3">
+												<label class="input">
+													<label class="label">可用数量：<span style="color: red;">*</span></label>
+													<input type="text" ng-model="contentBean.useCount" name="useCount" readonly
+														   placeholder="可用数量" required>
+												</label>
+										</section>
+										<section class="col col-3">
+												<label class="input">
+													<label class="label">领用数量：<span style="color: red;">*</span></label>
+													<input type="number" ng-model="deviceGet.getCount" name="getCount" ng-readonly="isNotEdit"
+														   ng-change="getCountChange()" placeholder="领用数量" required>
+												</label>
+										</section>
+										<section class="col col-3">
+											<label class="label">仓房名称：<span style="color: red;">*</span></label>
+											<label class="select">
+												<select ng-model="deviceGet.houseId" name="houseId" 
+														ng-options="store.storehouseId as store.storehouseName for store in storelist"
+														class="form-control" ng-disabled="isNotEdit" required>
+													<option value="">--请选择--</option>
+												</select>
+											</label>
+										</section>
+										<!-- <section class="col col-3">
+											<label class="label">存放位置：<span style="color: red;">*</span></label>
+											<label class="select">
+												<select ng-model="deviceGet.depotId" name="depotId" 
+														ng-options="equipmentEquipmentPool.id as equipmentEquipmentPool.putPosition for equipmentEquipmentPool in equipmentEquipmentPool "
+														class="form-control" ng-disabled="isNotEdit" required>
+													<option value="">--请选择--</option>
+												</select>
+											</label>
+										</section> -->
+										<section class="col col-10">
+												<label class="input">
+													<span>备注：</span>
+													<input type="text" ng-model="deviceGet.remark" name="remark" placeholder="备注" ng-readonly="isNotEdit">
+												</label>
+										</section>
+										<section class="col col-3">
+													<label class="label">
+													<input type="hidden" ng-model="deviceGet.inputId" name="inputId" ng-readonly="isNotEdit"
+														   placeholder="id" required>
+													<input type="hidden" ng-model="deviceGet.orgId" name="orgId">
+												</label>
+										</section>
+									</div>
+								</fieldset>
+								<footer>
+									<div class="row">
+										<div class="col-md-12">
+											<a class="btn btn-default" href-void="" href="#" ng-click="back()" ng-hide="isNotEdit">取消</a>
+											<a class="btn btn-primary" href-void="" href="#" ng-click="saveData()"  ng-hide="isNotEdit">提交</a>
+										</div>
+									</div>
+								</footer>
+						    </form>
+					    </div>
+					</div>
+				</div>
+			</article>
+		</div>
+	</section>
+</div>

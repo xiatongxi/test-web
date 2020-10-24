@@ -1,0 +1,75 @@
+<!--<div class="row">
+    <article class="col-sm-12">
+        <div jarvis-widget id="standard-datatable-widget" data-widget-color="darken" data-widget-editbutton="false">
+            <header>
+                <span class="widget-icon"> <i class="fa fa-table"></i> </span>
+                <h2>药剂采购申请列表 </h2>
+            </header>
+            <div>
+                <div class="widget-body no-padding">
+                <div id="DataTables_Table_1_wrapper" class="dataTables_wrapper form-inline no-footer" >
+                <table class="table table-striped table-bordered table-hover" width="100%">
+                 <thead>
+                  <tr>
+                      <th data-hide="expand"><i class="fa fa-fw  text-muted hidden-md hidden-sm hidden-xs"></i>采购申请编号</th>
+                      <th data-hide="expand"><i class="fa fa-fw  text-muted hidden-md hidden-sm hidden-xs"></i>申请粮库</th>
+                      <th data-hide="expand"><i class="fa fa-fw  text-muted hidden-md hidden-sm hidden-xs"></i>总数量</th>
+                      <th data-hide="expand"><i class="fa fa-fw  text-muted hidden-md hidden-sm hidden-xs"></i>预计总金额</th>
+                      <th data-class="expand"><i class="fa fa-fw  text-muted hidden-md hidden-sm hidden-xs"></i>申请人</th>
+                      <th data-class="expand"><i class="fa fa-fw  text-muted hidden-md hidden-sm hidden-xs"></i>申请时间</th>
+                      <th data-hide="expand"> 操作</th>
+                  </tr>
+                 </thead>
+                 
+                 <tbody>
+                     <tr ng-repeat="drugPurchase in pageInfo.list">
+                         <td>{{drugPurchase.applyNumber}}</td>
+                         <td>{{drugPurchase.applyDepot}}</td>
+                         <td>{{drugPurchase.applyTotalCount}}</td>
+                         <td>{{drugPurchase.applyTotalAmount}}</td>
+                         <td>{{drugPurchase.creater}}</td>
+                         <td>{{drugPurchase.createTime | date:'yyyy-MM-dd HH:mm:ss' }}</td>
+                         <td>
+                             <a href-void ng-click="selectDrugPurchase(drugPurchase)"><i class="fa fa-edit"></i>选择</a>
+                         </td>
+                     </tr>
+                 </tbody>
+                </table>
+                <div class="dt-toolbar-footer">
+                        <div class="col-sm-6 col-xs-12 hidden-xs">
+                            <div class="dataTables_info" role="status" aria-live="polite">
+                                显示 {{pageInfo.startRow}} - {{pageInfo.endRow}}条，共 {{pageInfo.total}} 条
+                            </div>
+                        </div>
+                        <div class="col-xs-12 col-sm-6">
+                            <div class="dataTables_paginate paging_simple_numbers">
+                                <ul class="pagination">
+                                    <li ><a href="javascript:void(0);" ng-click="go_page('firstPage', pageInfo.pageNum, pageInfo.pageSize)"
+                                        aria-controls="DataTables_Table_9" data-dt-idx="0"
+                                        tabindex="0" id="DataTables_Table_9_first">首页</a></li>
+                                    <li></li>
+                                    
+                                    <li><a href="javascript:void(0);" class="previous" ng-click="go_page('previousPage', pageInfo.pageNum, pageInfo.pageSize)"
+                                        aria-controls="DataTables_Table_9" data-dt-idx="1"
+                                        tabindex="0" id="DataTables_Table_9_previous">上一页</a></li>
+                                    <li></li>
+                                    
+                                    <li ng-repeat="page in pageInfo.navigatepageNums" ng-class="{true:'active'}[p_current==page]">
+                                         <a href="javascript:void(0);" ng-click="go_page('loadPage', page, pageInfo.pageSize)">{{ page }}</a>
+                                    </li>  
+                                    <li><a href="javascript:void(0);" class="next"
+                                        aria-controls="DataTables_Table_9" data-dt-idx="10" ng-click="go_page('nextPage',pageInfo.pageNum, pageInfo.pageSize, pageInfo.pages)"
+                                        tabindex="0" id="DataTables_Table_9_next">下一页</a></li>
+                                    <li><a href="javascript:void(0);" 
+                                        aria-controls="DataTables_Table_9" data-dt-idx="11" ng-click="go_page('lastPage',pageInfo.pageNum, pageInfo.pageSize, pageInfo.pages)"
+                                        tabindex="0" id="DataTables_Table_9_last">尾页</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                </div>
+            </div>
+        </div>
+    </article>
+</div>-->

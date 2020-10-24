@@ -1,0 +1,280 @@
+<div id="content">
+	<section id="widget-grid" widget-grid>
+		<div class="row">
+			<article class="col-sm-12 col-md-12 col-lg-12">
+				<div jarvis-widget id="form-grid-widget" data-widget-colorbutton="false" data-widget-editbutton="false"
+					 data-widget-custombutton="false">
+					<div>
+						<div class="widget-body no-padding">
+
+							<form id="festivalbefore-form" name='festivalbefore-form'
+								  class="smart-form ng-pristine ng-valid"
+								  ng-submit='festivalbefore-form.$valid&&save(festivalbefore)'
+								  novalidate="novalidate">
+								<header>
+									<a href-void class="btn btn-default btn-xs" ng-click="back()"><i class="fa fa-angle-left"></i>&nbsp;返回&nbsp;</a>
+									&nbsp;<strong>节前安全生产检查清单</strong>
+									<span class="pull-right font-xs">带*的部分必须填写</span>
+								</header>
+								<fieldset>
+									<table class="table table-striped table-bordered table-hover" width="100%">
+										<tr>
+											<th style="text-align:center;">序号</th>
+											<th style="text-align:center;">检查内容</th>
+											<th style="text-align:center;">检查项目</th>
+											<th style="text-align:center;">有</th>
+											<th style="text-align:center;">无</th>
+										</tr>
+										<tr>
+											<td rowspan="2">
+												1
+											</td>
+											<td rowspan="2">
+												<label class="label" style="margin-top: 9px;text-align: center;">节前安全生产检查</label>
+											</td>
+											<td>
+												<label class="label" style="margin-top: 9px;text-align: center;">有无检查记录（库房有无漏雨、库存粮情检查情况、灭火器是否完好有效、水电是否管理到位）</label>
+											</td>
+											<td>
+												<label class="radio">
+													<input type="radio" value="1" ng-model="festivalbefore.checkRecord" name="checkRecord" ng-disabled="isNotEdit"
+														   ng-init="festivalbefore.checkRecord = 1">
+													<i></i>
+												</label>
+
+											</td>
+											<td>
+												<label class="radio">
+													<input type="radio" value="0" ng-model="festivalbefore.checkRecord" name="checkRecord" ng-disabled="isNotEdit">
+													<i></i>
+												</label>
+											</td>
+										</tr>
+									    <tr>
+											<td>
+												<label class="label" style="margin-top: 9px;text-align: center;">企业自查发现隐患整改落实情况</label>
+											</td>
+											<td>
+												<label class="radio">
+													<input type="radio" value="1" ng-model="festivalbefore.implementCase" name="implementCase" ng-disabled="isNotEdit"
+														   ng-init="festivalbefore.implementCase = 1">
+													<i></i>
+												</label>
+
+											</td>
+											<td>
+												<label class="radio">
+													<input type="radio" value="0" ng-model="festivalbefore.implementCase" name="implementCase" ng-disabled="isNotEdit">
+													<i></i>
+												</label>
+											</td>
+										</tr>
+
+										<tr>
+											<td rowspan="4">
+												2
+											</td>
+											<td rowspan="4">
+												<label class="label" style="margin-top: 9px;text-align: center;">节日期间值班安排部署情况
+												</label>
+											</td>
+											<td>
+												<label class="label" style="margin-top: 9px;text-align: center;">有无节日值班安排（值班人员、地点、联络方式、通讯畅通）</label>
+											</td>
+											<td>
+												<label class="radio">
+													<input type="radio" value="1" ng-model="festivalbefore.dutyArrangement" name="dutyArrangement" ng-disabled="isNotEdit"
+														   ng-init="festivalbefore.dutyArrangement = 1">
+													<i></i>
+												</label>
+
+											</td>
+											<td>
+												<label class="radio">
+													<input type="radio" value="0" ng-model="festivalbefore.dutyArrangement" name="dutyArrangement" ng-disabled="isNotEdit">
+													<i></i>
+												</label>
+											</td>
+										</tr>
+										<tr>
+											<td>
+												<label class="label" style="margin-top: 9px;text-align: center;">节日期间作业安排（专人负责作业现场管理、工作人员熟悉作业流程）</label>
+											</td>
+											<td>
+												<label class="radio">
+													<input type="radio" value="1" ng-model="festivalbefore.operationArrangement" name="operationArrangement" ng-disabled="isNotEdit"
+														   ng-init="festivalbefore.operationArrangement = 1">
+													<i></i>
+												</label>
+
+											</td>
+											<td>
+												<label class="radio">
+													<input type="radio" value="0" ng-model="festivalbefore.operationArrangement" name="operationArrangement" ng-disabled="isNotEdit">
+													<i></i>
+												</label>
+											</td>
+										</tr>
+										<tr>
+											<td>
+												<label class="label" style="margin-top: 9px;text-align: center;">落实领导带班制度情况</label>
+											</td>
+											<td>
+												<label class="radio">
+													<input type="radio" value="1" ng-model="festivalbefore.leadSystem" name="leadSystem" ng-disabled="isNotEdit"
+														   ng-init="festivalbefore.leadSystem = 1">
+													<i></i>
+												</label>
+
+											</td>
+											<td>
+												<label class="radio">
+													<input type="radio" value="0" ng-model="festivalbefore.leadSystem" name="leadSystem" ng-disabled="isNotEdit">
+													<i></i>
+												</label>
+											</td>
+										</tr>
+										<tr>
+											<td>
+												<label class="label" style="margin-top: 9px;text-align: center;">值班人员安全教育情况（防火、防盗及其他注意事项，值班人员熟知消防、防汛设施设备存放点、会正确使用灭火器、会报警、规范填写值班记录、明确值班要求）</label>
+											</td>
+											<td>
+												<label class="radio">
+													<input type="radio" value="1" ng-model="festivalbefore.safetyEducation" name="safetyEducation" ng-disabled="isNotEdit"
+														   ng-init="festivalbefore.safetyEducation = 1">
+													<i></i>
+												</label>
+
+											</td>
+											<td>
+												<label class="radio">
+													<input type="radio" value="0" ng-model="festivalbefore.safetyEducation" name="safetyEducation" ng-disabled="isNotEdit">
+													<i></i>
+												</label>
+											</td>
+										</tr>
+
+
+										<tr>
+											<td rowspan="3">
+												3
+											</td>
+											<td rowspan="3">
+												<label class="label" style="margin-top: 9px;text-align: center;">突发事故防范准备工作</label>
+											</td>
+											<td>
+												<label class="label" style="margin-top: 9px;text-align: center;">清理排水沟</label>
+											</td>
+											<td>
+												<label class="radio">
+													<input type="radio" value="1" ng-model="festivalbefore.cleaningDrain" name="cleaningDrain" ng-disabled="isNotEdit"
+														   ng-init="festivalbefore.cleaningDrain = 1">
+													<i></i>
+												</label>
+
+											</td>
+											<td>
+												<label class="radio">
+													<input type="radio" value="0" ng-model="festivalbefore.cleaningDrain" name="cleaningDrain" ng-disabled="isNotEdit">
+													<i></i>
+												</label>
+											</td>
+										</tr>
+										<tr>
+											<td>
+												<label class="label" style="margin-top: 9px;text-align: center;">应急设施、应急装备配备、应急物资储备</label>
+											</td>
+											<td>
+												<label class="radio">
+													<input type="radio" value="1" ng-model="festivalbefore.emergencyFacilities" name="emergencyFacilities" ng-disabled="isNotEdit"
+														   ng-init="festivalbefore.emergencyFacilities = 1">
+													<i></i>
+												</label>
+
+											</td>
+											<td>
+												<label class="radio">
+													<input type="radio" value="0" ng-model="festivalbefore.emergencyFacilities" name="emergencyFacilities" ng-disabled="isNotEdit">
+													<i></i>
+												</label>
+											</td>
+										</tr>
+										<tr>
+											<td>
+												<label class="label" style="margin-top: 9px;text-align: center;">应急预案建立（防火、防汛、储粮处置、安全生产作业事故）</label>
+											</td>
+											<td>
+												<label class="radio">
+													<input type="radio" value="1" ng-model="festivalbefore.emergencyPlan" name="emergencyPlan" ng-disabled="isNotEdit"
+														   ng-init="festivalbefore.emergencyPlan = 1">
+													<i></i>
+												</label>
+
+											</td>
+											<td>
+												<label class="radio">
+													<input type="radio" value="0" ng-model="festivalbefore.emergencyPlan" name="emergencyPlan" ng-disabled="isNotEdit">
+													<i></i>
+												</label>
+											</td>
+										</tr>
+
+									</table>
+								</fieldset>
+
+								<fieldset>
+									<div class="row">
+										<section class="col col-3">
+											<label class="label">仓房名称：<span style="color: red;">*</span></label>
+											<label class="select">
+												<select ng-model="festivalbefore.houseId" name="houseId" required
+														ng-options="store.storehouseId as store.storehouseName for store in storelist"
+														class="form-control" ng-disabled="isNotEdit">
+													<option value="" disabled>--请选择--</option>
+												</select>
+											</label>
+										</section>
+										<section class="col col-3">
+											<label class="label">检查日期：<span style="color: red;">*</span></label>
+											<label class="input">
+												<input type="text" ng-model="festivalbefore.checkDate" name="checkDate" data-smart-datepicker ng-disabled="isNotEdit"
+													   placeholder="检查日期" required>
+											</label>
+										</section>
+										<section class="col col-3">
+											<label class="input">
+												<label class="label">检查人员：<span style="color: red;">*</span></label>
+												<input type="text" ng-model="festivalbefore.checkPerson" name="checkPerson" ng-disabled="isNotEdit"
+													   placeholder="检查人员"  required>
+											</label>
+										</section>
+									</div>
+									<div class="row">
+										<section class="col col-10">
+											<label class="label">检查发现问题：</label>
+											<label class="textarea textarea-resizable">
+												<textarea rows="3" class="custom-scroll"  ng-model="festivalbefore.problem" name="problem" ng-disabled="isNotEdit"></textarea>
+											</label>
+										</section>
+									</div>
+									<div class="row">
+										<section class="col col-10">
+											<label class="label">整改措施：</label>
+											<label class="textarea textarea-resizable">
+												<textarea rows="3" class="custom-scroll"  ng-model="festivalbefore.opinion" name="opinion" ng-disabled="isNotEdit"></textarea>
+											</label>
+										</section>
+									</div>
+								</fieldset>
+								<footer class="modal-footer text-align-center">
+									<button ng-click="back()" class="btn btn-default btn-lg" data-dismiss="modal">取消</button>
+									<button ng-click="saveData()" type="button" class="btn btn-primary btn-lg" ng-hide="isNotEdit">提交</button>
+								</footer>
+							</form>
+						</div>
+					</div>
+				</div>
+			</article>
+		</div>
+	</section>
+</div>

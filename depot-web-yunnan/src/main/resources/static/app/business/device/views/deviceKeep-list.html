@@ -1,0 +1,92 @@
+<!-- MAIN CONTENT -->
+<div id="content">
+    <!-- widget grid -->
+    <section widget-grid id="widget-grid">
+        <div class="row">
+            <article class="col-sm-12">
+
+                <div jarvis-widget id="standard-datatable-widget" data-widget-color="darken" data-widget-editbutton="false">
+                    <header>
+                        <span class="widget-icon"> <i class="fa fa-table"></i> </span>
+                        <h2>器材设备保养 </h2>
+                    </header>
+                    <div>
+                        <div class="widget-body no-padding">
+                        <div id="DataTables_Table_1_wrapper" class="dataTables_wrapper form-inline no-footer">
+							<div class="dt-toolbar">
+								<div class="col-xs-12 col-sm-10">
+									<div class="form-group">
+									<label>
+									 	<a has-permission="512" href-void class="btn btn-primary btn-sm" ng-click="showKeep()"><i class="fa fa-plus"></i>&nbsp;保&nbsp;养</a>
+									</label>
+										<label> 保养状态:&emsp;
+											<select ng-model="search.keepStatus" class="form-control input-sm">
+													<!-- ng-options="ware.warehouseId as ware.warehouseName for ware in warelist" -->
+												<option value="">请选择</option>
+												<option value="1">正在保养</option>
+												<option value="0">正常</option>
+											</select>&emsp;
+										</label>
+										<a class="btn btn-default btn-sm" ng-click="loadData()">
+											<i class="fa fa-search"></i>&nbsp;查&nbsp;询</a>
+									</div>
+								</div>
+								<!-- <div class="col-xs-2 col-sm-1">
+									<a href-void class="btn btn-primary btn-sm" ng-click="moreDelete()"><i class="fa fa-trash-o"></i>&nbsp;批&nbsp;量&nbsp;结&nbsp;束</a>
+								</div> -->
+								<div class="col-sm-2 col-xs-1 hidden-xs">
+									<div class="dataTables_length">
+										<label>每页显示 <select ng-model="pageInfo.pageSize" ng-change="loadData()"
+															ng-options="num as num for num in [10,25,50,100]"
+															class="form-control input-sm"></select> 条
+										</label>
+									</div>
+								</div>
+							</div>
+
+
+						<table class="table table-striped table-bordered table-hover" width="100%">
+                        <thead>
+                        <tr>
+                            <th data-hide="phone">序号</th>
+							<th data-class="expand">库名</th>
+							<th data-class="expand">设备名称</th> 
+							<th data-class="expand">规格型号</th> 
+                            <th data-class="expand">保养开始日期</th>
+                            <th data-hide="phone">保养结束日期</th>
+                            <th data-hide="phone,tablet">保养负责人</th>
+                            <th data-hide="phone,tablet">设备管理员</th>
+                            <th data-hide="phone,tablet"> 操作</th>
+                        </tr>
+                        </thead>
+                        
+                        <tbody>
+                        	<tr ng-repeat="deviceList in pageInfo.list">
+								<th align="center">
+								<!-- <input type="checkbox" ng-if="deviceList.keepStatus == 0" disabled="disabled" name="deviceKeepIds" ng-checked="isSelected(deviceList.id)" ng-click="updateSelection($event,deviceList.id)"><input type="checkbox" ng-if="deviceList.keepStatus == 1" name="deviceKeepIds" ng-checked="isSelected(deviceList.id)" ng-click="updateSelection($event,deviceList.id)"> -->
+								  {{$index + 1 + (pageInfo.pageNum-1) * pageInfo.pageSize}}</th>
+								<td>{{orgInfo.orgName}}</td>
+								<td>{{dicData[deviceList.deviceName]}}</td> 
+								<td>{{deviceList.model}}</td> 
+								<td>{{deviceList.keepStart | date:'yyyy-MM-dd'}}</td>
+								<td>{{deviceList.keepEnd | date:'yyyy-MM-dd'}}</td>
+								<td>{{deviceList.keeper}}</td>
+								<td>{{deviceList.deviceManager}}</td>
+								<td>
+									<a href-void ng-click="showKeepMassage(deviceList.id)"><i class="fa fa-info-circle"></i>查看</a><span ng-show="{{deviceList.keepStatus == 1}}">  
+									<a has-permission="513" href-void ng-click="keepEnd(deviceList.id)"><i class="fa fa-stop" aria-hidden="true"></i>结束</a></span>
+                        		</td>
+                        	</tr>
+                        </tbody>
+
+                        </table>
+							<div smart-include="app/layout/partials/page.tpl.html"></div>
+						</div>
+                    	</div>
+                    </div>
+                </div>
+            </article>
+        </div>
+    </section>
+</div>
+

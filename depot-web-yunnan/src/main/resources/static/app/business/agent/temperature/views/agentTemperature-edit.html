@@ -1,0 +1,283 @@
+<!-- MAIN CONTENT -->
+<div id="content">
+
+	<!-- widget grid -->
+	<section id="widget-grid" widget-grid>
+
+		<!-- START ROW -->
+		<div class="row">
+
+			<!-- NEW COL START -->
+			<article class="col-sm-12 col-md-12 col-lg-12">
+
+				<!-- Widget ID (each widget will need unique ID)-->
+				<div jarvis-widget id="form-grid-widget"
+					 data-widget-colorbutton="false" data-widget-editbutton="false"
+					 data-widget-custombutton="false">
+
+					<!-- widget div-->
+					<div>
+
+						<!-- widget content -->
+						<div class="widget-body no-padding">
+							<form id="agentTemperature-form" class="smart-form ng-pristine ng-valid" data-validator-option="validateOptions" novalidate="novalidate">
+								<header>
+									<a href-void class="btn btn-default btn-xs" ng-click="retList()">
+										<i class="fa fa-angle-left"></i>&nbsp;返回&nbsp;
+									</a>
+									&nbsp;<strong>粮情信息详情</strong>
+								</header>
+								<fieldset>
+									<div class="row">
+										<section class="col col-4">
+											<label class="label txt-bg-red">代储点名称<span style="color: red;">*</span></label>
+											<label class="select">
+												<select ng-model="agentTemperatureEdit.agentId" required name="agentId"
+														ng-options="agent.id as agent.agentName for agent in agentData.list"
+														class="form-control" ng-change="getAgentDepotData(agentTemperatureEdit.agentId)">
+													<option value="">--请选择--</option>
+												</select>
+											</label>
+										</section>
+										<section class="col col-4">
+											<label class="label txt-bg-red">粮库名称<span style="color: red;">*</span></label>
+											<label class="select">
+												<select ng-model="agentTemperatureEdit.agentDepotId" name="agentDepotId" required
+														ng-options="depot.depotId as depot.depotName for depot in depotList"
+														class="form-control" ng-change="getHouseList(agentTemperatureEdit.agentDepotId)">
+													<option value="">--请选择--</option>
+												</select>
+											</label>
+										</section>
+										<section class="col col-4">
+											<label class="label txt-bg-red">仓房名称<span style="color: red;">*</span></label>
+											<label class="select">
+												<select ng-model="agentTemperatureEdit.storehouseId" name="storehouseId" required
+														ng-options="store.storehouseId as store.storehouseName for store in storehouseList"
+														class="form-control">
+													<option value="">--请选择--</option>
+												</select>
+											</label>
+										</section>
+									</div>
+									<div class="row">
+										<section class="col col-4">
+											<label class="label txt-bg-red">天气情况</label>
+											<label class="input">
+												<i class="icon-prepend fa fa-user"></i>
+												<input type="text" name="weather" ng-model="agentTemperatureEdit.weather"/>
+											</label>
+										</section>
+										<section class="col col-4">
+											<label class="label txt-bg-red">实际储量(公斤)</label>
+											<label class="input">
+												<i class="icon-prepend fa fa-user"></i>
+												<input type="text" name="actualAmount" ng-model="agentTemperatureEdit.actualAmount"/>
+											</label>
+										</section>
+										<section class="col col-4">
+											<label class="label txt-bg-red">粮油品种<span style="color: red;">*</span></label>
+											<label class="select">
+												<select ng-model="agentTemperatureEdit.lspz" name="lspz" required
+														ng-options="enum.enumid as enum.enumname for enum in dicDataList[1061]"
+														class="form-control">
+													<option value="">--请选择--</option>
+												</select>
+											</label>
+										</section>
+									</div>
+									<div class="row">
+										<section class="col col-4">
+											<label class="label">收获年度<span style="color: red;">*</span></label>
+											<label class="select">
+												<select ng-model="agentTemperatureEdit.harvestYear" name="harvestYear"
+														ng-options="enum.enumid as enum.enumname for enum in dicDataList[1004]" required>
+													<option value="">--请选择--</option>
+												</select>
+											</label>
+										</section>
+										<section class="col col-4">
+											<label class="label txt-bg-red">入库日期</label>
+											<label class="input">
+												<label class="input">
+													<input type="text" ng-model="agentTemperatureEdit.enterTime" class="form-control datepicker" data-smart-datepicker>
+												</label>
+											</label>
+										</section>
+										<section class="col col-4">
+											<label class="label">粮油等级<span style="color: red;">*</span></label>
+											<label class="select">
+												<select ng-model="agentTemperatureEdit.level" name="level"
+														ng-options="enum.enumid as enum.enumname for enum in dicDataList[1002]" required>
+													<option value="">--请选择--</option>
+												</select><i></i>
+											</label>
+										</section>
+									</div>
+									<div class="row">
+										<section class="col col-4" style="margin-bottom: 0px;">
+											<label class="label">粮油性质<span style="color: red;">*</span></label>
+											<label class="select">
+												<multi-select-tree
+														disabled-tree="disabled"
+														data-input-model="grainAttributeTreeData"
+														data-output-model="agentTemperatureEdit.nature"
+														data-default-label="--请选择--"
+														name="nature"
+														select-only-leafs="true"
+														multi-select="false" required>
+												</multi-select-tree>
+												<em><span style="color: #D56161;margin-top:6px;padding:0 1px;font-style:normal;font-size:11px;
+						                         line-height:15px;" id="grainAttribute-error"></span></em>
+											</label>
+										</section>
+										<section class="col col-4">
+											<label class="label txt-bg-red">保管员</label>
+											<label class="input">
+												<i class="icon-prepend fa fa-user"></i>
+												<input type="text" name="keeper" ng-model="agentTemperatureEdit.keeper"/>
+											</label>
+										</section>
+										<section class="col col-4">
+											<label class="label txt-bg-red">仓温（℃）</label>
+											<label class="input">
+												<i class="icon-prepend fa fa-user"></i>
+												<input type="text" name="houseTemperature" ng-model="agentTemperatureEdit.houseTemperature"/>
+											</label>
+										</section>
+									</div>
+									<div class="row">
+										<section class="col col-4">
+											<label class="label txt-bg-red">仓湿（%RH）</label>
+											<label class="input">
+												<i class="icon-prepend fa fa-user"></i>
+												<input type="text" name="houseHumidity" ng-model="agentTemperatureEdit.houseHumidity"/>
+											</label>
+										</section>
+										<section class="col col-4">
+											<label class="label txt-bg-red">气温（℃）</label>
+											<label class="input">
+												<i class="icon-prepend fa fa-user"></i>
+												<input type="text" name="gasTemperature" ng-model="agentTemperatureEdit.gasTemperature"/>
+											</label>
+										</section>
+										<section class="col col-4">
+											<label class="label txt-bg-red">气湿（%RH）</label>
+											<label class="input">
+												<i class="icon-prepend fa fa-user"></i>
+												<input type="text" name="gasHumidity" ng-model="agentTemperatureEdit.gasHumidity"/>
+											</label>
+										</section>
+									</div>
+									<div class="row">
+										<section class="col col-4">
+											<label class="label txt-bg-red">检测时间</label>
+											<label class="input">
+												<label class="input">
+													<input type="text" ng-model="agentTemperatureEdit.detectionTime" class="form-control datepicker" data-smart-datepicker>
+												</label>
+											</label>
+										</section>
+										<section class="col col-4">
+											<label class="label txt-bg-red">最高温（℃）</label>
+											<label class="input">
+												<i class="icon-prepend fa fa-user"></i>
+												<input type="text" name="max" ng-model="agentTemperatureEdit.max"/>
+											</label>
+										</section>
+										<section class="col col-4">
+											<label class="label txt-bg-red">最低温（℃）</label>
+											<label class="input">
+												<i class="icon-prepend fa fa-user"></i>
+												<input type="text" name="min" ng-model="agentTemperatureEdit.min"/>
+											</label>
+										</section>
+									</div>
+									<div class="row">
+										<section class="col col-4">
+											<label class="label txt-bg-red">平均温（℃）</label>
+											<label class="input">
+												<i class="icon-prepend fa fa-user"></i>
+												<input type="text" name="avg" ng-model="agentTemperatureEdit.avg"/>
+											</label>
+										</section>
+									</div>
+								</fieldset>
+
+								<header>
+									<h3>
+										<strong>检测信息</strong>&nbsp;&nbsp;
+										<a class="btn btn-primary btn-sm" ng-click="addTR(agentTemperatureEdit.id)" ng-hide="disabled">+&nbsp;&nbsp;检测项</a>
+									</h3>
+								</header>
+								<fieldset>
+									<div class="col-xs-10 col-sm-10">
+										<table class="table table-striped table-bordered table-hover" width="80%">
+											<tr>
+												<th  style="text-align: center;">测温线缆行号</th>
+												<th  style="text-align: center;">测温线缆列号</th>
+												<th  style="text-align: center;">测温点层数</th>
+												<th  style="text-align: center;">温度值</th>
+												<th  style="text-align: center;" ng-hide="disabled">操作</th>
+											</tr>
+
+											<tr ng-repeat="checkSon in addCheckSon">
+												<input type="hidden" ng-model="checkSon.qualitycheckId" />
+												<input type="hidden" ng-model="checkSon.id" />
+												<td>
+													<section class="col col-9" style="margin-left: 26px;">
+														<label class="input">
+															<input type="text" ng-model="checkSon.x" name="x" ng-disabled="disabled" required>
+														</label>
+													</section>
+												</td>
+												<td>
+													<section class="col col-9" style="margin-left: 26px;">
+														<label class="input">
+															<input type="text" ng-model="checkSon.y" name="y" ng-disabled="disabled" required>
+														</label>
+													</section>
+												</td>
+												<td>
+													<section class="col col-9" style="margin-left: 26px;">
+														<label class="input">
+															<input type="text" ng-model="checkSon.z" name="z" ng-disabled="disabled" required>
+														</label>
+													</section>
+												</td>
+												<td>
+													<section class="col col-9" style="margin-left: 26px;">
+														<label class="input">
+															<input type="text" ng-model="checkSon.temp" name="temp" ng-disabled="disabled" required>
+														</label>
+													</section>
+												</td>
+												<td  style="text-align: center;">
+													<section class="col col-9" style="margin-left: 26px;">
+														<label class="input">
+															<a ng-hide="disabled" class="btn btn-primary btn-sm" ng-click="deleteTR(checkSon)">-&nbsp;&nbsp;检测项</a>
+														</label>
+													</section>
+												</td>
+											</tr>
+										</table>
+									</div>
+								</fieldset>
+
+								<footer class="text-align-center">
+									<button ng-show="isShow == '1'" type="button" class="btn btn-primary" ng-click="saveData()">提交</button>
+									<button type="button" class="btn btn-default" ng-click="getEmptying()">取消</button>
+								</footer>
+							</form>
+						</div>
+					</div>
+				</div>
+			</article>
+		</div>
+	</section>
+	<form id="download-form" method="post" target="_blank" style=" border-width:5px; margin-left:2%;position:relative;margin-right:2%;">
+		<input type="hidden" name="filePath" id="filePath">
+		<input type="hidden" name="originalFileName" id="originalFileName">
+		<input type="hidden" name="type" id="type">
+	</form>
+</div>

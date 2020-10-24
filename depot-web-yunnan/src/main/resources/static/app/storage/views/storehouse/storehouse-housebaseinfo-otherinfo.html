@@ -1,0 +1,221 @@
+<!-- MAIN CONTENT -->
+<div id="content">
+
+	<!-- widget grid -->
+	<section id="widget-grid" widget-grid>
+
+		<!-- START ROW -->
+		<div class="row">
+
+			<!-- NEW COL START -->
+			<article class="col-sm-12 col-md-12 col-lg-12">
+				<legend>
+					<a href-void class="btn btn-default btn-xs"ng-click="upList()"><i class="fa fa-angle-left"></i>&nbsp;返回&nbsp;</a>
+				</legend>
+
+				<!-- Widget ID (each widget will need unique ID)-->
+				<div jarvis-widget id="form-grid-widget"
+					 data-widget-colorbutton="false" data-widget-editbutton="false"
+					 data-widget-custombutton="false">
+
+					<!-- widget div-->
+					<div>
+
+						<!-- widget content -->
+						<div class="widget-body no-padding">
+							<form id="basicStorehouseView-form" name='basicStorehouseView-form'
+								  class="smart-form ng-pristine ng-valid"
+								  ng-submit='basicStorehouseView-form.$valid&&save(basicStorehouseView)'
+								  novalidate="novalidate">
+
+								<header>仓房基础信息</header>
+								<fieldset>
+									<div class="row">
+										<section class="col col-3">
+											<label class="label">所属仓库名称</label>
+											<label class="input">
+												<input type="text" ng-model="basicStorehouseView.depotName" ng-disabled="true"
+													   name="depotName" ng-disabled="true">
+											</label>
+										</section>
+										<section class="col col-3">
+											<label class="label">仓房编码</label> <label class="input">
+											<input type="text" maxlength="3" ng-model="basicStorehouseView.storehouseCode" ng-disabled="true"
+												   name="storehouseCode">
+										</label>
+										</section>
+										<section class="col col-3">
+											<label class="label">仓房名称</label> <label class="input">
+											<input type="text" ng-model="basicStorehouseView.storehouseName" ng-disabled="true"
+												   name="storehouseName" maxlength="20" required>
+										</label>
+										</section>
+										<section class="col col-3">
+											<label class="label">仓房类型</label> <label class="select">
+											<select ng-model="basicStorehouseView.storehouseType"
+													ng-options="enum.enumid as enum.enumname for enum in dicDataList[1064]" ng-disabled="true"
+													class="form-control">
+												<option value="">--请选择--</option>
+											</select>
+										</label>
+										</section>
+									</div>
+									<div class="row">
+										<section class="col col-3">
+											<label class="label">启用日期</label> <label class="input">
+											<input type="text" ng-model="basicStorehouseView.usedate" ng-disabled="true"
+												   class="form-control datepicker" data-smart-datepicker
+												   name="usedate" ng-readonly="true">
+										</label>
+										</section>
+										<section class="col col-3">
+											<label class="label">仓房状态</label> <label class="select">
+											<select ng-model="basicStorehouseView.storehouseState"
+													ng-options="enum.enumid as enum.enumname for enum in dicDataList[1001]" ng-disabled="true"
+													class="form-control">
+												<option value="">--请选择--</option>
+											</select>
+										</label>
+										</section>
+										<section class="col col-3">
+											<label class="label">储粮方式</label> <label class="select">
+											<select ng-model="basicStorehouseView.storeWay"
+													ng-options="enum.enumid as enum.enumname for enum in dicDataList[1056]" ng-disabled="true"
+													class="form-control">
+												<option value="">--请选择--</option>
+											</select>
+										</label>
+										</section>
+										<section class="col col-3">
+											<label class="label">仓房使用状态</label> <label class="select">
+											<select ng-model="basicStorehouseView.currenttype"
+													ng-options="enum.enumid as enum.enumname for enum in dicDataList[1057]" ng-disabled="true"
+													class="form-control" ng-disabled="true">
+												<option value="">--请选择--</option>
+											</select>
+										</label>
+										</section>
+
+									</div>
+								</fieldset>
+								<header>仓房设计信息</header>
+								<fieldset>
+									<div class="row">
+										<section class="col col-3">
+											<label class="label">仓房结构_地面</label> <label class="select">
+											<select ng-model="basicStorehouseView.ground"
+													ng-options="enum.enumid as enum.enumname for enum in dicDataList[1037]" ng-disabled="true"
+													class="form-control">
+												<option value="">--请选择--</option>
+											</select>
+										</label>
+										</section>
+										<section class="col col-3">
+											<label class="label">仓房结构_墙体</label> <label class="select">
+											<select ng-model="basicStorehouseView.wall"
+													ng-options="enum.enumid as enum.enumname for enum in dicDataList[1037]" ng-disabled="true"
+													class="form-control">
+												<option value="">--请选择--</option>
+											</select>
+										</label>
+										</section>
+										<section class="col col-3">
+											<label class="label">仓房结构_屋面</label> <label class="select">
+											<select ng-model="basicStorehouseView.roof"
+													ng-options="enum.enumid as enum.enumname for enum in dicDataList[1037]" ng-disabled="true"
+													class="form-control">
+												<option value="">--请选择--</option>
+											</select>
+										</label>
+										</section>
+										<section class="col col-3">
+											<label class="label">仓内长度</label> <label class="input">
+											<input type="number" ng-model="basicStorehouseView.length" ng-disabled="true"
+												   name="length" oninput="if(value.length>5) value=value.slice(0,5)">
+										</label>
+										</section>
+										<section class="col col-3">
+											<label class="label">仓内宽度</label> <label class="input">
+											<input type="number" ng-model="basicStorehouseView.width" ng-disabled="true"
+												   name="width" oninput="if(value.length>5) value=value.slice(0,5)">
+										</label>
+										</section>
+										<section class="col col-3">
+											<label class="label">檐口高度</label> <label class="input">
+											<input type="number" ng-model="basicStorehouseView.height" ng-disabled="true"
+												   name="height" oninput="if(value.length>5) value=value.slice(0,5)">
+										</label>
+										</section>
+										<section class="col col-3">
+											<label class="label">仓门数量</label>
+											<label class="input">
+												<input type="number" ng-model="basicStorehouseView.houseDoorNum" ng-disabled="true"
+													   name="houseDoorNum" oninput="if(value.length>1) value=value.slice(0,1)">
+											</label>
+										</section>
+										<section class="col col-3">
+											<label class="label">仓门宽度</label>
+											<label class="input">
+												<input type="number" ng-model="basicStorehouseView.houseDoorWidth" ng-disabled="true"
+													   name="houseDoorWidth" oninput="if(value.length>4) value=value.slice(0,4)">
+											</label>
+										</section>
+										<section class="col col-3">
+											<label class="label">仓门高度</label>
+											<label class="input">
+												<input type="number" ng-model="basicStorehouseView.houseDoorHeight" ng-disabled="true"
+													   name="houseDoorHeight" oninput="if(value.length>4) value=value.slice(0,4)">
+											</label>
+										</section>
+										<section class="col col-3">
+											<label class="label">仓房设计容量(吨)</label> <label class="input">
+											<input type="number" ng-model="basicStorehouseView.designCapacity" ng-disabled="true"
+												   name="designCapacity" oninput="if(value.length>8) value=value.slice(0,8)">
+										</label>
+										</section>
+										<section class="col col-3">
+											<label class="label">仓房实际容量(吨)</label> <label class="input">
+											<input type="number" ng-model="basicStorehouseView.actualCapacity" ng-disabled="true"
+												   name="actualCapacity" oninput="if(value.length>8) value=value.slice(0,8)">
+										</label>
+										</section>
+										<section class="col col-3">
+											<label class="label">通风方式</label> <label class="select">
+											<select ng-model="basicStorehouseView.drafttype"
+													ng-options="enum.enumid as enum.enumname for enum in dicDataList[5218]" ng-disabled="true"
+													class="form-control">
+												<option value="">--请选择--</option>
+											</select>
+										</label>
+										</section>
+										<section class="col col-3">
+											<label class="label">建筑类型</label>
+											<label class="input">
+												<input type="text" ng-model="basicStorehouseView.architectureType" ng-disabled="true"
+													   name="architectureType" required maxlength="20">
+											</label>
+										</section>
+										<section class="col col-3">
+											<label class="label">隔热措施</label> <label class="input">
+											<input type="text"
+												   ng-model="basicStorehouseView.heatinsulationstep" ng-disabled="true"
+												   name="heatinsulationstep" maxlength="20" >
+										</label>
+										</section>
+										<section class="col col-6">
+											<label class="label">备注</label>
+											<label class="textarea">
+												<textarea rows="5" ng-model="basicStorehouseView.remark" ng-disabled="true" name="remark" oninput="if(value.length>200) value=value.slice(0,200)"></textarea>
+											</label>
+										</section>
+									</div>
+
+								</fieldset>
+							</form>
+						</div>
+					</div>
+				</div>
+			</article>
+		</div>
+	</section>
+</div>

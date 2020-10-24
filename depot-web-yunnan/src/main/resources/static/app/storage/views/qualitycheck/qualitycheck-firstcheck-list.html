@@ -1,0 +1,103 @@
+<!-- MAIN CONTENT -->
+<div id="content">
+    <!-- widget grid -->
+    <section widget-grid id="widget-grid">
+        <div class="row">
+            <article class="col-sm-12">
+
+                <div jarvis-widget id="standard-datatable-widget" data-widget-color="darken" data-widget-editbutton="false">
+                    <header>
+                        <span class="widget-icon"> <i class="fa fa-table"></i> </span>
+                        <h2>初检信息列表 </h2>
+                    </header>
+                    <div>
+                        <div class="widget-body no-padding">
+                        <div id="DataTables_Table_1_wrapper" class="dataTables_wrapper form-inline no-footer">
+							<div class="dt-toolbar">
+								<div class="col-xs-12 col-sm-9">
+									<div class="form-group">
+										<a has-permission="472" href-void class="btn btn-primary btn-sm" ng-click="showAddFck()"><i class="fa fa-plus"></i>&nbsp;新&nbsp;增</a>&emsp;
+									</div>
+									<div class="form-group">
+										<label> 仓房名称:&emsp;
+											<select ng-model="search.storehouseId" class="form-control input-sm"
+													ng-options="store.storehouseId as store.storehouseName for store in storelist"
+													ng-change="loadWare()">
+												<option value="">请选择</option>
+											</select>&emsp;
+										</label>
+										<label> 货位名称:&emsp;
+											<select ng-model="search.warehouseId" class="form-control input-sm"
+													ng-options="ware.warehouseId as ware.warehouseName for ware in warelist">
+												<option value="">请选择</option>
+											</select>&emsp;
+										</label>
+										<a class="btn btn-default btn-sm" ng-click="loadData()">
+											<i class="fa fa-search"></i>&nbsp;查&nbsp;询</a>
+									</div>
+								</div>
+
+								<div class="col-sm-3 col-xs-6 hidden-xs">
+									<div class="dataTables_length">
+										<label>每页显示 <select ng-model="pageInfo.pageSize" ng-change="loadData()"
+															ng-options="num as num for num in [10,25,50,100]"
+															class="form-control input-sm"></select> 条
+										</label>
+									</div>
+								</div>
+							</div>
+
+
+						<table class="table table-striped table-bordered table-hover" width="100%">
+                        <thead>
+                        <tr>
+                            <th data-hide="phone">序号</th>
+							<th data-class="expand">仓房名称</th>
+							<th data-class="expand">货位名称</th>
+                            <th data-class="expand">检查类型</th>
+                            <th data-class="expand">储粮性质</th>
+                            <th data-class="expand">粮食品种</th>
+                            <th data-hide="phone">检验人</th>
+                            <th data-hide="phone,tablet">检验结果</th>
+							<th data-hide="phone,tablet">检查日期</th>
+                            <th data-hide="phone,tablet"> 操作</th>
+                        </tr>
+                        </thead>
+                        
+                        <tbody>
+                        	<tr ng-repeat="qualitycheck in pageInfo.list">
+								<th align="center">{{$index + 1 + (pageInfo.pageNum-1) * pageInfo.pageSize}}</th>
+								<td>{{qualitycheck.storehouseName}}</td>
+								<td>{{qualitycheck.wareHouseName}}</td>
+                        		<td>粮食初检</td>
+								<td>{{dicData[qualitycheck.quality]}}</td>
+								<td>{{dicData[qualitycheck.subType]}}</td>
+                        		<td>{{qualitycheck.checker}}</td>
+                        		<td >
+									<span ng-if="qualitycheck.checkResult=='0'">合格</span>
+									<span ng-if="qualitycheck.checkResult=='1'">不合格</span>
+								</td>
+
+                        		<td>{{qualitycheck.checkTime | date :'yyyy-MM-dd '}}</td>
+                        		<td>
+									<span ng-if="qualitycheck.flagType!='1'">
+										<a has-permission="475" href-void ng-click="showAddAck(qualitycheck.id,qualitycheck.houseId,qualitycheck.warehouseId)"><i class="fa fa-plus"></i>验收</a>&nbsp;&nbsp;
+									</span>
+                        			<a  href-void ng-click="showViewFck(qualitycheck.id)"><i class="fa fa-info-circle"></i>查看</a>&nbsp;&nbsp;
+                        			<a  has-permission="473" href-void ng-click="showEditFck(qualitycheck.id)"><i class="fa fa-edit"></i>修改</a>&nbsp;&nbsp;
+                        			<a  has-permission="474" href-void ng-click="remove(qualitycheck.id)"><i class="fa fa-trash-o"></i>删除</a>
+                        		</td>
+                        	</tr>
+                        </tbody>
+
+                        </table>
+							<div smart-include="app/layout/partials/page.tpl.html"></div>
+						</div>
+                    	</div>
+                    </div>
+                </div>
+            </article>
+        </div>
+    </section>
+</div>
+

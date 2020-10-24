@@ -1,0 +1,70 @@
+<div class="modal-content">
+    <div class="modal-header">
+        <button type="button" class="close" ng-click="cancel()">
+            &times;
+        </button>
+        <h4 class="modal-title" id="myModalLabel">编辑功能信息</h4>
+    </div>
+    <div class="modal-body">
+
+        <form id="func-form" class="smart-form ng-pristine ng-valid" data-validator-option="validateOptions" novalidate="novalidate">
+			<div class="row">
+				<section class="col col-sm-12">
+					<label class="label">功能名称</label> 
+					<label class="input"> 
+						<input type="text" name="funcName" ng-model="funcInfo.funcName" 
+							 minlength="2" maxlength="20" required />
+					</label>
+				</section>
+			</div>
+			<div class="row">
+				<section class="col col-sm-12">
+					<label class="label">功能路径</label> 
+					<label class="input"> 
+						<input type="text" name="funcUrl" ng-model="funcInfo.funcUrl" 
+							 maxlength="200" />
+					</label>
+				</section>
+			</div>
+			<div class="row">
+				<section class="col col-sm-12">
+					<label class="label">功能图标</label>
+					<div class="input input-file">
+							<span class="button">
+								<input type="file" nv-file-select="" uploader="uploader" accept="image/*"
+									   onchange="this.parentNode.nextSibling.value = this.value">
+									浏览
+							</span><input type="text" ng-model="funcInfo.icoUrl" placeholder="" readonly="">
+					</div>
+				</section>
+			</div>
+			<div class="row">
+				<section class="col col-sm-12">
+					<label class="label">功能排序</label>
+					<label class="input">
+						<input type="text" name="funcSort" ng-model="funcInfo.funcSort"
+						onkeyup="this.value=this.value.replace(/[^0-9]+/,'');" required />
+					</label>
+				</section>
+			</div>
+			<div class="row">
+				<section class="col col-sm-12">
+					<label class="label">备注</label> 
+					<label class="textarea"> 
+						<textarea rows="5" name="remark" ng-model="funcInfo.remark" 
+							 maxlength="200"></textarea>
+					</label>
+				</section>
+			</div>
+		</form>
+
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-primary" ng-click="save()">
+        	提交
+        </button>
+        <button type="button" class="btn btn-default"  ng-click="cancel()">
+        	取消
+        </button>
+    </div>
+</div>

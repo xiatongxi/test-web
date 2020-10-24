@@ -1,0 +1,98 @@
+<!-- MAIN CONTENT -->
+<div id="content">
+    <!-- widget grid -->
+    <section widget-grid id="widget-grid">
+
+        <div class="row">
+            <article class="col-sm-12">
+                <legend ng-show="isShow=='1' || isShow=='2'" class="">
+                    <a ng-click="returnUp()" href-void="" class="btn btn-default btn-xs" href="#">
+                        <i class="fa fa-angle-left"></i>&nbsp;返回&nbsp;
+                    </a>
+                </legend>
+                <div jarvis-widget id="standard-datatable-widget"
+                     data-widget-color="darken" data-widget-editbutton="false">
+                    <header>
+						<span class="widget-icon"> <i class="fa fa-table"></i>
+						</span>
+                        <h2>摄像头诊断最新结果列表</h2>
+                    </header>
+                    <div>
+                        <div class="widget-body no-padding">
+                            <div id="DataTables_Table_1_wrapper"
+                                 class="dataTables_wrapper form-inline no-footer">
+                                <div class="dt-toolbar">
+                                    <div class="col-xs-12 col-sm-7">
+                                        <div class="form-group">
+                                            <label> 摄像头名称:&emsp;<input type="search" ng-model="cameraName" class="form-control" placeholder=""></label>
+                                            <a class="btn btn-default btn-sm" ng-click="loadData()">
+                                                <i class="fa fa-search"></i>&nbsp;查&nbsp;询</a>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-5 col-xs-6 hidden-xs">
+                                        <div class="dataTables_length">
+                                            <label>每页显示 <select ng-model="pageInfo.pageSize" ng-change="loadData()"
+                                                                ng-options="num as num for num in [10,25,50,100]"
+                                                                class="form-control input-sm"></select> 条
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <table class="table table-striped table-bordered table-hover"
+                                       width="100%">
+                                    <thead>
+                                    <tr>
+                                        <th data-hide="phone">摄像头名称</th>
+                                        <th data-class="expand">检测结果</th>
+                                        <th data-class="expand">图片</th>
+                                        <th data-hide="phone,tablet">诊断时间</th>
+                                        <th data-hide="phone,tablet"> 操作</th>
+                                    </tr>
+                                    </thead>
+
+                                    <tbody>
+                                    <tr ng-repeat="list in pageInfo.list">
+                                        <td>{{list.alias}}</td>
+                                        <td>{{list.result==0?"正常":list.result==1?"有异常":"检测失败"}}</td>
+                                        <td>
+                                            <a ng-click="getPicture(list.img)">{{list.img=="NO"?"无图片":"点击预览"}}</a>
+                                        </td>
+                                        <td>{{list.create_time | date:'yyyy-MM-dd HH:mm:ss'}}</td>
+                                        <td>
+                                            <a ng-click="getCameraResultList(list.camera_id)"><i class="fa fa-info-circle"></i>查看历史列表</a>
+                                        </td>
+                                    </tr>
+                                    </tbody>
+
+                                </table>
+                                <div smart-include="app/layout/partials/page.tpl.html"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </article>
+        </div>
+
+    </section>
+
+</div>
+
+
+<!-- Modal -->
+<div class="modal fade" id="resultModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-body">
+
+                <form id="role-form" class="smart-form ng-pristine ng-valid" data-validator-option="validateOptions" novalidate="novalidate">
+                    <div class="row">
+                        <section class="col col-sm-12">
+                            <img style="width:100%;height:100%"src="{{picture}}"  alt="报警截图" />
+                        </section>
+                    </div>
+                </form>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->

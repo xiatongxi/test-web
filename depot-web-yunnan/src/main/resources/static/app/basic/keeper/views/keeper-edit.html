@@ -1,0 +1,380 @@
+<!-- MAIN CONTENT -->
+<div id="content">
+	<!-- widget grid -->
+	<section id="widget-grid" widget-grid>
+		<!-- START ROW -->
+		<div class="row">
+			<!-- NEW COL START -->
+			<article class="col-sm-12 col-md-12 col-lg-12">
+				<!-- Widget ID (each widget will need unique ID)-->
+				<div jarvis-widget id="form-grid-widget"
+					data-widget-colorbutton="false" data-widget-editbutton="false"
+					data-widget-custombutton="false">
+					<!-- widget div-->
+					<div>
+						<!-- widget content -->
+						<div class="widget-body no-padding">
+							<form id="keeper-form" name='keeper-form'
+								class="smart-form ng-pristine ng-valid"
+								data-validator-option="validateOptions" novalidate="novalidate">
+								<header>
+									<a href-void class="btn btn-default btn-xs" ng-click="returnTop()">
+										<i class="fa fa-angle-left"></i>&nbsp;返回&nbsp;
+									</a>
+									&nbsp;<strong>员工信息编辑</strong>
+									<span class="pull-right font-xs">带*的部分必须填写</span>
+								</header>
+								<fieldset>
+									<div class="row">
+										<section class="col col-3">
+											<label class="label">所属粮库</label> <label class="input">
+												<input ng-model="keeper.depotName" name="grainId{{$index}}"
+												class="form-control" ng-readonly="true">
+											</label>
+										</section>
+										<section class="col col-3">
+											<label class="label">岗位类型<span style="color: red;margin-left: 5px;text-align: center;">*</span></label>
+											<label class="select">
+												<select ng-model="keeper.postType" ng-disabled="isNotEdit" ng-change="getUserList()"
+												ng-options="role.roleId as role.roleName for role in rolelist"
+												class="form-control" required>
+													<option value="">--请选择--</option>
+												</select>
+											</label>
+										</section>
+										<section class="col col-3">
+											<label class="label">员工姓名<span style="color: red;margin-left: 5px;text-align: center;">*</span></label>
+											<label class="select">
+												<input type="text" ng-model="keeper.name" name="name"
+												required ng-hide="true" />
+												<select ng-model="keeper.userId" ng-disabled="isNotEdit" ng-change="setKeeperName()"
+												ng-options="user.userId as user.realName for user in keeperList" name="userId"
+												class="form-control" required>
+													<option value="">--请选择--</option>
+												</select>
+											</label>
+										</section>
+										<section class="col col-3">
+											<label class="label">员工别名</label>
+											<label class="input">
+												<input type="text" ng-model="keeper.userAlias" name="userAlias" ng-readonly="true" />
+											</label>
+										</section>
+									</div>
+									<div class="row">
+										<section class="col col-3">
+											<label class="label">性别</label>
+											<label class="select">
+												<select ng-model="keeper.sex" ng-disabled="isNotEdit" name="sex"
+												ng-options="enum.enumid as enum.enumname for enum in dicDataList[5287]"
+												class="form-control">
+													<option value="">--请选择--</option>
+												</select>
+											</label>
+										</section>
+										<section class="col col-3">
+											<label class="label">身份证号</label>
+											<label class="input">
+												<input type="text" ng-model="keeper.idCard" name="idCard"
+												placeholder="" ng-readonly="isNotEdit" maxlength="18">
+											</label>
+										</section>
+										<section class="col col-3">
+											<label class="label">联系方式</label>
+											<label class="input">
+												<i class="icon-prepend fa fa-mobile-phone"></i>
+												<input type="text" ng-model="keeper.phone" name="phone"
+												placeholder="" ng-readonly="isNotEdit" maxlength="20">
+											</label>
+										</section>
+										<section class="col col-3">
+											<label class="label">职员类别</label>
+											<label class="select">
+												<select ng-model="keeper.employeeNature" ng-disabled="isNotEdit" name="employeeNature"
+												ng-options="enum.enumid as enum.enumname for enum in dicDataList[6888]"
+												class="form-control">
+													<option value="">--请选择--</option>
+												</select>
+											</label>
+										</section>
+									</div>
+									<div class="row">
+										<section class="col col-3">
+											<label class="label">入职日期<span style="color: red;margin-left: 5px;text-align: center;">*</span></label> <label class="input">
+												<input type="input" ng-model="keeper.entryTime" name="entryTime" 
+												required class="form-control datepicker" data-smart-datepicker ng-disabled="isNotEdit" />
+											</label>
+										</section>
+										<section class="col col-3">
+											<label class="label">邮箱</label> <label class="input">
+												<i class="icon-prepend fa fa-envelope-o"></i>
+												<input type="email" ng-model="keeper.email" name="email"
+												ng-readonly="isNotEdit" maxlength="30">
+											</label>
+										</section>
+										<section class="col col-3">
+											<label class="label">政治面貌</label> <label class="select">
+												<select ng-model="keeper.political" ng-disabled="isNotEdit" 
+												ng-options="enum.enumid as enum.enumname for enum in dicDataList[1043]"
+												class="form-control">
+													<option value="">--请选择--</option>
+												</select>
+											</label>
+										</section>
+										<section class="col col-3">
+											<label class="label">工作年限</label>
+											<label class="input">
+												<input type="number" ng-model="keeper.workYear" oninput="if(value.length>2) value=value.slice(0,2)"
+												name="workYear" placeholder="" ng-readonly="isNotEdit" />
+											</label>
+										</section>
+									</div>
+									<div class="row">
+										<section class="col col-3">
+											<label class="label">出生日期</label>
+											<label class="input">
+												<input type="text" ng-model="keeper.birthday"
+												class="form-control datepicker" data-smart-datepicker 
+												name="birthday" ng-disabled="isNotEdit">
+											</label>
+										</section>
+										<section class="col col-3">
+											<label class="label">入党日期</label> <label class="input">
+												<input type="text" ng-model="keeper.isdepartmentTime" name="isdepartmentTime" 
+												class="form-control datepicker" data-smart-datepicker ng-disabled="isNotEdit" />
+											</label>
+										</section>
+										<section class="col col-3">
+											<label class="label">职员头像</label> 
+											<div class="input input-file">
+												<span class="button">
+									            	<input type="file" nv-file-select="" uploader="uploader" accept="image/*" ng-hide="isNotEdit">
+									                	浏览
+									            </span><input type="text" ng-model="keeper.avatorUrl" placeholder="" ng-readonly="isNotEdit">
+											</div>
+										</section>
+									</div>
+								</fieldset>
+								<header>
+									<h3>
+										<strong>学历学位情况</strong>&nbsp;&nbsp; <a
+											class="btn btn-primary btn-circle"
+											ng-click="addEducation(keeper.id,1)" ng-hide="isNotEdit">新增</a>
+									</h3>
+								</header>
+								<fieldset>
+									<div ng-repeat="keeperedu in addXwxl">
+										<input type="hidden" ng-model="keeperedu.datatype" />
+										<input type="hidden" ng-model="keeperedu.keeperId" />
+										<input type="hidden" ng-model="keeperedu.id" />
+										<div class="row">
+											<section class="col col-2">
+												<label class="label">教育形式</label>
+												<label class="select">
+													<select ng-options="enum.enumid as enum.enumname for enum in dicDataList[5291]" 
+													ng-model="keeperedu.type" name="type{{$index}}" 
+													class="form-control" ng-disabled="isNotEdit">
+														<option value="">--请选择--</option>
+													</select>
+												</label>
+											</section>
+											<section class="col col-2">
+												<label class="label">毕业院校</label>
+												<label class="input">
+													<input type="text" ng-model="keeperedu.college" maxlength="30"
+													name="college{{$index}}" ng-readonly="isNotEdit" />
+												</label>
+											</section>
+											<section class="col col-2">
+												<label class="label">专业</label>
+												<label class="input">
+													<input type="text" ng-model="keeperedu.department" maxlength="20"
+													name="department{{$index}}" ng-readonly="isNotEdit" />
+												</label>
+											</section>
+											<section class="col col-1">
+												<label class="label">学位</label>
+												<label class="select">
+													<select type="text" ng-model="keeperedu.degree" name="degree{{$index}}" 
+													ng-options="enum.enumid as enum.enumname for enum in dicDataList[5426]" ng-disabled="isNotEdit">
+														<option value="">--请选择--</option>
+													</select>
+												</label>
+											</section>
+											<section class="col col-2">
+												<label class="label">学位明细</label>
+												<label class="select">
+													<select type="text" ng-model="keeperedu.degreeDetailed" name="degreeDetailed{{$index}}" 
+													ng-options="enum.enumid as enum.enumname for enum in dicDataList[keeperedu.degree]" ng-disabled="isNotEdit">
+														<option value="">--请选择--</option>
+													</select>
+												</label>
+											</section>
+											<section class="col col-2">
+												<label class="label">学历</label> <label class="select">
+													<select ng-model="keeperedu.education" name="education{{$index}}" 
+													ng-options="enum.enumid as enum.enumname for enum in dicDataList[5294]"
+													class="form-control" ng-disabled="isNotEdit"></select>
+												</label>
+											</section>
+											<section class="col col-1">
+												<label class="label"> </label>
+												<label class="input">
+													<a ng-hide="isNotEdit" class="btn btn-primary btn-circle" ng-click="delRow(keeper.id,1,keeperedu)">删除</a>
+												</label>
+											</section>
+										</div>
+									</div>
+								</fieldset>
+								<header>
+									<h3>
+										<strong>专业技术职称</strong>&nbsp;&nbsp; <a ng-hide="isNotEdit"
+											class="btn btn-primary btn-circle" ng-click="addEducation(keeper.id,2)">新增</a>
+									</h3>
+								</header>
+								<fieldset>
+									<div ng-repeat="zyjszc in addZyjs">
+										<input type="hidden" ng-model="zyjszc.datatype" />
+										<input type="hidden" ng-model="zyjszc.keeperId" />
+										<input type="hidden" ng-model="zyjszc.id" />
+										<div class="row">
+											<section class="col col-2">
+												<label class="label">专业</label>
+												<label class="input">
+													<input type="text" ng-model="zyjszc.department" maxlength="20"
+													name="departmente{{$index}}" ng-readonly="isNotEdit" />
+												</label>
+											</section>
+											<section class="col col-2">
+												<label class="label">级别</label> 
+												<label class="select">
+													<select ng-options="enum.enumid as enum.enumname for enum in dicDataList[5303]" 
+													ng-model="zyjszc.rank" name="rankes{{$index}}" 
+													class="form-control" ng-disabled="isNotEdit">
+														<option value="">--请选择--</option>
+													</select>
+												</label>
+											</section>
+											<section class="col col-2">
+												<label class="label">颁证机构</label> <label class="input">
+													<input type="text" ng-model="zyjszc.issueFacility" maxlength="20"
+													name="issueFacility{{$index}}" ng-readonly="isNotEdit">
+												</label>
+											</section>
+											<section class="col col-2">
+												<label class="label">颁证年月</label> <label class="input">
+													<input type="text" ng-model="zyjszc.issueTime" 
+													class="form-control datepicker" data-smart-datepicker
+													name="issueTime{{$index}}" ng-disabled="isNotEdit">
+												</label>
+											</section>
+											<section class="col col-2">
+												<label class="label"> </label>
+												<label class="input">
+													<a ng-hide="isNotEdit" class="btn btn-primary btn-circle" ng-click="delRow(keeper.id,2,zyjszc)">删除</a>
+												</label>
+											</section>
+										</div>
+									</div>
+								</fieldset>
+								<header>
+									<h3>
+										<strong>职业资格及等级</strong>&nbsp;&nbsp; <a ng-hide="isNotEdit" 
+											class="btn btn-primary btn-circle" ng-click="addEducation(keeper.id,3)">新增</a>
+									</h3>
+								</header>
+								<fieldset>
+									<div ng-repeat="zyzg in addZyzg">
+										<input type="hidden" ng-model="zyzg.datatype" />
+										<input type="hidden" ng-model="zyzg.keeperId" />
+										<input type="hidden" ng-model="zyzg.id" />
+										<div class="row">
+											<section class="col col-2">
+												<label class="label">专业</label>
+												<label class="select">
+													<select ng-model="zyzg.occupation" name="occupation{{$index}}"
+													ng-options="enum.enumid as enum.enumname for enum in dicDataList[5307]"
+													class="form-control" ng-disabled="isNotEdit">
+														<option value="">--请选择--</option>
+												</select>
+												</label>
+											</section>
+											<section class="col col-2">
+												<label class="label">等级</label>
+												<label class="select">
+													<select ng-model="zyzg.rank" name="rank{{$index}}" 
+														ng-options="enum.enumid as enum.enumname for enum in dicDataList[5310]"
+														class="form-control" ng-disabled="isNotEdit">
+														<option value="">--请选择--</option>
+													</select>
+												</label>
+											</section>
+											<section class="col col-2">
+												<label class="label">颁证机构</label> <label class="input">
+													<input type="text" ng-model="zyzg.issueFacility" maxlength="20"
+													name="issueFacility{{$index}}" ng-readonly="isNotEdit">
+												</label>
+											</section>
+											<section class="col col-2">
+												<label class="label">颁证年月</label> <label class="input">
+													<input type="text" ng-model="zyzg.issueTime" 
+													class="form-control datepicker" data-smart-datepicker 
+													name="issueTime{{$index}}" ng-disabled="isNotEdit">
+												</label>
+											</section>
+											<section class="col col-2">
+												<label class="label"></label> 
+												<label class="input">
+													<a ng-hide="isNotEdit" class="btn btn-primary btn-circle" ng-click="delRow(keeper.id,3,zyzg)">删除</a>
+												</label>
+											</section>
+										</div>
+									</div>
+								</fieldset>
+								<header>
+									<h3>
+										<strong>上岗证</strong>
+									</h3>
+								</header>
+								<fieldset>
+									<div ng-repeat="sgz in addSgz">
+										<input type="hidden" ng-model="sgz.datatype" />
+										<input type="hidden" ng-model="sgz.keeperId" />
+										<input type="hidden" ng-model="sgz.id" />
+										<div class="row">
+											<section class="col col-4">
+												<label class="label">专业</label> <label class="input">
+													<input type="text" ng-model="sgz.department" maxlength="20"
+													name="departments{{$index}}" ng-readonly="isNotEdit" />
+												</label>
+											</section>
+											<section class="col col-4">
+												<label class="label">颁证机构</label> <label class="input">
+													<input type="text" ng-model="sgz.issueFacility" maxlength="20"
+													name="issueFacility" ng-readonly="isNotEdit">
+												</label>
+											</section>
+											<section class="col col-3">
+												<label class="label">颁证年月</label> <label class="input">
+													<input type="text" ng-model="sgz.issueTime" 
+													class="form-control datepicker" data-smart-datepicker 
+													name="issueTime" ng-disabled="isNotEdit">
+												</label>
+											</section>
+										</div>
+									</div>
+								</fieldset>
+								<footer class="modal-footer text-align-center">
+									<button ng-click="returnTop()"
+										class="btn btn-default btn-lg" data-dismiss="modal">取消</button>
+									<button ng-click="save()" type="button"
+										class="btn btn-primary btn-lg" ng-hide="isNotEdit">提交</button>
+								</footer>
+							</form>
+						</div>
+					</div>
+				</div>
+			</article>
+		</div>
+	</section>
+</div>

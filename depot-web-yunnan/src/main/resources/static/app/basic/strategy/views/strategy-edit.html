@@ -1,0 +1,40 @@
+<div class="modal-content">
+	<div class="modal-header">
+		<button type="button" class="close" ng-click="cancel()">
+			&times;</button>
+		<h4 class="modal-title" id="myModalLabel">数据策略详情</h4>
+	</div>
+
+	<div class="modal-body">
+		<form id="strategy-form" name='pool-form'
+			class="smart-form ng-pristine ng-valid"
+			data-validator-option="validateOptions" novalidate="novalidate">
+			<fieldset>
+		        <div class="row">
+		            <section class="col col-4">
+		                <label class="label">策略名称<span style="color: red;margin-left: 5px;text-align: center;">*</span></label>
+		                <label class="input">
+		                    <input type="text" ng-model="strategy.strategyName" name="strategyName" maxlength="50" ng-readonly="isNotEdit" required>
+		                </label>
+		            </section>
+		            <section class="col col-4">
+		                <label class="label">sql表达式<span style="color: red;margin-left: 5px;text-align: center;">*</span></label>
+		                <label class="input">
+		                    <input type="text" ng-model="strategy.sqlExp" name="sqlExp" maxlength="50" ng-readonly="isNotEdit" ng-readonly="isNotEdit" required>
+		                </label>
+		            </section>
+		            <section class="col col-4">
+		                <label class="label">优先级<span style="color: red;margin-left: 5px;text-align: center;">*</span></label>
+		                <label class="input">
+		                    <input type="number" ng-model="strategy.priority" name="priority" maxlength="50" ng-readonly="isNotEdit" required>
+		                </label>
+		            </section>
+		        </div>
+		    </fieldset>
+		</form>
+	</div>
+	<div class="modal-footer">
+		<button ng-click="save()" type="button" ng-hide="isNotEdit" class="btn btn-primary">提交</button>
+		<button ng-click="cancel()" class="btn btn-default" data-dismiss="modal">取消</button>
+	</div>
+</div>

@@ -1,0 +1,127 @@
+<!-- MAIN CONTENT -->
+<div id="content">
+    <!-- widget grid -->
+    <section widget-grid id="widget-grid">
+
+		<div class="col-md-10" hidden>
+			<input uploader="uploader" multiple type="file" nv-file-select="" id="exampleInputFile1" accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet">
+		</div>
+
+        <div class="row">
+            <article class="col-sm-12">
+
+                <div jarvis-widget id="standard-datatable-widget" data-widget-color="darken" data-widget-editbutton="false">
+                    <header>
+                        <span class="widget-icon"> <i class="fa fa-table"></i> </span>
+                        <h2>春秋普查信息列表 </h2>
+                    </header>
+                    <div>
+                        <div class="widget-body no-padding">
+                        <div id="DataTables_Table_1_wrapper" class="dataTables_wrapper form-inline no-footer">
+							<div class="dt-toolbar">
+								<div class="col-xs-3 col-sm-10" >
+									<a has-permission="472" href-void class="btn btn-primary btn-sm" ng-click="showAcctCheckPage()"><i class="fa fa-plus"></i>&nbsp;新&nbsp;增</a>
+									<div class="form-group">
+										<label class="btn btn-primary btn-sm" for="exampleInputFile1"><i class="glyphicon glyphicon-import"></i>&nbsp;导&nbsp;入</label>
+									</div>&nbsp;
+									<a class="btn btn-primary btn-sm" href="app/mould/质量管理.库内检验.春秋普查模板.xlsx"><i class="glyphicon glyphicon-export"></i>&nbsp;导出模板</a>&emsp;
+									<div class="form-group">
+										<label> 代储点名称:&emsp;
+											<select ng-model="search.agentId" class="form-control input-sm"
+													ng-options="agent.id as agent.agentName for agent in agentData.list"
+													ng-change="getAgentDepotData(search.agentId)">
+												<option value="">请选择</option>
+											</select>&emsp;
+										</label>
+										<label> 粮库名称:&emsp;
+											<select ng-model="search.agentDepotId" class="form-control input-sm"
+													ng-options="depot.depotId as depot.depotName for depot in depotList"
+													ng-change="getHouseList(search.agentDepotId)">
+												<option value="">请选择</option>
+											</select>&emsp;
+										</label>
+										<label> 仓房名称:&emsp;
+											<select ng-model="search.storehouseId" class="form-control input-sm"
+													ng-options="store.storehouseId as store.storehouseName for store in storehouseList"
+													ng-change="getWareList(search.storehouseId)">
+												<option value="">请选择</option>
+											</select>&emsp;
+										</label>
+									</div>
+								</div>
+								<div class="col-xs-3 col-sm-10">
+									<div class="form-group">
+										<label> 货位名称:&emsp;
+											<select ng-model="search.warehouseId" class="form-control input-sm"
+													ng-options="ware.warehouseId as ware.warehouseName for ware in warelist">
+												<option value="">请选择</option>
+											</select>&emsp;
+										</label>
+										<a class="btn btn-default btn-sm" ng-click="loadData()">
+											<i class="fa fa-search"></i>&nbsp;查&nbsp;询</a>
+									</div>
+								</div>
+
+								<div class="col-sm-2 col-xs-6 hidden-xs">
+									<div class="dataTables_length">
+										<label>每页显示 <select ng-model="pageInfo.pageSize" ng-change="loadData()"
+															ng-options="num as num for num in [10,25,50,100]"
+															class="form-control input-sm"></select> 条
+										</label>
+									</div>
+								</div>
+							</div>
+						<table class="table table-striped table-bordered table-hover" width="100%">
+                        <thead>
+						<tr>
+							<th data-hide="phone">序号</th>
+							<th data-class="expand">代储点名称</th>
+							<th data-class="expand">粮库名称</th>
+							<th data-class="expand">仓房名称</th>
+							<th data-class="expand">货位名称</th>
+							<th data-class="expand">检查类型</th>
+							<th data-class="expand">储粮性质</th>
+							<th data-class="expand">粮食品种</th>
+							<th data-hide="phone,tablet">检验结果</th>
+							<th data-hide="phone,tablet">检查日期</th>
+							<th data-hide="phone,tablet"> 操作</th>
+						</tr>
+						</thead>
+
+							<tbody>
+							<tr ng-repeat="qualitycheck in pageInfo.list">
+								<th align="center">{{$index + 1 + (pageInfo.pageNum-1) * pageInfo.pageSize}}</th>
+								<td>{{qualitycheck.agentName}}</td>
+								<td>{{qualitycheck.agentDepotName}}</td>
+								<td>{{qualitycheck.storehouseName}}</td>
+								<td>{{qualitycheck.warehouseName}}</td>
+								<td>春秋普查</td>
+								<td>{{dicData[qualitycheck.quality]}}</td>
+								<td>{{dicData[qualitycheck.subType]}}</td>
+								<td >
+									<span ng-if="qualitycheck.checkResult=='0'">合格</span>
+									<span ng-if="qualitycheck.checkResult=='1'">不合格</span>
+								</td>
+								<td>{{qualitycheck.checkTime | date:'yyyy-MM-dd'}}</td>
+                        		<td>
+									<a href-void ng-click="showViewSpr(qualitycheck.id,qualitycheck.stateType,qualitycheck.storehouseName,qualitycheck.warehouseName)"><i class="fa fa-info-circle"></i>查看</a>
+                        			<a has-permission="476" ng-if="qualitycheck.stateType=='0'" href-void ng-click="showEditSpr(qualitycheck.id)"><i class="fa fa-edit"></i>修改</a>
+                        			<a has-permission="477" ng-if="qualitycheck.stateType=='0'" href-void ng-click="remove(qualitycheck.id)"><i class="fa fa-trash-o"></i>删除</a>
+                        		</td>
+                        	</tr>
+                        </tbody>
+
+                        </table>
+							<div smart-include="app/layout/partials/page.tpl.html"></div>
+						</div>
+                    	</div>
+                    </div>
+                </div>
+            </article>
+        </div>
+
+    </section>
+    
+</div>
+
+

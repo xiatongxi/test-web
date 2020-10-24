@@ -1,0 +1,149 @@
+<!-- MAIN CONTENT -->
+<div id="content">
+    <!-- widget grid -->
+    <section widget-grid id="widget-grid">
+        <div class="row">
+            <!-- NEW COL START -->
+            <article class="col-sm-12 col-md-12 col-lg-12">
+                <!-- Widget ID (each widget will need unique ID)-->
+                <div jarvis-widget id="form-grid-widget"
+                     data-widget-colorbutton="false" data-widget-editbutton="false"
+                     data-widget-custombutton="false">
+                    <!-- widget div-->
+                    <div>
+                        <!-- widget content -->
+                        <div class="widget-body no-padding">
+                            <form id="aerationParameterView-form" class="smart-form ng-pristine ng-valid" data-validator-option="validateOptions" novalidate="novalidate">
+                                <header>
+                                    <a href-void class="btn btn-default btn-xs" ng-click="retList()"><i class="fa fa-angle-left"></i>&nbsp;返回&nbsp;</a>
+                                    &nbsp;<strong>通风参数值设置详情</strong>
+                                    <span class="pull-right font-xs">带*的部分必须填写</span>
+                                </header>
+                                <table class="table table-striped table-bordered table-hover" width="100%">
+                                    <fieldset>
+                                        <div class="row">
+                                           <section class="col col-3">
+                                                <label class="label">所属仓房<span style="color: red;">*</span></label>
+                                                <label class="select">
+                                                    <select ng-model="aerationParameter.vcfcode" name="vcfcode"
+                                                            ng-options="store.storehouseCode as store.storehouseName for store in storelist"
+                                                            ng-disabled="isNotEdit" class="form-control"
+                                                            required>
+                                                        <option value="">--请选择--</option>
+                                                    </select>
+                                                </label>
+                                            </section>
+                                            <section class="col col-3" ng-hide="isAdd">
+                                                <label class="label">设备编码<span style="color: red;">*</span></label>
+                                                   <label class="input">
+                                                    <input type="text" maxlength="5"
+                                                           ng-model="aerationParameter.vdevcode"
+                                                           ng-disabled="true" name="vdevcode">
+                                                           
+                                                     </label>
+                                            </section>
+                                            <section class="col col-3">
+                                                <label class="label">设备名称<span style="color: red;">*</span></label> 
+                                                <label class="input">
+                                                    <input type="text" maxlength="15"
+                                                           ng-model="aerationParameter.vdevname"
+                                                           ng-disabled="isNotEdit"
+                                                           name="vdevname" required>
+                                                </label>
+                                            </section>
+                                            <section class="col col-3">
+                                                <label class="label">通道号<span style="color: red;">*</span></label> 
+                                                <label class="input">
+                                                    <input type="number" maxlength="5"
+                                                           ng-model="aerationParameter.idevtdh"
+                                                           ng-disabled="isNotEdit"
+                                                           name="idevtdh" required>
+                                                </label>
+                                            </section>
+											<section class="col col-3">
+                                                <label class="label">设备类型<span style="color: red;">*</span></label>
+                                                <label class="select">
+                                                    <!-- <select ng-model="aerationParameter.vdevkindcode" name="vdevkindcode"
+                                                            ng-options="enum.enumid as enum.enumname for enum in dicDataList[6954]"
+                                                            ng-disabled="isNotEdit" class="form-control"
+                                                            required>
+                                                        <option value="">--请选择--</option>
+                                                    </select> -->
+                                                    <select  class="form-control input-sm" ng-model="aerationParameter.vdevkindcode" ng-disabled="isNotEdit" required>
+                                                    <option value="01">通风窗</option>
+                                                    <option value="02">轴流窗</option>
+                                                    <option value="03">轴流风机</option>
+                                                    <option value="04">通风口</option>
+                                                    <option value="05">环流风机</option>
+                                                    <option value="06">离心风机</option>
+                                                    <option value="07">混流风机</option>
+                                                </select>
+                                                </label>
+                                            </section>
+                                            
+                                            <section class="col col-3">
+                                                <label class="label">所属站点<span style="color: red;">*</span></label> 
+                                                <label class="select">
+                                                    <select ng-model="aerationParameter.sitecode" name="sitecode"
+                                                            ng-options="station.sitecode as station.sitename for station in stations"
+                                                            ng-disabled="isNotEdit" class="form-control"
+                                                            required>
+                                                        <option value="">--请选择--</option>
+                                                    </select>
+                                                </label>
+                                            </section>
+                                            <section class="col col-3">
+                                                <label class="label">位置<span style="color: red;">*</span></label> 
+                                                <label class="input">
+                                                    <input type="text"
+                                                           ng-model="aerationParameter.vposition"
+                                                           ng-disabled="isNotEdit"
+                                                           name="vposition" required>
+                                                </label>
+                                            </section>
+                                            <section class="col col-3">
+                                                <label class="label">设备状态<span style="color: red;">*</span></label> 
+                                                <label class="input">
+													<select  class="form-control input-sm" ng-model="aerationParameter.valarmstatue" ng-disabled="isNotEdit" required>
+                                                    <option value="0">正常</option>
+                                                    <option value="1">异常</option>
+                                                </select>
+                                               </label>
+                                            </section>
+                                           
+                                            <section class="col col-3">
+                                                <label class="label">操作状态<span style="color: red;">*</span></label> 
+                                                <label class="input">
+													<select  class="form-control input-sm" ng-model="aerationParameter.vstatue" ng-disabled="isNotEdit" required>
+                                                    <option value="0">关闭</option>
+                                                    <option value="1">打开</option>
+                                                    <option value="2">反转</option>
+                                                    <option value="3">停止</option>
+                                                </select>
+                                                </label>
+                                           </section>
+                                           <section class="col col-3">
+                                                <label class="label">备注</label>
+                                                   <label class="input">
+                                                      <input type="text" maxlength="20"
+                                                           ng-model="aerationParameter.remark"
+                                                           ng-disabled="isNotEdit"  name="remark">
+                                                   </label>
+                                            </section>
+                                        </div>
+                                    </fieldset>
+                                    <div class="form-actions">
+                                        <footer class="text-align-center">
+                                            <button type="button" class="btn btn-default" ng-click="retList()">取消</button>
+                                            <button type="button" class="btn btn-primary" ng-hide="isNotEdit" ng-click="save()">保存</button>
+                                        </footer>
+                                    </div>
+                                </table>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </article>
+        </div>
+    </section>
+</div>

@@ -1,0 +1,113 @@
+<div class="modal-content">
+    <div class="modal-header">
+        <button type="button" class="close" ng-click="cancel()">
+            &times;
+        </button>
+        <h4 class="modal-title" id="myModalLabel">水分检测详情</h4>
+    </div>
+    <div class="modal-body">
+        <div style="width: 100%;margin-top:15px;text-align: left;">
+        <!--<div style="width: 100%;margin-top:-15px;text-align: left;">-->
+            <!--<a class="btn btn-default btn-sm" ng-click="vCfCodeGrainSituationTrend()"> <i class="fa fa-search"></i>&nbsp;水分趋势</a>
+            <a class="btn btn-default btn-sm" ng-click="vCfCodeGSituationComparison()"> <i class="fa fa-search"></i>&nbsp;水分对比</a>
+            <a class="btn btn-default btn-sm" ng-click="vCfCodePointAllGrainComparison()"> <i class="fa fa-search"></i>&nbsp;所有点水分对比</a>-->
+        </div>
+        <div style="width: 100%;margin-top:-30px;text-align: right;">
+            <a class="btn btn-primary btn-sm" ng-click="print()">
+                <span class="fa fa-print"></span>&nbsp;打&nbsp;印
+            </a>
+        </div>
+        <!--温度表格-->
+        <div id="print" style="width: 100%;margin: 0 auto">
+            <div style="width: 100%;">
+                <span style="font-size: 25px;display: block;width: 100%;float: left;text-align: center">{{orgInfo.orgName}}</span>
+            </div>
+            <table class="table table-striped table-bordered table-hover" border="1" style="width: 100%;margin-top:10px;"><!--cellspacing="0" cellpadding="0"-->
+                <hr style="height:3px;border:none;border-top:3px double #000;" />
+                <div style="width: 100%;margin-top:-25px;">
+                    <span style="font-style:italic;display: block;text-align: center;margin-top: 30px;margin-bottom: 10px;">{{storeHouseCodeObj[vCfCode].storehouseName}}水分检测报告单</span>
+                </div>
+                <div style="width: 100%;margin-top:-25px;">
+                    <span style="font-style:italic;display: block;text-align: center;;float: left;padding-top: 20px">天气情况：无雨雪</span>
+                    <span style="font-style:italic;display: block;text-align: center;float: right;padding-top: 20px">检测时间：{{time | date:'yyyy-MM-dd HH:mm:ss'}}</span>
+                </div>
+                <tr>
+                    <td style="text-align: center">仓房类型：</td>
+                    <td style="text-align: center">{{dicData[storeHouseCodeObj[vCfCode].storehouseType]}}</td>
+                    <td style="text-align: center">设计仓容(t)：</td>
+                    <td style="text-align: center">{{storehouseCode[vCfCode].design_capacity}}</td>
+                    <td style="text-align: center">入库时间：</td>
+                    <td style="text-align: center">{{storehouseCode[vCfCode].rcrq}}</td>
+                </tr>
+                <tr>
+                    <td style="text-align: center">粮食品种：</td>
+                    <td style="text-align: center">{{dicData[storehouseCode[vCfCode].pz]}}</td>
+                    <td style="text-align: center">粮食性质：</td>
+                    <td style="text-align: center">{{dicData[storehouseCode[vCfCode].hwxz]}}</td>
+                    <td style="text-align: center">粮食等级：</td>
+                    <td style="text-align: center">{{dicData[storehouseCode[vCfCode].dj]}}</td>
+                </tr>
+                <tr>
+                    <td style="text-align: center">实际储量(kg)：</td>
+                    <td style="text-align: center">{{storehouseCode[vCfCode].kcsl}}</td>
+                    <td style="text-align: center">收获年度：</td>
+                    <td style="text-align: center">{{storehouseCode[vCfCode].rq}}</td>
+                    <td style="text-align: center">保管员：</td>
+                    <td style="text-align: center">{{keeperNames}}</td>
+                </tr>
+            </table>
+
+
+            <table id="table_5" border="1" style="width: 100%; margin-top:10px;">
+                <tr>
+                    <!--<td style="border: 1px solid #000;text-align: center;">仓温</td>
+                    <td style="border: 1px solid #000;text-align: center;">{{intemp == 250?'设备异常':intemp}}</td>-->
+                    <td style="border: 1px solid #000;text-align: center;">温\层</td>
+                    <td style="border: 1px solid #000;text-align: center;">整仓</td>
+                </tr>
+                <tr>
+                    <!--<td style="border: 1px solid #000;text-align: center;">仓湿</td>
+                    <td style="border: 1px solid #000;text-align: center;">{{inh == 250?'设备异常':inh}}</td>-->
+                    <td style="border: 1px solid #000;text-align: center;">平均水分</td>
+                    <td style="border: 1px solid #000;text-align: center;">{{avg}}</td>
+                </tr>
+                <tr>
+                    <!--<td style="border: 1px solid #000;text-align: center;">气温</td>
+                    <td style="border: 1px solid #000;text-align: center;">{{outtemp == 250?'设备异常':outtemp}}</td>-->
+                    <td style="border: 1px solid #000;text-align: center;">最高水分</td>
+                    <td style="border: 1px solid #000;text-align: center;">{{max}}</td>
+                </tr>
+                <tr>
+                    <!--<td style="border: 1px solid #000;text-align: center;">气湿</td>
+                    <td style="border: 1px solid #000;text-align: center;">{{outh == 250?'设备异常':outh}}</td>-->
+                    <td style="border: 1px solid #000;text-align: center;">最低水分</td>
+                    <td style="border: 1px solid #000;text-align: center;">{{min}}</td>
+                </tr>
+            </table>
+            <table id="table_6" border="1" style="width: 100%; margin-top:10px;">
+                <thead  style="width: 100%;border: 1px solid #000">
+                <tr></tr>
+                </thead>
+            </table>
+            <table class="table table-striped table-bordered table-hover">
+                <div style="width: 100%;margin-top:-10px;">
+                    <span style="font-style:italic;display: block;text-align: center;;float: left;padding-top: 20px">注：&emsp;水分单位:(%)</span>
+                    <span style="font-style:italic;display: block;text-align: center;;float: left;padding-top: 20px">;&emsp;湿度单位:(%RH);</span>
+                    <span style="font-style:italic;display: block;text-align: center;float: right;padding-top: 20px">制表时间:{{tableTime}}</span>
+                </div>
+                <!--<tbody>
+                <tr>
+                    <td>注：</td>
+                    <td>最高粮温:"↑"&emsp;</td>
+                    <td>最低粮温:"↓"&emsp;</td>
+                    <td>无温度:"-"&emsp;</td>
+                    <td>温度单位:℃&emsp;</td>
+                    <td>湿度单位:%&emsp;</td>
+                    <td>制表时间:{{tableTime}}</td>
+                </tr>
+                </tbody>-->
+            </table>
+        </div>
+    </div>
+</div>
+

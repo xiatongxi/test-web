@@ -1,0 +1,43 @@
+<!-- MAIN CONTENT -->
+<div id="content">
+    <!-- widget grid -->
+    <section widget-grid id="widget-grid">
+        <div class="row">
+            <article class="col-sm-12">
+                 <div>
+                  	<a href-void class="btn btn-default btn-xs" ng-click="back()"><i class="fa fa-angle-left"></i>&nbsp;返回&nbsp;</a>
+                    <div>
+						<table class="table table-striped table-bordered table-hover" width="100%">
+                        <thead>
+                        <tr>
+                              <th colspan="10"><h4>保养信息明细</h4></th>   
+                        </tr>
+                        <tr>
+                            <th data-hide="phone">序号</th>
+							<th data-class="expand">设备名称</th>
+							<th data-class="expand">规格型号</th>
+                            <th data-class="expand">设备编号</th>
+                            <th data-hide="phone">保养开始日期</th>
+                            <th data-hide="phone,tablet">保养结束日期</th>
+                            <th data-hide="phone,tablet">设备状况</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        	<tr ng-repeat="deviceKeep in deviceKeepMassage">
+								<th align="center">{{$index + 1}}</th>
+								<td>{{dicData[deviceKeep.deviceName]}}</td>
+								<td>{{deviceKeep.model}}</td>
+								<td>{{deviceKeep.number}}</td>
+								<td>{{deviceKeep.keepStart | date :'yyyy-MM-dd '}}</td>
+								<td>{{deviceKeep.keepEnd | date :'yyyy-MM-dd'}}</td>
+								<td>{{deviceKeep.keepStatus==0?'正常':'保养中'}}</td>
+                        	</tr>
+                        </tbody>
+                        </table>
+						</div>
+                </div>
+            </article>
+        </div>
+    </section>
+</div>
+

@@ -1,0 +1,74 @@
+<!-- MAIN CONTENT -->
+<style>
+.error{
+	color: red;
+}
+</style>
+<div id="content">
+
+	<!-- widget grid -->
+	<section id="widget-grid" widget-grid>
+
+		<!-- START ROW -->
+		<div class="row"> 
+
+			<!-- NEW COL START -->
+			<article class="col-sm-12 col-md-12 col-lg-12">
+
+				<!-- Widget ID (each widget will need unique ID)-->
+				<div jarvis-widget id="form-grid-widget"
+					data-widget-colorbutton="false" data-widget-editbutton="false"
+					data-widget-custombutton="false">
+
+					<!-- widget div-->
+					<div>
+
+						<!-- widget content -->
+						<div class="widget-body no-padding">
+							<form id="pwd-form" class="smart-form" novalidate="novalidate">
+							
+								<header>重置密码</header>
+								<fieldset>
+									<div class="row"> 
+										<section class="col col-6">
+											<label class="label txt-bg-red">用户</label> 
+											<label class="select"> 
+												<select ng-model="userId" class="form-control input-sm" required
+                                                        ng-options="user.userId as user.realName for user in userInfoList">
+                                                    <option value="">请选择</option>
+                                                </select>&emsp;
+											</label>
+										</section>
+									</div>
+									<div class="row">
+										<section class="col col-6">
+											<label class="label txt-bg-red">新密码(7位以上，大小写字母+数字)</label> 
+											<label class="input"> 
+												<input type="password" id="newPassword" name="newPassword" 
+													ng-model="newPassword" minlength="7" maxlength="20" required  validUsePwd="true"/>
+											</label>
+										</section>
+									</div>
+									<div class="row">
+										<section class="col col-6">
+											<label class="label txt-bg-red">确认新密码</label> 
+											<label class="input"> 
+												<input type="password" name="newPassword1" ng-model="newPassword1" 
+													 minlength="7" maxlength="20" required  />
+											</label>
+										</section>
+									</div>
+							
+								</fieldset>
+								
+					            <footer class="text-align-center">
+					                <button type="button" class="btn btn-primary" ng-click="submit()">提交</button>
+					                <!-- <button type="button" class="btn btn-default" ng-click="back()">取消</button> -->
+					            </footer>
+							</form>
+						</div>
+					</div>
+			</article>
+		</div>
+	</section>
+</div>

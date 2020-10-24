@@ -1,0 +1,259 @@
+body {
+	font-family: "Microsoft YaHei";	
+	margin: 0px;
+	padding: 0px;
+	font-size: 12px;
+	overflow: hidden;
+}
+
+a:focus, a:hover {   
+	background-color: transparent;
+	text-decoration: none;
+}
+
+ol, ul {
+	list-style: none;
+	margin: 0px;
+	padding: 0px;
+}
+
+h1,  h3, h4, h5, h6 {
+	font-size: 100%;
+	font-weight: normal;
+}
+
+button {
+	padding: 0;
+	margin: 0;
+}
+
+p {
+	margin: 0px;
+	padding: 0px;
+}
+
+* {
+	-webkit-box-sizing: content-box;
+	-moz-box-sizing: content-box;
+	box-sizing: content-box;
+}
+
+body.sign-body {
+	overflow: hidden;
+}
+.comtain-informatin {
+	background: url(../img/login/bg.jpg) repeat bottom;
+	width: 100%;
+	height: 100%;
+	position: fixed;
+	left: 0;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	
+}
+
+.comtain {
+	width: 687px;
+	height: 479px;
+	background: url(../img/login/login_bg.png) no-repeat center;
+	    position: absolute;
+    top: 50%;
+    margin-top: -241px;
+    left: 50%;
+    margin-left: -343px;
+
+}
+
+.con-left {
+	width: 241px;
+	height: 300px;
+	margin-left:50px;
+	padding-top: 70px;
+	float: left;
+}
+
+.con {
+	 width: 239px;
+     margin-left: 380px;
+     height: 300px;
+     padding-top:55px;
+}
+
+.con .con-messon {
+	width: 239px;
+}
+.comtain-right {
+	width: 239px;
+	height: 314px;
+	margin-top:5px;
+	background: url(../img/login/main-bg.png) no-repeat;
+}
+.comtain-message {
+	 padding-top: 20px;
+    margin-bottom:  5px;
+}
+.comtain-message p {
+	text-align: center;
+	font-size: 18px;
+  color: #888888;
+}
+.span-information a {
+	float: right;
+	display: inline-block;
+}
+
+.box-information1 a:hover {
+	text-decoration: none;
+}
+.span-information {
+	width: 87px;
+	height: 41px;
+    left: 118px;	
+	position: relative;
+	top: -34px;
+	cursor: pointer
+}
+
+.login-yzm-a {
+	font-size: 14px;
+	cursor: pointer;
+	position: relative;
+	    top: -60px;
+    left: 164px;
+	width: 70px;
+	display: block;
+}
+
+
+.input-group  .clear-btn {
+	position: absolute;
+	z-index: 20;
+	right: 57px;
+	top: 12px;
+	width: 14px;
+	height: 14px;
+	background: url(../img/login/close.png) no-repeat;
+	cursor: pointer;
+	display: none;
+}
+
+.smart-form .state-error+em {
+    display: block;
+    margin-top: 6px;
+     padding: 0 1px; 
+    font-style: normal;
+    font-size: 11px;
+    line-height: 15px;
+    color: #D56161;
+    text-align: center;
+  
+}
+.smart-form fieldset {
+     display: block; 
+     padding: 0 0 0;
+    border: 0; 
+    background: transparent; 
+     position: relative; 
+}
+
+.input-group {	
+   padding-left: 24px;
+}
+
+.passon-con {
+    margin-top: 20px;
+}
+
+.input-group  .xiigm,.mima,.mimars {
+	border-radius: 0 4px 4px 0 !important;
+}
+
+.input-group  .form-control {
+	width: 77%;
+	padding: 0px 7px;
+	background-color: #f2f2f2;
+	-moz-box-shadow: 0px 0px 2px #ccc;
+	-webkit-box-shadow: 0px 0px 2px #ccc;
+	box-shadow: 0px 0px 2px rgba(0,0,0,0.2);
+}
+
+input{   box-shadow: 0 -4px 2px -2px rgba(0,0,0,0.4);  background:#eeeeee;}  
+
+.input-group   .form-contro2 {
+	width: 23%;
+	    padding-left: 7px;
+	border-radius: 0;
+	-moz-box-shadow: 0px 0px 2px #ccc;
+	-webkit-box-shadow: 0px 0px 2px #ccc;
+	box-shadow: 0px 0px 2px rgba(0,0,0,0.2);
+}
+
+  .form-control {
+  box-shadow:  inset 0 1px 1px rgba(0,0,0,.075) !important; 
+   -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075) !important; 
+    -moz-box-shadow:  inset 0 1px 1px rgba(0,0,0,.075) !important; 
+    height:31px;     
+   
+  }
+	
+.input-group-addon {
+	background-color: #f3f3f3;
+	padding: 0  0;
+	border-radius: 0;
+	border: none;
+}
+
+.box-cesstion {
+	margin-top: 0px;
+}
+.box-information1 {   
+	    margin-top: 20px;
+    height: 33px; overflow:hidden;
+} 
+
+
+.login-btn-box {
+	    margin-top: 20px;
+    margin-left:  24px;
+}
+
+.reset-btn {
+	background: url(../img/login/button_bg.png) 0 0 no-repeat;
+	width: 88px;
+    height: 34px;
+    line-height: 34px;
+	cursor: pointer;
+	border: 0px none;
+	font-size: 14px;
+	color: #ffffff;
+}
+
+.login-btn-box .reset-btn:hover {
+	background: url(../img/login/button_xuanzhong_bg.png) 0 0 no-repeat;
+}
+
+.login-btn {
+	background: url(../img/login/button_bg.png) 0 0 no-repeat;
+	width: 88px;
+    height: 34px;
+    line-height: 34px;
+	cursor: pointer;
+	border: 0px none;
+	font-size: 14px;
+	color: #ffffff;
+	margin-left: 12px;
+}
+
+.login-btn-box .login-btn:hover {
+	background: url(../img/login/button_xuanzhong_bg.png) 0 0 no-repeat;
+}
+
+.input-group.state-error em{
+	position: absolute;
+    left: 0; 
+    bottom: -18px;
+	left: 36px;	
+    color: #f00;
+	font-style: normal;
+}

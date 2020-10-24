@@ -1,0 +1,86 @@
+<!-- MAIN CONTENT -->
+<div id="content">
+    <!-- widget grid -->
+    <section widget-grid id="widget-grid">
+        <div class="row">
+            <article class="col-sm-12">
+
+                <div jarvis-widget id="standard-datatable-widget" data-widget-color="darken"
+                     data-widget-editbutton="false">
+                    <header>
+                        <span class="widget-icon"> <i class="fa fa-table"></i> </span>
+                        <h2>充氮控制列表</h2>
+                    </header>
+                    <div>
+                        <div class="widget-body no-padding">
+                            <div id="DataTables_Table_1_wrapper" class="dataTables_wrapper form-inline no-footer">
+                                <div class="dt-toolbar">
+                                    <div class="col-xs-12 col-sm-10">
+                                        <label> 仓房名称:&emsp;
+                                            <select ng-model="search.vcfcode" class="form-control input-sm"
+                                                    ng-options="store.storehouseCode as store.storehouseName for store in storelist">
+                                                <option value="">请选择</option>
+                                            </select>&emsp;
+                                        </label>
+                                        <a class="btn btn-default btn-sm" ng-click="loadData()"> <i
+                                                class="fa fa-search"></i>&nbsp;查&nbsp;询</a>
+                                        <a class="btn btn-default btn-sm" ng-click="empty()"> <i class=""></i>&nbsp;清&nbsp;空</a>
+                                    </div>
+                                    <div class="col-sm-2 col-xs-2 hidden-xs">
+                                        <div class="dataTables_length">
+                                            <label>每页显示 <select ng-model="pageInfo.pageSize" ng-change="loadData()"
+                                                                ng-options="num as num for num in [1,10,25,50,100]"
+                                                                class="form-control input-sm"></select> 条
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <table class="table table-striped table-bordered table-hover" width="100%">
+                                    <thead>
+                                    <tr>
+                                        <th data-class="expand" style="text-align:center;">序号</th>
+                                        <th data-class="expand" style="text-align:center;">氮气房编码</th>
+                                        <th data-class="expand" style="text-align:center;">氮气房名称</th>
+                                        <th data-class="expand" style="text-align:center;">氮气房状态</th>
+                                        <th data-class="expand" style="text-align:center;">操作状态</th>
+                                        <th data-class="expand" style="text-align:center;">更新时间</th>
+                                        <th has-botton="2" data-class="expand" style="text-align:center;">操作</th>
+                                    </tr>
+                                    </thead>
+
+                                    <tbody>
+                                    <tr ng-repeat="cainfo in pageInfo.list">
+                                        <td style="text-align:center;">{{ $index + 1 }}</td><!--序号-->
+                                        <td style="text-align:center;">{{ cainfo.vdevcode }}</td><!--设备编码-->
+                                        <td style="text-align:center;"><a ng-click="showDetails(cainfo)">{{ cainfo.nitrogenhouse }}</a></td><!--设备名称-->
+                                        <td style="text-align:center;"><!--设备状态-->
+                                            <span ng-if="cainfo.valarmstatue=='0'">正常</span>
+                                            <span ng-if="cainfo.valarmstatue=='1'">异常</span>
+                                        </td>
+                                        <td style="text-align:center;"><!--操作状态-->
+                                            <span ng-if="cainfo.vstatue=='0'">关闭</span>
+                                            <span ng-if="cainfo.vstatue=='1'">打开</span>
+                                            <span ng-if="cainfo.vstatue=='2'">反正</span>
+                                            <span ng-if="cainfo.vstatue=='3'">停止</span>
+                                        </td>
+                                        <td style="text-align:center;">{{ cainfo.updatetime | date:'yyyy-MM-dd HH:mm:ss' }}</td><!--更新时间-->
+                                        <td has-botton="2" style="text-align:center;"><!--操作-->
+                                            <a ng-click="sendClose(cainfo)" ng-hide="cainfo.vstatue=='0'"><img src="styles/img/onOff/off.png"></a>
+                                            <a ng-click="sendOpen(cainfo)" ng-hide="cainfo.vstatue=='1'"><img src="styles/img/onOff/on.png"></a>
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                                <div smart-include="app/layout/partials/page.tpl.html"></div>
+                            </div>
+                        </div>
+                        <div class="player-loader" style="position:fixed;left:0;top:0;opacity:0.5;width:100%;height:100%;background:#ccc;z-index:998;display:none;">
+                            <img alt="" src="styles/img/ajax-loader.gif" style="margin:20% 50%;">
+                        </div>
+                    </div>
+                </div>
+            </article>
+        </div>
+    </section>
+</div>

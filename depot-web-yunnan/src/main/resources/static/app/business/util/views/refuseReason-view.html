@@ -1,0 +1,17 @@
+<div class="modal-content">
+    <div class="modal-header">
+        <h4 class="modal-title" id="myModalLabel">暂停或终止的原因：</h4>
+        &nbsp;
+        <section>
+		     <label class="input" style="width :80%;"> 
+		         <input class="form-control" type="text" ng-model="common.refuseReason" ng-readonly="isNotEdit" name="refuseReason"
+		             required>
+		    </label>
+		</section>
+     </div>
+    
+    <div class="modal-footer"> 
+        <button ng-click="submit(common.refuseReason)" type="button" class="btn btn-primary">确认</button>
+        <button ng-click="cancel()" type="button" class="btn btn-default">取消 </button>
+    </div>
+</div>

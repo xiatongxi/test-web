@@ -1,0 +1,59 @@
+<!-- MAIN CONTENT -->
+<div id="content" auto-height>
+        <div class="row">
+                <div class="widget-body no-padding camera-body">
+                    <!--<div class="table-responsive">-->
+                        <!--<div class="jarviswidget jarviswidget-color-blueDark">-->
+                                <div class="row">
+                                    <div class="col-sm-12 col-md-12 col-lg-12 no-padding">
+                                        <div class="jarviswidget jarviswidget-color-blueDark">
+                                            <!--<header>-->
+                                                <!--<h2> 摄像头点位图</h2>-->
+                                            <!--</header>-->
+                                            <div class="wrap-imgbox1">
+                                                <!--<img id="img" src="styles/img/cangfang_linxia.jpg" style="width: 100%;height: 100%;"/>-->
+                                                <img id="img" src="{{birdsRemoteUrl}}" style="width: 100%;height: 100%;"/>
+                                                <div style="position: absolute;width: 100%;height:100%;top:0px;left:0px" id="showDiv" auto-height>
+                                                </div>
+                                                <div>
+                                                    <div class='jk-icon-box'>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                        <!--</div>-->
+                    <!--</div>-->
+                </div>
+        </div>
+    <!-- Modal -->
+    <div class="modal fade" id="cameraPlayModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                        &times;
+                    </button>
+                    <h4 class="modal-title" id="myModalLabel">{{alias}}</h4>
+                </div>
+                <div class="modal-body" id="ocxDiv">
+                    <!--<div smart-include="app/monitor/views/camera-ocx.html"></div>-->
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="distroyOcx()">
+                        取消
+                    </button>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal-->
+</div>
+<div id="leftDIV" >
+    <div class="ycjk-oper" style="top:0px;">
+        <div ng-click='getIndex("2")' class="ycjk-btn ycjk-btn2 active"><i class="liangq-icon"></i>粮情</div>
+        <div ng-click='getIndex("3")' class="ycjk-btn ycjk-btn3"><i class="zuoy-icon"></i>作业</div>
+        <div ng-click='getIndex("4")' class="ycjk-btn ycjk-btn4"><i class="chul-icon"></i>储粮</div>
+    </div>
+    <div class="ycjk-btn-yuj" id="yjDiv" style="cursor:pointer;"></div>
+</div>

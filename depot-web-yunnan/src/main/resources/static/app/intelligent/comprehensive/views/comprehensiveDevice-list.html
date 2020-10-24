@@ -1,0 +1,108 @@
+<!-- MAIN CONTENT -->
+<div id="content">
+	<!-- widget grid -->
+	<section widget-grid id="widget-grid">
+
+
+		<div class="row">
+			<article class="col-sm-12">
+
+				<div jarvis-widget id="standard-datatable-widget"
+					data-widget-color="darken" data-widget-editbutton="false">
+					<header>
+						<span class="widget-icon"> <i class="fa fa-table"></i>
+						</span>
+						<h2>设备操作记录列表</h2>
+					</header>
+					<div>
+						<div class="widget-body no-padding">
+							<div id="DataTables_Table_1_wrapper"
+								class="dataTables_wrapper form-inline no-footer">
+								<div class="dt-toolbar">
+									<div class="col-xs-12 col-sm-9">
+										<div class="form-group">
+											<label> 仓房名称:&emsp;
+												<select ng-model="search.vcfcode" class="form-control input-sm"
+														ng-options="store.storehouseCode as store.storehouseName for store in storelist">
+													<option value="">请选择</option>
+												</select>&emsp;
+											</label>&nbsp;&nbsp;
+											<label>
+												操作类别：
+												<label class="select">
+													<label class="select">
+														<select ng-model="search.vDistinguishState" name="vDistinguishState"
+																ng-options="x.id as x.name for x in [{id:0,name:'通风'},{id:1,name:'熏蒸'}]" class="form-control input-sm">
+															<option value="" selected="" disabled="">--请选择--</option>
+														</select>
+													</label>
+												</label>
+											</label>&nbsp;&nbsp;
+											<a class="btn btn-default btn-sm" ng-click="loadData()">
+												<i class="fa fa-search"></i>&nbsp;查&nbsp;询
+											</a>&nbsp;&nbsp;
+											<a class="btn btn-default btn-sm" ng-click="empty()"> <i class=""></i>&nbsp;清&nbsp;空</a>
+										</div>
+									</div>
+									<div class="col-sm-3 col-xs-6 hidden-xs">
+										<div class="dataTables_length">
+											<label>
+											每页显示 <select ng-change="loadData(pageInfo.pageNum=1)"
+													ng-options="num as num for num in [1,10,25,50,100]"
+													ng-model="pageInfo.pageSize" class="form-control input-sm">
+											</select> 条
+											</label>
+										</div>
+									</div>
+								</div>
+
+								<table class="table table-striped table-bordered table-hover"
+									width="100%">
+									<thead>
+										<tr>
+											<th data-class="expand" style="text-align:center;">序号</th>
+											<th data-class="expand" style="text-align:center;">仓房名称</th>
+											<th data-class="expand" style="text-align:center;">设备名称</th>
+											<th data-class="expand" style="text-align:center;">设备类型</th>
+											<th data-class="expand" style="text-align:center;">操作类别</th>
+											<th data-hide="expand" style="text-align:center;">设备状态</th>
+											<th data-class="expand" style="text-align:center;">开始时间</th>
+											<th data-class="expand" style="text-align:center;">结束时间</th>
+											<th data-class="expand" style="text-align:center;">操作</th>
+										</tr>
+									</thead>
+
+									<tbody>
+										<tr ng-repeat="device in pageInfo.list">
+											<td style="text-align:center;">{{$index + 1}}</td>
+											<td style="text-align:center;">{{ storeHouseCodeObj[device.vCfCode].storehouseName }}</td>
+											<td style="text-align:center;">{{device.vDevName}}</td>
+											<td style="text-align:center;">{{dicData[device.vDeviceCode]}}</td>
+											<td style="text-align:center;">
+												 <p ng-if="device.vDistinguishState==0">通风</p>
+												 <p ng-if="device.vDistinguishState==1">熏蒸</p>
+											</td>
+											<td style="text-align:center;">
+												 <p ng-if="device.vState==0">关闭</p>
+												 <p ng-if="device.vState==1">打开</p>
+												 <p ng-if="device.vState==2">反转</p>
+												 <p ng-if="device.vState==3">停止</p>
+											</td>
+											<td style="text-align:center;">{{device.vStartTime | date :'yyyy-MM-dd HH:mm:ss'}}</td>
+											<td style="text-align:center;">{{device.vEndTime | date :'yyyy-MM-dd HH:mm:ss'}}</td>
+											<td style="text-align:center;">
+												<a href-void ng-click="detail(device.id)"><i class=""></i>详情</a>
+											</td>
+										</tr>
+									</tbody>
+
+								</table>
+								<div smart-include="app/layout/partials/page.tpl.html"></div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</article>
+		</div>
+	</section>
+</div>

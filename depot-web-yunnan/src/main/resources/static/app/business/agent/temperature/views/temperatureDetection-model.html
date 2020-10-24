@@ -1,0 +1,95 @@
+<div class="modal-content">
+    <div class="modal-header">
+        <button type="button" class="close" ng-click="cancel()">
+            &times;
+        </button>
+        <h4 class="modal-title" id="myModalLabel">粮情检测详情</h4>
+    </div>
+<div class="modal-body">
+        <div style="width: 100%;margin-top:-18px;text-align: right;">
+            <a class="btn btn-primary btn-sm" href-void ng-click="exportToExcel('#print')">
+                <span class="glyphicon glyphicon-export"></span>导出Excel
+            </a>&nbsp;
+            <a class="btn btn-primary btn-sm" ng-click="print()">
+                <span class="fa fa-print"></span>&nbsp;打&nbsp;印
+            </a>
+        </div>
+        <!--温度表格-->
+        <div id="print" style="width: 100%;margin-top:0px;">
+            <table class="table table-striped table-bordered table-hover" border="1" bordercolor="#999999" style="width: 100%;margin-top:10px;border-collapse:collapse;">
+                <tr>
+                    <td colspan="{{forehead}}" style="font-size: 25px;text-align: center">{{agentDepotName}}</td>
+                </tr>
+                <tr>
+                    <td colspan="{{forehead%2==0?forehead/2:(forehead+1)/2}}" style="text-align: center">{{storehouseName}}粮情检测报告单</td>
+                    <td colspan="{{forehead%2==0?forehead/2:(forehead+1)/2-1}}" style="text-align: center">检测时间：{{detectionTime | date:'yyyy-MM-dd HH:mm:ss'}}</td>
+                </tr>
+                <tr>
+                    <td style="text-align: center">仓房类型：</td>
+                    <td style="text-align: center">{{dicData[storehouseType]}}</td>
+                    <td style="text-align: center">设计仓容(t)：</td>
+                    <td colspan="{{tableOne_1}}" style="text-align: center">{{designCapacity}}</td>
+                    <td style="text-align: center">入库日期：</td>
+                    <td style="text-align: center">{{sign == '1'?enterTime:agentStoreCode[vCfCode].cjsj | date:'yyyy-MM-dd'}}</td>
+                </tr>
+                <tr>
+                    <td style="text-align: center">粮食品种：</td>
+                    <td style="text-align: center">{{sign == '1'?dicData[lspz]:dicData[agentStoreCode[vCfCode].pz]}}</td>
+                    <td style="text-align: center">粮食性质：</td>
+                    <td colspan="{{tableOne_1}}" style="text-align: center">{{sign == '1'?dicData[nature]:dicData[agentStoreCode[vCfCode].hwxz]}}</td>
+                    <td style="text-align: center">粮食等级：</td>
+                    <td style="text-align: center">{{sign == '1'?dicData[level]:dicData[agentStoreCode[vCfCode].dj]}}</td>
+                </tr>
+                <tr>
+                    <td style="text-align: center">实际储量(kg)：</td>
+                    <td style="text-align: center">{{sign == '1'?actualAmount:agentStoreCode[vCfCode].kcsl}}</td>
+                    <td style="text-align: center">收获年度：</td>
+                    <td colspan="{{tableOne_1}}" style="text-align: center">{{sign == '1'?harvestYear:agentStoreCode[vCfCode].rq}}</td>
+                    <td style="text-align: center">保管员：</td>
+                    <td style="text-align: center">{{keeperNames}}</td>
+                </tr>
+            </table>
+
+
+            <table id="table_5" border="1"bordercolor="#999999" style="width: 100%; margin-top:10px;border-collapse:collapse;">
+                <tr>
+                    <td style="border: 1px solid #000;text-align: center;">仓内温</td>
+                    <td style="border: 1px solid #000;text-align: center;">{{houseTemperature == 250?'设备异常':houseTemperature}}</td>
+                    <td colspan="{{tableTwo_1}}" style="border: 1px solid #000;text-align: center;">温\缆</td>
+                    <td style="border: 1px solid #000;text-align: center;">整仓</td>
+                </tr>
+                <tr>
+                    <td style="border: 1px solid #000;text-align: center;">仓内湿</td>
+                    <td style="border: 1px solid #000;text-align: center;">{{houseHumidity == 250?'设备异常':houseHumidity}}</td>
+                    <td colspan="{{tableTwo_1}}" style="border: 1px solid #000;text-align: center;">平均粮温</td>
+                    <td style="border: 1px solid #000;text-align: center;">{{avg == 250?'设备异常':avg}}</td>
+                </tr>
+                <tr>
+                    <td style="border: 1px solid #000;text-align: center;">仓外温</td>
+                    <td style="border: 1px solid #000;text-align: center;">{{gasTemperature == 250?'设备异常':gasTemperature}}</td>
+                    <td colspan="{{tableTwo_1}}" style="border: 1px solid #000;text-align: center;">最高粮温</td>
+                    <td style="border: 1px solid #000;text-align: center;">{{max == 250?'设备异常':max}}</td>
+                </tr>
+                <tr>
+                    <td style="border: 1px solid #000;text-align: center;">仓外湿</td>
+                    <td style="border: 1px solid #000;text-align: center;">{{gasHumidity == 250?'设备异常':gasHumidity}}</td>
+                    <td colspan="{{tableTwo_1}}" style="border: 1px solid #000;text-align: center;">最低粮温</td>
+                    <td style="border: 1px solid #000;text-align: center;">{{min == 250?'设备异常':min}}</td>
+                </tr>
+            </table>
+            <table id="table_6" border="1" bordercolor="#999999" style="width: 100%; margin-top:10px;border-collapse:collapse;">
+                <thead  style="width: 100%;border: 1px solid #000">
+                    <tr></tr>
+                </thead>
+            </table>
+            <table class="table table-striped table-bordered table-hover">
+                <div style="width: 100%;margin-top:-10px;">
+                    <span style="font-style:italic;display: block;text-align: center;;float: left;padding-top: 20px">注：&emsp;温度单位:(℃)</span>
+                    <span style="font-style:italic;display: block;text-align: center;;float: left;padding-top: 20px">;&emsp;湿度单位:(%RH);</span>
+                    <span style="font-style:italic;display: block;text-align: center;float: right;padding-top: 20px">制表时间:{{tableTime}}</span>
+                </div>
+            </table>
+        </div>
+    </div>
+</div>
+

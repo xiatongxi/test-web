@@ -1,0 +1,132 @@
+<!-- MAIN CONTENT -->
+<div id="content">
+    <!-- widget grid -->
+    <section widget-grid id="widget-grid">
+        <div class="row">
+            <!-- NEW COL START -->
+            <article class="col-sm-12 col-md-12 col-lg-12">
+                <!-- Widget ID (each widget will need unique ID)-->
+                <div jarvis-widget id="form-grid-widget"
+                     data-widget-colorbutton="false" data-widget-editbutton="false"
+                     data-widget-custombutton="false">
+                    <!-- widget div-->
+                    <div>
+                        <!-- widget content -->
+                        <div class="widget-body no-padding">
+                            <form id="basicStorehouseView-form" class="smart-form ng-pristine ng-valid"
+                                  data-validator-option="validateOptions" novalidate="novalidate">
+                                <header>
+                                    <a href-void class="btn btn-default btn-xs" ng-click="retList()"><i
+                                            class="fa fa-angle-left"></i>&nbsp;返回&nbsp;</a>
+                                    &nbsp;<strong>数量检测设置详情</strong>
+                                    <span class="pull-right font-xs">带*的部分必须填写</span>
+                                </header>
+                                <table class="table table-striped table-bordered table-hover" width="100%">
+                                    <fieldset>
+                                        <div class="row">
+                                            <section class="col col-3">
+                                                <label class="label">仓房名称:<span style="color: red;">*</span></label>
+                                                <label class="select">
+                                                    <select ng-model="quantity.vRemark" name="vRemark"
+                                                            ng-options="store.storehouseCode as store.storehouseName for store in storelist"
+                                                            ng-disabled="isNotEdit" class="form-control"
+                                                            required>
+                                                        <option value="">--请选择--</option>
+                                                    </select>
+                                                </label>
+                                            </section>
+                                            <section class="col col-3">
+                                                <label class="label">检测设备编码:<span style="color: red;">*</span></label>
+                                                <label class="input">
+                                                    <input type="text" ng-model="quantity.vCfCode" ng-disabled="isNotEdit" name="vCfCode" maxlength="20" required>
+                                                </label>
+                                            </section>
+                                            <section class="col col-3" ng-hide="isAdd">
+                                                <label class="label">数量检测编码：</label>
+                                                <label class="input">
+                                                    <input type="text" maxlength="5"
+                                                           ng-model="quantity.vJcCode"
+                                                           ng-blur="itExistCode(quantity.vJcCode,'')"
+                                                           ng-disabled="true"
+                                                           name="vJcCode">
+                                                </label>
+                                            </section>
+                                            <section class="col col-3">
+                                                <label class="label">数量检测名称：</label>
+                                                <label class="input">
+                                                    <input type="text" maxlength="20"
+                                                           ng-model="quantity.vJcName"
+                                                           ng-blur="itExistCode('',quantity.vJcName)"
+                                                           ng-disabled="isNotEdit"
+                                                           name="vJcName" placeholder="数量检测设置,视频设置无需填写.">
+                                                </label>
+                                            </section>
+                                            <section class="col col-3">
+                                                <label class="label">数量检测WS接口地址：</label>
+                                                <label class="input">
+                                                    <input type="text" name="vWsSrc" ng-model="quantity.vWsSrc"
+                                                           ng-disabled="isNotEdit" placeholder="数量检测设置,视频设置无需填写.">
+                                                </label>
+                                            </section>
+                                            <section class="col col-3">
+                                                <label class="label">视频IP：</label>
+                                                <label class="input">
+                                                    <input type="text" ng-model="quantity.vVedioIp" ng-disabled="isNotEdit"
+                                                           name="vVedioIp" maxlength="20" placeholder="视频IP设置,数量检测设置无需填写.">
+                                                </label>
+                                            </section>
+                                            <section class="col col-3">
+                                                <label class="label">视频端口：</label>
+                                                <label class="input">
+                                                    <input type="text" ng-model="quantity.iVedioPort" ng-disabled="isNotEdit"
+                                                           name="iVedioPort" maxlength="20" validNumber="true" placeholder="视频端口设置,数量检测设置无需填写.">
+                                                </label>
+                                            </section>
+                                            <section class="col col-3">
+                                                <label class="label">视频用户名:</label> <label class="input">
+                                                <input type="text" ng-model="quantity.vVedioUser" ng-disabled="isNotEdit"
+                                                       name="vVedioUser" maxlength="20" placeholder="视频用户名设置,数量检测设置无需填写.">
+                                            </label>
+                                            </section>
+                                            <section class="col col-3">
+                                                <label class="label">视频密码:</label> <label class="input">
+                                                <input type="text" ng-model="quantity.vVedioPwd" ng-disabled="isNotEdit"
+                                                       name="vVedioPwd" maxlength="20" placeholder="视频密码设置,数量检测设置无需填写.">
+                                            </label>
+                                            </section>
+                                            <section class="col col-3">
+                                                <label class="label">视频通道号:</label> <label class="input">
+                                                <input type="text" ng-model="quantity.vVedioTdh" ng-disabled="isNotEdit"
+                                                       name="vVedioTdh" maxlength="20" validNumber="true" placeholder="视频通道号设置,数量检测设置无需填写.">
+                                            </label>
+                                            </section>
+                                            <section class="col col-3">
+                                                <label class="label">视频品牌:</label>
+                                                <label class="select">
+                                                    <select class="form-control" ng-model="quantity.vJcpp" name="vJcpp" ng-disabled="isNotEdit">
+                                                        <option value="">--视频品牌设置,数量检测设置无需填写--</option>
+                                                        <option value="200">海康</option>
+                                                        <option value="300">大华</option>
+                                                    </select>
+                                                </label>
+                                            </section>
+                                        </div>
+                                    </fieldset>
+                                    <div class="form-actions">
+                                        <footer class="text-align-center">
+                                            <button type="button" class="btn btn-default" ng-click="retList()">取消
+                                            </button>
+                                            <button type="button" class="btn btn-primary" ng-hide="isNotEdit"
+                                                    ng-click="save()">保存
+                                            </button>
+                                        </footer>
+                                    </div>
+                                </table>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </article>
+        </div>
+    </section>
+</div>

@@ -1,0 +1,92 @@
+<!-- MAIN CONTENT -->
+<div id="content">
+    <!-- widget grid -->
+    <section widget-grid id="widget-grid">
+        <div class="row">
+            <article class="col-sm-12">
+                <div jarvis-widget id="standard-datatable-widget" data-widget-color="darken" data-widget-editbutton="false">
+                    <header>
+                        <span class="widget-icon"> <i class="fa fa-table"></i> </span>
+                        <h2>计划进度查询列表 </h2>
+                    </header>
+                    <div>
+                        <div class="widget-body no-padding">
+	                        <div id="DataTables_Table_1_wrapper" class="dataTables_wrapper form-inline no-footer">
+	                            <div class="dt-toolbar">
+	                                <div class="col-xs-12 col-sm-9">
+	                                    <div class="form-group">
+	                                        <label>
+	                                            	计划编号:  <input type="search" class="form-control input-sm" ng-model="searchCondition.planNumber"/>
+	                                        </label>&emsp;
+											<label>
+												<select class="form-control input-sm" name="executeType"
+														ng-model="searchCondition.executeType" required>
+													<option value="">计划类型</option>
+													<option value="3154">收储计划</option>
+													<option value="3155">销售计划</option>
+													<option value="3156">轮换计划</option>
+												</select> <i></i>
+	                                        </label>&emsp;
+	                                        <label><a class="btn btn-default btn-sm" ng-click="loadData()">
+														<i class="fa fa-search"></i>&nbsp;查&nbsp;询
+													</a>
+											</label>&emsp;&emsp;&emsp;&emsp;&emsp;
+											<!-- <label><a class="btn btn-default btn-sm" ng-click="clearConditions()">
+														<i class="fa fa-trash-o"></i>&nbsp;清&nbsp;空
+													</a>
+	                                        </label> -->
+											<label style="color: red;width: 230px;">&emsp;要求数量总量(公斤)：{{pageInfo.list[0].combinedRequired}}</label>
+											<label style="color: red;">完成数量总量(公斤)：{{pageInfo.list[0].combinedComplete}}</label>
+	                                    </div>
+	                                </div>
+	                                <div class="col-sm-3 col-xs-12 hidden-xs">
+	                                    <div class="dataTables_length">
+											<label>每页显示 <select ng-model="pageInfo.pageSize" ng-change="loadData(pageInfo.pageNum=1)"
+																ng-options="num as num for num in [1,10,25,50,100]"
+																class="form-control input-sm"></select> 条
+											</label>
+										</div>
+	                                </div>
+	                            </div>
+	                        <table class="table table-striped table-bordered table-hover" width="100%">
+		                        <thead>
+			                        <tr>
+			                            <th>计划编号</th>
+			                            <th>计划执行类型</th>
+			                            <th>要求数量(公斤)</th>
+			                            <th>完成数量(公斤)</th>
+			                            <th>完成比(%)</th>
+			                            <th>生效日期</th>
+			                            <th>操作</th>
+			                        </tr>
+		                        </thead>
+		                        <tbody>
+		                            <tr ng-repeat="plan in pageInfo.list">
+		                                <td>{{plan.planNumber}}</td>
+		                                <td>{{ dicData[plan.executeType] }}</td>
+		                                <td>
+		                                	<span ng-if="plan.executeType==3155">{{ plan.outAmount }}</span>
+		                                	<span ng-if="plan.executeType==3154 || plan.executeType==3156">{{ plan.inAmount }}</span>
+		                                </td>
+		                                <td>{{ plan.completeAmount }}</td>
+		                                <td>{{ plan.completeRate }}</td>
+		                                <td>{{ plan.agreeTime | date:'yyyy-MM-dd' }}</td>
+		                                <td>
+		                                	<div>
+		                                    	<a href-void ng-click="showView(plan.id, plan.processInstanceId)"><i class="fa fa-info-circle"></i>查看</a>&emsp;
+		                                    	<a href-void ng-click="showContractScheduleList(plan.id)"><i class="fa fa-info-circle"></i>合同</a>&emsp;
+		                                    	<a href-void ng-click="showNoticeScheduleList(plan.id)"><i class="fa fa-info-circle"></i>通知单</a>
+		                                	</div>
+		                                </td>
+		                            </tr>
+		                        </tbody>
+	                        </table>
+							<div smart-include="app/layout/partials/page.tpl.html"></div>
+	                        </div>
+                        </div>
+                    </div>
+                </div>
+            </article>
+        </div>
+    </section>
+</div>

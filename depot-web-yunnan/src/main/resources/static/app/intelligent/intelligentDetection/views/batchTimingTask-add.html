@@ -1,0 +1,136 @@
+<!-- MAIN CONTENT -->
+<div id="content">
+    <section id="widget-grid" widget-grid>
+        <div class="row">
+            <article class="col-sm-12 col-md-12 col-lg-12">
+                <div jarvis-widget id="form-grid-widget"
+                     data-widget-colorbutton="false" data-widget-editbutton="false"
+                     data-widget-custombutton="false">
+                    <!-- widget div-->
+                    <div>
+                        <!-- widget content -->
+                        <div class="widget-body no-padding">
+                            <form id="timingTask-form" class="smart-form ng-pristine ng-valid" data-validator-option="validateOptions" novalidate="novalidate">
+                                <header>
+                                    <a href-void class="btn btn-default btn-xs" ng-click="retList()">
+                                        <i class="fa fa-angle-left"></i>&nbsp;返回&nbsp;
+                                    </a>
+                                    &nbsp;<strong>新增定时任务</strong>
+                                    <span class="pull-right font-xs">带*的部分必须填写</span>
+                                </header>
+
+                                <fieldset>
+                                    <table id="table_1" class="table table-striped table-bordered table-hover" width="100%" border="1" style="border-collapse:collapse;">
+                                        <thead>
+                                        <tr>
+                                            <th>任务名称:<span style="color: red;">*</span></label></th>
+                                            <td colspan="9">
+                                                <label class="input">
+                                                    <input type="text" class="form-control input-sm" ng-model="taskSchema.tName" style="width:250px" required/>
+                                                </label>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th>任务触发时间:</label></th>
+                                            <td>
+                                                <select ng-model="taskSchema.tDetectionDesc" class="form-control input-sm" ng-change="setOptional()">
+                                                    <option value="">请选择</option>
+                                                    <option value="每小时">每小时</option>
+                                                    <option value="每天">每天</option>
+                                                    <option value="每周">每周</option>
+                                                    <option value="每月">每月</option>
+                                                    <option value="每年">每年</option>
+                                                </select>
+                                            </td>
+                                            <td>
+                                                <p id="basicExample" ng-hide="isHour">
+                                                    <input type="text" class="time" style="height: 26px;width: 85px;" ng-model="taskTime.tTime"/>
+                                                </p>
+                                            </td>
+                                            <td colspan="7">
+                                                <div ng-hide="isWeek" id="week">
+                                                    <input type="checkbox" value="1" name="p.weeks" ng-model="week.MON">星期一&nbsp;
+                                                    <input type="checkbox" value="2" name="p.weeks" ng-model="week.TUE">星期二&nbsp;
+                                                    <input type="checkbox" value="3" name="p.weeks" ng-model="week.WED">星期三&nbsp;
+                                                    <input type="checkbox" value="4" name="p.weeks" ng-model="week.THURS">星期四&nbsp;
+                                                    <input type="checkbox" value="5" name="p.weeks" ng-model="week.FRI">星期五&nbsp;
+                                                    <input type="checkbox" value="6" name="p.weeks" ng-model="week.SAT">星期六&nbsp;
+                                                    <input type="checkbox" value="7" name="p.weeks" ng-model="week.SUN">星期日&nbsp;
+                                                </div>
+                                                <div ng-hide="isMonth" id="month">
+                                                    <input type="checkbox" value="1" name="p.days" ng-model="day.one">1&ensp;
+                                                    <input type="checkbox" value="2" name="p.days" ng-model="day.two">2&ensp;
+                                                    <input type="checkbox" value="3" name="p.days" ng-model="day.three">3&ensp;
+                                                    <input type="checkbox" value="4" name="p.days" ng-model="day.four">4&ensp;
+                                                    <input type="checkbox" value="5" name="p.days" ng-model="day.five">5&ensp;
+                                                    <input type="checkbox" value="6" name="p.days" ng-model="day.six">6&ensp;
+                                                    <input type="checkbox" value="7" name="p.days" ng-model="day.seven">7&ensp;
+                                                    <input type="checkbox" value="8" name="p.days" ng-model="day.eight">8&ensp;
+                                                    <input type="checkbox" value="9" name="p.days" ng-model="day.nine">9&ensp;
+                                                    <input type="checkbox" value="10" name="p.days" ng-model="day.ten">10&ensp;
+                                                    <input type="checkbox" value="11" name="p.days" ng-model="day.eleven">11&ensp;
+                                                    <input type="checkbox" value="12" name="p.days" ng-model="day.twelve">12&ensp;
+                                                    <input type="checkbox" value="13" name="p.days" ng-model="day.thirteen">13&ensp;
+                                                    <input type="checkbox" value="14" name="p.days" ng-model="day.fourteen">14&ensp;
+                                                    <input type="checkbox" value="15" name="p.days" ng-model="day.fifteen">15&ensp;
+                                                    <input type="checkbox" value="16" name="p.days" ng-model="day.sixteen">16&ensp;
+                                                    <input type="checkbox" value="17" name="p.days" ng-model="day.seventeen">17&ensp;
+                                                    <input type="checkbox" value="18" name="p.days" ng-model="day.eighteen">18&ensp;
+                                                    <input type="checkbox" value="19" name="p.days" ng-model="day.nineteen">19&ensp;
+                                                    <input type="checkbox" value="20" name="p.days" ng-model="day.twenty">20&ensp;
+                                                    <input type="checkbox" value="21" name="p.days" ng-model="day.twentyOne">21&ensp;<br/>
+                                                    <input type="checkbox" value="22" name="p.days" ng-model="day.twentyTwo">22&ensp;
+                                                    <input type="checkbox" value="23" name="p.days" ng-model="day.twentyTree">23&ensp;
+                                                    <input type="checkbox" value="24" name="p.days" ng-model="day.twentyFour">24&ensp;
+                                                    <input type="checkbox" value="25" name="p.days" ng-model="day.twentyFive">25&ensp;
+                                                    <input type="checkbox" value="26" name="p.days" ng-model="day.twentySix">26&ensp;
+                                                    <input type="checkbox" value="27" name="p.days" ng-model="day.twentySeven">27&ensp;
+                                                    <input type="checkbox" value="28" name="p.days" ng-model="day.twentyEight">28&ensp;
+                                                    <input type="checkbox" value="29" name="p.days" ng-model="day.twentyNine">29&ensp;
+                                                    <input type="checkbox" value="30" name="p.days" ng-model="day.thirty">30&ensp;
+                                                    <input type="checkbox" value="31" name="p.days" ng-model="day.thirtyOne">31&ensp;
+                                                </div>
+                                                <div ng-hide="isYear" id="year">
+                                                    <input style="height: 30px; width: 100px;" type="text" ng-model="year.months" class="form-control datepicker" data-smart-datepicker>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th>是否开启:</label></th>
+                                            <td colspan="9"><!--开关 (0:已关闭, 1:已开启)对应显示反转-->
+                                                <input name="p.reportTag" type="radio" value="1" checked/>是
+                                                <input name="p.reportTag" type="radio" value="0"/>否
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th colspan="10">
+                                                <input name="r.reportTag" type="radio" value="2" id="allChecked">全选&nbsp;&nbsp;&nbsp;&nbsp;
+                                                <input name="r.reportTag" type="radio" value="0" id="orChecked">全不选&nbsp;&nbsp;&nbsp;&nbsp;
+                                                <input name="r.reportTag" type="radio" value="1" id="invertChecked">反选
+                                            </th>
+                                        </tr>
+                                        </thead>
+
+                                        <tbody id="box">
+                                        <tr></tr>
+                                        <tr></tr>
+                                        </tbody>
+                                    </table>
+                                </fieldset>
+
+                                <div class="form-actions">
+                                    <footer class="text-align-center">
+                                        <button type="button" class="btn btn-default" ng-click="retList()">取消</button>
+                                        <button type="button" class="btn btn-primary" ng-hide="isNotEdit" ng-click="save()">保存</button>
+                                    </footer>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </article>
+        </div>
+    </section>
+</div>
+
+

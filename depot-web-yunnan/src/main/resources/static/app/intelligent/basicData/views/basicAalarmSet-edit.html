@@ -1,0 +1,59 @@
+<div jarvis-widget="" id="wid-id-0" data-widget-colorbutton="false" data-widget-editbutton="false" data-widget-deletebutton="false" data-widget-sortable="false" class="jarviswidget" role="widget">
+	<div role="content">
+		<div jarvis-widget="" id="wid-id-7" data-widget-colorbutton="false" data-widget-editbutton="false" data-widget-deletebutton="false" data-widget-sortable="false" class="jarviswidget" role="widget">
+			<header role="heading"><div class="jarviswidget-ctrls" role="menu"> </div>
+				<h2>配置管理 </h2>
+				<span class="jarviswidget-loader"><i class="fa fa-refresh fa-spin"></i></span></header>
+			<div role="content">
+				<div class="widget-body"><div class="jarviswidget-editbox"><input class="form-control" type="text"></div>
+					<form id="contactForm" name ="contactForm" method="post" class="form-horizontal ng-pristine ng-valid bv-form" novalidate="novalidate">
+						<fieldset>配置管理
+							<legend>
+								<a onclick="window.history.back()"><i class="fa fa-mail-forward"></i> 返回</a>
+							</legend>
+							<legend>短信发送配置</legend>
+							<div class="form-group has-feedback">
+								<label class="col-md-3 control-label">接收人名称<span
+										style="color: red;margin-left: 5px;text-align: center;">*</span></label>
+								<div class="col-md-6">
+									<input type="text" class="form-control" name="email" data-bv-field="email" ng-model="alarm.alarmMan"  ng-blur="itExistCode(alarm.alarmMan,'')" required ><i class="form-control-feedback" data-bv-icon-for="email" style="display: none;" ></i>
+								</div>
+							</div>
+						</fieldset>
+						<fieldset>
+							<div class="form-group has-feedback">
+								<label class="col-md-3 control-label">接收角色</label>
+								<div class="col-md-6">
+									<input type="text" class="form-control" name="title" data-bv-field="title" ng-model="alarm.alarmRole"><i class="form-control-feedback" data-bv-icon-for="title" style="display: none;"></i>
+								</div>
+							</div>
+						</fieldset>
+						<fieldset>
+							<div class="form-group has-feedback">
+								<label class="col-md-3 control-label">接收电话<span
+										style="color: red;margin-left: 5px;text-align: center;">*</span></label>
+								<div class="col-md-6">
+									<input type="text" class="form-control" name="fullName" ng-minlength="11"  ng-pattern="/^1(3|4|5|6|7|8)\d{9}$/" data-bv-field="fullName"  ng-model="alarm.alarmPhone"   ng-blur="itExistCode('',alarm.alarmPhone)" required ><i class="form-control-feedback" data-bv-icon-for="fullName" style="display: none;"></i>
+									<span style="color:red" ng-show="contactForm.fullName.$dirty && contactForm.fullName.$invalid">联系电话格式不正确！</span>
+
+								</div>
+							</div>
+						</fieldset>
+						<div class="form-actions">
+							<div class="row">
+								<div class="col-md-12">
+									<button type="submit"  ng-disabled="contactForm.$invalid" class="btn btn-primary" ng-click="saveAlarmPhoneNum()">
+										保存
+									</button>
+									<button type="button" class="btn btn-default" onclick="window.history.back();">
+										取消
+									</button>
+								</div>
+							</div>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

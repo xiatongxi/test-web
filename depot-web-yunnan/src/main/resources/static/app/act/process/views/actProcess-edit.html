@@ -1,0 +1,35 @@
+<form id="act-form" class="smart-form" novalidate="novalidate">
+
+	<fieldset>
+		<div class="row">
+			<section class="col col-6">
+				<label class="input"> <i class="icon-prepend fa fa-user"></i>
+					<input type="text" ng-model="act.name" name="name" placeholder="模块名称">
+				</label>
+			</section>
+			<section class="col col-6">
+				<label class="input"> <i class="icon-prepend fa fa-user"></i>
+					<input type="text" ng-model="act.key" name="key" placeholder="模块标识">
+				</label>
+			</section>
+		</div>
+
+		<div class="row">
+			<section class="col col-6">
+				<label class="input"> 
+					<i class="icon-prepend fa fa-phone"></i>
+					<input type="text" ng-model="act.description" name="description" placeholder="模块描述"
+						max-length="11">
+				</label>
+			</section>
+			<section class="col col-6">
+				<label class="input"> 
+					<i class="icon-prepend fa fa-phone"></i>
+					<input type="text" ng-model="act.category" name="category" placeholder="描述"
+						max-length="11">
+				</label>
+			</section>
+		</div>
+	</fieldset>
+
+</form>

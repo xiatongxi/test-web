@@ -1,0 +1,96 @@
+<!-- MAIN CONTENT -->
+<div id="content">
+    <!-- widget grid -->
+    <section widget-grid id="widget-grid">
+        <div class="row">
+            <article class="col-sm-12">
+
+                <div jarvis-widget id="standard-datatable-widget" data-widget-color="darken" data-widget-editbutton="false">
+                    <header>
+                        <span class="widget-icon"> <i class="fa fa-table"></i> </span>
+                        <h2>熏蒸方案申请列表</h2>
+                    </header>
+                    <div>
+                        <div class="widget-body no-padding">
+                            <div id="DataTables_Table_1_wrapper" class="dataTables_wrapper form-inline no-footer">
+                                <div class="dt-toolbar">
+                                    <div has-botton="2" class="col-xs-3 col-sm-1" >
+                                        <a has-permission="596" href-void class="btn btn-primary btn-sm" ng-click="getAddAndEdit('add','')"><i class="fa fa-plus"></i>&nbsp;新&nbsp;增</a>
+                                    </div>
+                                    <div class="col-xs-12 col-sm-8">
+                                        <div class="form-group">
+                                            <label> 仓房名称:&emsp;
+                                                <select ng-model="storehouseId" class="form-control input-sm"
+                                                        ng-options="store.storehouseId as store.storehouseName for store in storelist">
+                                                    <option value="">请选择</option>
+                                                </select>&emsp;
+                                            </label>
+                                            <a class="btn btn-default btn-sm" ng-click="loadData()">
+                                                <i class="fa fa-search"></i>&nbsp;查&nbsp;询</a>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-sm-3 col-xs-6 hidden-xs">
+                                        <div class="dataTables_length">
+                                            <label>每页显示 <select ng-model="pageInfo.pageSize" ng-change="loadData()"
+                                                                ng-options="num as num for num in [10,25,50,100]"
+                                                                class="form-control input-sm"></select> 条
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <table class="table table-striped table-bordered table-hover" width="100%">
+                                    <thead>
+                                    <tr>
+                                        <th data-class="expand" style="text-align:center;">熏蒸编号</th>
+                                        <th data-class="expand" style="text-align:center;">仓房名称</th>
+                                        <th data-class="expand" style="text-align:center;">熏蒸方式</th>
+                                        <th data-class="expand" style="text-align:center;">熏蒸人数</th>
+                                        <th data-class="expand" style="text-align:center;">熏蒸指挥人</th>
+                                        <th data-class="expand" style="text-align:center;">创建时间</th>
+                                        <th data-class="expand" style="text-align:center;">审批状态</th>
+                                        <th data-class="expand" style="text-align:center;"> 操作</th>
+                                    </tr>
+                                    </thead>
+
+                                    <tbody>
+                                    <tr ng-repeat="fumigationPlan in pageInfo.list">
+                                        <td style="text-align:center;">{{ fumigationPlan.id }}</td>
+                                        <td style="text-align:center;">{{ storehouseObj[fumigationPlan.houseId].storehouseName }}</td>
+                                        <td style="text-align:center;">{{ dicData[fumigationPlan.fumigationType] }}</td>
+                                        <td style="text-align:center;">{{ fumigationPlan.fumigationNumber }}</td>
+                                        <td style="text-align:center;">{{ fumigationPlan.fumigationCommand }}</td>
+                                        <td style="text-align:center;">{{ fumigationPlan.createTime | date:'yyyy-MM-dd HH:mm:ss' }}</td>
+                                        <td style="text-align:center;"><div ng-switch="{{fumigationPlan.state}}">
+                                            <div ng-switch-when="1"><span style='text-align:center;color:green;'>未提交</span></div>
+                                            <div ng-switch-when="2"><span style='text-align:center;color:blue;'>待审批</span></div>
+                                            <div ng-switch-when="3"><span style='text-align:center;color:blue;'>审批中</span></div>
+                                            <div ng-switch-when="4"><span style='text-align:center;color:blue;'>审批通过</span></div>
+                                            <div ng-switch-when="0"><span style='text-align:center;color:red;'>审批驳回</span></div>
+                                            <div ng-switch-when="5"><span style='text-align:center;color:black;'>作业结束</span></div>
+                                            <div ng-switch-when="6"><span style='text-align:center;color:red;'>拒绝</span></div>
+                                            <div ng-switch-default>{{plan.auditState}}</div>
+                                        </div>
+                                        </td>
+                                        <td style="text-align:center;">
+                                            <span has-botton="2" ng-if="fumigationPlan.state < 2">
+                                                <a has-permission="597" href-void ng-click="getChoices(fumigationPlan)"><i class=""></i>提交</a>
+                                                <a has-permission="597" href-void ng-click="getAddAndEdit('edit',fumigationPlan.id)"><i class=""></i>修改</a>
+                                                <a has-permission="598" href-void ng-click="removeDetail(fumigationPlan.id)"><i class=""></i>删除</a>
+                                            </span>
+                                            <a href-void ng-click="getAddAndEdit('detail',fumigationPlan.id)"><i class=""></i>查看</a>
+                                        </td>
+                                    </tr>
+                                    </tbody>
+
+                                </table>
+                                <div smart-include="app/layout/partials/page.tpl.html"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </article>
+        </div>
+    </section>
+</div>

@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>视频监控点位图配置</title>
+    <script src="../../../util/jquery-1.10.2.min.js" type="text/javascript"></script>
+    <link rel="stylesheet" href="../../../styles/css/bootstrap.min.css">
+    <style>
+        *{
+            padding: 0px;
+            margin: 0px;
+        }
+        #img-box{
+            position: absolute;
+            z-index: 1;
+            width: 100%;
+            height: 100%;
+            top:0%;
+            left:0%
+        }
+    </style>
+</head>
+<body id="body">
+<div id="div1" style="position:absolute;top:0px;left:0px;background: rgba(0,0,0,0.5);z-index: 999;padding:10px">
+    <button onclick="show_mo(this)" style="width: 100%" class="btn toggle_m"><i class="glyphicon glyphicon-asterisk"></i>设置</button>
+    <ul id="ul-box"   style="position: relative;z-index: 9999" class="list-group">
+        <li class="list-group-item "><label>摄像头选择</label>
+            <select onchange="get_cw(this.value)" id="cameraDate"  class="form-control form-group-sm">
+            </select></li>
+        <li class="list-group-item "><label>左边距离</label><input id="left_m" oninput ="dom_re(document.getElementById('cameraDate').value)" onpropertychange="dom_re(document.getElementById('cameraDate').value)" value="1" step="0.01" type="range" step="1"  name="points" min="1" max="100" /></li>
+        <li class="list-group-item"><label>上边距离</label><input id="top_m" oninput ="dom_re(document.getElementById('cameraDate').value)" onpropertychange="dom_re(document.getElementById('cameraDate').value)" type="range" step="0.01" value="1" name="points" min="1" max="100" /></li>
+        <li class="list-group-item"><label>宽</label><input id="width_m" oninput ="dom_re(document.getElementById('cameraDate').value)" onpropertychange="dom_re(document.getElementById('cameraDate').value)" type="range" step="0.01" value="1" name="points" min="1" max="100" /></li>
+        <li class="list-group-item"><label>高</label><input id="height_m" oninput ="dom_re(document.getElementById('cameraDate').value)" onpropertychange="dom_re(document.getElementById('cameraDate').value)" type="range" step="0.01" value="1" name="points" min="1" max="100" /></li>
+        <li class="list-group-item "><label>弧度</label><input id="rdu_m" oninput ="dom_re(document.getElementById('cameraDate').value)" onpropertychange="dom_re(document.getElementById('cameraDate').value)" value="1" type="range" step="0.01"  name="points" min="1" max="100" /></li>
+        <li has-permission="125" class="list-group-item"><button  style="width: 100%" onclick="cmt()" id="btn-sbmit" class="btn btn-info btn-sm">保存/修改</button></li>
+    </ul>
+</div>
+<div id="img-main" style="width: 100%;height:100%;position: relative">
+    <img id="myPicture" style="position: absolute;width: 100%;height: 100%;display: block"></div>
+<div id="img-box">
+    <div class="SXT" id="1_c"  style="width:9.0%;height:5.5%;opacity: 0.5;left:42.5%!important;top: 24.531111%;position: absolute;"></div>
+    <div class="SXT" id="2_c" style="width:18.5%;height:8.0%;opacity:0.5;left:31.8%!important;bottom: 37.531111%;position: absolute"></div>
+</div>
+</body>
+<script type="text/javascript">
+    var obj = null;
+    var divObj = null;
+    var deltaX, deltaY,_startX,_startY;
+    function  get_td(obj,box){
+        obj = document.getElementById(obj);
+        box_g=$("#"+box)
+        divObj = document.getElementById(box);
+        obj.addEventListener('mousedown', function (event) {
+            //将鼠标位置转为文档坐标
+            var scroll = getScrollOffsets();
+            var startX = event.clientX + scroll.x;
+            var startY = event.clientY + scroll.y;
+
+            _startX = parseInt(startX);
+            _startY = parseInt(startY);
+            if (document.addEventListener) {
+                document.addEventListener("mousemove", moveHandler, true);
+                document.addEventListener("mouseup", upHandler, true);
+            } else if (document.attachEvent) {
+                obj.setCapture();
+                obj.attachEvent("onlosecapeture", upHandler);
+                obj.attachEvent("onmouseup", upHandler);
+                obj.attachEvent("onmousemove", moveHandler);
+
+            }
+
+            //处理了这个事件，不让任何其它元素看到它
+            if (event.stopPropagation) event.stopPropagation(); //标准模型
+            else event.cancelBubble = true;
+
+            //现在阻止任何默认操作
+            if (event.preventDefault) event.preventDefault();
+            else event.returnValue = false;
+        });
+        ;
+
+    };
+
+    function moveHandler(e) {
+        if (!e) e = window.event; //ie事件模型
+        var startX =parseInt(e.clientX);
+        var startY =parseInt(e.clientY);
+        deltaX = startX - _startX;
+        deltaY = startY - _startY;
+        $(box_g).width(($(box_g).width()+  deltaX ))
+        $(box_g).height(($(box_g).height() + deltaY))
+        $("#width_m").val(($(box_g).width()+  deltaX )/ $("#img-box").width() * 100)
+        $("#height_m").val(($(box_g).height()+ deltaY)/$("#img-box").height() * 100)
+        _startX = startX;
+        _startY = startY;
+        if (e.stopPropagation) e.stopPropagation(); //标准模型
+        else e.cancelBubble = true;
+    }
+
+    function upHandler(e) {
+        if (!e) e = window.event; //ie事件模型
+        //注销捕获事件处理程序
+        if (document.removeEventListener) {
+            document.removeEventListener("mousemove", moveHandler, true);
+            document.removeEventListener("mouseup", upHandler, true);
+        } else if (document.detachEvent) {
+            obj.detachEvent("onlosecapeture", upHandler);
+            obj.detachEvent("onmouseup", upHandler);
+            obj.detachEvent("onmousemove", moveHandler);
+            obj.releaseCapture();
+        }
+
+
+        if (e.stopPropagation) e.stopPropagation(); //标准模型
+        else e.cancelBubble = true;
+    }
+
+    //以一个对象的x和y属性的方式返回滚动条的偏移量
+    function getScrollOffsets(w) {
+        // 使用指定的窗口，如果不带参数则使用当前窗口
+        w = w || window;
+        // 除了IE8及更早的版本以外，其它浏览器版本都能用
+        if (w.pageXOffset != null) return { x: w.pageXOffset, y: w.pageYOffset };
+
+        // 对标准模式下的IE（或任何浏览器）
+        var d = w.document;
+        if (document.compatMode == "CSS1Compat")
+            return { x: d.documentElement.scrollLeft, y: d.documentElement.scrollTop };
+
+        //对怪异模式下的浏览器
+        return { x: d.body.scrollLeft, y: d.body.scrollTop };
+    }
+    var navControl = null;
+
+
+</script>
+<script type="text/javascript">
+    //获取浏览器窗口高度
+    //窗体适应
+    WIN_WH()
+    //dom适应；
+    get_cw(document.getElementById('cameraDate').value)
+    //设置窗口隐藏显示
+    function show_mo(obj){
+        $("#ul-box").toggle()
+    }
+    function get_textwh(dom){
+        for(var a=0;a<$(dom).length;a++){
+            var SXT=$(dom).eq(a)
+            var t=SXT.width();
+            var h=SXT.height();
+            var c=t*0.8;
+            var w= c/(SXT.text().length)
+            SXT.css("font-size",w)
+            SXT.css("line-height",h*0.8+"px")
+            SXT.css("text-align","center")
+        }
+    }
+    //获取老的摄像头点位信息并标注页面
+    function get_cw(obj){
+        $(".SXT").html("");
+        if (obj == "") {
+            return false
+        }
+        //这里我是将当前仓位的值作为当前仓位热点图的id
+        var  cw_xx={top:"50",left:"50",width:"4",height:"4",rdu_m:"0"}//通过当前仓位查找当前热点dom的位置信息
+        if(cw_xx==""){
+            cw_xx={top:"0",left:"0",width:"0",height:"0",rdu_m:"0"}
+        }
+
+        var cameraStyle="";//添加已经保存的位置
+        //修改dom.初始化赋值
+        $.ajax({
+            type: "get",
+            dataType: "json",
+            url: location.protocol+"//"+location.host+"/depot-supervise/depotStyle/getSinglePointChart",
+            data: {
+                indexid: $("#cameraDate").val(),
+                type: type
+            },
+            success: function (msg) {
+                if (msg.length != 0) {
+                    cameraStyle = msg[0].styles;
+                    $("#left_m").val(cameraStyle.match(/left:(.+?)%;/)[1]);
+                    $("#top_m").val(cameraStyle.match(/top:(.+?)%;/)[1]);
+                    $("#width_m").val(cameraStyle.match(/width:(.+?)%;/)[1]);
+                    $("#height_m").val(cameraStyle.match(/height:(.+?)%;/)[1]);
+                    $("#rdu_m").val(cameraStyle.match(/border-radius:(.+?)%;/)[1]);
+                }else{
+                    $("#left_m").val(cw_xx.left);
+                    $("#top_m").val(cw_xx.top);
+                    $("#width_m").val(cw_xx.width);
+                    $("#height_m").val(cw_xx.height);
+                    $("#rdu_m").val(cw_xx.rdu_m);
+                }
+                dom_re(obj)
+            }
+        });
+    }
+    function dom_re(obj){
+        $("#img-box").html(
+            '<div class="SXT" id='+obj+' style="border-radius:'+$("#rdu_m").val()+'%;resize: both;opacity:0.5;background-color:#000;height:' + $("#height_m").val() + '%;width:' + $("#width_m").val() + '%;left:' + $("#left_m").val() + '%;top:'+ $("#top_m").val()+'%;position: absolute">' +
+            '<div id="'+obj+'_c" style="position: absolute; left: 1px; top: 1px; width: 10px; height:10px; cursor:' +
+            ' se-resize;z-index: 200001; background: #fff;opacity: 0.5"> </div></div>')
+        //字体大小适应
+        get_textwh(".SXT");
+        var dom=document.getElementById(obj);
+        //添加拖到
+        dom_ap(dom);
+        //添加手动变形;
+        get_td(obj+"_c",obj);
+    }
+    //为当前仓库添加鼠标拖到事件
+    function dom_ap(obj){
+        obj.onmousedown = function(ev) {
+            if (ev.target == this) {
+                var oevent = ev || event;
+
+                var distanceX = oevent.clientX - obj.offsetLeft;
+                var distanceY = oevent.clientY - obj.offsetTop;
+            }
+            document.onmousemove = function (ev) {
+                var oevent = ev || event;
+                var width = (oevent.clientX - distanceX) / $("#img-box").width() * 100;
+                var height = (oevent.clientY - distanceY) / $("#img-box").height() * 100;
+                $("#left_m").val(width)
+                $("#top_m").val(height)
+                obj.style.left = width + '%';
+                obj.style.top = height + '%';
+            };
+            document.onmouseup = function () {
+                document.onmousemove = null;
+                document.onmouseup = null;
+            };
+        }}
+    //判断当前是否选中摄像头
+    function cw_d() {
+        if ($("#cameraDate").val() == "0" || $("#cameraDate").val() == " " || !$("#cameraDate").val()) {
+            alert("请选择摄像头")
+            return false
+        }
+        return true;
+    }
+
+    var urls = window.location.href;
+    var type = urls.match(/\?.*type=([^&]*).*/)[1];
+    var id = urls.match(/\?.*id=([^&]*).*/)[1];
+    var image = urls.match(/\?.*image=([^&]*).*/)[1];
+    //保存当前摄像头位置图
+    function  cmt(){
+        if(cw_d()) {
+            var w = $("#width_m").val().replace("%", "");
+            var h = $("#height_m").val().replace("%", "");
+            var l = $("#left_m").val().replace("%", "");
+            var t = $("#top_m").val().replace("%", "");
+            var s = $("#rdu_m").val().replace("%", "");
+
+            $.ajax({
+                type: "POST",
+                dataType: "json",
+                url: location.protocol+"//"+location.host+"/depot-supervise/depotStyle/addSXTPoint",
+                data: {
+                    indexid: $("#cameraDate").val(),
+                    type: type,
+                    styles: "border-radius:"+s+"%;resize: both;opacity:0.5;background-color:#000;height:" + h + "%;width:" + w + "%;left:" + l + "%;top:"+ t +"%;position: absolute;",
+                    orgId : id
+                },
+
+                success: function (msg) {
+                    if (msg.status == "success") {
+                        alert("保存成功！", '提示');
+                        window.close();
+                    }
+                },
+                error: function () {
+                    alert("保存失败！", '提示');
+                }
+            });
+        }
+    }
+    window.onload = function(){
+        var div1 = document.getElementById("div1");
+        div1.onmousedown = function(ev){
+            if(ev.target==this) {
+                var oevent = ev || event;
+                var distanceX = oevent.clientX - div1.offsetLeft;
+                var distanceY = oevent.clientY - div1.offsetTop;
+            }
+            document.onmousemove = function(ev){
+                var oevent = ev || event;
+                div1.style.left = oevent.clientX - distanceX + 'px';
+                div1.style.top = oevent.clientY - distanceY + 'px';
+            };
+            document.onmouseup = function(){
+                document.onmousemove = null;
+                document.onmouseup = null;
+            };
+
+        };
+
+        //获取到连接里面的参数
+//        alert("服务器路径："+(document.URL).split("app")[0]);
+    }
+    //窗口适应
+    function WIN_WH() {
+        if (window.innerHeight)
+            document.getElementById("body").style.height = window.innerHeight;
+        else if ((document.body) && (document.body.clientHeight))
+            document.getElementById("body").style.width = document.body.clientHeight + "px";
+        ;
+        //通过深入Document内部对body进行检测，获取浏览器窗口高度
+        if (document.documentElement && document.documentElement.clientHeight)
+            document.getElementById("body").style.height = document.documentElement.clientHeight + "px";
+    }
+    $(window).resize(function () {
+        //窗体适应
+        WIN_WH()
+        //dom适应；
+        get_cw(document.getElementById('cameraDate').value)
+    })
+
+</script>
+<script type="text/javascript">
+    $(function(){
+        //动态获取背景图片
+        var element = document.getElementById('myPicture');
+        element.src = image;
+        getBarn();
+    });
+    //获取摄像头信息
+    function getBarn(){
+        $.ajax({
+            type: "GET",
+            dataType: "json",
+            url: location.protocol+"//"+location.host+"/depot-monitor/camera/getCamera",
+            data : {
+                pageNum : null,
+                pageSize : null,
+                cameraName : "",
+                orgid : id
+            },
+            success: function (msg) {
+                getSelect(msg.list);
+            },
+            error: function () {
+                alert("查询信息失败",'提示');
+            }
+        });
+    }
+
+    //循环下拉摄像头信息
+    function getSelect(msg){
+        var ObjectSelect = $("#cameraDate");
+        ObjectSelect.html("");
+        ObjectSelect.append("<option selected value=''>--全部--</option>");
+        for(var i=0;i<msg.length;i++){
+            ObjectSelect.append("<option value='"+msg[i].id+"'>"+msg[i].alias+"</option>");
+        }
+    }
+
+</script>
+
+</html>

@@ -1,0 +1,57 @@
+<div class="modal-content">
+    <div class="modal-header">
+        <button type="button" class="close" ng-click="cancel()">
+            &times;
+        </button>
+        <h4 class="modal-title" id="myModalLabel">质检信息列表</h4>
+    </div>
+    <div class="modal-body">
+		<div>
+           <div class="widget-body no-padding">
+           <div id="DataTables_Table_1_wrapper" class="table-responsive" style="overflow:auto;">
+                  <table class="table table-bordered">
+                  <thead>
+                   <tr>
+                       <th data-class="expand">仓房名称</th>
+                       <th data-class="expand">货位名称</th>
+                       <th data-class="expand">检查类型</th>
+                       <th data-class="expand">储粮性质</th>
+                       <th data-class="expand">粮食品种</th>
+                       <th data-hide="phone">检验人</th>
+                       <th data-hide="phone,tablet">检验结果</th>
+                       <th data-hide="phone,tablet">检查日期</th>
+                       <th data-hide="phone,tablet"> 操作</th>
+                   </tr>
+                  </thead>
+                  
+                  <tbody>
+                      <tr ng-repeat="plan in pageInfo.list">
+                          <td>{{plan.storehouseName}}</td>
+                          <td>{{plan.wareHouseName}}</td>
+                          <td>验收</td>
+                          <td>{{dicData[plan.quality]}}</td>
+                          <td>{{dicData[plan.subType]}}</td>
+                          <td>{{plan.checker}}</td>
+                          <td >
+                              <span ng-if="plan.checkResult=='0'">合格</span>
+                              <span ng-if="plan.checkResult=='1'">不合格</span>
+                          </td>
+                          <td>{{plan.checkTime | date:'yyyy-MM-dd'}}</td>
+                          <td>
+                              <a href-void ng-click="selectPlan(plan)"><i class="fa fa-edit"></i>选择</a>
+                          </td>
+                      </tr>
+                  </tbody>
+
+                  </table>
+				<div smart-include="app/layout/partials/page.tpl.html"></div>
+                  </div>
+                  </div>
+              </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-default"  ng-click="cancel()">
+        	取消
+        </button>
+    </div>
+</div>

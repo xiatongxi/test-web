@@ -1,0 +1,261 @@
+<!-- <script src="resources/scripts/product/editProduct.js?v=20170329"></script> -->
+<style>
+	.current {background-color: red;}
+</style>
+<div data-ng-controller="productEditCtrl"
+	 style="position: absolute; z-index: 900; width: 100%">
+	<section id="widget-grid" class="">
+
+		<!-- row -->
+		<div class="row">
+
+			<!-- NEW WIDGET START -->
+			<article class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+
+				<!-- Widget ID (each widget will need unique ID)-->
+				<!-- zxa 隐藏背景色、关闭、最小化按钮 -->
+				<div class="jarviswidget jarviswidget-color-darken" id="wid-id-0"
+					 data-widget-editbutton="false" data-widget-colorbutton="false"
+					 data-widget-togglebutton="false" data-widget-deletebutton="false">
+
+					<header role="heading">
+						<span class="widget-icon">
+							<i class="fa fa-table"></i>
+						</span>
+						<h2>产品基本信息</h2>
+					</header>
+					<div style="padding-top: 0;">
+						<form id="editProductForm" class="smart-form ng-pristine ng-valid"
+							  novalidate=“novalidate”>
+							<!-- <header>产品基本信息</header> -->
+							<fieldset>
+								<div id="innerBox" class="row">
+									<section class="col col-6">
+										<label class="label">产品名称</label>
+										<label for="pname" class="input">
+											<input type="text"
+												   id="pname" name="pname"
+												   placeholder="{{'EDITPRODUCT_PRODUCTNAME_TEXT' | translate }}"
+												   ng-model="product.pname" maxlength="30" required>
+										</label>
+									</section>
+									<section class="col col-6">
+										<label class="label">产品售价</label>
+										<label for="pprice" class="input"> <input type="text"
+																				  id="pprice" name="pprice"
+																				  placeholder="{{'EDITPRODUCT_PRODUCTPRICE_TEXT' | translate }}"
+																				  ng-model="product.pprice"
+																				  onkeyup="if(isNaN(value))execCommand('undo')" required>
+										</label>
+									</section>
+									<section class="col col-6">
+										<label class="label">产品出厂 价</label>
+										<label for="pexPrice" class="input"> <input
+												type="text" id="pexPrice" name="pexPrice"
+												placeholder="{{'EDITPRODUCT_PEXPRICE_TEXT' | translate }}"
+												ng-model="product.pexPrice"
+												onkeyup="if(isNaN(value))execCommand('undo')" required>
+										</label>
+									</section>
+									<section class="col col-6">
+										<label class="label">库存数量</label>
+										<label for="pinventory" class="input"> <input
+												type="text" id="pinventory" name="pinventory"
+												placeholder="{{'EDITPRODUCT_PINVENTORY_TEXT' | translate }}"
+												ng-model="product.pinventory"
+												onkeyup="this.value=this.value.replace(/\D/g,'')">
+										</label>
+									</section>
+									<section class="col col-6">
+										<label class="label">是否套装</label>
+										<label for="issuit" class="input"> <select id="issuit"
+																				   class="form-control" name="issuit" ng-model="product.issuit"
+																				   required>
+											<option>{{'EDITPRODUCT_ISSUIT_TEXT' | translate }}</option>
+											<option value="1">是</option>
+											<option value="0">否</option>
+										</select>
+										</label>
+									</section>
+									<section class="col col-6">
+										<label class="label">是否上市</label>
+										<label for="islaunch" class="input"> <select
+												id="islaunch" class="form-control" name="islaunch"
+												ng-model="product.islaunch">
+											<option>是否上市</option>
+											<option value="1">是</option>
+											<option value="0">否</option>
+										</select>
+										</label>
+									</section>
+									<!-- 产品扩展的基本信息 -->
+									<section ng-repeat="pa in product.productExtendedAttribute"
+											 class="col col-6">
+										<label class="label">{{pa.extendedAttribute.eadisplayname}}</label>
+										<label for="{{pa.extendedAttribute.eafieldname}}"
+											   class="input"
+											   ng-if="pa.extendedAttribute.eainputtype==0"> 
+											   <input
+												   type="text" id="{{pa.extendedAttribute.eafieldname}}"
+												   name="{{pa.extendedAttribute.eafieldname}}"
+												   ng-if="pa.extendedAttribute.eafieldname=='psapnumber'" required
+												   placeholder="{{'SAP_CHECK_TEXT' | translate }}"
+												   title="{{pa.extendedAttribute.eadisplayname}}"
+												   ng-model="pa.fieldValue">
+											  <input 
+											  		 type="text"
+													 id="{{pa.extendedAttribute.eafieldname}}"
+													 name="{{pa.extendedAttribute.eafieldname}}"
+													 ng-if="pa.extendedAttribute.eafieldname!='psapnumber'&&pa.extendedAttribute.eafieldname!='bnumber'"
+													 placeholder="{{pa.extendedAttribute.eadisplayname}}"
+													 title="{{pa.extendedAttribute.eadisplayname}}"
+													 ng-model="pa.fieldValue">
+													 <input type="text" ng-click="showBOxlist(pa.fieldValue)"
+													 id="{{pa.extendedAttribute.eafieldname}}"
+													 name="{{pa.extendedAttribute.eafieldname}}"
+													 ng-if="pa.extendedAttribute.eafieldname!='psapnumber'&&pa.extendedAttribute.eafieldname=='bnumber'"
+													 placeholder="{{pa.extendedAttribute.eadisplayname}}"
+													 title="{{pa.extendedAttribute.eadisplayname}}"
+													 ng-model="pa.fieldValue">
+										</label>
+										<label for="{{pa.extendedAttribute.eafieldname}}" class="textarea"
+											   ng-if="pa.extendedAttribute.eainputtype==1"> <textarea
+												type="text" id="{{pa.extendedAttribute.eafieldname}}"
+												name="{{pa.extendedAttribute.eafieldname}}"
+												placeholder="{{pa.extendedAttribute.eadisplayname}}"
+												title="{{pa.extendedAttribute.eadisplayname}}"
+												ng-model="pa.fieldValue"></textarea>
+										</label>
+										<label class="input" ng-if="pa.extendedAttribute.eainputtype==4">
+											<select class="form-control" ng-model="pa.fieldValue"
+													ng-options="code.cnumber as code.cvalue  for code in pa.codelist">
+												<option value="">{{pa.extendedAttribute.eadisplayname}}</option>
+											</select>
+										</label>
+										<label ng-if="pa.extendedAttribute.cainputtype==6">
+											<div ng-include="'/pages/common/ckeditor.html'"></div>
+										</label>
+										<label for="file" class="input input-file" ng-if="pa.extendedAttribute.eainputtype==5">
+											<div class="button">
+												<!-- === update by leyan redMine号：4040 START== -->
+												<input type="file" name="file" id="{{pa.extendedAttribute.eafieldname}}" ng-show="pa.extendedAttribute.eafieldname!='templet_url' && pa.extendedAttribute.eafieldname!='imgurl'" onchange="angular.element(this).scope().onExtendedFileSelect(this,this.id)">
+												<input type="file" name="file" id="{{pa.extendedAttribute.eafieldname}}" ng-show="pa.extendedAttribute.eafieldname=='templet_url' || pa.extendedAttribute.eafieldname=='imgurl'" onchange="angular.element(this).scope().onExtendedSingleFileSelect(this,this.id)">
+												<!-- === update by leyan redMine号：4040 END== -->
+												{{'BUTTON_BROWSE_TEXT' | translate }}
+											</div><input type="text" placeholder="{{pa.extendedAttribute.eadisplayname}}"
+														 title="{{pa.extendedAttribute.eadisplayname}}"
+														 name="{{pa.extendedAttribute.eafieldname}}"
+														 ng-model="pa.fieldValue">
+										</label>
+										
+										<!-- 图片上传控件 add by zhuxg redMine 3771-->
+										<div class="label" ng-if="pa.extendedAttribute.eainputtype==7">
+											<div class="row">
+												<div class="col width-100 overflow-auto margin-bottom-0 section-height">
+													<div class="file-style position-relative" ng-repeat="item in thumb[pa.extendedAttribute.eafieldname]">
+														<img class="file-responsive" ng-src="{{rootResourceUrl}}{{item}}">
+														<div class="border-gray position-absolute cursor-pointer file-delete" style="">
+															<i class="fa  fa-trash-o " delete-img="{{pa.extendedAttribute.eafieldname}},{{$index}}"></i>
+														</div>
+													</div>
+	
+													<div class="file-style position-relative cursor-pointer" id="{{pa.extendedAttribute.eafieldname}}">
+														<input type="file"  img-upload="{{pa.extendedAttribute.eafieldname}}" class=" cursor-pointer file-responsive position-absolute file-up" >
+														<div class="file-responsive border-gray position-absolute file-div text-center">
+															<div class=" text-center add-style" style="">+</div>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>										
+									</section>
+									<!-- 结束 -->
+								</div>
+								<!-- === update by fsk redMine号：4182 START=获取属性分类列表 -->
+								<ul id="rowTitleTab" style="overflow: hidden; margin-bottom: 20px; float: left;width:100% ">
+									<li ng-repeat="code in uselist" ng-if="code.cnumber!='1141'" id="li_{{code.cnumber}}" style="float: left; height: 20px; padding: 10px 20px; text-align: center; cursor: pointer;" ng-click="liclick(code.cnumber)">
+										{{code.cvalue}}
+									</li>
+								</ul>
+<!-- 								<div id="lineSpan" style="border-bottom: 1px solid #dbdbdb; height: 20px; padding: 10px 30px;margin-bottom: 40px;"></div>-->								
+                                  <!-- === update by fsk redMine号：4182 END= -->
+                                   <div  ng-repeat="code in uselist" ng-init="initFunction()" id="{{code.cnumber}}" ng-if="code.cnumber!='1141'" class="row">
+									<section ng-repeat="pa in product.productAttributes"
+											 ng-if="pa.classAppend.usenumber==code.cnumber"
+											 class="col col-6">
+										<label class="label">{{pa.classAppend.cadisplayname}}</label>
+										<label for="{{pa.classAppend.cafieldname}}" class="input"
+											   ng-if="pa.classAppend.cainputtype==0"> <input
+												type="text" id="{{pa.classAppend.cafieldname}}"
+												name="{{pa.classAppend.cafieldname}}"
+												ng-if="pa.classAppend.cafieldname=='psapnumber'" required
+												placeholder="{{'SAP_CHECK_TEXT' | translate }}"
+												title="{{pa.classAppend.cadisplayname}}"
+												ng-model="pa.fieldValue"> <input type="text"
+																				 id="{{pa.classAppend.cafieldname}}"
+																				 name="{{pa.classAppend.cafieldname}}"
+																				 ng-if="pa.classAppend.cafieldname!='psapnumber'"
+																				 placeholder="{{pa.classAppend.cadisplayname}}"
+																				 title="{{pa.classAppend.cadisplayname}}"
+																				 ng-model="pa.fieldValue">
+										</label>
+										<label for="{{pa.classAppend.cafieldname}}" class="textarea"
+											   ng-if="pa.classAppend.cainputtype==1"> <textarea
+												type="text" id="{{pa.classAppend.cafieldname}}"
+												name="{{pa.classAppend.cafieldname}}"
+												placeholder="{{pa.classAppend.cadisplayname}}"
+												title="{{pa.classAppend.cadisplayname}}"
+												ng-model="pa.fieldValue"></textarea>
+										</label>
+										<label class="input" ng-if="pa.classAppend.cainputtype==4">
+											<select class="form-control" ng-model="pa.fieldValue"
+													ng-options="code.cnumber as code.cvalue  for code in pa.codelist">
+												<option value="">{{pa.classAppend.cadisplayname}}</option>
+											</select>
+										</label>
+										<label ng-if="pa.classAppend.cainputtype==6">
+											<div ng-include="'/pages/common/ckeditor.html'"></div>
+										</label>
+										<label for="file" class="input input-file" ng-if="pa.classAppend.cainputtype==5">
+											<div class="button">
+												<input type="file" name="file" id="{{pa.classAppend.cafieldname}}" onchange="angular.element(this).scope().onFileSelect(this,this.id)">
+												{{'BUTTON_BROWSE_TEXT' | translate }}
+											</div><input type="text" placeholder="{{pa.classAppend.cadisplayname}}"
+														 title="{{pa.classAppend.cadisplayname}}"
+														 name="{{pa.classAppend.cafieldname}}"
+														 ng-model="pa.fieldValue">
+
+										</label>
+									</section>
+								</div>
+								<!--add by lyj redmine 3151-->
+								<!--start-->
+<!-- 								<section class="col col-6"> -->
+<!-- 									<label class="label"> -->
+<!-- 										Box类型： -->
+<!-- 									</label> -->
+<!-- 									<label class="input"> -->
+<!-- 										<input type="text" ng-click="showBOxlist()"> -->
+<!-- 									</label> -->
+<!-- 								</section> -->
+								<!--end-->
+							</fieldset>
+
+							<div>
+								<button style="margin: 20px" class="btn btn-primary btn-lg"
+										ng-click="submit()">{{'BUTTON_SUBMIT_TEXT' | translate }}</button>
+								<!-- //add sxf redmine:4932 start -->
+								<button style="margin: 20px" class="btn btn-default btn-lg"
+										ng-click="cancel()">{{'BUTTON_CANCEL_TEXT' | translate }}</button>	
+								 <!-- //add sxf redmine:4932 end -->
+							</div>
+						</form>
+					</div>
+				</div>
+
+				<!-- 文件上传进度条 -->
+				<div ng-include="'pages/common/progress.html'"></div>
+				<script src="resources/js/plugin/jquery-form/jquery-form.min.js?v=20170329"></script>
+				<script type="text/javascript">
+					pageSetUp();
+				</script>

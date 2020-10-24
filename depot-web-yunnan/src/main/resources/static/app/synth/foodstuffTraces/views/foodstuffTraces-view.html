@@ -1,0 +1,430 @@
+<!-- MAIN CONTENT -->
+<div id="content">
+	<!-- widget grid -->
+	<section id="widget-grid" widget-grid>
+		<!-- START ROW -->
+		<div class="row">
+			<!-- NEW COL START -->
+			<article class="col-sm-12 col-md-12 col-lg-12">
+				<!-- Widget ID (each widget will need unique ID)-->
+				<div jarvis-widget id="form-grid-widget"
+					data-widget-colorbutton="false" data-widget-editbutton="false"
+					data-widget-custombutton="false">
+					<!-- widget div-->
+					<div>
+						<!-- widget content -->
+						<div class="widget-body no-padding saf-asc-bodybg">
+							<form id="foodInfo-form" name='foodInfo-form'
+								class="smart-form ng-pristine ng-valid"
+								data-validator-option="validateOptions" novalidate="novalidate">
+								<header>
+									<a href-void class="btn btn-default btn-xs" ng-click="retureTop()">
+										<i class="fa fa-angle-left"></i>&nbsp;返回&nbsp;
+									</a>
+									&nbsp;<strong>储粮追溯详情</strong>
+								</header>
+                                <div class="saf-asc-row2">
+                                    <h3>粮食信息</h3>
+                                    <table>
+                                        <tr>
+                                            <td class="label-td" style="width:120px;">粮权单位：</td><td style="width:150px;">{{foodInfo.recordUnite}}</td>
+                                            <td class="label-td" style="width:120px;">粮食性质：</td><td style="width:150px;">{{dicData[foodInfo.quality]}}</td>
+                                            <td class="label-td" style="width:120px;">产地：</td><td style="width:150px;">{{dicData[foodInfo.placeOfOrigin]}}</td>
+                                            <td class="label-td" style="width:120px;">生产年份：</td><td>{{dicData[foodInfo.growYear]}}</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="label-td">粮食品种：</td><td>{{dicData[foodInfo.subType]}}</td>
+                                            <td class="label-td">粮食等级：</td><td>{{dicData[foodInfo.level]}}</td>
+                                            <td class="label-td">粮食数量（吨）：</td><td>{{foodInfo.standNumber}}</td>
+                                            <td class="label-td">入仓日期：</td><td>{{foodInfo.inputYear | date:'yyyy-MM-dd'}}</td>
+                                        </tr>
+                                        <tr>
+                                        	<td class="label-td">仓房名称：</td><td>{{storehouseObj[foodInfo.houseId].storehouseName}}</td>
+                                        	<td class="label-td">货位名称：</td><td>{{warehouseObj[foodInfo.warehouseId].warehouseName}}</td>
+                                            <td class="label-td">保管方式：</td><td>{{dicData[foodInfo.keepMethod]}}</td>
+                                            <td class="label-td">保管员：</td><td>{{foodInfo.recorder}}</td>
+                                        </tr>
+                                    </table>
+                                </div>
+                                <!--row2-->
+                                <div class="saf-asc-row2">
+                                    <h3>粮食质量信息</h3>
+                                    <table>
+                                        <tr>
+                                            <td class="label-td" style="width:120px;">容重(L/g)：</td><td style="width:150px;">{{foodInfo.weight}}</td>
+                                            <td class="label-td" style="width:120px;">水分(%)：</td><td style="width:150px;">{{foodInfo.water}}</td>
+                                            <td class="label-td" style="width:120px;">杂质(%)：</td><td style="width:150px;">{{foodInfo.impurity}}</td>
+                                            <td class="label-td" style="width:120px;">不完善粒(%)：</td><td>{{foodInfo.unsound}}</td>
+                                        </tr>
+                                    </table>
+                                </div>
+                                <!--row2-->
+
+								<div class="text-center">
+                                	<div class="saf-asc-row3">
+                                        <ul class="timeline-box">
+                                        	<!-- ******轮入计划****** -->
+<!--                                             <li class="jih-gl timeline-bom-msg active"> -->
+                                            <li class="jih-gl timeline-bom-msg">
+                                                <div class="timeline-time">{{rkPlanTime}}</div>
+                                                <i class="timeline-icon" ng-click="getList('rkPlan')"></i>
+                                            </li>
+                                            <!-- ******入库合同****** -->
+                                            <li class="caig-ht">
+                                                <i class="timeline-icon" ng-click="getList('rkHt')"></i>
+                                                <div class="timeline-time">{{rkHtTime}}</div>
+                                            </li>
+                                            <!-- ******入库管理****** -->
+                                            <li class="ruk-gl timeline-bom-msg">
+                                                <div class="timeline-time">{{rkTime}}</div>
+                                                <i class="timeline-icon" ng-click="getList('rkGl')"></i>
+                                            </li>
+                                            <!-- ******封仓管理****** -->
+                                            <li class="fengc-gl">
+                                                <i class="timeline-icon" ng-click="getList('fcGl')"></i>
+                                                <div class="timeline-time">{{fcGlTime}}</div>
+                                            </li>
+                                            <!-- ******质量管理****** -->
+                                            <li class="zhil-gl timeline-bom-msg">
+                                                <div class="timeline-time">{{zlGlTime}}</div>
+                                                <i class="timeline-icon" ng-click="getList('zlGl')"></i>
+                                            </li>
+                                            <!-- ******作业管理****** -->
+                                            <li class="zuoy-gl">
+                                                <i class="timeline-icon" ng-click="getList('zyGl')"></i>
+                                                <div class="timeline-time">{{zyTime}}</div>
+                                            </li>
+                                            <!-- ******轮出计划****** -->
+                                            <li class="lunc-jh timeline-bom-msg">
+                                                <div class="timeline-time">{{ckPlanTime}}</div>
+                                                <i class="timeline-icon" ng-click="getList('ckPlan')"></i>
+                                            </li>
+                                            <!-- ******销售合同****** -->
+                                            <li class="xiaos-ht">
+                                                <i class="timeline-icon" ng-click="getList('ckHt')"></i>
+                                                <div class="timeline-time">{{ckHtTime}}</div>
+                                            </li>
+                                            <!-- ******出库管理****** -->
+                                            <li class="chuk-gl timeline-bom-msg">
+                                                <div class="timeline-time">{{ckTime}}</div>
+                                                <i class="timeline-icon" ng-click="getList('ckGl')"></i>
+                                            </li>
+                                            <!-- ******费用管理****** -->
+                                            <li class="feiy-gl">
+                                                <i class="timeline-icon" ng-click="getList('fyGl')"></i>
+                                                <div class="timeline-time">{{fyTime}}</div>
+                                            </li>
+                                            <!-- ******归档管理****** -->
+                                            <li class="guid-gl timeline-bom-msg">
+                                                <div class="timeline-time">{{gdApprovalTime}}</div>
+                                                <i class="timeline-icon" ng-click="getList('gdGl')"></i>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <!--/saf-asc-row3-->
+                                </div>
+                                <div class="saf-asc-row4">
+                                	<!-- ******轮入计划****** -->
+	                				<table class="table table-bordered" id="rkPlan">
+	                                    <thead>
+											<tr>
+												<th data-hide="expand">创建日期</th>
+												<th data-class="expand">分类</th>
+												<th data-hide="expand">编号</th>
+												<th data-class="expand">类型</th>
+												<th data-class="expand">粮食性质</th>
+												<th data-class="expand">粮食品种</th>
+												<th data-class="expand">等级</th>
+												<th data-class="expand">数量</th>
+												<th data-hide="expand">操作</th>
+											</tr>
+										</thead>
+										<tbody>
+											<tr ng-repeat="plan in rkPlanList">
+												<td>{{plan.createTime  | date:'yyyy-MM-dd HH:mm:ss'}}</td>
+												<td>计划</td>
+												<td>{{plan.planNumber}}</td>
+												<td>轮入计划</td>
+												<td>{{dicData[plan.grainAttribute]}}</td>
+												<td>{{dicData[plan.grainKind]}}</td>
+												<td>{{dicData[plan.grainGrade]}}</td>
+												<td>{{plan.demandAmount}}</td>
+												<td><a href-void ng-click="lookUp(plan.id, 'rkPlan', plan.processInstanceId)"><i class="fa fa-edit"></i>查看</a></td>
+											</tr>
+										</tbody>
+	                                </table>
+	                                <!-- ******采购合同****** -->
+	                                <table class="table table-bordered" id="rkHt" style="display: none;">
+	                                    <thead>
+											<tr>
+												<th data-hide="expand">计划编号</th>
+												<th data-class="expand">合同编号</th>
+												<th data-hide="expand">合同名称</th>
+												<th data-class="expand">合同类型</th>
+												<th data-class="expand">粮食品种</th>
+												<th data-class="expand">数量</th>
+												<th data-class="expand">付款方式</th>
+												<th data-class="expand">创建日期</th>
+												<th data-hide="expand">操作</th>
+											</tr>
+										</thead>
+										<tbody>
+											<tr ng-repeat="ht in rkHtList">
+												<td>{{ht.planNumber}}</td>
+												<td>{{ht.contractNumber}}</td>
+												<td>{{ht.contractTitle}}</td>
+												<td>{{ht.contractType}}</td>
+												<td>{{dicData[ht.grainKind]}}</td>
+												<td>{{ht.grainQuantity}}</td>
+												<td>{{ht.contractPayType}}</td>
+												<td>{{ht.createTime | date:'yyyy-MM-dd'}}</td>
+												<td><a href-void ng-click="lookUp(ht.id, 'rkHt', ht.processInstanceId)"><i class="fa fa-edit"></i>查看</a></td>
+											</tr>
+										</tbody>
+	                                </table>
+	                                <!-- ******入库管理****** -->
+	                                <table class="table table-bordered" id="rkGl" style="display: none;">
+	                                    <thead>
+											<tr>
+												<th data-hide="expand">入门登记单号</th>
+												<th data-class="expand">入仓日期</th>
+												<th data-hide="expand">类型</th>
+												<th data-class="expand">车牌号码</th>
+												<th data-class="expand">净重</th>
+												<th data-hide="expand">操作</th>
+											</tr>
+										</thead>
+										<tbody>
+											<tr ng-repeat="rk in rkList">
+												<td>{{rk.bizno}}</td>
+												<td>{{rk.rcrq | date:'yyyy-MM-dd'}}</td>
+												<td>入库</td>
+												<td>{{rk.cphm}}</td>
+												<td>{{rk.xxklhjz}}</td>
+												<td><a href-void ng-click="lookUp(rk.dataid, 'rkGl')"><i class="fa fa-edit"></i>查看</a></td>
+											</tr>
+										</tbody>
+	                                </table>
+	                                <!-- ******封仓管理****** -->
+	                                <table class="table table-bordered" id="fcGl" style="display: none;">
+	                                    <thead>
+											<tr>
+												<th data-hide="expand">检验类型</th>
+												<th data-class="expand">检验日期</th>
+												<th data-class="expand">检验结论</th>
+												<th data-class="expand">封仓日期</th>
+												<th data-hide="expand">操作</th>
+											</tr>
+										</thead>
+										<tbody>
+											<tr ng-repeat="fc in fcGlList">
+												<td>{{fc.storehouseName}}</td>
+												<td>{{fc.checkTime | date:'yyyy-MM-dd'}}</td>
+												<td>{{fc.wareHouseName}}</td>
+												<td>{{fc.sealDate | date:'yyyy-MM-dd'}}</td>
+												<td><a href-void ng-click="lookUp(fc.id, 'fcGl', '', fc.type)"><i class="fa fa-edit"></i>查看</a></td>
+											</tr>
+										</tbody>
+	                                </table>
+	                                <!-- ******质量管理****** -->
+	                                <table class="table table-bordered" id="zlGl" style="display: none;">
+	                                    <thead>
+											<tr>
+												<th data-hide="expand">检验日期</th>
+												<th data-class="expand">检验类型</th>
+												<th data-hide="expand">粮食品种</th>
+												<th data-class="expand">检验结论</th>
+												<th data-class="expand">检验人</th>
+												<th data-hide="expand">操作</th>
+											</tr>
+										</thead>
+										<tbody>
+											<tr ng-repeat="zlgl in zlGlList">
+												<td>{{zlgl.checkTime | date:'yyyy-MM-dd'}}</td>
+												<td>{{zlgl.storehouseName}}</td>
+												<td>{{dicData[zlgl.subType]}}</td>
+												<td>{{zlgl.wareHouseName}}</td>
+												<td>{{zlgl.checker}}</td>
+												<td><a href-void ng-click="lookUp(zlgl.id, 'zlGl', '', zlgl.type)"><i class="fa fa-edit"></i>查看</a></td>
+											</tr>
+										</tbody>
+	                                </table>
+	                                <!-- ******作业管理****** -->
+	                                <table class="table table-bordered" id="zyGl" style="display: none;">
+	                                    <thead>
+											<tr>
+												<th data-hide="expand">作业单号</th>
+												<th data-hide="expand">作业开始时间</th>
+												<th data-hide="expand">作业结束时间</th>
+												<th data-class="expand">作业类型</th>
+												<th data-hide="expand">操作</th>
+											</tr>
+										</thead>
+										<tbody>
+											<tr ng-repeat="xzgl in xzList">
+												<td>{{xzgl.fumigateProgramNumber}}</td>
+												<td>{{xzgl.taskStartTime | date:'yyyy-MM-dd HH:mm:ss'}}</td>
+												<td>{{xzgl.taskEndTime | date:'yyyy-MM-dd HH:mm:ss'}}</td>
+												<td>{{xzgl.grainOther}}</td>
+												<td><a href-void ng-click="lookUp(xzgl.houseType, 'zyGl', '', 'xz')"><i class="fa fa-edit"></i>查看</a></td>
+											</tr>
+											<tr ng-repeat="tfgl in tfList">
+												<td>{{tfgl.taskId}}</td>
+												<td>{{tfgl.taskStartTime | date:'yyyy-MM-dd HH:mm:ss'}}</td>
+												<td>{{tfgl.taskEndTime | date:'yyyy-MM-dd HH:mm:ss'}}</td>
+												<td>{{tfgl.remark}}</td>
+												<td><a href-void ng-click="lookUp(tfgl.houseType, 'zyGl', '', 'tf')"><i class="fa fa-edit"></i>查看</a></td>
+											</tr>
+											<tr ng-repeat="fyxgl in fyxList">
+												<td>{{fyxgl.id}}</td>
+												<td></td>
+												<td>{{fyxgl.postCheckDate | date:'yyyy-MM-dd HH:mm:ss'}}</td>
+												<td>{{fyxgl.postWaterInSolution}}</td>
+												<td><a href-void ng-click="lookUp(fyxgl.id, 'zyGl', '', 'fyx')"><i class="fa fa-edit"></i>查看</a></td>
+											</tr>
+										</tbody>
+	                                </table>
+	                                <!-- ******轮出计划****** -->
+	                                <table class="table table-bordered" id="ckPlan" style="display: none;">
+	                                    <thead>
+											<tr>
+												<th data-hide="expand">创建日期</th>
+												<th data-class="expand">分类</th>
+												<th data-hide="expand">编号</th>
+												<th data-class="expand">类型</th>
+												<th data-class="expand">粮食性质</th>
+												<th data-class="expand">粮食品种</th>
+												<th data-class="expand">等级</th>
+												<th data-class="expand">数量</th>
+												<th data-hide="expand">操作</th>
+											</tr>
+										</thead>
+										<tbody>
+											<tr ng-repeat="plan in ckPlanList">
+												<td>{{plan.createTime | date:'yyyy-MM-dd HH:mm:ss'}}</td>
+												<td>计划</td>
+												<td>{{plan.planNumber}}</td>
+												<td>轮出计划</td>
+												<td>{{dicData[plan.grainAttribute]}}</td>
+												<td>{{dicData[plan.grainKind]}}</td>
+												<td>{{dicData[plan.grainGrade]}}</td>
+												<td>{{plan.demandAmount}}</td>
+												<td><a href-void ng-click="lookUp(plan.id, 'ckPlan', plan.processInstanceId)"><i class="fa fa-edit"></i>查看</a></td>
+											</tr>
+										</tbody>
+	                                </table>
+	                                <!-- ******销售合同****** -->
+	                                <table class="table table-bordered" id="ckHt" style="display: none;">
+	                                    <thead>
+											<tr>
+												<th data-hide="expand">计划编号</th>
+												<th data-class="expand">合同编号</th>
+												<th data-hide="expand">合同名称</th>
+												<th data-class="expand">合同类型</th>
+												<th data-class="expand">粮食品种</th>
+												<th data-class="expand">数量</th>
+												<th data-class="expand">付款方式</th>
+												<th data-class="expand">创建日期</th>
+												<th data-hide="expand">操作</th>
+											</tr>
+										</thead>
+										<tbody>
+											<tr ng-repeat="ht in ckHtList">
+												<td>{{ht.planNumber}}</td>
+												<td>{{ht.contractNumber}}</td>
+												<td>{{ht.contractTitle}}</td>
+												<td>{{ht.contractType}}</td>
+												<td>{{dicData[ht.grainKind]}}</td>
+												<td>{{ht.grainQuantity}}</td>
+												<td>{{ht.contractPayType}}</td>
+												<td>{{ht.createTime | date:'yyyy-MM-dd'}}</td>
+												<td><a href-void ng-click="lookUp(ht.id, 'ckHt', ht.processInstanceId)"><i class="fa fa-edit"></i>查看</a></td>
+											</tr>
+										</tbody>
+	                                </table>
+	                                <!-- ******出库管理****** -->
+	                                <table class="table table-bordered" id="ckGl" style="display: none;">
+	                                    <thead>
+											<tr>
+												<th data-hide="expand">入门登记单号</th>
+												<th data-class="expand">入仓日期</th>
+												<th data-hide="expand">类型</th>
+												<th data-class="expand">车牌号码</th>
+												<th data-class="expand">净重</th>
+												<th data-hide="expand">操作</th>
+											</tr>
+										</thead>
+										<tbody>
+											<tr ng-repeat="ck in ckList">
+												<td>{{ck.bizno}}</td>
+												<td>{{ck.rcrq | date:'yyyy-MM-dd'}}</td>
+												<td>出库</td>
+												<td>{{ck.cphm}}</td>
+												<td>{{ck.xxklhjz}}</td>
+												<td><a href-void ng-click="lookUp(ck.dataid, 'ckGl')"><i class="fa fa-edit"></i>查看</a></td>
+											</tr>
+										</tbody>
+	                                </table>
+	                                <!-- ******费用管理****** -->
+	                                <table class="table table-bordered" id="fyGl" style="display: none;">
+	                                    <thead>
+											<tr>
+												<th data-hide="expand">产生时间</th>
+												<th data-class="expand">费用类型</th>
+												<th data-hide="expand">运费(元)</th>
+												<th data-class="expand">其它费用(元)</th>
+												<th data-hide="expand">总金额</th>
+												<th data-hide="expand">操作</th>
+											</tr>
+										</thead>
+										<tbody>
+											<tr ng-repeat="fy in fyList">
+												<td>{{fy.agreeTime | date:'yyyy-MM-dd'}}</td>
+												<td>{{fy.creater}}</td>
+												<td>{{fy.freight}}</td>
+												<td>{{fy.otherCharges}}</td>
+												<td>{{fy.acquisitionCost}}</td>
+												<td><a href-void ng-click="lookUp(fy.id, 'fyGl')"><i class="fa fa-edit"></i>查看</a></td>
+											</tr>
+										</tbody>
+	                                </table>
+	                                <!-- ******归档管理****** -->
+	                                <table class="table table-bordered" id="gdGl" style="display: none;">
+	                                    <thead>
+											<tr>
+												<th data-hide="expand">存储仓库</th>
+												<th data-class="expand">仓房名称</th>
+												<th data-hide="expand">储粮性质</th>
+												<th data-class="expand">品种</th>
+												<th data-class="expand">入仓时间</th>
+												<th data-class="expand">出仓时间</th>
+												<th data-hide="expand">实际数量（kg）</th>
+												<th data-class="expand">责任保管员</th>
+												<th data-class="expand">状态</th>
+												<th data-hide="expand">操作</th>
+											</tr>
+										</thead>
+										<tbody>
+											<tr>
+												<td>{{foodInfo.recordUnite}}</td>
+												<td>{{warehouseObj[foodInfo.warehouseId].warehouseName}}</td>
+												<td>{{dicData[foodInfo.quality]}}</td>
+												<td>{{foodInfo.placeOfOrigin}}</td>
+												<td>{{foodInfo.growYear}}</td>
+												<td>{{foodInfo.recordUnite}}</td>
+												<td>{{warehouseObj[foodInfo.warehouseId].warehouseName}}</td>
+												<td>{{dicData[foodInfo.quality]}}</td>
+												<td>{{foodInfo.placeOfOrigin}}</td>
+												<td><a href-void ng-click="lookUp(foodInfo.id, 'fcGl')"><i class="fa fa-edit"></i>查看</a></td>
+											</tr>
+										</tbody>
+	                                </table>
+                                </div>
+							</form>
+						</div>
+					</div>
+				</div>
+			</article>
+		</div>
+	</section>
+</div>

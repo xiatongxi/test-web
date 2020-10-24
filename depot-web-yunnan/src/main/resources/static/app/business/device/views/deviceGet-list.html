@@ -1,0 +1,100 @@
+<!-- MAIN CONTENT -->
+<div id="content">
+    <!-- widget grid -->
+    <section widget-grid id="widget-grid">
+        <div class="row">
+            <article class="col-sm-12">
+                <div jarvis-widget id="standard-datatable-widget" data-widget-color="darken" data-widget-editbutton="false">
+                    <header>
+                        <span class="widget-icon"> <i class="fa fa-table"></i> </span>
+                        <h2 id="typetest">机械及器材领用 </h2>
+                    </header>
+                    <div>
+                        <div class="widget-body no-padding">
+                        <div id="DataTables_Table_1_wrapper" class="dataTables_wrapper form-inline no-footer">
+							<div class="dt-toolbar">
+								<div class="col-xs-12 col-sm-9">
+									<div class="form-group">
+									<label>
+										<a has-permission="510" href-void class="btn btn-primary btn-sm" ng-click="showGet()"><i class="fa fa-plus"></i>&nbsp;领&nbsp;用</a>
+									</label>
+										<label> 设备器材类别:
+											<select ng-model="search.deviceType" class="form-control input-sm" 
+													ng-options="enum.enumid as enum.enumname for enum in dicDataList[5473]">
+												<option value="">请选择</option>
+											</select>&emsp;
+										</label>
+										<a class="btn btn-default btn-sm" ng-click="loadData()">
+											<i class="fa fa-search"></i>&nbsp;查&nbsp;询</a>
+									</div>
+								</div>
+
+								<div class="col-sm-3 col-xs-6 hidden-xs">
+									<div class="dataTables_length">
+										<label>每页显示 <select ng-model="pageInfo.pageSize" ng-change="loadData()"
+															ng-options="num as num for num in [10,25,50,100]"
+															class="form-control input-sm"></select> 条
+										</label>
+									</div>
+								</div>
+							</div>
+
+
+						<table class="table table-striped table-bordered table-hover" width="100%">
+                        <thead>
+                        <tr>
+                            <th data-hide="phone">序号</th>
+							<th data-class="expand">粮库名称</th>
+							<th data-class="expand">类别</th>
+                            <th data-class="expand">领用日期</th>
+                            <th data-class="expand">机械器材名称</th>
+                            <th data-class="expand">规格型号</th>
+                            <th data-hide="phone">领用数量</th>
+                            <th data-hide="phone">归还数量</th>
+                            <th data-hide="phone,tablet">记账人</th>
+                            <th data-hide="phone,tablet">经手人</th>
+                            <th data-hide="phone,tablet"> 操作</th>
+                        </tr>
+                        </thead>
+                        
+                        <tbody>
+                        	<tr id="{{deviceGet.id}}" ng-repeat="deviceGet in pageInfo.list">
+								<th align="center">{{$index + 1 + (pageInfo.pageNum-1) * pageInfo.pageSize}}</th>
+								<td>{{orgInfo.orgName}}</td>
+								<td>{{dicData[deviceGet.deviceType]}}</td>
+								<td>{{deviceGet.getTime | date:'yyyy-MM-dd'}}</td>
+								<td>{{deviceGet.deviceName}}</td>
+								<td>{{deviceGet.model}}</td>
+								<td>{{deviceGet.getCount}}</td>
+								<!-- <td>{{deviceGet.getCount | changeBgColor:deviceGet.id:deviceGet.getCount:deviceGet.backCount}}</td> -->
+								<td>
+									<span ng-if="deviceGet.deviceType==5476 || deviceGet.deviceType==5475">
+									 {{deviceGet.backCount}}
+									</span>
+									<span ng-if="deviceGet.deviceType!=5476 && deviceGet.deviceType!=5475">
+									  ——
+									</span>
+								</td>
+								<td>{{deviceGet.bookKeeper}}</td>
+								<td>{{deviceGet.handler}}</td>
+								<td>
+									<a href-void ng-click="showMassage(deviceGet.id)"><i class="fa fa-info-circle"></i>查看</a>
+									<!-- <span ng-show="{{deviceGet.getCount != deviceGet.backCount}} && {{deviceGet.deviceTypeId}}!=5476 && {{deviceGet.deviceTypeId}}!=5475 ">
+									<a has-permission="511" href-void ng-click="showGetBack(deviceGet.id,deviceGet.getCount)"><i class="fa fa-reply-all" aria-hidden="true"></i>归还</a></span> -->
+                        			<span ng-if="deviceGet.getCount != deviceGet.backCount && (deviceGet.deviceType==5476 || deviceGet.deviceType==5475)">
+									  	<a has-permission="511" href-void ng-click="showGetBack(deviceGet.id,deviceGet.getCount)"><i class="fa fa-reply-all" aria-hidden="true"></i>归还</a>
+									</span>
+                        		</td>
+                        	</tr>
+                        </tbody>
+                        </table>
+							<div smart-include="app/layout/partials/page.tpl.html"></div>
+						</div>
+                    	</div>
+                    </div>
+                </div>
+            </article>
+        </div>
+    </section>
+</div>
+

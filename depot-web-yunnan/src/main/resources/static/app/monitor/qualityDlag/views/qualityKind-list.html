@@ -1,0 +1,106 @@
+<!-- MAIN CONTENT -->
+<div id="content">
+	<!-- widget grid -->
+	<section widget-grid id="widget-grid">
+
+		<div class="row">
+			<article class="col-sm-12">
+
+				<div jarvis-widget id="standard-datatable-widget"
+					 data-widget-color="darken" data-widget-editbutton="false">
+					<header>
+						<span class="widget-icon"> <i class="fa fa-table"></i>
+						</span>
+						<h2>阈值管理（<span style="color: red;">检测结果是按照&nbsp;新设置阈值&nbsp;校验的</span>）</h2>
+					</header>
+					<div>
+						<div class="widget-body no-padding">
+							<div id="DataTables_Table_1_wrapper"
+								 class="dataTables_wrapper form-inline no-footer">
+								<div class="dt-toolbar">
+									<div class="col-xs-3 col-sm-3">
+										<!--<a class="btn btn-primary" ui-sref="app.qualityDlag.playEdit({planId:0})">一键保存</a>-->
+									</div>
+									<div class="col-sm-9 col-xs-9 hidden-xs">
+										<div class="dataTables_length">
+											<!--<label>每页显示 <select ng-model="pageInfo.pageSize" ng-change="loadData()"-->
+																<!--ng-options="num as num for num in [10,25,50,100]"-->
+																<!--class="form-control input-sm"></select> 条-->
+											<!--</label>-->
+										</div>
+									</div>
+								</div>
+
+								<table class="table table-striped table-bordered table-hover"
+									   width="100%">
+									<thead>
+									<tr>
+										<th style="text-align: center;" data-hide="phone">编号</th>
+										<th style="text-align: center;" data-hide="phone">类型</th>
+										<th style="text-align: center;" data-class="expand">默认阈值</th>
+										<th style="text-align: center;" data-class="expand">新设置阈值</th>
+										<th style="text-align: center;" data-hide="phone,tablet"> 操作</th>
+									</tr>
+									</thead>
+
+									<tbody>
+									<tr ng-repeat="list in kindlist">
+										<td style="padding: 5px;text-align: center;">{{list.id}}</td>
+										<td style="padding: 5px;text-align: center;">{{list.kind}}</td>
+										<td style="padding: 5px;text-align: center;">{{list.defaultScore}}</td>
+										<td style="padding: 5px;text-align: center;"><input minlength="1" maxlength="2" name="newScores" style="clear: both;" type="text" ng-value="list.newScore"/><label style="color: red;">(可选范围：1~99)</label></td>
+										<td style="padding: 5px;text-align: center;">
+											<!--<a ng-click="updateThresholdValue(list.id,list.kind,list.newScore)"><i class="fa fa-edit"></i>编辑</a>-->
+										</td>
+									</tr>
+									</tbody>
+								</table>
+								<a has-permission="94" class="btn btn-primary" ng-click="allSave()" style="float: right;margin-right: 30px;">一键保存</a>
+								<!--<div smart-include="app/layout/partials/page.tpl.html"></div>-->
+							</div>
+						</div>
+					</div>
+				</div>
+			</article>
+		</div>
+
+	</section>
+
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="qualityKindModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+					&times;
+				</button>
+				<h4 class="modal-title" id="qualityKindModalLabel">新设置阈值修改</h4>
+			</div>
+			<div class="modal-body">
+
+				<form id="role-form" class="smart-form ng-pristine ng-valid" data-validator-option="validateOptions" novalidate="novalidate">
+					<div class="row">
+						<section class="col col-sm-12">
+							<label class="label txt-bg-red">{{thresholdValue.kind}}</label>
+							<label class="input">
+								<input type="text" name="roleName" ng-model="thresholdValue.thresholdValue"
+									   minlength="1" maxlength="2" required/>
+							</label>
+						</section>
+					</div>
+				</form>
+
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-primary" ng-click="save()">
+					提交
+				</button>
+				<button type="button" class="btn btn-default"  ng-click="cancel()">
+					取消
+				</button>
+			</div>
+		</div><!-- /.modal-content -->
+	</div><!-- /.modal-dialog -->
+</div><!-- /.modal -->

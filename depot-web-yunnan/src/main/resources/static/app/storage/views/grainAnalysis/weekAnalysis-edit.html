@@ -1,0 +1,352 @@
+<!-- MAIN CONTENT -->
+<div id="content">
+	<!-- widget grid -->
+	<section id="widget-grid" widget-grid>
+		<!-- START ROW -->
+		<div class="row">
+			<!-- NEW COL START -->
+			<article class="col-sm-12 col-md-12 col-lg-12">
+				<div jarvis-widget id="form-grid-widget"
+					data-widget-colorbutton="false" data-widget-editbutton="false"
+					data-widget-custombutton="false">
+					<!-- widget div-->
+					<div>
+						<!-- widget content -->
+						<div class="widget-body no-padding">
+							<form id="grain-form" name='grain-form'
+								class="smart-form ng-pristine ng-valid"
+								data-validator-option="validateOptions" novalidate="novalidate">
+								<header>
+											<a href-void class="btn btn-default btn-xs" ng-click="retList()">
+												<i class="fa fa-angle-left"></i>&nbsp;返回&nbsp;
+											</a>
+											&nbsp;
+											<span class="pull-right font-xs">带*的部分必须填写</span><br/>
+								</header>
+								<h2 style="text-align: center;"><strong>周粮情分析详情</strong></h2>
+								<header>基本信息</header>
+								<fieldset>
+									<div class="row">
+										<section class="col col-3">
+											<label class="label">编号：</label>
+											<label class="input">
+												<input type="text" ng-model="grain.analysisId" name="analysisId" class="form-control" ng-disabled="true" />
+											</label>
+										</section>
+										<section class="col col-3">
+											<label class="label">粮库名称：</label>
+											<label class="input">
+												<input type="text" ng-model="grain.orgName" name="orgName" class="form-control" ng-disabled="true">
+											</label>
+										</section>
+										<section class="col col-3">
+											<label class="label">仓房名称：<span style="color: red;margin-left: 5px;text-align: center;">*</span></label>
+											<label class="select">
+												<select ng-model="grain.storehouseId" class="form-control input-sm" ng-change="getWarehouseList('house')" required
+												ng-options="storehouse.storehouseId as storehouse.storehouseName for storehouse in storelist" ng-disabled="isNotEdit">
+														<option value="">--请选择--</option>
+												</select>
+											</label>
+										</section>
+										<section class="col col-3">
+											<label class="label">货位名称：<span style="color: red;margin-left: 5px;text-align: center;">*</span></label>
+											<label class="select">
+												<select ng-model="grain.warehouseId" name="warehouseId" class="form-control input-sm" ng-change="getWarehouseList('ware')" required
+												ng-options="warehouse.warehouseId as warehouse.warehouseName for warehouse in warehouseList" ng-disabled="isNotEdit">
+														<option value="">--请选择--</option>
+												</select>
+											</label>
+										</section>
+									</div>
+									<div class="row">
+										<section class="col col-3">
+											<label class="label">仓房类型：</label>
+											<label class="select">
+												<select ng-model="grain.storehouseType" class="form-control input-sm" ng-disabled="true"
+												ng-options="enum.enumid as enum.enumname for enum in dicDataList[1064]">
+														<option value="">--请选择--</option>
+												</select>
+											</label>
+										</section>
+										<section class="col col-3">
+											<label class="label">粮食品种：</label>
+											<label class="select">
+												<select ng-model="grain.foodstuffType" class="form-control input-sm" ng-disabled="true"
+												ng-options="enum.enumid as enum.enumname for enum in dicDataList[1061]">
+														<option value="">--请选择--</option>
+												</select>
+											</label>
+										</section>
+										<section class="col col-3">
+											<label class="label">责任保管员：</label>
+											<label class="input">
+												<input type="text" ng-model="grain.keeperName" name="keeperName" class="form-control" ng-disabled="true">
+											</label>
+										</section>
+										<section class="col col-3">
+											<label class="label">提交人：</label>
+											<label class="input">
+												<input type="text" ng-model="grain.submitPerson" name="submitPerson" class="form-control" ng-disabled="true">
+											</label>
+										</section>
+									</div>
+									<div class="row">
+										<section class="col col-3">
+											<label class="label">检查起始日期：<span style="color: red;margin-left: 5px;text-align: center;">*</span></label>
+											<label class="input">
+												<input type="text" ng-model="grain.checkDateStart" ng-disabled="isNotEdit" 
+												name="checkDateStart" required class="form-control datepicker" data-smart-datepicker>
+											</label>
+										</section>
+										<section class="col col-3">
+											<label class="label">检查终止日期：<span style="color: red;margin-left: 5px;text-align: center;">*</span></label>
+											<label class="input">
+												<input type="text" ng-model="grain.checkDateEnd" ng-disabled="isNotEdit" ng-change="getThreeTempList()"
+												name="checkDateEnd" required class="form-control datepicker" data-smart-datepicker>
+											</label>
+										</section>
+										<section class="col col-3">
+											<label class="label">提交日期：<span style="color: red;margin-left: 5px;text-align: center;">*</span></label>
+											<label class="input">
+												<input type="text" ng-model="grain.submitDate" ng-disabled="true"
+												name="submitDate" required class="form-control datepicker" data-smart-datepicker>
+											</label>
+										</section>
+									</div>
+								</fieldset>
+								<header><strong>温湿度情况</strong></header>
+								<fieldset>
+									<div class="col-xs-12 col-sm-12">
+										<table class="table table-striped table-bordered table-hover" width="100%">
+											<tr>
+												<th rowspan="2">
+													<label class="label" style="margin-top: 34px;text-align: center;">检查时间</label>
+												</th>
+												<th colspan="2">
+													<label class="label" style="margin-top: 9px;text-align: center;">湿度(%)</label>
+												</th>
+												<th colspan="2">
+													<label class="label" style="margin-top: 9px;text-align: center;">温度(℃)</label>
+												</th>
+												<th colspan="3">
+													<label class="label" style="margin-top: 9px;text-align: center;">粮温检查情况(℃)</label>
+												</th>
+											</tr>
+											<tr>
+												<th>
+													<label class="label" style="margin-top: 9px;text-align: center;">仓内</label>
+												</th>
+												<th>
+													<label class="label" style="margin-top: 9px;text-align: center;">仓外</label>
+												</th>
+												<th>
+													<label class="label" style="margin-top: 9px;text-align: center;">仓内</label>
+												</th>
+												<th>
+													<label class="label" style="margin-top: 9px;text-align: center;">仓外</label>
+												</th>
+												<th>
+													<label class="label" style="margin-top: 9px;text-align: center;">最高</label>
+												</th>
+												<th>
+													<label class="label" style="margin-top: 9px;text-align: center;">最低</label>
+												</th>
+												<th>
+													<label class="label" style="margin-top: 9px;text-align: center;">平均</label>
+												</th>
+											</tr>
+											<tr ng-repeat="threeTemp in threeTempList">
+												<th>
+													<label class="label" style="margin-top: 9px;text-align: center;">{{threeTemp.checkDate | date :'yyyy-MM-dd'}}</label>
+												</th>
+												<th>
+													<label class="label" style="margin-top: 9px;text-align: center;">{{threeTemp.inWater}}</label>
+												</th>
+												<th>
+													<label class="label" style="margin-top: 9px;text-align: center;">{{threeTemp.outWater}}</label>
+												</th>
+												<th>
+													<label class="label" style="margin-top: 9px;text-align: center;">{{threeTemp.inTemp}}</label>
+												</th>
+												<th>
+													<label class="label" style="margin-top: 9px;text-align: center;">{{threeTemp.outTemp}}</label>
+												</th>
+												<th>
+													<label class="label" style="margin-top: 9px;text-align: center;">{{threeTemp.maxTemp}}</label>
+												</th>
+												<th>
+													<label class="label" style="margin-top: 9px;text-align: center;">{{threeTemp.minTemp}}</label>
+												</th>
+												<th>
+													<label class="label" style="margin-top: 9px;text-align: center;">{{threeTemp.avgTemp}}</label>
+												</th>
+											</tr>
+										</table>
+									</div>
+								</fieldset>
+								<header><strong>异常情况与四无检查</strong></header>
+								<fieldset>
+									<div class="col-xs-12 col-sm-12">
+										<table class="table table-striped table-bordered table-hover" width="100%">
+											<tr>
+												<th rowspan="2">
+													<label class="label" style="margin-top: 34px;text-align: center;width: 80px;">检查时间</label>
+												</th>
+												<th colspan="5">
+													<label class="label" style="margin-top: 9px;text-align: center;">异常情况</label>
+												</th>
+												<th colspan="4">
+													<label class="label" style="margin-top: 9px;text-align: center;">四无检查</label>
+												</th>
+												<th rowspan="2">
+													<label class="label" style="margin-top: 26px;text-align: center;">处理方案或处理效果</label>
+												</th>
+											</tr>
+											<tr>
+												<th>
+													<label class="label" style="margin-top: 9px;text-align: center;">类型</label>
+												</th>
+												<th>
+													<label class="label" style="margin-top: 9px;text-align: center;">部位</label>
+												</th>
+												<th>
+													<label class="label" style="margin-top: 9px;text-align: center;">范围</label>
+												</th>
+												<th>
+													<label class="label" style="margin-top: 9px;text-align: center;">粮温</label>
+												</th>
+												<th>
+													<label class="label" style="margin-top: 9px;text-align: center;">水分</label>
+												</th>
+												<th>
+													<label class="label" style="margin-top: 9px;text-align: center;">鼠雀情况</label>
+												</th>
+												<th>
+													<label class="label" style="margin-top: 9px;text-align: center;">害虫情况</label>
+												</th>
+												<th>
+													<label class="label" style="margin-top: 9px;text-align: center;">变质情况</label>
+												</th>
+												<th>
+													<label class="label" style="margin-top: 9px;text-align: center;">事故情况</label>
+												</th>
+											</tr>
+											<tr ng-repeat="execptionObj in exceptionAndOnforeList">
+												<th>
+													<label class="label" style="margin-top: 9px;text-align: center;width: 80px;">
+														<input type="hidden" ng-model="execptionObj.checkDate" ng-disabled="true"
+															name="submitDate" required class="form-control datepicker" data-smart-datepicker>
+														{{execptionObj.checkDate | date :'yyyy-MM-dd'}}
+													</label>
+												</th>
+												<th>
+													<label class="input" style="margin-top: 9px;text-align: center;">
+														<input type="text" ng-model="execptionObj.checkType" name="checkType" class="form-control" ng-readonly="isNotEdit">
+													</label>
+												</th>
+												<th>
+													<label class="input" style="margin-top: 9px;text-align: center;">
+														<input type="text" ng-model="execptionObj.checkPart" name="checkPart" class="form-control" ng-readonly="isNotEdit">
+													</label>
+												</th>
+												<th>
+													<label class="input" style="margin-top: 9px;text-align: center;">
+														<input type="text" ng-model="execptionObj.checkRange" name="checkRange" class="form-control" ng-readonly="isNotEdit">
+													</label>
+												</th>
+												<th>
+													<label class="input" style="margin-top: 9px;text-align: center;">
+														<input type="number" ng-model="execptionObj.foodstuffTemp" name="foodstuffTemp" class="form-control" oninput="if(value.length>5) value=value.slice(0,5)" ng-readonly="isNotEdit">
+													</label>
+												</th>
+												<th>
+													<label class="input" style="margin-top: 9px;text-align: center;">
+														<input type="number" ng-model="execptionObj.foodstuffWater" name="foodstuffWater" class="form-control" oninput="if(value.length>5) value=value.slice(0,5)" ng-readonly="isNotEdit">
+													</label>
+												</th>
+												<th>
+													<label class="input" style="margin-top: 9px;text-align: center;">
+														<input type="text" ng-model="execptionObj.ratBirdSituation" name="ratBirdSituation" class="form-control" ng-readonly="isNotEdit">
+													</label>
+												</th>
+												<th>
+													<label class="input" style="margin-top: 9px;text-align: center;">
+														<input type="text" ng-model="execptionObj.pestSituation" name="pestSituation" class="form-control" ng-readonly="isNotEdit">
+													</label>
+												</th>
+												<th>
+													<label class="input" style="margin-top: 9px;text-align: center;">
+														<input type="text" ng-model="execptionObj.badSituation" name="badSituation" class="form-control" ng-readonly="isNotEdit">
+													</label>
+												</th>
+												<th>
+													<label class="input" style="margin-top: 9px;text-align: center;">
+														<input type="text" ng-model="execptionObj.accidentSituation" name="accidentSituation" class="form-control" ng-readonly="isNotEdit">
+													</label>
+												</th>
+												<th>
+													<label class="input" style="margin-top: 9px;text-align: center;">
+														<input type="text" ng-model="execptionObj.handlePlanOrResult" name="handlePlanOrResult" class="form-control" ng-readonly="isNotEdit">
+													</label>
+												</th>
+											</tr>
+										</table>
+									</div>
+								</fieldset>
+								<header><strong>粮情分析</strong></header>
+								<fieldset>
+									<section>
+								       	<label class="textarea"> <i class="icon-append fa fa-comment"></i>
+								           	<textarea ng-disabled="isNotEdit" rows="5" ng-model="grain.grainAnalysis" name="grainAnalysis" oninput="if(value.length>255) value=value.slice(0,255)"></textarea>
+								       	</label>
+									</section>
+								</fieldset>
+								<header ng-hide="auditor_data"><strong>审核意见</strong></header>
+								<fieldset ng-hide="auditor_data">
+									<div class="col-xs-12 col-sm-12">
+										<table class="table table-striped table-bordered table-hover" width="100%">
+											<tr>
+												<th>
+													<label class="label" style="margin-top: 9px;text-align: center;">审核人</label>
+												</th>
+												<th>
+													<label class="input">
+														<input type="text" ng-model="grain.auditor" name="checkType" class="form-control" ng-readonly="true">
+													</label>
+												</th>
+												<th>
+													<label class="label" style="margin-top: 9px;text-align: center;">审核时间</label>
+												</th>
+												<th>
+													<label class="input">
+														<input type="text" ng-model="grain.auditorDate" ng-disabled="auditor_isNotEdit"
+ 																name="submitDate" required class="form-control datepicker" data-smart-datepicker>
+													</label>
+												</th>
+											</tr>
+											<tr>
+												<th>
+													<label class="label" style="margin-top: 17px;text-align: center;">审核意见<span style="color: red;margin-left: 5px;text-align: center;">*</span></label>
+												</th>
+												<th colspan="3">
+													<label class="textarea">
+											           	<textarea required ng-disabled="auditor_isNotEdit" rows="3" ng-model="grain.auditorOpinion" name="grainAnalysis" oninput="if(value.length>255) value=value.slice(0,255)"></textarea>
+												    </label>
+												</th>
+											</tr>
+										</table>
+									</div>
+								</fieldset>
+								<footer class="modal-footer text-align-center">
+									<button ng-click="retList()" class="btn btn-default btn-lg" data-dismiss="modal">取消</button>
+									<button ng-click="auditor_submit()" type="button" class="btn btn-primary btn-lg" ng-hide="sh_isNotEdit">审核</button>
+									<button ng-click="save(0)" type="button" class="btn btn-primary btn-lg" ng-hide="tj_isNotEdit">提交</button>
+								</footer>
+							</form>
+						</div>
+					</div>
+				</div>
+			</article>
+		</div>
+	</section>
+</div>

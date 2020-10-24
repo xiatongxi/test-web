@@ -1,0 +1,31 @@
+<div class="modal-content">
+    <div class="modal-header">
+        <button type="button" class="close" ng-click="cancel()">
+            &times;
+        </button>
+        <h4 class="modal-title" id="myModalLabel">编辑角色信息</h4>
+    </div>
+    <div class="modal-body">
+
+        <form id="role-form" class="smart-form form-horizontal ng-pristine" data-validator-option="validateOptions" novalidate="novalidate">
+			<fieldset>
+		    	<div class="form-group">
+			        <label class="col-md-2 control-label">角色名称&emsp; </label>
+			        <div class="col-md-6">
+			            <input class="form-control" type="text" name="roleName" ng-model="roleInfo.roleName" 
+							 minlength="2" maxlength="20" required />
+					</div>
+				</div>
+			</fieldset>
+		</form>
+
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-primary" ng-click="save()">
+        	提交
+        </button>
+        <button type="button" class="btn btn-default"  ng-click="cancel()">
+        	取消
+        </button>
+    </div>
+</div>

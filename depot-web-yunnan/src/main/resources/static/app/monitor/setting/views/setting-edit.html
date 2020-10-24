@@ -1,0 +1,49 @@
+<div jarvis-widget="" id="wid-id-0" data-widget-colorbutton="false" data-widget-editbutton="false" data-widget-deletebutton="false" data-widget-sortable="false" class="jarviswidget" role="widget">
+	<div role="content">
+		<div jarvis-widget="" id="wid-id-7" data-widget-colorbutton="false" data-widget-editbutton="false" data-widget-deletebutton="false" data-widget-sortable="false" class="jarviswidget" role="widget">
+			<header role="heading"><div class="jarviswidget-ctrls" role="menu">   <a href="javascript:void(0);" class="button-icon jarviswidget-toggle-btn" rel="tooltip" title="" data-placement="bottom" data-original-title="最小化"><i class="fa fa-minus "></i></a> <a href="javascript:void(0);" class="button-icon jarviswidget-fullscreen-btn" rel="tooltip" title="" data-placement="bottom" data-original-title="最大化"><i class="fa fa-expand "></i></a> </div>
+				<h2>配置管理 </h2>
+				<span class="jarviswidget-loader"><i class="fa fa-refresh fa-spin"></i></span></header>
+			<div role="content">
+				<div class="widget-body"><div class="jarviswidget-editbox"><input class="form-control" type="text"></div>
+					<form id="contactForm" method="post" class="form-horizontal ng-pristine ng-valid bv-form" novalidate="novalidate">
+						<fieldset>
+							<legend>视频相关录像配置</legend>
+							<div class="form-group has-feedback">
+								<label class="col-md-3 control-label">抓图路径</label>
+								<div class="col-md-6">
+									<input type="text" class="form-control" name="email" data-bv-field="email" ng-model="monitorSavepath.imgpath"><i class="form-control-feedback" data-bv-icon-for="email" style="display: none;"></i>
+								</div>
+							</div>
+						</fieldset>
+						<fieldset>
+							<div class="form-group has-feedback">
+								<label class="col-md-3 control-label">录像路径</label>
+								<div class="col-md-6">
+									<input type="text" class="form-control" name="title" data-bv-field="title" ng-model="monitorSavepath.recordpath"><i class="form-control-feedback" data-bv-icon-for="title" style="display: none;"></i>
+								</div>
+							</div>
+						</fieldset>
+						<!-- <fieldset>
+							<div class="form-group has-feedback">
+								<label class="col-md-3 control-label">回放文件下载路径</label>
+								<div class="col-md-6">
+									<input type="text" class="form-control" name="fullName" data-bv-field="fullName" ng-model="monitorSavepath.downpath"><i class="form-control-feedback" data-bv-icon-for="fullName" style="display: none;"></i>
+								</div>
+							</div>
+						</fieldset> -->
+						<div has-permission="430" class="form-actions">
+							<div class="row">
+								<div class="col-md-12">
+									<button type="submit" class="btn btn-primary" ng-click="saveCameraPath()">
+										保存
+									</button>
+								</div>
+							</div>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

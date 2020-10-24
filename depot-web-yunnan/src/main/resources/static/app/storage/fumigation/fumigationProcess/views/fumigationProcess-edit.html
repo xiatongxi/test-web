@@ -1,0 +1,794 @@
+<!-- MAIN CONTENT -->
+<div id="content" style=" border-width:5px; margin-left:2%;position:relative;margin-right:2%;">
+    <!-- widget grid -->
+    <section id="widget-grid" widget-grid>
+        <!-- START ROW -->
+        <div class="row">
+            <!-- NEW COL START -->
+            <article class="col-sm-12 col-md-12 col-lg-12">
+                <!-- Widget ID (each widget will need unique ID)-->
+                <div jarvis-widget id="form-grid-widget"
+                    data-widget-colorbutton="false" data-widget-editbutton="false"
+                    data-widget-custombutton="false">
+                    <!-- widget div-->
+                    <div>
+                        <!-- widget content -->
+                        <div class="widget-body no-padding">
+                            <form id="fumigation-form" class="smart-form ng-pristine ng-valid" data-validator-option="validateOptions" novalidate="novalidate" style=" border-width:5px; margin-left:2%;position:relative;margin-right:2%;">
+								<header>
+									<a href-void class="btn btn-default btn-xs" ng-click="retList()">
+										<i class="fa fa-angle-left"></i>&nbsp;返回&nbsp;
+									</a>
+									&nbsp;<strong>熏蒸过程详情</strong>
+									<span class="pull-right font-xs">带*的部分必须填写</span>
+								</header>
+                                <fieldset>
+                                <div id="dtBox"></div>
+                                <table ng-hide="isNext" style="width:70%; border-width:5px; margin-left:15%;position:relative;margin-right:15%;">
+                                	<table ng-hide="isNext" class="table table-striped table-bordered table-hover" width="100%" style="padding: 0;" >
+                                		<!--第一个tr开始 -->
+										<tr>
+											<th rowspan="3" width='10%'>
+												<label class="label" style="margin-top: 50%;text-align: center;">仓房情况</label>
+											</th>
+											<th width='15%'>
+												<label class="label" style="margin-top: 9px;text-align: center;">粮库名称<span style="color: red;">*</span></label>
+											</th>
+											<th width='15%'>
+												<section>
+			                                        <label class="input">
+		                                                <input class="form-control" type="text" ng-model="fumigation.orgName" 
+		                                                ng-readonly="true" name="orgName">
+		                                            </label>
+		                                        </section>
+											</th>
+											<th>
+												<label class="label" style="margin-top: 9px;text-align: center;">仓房名称<span style="color: red;margin-left: 5px;text-align: center;">*</span></label>
+											</th>
+											<th width='15%'>
+												<section>
+													<label class="input">
+		                                                <input class="form-control" type="text" ng-model="fumigation.storehouseName" 
+		                                                ng-readonly="true" name="storehouseName">
+		                                            </label>
+		                                        </section>
+											</th>
+											<th width='15%'>
+												<label label class="label" style="margin-top: 9px;text-align: center;">保管员</label>
+											</th>
+											<th width='15%'>
+												<section>
+		                                            <label class="select"> 
+		                                                <select ng-model="fumigation.keeper" 
+														ng-options="keeper.id as keeper.name for keeper in keeperList"
+														class="form-control" ng-disabled="true">
+															<option value="">--请选择--</option>
+														</select>
+		                                            </label>
+		                                        </section>
+											</th>
+										</tr>
+										<tr>
+											<th>
+												<label class="label" style="margin-top: 9px;text-align: center;">方案编号</label>
+											</th>
+											<th>
+												<section >
+			                                        <label class="input"> 
+		                                                <input class="form-control" type="text" ng-model="fumigation.fumigateProgramNumber" 
+		                                                ng-readonly="true" name="fumigateProgramNumber">
+		                                            </label>
+		                                        </section>
+											</th>
+											
+											<th>
+												<label label class="label" style="margin-top: 9px;text-align: center;">粮食品种<span style="color: red;margin-left: 5px;text-align: center;">*</span></label>
+											</th>
+											<th>
+												<section>
+		                                            <label class="select"> 
+		                                                <select ng-model="fumigation.grainKind" name="grainKind" ng-disabled="true" 
+		                                                ng-options="enum.enumid as enum.enumname for enum in dicDataList[1061]" required>
+		                                                	<option value="">--请选择--</option>
+		                                                </select><i></i>
+		                                            </label>
+		                                        </section>
+											</th>
+											<th>
+												<label label class="label" style="margin-top: 9px;text-align: center;">粮堆体积(立方米)</label>
+											</th>
+											<th>
+												<section>
+		                                            <label class="input"> 
+		                                                <input class="form-control" type="text" ng-model="fumigation.houseHeapGrainCapacity" 
+		                                                ng-readonly="true" name="houseHeapGrainCapacity">
+		                                            </label>
+		                                        </section>
+											</th>
+										</tr>
+										<tr>
+											<th>
+												<label class="label" style="margin-top: 9px;text-align: center;">空间体积(立方米)</label>
+											</th>
+											<th>
+												<section>
+		                                            <label class="input"> 
+		                                                <input class="form-control" type="text" ng-model="fumigation.houseSpaceCapacity" 
+		                                                ng-readonly="true" name="houseSpaceCapacity">
+		                                            </label>
+		                                        </section>
+											</th>
+											<th>
+												<label class="label" style="margin-top: 9px;text-align: center;">总体积(立方米)</label>
+											</th>
+											<th>
+												<section>
+		                                            <label class="input"> 
+		                                                <input class="form-control" type="text" ng-model="fumigation.houseCapacity" 
+		                                                ng-readonly="true" name="houseCapacity">
+		                                            </label>
+		                                        </section>
+											</th>
+											<th colspan="2">
+											</th>
+										</tr>
+										
+										
+										
+										<tr>
+											<th rowspan="9" width='10%'>
+												<label class="label" style="margin-top: 50%;text-align: center;">施药情况</label>
+											</th>
+											<th>
+												<label label class="label" style="margin-top: 9px;text-align: center;">主要害虫</label>
+											</th>
+											<th>
+		                                        <section>
+		                                            <label class="select"> 
+		                                                <select ng-model="fumigation.majorInsectPests" name="majorInsectPests" ng-disabled="true" 
+		                                                ng-options="enum.enumid as enum.enumname for enum in dicDataList[5267]" >
+		                                                	<option value="">--请选择--</option>
+		                                                </select><i></i>
+		                                            </label>
+		                                        </section>
+											</th>
+											<th>
+												<label label class="label" style="margin-top: 9px;text-align: center;">害虫密度(头/公斤)</label>
+											</th>
+											<th>
+												<section>
+		                                            <label class="input"> 
+		                                                <input class="form-control" type="text" ng-model="fumigation.insectDensity" ng-readonly="true" 
+		                                                name="insectDensity">
+		                                            </label>
+		                                        </section>
+											</th>
+											<th>
+												<label class="label" style="margin-top: 9px;text-align: center;">熏蒸方式</label>
+											</th>
+											<th>
+												<section>
+		                                            <label class="select"> 
+		                                                <select ng-model="fumigation.fumigationType" name="fumigationType" ng-disabled="true" 
+		                                                ng-options="enum.enumid as enum.enumname for enum in dicDataList[5216]">
+		                                                	<option value="">--请选择--</option>
+		                                                </select><i></i>
+		                                            </label>
+		                                        </section>
+											</th>
+										</tr>
+										
+										<tr>
+											<th>
+												<label class="label" style="margin-top: 9px;text-align: center;">药剂名称</label>
+											</th>
+											<th>
+												<section>
+		                                            <label class="select"> 
+		                                                <select ng-model="fumigation.drugName" name="drugName" ng-disabled="true" 
+		                                                ng-options="enum.enumid as enum.enumname for enum in dicDataList[3024]" >
+		                                                	<option value="">--请选择--</option>
+		                                                </select><i></i>
+		                                            </label>
+		                                        </section>
+											</th>
+											<th>
+												<label class="label" style="margin-top: 9px;text-align: center;">药剂纯度(%)</label>
+											</th>
+											<th>
+												<section>
+		                                            <label class="input"> 
+		                                                <input class="form-control" type="text" ng-model="fumigation.drugPurity" ng-readonly="true" 
+		                                                name="drugPurity" placeholder="" validNumber="true">
+		                                            </label>
+		                                        </section>
+											</th>
+											<th>
+												<label class="label" style="margin-top: 9px;text-align: center;">施药方式</label>
+											</th>
+											<th>
+												<section>
+		                                            <label class="input"> 
+		                                                <input class="form-control" type="text" ng-model="fumigation.useDrugType" ng-readonly="true" 
+		                                                name="useDrugType" placeholder="">
+		                                            </label>
+		                                        </section>
+											</th>
+										</tr>
+										
+										<tr>
+											<th>
+												<label class="label" style="margin-top: 9px;text-align: center;">密闭方法</label>
+											</th>
+											<th>
+												<section>
+		                                            <label class="input"> 
+		                                                <input class="form-control" type="text" ng-model="fumigation.sealType" 
+		                                                ng-readonly="true" name="sealType">
+		                                            </label>
+		                                        </section>
+											</th>
+											<th>
+												<label label class="label" style="margin-top: 9px;text-align: center;">设定浓度(ppm)</label>
+											</th>
+											<th>
+												<section>
+		                                            <label class="input"> 
+		                                                <input class="form-control" type="text" ng-model="fumigation.settingConcentration" ng-readonly="true" 
+		                                                name="settingConcentration">
+		                                            </label>
+		                                        </section>
+											</th>
+											<th colspan="2">
+											</th>
+										</tr>
+										
+										<!------------------------------------------------  熏蒸过程字段 ---------------------------------------------  -->
+										<tr>
+											<th>
+												<label class="label" style="margin-top: 9px;text-align: center;">初次施药时间<span style="color: red;">*</span></label>
+											</th>
+											<th>
+												<section>
+		                                            <label class="input"> 
+	                                                	<input type="text" class="form-control" ng-model="fumigationProcess.firstUseDrugTime" name="firstUseDrugTime"
+	                                                		data-field="datetime" data-format="yyyy-MM-dd hh:mm:ss" ng-disabled="isNotEdit" required>
+                                            		</label>
+		                                        </section>
+											</th>
+											<th>
+												<label class="label" style="margin-top: 9px;text-align: center;">初次单位剂量(g/m³)<span style="color: red;">*</span></label>
+											</th>
+											<th>
+												<section>
+		                                            <label class="input"> 
+		                                                <input class="form-control" type="text" ng-model="fumigationProcess.firstUseDrugUnit" ng-readonly="isNotEdit" 
+		                                                name="firstUseDrugUnit" placeholder=""  validNumber="true" required>
+		                                            </label>
+		                                        </section>
+											</th>
+											<th>
+												<label class="label" style="margin-top: 9px;text-align: center;">初次用药量(kg)<span style="color: red;">*</span></label>
+											</th>
+											<th>
+												<section>
+		                                            <label class="input"> 
+		                                                <input class="form-control" type="text" ng-model="fumigationProcess.firstUseDrugCount" ng-readonly="isNotEdit" 
+		                                                name="firstUseDrugCount" placeholder=""  validNumber="true" required>
+		                                            </label>
+		                                        </section>
+											</th>
+										</tr>
+										
+										<tr>
+											<th>
+												<label class="label" style="margin-top: 9px;text-align: center;">环流时间(h)<span style="color: red;">*</span></label>
+											</th>
+											<th>
+												<section>
+		                                            <label class="input"> 
+		                                                <input class="form-control" type="text" ng-model="fumigationProcess.circulationUseTime" ng-readonly="isNotEdit" 
+		                                                name="circulationUseTime" validNumber="true" required>
+		                                            </label>
+		                                        </section>
+											</th>
+											<th>
+												<label class="label" style="margin-top: 9px;text-align: center;">初次补药日期</label>
+											</th>
+											<th>
+												<section>
+		                                            <label class="input"> 
+														<input type="text" ng-model="fumigationProcess.firstSupplementDrugTime" name="firstSupplementDrugTime" 
+		                                                class="form-control datepicker" data-smart-datepicker ng-readOnly="true" ng-disabled="isNotEdit" ><i></i>
+		                                            </label>
+		                                        </section>
+											</th>
+											<th>
+												<label class="label" style="margin-top: 9px;text-align: center;">初次补药量(kg)</label>
+											</th>
+											<th>
+												<section>
+		                                            <label class="input"> 
+		                                                <input class="form-control" type="text" ng-model="fumigationProcess.firstSupplementDrugCount" ng-readonly="isNotEdit" 
+		                                                name="firstSupplementDrugCount" placeholder=""  validNumber="true">
+		                                            </label>
+		                                        </section>
+											</th>
+										</tr>
+										
+										<tr>
+											<th>
+												<label class="label" style="margin-top: 9px;text-align: center;">最后补药日期</label>
+											</th>
+											<th>
+												<section>
+		                                            <label class="input"> 
+														<input type="text" ng-model="fumigationProcess.lastSupplementDrugTime" name="lastSupplementDrugTime" 
+		                                                class="form-control datepicker" data-smart-datepicker ng-readOnly="true" ng-disabled="isNotEdit" ><i></i>
+		                                            </label>
+		                                        </section>
+											</th>
+											<th>
+												<label class="label" style="margin-top: 9px;text-align: center;">最后补药量(kg)</label>
+											</th>
+											<th>
+												<section>
+		                                            <label class="input"> 
+		                                                <input class="form-control" type="text" ng-model="fumigationProcess.lastSupplementDrugCount" ng-readonly="isNotEdit" 
+		                                                name="lastSupplementDrugCount" placeholder=""  validNumber="true">
+		                                            </label>
+		                                        </section>
+											</th>
+											<th>
+												<label class="label" style="margin-top: 9px;text-align: center;">总补药次数(次)</label>
+											</th>
+											<th>
+												<section>
+		                                            <label class="input"> 
+		                                                <input class="form-control" type="text" ng-model="fumigationProcess.totalSupplementDrugTimes" ng-readonly="isNotEdit" 
+		                                                name="totalSupplementDrugTimes" validPositiveInteger="true">
+		                                            </label>
+		                                        </section>
+											</th>
+										</tr>
+										
+										<tr>
+											<th>
+												<label class="label" style="margin-top: 9px;text-align: center;">总补药量(kg)<span style="color: red;">*</span></label>
+											</th>
+											<th>
+												<section>
+		                                            <label class="input"> 
+		                                                <input class="form-control" type="text" ng-model="fumigationProcess.totalSupplementDrugCount" ng-readonly="isNotEdit" 
+		                                                name="totalSupplementDrugCount" validNumber="true" required>
+		                                            </label>
+		                                        </section>
+											</th>
+											<th>
+												<label class="label" style="margin-top: 9px;text-align: center;">总用药量(kg)</label>
+											</th>
+											<th>
+												<section>
+		                                            <label class="input"> 
+		                                                <input class="form-control" type="text" ng-model="fumigationProcess.totalUseDrugCount" ng-readonly="isNotEdit" 
+		                                                name="totalUseDrugCount" validNumber="true">
+		                                            </label>
+		                                        </section>
+											</th>
+											<th>
+												<label class="label" style="margin-top: 9px;text-align: center;">补药方法</label>
+											</th>
+											<th>
+												<section>
+		                                            <label class="input"> 
+		                                                <input class="form-control" type="text" ng-model="fumigationProcess.supplementDrugType" ng-readonly="isNotEdit" 
+		                                                name="supplementDrugType" >
+		                                            </label>
+		                                        </section>
+											</th>
+										</tr>
+										<!-- -----------------------------------------熏蒸过程字段 结束 --------------------------------------------->
+										
+										<tr>
+											<th>
+												<label class="label" style="margin-top: 9px;text-align: center;">熏蒸人数</label>
+											</th>
+											<th>
+												<section>
+		                                            <label class="input"> 
+		                                                <input class="form-control" type="text" ng-model="fumigation.fumigationPeopleNumber" ng-readonly="true"
+		                                                 name="fumigationPeopleNumber">
+		                                            </label>
+		                                        </section>
+											</th>
+											<th>
+												<label class="label" style="margin-top: 9px;text-align: center;">熏蒸指挥人</label>
+											</th>
+											<th>
+												<section>
+		                                            <label class="input"> 
+		                                                <input class="form-control" type="text" ng-model="fumigation.fumigationChargePerson" ng-readonly="true" 
+		                                                name="fumigationChargePerson">
+		                                            </label>
+		                                        </section>
+											</th>
+											<th>
+												<label class="label" style="margin-top: 9px;text-align: center;">施药人数</label>
+											</th>
+											<th>
+												<section>
+		                                            <label class="input"> 
+		                                                <input class="form-control" type="text" ng-model="fumigation.drugUserNumber" ng-readonly="true" 
+		                                                name="drugUserNumber" >
+		                                            </label>
+		                                        </section>
+											</th>
+										</tr>
+										
+										<tr>
+											<th>
+												<label label class="label" style="margin-top: 9px;text-align: center;">熏蒸操作人员</label>
+											</th>
+											<th>
+												<section>
+		                                            <label class="input"> 
+		                                                <input class="form-control" type="text" ng-model="fumigation.fumigationOperator" ng-readonly="true"
+		                                                 name="fumigationOperator">
+		                                            </label>
+		                                        </section>
+											</th>
+											<th>
+												<label label class="label" style="margin-top: 9px;text-align: center;">防护人员</label>
+											</th>
+											<th>
+												<section>
+		                                            <label class="input"> 
+		                                                <input class="form-control" type="text" ng-model="fumigation.protectPerson" ng-readonly="true"
+		                                                 name="protectPerson">
+		                                            </label>
+		                                        </section>
+											</th>
+											<th colspan="2">
+											</th>
+										</tr>
+										
+									</table>
+                                </table>
+                                
+                                
+                                
+                                <!---第二页----------------------------第二页----------------------------------  第二页  ----------------------------------第二页----------------------------------->
+                                <table ng-hide="!isLast" style="width:70%; border-width:5px; margin-left:15%;position:relative;margin-right:15%;">
+                                	<table ng-hide="!isLast" class="table table-striped table-bordered table-hover" width="100%">
+                                		<!--第一个tr开始 -->
+										<tr>
+											<th rowspan="4" width='10%'>
+												<label class="label" style="margin-top: 50%;text-align: center;">安全检查项目</label>
+											</th>
+											<th width='15%'>
+												<label class="label" style="margin-top: 9px;text-align: center;">环流风机/阀门</label>
+											</th>
+											<th width='15%'>
+												<section >
+			                                        <label class="radio">
+										                <input type="radio" value="1" ng-model="fumigationProcess.isCirculationFine" name="isCirculationFine" ng-disabled="isNotEdit" 
+										                ng-init="fumigationProcess.isCirculationFine = 1">
+										                <i></i>正常</label>
+										            <label class="radio">
+										                <input type="radio" value="0" ng-model="fumigationProcess.isCirculationFine" name="isCirculationFine" ng-disabled="isNotEdit">
+										                <i></i>不正常</label>
+		                                        </section>
+											</th>
+											<th width='15%'>
+												<label class="label" style="margin-top: 9px;text-align: center;">施药设备</label>
+											</th>
+											<th width='15%'>
+												<section>
+		                                            <label class="radio">
+										                <input type="radio" value="1" ng-model="fumigationProcess.isUseDrugEquipmentFine" name="isUseDrugEquipmentFine" ng-disabled="isNotEdit" 
+										                ng-init="fumigationProcess.isUseDrugEquipmentFine = 1">
+										                <i></i>正常</label>
+										            <label class="radio">
+										                <input type="radio" value="0" ng-model="fumigationProcess.isUseDrugEquipmentFine" name="isUseDrugEquipmentFine" ng-disabled="isNotEdit">
+										                <i></i>不正常</label>
+		                                        </section>
+											</th>
+											<th width='15%'>
+												<label class="label" style="margin-top: 9px;text-align: center;">仓房密闭性</label>
+											</th>
+											<th width='15%'>
+												<section>
+		                                            <label class="radio">
+									                <input type="radio" value="1" ng-model="fumigationProcess.isHouseTightnessFine" name="isHouseTightnessFine" ng-disabled="isNotEdit"
+									                ng-init="fumigationProcess.isHouseTightnessFine = 1">
+									                <i></i>正常</label>
+									            <label class="radio">
+									                <input type="radio" value="0" ng-model="fumigationProcess.isHouseTightnessFine" name="isHouseTightnessFine" ng-disabled="isNotEdit">
+									                <i></i>不正常</label>
+		                                        </section>
+											</th>
+										</tr>
+										
+										<tr>
+											<th width='15%'>
+												<label class="label" style="margin-top: 9px;text-align: center;">高空作业平台安全检测</label>
+											</th>
+											<th width='15%'>
+												<section >
+			                                        <label class="radio">
+										                <input type="radio" value="1" ng-model="fumigationProcess.isAerialWorkPlatformFine"name="isAerialWorkPlatformFine" ng-disabled="isNotEdit"
+										                ng-init="fumigationProcess.isAerialWorkPlatformFine = 1">
+										                <i></i>正常</label>
+										            <label class="radio">
+										                <input type="radio" value="0" ng-model="fumigationProcess.isAerialWorkPlatformFine"name="isAerialWorkPlatformFine" ng-disabled="isNotEdit">
+										                <i></i>不正常</label>
+		                                        </section>
+											</th>
+											<th width='15%'>
+												<label class="label" style="margin-top: 9px;text-align: center;">磷化氢检测仪</label>
+											</th>
+											<th width='15%'>
+												<section>
+		                                            <label class="radio">
+										                <input type="radio" value="1" ng-model="fumigationProcess.isPhosphineDetectorFine" name="isPhosphineDetectorFine" ng-disabled="isNotEdit"
+										                ng-init="fumigationProcess.isPhosphineDetectorFine = 1">
+										                <i></i>正常</label>
+										            <label class="radio">
+										                <input type="radio" value="0" ng-model="fumigationProcess.isPhosphineDetectorFine" name="isPhosphineDetectorFine" ng-disabled="isNotEdit">
+										                <i></i>不正常</label>
+		                                        </section>
+											</th>
+											<th width='15%'>
+												<label class="label" style="margin-top: 9px;text-align: center;">磷化氢报警仪</label>
+											</th>
+											<th width='15%'>
+												<section>
+		                                            <label class="radio">
+										                <input type="radio" value="1" ng-model="fumigationProcess.isPhosphineAlarmFine" name="isPhosphineAlarmFine" ng-disabled="isNotEdit"
+										                ng-init="fumigationProcess.isPhosphineAlarmFine = 1">
+										                <i></i>正常</label>
+										            <label class="radio">
+										                <input type="radio" value="0" ng-model="fumigationProcess.isPhosphineAlarmFine" name="isPhosphineAlarmFine" ng-disabled="isNotEdit">
+										                <i></i>不正常</label>
+		                                        </section>
+											</th>
+										</tr>
+										
+										<tr>
+											<th width='15%'>
+												<label class="label" style="margin-top: 9px;text-align: center;">测氧仪</label>
+											</th>
+											<th width='15%'>
+												<section >
+			                                        <label class="radio">
+										                <input type="radio" value="1" ng-model="fumigationProcess.isOxygenDetectorFine" name="isOxygenDetectorFine" ng-disabled="isNotEdit"
+										                ng-init="fumigationProcess.isOxygenDetectorFine = 1">
+										                <i></i>正常</label>
+										            <label class="radio">
+										                <input type="radio" value="0" ng-model="fumigationProcess.isOxygenDetectorFine" name="isOxygenDetectorFine" ng-disabled="isNotEdit">
+										                <i></i>不正常</label>
+		                                        </section>
+											</th>
+											<th width='15%'>
+												<label class="label" style="margin-top: 9px;text-align: center;">空气呼吸器</label>
+											</th>
+											<th width='15%'>
+												<section>
+		                                            <label class="radio">
+										                <input type="radio" value="1" ng-model="fumigationProcess.isAirRespiratorFine" name="isAirRespiratorFine" ng-disabled="isNotEdit"
+										                ng-init="fumigationProcess.isAirRespiratorFine = 1">
+										                <i></i>正常</label>
+										            <label class="radio">
+										                <input type="radio" value="0" ng-model="fumigationProcess.isAirRespiratorFine" name="isAirRespiratorFine" ng-disabled="isNotEdit">
+										                <i></i>不正常</label>
+		                                        </section>
+											</th>
+											<th width='15%'>
+												<label class="label" style="margin-top: 9px;text-align: center;">警戒线/警示牌</label>
+											</th>
+											<th width='15%'>
+												<section>
+		                                            <label class="radio">
+										                <input type="radio" value="1" ng-model="fumigationProcess.isHaveWarningSignFine" name="isHaveWarningSignFine" ng-disabled="isNotEdit"
+										                ng-init="fumigationProcess.isHaveWarningSignFine = 1">
+										                <i></i>有</label>
+										            <label class="radio">
+										                <input type="radio" value="0" ng-model="fumigationProcess.isHaveWarningSignFine" name="isHaveWarningSignFine" ng-disabled="isNotEdit">
+										                <i></i>无</label>
+		                                        </section>
+											</th>
+										</tr>
+										
+										<tr>
+											<th width='15%'>
+												<label class="label" style="margin-top: 9px;text-align: center;">灭火器</label>
+											</th>
+											<th width='15%'>
+												<section >
+			                                        <label class="radio">
+										                <input type="radio" value="1" ng-model="fumigationProcess.isFireExtinguisherFine" name="isFireExtinguisherFine" ng-disabled="isNotEdit"
+										                ng-init="fumigationProcess.isFireExtinguisherFine = 1">
+										                <i></i>正常</label>
+										            <label class="radio">
+										                <input type="radio" value="0" ng-model="fumigationProcess.isFireExtinguisherFine" name="isFireExtinguisherFine" ng-disabled="isNotEdit">
+										                <i></i>不正常</label>
+		                                        </section>
+											</th>
+											<th width='15%'>
+												<label class="label" style="margin-top: 9px;text-align: center;">急救箱</label>
+											</th>
+											<th width='15%'>
+												<section>
+		                                            <label class="radio">
+										                <input type="radio" value="1" ng-model="fumigationProcess.isHaveFirstAidKit" name="isHaveFirstAidKit" ng-disabled="isNotEdit"
+										                ng-init="fumigationProcess.isHaveFirstAidKit = 1">
+										                <i></i>有</label>
+										            <label class="radio">
+										                <input type="radio" value="0" ng-model="fumigationProcess.isHaveFirstAidKit" name="isHaveFirstAidKit" ng-disabled="isNotEdit">
+										                <i></i>无</label>
+		                                        </section>
+											</th>
+											<th colspan="2">
+											</th>
+										</tr>
+										
+										<!-- 散气情况 -->
+										<tr>
+											<th rowspan="2" width='10%'>
+												<label class="label" style="margin-top: 50%;text-align: center;">散气情况</label>
+											</th>
+											<th>
+												<label label class="label" style="margin-top: 9px;text-align: center;">散气开始时间<span style="color: red;">*</span></label>
+											</th>
+											<th>
+												<section>
+		                                            <label class="input">
+		                                                <input type="text" class="form-control" ng-model="fumigationProcess.bulkStartTime" name="bulkStartTime"
+	                                                		data-field="datetime" data-format="yyyy-MM-dd hh:mm:ss" ng-disabled="isNotEdit" required>
+		                                            </label>
+		                                        </section>
+											</th>
+											<th>
+												<label label class="label" style="margin-top: 9px;text-align: center;">散气结束时间<span style="color: red;">*</span></label>
+											</th>
+											<th>
+												<section>
+		                                            <label class="input">
+		                                            	<input type="text" class="form-control" ng-model="fumigationProcess.bulkEndTime" name="bulkEndTime"
+	                                                		data-field="datetime" data-format="yyyy-MM-dd hh:mm:ss" ng-disabled="isNotEdit" required>
+		                                            </label>
+		                                        </section>
+											</th>
+											<th>
+												<label label class="label" style="margin-top: 9px;text-align: center;">散气方法</label>
+											</th>
+											<th>
+												<section>
+		                                            <label class="input"> 
+		                                                <input class="form-control" type="text" ng-model="fumigationProcess.bulkGasType" 
+		                                                ng-readonly="isNotEdit" name="bulkGasType">
+		                                            </label>
+		                                        </section>
+											</th>
+										</tr>
+										<tr>
+											<th>
+												<label label class="label" style="margin-top: 9px;text-align: center;">散气结束时毒气浓度(ppm)<span style="color: red;">*</span></label>
+											</th>
+											<th>
+												<section>
+		                                            <label class="input"> 
+		                                                <input class="form-control" type="text" ng-model="fumigationProcess.bulkEndToxicGasConcentration" 
+		                                                ng-readonly="isNotEdit" name="bulkEndToxicGasConcentration" validNumber="true" required>
+		                                            </label>
+		                                        </section>
+											</th>
+											<th>
+												<label label class="label" style="margin-top: 9px;text-align: center;">药剂残留率(ppm)<span style="color: red;">*</span></label>
+											</th>
+											<th>
+												<section>
+		                                            <label class="input"> 
+		                                                <input class="form-control" type="text" ng-model="fumigationProcess.drugResidueRate" 
+		                                                ng-readonly="isNotEdit" name="drugResidueRate" validNumber="true" required>
+		                                            </label>
+		                                        </section>
+											</th>
+											<th colspan="2">
+											</th>
+										</tr>
+										
+										
+										<!-- 创建信息 -->
+										<tr ng-hide="!isNotEdit">
+											<th>
+												<label label class="label" style="margin-top: 9px;text-align: center;">创建信息</label>
+											</th>
+											<th>
+												<label label class="label" style="margin-top: 9px;text-align: center;">创建时间</label>
+											</th>
+											<th colspan="2">
+												<section>
+		                                            <label label class="input" style="margin-top: 9px;">
+		                                            	{{ fumigationProcess.createTime | date:'yyyy-MM-dd HH:mm:ss' }}
+		                                            </label>
+		                                        </section>
+											</th>
+											<th>
+												<label label class="label" style="margin-top: 9px;text-align: center;">创建人</label>
+											</th>
+											<th colspan="2">
+												<section>
+													<label label class="input" style="margin-top: 9px;">
+														{{userInfoData[fumigationProcess.creater]}}
+													</label>
+		                                        </section>
+											</th>
+										</tr>
+									</table>
+                                </table>
+                                
+                                <!-- 子表    --------磷化氢浓度检测 -->
+                                <header ng-hide="!isLast">
+                                	<h3>
+                                		<strong>磷化氢浓度检测</strong>
+                                		<a class="btn btn-primary " ng-hide="isNotEdit" ng-click="addRow()">新增</a>
+                               		</h3>
+                          		</header>
+                          		<fieldset ng-hide="!isLast">
+                                	<table class="table table-striped table-bordered table-hover"  >
+										<thead>
+											<tr>
+												<th>序号</th>
+												<th>检查时间</th>
+												<th>测点1(ppm)</th>
+												<th>测点2(ppm)</th>
+												<th>测点3(ppm)</th>
+												<th>测点4(ppm)</th>
+												<th>测点5(ppm)</th>
+												<th>空间(ppm)</th>
+												<th>最低浓度(ppm)</th>
+												<th>检测人</th>
+												<th>操作</th>
+											</tr>
+										</thead>
+
+										<tbody>
+											<tr ng-repeat="detailInfo in addedDetail">
+												<td>{{$index + 1}}</td>
+												<td>{{detailInfo.checkTime}}</td>
+												<td>{{detailInfo.checkPointOne}}</td>
+												<td>{{detailInfo.checkPointTwo}}</td>
+												<td>{{detailInfo.checkPointThree}}</td>
+												<td>{{detailInfo.checkPointFour}}</td>
+												<td>{{detailInfo.checkPointFive}}</td>
+												<td>{{detailInfo.checkSpace}}</td>
+												<td>{{detailInfo.minimumConcentration}}</td>
+												<td>{{detailInfo.checkMan}}</td>
+												<td>
+													<a class="btn btn-primary" ng-hide="isNotEdit" ng-click="editRow(detailInfo)">编辑</a>
+                                                	<a class="btn btn-primary" ng-hide="isNotEdit" ng-click="deleteRow(detailInfo)">删除</a>
+												</td>
+											</tr>
+										</tbody>
+		                             </table>
+                          		</fieldset>
+                                
+                                <fieldset>
+                                </fieldset>
+                                
+                                </fieldset>
+                                <footer class="text-align-center" >
+	                                    <button type="button" class="btn btn-default" ng-click="retList()">取消</button>
+	                                    <button type="button" class="btn btn-primary" ng-hide="!showEndTaskButton" ng-click="endTask()">结束</button>
+	                                    <button type="button" class="btn btn-primary" ng-hide="isNotEdit" ng-click="save()">保存</button>
+	                                	<button type="button" class="btn btn-primary" ng-hide="!showNextButton" ng-click="next()">下一步</button>
+	                                    <button type="button" class="btn btn-primary" ng-hide="!showLastButton" ng-click="last()">上一步</button>
+	                            </footer>
+                            </form>
+                        </div>
+                    </div>
+            </article>
+        </div>
+    </section>
+</div>

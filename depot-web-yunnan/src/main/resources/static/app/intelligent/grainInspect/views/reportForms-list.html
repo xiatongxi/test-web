@@ -1,0 +1,189 @@
+<!-- MAIN CONTENT -->
+<div id="content">
+    <!-- widget grid -->
+    <section widget-grid id="widget-grid">
+        <div class="row">
+            <article class="col-sm-12">
+
+                <div jarvis-widget id="standard-datatable-widget" data-widget-color="darken"
+                     data-widget-editbutton="false">
+                    <header>
+                        <span class="widget-icon"> <i class="fa fa-table"></i> </span>
+                        <h2>粮情报表列表&emsp;&emsp;<span style="color: red;">注:标红数值表示不在合理范围或设备异常.</span></h2>
+                    </header>
+                    <div>
+                        <div class="widget-body no-padding">
+                            <div id="DataTables_Table_1_wrapper" class="dataTables_wrapper form-inline no-footer">
+                                <div class="dt-toolbar">
+                                    <div class="col-xs-12 col-sm-10">
+                                        <a class="btn btn-primary btn-sm" href-void
+                                           ng-click="exportToExcel('#exampleTableEvents')">
+                                            <span class="glyphicon glyphicon-export"></span>导出Excel
+                                        </a>&nbsp;
+                                        <!--<a class="btn btn-primary btn-sm" href-void ng-click="exportToWord('#exampleTableEvents')">
+                                            <span class="glyphicon glyphicon-export"></span>导出Word
+                                        </a>&nbsp;-->
+                                        <a class="btn btn-primary btn-sm" ng-click="print()">
+                                            <span class="fa fa-print"></span>&nbsp;打&nbsp;印
+                                        </a>&nbsp;
+                                        <label> 仓房名称:
+                                            <select ng-model="search.vCfCode" class="form-control input-sm"
+                                                    ng-options="store.storehouseCode as store.storehouseName for store in storelist">
+                                                <option value="">请选择</option>
+                                            </select>&nbsp;
+                                        </label>
+                                        <label>报表周期:
+                                            <select class="form-control input-sm" ng-model="reportForm">
+                                                <option value="">-请选择-</option>
+                                                <option value="周报">周报</option>
+                                                <option value="月报">月报</option>
+                                                <option value="季报">季报</option>
+                                                <option value="年报">年报</option>
+                                            </select>&nbsp;
+                                        </label>
+                                        <label>检测时间:
+                                            <input style="width: 100px;" class="form-control" type="text"
+                                                   ng-model="search.startTime" data-smart-datepicker>
+                                            -&nbsp;<input style="width: 100px;" class="form-control" type="text"
+                                                          ng-model="search.endTime" data-smart-datepicker>
+                                        </label>
+                                        <a class="btn btn-default btn-sm" ng-click="loadData()">
+                                            <i class="fa fa-search"></i>&nbsp;查&nbsp;询
+                                        </a>
+                                        <a class="btn btn-default btn-sm" ng-click="emptyCondition()"> <i class=""></i>&nbsp;清&nbsp;空</a>
+                                    </div>
+                                    <div class="col-sm-2 col-xs-2 hidden-xs">
+                                        <div class="dataTables_length">
+                                            <label>每页显示 <select ng-model="pageInfo.pageSize" ng-change="loadData()"
+                                                                ng-options="num as num for num in [1,10,25,50,100]"
+                                                                class="form-control input-sm"></select> 条
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div id="print">
+                                    <table id="exampleTableEvents"
+                                           class="table table-striped table-bordered table-hover" width="100%"
+                                           border="1" style="border-collapse:collapse;border:none;">
+                                        <thead>
+                                        <tr>
+                                            <th colspan="12" style="text-align:center;"><h4><b>粮情{{reportForm}}表</b>
+                                            </h4></th>
+                                        </tr>
+                                        <tr>
+                                            <th data-class="expand" style="text-align:center;">序号</th>
+                                            <th data-class="expand" style="text-align:center;">仓房名称</th>
+                                            <th data-class="expand" style="text-align:center;">品种</th>
+                                            <th data-class="expand" style="text-align:center;">库存数量(kg)</th>
+                                            <th data-class="expand" style="text-align:center;">检测时间</th>
+                                            <th data-class="expand" style="text-align:center;">气温(℃)</th>
+                                            <th data-class="expand" style="text-align:center;">气湿(%RH)</th>
+                                            <th data-class="expand" style="text-align:center;">仓温(℃)</th>
+                                            <th data-class="expand" style="text-align:center;">仓湿(%RH)</th>
+                                            <th data-class="expand" style="text-align:center;">平均粮温(℃)</th>
+                                            <th data-class="expand" style="text-align:center;">最高粮温(℃)</th>
+                                            <th data-class="expand" style="text-align:center;">最低粮温(℃)</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr ng-repeat="grainReport in pageInfo.list">
+                                            <td style="text-align:center;">{{ $index + 1 }}</td>
+                                            <td style="text-align:center;">{{
+                                                storeHouseCodeObj[grainReport.storehouse].storehouseName }}
+                                            </td>
+                                            <td style="text-align:center;">
+                                                {{dicData[storehouseCode[grainReport.storehouse].pz]}}
+                                            </td>
+                                            <td style="text-align:center;">
+                                                {{storehouseCode[grainReport.storehouse].kcsl}}
+                                            </td>
+                                            <td style="text-align:center;">{{ grainReport.time | date:'yyyy-MM-dd HH:mm:ss' }}
+                                            </td>
+                                            <td style="text-align:center;">
+                                                <div ng-if="grainReport.outtemp==250">
+                                                    <acronym title="设备异常"><span
+                                                            style="color: red;">{{ -100 }}</span></acronym>
+                                                </div>
+                                                <div ng-if="grainReport.outtemp!=250">{{ grainReport.outtemp }}</div>
+                                            </td>
+                                            <td style="text-align:center;">
+                                                <div ng-if="grainReport.outh==250">
+                                                    <acronym title="设备异常"><span
+                                                            style="color: red;">{{ -1 }}</span></acronym>
+                                                </div>
+                                                <div ng-if="grainReport.outh!=250">{{ grainReport.outh }}</div>
+                                            </td>
+                                            <td style="text-align:center;">
+                                                <div ng-if="grainReport.intemp==250">
+                                                    <acronym title="设备异常"><span
+                                                            style="color: red;">{{ -100 }}</span></acronym>
+                                                </div>
+                                                <div ng-if="grainReport.intemp!=250">{{ grainReport.intemp }}</div>
+                                            </td>
+                                            <td style="text-align:center;">
+                                                <div ng-if="grainReport.inh==250">
+                                                    <acronym title="设备异常"><span
+                                                            style="color: red;">{{ -1 }}</span></acronym>
+                                                </div>
+                                                <div ng-if="grainReport.inh!=250">{{ grainReport.inh }}</div>
+                                            </td>
+                                            <td style="text-align:center;">
+                                                <div ng-if="grainReport.avg==250">
+                                                    <acronym title="设备异常"><span style="color: red;">{{ -100 }}</span></acronym>
+                                                </div>
+                                                <div ng-if="grainReport.avg!=250">{{ grainReport.avg }}</div>
+                                            </td>
+                                            <td style="text-align:center;">
+                                                <!--高温报警-->
+                                                <div ng-if="grainReport.max==250">
+                                                    <acronym title="设备异常"><span style="color: red;">{{ -100 }}</span></acronym>
+                                                </div>
+                                                <div ng-if="grainReport.max!=250">
+                                                    <div ng-if="grainReport.max >= warningValueList[grainReport.storehouse].high">
+                                                        <div ng-if="grainReport.max!=250">
+                                                            <acronym title="粮温高限报警为: {{warningValueList[grainReport.storehouse].high}}℃">
+                                                                <span style="color: red;">{{ grainReport.max }}</span>
+                                                            </acronym>
+                                                        </div>
+                                                    </div>
+                                                    <div ng-if="grainReport.max < warningValueList[grainReport.storehouse].high">
+                                                        <span>{{ grainReport.max }}</span>
+                                                    </div>
+                                                    <div ng-if="warningValueList[grainReport.storehouse].high == null">
+                                                        <span>{{ grainReport.max }}</span>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td style="text-align:center;">
+                                                <!--低温报警-->
+                                                <div ng-if="grainReport.min==250">
+                                                    <acronym title="设备异常"><span style="color: red;">{{ -100 }}</span></acronym>
+                                                </div>
+                                                <div ng-if="grainReport.min!=250">
+                                                    <div ng-if="grainReport.min <= warningValueList[grainReport.storehouse].low">
+                                                        <acronym title="粮温低限报警为: {{warningValueList[grainReport.storehouse].low}}℃">
+                                                            <span style="color: red;">{{ grainReport.min }}</span>
+                                                        </acronym>
+                                                    </div>
+                                                    <div ng-if="grainReport.min > warningValueList[grainReport.storehouse].low">
+                                                        <span>{{ grainReport.min }}</span>
+                                                    </div>
+                                                    <div ng-if="warningValueList[grainReport.storehouse].low == null">
+                                                        <span>{{ grainReport.min }}</span>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div smart-include="app/layout/partials/page.tpl.html"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </article>
+        </div>
+    </section>
+</div>

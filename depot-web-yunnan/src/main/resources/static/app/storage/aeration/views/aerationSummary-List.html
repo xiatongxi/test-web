@@ -1,0 +1,138 @@
+<!-- MAIN CONTENT -->
+<div id="content">
+	<!-- widget grid -->
+	<section widget-grid id="widget-grid">
+		<div class="row">
+			<article class="col-sm-12">
+				<legend ng-show="isShow=='1'">
+					<a ng-click="returnUp()" href-void="" class="btn btn-default btn-xs" href="#">
+						<i class="fa fa-angle-left"></i>&nbsp;返回&nbsp;
+					</a>
+				</legend>
+				<div jarvis-widget id="standard-datatable-widget"
+					data-widget-color="darken" data-widget-editbutton="false">
+					<header>
+						<span class="widget-icon"> <i class="fa fa-table"></i></span>
+						<h2>善后工作列表</h2>
+					</header>
+					<div>
+						<div class="widget-body no-padding">
+							<div id="DataTables_Table_1_wrapper"
+								class="dataTables_wrapper form-inline no-footer">
+								<div class="dt-toolbar">
+									<div class="col-xs-9 col-sm-10">
+										<div class="form-group">
+											<a has-permission="150" ng-show="isShow=='0'" class="btn btn-primary btn-sm" ng-click="edit('', 0)">
+												<span class="fa fa-plus"></span>&nbsp;新&nbsp;增
+											</a>&emsp;
+											<label>
+												<select ng-model="summary.houseId" class="form-control"
+														ng-options="store.storehouseId as store.storehouseName for store in storelist">
+													<option value="">--仓房名称--</option>
+												</select>
+											</label>&emsp;
+											<label>
+											<label class="select">
+												<multi-select-tree
+                                                        data-input-model="grainAttributeTreeDataLspz" 
+                                                        data-output-model="summary.goodsKinds"
+                                                        data-default-label="--粮食品种--" 
+                                                        name="goodsKinds" 
+                                                        multi-select="false" >
+                                                </multi-select-tree>
+											</label></label>&emsp;
+											<label>
+												<select ng-model="summary.aerationTarget" class="form-control"
+														ng-options="enum.enumid as enum.enumname for enum in dicDataList[5218]">
+													<option value="">--通风方式--</option>
+												</select>
+											</label>&emsp;
+											<a class="btn btn-default btn-sm" ng-click="loadData()">
+												<i class="fa fa-search"></i>&nbsp;查&nbsp;询
+											</a>
+										</div>
+									</div>
+									<div class="col-sm-2 col-xs-6 hidden-xs">
+										<div class="dataTables_length">
+											<label>每页显示 <select ng-model="pageInfo.pageSize" ng-change="loadData(pageInfo.pageNum=1)"
+													ng-options="num as num for num in [10,25,50,100]"
+													class="form-control input-sm"></select> 条
+											</label>
+										</div>
+									</div>
+								</div>
+
+								<table class="table table-striped table-bordered table-hover"
+									width="100%">
+									<thead>
+										<tr>
+											<th data-class="expand">方案编号</th>
+											<th data-class="expand">粮库名称</th>
+											<th data-class="expand">仓房名称</th>
+											<th data-class="expand">粮食品种</th>
+											<th data-hide="expand">通风方式</th>
+											<th data-hide="expand">创建人</th>
+											<th data-hide="expand">创建日期</th>
+											<th data-hide="expand">操作</th>
+										</tr>
+									</thead>
+
+									<tbody>
+										<tr ng-repeat="summary in pageInfo.list | filter:search">
+											<td>{{summary.taskCode}}</td>
+											<td>{{deptName}}</td>
+											<td>{{storehouseObj[summary.houseId].storehouseName}}</td>
+											<td>{{dicData[summary.goodsKinds]}}</td>
+											<td>{{dicData[summary.aerationTarget]}}</td>
+											<td>{{summary.operator}}</td>
+											<td>{{summary.inputDate | date :'yyyy-MM-dd'}}</td>
+											<td>
+												<a has-permission="277" ng-show="isShow=='0'" href-void ng-click="edit(summary.id, 2)">
+													<i class="fa fa-edit"></i>修改
+												</a>
+												<a href-void ng-click="edit(summary.id, 1)">
+													<i class="fa fa-info-circle"></i>查看
+												</a>
+											</td>
+										</tr>
+									</tbody>
+								</table>
+								<div smart-include="app/layout/partials/page.tpl.html"></div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</article>
+		</div>
+
+	</section>
+
+</div>
+
+
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog"
+	aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal"
+					aria-hidden="true">&times;</button>
+				<h4 class="modal-title" id="myModalLabel">计划</h4>
+			</div>
+			<div class="modal-body">
+
+<!-- 				<div smart-include="app/basic/storehouse/views/Storehouse-edit.html"></div> -->
+
+			</div>
+			<div class="modal-footer">
+				<button ng-click="save()" type="button" class="btn btn-primary">提交</button>
+				<button type="button" class="btn btn-default" data-dismiss="modal">
+					取消</button>
+			</div>
+		</div>
+		<!-- /.modal-content -->
+	</div>
+	<!-- /.modal-dialog -->
+</div>
+<!-- /.modal -->

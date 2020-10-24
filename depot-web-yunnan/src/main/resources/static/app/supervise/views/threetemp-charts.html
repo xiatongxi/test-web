@@ -1,0 +1,79 @@
+<div class="modal-body" id="ocxDiv">
+    <section widget-grid id="widget-grid">
+        <div class="row">
+            <article class="col-sm-12">
+                <label ng-show="isShow=='1'">
+                    <a class="btn btn-primary btn-sm" ng-click="returnUp()"> <i class="fa fa-reply"></i>返&nbsp;回</a>&nbsp;
+                </label>
+                <div jarvis-widget id="standard-datatable-widget" data-widget-color="darken" data-widget-editbutton="false">
+                    <header>
+                        <span class="widget-icon"> <i class="fa fa-table"></i> </span>
+                        <h2>粮情列表 </h2>
+                    </header>
+                    <div>
+                        <div class="widget-body no-padding">
+                            <div id="DataTables_Table_1_wrapper" class="dataTables_wrapper form-inline no-footer">
+                                <div class="dt-toolbar">
+                                    <div class="col-xs-12 col-sm-9" ng-show="isShow!='1'">
+                                        <div class="form-group">
+                                            <label>仓房名称:
+                                                <select id="houseid" ng-model="houseId" class="form-control"
+                                                        ng-options="store.storehouseId as store.storehouseName for store in storehouseList">
+                                                    <option value="">--请选择--</option>
+                                                </select>
+                                                <a class="btn btn-default btn-sm" ng-click="loadSwTabData()"> <i class="fa fa-search"></i>&nbsp;查&nbsp;询</a>
+                                            </label>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-sm-2 col-xs-2 hidden-xs" style="float: right;">
+                                        <div class="dataTables_length" style="vertical-align: middle;">
+                                            <label style="float: right;"><div style="width: 16px;height: 16px;background: #fb7f69;float: left;"></div>仓外温</label>
+                                            <label style="float: right;"><div style="width: 16px;height: 16px;background: #97bbcd;float: left;"></div>粮温</label>
+                                            <label style="float: right;"><div style="width: 16px;height: 16px;background: #dcdcdc;float: left;"></div>仓内温</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <table class="table table-striped table-bordered table-hover" width="100%">
+                                    <thead>
+                                        <tr>
+                                            <th style="text-align: center;">仓房名称</th>
+                                            <th style="text-align: center;">品种</th>
+                                            <th style="text-align: center;">性质</th>
+                                            <!-- <th style="text-align: center;">粮食所属</th> -->
+                                            <th style="text-align: center;">最高温℃</th>
+                                            <th style="text-align: center;">平均温℃</th>
+                                            <th style="text-align: center;">最低温℃</th>
+                                            <th style="text-align: center;">仓内温度℃</th>
+                                            <th style="text-align: center;">仓内湿度℃</th>
+                                            <th style="text-align: center;">仓外温度℃</th>
+                                            <th style="text-align: center;">仓外湿度℃</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr>
+                                        <td style="text-align: center;">{{houseTemp.HouseNo}}</td>
+                                        <td style="text-align: center;">{{dicData[houseTemp.sub_type]}}</td>
+                                        <td style="text-align: center;">{{dicData[houseTemp.quality]}}</td>
+                                        <!-- <td style="text-align: center;">{{dicData[houseTemp.record_unite]}}</td> -->
+                                        <td style="text-align: center;">{{houseTemp.MaxT == 250?'设备异常' : houseTemp.MaxT}}</td>
+                                        <td style="text-align: center;">{{houseTemp.MaxT == 250?'设备异常' : houseTemp.MaxT}}</td>
+                                        <td style="text-align: center;">{{houseTemp.AvgT == 250?'设备异常' : houseTemp.AvgT}}</td>
+                                        <td style="text-align: center;">{{houseTemp._InT == 250?'设备异常' : houseTemp._InT}}</td>
+                                        <td style="text-align: center;">{{houseTemp.InH == 250?'设备异常' : houseTemp.InH}}</td>
+                                        <td style="text-align: center;">{{houseTemp.OutT == 250?'设备异常' : houseTemp.OutT}}</td>
+                                        <td style="text-align: center;">{{houseTemp.OutH == 250?'设备异常' : houseTemp.OutH}}</td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                                <div id="canvass">
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </article>
+        </div>
+    </section>
+</div>

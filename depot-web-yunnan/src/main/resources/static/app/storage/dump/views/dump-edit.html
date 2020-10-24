@@ -1,0 +1,116 @@
+<!-- MAIN CONTENT -->
+<div id="content">
+
+	<!-- widget grid -->
+	<section id="widget-grid" widget-grid>
+
+		<!-- START ROW -->
+		<div class="row">
+
+			<!-- NEW COL START -->
+			<article class="col-sm-12 col-md-12 col-lg-12">
+
+				<!-- Widget ID (each widget will need unique ID)-->
+				<div jarvis-widget id="form-grid-widget"
+					 data-widget-colorbutton="false" data-widget-editbutton="false"
+					 data-widget-custombutton="false">
+
+					<!-- widget div-->
+					<div>
+
+						<!-- widget content -->
+						<div class="widget-body no-padding">
+							<form id="dump-form" class="smart-form ng-pristine ng-valid" data-validator-option="validateOptions" novalidate="novalidate">
+								<header>
+									<a href-void class="btn btn-default btn-xs" ng-click="retrunTop()">
+										<i class="fa fa-angle-left"></i>&nbsp;返回&nbsp;
+									</a>
+									&nbsp;<strong>转储详情</strong>
+								</header>
+								<fieldset>
+									<div class="row">
+										<section class="col col-4">
+											<label class="label">变动后性质：<span style="color: red;">*</span></label>
+											<label class="select" id="grainAttribute-label">
+						                          <multi-select-tree 
+						                              disabled-tree="isNotEdit"
+						                              data-input-model="grainAttributeTreeData" 
+						                              data-output-model="dump.xLsxz"
+						                              data-default-label="变动后性质" name="xLsxz" 
+						                              multi-select="false"
+						                              select-only-leafs="true"
+						                               required>
+						                          </multi-select-tree>
+						                          <em><span style="color: #D56161;margin-top:6px;padding:0 1px;font-style:normal;font-size:11px;
+						                         line-height:15px;" id="grainAttribute-error"></span></em>
+						                     </label>
+										</section>
+										<section class="col col-4">
+											<label style="margin-bottom:8px;">业务发生日期：<span style="color: red;">*</span></label>
+											<label class="input">
+												<input required ng-model="dump.businessCreateTime" name="businessCreateTime" class="form-control datepicker" ng-disabled="isNotEdit" data-smart-datepicker >
+											</label>
+										</section>
+										<section class="col col-4">
+											<label></label>
+											<label class="input"></label>
+										</section>
+										<section class="col col-4">
+											<label></label>
+											<label class="input"></label>
+										</section>
+									</div>
+								</fieldset>
+
+								<header>
+									<h3>
+										<strong>转储明细</strong>
+										<a class="btn btn-primary" ng-hide="isNotEdit" ng-click="addRow()"><i class="fa fa-plus"></i>选择</a>
+									</h3>
+								</header>
+								<fieldset>
+									<table class="table table-striped table-bordered table-hover"  >
+										<thead>
+										<tr>
+											<th data-class="expand">仓房名称</th>
+											<th data-class="expand">货位名称</th>
+											<th data-class="expand">粮油品种</th>
+											<th data-class="expand">原粮油性质</th>
+											<th data-class="expand">等级</th>
+											<th data-class="expand">仓房数量（公斤）</th>
+											<th data-class="expand">检验结果</th>
+											<th data-class="expand">状态</th>
+											<th data-hide="phone,tablet">操作</th>
+										</tr>
+										</thead>
+
+										<tbody>
+										<tr ng-repeat="detailInfo in addedDetail">
+											<td>{{storehouseObj[detailInfo.houseId].storehouseName}}</td>
+											<td>{{warehouseObj[detailInfo.wareId].warehouseName}}</td>
+											<td>{{dicData[detailInfo.lspz]}}</td>
+											<td>{{dicData[detailInfo.yLsxz]}}</td>
+											<td>{{dicData[detailInfo.lsdj]}}</td>
+											<td>{{detailInfo.clsl}}</td>
+											<td>{{detailInfo.zjjg}}</td>
+											<td>{{detailInfo.ysStatus}}</td>
+											<td>
+												<a class="btn btn-primary" ng-click="checkTestMessage(detailInfo.ysId)">查看验收信息</a>
+											</td>
+										</tr>
+										</tbody>
+									</table>
+								</fieldset>
+
+								<footer class="text-align-center">
+									<button type="button" class="btn btn-default" ng-click="retrunTop()">取消</button>
+									<button type="button" ng-hide="isNotEdit" class="btn btn-primary" ng-click="save()">提交</button>
+								</footer>
+							</form>
+						</div>
+					</div>
+				</div>
+			</article>
+		</div>
+	</section>
+</div>

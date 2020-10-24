@@ -1,0 +1,121 @@
+<!-- MAIN CONTENT -->
+<div id="content">
+	<!-- widget grid -->
+	<section widget-grid id="widget-grid">
+		<div class="row">
+			<article class="col-sm-12">
+				<div jarvis-widget id="standard-datatable-widget"
+					data-widget-color="darken" data-widget-editbutton="false">
+					<header>
+						<span class="widget-icon"> <i class="fa fa-table"></i>
+						</span>
+						<h2>员工信息列表</h2>
+					</header>
+					<div>
+						<div class="widget-body no-padding">
+							<div id="DataTables_Table_1_wrapper"
+								class="dataTables_wrapper form-inline no-footer">
+								<div class="dt-toolbar">
+									<div class="col-xs-12 col-sm-9">
+										<div class="form-group">
+											<a class="btn btn-primary btn-sm" ng-click="edit()">
+												<span class="fa fa-plus"></span>&nbsp;新&nbsp;增
+											</a>&emsp;
+											<label>员工姓名:&emsp;<input class="form-control input-sm" ng-model="keper.name" placeholder=""> &emsp;
+											</label>
+											<a class="btn btn-default btn-sm" ng-click="loadData()">
+												<i class="fa fa-search"></i>&nbsp;查&nbsp;询
+											</a>
+										</div>
+									</div>
+									<div class="col-sm-3 col-xs-6 hidden-xs">
+										<div class="dataTables_length">
+											<label>每页显示 <select ng-model="pageInfo.pageSize" ng-change="loadData(pageInfo.pageNum=1)"
+													ng-options="num as num for num in [10,25,50,100]"
+													class="form-control input-sm"></select> 条
+											</label>
+										</div>
+									</div>
+								</div>
+
+								<table class="table table-striped table-bordered table-hover"
+									width="100%">
+									<thead>
+										<tr>
+											<th data-hide="expand">员工姓名</th>
+											<th data-class="expand">性别</th>
+											<th data-class="expand">联系电话</th>
+											<th data-class="expand">邮箱</th>
+											<th data-hide="expand">出生日期</th>
+											<th data-hide="expand">所属单位</th>
+											<th data-hide="expand">操作</th>
+										</tr>
+									</thead>
+
+									<tbody>
+										<tr ng-repeat="keeper in pageInfo.list | filter:search">
+											<td>{{keeper.name}}</td>
+											<td>{{dicData[keeper.sex]}}</td>
+											<td>{{keeper.phone}}</td>
+											<td>{{keeper.email}}</td>
+											<td>{{keeper.birthday | date:'yyyy-MM-dd'}}</td>
+											<td>{{keeper.depotName}}</td>
+											<td>
+												<span ng-if="roleObj[keeper.postType]=='保管员'">
+													<a href-void ng-click="getUnitStoreList(keeper.id,keeper.orgId)">
+														<i class="fa fa-cogs"></i>分配仓房
+													</a>
+												</span>
+												<a href-void ng-click="edit(keeper.id, 2)">
+													<i class="fa fa-edit"></i>修改
+												</a>
+												<a href-void ng-click="remove(keeper.id)">
+													<i class="fa fa-trash-o"></i>删除
+												</a>
+												<a href-void ng-click="view(keeper.id)">
+													<i class="fa fa-info-circle"></i>查看
+												</a> 
+											</td>
+										</tr>
+									</tbody>
+
+								</table>
+								<div smart-include="app/layout/partials/page.tpl.html"></div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</article>
+		</div>
+
+	</section>
+
+</div>
+
+
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog"
+	aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal"
+					aria-hidden="true">&times;</button>
+				<h4 class="modal-title" id="myModalLabel">保管员仓房权限权限分配信息</h4>
+			</div>
+			<div class="modal-body">
+
+				<div smart-include="app/basic/keeper/views/housePower-edit.html"></div>
+
+			</div>
+			<div class="modal-footer">
+				<button ng-click="save()" type="button" class="btn btn-primary">提交</button>
+				<button type="button" class="btn btn-default" data-dismiss="modal">
+					取消</button>
+			</div>
+		</div>
+		<!-- /.modal-content -->
+	</div>
+	<!-- /.modal-dialog -->
+</div>
+<!-- /.modal -->

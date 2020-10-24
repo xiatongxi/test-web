@@ -1,0 +1,248 @@
+<div class="modal-content">
+    <div class="modal-header">
+        <button type="button" class="close" ng-click="cancel()">
+            &times;
+        </button>
+        <h4 class="modal-title" id="myModalLabel">明细详情</h4>
+    </div>
+    <div class="modal-body">
+        <form id="storeWareDetail-form" class="smart-form ng-pristine ng-valid" data-validator-option="validateOptions" novalidate="novalidate">
+			<div class="row" >
+				<section class="col col-sm-4">
+					<label class="label">粮库名称<span style="color: red;">*</span></label> 
+					<label class="select"> 
+	                    <select ng-model="storeWareDetail.state" name="state" required
+							ng-options="agent.depotId as agent.agentDepotName for agent in agentDepotList"
+							ng-change="depotChange()" ng-disabled="isNotEdit" class="form-control" >
+								<option value="">--请选择--</option>
+						</select>
+					</label>
+				</section>
+				<section class="col col-sm-4">
+					<label class="label">仓房名称<span style="color: red;">*</span></label> 
+					<label class="select"> 
+	                    <select ng-model="storeWareDetail.houseId" name="houseId" required
+							ng-options="store.storehouseId as store.storehouseName for store in storehouseList"
+							ng-change="houseChange()" ng-disabled="isNotEdit" class="form-control" >
+								<option value="">--请选择--</option>
+						</select>
+					</label>
+				</section>
+				<section class="col col-sm-4">
+					<label class="label">货位名称<span style="color: red;">*</span></label> 
+					<label class="select"> 
+	                    <select ng-model="storeWareDetail.warehouseId" name="warehouseId" required
+							ng-options="ware.warehouseId as ware.warehouseName for ware in warehouseList"
+							ng-change="warehouseChange()" class="form-control" >
+							<option value="">--请选择--</option>
+						</select>
+					</label>
+				</section>
+			</div>
+			<div class="row">
+			    <section class="col col-sm-4">
+					<label class="label">粮油品种<span style="color: red;">*</span></label> 
+		             <label class="select"> 
+		                   <select ng-model="storeWareDetail.grainKind" ng-disabled="!warehouseIdEdit"   
+                             ng-change="getGrainDetailKind(storeWareDetail.grainKind)" name="grainKind" 
+		                      ng-options="enum.enumid as enum.enumname for enum in dicDataList[1061]" required>
+		                      <option value="">--请选择--</option>
+		                    </select>
+		             </label>
+				</section>
+				<section class="col col-sm-4">
+					<label class="label">明细品种<span style="color: red;">*</span></label> 
+		            <label class="select" id="grainDetailKind-label">
+                        <multi-select-tree 
+                            disabled-tree="!warehouseIdEdit"
+                            data-input-model="grainDetailKindTreeData" 
+                            data-output-model="storeWareDetail.grainDetailKind"
+                            data-default-label="请选择" name="grainDetailKind" 
+                            multi-select="false"
+                            select-only-leafs="true"
+                            data-callback="selectOnlyDetailKind(item, selectedItems)" required>
+                        </multi-select-tree>
+                        <!-- select-only-leafs="false" -->
+                         <em><span style="color: #D56161;margin-top:6px;padding:0 1px;font-style:normal;font-size:11px;
+                         line-height:15px;" id="grainDetailKind-error"></span></em>
+                    </label>
+				</section>
+				<section class="col col-sm-4">
+					<label class="label">粮油性质<span style="color: red;">*</span></label>
+		             <label class="select" id="grainAttribute-label">
+                          <multi-select-tree
+                              disabled-tree="!warehouseIdEdit"
+                              data-input-model="grainAttributeTreeData"
+                              data-output-model="storeWareDetail.grainAttribute"
+                              data-default-label="请选择" name="grainAttribute"
+                              multi-select="false"
+                              select-only-leafs="true"
+                              data-callback="selectOnlyAttribute(item, selectedItems)" required>
+                          </multi-select-tree>
+                          <em><span style="color: #D56161;margin-top:6px;padding:0 1px;font-style:normal;font-size:11px;
+                         line-height:15px;" id="grainAttribute-error"></span></em>
+                     </label>
+				</section>
+			</div>
+			<div class="row">
+			    <section class="col col-sm-4">
+					<label class="label">等级<span style="color: red;">*</span></label>
+		             <label class="select">
+		                   <select ng-model="storeWareDetail.grainGrade" ng-disabled="!warehouseIdEdit"  name="grainGrade"
+		                      ng-options="enum.enumid as enum.enumname for enum in dicDataList[1002]"  required>
+		                      <option value="">--请选择--</option>
+		                    </select>
+		             </label>
+				</section>
+				<section class="col col-sm-4">
+					<label class="label">生产年份<span style="color: red;">*</span></label>
+                    <section>
+                         <label class="select">
+                           <select ng-model="storeWareDetail.productiveYear" ng-disabled="isNotEdit" name="productiveYear" 
+                           ng-options="enum.enumid as enum.enumname for enum in dicDataList[1004]"  required ng-change="changeDate()">
+                           	<option value="">--请选择--</option><i></i>
+                           </select><i></i>
+                         </label>
+                     </section>
+				</section>
+				<section class="col col-sm-4">
+					<label class="label">收获年度<span style="color: red;">*</span></label>
+                    <section>
+                         <label class="select">
+                           <select ng-model="storeWareDetail.grainAnnual" ng-disabled="isNotEdit" name="grainAnnual" 
+                           ng-options="enum.enumid as enum.enumname for enum in dicDataList[1004]"  required ng-change="changeDate()">
+                           	<option value="">--请选择--</option><i></i>
+                           </select><i></i>
+                         </label>
+                     </section>
+				</section>
+			</div>
+			<div class="row">
+			    <section class="col col-sm-4">
+					<label class="label">入库时间<span style="color: red;">*</span></label>
+                         <label class="input">
+                             <input type="input" ng-model="storeWareDetail.inputTime"  name="inputTime" class="form-control datepicker" data-smart-datepicker
+                              ng-disabled="isNotEdit"  ng-readonly="!warehouseIdEdit" required ng-change="changeDate()">
+                         </label>
+				</section>
+				<section class="col col-sm-4" style="height:55px;">
+					<label class="label">粮油产地<span style="color: red;">*</span></label>
+		              <label class="select"  id="grainProducingArea-label">
+                         <multi-select-tree
+                              disabled-tree="isNotEdit"
+                              data-input-model="grainProducingAreaTreeData"
+                              data-default-label="请选择" name="grainProducingArea"
+		       				  multi-select="false"
+		       				  select-only-leafs="false"
+                              data-output-model="storeWareDetail.grainProducingArea"
+		      				  data-callback="selectOnlyProducingArea(item, selectedItems)">
+		   				 </multi-select-tree>
+		   				 <em><span style="color: #D56161;margin-top:6px;padding:0 1px;font-style:normal;font-size:11px;
+                         line-height:15px;" id="grainProducingArea-error"></span></em>
+                      </label>
+				</section>
+			    <section class="col col-sm-4" ng-show="shouchu">
+					<label class="label">数量(公斤)<span style="color: red;">*</span></label> 
+		              <label class="input"> 
+                          <input class="form-control" type="text" ng-model="storeWareDetail.inCount" ng-readonly="isNotEdit" 
+                            name="inCount" ng-change="totalPrice()" required onkeyup="this.value=this.value.match(/\d+(\.\d{0,5})?/) ? this.value.match(/\d+(\.\d{0,5})?/)[0] : '' ">
+                      </label>
+				</section>
+				<section class="col col-sm-4" ng-show="shouchu">
+		              <label class="label">单价(元/公斤)<span style="color: red;">*</span></label> 
+		              <label class="input"> 
+                          <input class="form-control" type="text" ng-model="storeWareDetail.inPrice" ng-readonly="isNotEdit" 
+                            name="inPrice" ng-change="totalPrice()" required onkeyup="this.value=this.value.match(/\d+(\.\d{0,5})?/) ? this.value.match(/\d+(\.\d{0,5})?/)[0] : '' ">
+                      </label>
+				</section>
+				<section class="col col-sm-4" ng-show="shouchu">
+					<label class="label">总价(元)<span style="color: red;">*</span></label> 
+					<label class="input">
+					  <input class="form-control" type="text" ng-model="storeWareDetail.inDetailTotalPrice" ng-readonly="true"  
+		                   name="inDetailTotalPrice" placeholder="单价*要求数量">
+					</label>
+				</section>
+			    <section class="col col-sm-4" ng-show="lunru">
+					<label class="label">轮入数量(公斤)<span style="color: red;">*</span></label> 
+		              <label class="input"> 
+                          <input class="form-control" type="text" ng-model="storeWareDetail.inCount" ng-readonly="isNotEdit" 
+                            name="inCount" ng-change="totalPrice()" required 
+                            onkeyup="this.value=this.value.match(/\d+(\.\d{0,5})?/) ? this.value.match(/\d+(\.\d{0,5})?/)[0] : '' ">
+                      </label>
+				</section>
+				<section class="col col-sm-4" ng-show="lunru">
+		              <label class="label">轮入单价(元/公斤)<span style="color: red;">*</span></label> 
+		              <label class="input"> 
+                          <input class="form-control" type="text" ng-model="storeWareDetail.inPrice" ng-readonly="isNotEdit" 
+                            name="inPrice" ng-change="totalPrice()" required onkeyup="this.value=this.value.match(/\d+(\.\d{0,5})?/) ? this.value.match(/\d+(\.\d{0,5})?/)[0] : '' ">
+                      </label>
+				</section>
+				<section class="col col-sm-4" ng-show="lunru">
+					<label class="label">轮入总价(元)<span style="color: red;">*</span></label> 
+					<label class="input">
+					  <input class="form-control" type="text" ng-model="storeWareDetail.inDetailTotalPrice" ng-readonly="true"  
+		                   name="inDetailTotalPrice" placeholder="单价*要求数量">
+					</label>
+				</section>
+			<!-- </div>
+			<div class="row"> -->
+			    <section class="col col-sm-4" ng-show="lunchu">
+					<label class="label">轮出数量(公斤)<span style="color: red;">*</span></label> 
+		              <label class="input"> 
+                          <input class="form-control" type="text" ng-model="storeWareDetail.outCount" ng-readonly="isNotEdit" 
+                            name="outCount" ng-change="outTotalPrice()" required 
+                            onkeyup="this.value=this.value.match(/\d+(\.\d{0,5})?/) ? this.value.match(/\d+(\.\d{0,5})?/)[0] : '' ">
+                      </label>
+				</section>
+				<section class="col col-sm-4" ng-show="lunchu">
+		              <label class="label">轮出单价(元/公斤)<span style="color: red;">*</span></label> 
+		              <label class="input"> 
+                          <input class="form-control" type="text" ng-model="storeWareDetail.outPrice" ng-readonly="isNotEdit" 
+                            name="outPrice" ng-change="outTotalPrice()" required onkeyup="this.value=this.value.match(/\d+(\.\d{0,5})?/) ? this.value.match(/\d+(\.\d{0,5})?/)[0] : '' ">
+                      </label>
+				</section>
+				<section class="col col-sm-4" ng-show="lunchu">
+					<label class="label">轮出总价(元)<span style="color: red;">*</span></label> 
+		                <label class="input">
+		                  <input class="form-control" type="text" ng-model="storeWareDetail.outDetailTotalPrice" ng-readonly="true" name="outDetailTotalPrice" 
+		                     placeholder="单价*要求数量">
+		                </label>
+		                <input class="form-control" type="hidden" ng-model="storeWareDetail.orgId" ng-readonly="true" name="orgId" >
+				</section>
+			    <section class="col col-sm-4" ng-show="xiaoshou">
+					<label class="label">数量(公斤)<span style="color: red;">*</span></label> 
+		              <label class="input"> 
+                          <input class="form-control" type="text" ng-model="storeWareDetail.outCount" ng-readonly="isNotEdit" 
+                            name="outCount" ng-change="outTotalPrice()" required 
+                            onkeyup="this.value=this.value.match(/\d+(\.\d{0,5})?/) ? this.value.match(/\d+(\.\d{0,5})?/)[0] : '' ">
+                      </label>
+				</section>
+				<section class="col col-sm-4" ng-show="xiaoshou">
+		              <label class="label">单价(元/公斤)<span style="color: red;">*</span></label> 
+		              <label class="input"> 
+                          <input class="form-control" type="text" ng-model="storeWareDetail.outPrice" ng-readonly="isNotEdit" 
+                            name="outPrice" ng-change="outTotalPrice()" required onkeyup="this.value=this.value.match(/\d+(\.\d{0,5})?/) ? this.value.match(/\d+(\.\d{0,5})?/)[0] : '' ">
+                      </label>
+				</section>
+				<section class="col col-sm-4" ng-show="xiaoshou">
+					<label class="label">总价(元)<span style="color: red;">*</span></label> 
+		                <label class="input">
+		                  <input class="form-control" type="text" ng-model="storeWareDetail.outDetailTotalPrice" ng-readonly="true" name="outDetailTotalPrice" 
+		                     placeholder="单价*要求数量">
+		                </label>
+		                <input class="form-control" type="hidden" ng-model="storeWareDetail.orgId" ng-readonly="true" name="orgId" >
+				</section>
+			</div>
+		</form>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-primary" ng-hide="isNotEdit" ng-click="save()">
+        	提交
+        </button>
+        <button type="button" class="btn btn-default"  ng-click="cancel()">
+        	取消
+        </button>
+    </div>
+</div>
+
+

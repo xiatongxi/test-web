@@ -1,0 +1,102 @@
+<!-- MAIN CONTENT -->
+<div id="content">
+	<!-- widget grid -->
+	<section widget-grid id="widget-grid">
+
+
+		<div class="row">
+			<article class="col-sm-12">
+
+				<div jarvis-widget id="standard-datatable-widget"
+					data-widget-color="darken" data-widget-editbutton="false">
+					<header>
+						<span class="widget-icon"> <i class="fa fa-table"></i>
+						</span>
+						<h2>架空期查询</h2>
+					</header>
+					<div>
+						<div class="widget-body no-padding">
+							<div id="DataTables_Table_1_wrapper"
+								class="dataTables_wrapper form-inline no-footer">
+								<div class="dt-toolbar">
+									<div class="col-xs-12 col-sm-9">
+										<div class="form-group">
+										<label>架空期开始时间：
+											<input style="width: 95px;" class="form-control" ng-model="searchCondition.applyTimeA" data-smart-datepicker />
+                                            <input style="width: 95px;" class="form-control" ng-model="searchCondition.applyTimeB" data-smart-datepicker />
+                                        </label>
+                                        <!-- <label>轮换完成日期：
+											<input style="width: 95px;" class="form-control" ng-model="searchCondition.lhEndA" data-smart-datepicker />
+                                            <input style="width: 95px;" class="form-control" ng-model="searchCondition.lhEndB" data-smart-datepicker />
+                                        </label> -->
+                                        <a class="btn btn-default btn-sm" ng-click="clearConditions()">
+												<i class="fa fa-search"></i>&nbsp;查&nbsp;询
+										</a>&emsp;
+										</div>
+									</div>
+									<div class="col-sm-3 col-xs-6 hidden-xs">
+										<div class="dataTables_length">
+											<label>每页显示 <select ng-model="pageInfo.pageSize" ng-change="loadData(pageInfo.pageNum=1)"
+												ng-options="num as num for num in [10,25,50,100]"
+												class="form-control input-sm"></select> 条
+											</label>
+										</div>
+									</div>
+								</div>
+
+								<table class="table table-striped table-bordered table-hover"
+									width="100%">
+									<thead>
+										<tr>
+											<th data-class="expand">序号</th>
+											<th data-class="expand">出库日期</th>
+											<th data-class="expand">仓房名称</th>
+											<th data-hide="expand">货位名称</th>
+											<th data-hide="expand">粮油品种</th>
+											<th data-class="expand">粮食性质</th>
+											<th data-hide="expand">轮出数量(公斤)</th>
+											<th data-hide="expand">轮入数量(公斤)</th>
+											<th data-hide="expand">计划编号</th>
+											<th data-hide="expand">架空期开始日期</th>
+											<th data-hide="expand">架空期截止日期</th>
+											<th data-hide="expand">申请延期日期</th>
+											<th data-hide="expand">轮换完成日期</th>
+											<th data-hide="expand">状态</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr ng-repeat="overhead in pageInfo.list">
+											<td>{{$index + 1 + (pageInfo.pageNum-1) * pageInfo.pageSize}}</td>
+											<td>{{overhead.modifydate | date :'yyyy-MM-dd'}}</td>
+											<td>{{storehouseObj[overhead.ch].storehouseName}}</td>
+											<td>{{wares[overhead.hwh].warehouseName}}</td>
+											<td>{{dicData[overhead.mxpz]}}</td>
+											<td>{{dicData[overhead.hwxz]}}</td>
+											<td>{{overhead.zcsl}}</td>
+											<td>{{overhead.srsl}}</td>
+											<td>{{overhead.jhbh}}</td>
+											<td>{{overhead.jkqStart | date :'yyyy-MM-dd'}}</td>
+											<td>{{overhead.jkqEnd | date :'yyyy-MM-dd'}}</td>
+											<td>{{overhead.sqyqTime | date :'yyyy-MM-dd'}}</td>
+											<td>{{overhead.rq | date :'yyyy-MM-dd'}}</td>
+												<td><div ng-switch="{{overhead.bw}}">
+			                                    <div ng-switch-when="0"><span style='color:black;'>正常</span></div>
+			                                    <div ng-switch-when="1"><span style='color:red;'>预警</span></div>
+			                                    <div ng-switch-when="2"><span style='color:red;'>逾期</span></div>
+			                                    <div ng-switch-when="3"><span style='color:black;'>延期</span></div>
+			                                    <div ng-switch-when="4"><span style='color:green;'>完成</span></div>
+			                                   <div ng-switch-when="5"><span style='color:red;'>验收中</span></div>
+			                                    </div>
+											</td>
+										</tr>
+									</tbody>
+								</table>
+								<div smart-include="app/layout/partials/page.tpl.html"></div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</article>
+		</div>
+	</section>
+</div>

@@ -1,0 +1,107 @@
+<!-- MAIN CONTENT -->
+<div id="content">
+    <section widget-grid id="widget-grid">
+        <div class="row">
+            <article class="col-sm-12">
+                <div jarvis-widget id="standard-datatable-widget" data-widget-color="darken" data-widget-editbutton="false">
+                    <header>
+                        <span class="widget-icon"> <i class="fa fa-table"></i> </span>
+                        <h2>药剂信息维护列表 </h2>
+                    </header>
+                    <div>
+                        <div class="widget-body no-padding">
+                        <div id="DataTables_Table_1_wrapper" class="dataTables_wrapper form-inline no-footer" >
+                            <div class="dt-toolbar">
+                                <div class="col-xs-12 col-sm-10">
+                                    <div class="form-group">
+                                        <label>
+                                            <a has-permission="526" class="btn btn-primary btn-sm" ng-click="showAdd()"><i class="fa fa-plus"></i>&nbsp;新&nbsp;增</a>
+                                        </label>&emsp;
+										<label>药剂种类:&emsp;
+											<select class="form-control input-sm" ng-model="drugInfo.drugKind" ng-disabled="isNotEdit" name="drugKind"
+													ng-options="enum.enumid as enum.enumname for enum in dicDataList[5498]" required >
+												<option value="">--请选择--</option>
+											</select>
+										</label>&emsp;
+										<label>药剂名称:&emsp;
+											<select class="form-control input-sm" ng-model="drugInfo.drugName" ng-disabled="isNotEdit" name="drugName"
+													ng-options="enum.enumid as enum.enumname for enum in dicDataList[drugInfo.drugKind]" required >
+												<option value="">--请选择--</option><i></i>
+											</select><i></i>
+										</label>&emsp;
+										<label>使用状态:&emsp;
+											<select class="form-control input-sm" ng-model="drugInfo.isEffective" name="isEffective">
+												<option value="">--请选择--</option>
+												<option value="0">未使用</option>
+												<option value="1">使用中</option>
+											</select>
+										</label>&emsp;
+										<label>
+											<a class="btn btn-default btn-sm" ng-click="loadData()">
+												<i class="fa fa-search"></i>&nbsp;查&nbsp;询
+											</a>
+										</label>
+                                    </div>
+                                </div>
+                                <div class="col-sm-2 col-xs-6 hidden-xs">
+                                    <div class="dataTables_length">
+											<label>每页显示 <select ng-model="pageInfo.pageSize" ng-change="loadData(pageInfo.pageNum=1)"
+																ng-options="num as num for num in [1,10,25,50,100]"
+																class="form-control input-sm"></select> 条
+											</label>
+									</div>
+                                </div>
+                            </div>
+                        <table class="table table-striped table-bordered table-hover" width="100%">
+	                        <thead>
+		                        <tr>
+									<th> 序号</th>
+		                            <th> 药剂编号</th>
+		                            <th> 药剂种类</th>
+		                            <th> 药剂名称</th>
+		                            <th> 药剂形态</th>
+		                            <th> 药剂包装</th>
+		                            <th> 创建人</th>
+		                            <th> 使用状态</th>
+		                            <th> 操作</th>
+		                        </tr>
+	                        </thead>
+	                        <tbody>
+	                            <tr ng-repeat="drugInfo in pageInfo.list">
+	                          		<td>{{ $index+1}}</td>
+	                          		<td>{{ drugInfo.drugNumber}}</td>
+	                                <td>{{ dicData[drugInfo.drugKind] }}</td>
+	                                <td>{{ dicData[drugInfo.drugName] }}</td>
+	                                <td>{{ dicData[drugInfo.drugType] }}</td>
+	                                <td>{{ dicData[drugInfo.drugPacking] }}</td>
+	                                <td>{{ userInfoData[drugInfo.creater] }}</td>
+	                                <td>
+	                                	<div ng-switch="{{drugInfo.isEffective}}">
+	                                		<div ng-switch-when="0">未使用</div>
+	                                		<div ng-switch-when="1"><span style='color:green;'>使用中</span></div>
+	                                	</div>
+									</td>
+	                                <td>
+	                                	<div ng-switch="{{drugInfo.isEffective}}">
+	                                		<div ng-switch-when="0">
+			                                    <a has-permission="527" href-void ng-click="showView(drugInfo.id,drugInfo.orgId)"><i class="fa fa-info-circle"></i>查看&nbsp;</a>
+			                                    <a has-permission="528" href-void ng-click="showEdit(drugInfo.id,drugInfo.orgId)" ng-hide="isNotEdit"><i class="fa fa-edit"></i>修改&nbsp;</a>
+			                                    <a has-permission="529" href-void ng-click="delete(drugInfo.id,drugInfo.orgId)" ng-hide="isNotEdit"><i class="fa fa-trash-o"></i>删除&nbsp;</a>
+	                                		</div>
+	                                		<div ng-switch-when="1">
+			                                    <a has-permission="527" href-void ng-click="showView(drugInfo.id,drugInfo.orgId)"><i class="fa fa-info-circle"></i>查看&nbsp;</a>
+	                                		</div>
+	                                	</div>
+	                                </td>
+	                            </tr>
+	                        </tbody>
+                        </table>
+						<div smart-include="app/layout/partials/page.tpl.html"></div>
+                        </div>
+                        </div>
+                    </div>
+                </div>
+            </article>
+        </div>
+    </section>
+</div>

@@ -1,0 +1,112 @@
+<div class="modal-content">
+    <div class="modal-header">
+        <button type="button" class="close" ng-click="cancel()">
+            &times;
+        </button>
+        <h4 class="modal-title" id="myModalLabel">通风控制</h4>
+    </div>
+    <div class="modal-body">
+        <form id="aerationTaskControl-form" class="smart-form ng-pristine ng-valid" data-validator-option="validateOptions" novalidate="novalidate">
+			 <div class="row" >
+				<section class="col col-sm-4">
+					<label class="label">仓房名称：
+		                {{ storeHouseCodeObj[aerationTaskControl.vCfCode].storehouseName }}
+					</label> 
+				</section>
+				
+		      <section class="col col-1.1">
+                    <label class="label">设备类型:</label>
+              </section>
+		      <section class="col col-2">
+                    <label class="select">
+                        <select  class="form-control input-sm" ng-model="device.vdevkindcode" ng-change="loadDeviceData(aerationTaskControl.vCfCode,this.device.vdevkindcode)">
+                        <option value="">请选择</option>
+                        <option value="01">通风窗</option>
+                        <option value="02">轴流窗</option>
+                        <option value="03">轴流风机</option>
+                        <option value="04">通风口</option>
+                        <option value="05">环流风机</option>
+                        <option value="06">离心风机</option>
+                        <option value="07">混流风机</option>
+                    </select>
+                    </label>
+              </section>
+				
+			</div>
+			<table class="table table-striped table-bordered table-hover" width="60%">
+			<tr>
+				<!-- <td>设备编码</td> -->
+				<td>设备名称</td>
+				<td>设备类型</td>
+				<td>设备状态</td>
+			</tr>
+				
+			<tr  ng-repeat="aerationTaskControlList in test " id="{{aerationTaskControlList.id}}">
+				<td>{{aerationTaskControlList.vdevname}}</td>
+				<td>
+				    <p ng-if="aerationTaskControlList.vdevkindcode==01">通风窗</p>
+					<p ng-if="aerationTaskControlList.vdevkindcode==02">轴流窗</p>
+					<p ng-if="aerationTaskControlList.vdevkindcode==03">轴流风机</p>
+					<p ng-if="aerationTaskControlList.vdevkindcode==04">通风口</p>
+				    <p ng-if="aerationTaskControlList.vdevkindcode==05">环流风机</p>
+				    <p ng-if="aerationTaskControlList.vdevkindcode==06">离心风机</p>
+				    <p ng-if="aerationTaskControlList.vdevkindcode==07">混流风机</p>
+				 </td>
+				<td>
+	          	 <!-- <input type="radio"  name="vstatue{{$index}}" value="0" ng-click="vState(this,aerationTaskControlList.id)" />关闭
+	          	<input type="radio"  name="vstatue{{$index}}" value="1" ng-click="vState(this,aerationTaskControlList.id)" />打开 -->
+	          	 
+	          	
+	          	<select name="vstatue{{$index}}" ng-change="vState(aerationTaskControlList.id)" ng-model="aerationTaskControlList.vstatue"
+											id="a"	class="form-control input-sm">
+														<option value="0">关闭</option>
+														<option value="1">打开</option>
+				</select>
+        			 		<!-- <div ng-switch="{{aerationTaskControlList.vstatue}}">
+		                                    
+		                                    <div ng-switch-when="1">
+			                                    <input type="radio"  name="vstatue{{$index}}" value="0" ng-click="vState(this)"/>关闭
+			                                    <input type="radio"  name="vstatue{{$index}}" value="1" checked ng-click="vState(this)"/>打开
+			                                    <input type="radio"  name="vstatue{{$index}}" value="2"/>反转
+			                                    <input type="radio"  name="vstatue{{$index}}" value="3"/>停止
+		                                   
+		                                   		<select name="vstatue{{$index}}" ng-change="vState(this)" ng-model="aerationTaskControlList.vstatue"
+													class="form-control input-sm">
+														<option value="0">关闭</option>
+														<option value="1">打开</option>
+												</select>
+		                                   
+		                                    </div> 
+		                                    <div ng-switch-when="0">
+			                                    <input type="radio"  name="vstatue{{$index}}" value="0" checked ng-click="vState(this)"/>关闭
+			                                    <input type="radio"  name="vstatue{{$index}}" value="1" ng-click="vState(this)"/>打开
+			                                    <input type="radio"  name="vstatue{{$index}}" value="2"/>反转
+			                                    <input type="radio"  name="vstatue{{$index}}" value="3"/>停止
+		                                    	
+		                                    	<select name="vstatue{{$index}}" ng-change="vState(this)" ng-model="aerationTaskControlList.vstatue"
+													class="form-control input-sm">
+														<option value="0">关闭</option>
+														<option value="1">打开</option>
+												</select>
+		                                    
+		                                    </div>
+		                    </div> -->
+		        </td> 
+		            
+				</tr>
+				
+			</table>
+		</form>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-primary" ng-hide="isNotEdit" ng-click="save()">
+        	提交
+        </button>
+        <button type="button" class="btn btn-default"  ng-click="cancel()">
+        	取消
+        </button>
+    </div>
+</div>
+
+
+

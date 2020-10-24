@@ -1,0 +1,162 @@
+<!-- MAIN CONTENT -->
+<div id="content">
+    <!-- widget grid -->
+    <section widget-grid id="widget-grid">
+        <div class="row">
+            <!-- NEW COL START -->
+            <article class="col-sm-12 col-md-12 col-lg-12">
+                <!-- Widget ID (each widget will need unique ID)-->
+                <div jarvis-widget id="form-grid-widget"
+                     data-widget-colorbutton="false" data-widget-editbutton="false"
+                     data-widget-custombutton="false">
+                    <!-- widget div-->
+                    <div>
+                        <!-- widget content -->
+                        <div class="widget-body no-padding">
+                            <form id="basicGrainSetEdit-form" class="smart-form ng-pristine ng-valid" data-validator-option="validateOptions" novalidate="novalidate">
+                                <header>
+                                    <a href-void class="btn btn-default btn-xs" ng-click="retList()"><i class="fa fa-angle-left"></i>&nbsp;返回&nbsp;</a>
+                                    &nbsp;<strong>粮油信息设置详情</strong>
+                                    <span class="pull-right font-xs">带*的部分必须填写</span>
+                                </header>
+                                <table class="table table-striped table-bordered table-hover" width="100%">
+                                    <fieldset>
+                                        <div class="row">
+                                            <section class="col col-3">
+                                                <label class="label">仓房名称<span style="color: red;">*</span></label>
+                                                <label class="select">
+                                                    <select ng-model="basicGrainSet.vcfcode" name="vcfcode"
+                                                            ng-options="store.storehouseCode as store.storehouseName for store in storelist"
+                                                            ng-disabled="isNotEdit" class="form-control"
+                                                            required>
+                                                        <option value="">--请选择--</option>
+                                                    </select>
+                                                </label>
+                                            </section>
+                                        
+                                            <section class="col col-3" ng-hide="isAdd">
+                                                <label class="label">粮情编号<span style="color: red;">*</span></label>
+                                                <label class="input">
+                                                    <input type="text" ng-model="basicGrainSet.vdevcode"
+                                                           ng-blur="itExistCode(basicGrainSet.vdevcode,'')"
+                                                           ng-disabled="true" name="vdevcode" maxlength="20">
+                                                </label>
+                                            </section>
+                                            <section class="col col-3">
+                                                <label class="label">粮情名称<span style="color: red;">*</span></label>
+                                                <label class="input">
+                                                    <input type="text" maxlength="15" ng-model="basicGrainSet.vdevname"
+                                                           ng-blur="itExistCode('',basicGrainSet.vdevname)"
+                                                           ng-disabled="isNotEdit" name="vdevname" required>
+                                                </label>
+                                            </section>
+                                            <section class="col col-3">
+                                                <label class="label">通道号<span style="color: red;">*</span></label>
+                                                <label class="input">
+                                                    <input type="text" maxlength="3" ng-model="basicGrainSet.idevtdh" validNumber="true"
+                                                           ng-disabled="isNotEdit" name="idevtdh" required>
+                                                </label>
+                                            </section>
+                                            <section class="col col-3">
+                                                <label class="label">起始电缆号<span style="color: red;">*</span></label>
+                                                <label class="input">
+                                                    <input type="text" name="scable" ng-model="basicGrainSet.scable" validNumber="true"
+                                                           ng-disabled="isNotEdit" maxlength="3" required>
+                                                </label>
+                                            </section>
+                                        
+                                        
+                                            <section class="col col-3">
+                                                <label class="label">结束电缆号<span style="color: red;">*</span></label>
+                                                <label class="input">
+                                                    <input type="text" ng-model="basicGrainSet.ecable" ng-disabled="isNotEdit" validNumber="true"
+                                                           name="ecable" maxlength="3" required>
+                                                </label>
+                                            </section>
+                                            <section class="col col-3">
+                                                <label class="label">层数<span style="color: red;">*</span></label> <label class="input">
+                                                    <input type="text" ng-model="basicGrainSet.layer" validNumber="true"
+                                                           ng-disabled="isNotEdit" name="layer" maxlength="20" required>
+                                                </label>
+                                            </section>
+                                            <section class="col col-3">
+                                                <label class="label">行数<span style="color: red;">*</span></label>
+                                                <label class="input">
+                                                    <input type="text" ng-model="basicGrainSet.row" validNumber="true"
+                                                           ng-disabled="isNotEdit" name="row" maxlength="3" required>
+                                                </label>
+                                            </section>
+                                            <section class="col col-3">
+                                                <label class="label">列数<span style="color: red;">*</span></label>
+                                                <label class="input">
+                                                    <input type="text" ng-model="basicGrainSet.col" ng-disabled="isNotEdit" validNumber="true"
+                                                           name="col" maxlength="3" required>
+                                                </label>
+                                            </section>
+                                        
+                                       
+                                            <section class="col col-3">
+                                                <label class="label">站点编码:&emsp;<span
+                                                        style="color: red;margin-left: 5px;text-align: center;">*</span></label>
+                                                <label class="select">
+                                                    <select ng-model="basicGrainSet.sitecode" name="sitecode"
+                                                            ng-options="station.sitecode as station.sitename for station in stations"
+                                                            ng-disabled="isNotEdit" class="form-control"
+                                                            required>
+                                                        <option value="">--请选择--</option>
+                                                    </select>
+                                                </label>
+                                            </section>
+                                            <section class="col col-3">
+                                                <label class="label">是否反置:</label>
+                                                <label class="select">
+                                                    <select ng-model="basicGrainSet.irevflag" name="irevflag" ng-disabled="isNotEdit"
+                                                            ng-options="x.id as x.name for x in [{id:0,name:'不反'},{id:1,name:'反'}]" required>
+                                                        <option value="">--请选择--</option>
+                                                    </select>
+                                                </label>
+                                            </section>
+                                            <section class="col col-3">
+                                                <label class="label">方位:</label>
+                                                <label class="select">
+                                                    <select ng-model="basicGrainSet.isequence" name="isequence" ng-disabled="isNotEdit"
+                                                            ng-options="x.id as x.name for x in [{id:0,name:'从上到下，从左到右'},{id:1,name:'从上到下，从右到左'},{id:2,name:'从下到上，从左到右'},{id:3,name:'从下到上，从右到左'}]" required>
+                                                        <option value="">--请选择--</option>
+                                                    </select>
+                                                </label>
+                                            </section>
+                                            <section class="col col-3">
+                                                <label class="label">粮情/油情:</label>
+                                                <label class="select">
+                                                    <select ng-model="basicGrainSet.grainoil" name="grainoil" ng-disabled="isNotEdit"
+                                                            ng-options="x.id as x.name for x in [{id:0,name:'粮情'},{id:1,name:'油情'}]" required>
+                                                        <option value="">--请选择--</option>
+                                                    </select>
+                                                </label>
+                                            </section>
+                                        
+                                        
+                                            <section class="col col-3">
+                                                <label class="label">备注:</label>
+                                                <label class="input">
+                                                    <input type="text" ng-model="basicGrainSet.remark" ng-disabled="isNotEdit"
+                                                           name="remark" maxlength="20">
+                                                </label>
+                                            </section>
+                                        </div>
+                                    </fieldset>
+                                    <div class="form-actions">
+                                        <footer class="text-align-center">
+                                            <button type="button" class="btn btn-default" ng-click="retList()">取消</button>
+                                            <button type="button" class="btn btn-primary" ng-hide="isNotEdit" ng-click="save()">保存</button>
+                                        </footer>
+                                    </div>
+                                </table>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </article>
+        </div>
+    </section>
+</div>

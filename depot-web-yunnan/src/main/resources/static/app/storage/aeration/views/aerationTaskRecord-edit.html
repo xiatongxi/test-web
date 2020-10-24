@@ -1,0 +1,552 @@
+<!-- MAIN CONTENT -->
+<div id="content">
+	<!-- widget grid -->
+	<section id="widget-grid" widget-grid>
+		<!-- START ROW -->
+		<div class="row">
+			<!-- NEW COL START -->
+			<article class="col-sm-12 col-md-12 col-lg-12">
+				<!-- Widget ID (each widget will need unique ID)-->
+				<div jarvis-widget id="form-grid-widget"
+					data-widget-colorbutton="false" data-widget-editbutton="false"
+					data-widget-custombutton="false">
+					<!-- widget div-->
+					<div>
+						<!-- widget content -->
+						<div class="widget-body no-padding">
+							<form id="aerationTaskRecord-form" name='aerationTaskRecord-form'
+								class="smart-form ng-pristine ng-valid"
+								data-validator-option="validateOptions" novalidate="novalidate">
+								<header>
+									<a href-void class="btn btn-default btn-xs" ng-click="retrunTop()">
+										<i class="fa fa-angle-left"></i>&nbsp;返回&nbsp;
+									</a>
+									&nbsp;<strong>通风过程详情</strong>
+									<span class="pull-right font-xs">带*的部分必须填写</span>
+								</header>
+								<header ng-hide="isNext">仓房与储粮基本信息</header>
+								<fieldset ng-hide="isNext">
+									<table class="table table-striped table-bordered table-hover" width="100%">
+										<tr>
+											<th>
+												<label class="label" style="margin-top: 8px;text-align: right;">所属粮库：</label>
+											</th>
+											<th>
+												<label class="input">
+													<input type="text" ng-model="lkmc" ng-readonly="true">
+												</label>
+											</th>
+											<th>
+												<label class="label" style="margin-top: 8px;text-align: right;">仓房名称：<span style="color: red;margin-left: 5px;text-align: center;">*</span></label>
+											</th>
+											<th>
+												<label class="select">
+													<select ng-model="record.houseId" name="houseId" ng-change="getTaskRecord(record.houseId)" ng-disabled="isNotEditHouseId"
+													ng-options="store.houseId as store.depotName for store in houseList" ng-hide="viewHouseId" required
+													class="form-control">
+													</select>
+													<!-- 查看显示这个 -->
+													<select ng-model="record.houseId" name="houseId" ng-change="getTaskRecord(record.houseId)" ng-disabled="isNotEditHouseId"
+													ng-options="store.storehouseId as store.storehouseName for store in storelist" ng-hide="notviewHouseId" required 
+													class="form-control">
+													</select>
+												</label>
+											</th>
+											<th>
+												<label class="label" style="margin-top: 8px;text-align: right;">通风作业单编号：</label>
+											</th>
+											<th>
+												<label class="input">
+													<input type="text" ng-model="record.taskId" name="taskId" ng-readonly="true">
+												</label>
+											</th>
+										</tr>
+										<tr>
+											<th>
+												<label class="label" style="margin-top: 8px;text-align: right;">仓房类型：</label>
+											</th>
+											<th>
+												<label class="select">
+													<select ng-model="record.houseType" ng-disabled="true" class="form-control" 
+													ng-options="enum.enumid as enum.enumname for enum in dicDataList[1064]">
+														<option value="">--请选择--</option>
+													</select>
+												</label>
+											</th>
+											<th>
+												<label class="label" style="margin-top: 8px;text-align: right;">仓房尺寸(㎡)：</label>
+											</th>
+											<th>
+												<label class="input">
+													<input type="number" ng-model="record.houseSize" ng-readonly="true" name="houseSize" class="form-control">
+												</label>
+											</th>
+											<th>
+												<label class="label" style="margin-top: 8px;text-align: right;">粮食品种：</label>
+											</th>
+											<th>
+												<label class="select">
+													<select ng-model="record.foodType" class="form-control" ng-disabled="true" 
+													ng-options="enum.enumid as enum.enumname for enum in dicDataList[1061]">
+													</select>
+												</label>
+											</th>
+										</tr>
+										<tr>
+											<th>
+												<label class="label" style="margin-top: 8px;text-align: right;">数量（t）：</label>
+											</th>
+											<th>
+												<label class="input">
+													<input type="number" ng-model="record.goodsNumber" ng-readonly="true" name="goodsNumber" class="form-control">
+												</label>
+											</th>
+											<th>
+												<label class="label" style="margin-top: 8px;text-align: right;">承贷单位：</label>
+											</th>
+											<th>
+												<label class="input">
+													<label class="input">
+														<input type="text" ng-model="record.recordUnite" ng-readonly="true"
+														name="recordUnite" class="form-control" ng-readonly="true">
+													</label>
+												</label>
+											</th>
+											<th>
+												<label class="label" style="margin-top: 8px;text-align: right;">保管单位：</label>
+											</th>
+											<th>
+												<label class="input">
+													<input type="text" ng-model="record.keepUnite" ng-readonly="true" name="keepUnite" class="form-control">
+												</label>
+											</th>
+										</tr>
+										<tr>
+											<th>
+												<label class="label" style="margin-top: 8px;text-align: right;">实际装粮高度（m）：</label>
+											</th>
+											<th>
+												<label class="input">
+													<input type="number" ng-model="record.lineHeight" ng-readonly="true" name="lineHeight" class="form-control">
+												</label>
+											</th>
+											<th>
+												<label class="label" style="margin-top: 8px;text-align: right;">保管员：</label>
+											</th>
+											<th>
+												<label class="input">
+													<label class="input">
+														<input type="text" ng-model="record.keeperIds" ng-readonly="isNotEdit" name="keeperIds" class="form-control">
+													</label>
+												</label>
+											</th>
+											<th>
+												<label class="label" style="margin-top: 8px;text-align: right;"></label>
+											</th>
+											<th>
+												<label class="input"></label>
+											</th>
+										</tr>
+									</table>
+								</fieldset>
+								<header ng-hide="isNext">风机信息</header>
+								<fieldset ng-hide="isNext">
+									<table class="table table-striped table-bordered table-hover" width="100%">
+										<tr>
+											<th>
+												<label class="label" style="margin-top: 8px;text-align: right;">风机类型及型号：</label>
+											</th>
+											<th>
+												<label class="input">
+													<input type="text" ng-model="record.aerationMachineCode" ng-readonly="isNotEdit"
+													name="aerationMachineCode" maxlength="30">
+												</label>
+											</th>
+											<th>
+												<label class="label" style="margin-top: 8px;text-align: right;">通风方式:</label>
+											</th>
+											<th>
+												<label class="select">
+													<select ng-model="record.aerationType" class="form-control" ng-disabled="true"
+													ng-options="enum.enumid as enum.enumname for enum in dicDataList[5218]">
+														<option value="">--请选择--</option>
+													</select>
+												</label>
+											</th>
+											<th>
+												<label class="label" style="margin-top: 8px;text-align: right;">气流方向:</label>
+											</th>
+											<th>
+												<label class="input">
+													<input type="text" ng-model="record.airflowDirection" ng-readonly="isNotEdit"
+													name="airflowDirection" maxlength="20" class="form-control">
+												</label>
+											</th>
+										</tr>
+										<tr>
+											<th>
+												<label class="label" style="margin-top: 8px;text-align: right;">风网总阻力（Pa）：</label>
+											</th>
+											<th>
+												<label class="input">
+													<input type="number" ng-model="record.blowernetSumResistance" ng-readonly="isNotEdit"
+													name="blowernetSumResistance" maxlength="20" class="form-control">
+												</label>
+											</th>
+											<th>
+												<label class="label" style="margin-top: 8px;text-align: right;">总风量（m3/h）:</label>
+											</th>
+											<th>
+												<label class="input">
+													<input type="number" ng-model="record.sumAirVolume" ng-readonly="isNotEdit"
+													name="sumAirVolume" maxlength="20" class="form-control">
+												</label>
+											</th>
+											<th>
+												<label class="label" style="margin-top: 8px;text-align: right;">风机功率(kW):</label>
+											</th>
+											<th>
+												<label class="input">
+													<input type="number" ng-model="record.aerationPower" ng-readonly="isNotEdit"
+													name="aerationPower" class="form-control" oninput="if(value.length>10) value=value.slice(0,10)">
+												</label>
+											</th>
+										</tr>
+										<tr>
+											<th>
+												<label class="label" style="margin-top: 8px;text-align: right;">单位通风量（m3/h.t）：</label>
+											</th>
+											<th>
+												<label class="input">
+													<input type="number" ng-model="record.unitAerationSum" ng-readonly="isNotEdit"
+													name="unitAerationSum" class="form-control" oninput="if(value.length>5) value=value.slice(0,5)">
+												</label>
+											</th>
+											<th>
+												<label class="label" style="margin-top: 8px;text-align: right;"></label>
+											</th>
+											<th></th>
+											<th>
+												<label class="label" style="margin-top: 8px;text-align: right;"></label>
+											</th>
+											<th></th>
+										</tr>
+									</table>
+								</fieldset>
+								<header ng-hide="isNext">风网布置</header>
+								<fieldset ng-hide="isNext">
+									<table class="table table-striped table-bordered table-hover" width="100%">
+										<tr>
+											<th>
+												<label class="label" style="margin-top: 8px;text-align: right;">地槽或地上笼：</label>
+											</th>
+											<th>
+												<label class="input">
+													<input type="text" ng-model="record.aerationPlaceMode" ng-readonly="isNotEdit"
+													name="aerationPlaceMode" class="form-control">
+												</label>
+											</th>
+											<th>
+												<label class="label" style="margin-top: 8px;text-align: right;">地槽或地上笼尺寸(㎡)：</label>
+											</th>
+											<th>
+												<label class="input">
+													<input type="number" ng-model="record.aerationSize" ng-readonly="isNotEdit"
+													name="aerationSize" class="form-control" oninput="if(value.length>5) value=value.slice(0,5)">
+												</label>
+											</th>
+											<th>
+												<label class="label" style="margin-top: 8px;text-align: right;">空气途径比：</label>
+											</th>
+											<th>
+												<label class="input">
+													<input type="number" ng-model="record.airPathRatio" ng-readonly="isNotEdit"
+													name="airPathRatio" class="form-control" oninput="if(value.length>5) value=value.slice(0,5)">
+												</label>
+											</th>
+										</tr>
+										<tr>
+											<th>
+												<label class="label" style="margin-top: 8px;text-align: right;">孔板开孔率：</label>
+											</th>
+											<th>
+												<label class="input">
+													<input type="number" ng-model="record.orificeCoefficient" ng-readonly="isNotEdit"
+													name="orificeCoefficient" class="form-control" oninput="if(value.length>5) value=value.slice(0,5)">
+												</label>
+											</th>
+											<th>
+												<label class="label" style="margin-top: 8px;text-align: right;"></label>
+											</th>
+											<th>
+												
+											</th>
+											<th>
+												<label class="label" style="margin-top: 8px;text-align: right;"></label>
+											</th>
+											<th>
+												
+											</th>
+										</tr>
+									</table>
+								</fieldset>
+								<header ng-hide="isLast">通风时间信息</header>
+								<fieldset ng-hide="isLast">
+									<table class="table table-striped table-bordered table-hover" width="100%">
+										<tr>
+											<th>
+												<label class="label" style="margin-top: 8px;text-align: right;">开始通风时间：</label>
+											</th>
+											<th>
+												<label class="input">
+													<input type="text" class="form-control" ng-model="record.startAerationTime" name="startAerationTime"
+	                                                data-field="datetime" required data-format="yyyy-MM-dd hh:mm:ss" ng-disabled="isNotEdit">
+												</label>
+											</th>
+											<th>
+												<label class="label" style="margin-top: 8px;text-align: right;">结束通风时间：</label>
+											</th>
+											<th>
+												<label class="input">
+													<input type="text" ng-model="record.endAerationTime" ng-disabled="isNotEdit" data-field="datetime"
+													name="endAerationTime" data-format="yyyy-MM-dd hh:mm:ss" required class="form-control">
+												</label>
+											</th>
+											<th>
+												<label class="label" style="margin-top: 8px;text-align: right;">停机时间(h)：</label>
+											</th>
+											<th>
+												<label class="input">
+													<input type="number" ng-model="record.stopAerationTime" ng-readonly="isNotEdit"
+													name="stopAerationTime" class="form-control">
+												</label>
+											</th>
+										</tr>
+										<tr>
+											<th>
+												<label class="label" style="margin-top: 8px;text-align: right;">累计通风时间(h)：</label>
+											</th>
+											<th>
+												<label class="input">
+													<input type="number" ng-model="record.sumAerationTime" ng-readonly="isNotEdit"
+													name="sumAerationTime" class="form-control" required>
+												</label>
+											</th>
+											<th>
+												<label class="label" style="margin-top: 8px;text-align: right;"></label>
+											</th>
+											<th>
+												
+											</th>
+											<th>
+												<label class="label" style="margin-top: 8px;text-align: right;"></label>
+											</th>
+											<th>
+												
+											</th>
+										</tr>
+									</table>
+								</fieldset>
+								<header ng-hide="isLast">粮温检测(新)</header>
+								<fieldset ng-hide="isLast">
+									<table class="table table-striped table-bordered table-hover" width="100%">
+										<tr>
+											<th rowspan="2">
+												<label class="label" style="margin-top: 31px;text-align: center;">检查时间</label>
+											</th>
+											<th colspan="5">
+												<label class="label" style="margin-top: 8px;text-align: center;">粮温℃</label>
+											</th>
+											<th rowspan="2">
+												<label class="label" style="margin-top: 31px;text-align: center;">检测人员</label>
+											</th>
+											<th rowspan="2">
+												<label class="label" style="margin-top: 31px;text-align: center;">备注</label>
+											</th>
+											<th rowspan="2">
+												<label class="label" style="margin-top: 31px;text-align: center;">
+													<a class="btn btn-primary btn-sm" ng-click="addRows(0)">
+														<i class="fa fa-plus"></i>
+													</a>
+												</label>
+											</th>
+										</tr>
+										<tr>
+											<th>
+												<label class="label" style="margin-top: 8px;text-align: center;">上</label>
+											</th>
+											<th>
+												<label class="label" style="margin-top: 8px;text-align: center;">上中</label>
+											</th>
+											<th>
+												<label class="label" style="margin-top: 8px;text-align: center;">下中</label>
+											</th>
+											<th>
+												<label class="label" style="margin-top: 8px;text-align: center;">下</label>
+											</th>
+											<th>
+												<label class="label" style="margin-top: 8px;text-align: center;">其它点</label>
+											</th>
+										</tr>
+										<tr ng-repeat="checkTemp in tempList">
+											<input type="hidden" ng-model="checkTemp.checkType" />
+											<input type="hidden" ng-model="checkTemp.id" />
+											<th>
+												<label class="input" style="margin-top: 8px;text-align: center;">
+													<input type="text" ng-model="checkTemp.checkDate" ng-readonly="isNotEdit" class="form-control datepicker" data-smart-datepicker />
+												</label>
+											</th>
+											<th>
+												<label class="input" style="margin-top: 8px;text-align: center;">
+													<input type="text" ng-model="checkTemp.topLayer" ng-readonly="isNotEdit" class="form-control">
+												</label>
+											</th>
+											<th>
+												<label class="input" style="margin-top: 8px;text-align: center;">
+													<input type="text" ng-model="checkTemp.centerTopLayer" ng-readonly="isNotEdit" class="form-control">
+												</label>
+											</th>
+											<th>
+												<label class="input" style="margin-top: 8px;text-align: center;">
+													<input type="text" ng-model="checkTemp.centerDownLayer" ng-readonly="isNotEdit" class="form-control">
+												</label>
+											</th>
+											<th>
+												<label class="input" style="margin-top: 8px;text-align: center;">
+													<input type="text" ng-model="checkTemp.downLayer" ng-readonly="isNotEdit" class="form-control">
+												</label>
+											</th>
+											<th>
+												<label class="input" style="margin-top: 8px;text-align: center;">
+													<input type="text" ng-model="checkTemp.otherPoints" ng-readonly="isNotEdit" class="form-control">
+												</label>
+											</th>
+											<th>
+												<label class="input" style="margin-top: 8px;text-align: center;">
+													<input type="text" ng-model="checkTemp.checkPerson" ng-readonly="isNotEdit" class="form-control">
+												</label>
+											</th>
+											<th>
+												<label class="input" style="margin-top: 8px;text-align: center;">
+													<input type="text" ng-model="checkTemp.remark" ng-readonly="isNotEdit" class="form-control">
+												</label>
+											</th>
+											<th>
+												<label class="label" style="margin-top: 8px;text-align: center;">
+													<a class="btn btn-default btn-sm" ng-click="delRows(0, checkTemp)">
+														<i class="fa fa-minus"></i>
+													</a>
+												</label>
+											</th>
+										</tr>
+									</table>
+								</fieldset>
+								<header ng-hide="isLast">水分检测(新)</header>
+								<fieldset ng-hide="isLast">
+									<table class="table table-striped table-bordered table-hover" width="100%">
+										<tr>
+											<th rowspan="2">
+												<label class="label" style="margin-top: 31px;text-align: center;">检查时间</label>
+											</th>
+											<th colspan="5">
+												<label class="label" style="margin-top: 8px;text-align: center;">粮温℃</label>
+											</th>
+											<th rowspan="2">
+												<label class="label" style="margin-top: 31px;text-align: center;">检测人员</label>
+											</th>
+											<th rowspan="2">
+												<label class="label" style="margin-top: 31px;text-align: center;">备注</label>
+											</th>
+											<th rowspan="2">
+												<label class="label" style="margin-top: 31px;text-align: center;">
+													<a class="btn btn-primary btn-sm" ng-click="addRows(1)">
+														<i class="fa fa-plus"></i>
+													</a>
+												</label>
+											</th>
+										</tr>
+										<tr>
+											<th>
+												<label class="label" style="margin-top: 8px;text-align: center;">上</label>
+											</th>
+											<th>
+												<label class="label" style="margin-top: 8px;text-align: center;">上中</label>
+											</th>
+											<th>
+												<label class="label" style="margin-top: 8px;text-align: center;">下中</label>
+											</th>
+											<th>
+												<label class="label" style="margin-top: 8px;text-align: center;">下</label>
+											</th>
+											<th>
+												<label class="label" style="margin-top: 8px;text-align: center;">其它点</label>
+											</th>
+										</tr>
+										<tr ng-repeat="checkWater in waterList">
+											<input type="hidden" ng-model="checkWater.id" />
+											<input type="hidden" ng-model="checkWater.checkType" />
+											<th>
+												<label class="input" style="margin-top: 8px;text-align: center;">
+													<input type="text" ng-model="checkWater.checkDate" ng-readonly="isNotEdit" class="form-control datepicker" data-smart-datepicker />
+												</label>
+											</th>
+											<th>
+												<label class="input" style="margin-top: 8px;text-align: center;">
+													<input type="text" ng-model="checkWater.topLayer" ng-readonly="isNotEdit" class="form-control">
+												</label>
+											</th>
+											<th>
+												<label class="input" style="margin-top: 8px;text-align: center;">
+													<input type="text" ng-model="checkWater.centerTopLayer" ng-readonly="isNotEdit" class="form-control">
+												</label>
+											</th>
+											<th>
+												<label class="input" style="margin-top: 8px;text-align: center;">
+													<input type="text" ng-model="checkWater.centerDownLayer" ng-readonly="isNotEdit" class="form-control">
+												</label>
+											</th>
+											<th>
+												<label class="input" style="margin-top: 8px;text-align: center;">
+													<input type="text" ng-model="checkWater.downLayer" ng-readonly="isNotEdit" class="form-control">
+												</label>
+											</th>
+											<th>
+												<label class="input" style="margin-top: 8px;text-align: center;">
+													<input type="text" ng-model="checkWater.otherPoints" ng-readonly="isNotEdit" class="form-control">
+												</label>
+											</th>
+											<th>
+												<label class="input" style="margin-top: 8px;text-align: center;">
+													<input type="text" ng-model="checkWater.checkPerson" ng-readonly="isNotEdit" class="form-control">
+												</label>
+											</th>
+											<th>
+												<label class="input" style="margin-top: 8px;text-align: center;">
+													<input type="text" ng-model="checkWater.remark" ng-readonly="isNotEdit" class="form-control">
+												</label>
+											</th>
+											<th>
+												<label class="label" style="margin-top: 8px;text-align: center;">
+													<a class="btn btn-default btn-sm" ng-click="delRows(1, checkWater)">
+														<i class="fa fa-minus"></i>
+													</a>
+												</label>
+											</th>
+										</tr>
+									</table>
+								</fieldset>
+								<div id="dtBox"></div><!-- 时间控件：有时分秒 -->
+							</form>
+						</div>
+						<div class="modal-footer">
+							<button ng-click="last()" class="btn btn-primary" ng-hide="lastButton" data-dismiss="modal">上一步</button>
+							<button ng-click="next()" class="btn btn-primary" ng-hide="nextButton" data-dismiss="modal">下一步</button>
+							<button ng-click="save()" type="button" class="btn btn-primary" ng-hide="isNotEdit">保存</button>
+							<button ng-click="retrunTop()" class="btn btn-default" data-dismiss="modal">取消</button>
+						</div>
+					</div>
+				</div>
+			</article>
+		</div>
+	</section>
+</div>

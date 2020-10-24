@@ -1,0 +1,76 @@
+
+<link rel="stylesheet" type="text/css" media="screen"
+	href="../../../styles/css/login.css">
+<div class="comtain-informatin">
+	<div class="comtain">
+		<div class="con-left">
+			<img src="../../../styles/img/login/images.png" />
+		</div>
+		<div class="con">
+			<form id="login-form" class="smart-form client-form" novalidate="novalidate">
+				<div class="con-messon">
+					<a><img src="../../../styles/img/login/logo.png" /></a>
+				</div>
+				<div class="comtain-right">
+					<div class="comtain-message" style="height:30px;">
+						<p>用户登录</p>
+					</div>
+					<fieldset>
+						<section>
+							<div class="input-group">
+								<span class="input-group-addon">
+									<img src="../../../styles/img/login/user_icon_bg.png" />
+								</span> 
+								<input type="text" class="form-control input-item  xiigm" name="username"
+									ng-model="username" placeholder="用户名" />
+
+							</div>
+
+							<section>
+								<div class="input-group passon-con">
+									<span class="input-group-addon">
+										<img src="../../../styles/img/login/key_icon_bg.png" />
+									</span> 
+									<input type="Password" class="form-control input-item mima" 
+										name="Password" ng-model="password" placeholder="密码" />
+
+								</div>
+								<!-- 隐藏，放开就可用
+								<div class="input-group passon-con">
+									<span class="input-group-addon">
+										<img src="../../../styles/img/login/key_icon_bg.png" />
+									</span> 
+									<input type="text" name="verify" class="form-control input-item" style="width:65px;"
+										ng-model="verifyCode" placeholder="手机验证码" />
+									<input type="button" value="发送验证码" class="reset-btn" ng-click="sendMsg()" name="sendMsg"
+										style="width:70px;font-size:10px;height:24px;line-height:24px;margin:5px 0 0 5px;background:url(styles/img/login/button_bg.png) 0 0 no-repeat;"/>
+								</div> -->
+								
+								<section>
+									<div class="box-information1">
+										<div class="input-group box-cesstion">
+											<span class="input-group-addon" id="sizing-addon2">
+											<img src="../../../styles/img/login/yanzhengma_icon_bg.png" /></span>
+											<input type="text" class="form-control  form-contro2  mimars" ng-model="yzm" placeholder="验证码" />
+										</div>
+										<a class="span-information">
+											<img id="validateCode" src="{{file}}" ng-click="onload()" alt="" />
+										</a>
+									</div>
+								</section>
+								<div class="login-btn-box">
+									<button type="button" class="reset-btn" ng-click="login()">登&nbsp;&nbsp;录</button>
+									<button type="reset" class="login-btn" value="" ng-click="reset()">重&nbsp;&nbsp;置</button>
+								</div>
+
+							</section>
+
+						</section>
+					</fieldset>
+					<a href="http://qy.lswz.yn.gov.cn:88/web/company/#/login" target="_blank" class="comtain-message"><p style="font-size:16px;color:#3d8fd1;">云南省涉粮企业服务平台</p></a>
+					<a href="http://14.204.41.54:88/download/qyhosts.bat" class="comtain-message"><p style="font-size:13px;margin-top:3px;text-decoration:underline;">服务平台访问配置文件下载</p></a>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>

@@ -1,0 +1,350 @@
+<!-- MAIN CONTENT -->
+<div id="content">
+	<!-- widget grid -->
+	<section widget-grid id="widget-grid">
+		<div class="row">
+			<article class="col-sm-12 col-md-12 col-lg-12">
+				<div jarvis-widget id="form-grid-widget" data-widget-colorbutton="false" data-widget-editbutton="false"
+					 data-widget-custombutton="false">
+					<div class="dt-toolbar">
+						<header>
+							<a href-void class="btn btn-default btn-xs" ng-click="back()">
+								<i class="fa fa-angle-left"></i>&nbsp;返回&nbsp;
+							</a>
+							&nbsp;<h3><center>储备粮油专卡</center></h3>
+						</header>
+
+						<div class="panel-body col-sm-12">
+							<style>
+								.list-group .add-listclass{
+									border: none !important;
+									border-bottom: 1px solid #f5f5f5 !important;
+									margin-bottom: 0px !important;
+								}
+								.zhuank-img{ position:absolute; top:-85px; right:70px; border:1px solid #ccc; }
+							</style>
+							<script type="text/javascript">
+                                $(function(){
+                                    $("#img-1").click(function(e){
+                                        e.stopPropagation();
+                                        if(e.currentTarget.id == "img-1"){
+                                            $("#img-1").stop().animate({"width":"180px" , "height":"180px"});
+                                            $(".zhuank-img").stop().animate({"width":"180px" , "height":"180px"});
+                                        }
+                                    });
+                                    $(document).on('click',function(e){
+                                        $("#img-1").stop().animate({"width":"90px" , "height":"90px"});
+                                        $(".zhuank-img").stop().animate({"width":"90px" , "height":"90px"});
+                                    });
+                                });
+							</script>
+							<div class="zhuank-img">
+								<img id="img-1" src="{{foodbasicinfo.authCode}}" style="width: 90px; height: 90px; padding: 2px;">
+							</div>
+							<div class="row">
+								<table class="table table-striped table-bordered table-hover" style="width:98.7%" width="100%">
+									<tr>
+										<td style="text-align:center;">
+											填卡单位
+										</td>
+										<td>
+											{{foodbasicinfo.recordUnite}}
+										</td>
+										<td style="text-align:center;">
+											填卡日期
+										</td>
+										<td>
+											{{foodbasicinfo.fillingTime}}
+										</td>
+										<td style="text-align:center;">
+											保管单位
+										</td>
+										<td>
+											{{foodbasicinfo.keepUnite}}
+										</td>
+										<td style="text-align:center;">
+											仓房编号
+										</td>
+										<td>
+											{{foodbasicinfo.storehouseCode}}
+										</td>
+									</tr>
+									<tr>
+										<td style="text-align:center;">
+											货位编号
+										</td>
+										<td>
+											{{foodbasicinfo.warehouseCode}}
+										</td>
+										<td  style="text-align:center;">
+											仓型
+										</td>
+										<td>
+											{{dicData[foodbasicinfo.houseType]}}
+										</td>
+										<td  style="vertical-align:middle;text-align:center;">
+											设计仓容
+										</td>
+										<td   style="vertical-align:middle;">
+											{{foodbasicinfo.designHouseCapacity}}
+										</td>
+										<td   style="vertical-align:middle;text-align:center;">
+											储粮性质
+										</td>
+										<td   style="vertical-align:middle;">
+											{{dicData[foodbasicinfo.quality]}}
+										</td>
+									</tr>
+									<tr>
+										<td   style="vertical-align:middle;text-align:center;">
+											品种
+										</td>
+										<td   style="vertical-align:middle;">
+											{{dicData[foodbasicinfo.subType]}}
+										</td>
+										<td style="text-align:center;">
+											产地
+										</td>
+										<td>{{dicData[foodbasicinfo.placeOfOrigin]}}</td>
+										<td style="vertical-align:middle;text-align:center;">
+											实际数量(kg)
+										</td>
+										<td style="vertical-align:middle;">
+											{{foodbasicinfo.number}}
+										</td>
+										<td style="text-align:center;">
+											入库价格
+										</td>
+										<td>{{foodbasicinfo.price}}</td>
+									</tr>
+									<tr>
+										<td style="text-align:center;">
+											收获年度
+										</td>
+										<td>{{dicData[foodbasicinfo.growYear]}}</td>
+										<td style="text-align:center;">
+											入库时间
+										</td>
+										<td>{{foodbasicinfo.inputYear}}</td>
+										<td style="text-align:center;">
+											等级
+										</td>
+										<td>{{dicData[foodbasicinfo.level]}}</td>
+										<td style="text-align:center;">
+											水分(及挥发物)%
+										</td>
+										<td>{{foodbasicinfo.water}}</td>
+									</tr>
+									<tr>
+										<td style="text-align:center;">
+											杂质(不溶性杂质)%
+										</td>
+										<td>{{foodbasicinfo.impurity}}</td>
+										<td style="text-align:center;">
+											不完善粒(整精米率)%
+										</td>
+										<td>{{foodbasicinfo.unsound}}</td>
+										<td style="text-align:center;">
+											容重(出糙率%)
+										</td>
+										<td>{{foodbasicinfo.weight}}</td>
+										<td style="text-align:center;">
+											脂肪酸值(酸价)
+										</td>
+										<td>{{foodbasicinfo.fatIndex}}</td>
+									</tr>
+									<tr>
+										<td style="text-align:center;">
+											过氧化值
+										</td>
+										<td>{{foodbasicinfo.peroxideValue}}</td>
+										<td style="text-align:center;">
+											保管方法
+										</td>
+										<td>{{foodbasicinfo.keepMethod}}</td>
+										<td style="text-align:center;">
+											保管员
+										</td>
+										<td>{{foodbasicinfo.keeperNames}}</td>
+										<td style="text-align: center;">
+											粮(油)体积
+										</td>
+										<td>{{foodbasicinfo.disperseCapacity}}</td>
+									</tr>
+									<tr>
+										<td style="text-align:center;">
+											粮堆长
+										</td>
+										<td>{{foodbasicinfo.length}}</td>
+										<td style="text-align:center;">
+											粮堆(罐)宽
+										</td>
+										<td>{{foodbasicinfo.width}}</td>
+										<td style="text-align:center;">
+											粮堆(罐)高
+										</td>
+										<td>{{foodbasicinfo.height}}</td>
+										<td>
+										</td>
+										<td>
+										</td>
+									</tr>
+								</table>
+							</div>
+							<div ng-show="isShow">
+								<!--货位信息开始-->
+								<header style="padding-left:0px;overflow: hidden;" class="panel-heading">
+									<h4 style="float: left">基本形状 </h4>
+								</header>
+								<div>
+									<div class="widget-body no-padding">
+										<div id="DataTables_Table_1_wrapper3" class="dataTables_wrapper form-inline no-footer">
+											<img src="{{wareInfo.wareImg}}" width="90px"; height="90px"; style="margin-left: 100px; margin-top: -30px;">
+										</div>
+									</div>
+								</div>
+								<!--货位信息结束-->
+
+								<!--粮食质量检测记录开始-->
+								<header style="padding-left:0px;overflow: hidden;" class="panel-heading">
+									<h4 style="float: left">粮食质量检测记录 </h4>
+									<a style="float: left;margin-left:10px;margin-bottom: 5px;" href-void class="btn btn-primary btn-sm" ng-click="getPrefeThreeCheckRecord(foodbasicinfo.id)"><i class="fa fa-plus"></i>&nbsp;粮食质量检测记录</a>
+								</header>
+								<div class="row">
+									<table class="table table-striped table-bordered table-hover" style="width:98.7%" width="100%">
+										<thead>
+										<tr>
+											<th colspan="6" style="text-align:center;">常规检查项目</th>
+											<th colspan="2" style="text-align:center;">储藏品质检查项目</th>
+											<th rowspan="2" style="text-align:center;">检测单位或检测人</th>
+										</tr>
+										<tr>
+											<th data-class="expand"  style="text-align:center;">  检测时间</th>
+											<th data-class="expand"  style="text-align:center;">  容重g/L</th>
+											<th data-class="expand"  style="text-align:center;">  水分%</th>
+											<th data-hide="expand"  style="text-align:center;"> 杂质%</th>
+											<th data-hide="expand"  style="text-align:center;"> 不完善粒%</th>
+											<!--<th data-hide="expand"  style="text-align:center;"> 折光指数</th>-->
+
+											<th data-hide="expand"  style="text-align:center;">  色泽气味</th>
+											<th data-hide="expand"  style="text-align:center;">  面筋吸水量%</th>
+											<th data-hide="expand"  style="text-align:center;">  品尝评分值(分)</th>
+										</tr>
+										</thead>
+
+										<tbody>
+
+										<tr ng-repeat="check in thirdqualitycheck">
+											<td  style="text-align:center;">{{check.checkTime | date:'yyyy-MM-dd'}}</td>
+											<td  style="text-align:center;">{{check.capacity}}</td>
+											<td  style="text-align:center;">{{check.water}}</td>
+											<td  style="text-align:center;">{{check.impurity}}</td>
+											<td  style="text-align:center;">{{check.badpart}}</td>
+											<!--<td  style="text-align:center;"></td>-->
+
+											<td  style="text-align:center;">{{check.colorsmell}}</td>
+											<td  style="text-align:center;">{{check.glutenWaterCount}}</td>
+											<td  style="text-align:center;">{{check.eatScore}}</td>
+											<td  style="text-align:center;">{{check.checker}}</td>
+											<!--<td>
+												<a href-void ng-click="showAddFoodinfoCheck(foodinfocheck.id)"><i class="fa fa-edit"></i>修改</a>
+											</td>-->
+										</tr>
+										</tbody>
+									</table>
+								</div>
+
+								<!--粮食质量检测记录结束-->
+
+								<!--货位变更记录开始-->
+								<header style="padding-left:0px;overflow: hidden;" class="panel-heading">
+									<h4 style="float: left">货位变更记录 </h4>
+									<a style="float: left;margin-left:10px;margin-bottom: 5px;" href-void class="btn btn-primary btn-sm" ng-click="showAddFoodinfoLocation()"><i class="fa fa-plus"></i>&nbsp;货位变更记录</a>
+								</header>
+								<div class="row">
+									<table class="table table-striped table-bordered table-hover" style="width:98.7%" width="100%">
+										<thead>
+										<tr>
+											<th data-class="expand"  style="text-align:center;">  变更日期</th>
+											<th data-hide="expand"  style="text-align:center;">  原货位名称</th>
+											<th data-class="expand"  style="text-align:center;">  新货位名称</th>
+											<th data-hide="expand"  style="text-align:center;">  备注</th>
+										<!--	<th data-hide="expand"  style="text-align:center;"> 操作</th>-->
+										</tr>
+										</thead>
+
+										<tbody>
+										<tr ng-repeat="foodinfolocation in pageInfoLocation.list">
+											<td  style="text-align:center;">{{foodinfolocation.changeTime | date:'yyyy-MM-dd'}}</td>
+											<td  style="text-align:center;">{{foodinfolocation.warehouseName}}</td>
+											<td  style="text-align:center;">{{foodinfolocation.newWarehouseName}}</td>
+											<td  style="text-align:center;">{{foodinfolocation.remarks}}</td>
+											<!--<td>
+												&lt;!&ndash;<a href-void ng-click="showViewLocation(foodinfolocation.id)"><i class="fa fa-edit"></i>详情</a>&ndash;&gt;
+												&lt;!&ndash;	<a href-void ng-click="showAddFoodinfoLocation(foodinfolocation.id)"><i class="fa fa-edit"></i>修改</a>&ndash;&gt;
+
+											</td>-->
+										</tr>
+										</tbody>
+									</table>
+								</div>
+
+								<!--货位变更记录结束-->
+							</div>
+						</div>
+					</div>
+				</div>
+			</article>
+		</div>
+	</section>
+</div>
+
+
+
+<!-- 粮食质量检测记录的弹窗开始 -->
+<!--<div class="modal fade" id="foodinfocheckModal" tabindex="-1" role="dialog"
+	 aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal"
+						aria-hidden="true">&times;</button>
+				<h4 class="modal-title" id="myModalLabel">粮食质量检验记录</h4>
+			</div>
+			<div class="modal-body">
+				<div smart-include="app/storage/views/foodbasicinfo/foodbasicinfo-check-edit.html"></div>
+			</div>
+			<div class="modal-footer">
+				<button ng-click="saveFoodinfoCheck()" type="button" class="btn btn-primary">提交</button>
+				<button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+			</div>
+		</div>
+		&lt;!&ndash; /.modal-content &ndash;&gt;
+	</div>
+	&lt;!&ndash; /.modal-dialog &ndash;&gt;
+</div>-->
+<!-- 粮食质量检测记录的弹窗结束 -->
+
+<!-- 粮食质量检测记录的弹窗开始 -->
+<div class="modal fade" id="foodinfoLocationModal" tabindex="-1" role="dialog"
+	 aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal"
+						aria-hidden="true">&times;</button>
+				<h4 class="modal-title" id="myModalLabel2">货位变更记录</h4>
+			</div>
+			<div class="modal-body">
+				<div smart-include="app/storage/views/foodbasicinfo/foodbasicinfo-location-edit.html"></div>
+			</div>
+			<div class="modal-footer" id="operation">
+				<button ng-click="saveFoodinfoLocation()" type="button" class="btn btn-primary"  ng-readonly="isNotEdit">提交</button>
+				<button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+			</div>
+		</div>
+		<!-- /.modal-content -->
+	</div>
+	<!-- /.modal-dialog -->
+</div>
+<!-- 粮食质量检测记录的弹窗结束 -->

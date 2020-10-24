@@ -1,0 +1,151 @@
+<!-- MAIN CONTENT -->
+<div id="content">
+    <!-- widget grid -->
+    <section widget-grid id="widget-grid">
+        <div class="row">
+            <article class="col-sm-12">
+
+                <div jarvis-widget id="standard-datatable-widget" data-widget-color="darken" data-widget-editbutton="false">
+                    <header>
+                        <span class="widget-icon"> <i class="fa fa-table"></i> </span>
+                        <h2>汇总报表&emsp;&emsp;<span style="color: red;">注:标红数值表示不在合理范围或设备异常.</span></h2>
+                    </header>
+                    <div>
+                        <div class="widget-body no-padding">
+                            <div id="DataTables_Table_1_wrapper" class="dataTables_wrapper form-inline no-footer">
+                                <div class="dt-toolbar">
+                                    <div class="col-xs-12 col-sm-9">
+                                        <div class="form-group">
+                                            <label>日期：<input style="width: 100px;" class="form-control" type="text" ng-model="searchStartDate" name="searchStartDate" data-smart-datepicker>
+												<!-- --&nbsp;<input style="width: 100px;" class="form-control" type="text" ng-model="searchEndDate" name="searchEndDate" data-smart-datepicker> -->
+                                                <a class="btn btn-default btn-sm" ng-click="goPage(1)"> <i class="fa fa-search"></i>&nbsp;查&nbsp;询</a>
+                                                <a class="btn btn-default btn-sm" ng-click="emptyTime()"> <i class=""></i>&nbsp;清&nbsp;空</a>
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-3 col-xs-2 hidden-xs">
+                                        <div class="dataTables_length">
+                                            <label>每页显示 <select ng-model="pageInfo.pageSize" ng-change="loadData(pageInfo.pageNum=1)"
+                                                                ng-options="num as num for num in [1,10,25,50,100]"
+                                                                class="form-control input-sm"></select> 条
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <table class="table table-striped table-bordered table-hover" width="100%">
+                                    <thead>
+                                    <tr>
+                                        <th data-class="expand" style="text-align:center;" colspan="5">仓房信息</th>
+                                        <th data-class="expand" style="text-align:center;" colspan="7">粮情</th>
+                                        <th data-class="expand" style="text-align:center;" colspan="2">虫害</th>
+                                        <th data-class="expand" style="text-align:center;" colspan="3">气体</th>
+                                        <th data-class="expand" style="text-align:center;vertical-align:middle;" rowspan="2">保管员</th>
+                                        <th data-class="expand" style="text-align:center;vertical-align:middle;" rowspan="2">备注</th>
+                                    </tr>
+                                    <tr>
+                                        <th data-class="expand" style="text-align:center;vertical-align:middle;">仓号</th>
+                                        <th data-class="expand" style="text-align:center;vertical-align:middle;">储粮品种</th>
+                                        <th data-class="expand" style="text-align:center;vertical-align:middle;">储粮性质</th>
+                                        <th data-class="expand" style="text-align:center;vertical-align:middle;">设计仓容(t)</th>
+                                        <th data-class="expand" style="text-align:center;vertical-align:middle;">储粮数量(t)</th>
+                                        <th data-class="expand" style="text-align:center;vertical-align:middle;">气湿(%RH)</th>
+                                        <th data-class="expand" style="text-align:center;vertical-align:middle;">气温(℃)</th>
+                                        <th data-class="expand" style="text-align:center;vertical-align:middle;">仓湿(%RH)</th>
+                                        <th data-class="expand" style="text-align:center;vertical-align:middle;">仓温(℃)</th>
+                                        <th data-class="expand" style="text-align:center;vertical-align:middle;">平均粮温(℃)</th>
+                                        <th data-class="expand" style="text-align:center;vertical-align:middle;">最高粮温(℃)</th>
+                                        <th data-class="expand" style="text-align:center;vertical-align:middle;">最低粮温(℃)</th>
+                                        <th data-class="expand" style="text-align:center;vertical-align:middle;">最多虫数</th>
+                                        <th data-class="expand" style="text-align:center;vertical-align:middle;">最少虫数</th>
+                                        <th data-class="expand" style="text-align:center;vertical-align:middle;">氧气浓度(%)</th>
+                                        <th data-class="expand" style="text-align:center;vertical-align:middle;">二氧化碳浓度(ppm)</th>
+                                        <th data-class="expand" style="text-align:center;vertical-align:middle;">磷化氢浓度(ppm)</th>
+                                    </tr>
+                                    </thead>
+
+                                    <tbody>
+                                    <tr ng-repeat="summaryReport in pageInfo.list">
+                                        <td style="text-align:center;">{{summaryReport.storeHouse}}</td>
+                                        <td style="text-align:center;">{{ dicData[storehouseCode[summaryReport.storeHouse].pz] }}</td>
+                                        <td style="text-align:center;">{{ dicData[storehouseCode[summaryReport.storeHouse].hwxz] }}</td>
+                                        <td style="text-align:center;">{{ storehouseCode[summaryReport.storeHouse].design_capacity }}</td>
+                                        <td style="text-align:center;">
+                                        	{{storehouseCode[summaryReport.storeHouse].kcsl ? storehouseCode[summaryReport.storeHouse].kcsl/1000 : ''}}
+                                        </td>
+                                        <td style="text-align:center;">
+                                            <div ng-if="summaryReport.outH==250">
+                                                <acronym title="设备异常"><span style="color: red;">-1</span></acronym>
+                                            </div>
+                                            <div ng-if="summaryReport.outH!=250">{{ summaryReport.outH }}</div>
+                                        </td>
+                                        <td style="text-align:center;">
+                                            <div ng-if="summaryReport.outTemp==250">
+                                                <acronym title="设备异常"><span style="color: red;">-100</span></acronym>
+                                            </div>
+                                            <div ng-if="summaryReport.outTemp!=250">{{ summaryReport.outTemp }}</div>
+                                        </td>
+                                        <td style="text-align:center;">
+                                            <div ng-if="summaryReport.inH==250">
+                                                <acronym title="设备异常"><span style="color: red;">-1</span></acronym>
+                                            </div>
+                                            <div ng-if="summaryReport.inH!=250">{{ summaryReport.inH }}</div>
+                                        </td>
+                                        <td style="text-align:center;">
+                                            <div ng-if="summaryReport.inTemp==250">
+                                                <acronym title="设备异常"><span style="color: red;">-100</span></acronym>
+                                            </div>
+                                            <div ng-if="summaryReport.inTemp!=250">{{ summaryReport.inTemp }}</div>
+                                        </td>
+                                        <td style="text-align:center;">{{summaryReport.avgTemp}}</td>
+                                        <td style="text-align:center;">
+                                            <!--高温报警-->
+                                            <div ng-if="summaryReport.maxTemp >= warningValueList[summaryReport.storeHouse].high">
+                                                <div ng-if="summaryReport.maxTemp==250">
+                                                    <acronym title="设备异常"><span style="color: red;">-100</span></acronym>
+                                                </div>
+                                                <div ng-if="summaryReport.maxTemp!=250">
+                                                    <acronym title="粮温高限报警为: {{warningValueList[summaryReport.storeHouse].high}}℃"><span style="color: red;">{{ summaryReport.maxTemp }}</span></acronym>
+                                                </div>
+                                            </div>
+                                            <div ng-if="summaryReport.maxTemp < warningValueList[summaryReport.storeHouse].high">
+                                                <span>{{ summaryReport.maxTemp }}</span>
+                                            </div>
+                                            <div ng-if="warningValueList[summaryReport.storeHouse].high == null">
+                                                <span>{{ summaryReport.maxTemp }}</span>
+                                            </div>
+                                            <!--高温预警-->
+                                        </td>
+                                        <td style="text-align:center;">
+                                            <!--低温报警-->
+                                            <div ng-if="summaryReport.minTemp <= warningValueList[summaryReport.storeHouse].low">
+                                                <acronym title="粮温低限报警为: {{warningValueList[summaryReport.storeHouse].low}}℃"><span style="color: red;">{{ summaryReport.minTemp }}</span></acronym>
+                                            </div>
+                                            <div ng-if="summaryReport.minTemp > warningValueList[summaryReport.storeHouse].low">
+                                                <span>{{ summaryReport.minTemp }}</span>
+                                            </div>
+                                            <div ng-if="warningValueList[summaryReport.storeHouse].low == null">
+                                                <span>{{ summaryReport.minTemp }}</span>
+                                            </div>
+                                            <!--低温预警-->
+                                        </td>
+                                        <td style="text-align:center;">{{summaryReport.maxvalues}}</td>
+                                        <td style="text-align:center;">{{summaryReport.minvalues}}</td>
+                                        <td style="text-align:center;">{{summaryReport.o2avg}}</td>
+                                        <td style="text-align:center;">{{summaryReport.co2avg}}</td>
+                                        <td style="text-align:center;">{{summaryReport.ph3avg}}</td>
+                                        <td style="text-align:center;">{{summaryReport.dutyStoreman}}</td>
+                                        <td style="text-align:center;">{{summaryReport.remark}}</td>
+                                    </tr>
+                                    </tbody>
+
+                                </table>
+                                <div smart-include="app/layout/partials/page.tpl.html"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </article>
+        </div>
+    </section>
+</div>

@@ -1,0 +1,180 @@
+<!-- MAIN CONTENT -->
+<div id="content">
+    <!-- widget grid -->
+    <section widget-grid id="widget-grid">
+        <div class="row">
+            <!-- NEW COL START -->
+            <article class="col-sm-12 col-md-12 col-lg-12">
+                <!-- Widget ID (each widget will need unique ID)-->
+                <div jarvis-widget id="form-grid-widget"
+                     data-widget-colorbutton="false" data-widget-editbutton="false"
+                     data-widget-custombutton="false">
+                    <!-- widget div-->
+                    <div>
+                        <!-- widget content -->
+                        <div class="widget-body no-padding">
+                            <form id="basicStorehouseView-form" class="smart-form ng-pristine ng-valid"
+                                  data-validator-option="validateOptions" novalidate="novalidate">
+                                <header>
+                                    <a href-void class="btn btn-default btn-xs" ng-click="retList()"><i
+                                            class="fa fa-angle-left"></i>&nbsp;返回&nbsp;</a>
+                                    &nbsp;<strong>气调信息设置详情</strong>
+                                    <span class="pull-right font-xs">带*的部分必须填写</span>
+                                </header>
+                                <table class="table table-striped table-bordered table-hover" width="100%">
+                                    <fieldset>
+                                        <div class="row" >
+                                            <section class="col col-3">
+                                                <label class="label">仓房名称:&emsp;<span
+                                                        style="color: red;margin-left: 5px;text-align: center;">*</span></label>
+                                                <label class="select">
+                                                    <select ng-model="basicGasSet.vcfcode" name="vcfcode"
+                                                            ng-options="store.storehouseCode as store.storehouseName for store in storelist"
+                                                            ng-disabled="isNotEdit" class="form-control"
+                                                            required>
+                                                        <option value="">--请选择--</option>
+                                                    </select>
+                                                </label>
+                                            </section>
+                                            <section class="col col-3" ng-hide="isAdd">
+                                                <label class="label">设备编码:&emsp;</label>
+                                                <label class="input">
+                                                    <input type="text" maxlength="20"
+                                                           ng-model="basicGasSet.vdevcode"
+                                                           ng-disabled="true" name="vdevcode" >
+                                                </label>
+                                            </section>
+                                            <section class="col col-3">
+                                                <label class="label">设备名称:&emsp;<span
+                                                        style="color: red;margin-left: 5px;text-align: center;">*</span></label>
+                                                <label class="input">
+                                                    <input type="text" maxlength="5"
+                                                           ng-model="basicGasSet.vdevname"
+                                                           ng-blur="itExistCode('',basicGasSet.vdevname)"
+                                                           ng-disabled="isNotEdit"
+                                                           name="vdevname" required>
+                                                </label>
+                                            </section>
+                                            <section class="col col-3">
+                                                <label class="label">通道号:</label> <label class="input">
+                                                <input type="text" name="idevtdh" validNumber="true"
+                                                       ng-model="basicGasSet.idevtdh" ng-disabled="isNotEdit">
+                                            </label>
+                                            </section>
+                                            <section class="col col-3">
+                                                <label class="label">站点编码:&emsp;<span
+                                                        style="color: red;margin-left: 5px;text-align: center;">*</span></label>
+                                                <label class="select">
+                                                    <select ng-model="basicGasSet.sitecode" name="sitecode"
+                                                            ng-options="station.sitecode as station.sitename for station in stations"
+                                                            ng-disabled="isNotEdit" class="form-control"
+                                                            required>
+                                                        <option value="">--请选择--</option>
+                                                    </select>
+                                                </label>
+                                            </section>
+                                            <section class="col col-3">
+                                                <label class="label">电磁阀1:</label> <label class="input">
+                                                <input type="text" ng-model="basicGasSet.value1"
+                                                       ng-disabled="isNotEdit"
+                                                       name="value1" maxlength="20" validNumber="true">
+                                            </label>
+                                            </section>
+                                            <section class="col col-3">
+                                                <label class="label">电磁阀2:</label> <label class="input">
+                                                <input type="text" ng-model="basicGasSet.value2"
+                                                       ng-disabled="isNotEdit"
+                                                       name="value2" maxlength="20" validNumber="true">
+                                            </label>
+                                            </section>
+                                            <section class="col col-3">
+                                                <label class="label">电磁阀3:</label> <label class="input">
+                                                <input type="text" ng-model="basicGasSet.value3"
+                                                       ng-disabled="isNotEdit"
+                                                       name="value3" maxlength="20" validNumber="true">
+                                            </label>
+                                            </section>
+                                            <section class="col col-3">
+                                                <label class="label">氮气浓度1:</label> <label class="input">
+                                                <input type="text" ng-model="basicGasSet.n2value1"
+                                                       ng-disabled="isNotEdit" ng-keyup="clearNoNum(basicGasSet,'fN2Value1')"
+                                                       name="n2value1" maxlength="10">
+                                            </label>
+                                            </section>
+                                            <section class="col col-3">
+                                                <label class="label">氮气浓度2:</label> <label class="input">
+                                                <input type="text" ng-model="basicGasSet.n2value2"
+                                                       ng-disabled="isNotEdit" ng-keyup="clearNoNum(basicGasSet,'fN2Value2')"
+                                                       name="n2value2" maxlength="10">
+                                            </label>
+                                            </section>
+                                            <section class="col col-3">
+                                                <label class="label">氮气浓度3:</label> <label class="input">
+                                                <input type="text" ng-model="basicGasSet.n2value3"
+                                                       ng-disabled="isNotEdit" ng-keyup="clearNoNum(basicGasSet,'fN2Value3')"
+                                                       name="n2value3" maxlength="10">
+                                            </label>
+                                            </section>
+                                            <section class="col col-3">
+                                                <label class="label">氮气浓度4:</label> <label class="input">
+                                                <input type="text" ng-model="basicGasSet.n2value4"
+                                                       ng-disabled="isNotEdit" ng-keyup="clearNoNum(basicGasSet,'fN2Value4')"
+                                                       name="n2value4" maxlength="10">
+                                            </label>
+                                            </section>
+                                            <section class="col col-3">
+                                                <label class="label">氮气浓度5:</label> <label class="input">
+                                                <input type="text" ng-model="basicGasSet.n2value5"
+                                                       ng-disabled="isNotEdit" ng-keyup="clearNoNum(basicGasSet,'fN2Value5')"
+                                                       name="n2value5" maxlength="10">
+                                            </label>
+                                            </section>
+                                            <section class="col col-3">
+                                                <label class="label">设备状态:</label>
+                                                <label class="select">
+                                                    <label class="select">
+                                                        <select ng-model="basicGasSet.valarmstatue" name="valarmstatue" ng-disabled="isNotEdit"
+                                                                ng-options="x.id as x.name for x in [{id:0,name:'正常'},{id:1,name:'异常'}]">
+                                                            <option value="" selected="" disabled="">--请选择--</option>
+                                                        </select>
+                                                    </label>
+                                                </label>
+                                            </section>
+                                            <section class="col col-3">
+                                                <label class="label">风机状态:</label>
+                                                <label class="select">
+                                                    <label class="select">
+                                                        <select ng-model="basicGasSet.vstatue" name="vstatue" ng-disabled="isNotEdit"
+                                                                ng-options="x.id as x.name for x in [{id:0,name:'关闭'},{id:1,name:'打开'},{id:2,name:'反正'},{id:3,name:'停止'}]">
+                                                            <option value="" selected="" disabled="">--请选择--</option>
+                                                        </select>
+                                                    </label>
+                                                </label>
+                                            </section>
+                                            <section class="col col-3">
+                                                <label class="label">描述:</label>
+                                                <label class="input">
+                                                    <input type="text" maxlength="250"  ng-model="basicGasSet.remark"
+                                                           ng-disabled="isNotEdit" name="remark">
+                                                </label>
+                                            </section>
+                                        </div>
+                                    </fieldset>
+                                    <div class="form-actions">
+                                        <footer class="text-align-center">
+                                            <button type="button" class="btn btn-default" ng-click="retList()">取消
+                                            </button>
+                                            <button type="button" class="btn btn-primary" ng-hide="isNotEdit"
+                                                    ng-click="save()">保存
+                                            </button>
+                                        </footer>
+                                    </div>
+                                </table>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </article>
+        </div>
+    </section>
+</div>

@@ -1,0 +1,85 @@
+<!-- MAIN CONTENT -->
+<div id="content">
+    <!-- widget grid -->
+    <section widget-grid id="widget-grid">
+        <div class="row">
+            <article class="col-sm-12">
+
+                <div jarvis-widget id="standard-datatable-widget" data-widget-color="darken" data-widget-editbutton="false">
+                    <header>
+                        <span class="widget-icon"> <i class="fa fa-table"></i> </span>
+                        <h2>盘点单 </h2>
+                    </header>
+                    <div>
+                        <div class="widget-body no-padding">
+                        <div id="DataTables_Table_1_wrapper" class="dataTables_wrapper form-inline no-footer">
+							<div class="dt-toolbar">
+								<div class="col-xs-11 col-sm-10">
+									<div class="form-group">
+									<label>
+									 	<a  has-permission="519"  href-void class="btn btn-primary btn-sm" ng-click="showCheck()"><i class="fa fa-plus"></i>新建盘点单</a>
+									</label>
+										<label> 盘点单号:&emsp;
+											<select ng-model="search.pdNum" class="form-control input-sm"
+													ng-options="pdnum.checkNumber as pdnum.checkNumber for pdnum in pdNum">
+                                                <option value="">-请选择-</option>
+											</select>&emsp;
+										</label>
+										<label>
+											盘点时间：<input style="width: 100px;" class="form-control" type="text" ng-model="search.starttime" data-smart-datepicker>
+											--&nbsp;<input style="width: 100px;" class="form-control" type="text" ng-model="search.endtime" data-smart-datepicker>
+										</label>
+
+										<a class="btn btn-default btn-sm" ng-click="loadData()"> <i class="fa fa-search"></i>&nbsp;查&nbsp;询</a>
+										<a class="btn btn-default btn-sm" ng-click="clean()">&nbsp;清&nbsp;空</a>
+								     </div>
+							     </div>
+								
+								<div class="col-sm-2 col-xs-4 hidden-xs">
+									<div class="dataTables_length">
+										<label>每页显示 <select ng-model="pageInfo.pageSize" ng-change="loadData()"
+															ng-options="num as num for num in [10,25,50,100]"
+															class="form-control input-sm"></select> 条
+										</label>
+									</div>
+								</div>
+							 </div>
+							</div>
+
+						<table class="table table-striped table-bordered table-hover" width="100%">
+                        <thead>
+                        <tr>
+                            <th data-hide="phone">序号</th>
+							<th data-class="expand">存放位置</th>
+							<th data-class="expand">盘点单号</th>
+							<th data-class="expand">负责人</th>
+							<th data-class="expand">盘点时间</th>
+                            <th data-hide="phone,tablet"> 操作</th>
+                        </tr>
+                        </thead>
+                        
+                        <tbody>
+                        	<tr ng-repeat="deviceList in pageInfo.list">
+								<th align="center">{{$index + 1 + (pageInfo.pageNum-1) * pageInfo.pageSize}}</th>
+								<td>{{deviceList.depotName}}</td>
+								<td>{{deviceList.checkNumber}}</td>
+								<td>{{deviceList.checkPerson}}</td>
+								<td>{{deviceList.checkDate | date :'yyyy-MM-dd HH:mm:ss'}}</td>
+								<td>
+									<a href-void ng-click="loadDataById(deviceList.depotId,deviceList.checkNumber,'1')"><i class="fa fa-info-circle"></i>明细</a>
+									<a has-permission="520" href-void ng-click="loadDataById(deviceList.depotId,deviceList.checkNumber,'2')"><i class="fa fa-edit"></i>修改</a>
+									<a has-permission="521" href-void ng-click="remove(deviceList.depotId,deviceList.checkNumber)"><i class="fa fa-trash-o"></i>删除</a>
+                        		</td>
+                        	</tr>
+                        </tbody>
+
+                        </table>
+							<div smart-include="app/layout/partials/page.tpl.html"></div>
+						</div>
+                    	</div>
+                    </div>
+            </article>
+        </div>
+    </section>
+</div>
+

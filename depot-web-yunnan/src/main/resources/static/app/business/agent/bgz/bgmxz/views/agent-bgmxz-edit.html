@@ -1,0 +1,175 @@
+<!-- MAIN CONTENT -->
+<div id="content">
+
+	<!-- widget grid -->
+	<section id="widget-grid" widget-grid>
+
+		<!-- START ROW -->
+		<div class="row">
+
+			<!-- NEW COL START -->
+			<article class="col-sm-12 col-md-12 col-lg-12">
+
+				<!-- Widget ID (each widget will need unique ID)-->
+				<div jarvis-widget id="form-grid-widget"
+					 data-widget-colorbutton="false" data-widget-editbutton="false"
+					 data-widget-custombutton="false">
+
+					<!-- widget div-->
+					<div>
+
+						<!-- widget content -->
+						<div class="widget-body no-padding">
+							<form id="agentBgmxz-form" class="smart-form ng-pristine ng-valid" data-validator-option="validateOptions" novalidate="novalidate">
+								<header>
+									<a href-void class="btn btn-default btn-xs" ng-click="retList()">
+										<i class="fa fa-angle-left"></i>&nbsp;返回&nbsp;
+									</a>
+									&nbsp;<strong>保管明细账编辑</strong>
+								</header>
+								<fieldset>
+									<div class="row">
+										<section class="col col-4">
+											<label class="label txt-bg-red">代储点名称<span style="color: red;">*</span></label>
+											<label class="select">
+												<select ng-model="bgmxz.agentId" required name="agentId" ng-disabled="disabled" 
+														ng-options="agent.id as agent.agentName for agent in agentData.list"
+														class="form-control" ng-change="getAgentDepotData(bgmxz.agentId)">
+													<option value="">--请选择--</option>
+												</select>
+											</label>
+										</section>
+										<section class="col col-4">
+											<label class="label txt-bg-red">粮库名称<span style="color: red;">*</span></label>
+											<label class="select">
+												<select ng-model="bgmxz.szlkOrgId" name="szlkOrgId" required ng-disabled="disabled" 
+														ng-options="depot.depotId as depot.depotName for depot in depotList"
+														class="form-control" ng-change="getHouseList(bgmxz.szlkOrgId)">
+													<option value="">--请选择--</option>
+												</select>
+											</label>
+										</section>
+										<section class="col col-4">
+											<label class="label txt-bg-red">仓房名称<span style="color: red;">*</span></label>
+											<label class="select">
+												<select ng-model="bgmxz.houseId" name="houseId" required ng-disabled="disabled" 
+														ng-options="store.storehouseId as store.storehouseName for store in storehouseList"
+														class="form-control" ng-change="getWareList(bgmxz.houseId)">
+													<option value="">--请选择--</option>
+												</select>
+											</label>
+										</section>
+									</div>
+									<div class="row">
+										<section class="col col-4">
+											<label class="label txt-bg-red">货位名称<span style="color: red;">*</span></label>
+											<label class="select">
+												<select ng-model="bgmxz.wareId" name="wareId" required ng-disabled="disabled" 
+														ng-options="ware.warehouseId as ware.warehouseName for ware in warelist"
+														class="form-control">
+													<option value="">--请选择--</option>
+												</select>
+											</label>
+										</section>
+										<section class="col col-4">
+											<label class="label">粮油品种<span style="color: red;">*</span></label>
+											<label class="select">
+												<multi-select-tree
+														disabled-tree="disabled"
+														data-input-model="grainAttributeTreeLspzData"
+														data-output-model="bgmxz.lspz"
+														data-default-label="--请选择--"
+														name="nature"
+														select-only-leafs="true"
+														multi-select="false" required>
+												</multi-select-tree>
+												<em><span style="color: #D56161;margin-top:6px;padding:0 1px;font-style:normal;font-size:11px;
+						                         line-height:15px;" id="grainAttribute_lspz-error"></span></em>
+											</label>
+										</section>
+										<section class="col col-4">
+											<label class="label">粮油性质<span style="color: red;">*</span></label>
+											<label class="select">
+												<multi-select-tree
+														disabled-tree="disabled"
+														data-input-model="grainAttributeTreeLsxzData"
+														data-output-model="bgmxz.lsxz"
+														data-default-label="--请选择--"
+														name="nature"
+														select-only-leafs="true"
+														multi-select="false" required>
+												</multi-select-tree>
+												<em><span style="color: #D56161;margin-top:6px;padding:0 1px;font-style:normal;font-size:11px;
+						                         line-height:15px;" id="grainAttribute_lsxz-error"></span></em>
+											</label>
+										</section>
+									</div>
+									<div class="row">
+										<section class="col col-4">
+											<label class="label txt-bg-red">粮食等级<span style="color: red;">*</span></label>
+											<label class="select">
+												<select ng-model="bgmxz.lsdj" name="lspz" required ng-disabled="disabled" 
+														ng-options="enum.enumid as enum.enumname for enum in dicDataList[1002]"
+														class="form-control">
+													<option value="">--请选择--</option>
+												</select>
+											</label>
+										</section>
+										<section class="col col-4">
+											<label class="label txt-bg-red">业务类型<span style="color: red;">*</span></label>
+											<label class="select">
+												<select ng-model="businessType" required name="businessType" ng-disabled="disabled" 
+														ng-options="ywlx.id as ywlx.name for ywlx in ywlxList"
+														class="form-control">
+													<option value="">--请选择--</option>
+												</select>
+											</label>
+										</section>
+										<section class="col col-4">
+											<label class="label txt-bg-red">数量(公斤)<span style="color: red;">*</span></label>
+											<label class="input">
+												<i class="icon-prepend fa fa-user"></i>
+												<input type="number" name="number" ng-model="number" required ng-disabled="disabled" 
+												onkeyup="this.value= this.value.match(/\d+(\.\d{0,4})?/) ? this.value.match(/\d+(\.\d{0,4})?/)[0] : ''" />
+											</label>
+										</section>
+									</div>
+									<div class="row">
+										<section class="col col-4">
+											<label class="label txt-bg-red">库存数量(公斤)<span style="color: red;">*</span></label>
+											<label class="input">
+												<i class="icon-prepend fa fa-user"></i>
+												<input type="number" name="kcsl" ng-model="bgmxz.kcsl" ng-disabled="disabled" required
+												onkeyup="this.value= this.value.match(/\d+(\.\d{0,4})?/) ? this.value.match(/\d+(\.\d{0,4})?/)[0] : ''" />
+											</label>
+										</section>
+										<section class="col col-4">
+											<label class="label txt-bg-red">业务发生日期<span style="color: red;">*</span></label>
+											<label class="input">
+												<label class="input">
+													<input type="text" ng-model="bgmxz.fssj" ng-disabled="disabled" data-field="datetime"
+													name="fssj" data-format="yyyy-MM-dd hh:mm:ss" required class="form-control">
+												</label>
+											</label>
+										</section>
+									</div>
+								</fieldset>
+								<div id="dtBox"></div><!-- 时间控件：有时分秒 -->
+
+								<footer class="text-align-center">
+									<button type="button" class="btn btn-default" ng-click="retList()">取消</button>
+									<button ng-show="isShow == '1'" type="button" class="btn btn-primary" ng-click="saveData()">提交</button>
+								</footer>
+							</form>
+						</div>
+					</div>
+				</div>
+			</article>
+		</div>
+	</section>
+	<form id="download-form" method="post" target="_blank" style=" border-width:5px; margin-left:2%;position:relative;margin-right:2%;">
+		<input type="hidden" name="filePath" id="filePath">
+		<input type="hidden" name="originalFileName" id="originalFileName">
+		<input type="hidden" name="type" id="type">
+	</form>
+</div>

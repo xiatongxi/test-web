@@ -1,0 +1,81 @@
+<!-- MAIN CONTENT -->
+<div id="content">
+	<!-- widget grid -->
+	<section widget-grid id="widget-grid">
+		<div class="col-md-10" hidden>
+	        <input uploader="uploader" type="file" nv-file-select="" id="exampleInputFile1" accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet">
+	    </div>
+		<div class="row">
+			<article class="col-sm-12">
+				<div jarvis-widget id="standard-datatable-widget"
+					data-widget-color="darken" data-widget-editbutton="false">
+					<header>
+						<span class="widget-icon"> <i class="fa fa-table"></i>
+						</span>
+						<h2>数据策略列表</h2>
+					</header>
+					<div>
+						<div class="widget-body no-padding">
+							<div id="DataTables_Table_1_wrapper"
+								class="dataTables_wrapper form-inline no-footer">
+								<div class="dt-toolbar">
+									<div class="col-xs-12 col-sm-10">
+										<div class="form-group">
+											<a has-permission="493" class="btn btn-primary btn-sm" ng-click="edit(null, 0)">
+												<span class="fa fa-plus"></span>&nbsp;新&nbsp;增
+											</a>&nbsp;
+										</div>
+									</div>
+									<div class="col-sm-2 col-xs-6 hidden-xs">
+										<div class="dataTables_length">
+											<label>每页显示 <select ng-model="pageInfo.pageSize" ng-change="loadData(pageInfo.pageNum=1)"
+													ng-options="num as num for num in [10,25,50,100]"
+													class="form-control input-sm"></select> 条
+											</label>
+										</div>
+									</div>
+								</div>
+
+								<table id="tb" class="table table-striped table-bordered table-hover"
+									width="100%">
+									<thead>
+										<tr>
+											<th data-hide="expand">策略编号</th>
+											<th data-class="expand">策略名称</th>
+											<th data-hide="expand">sql表达式</th>
+											<th data-class="expand">优先级</th>
+											<th data-hide="expand">操作</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr ng-repeat="strategy in pageInfo.list">
+											<td>{{strategy.strategyId}}</td>
+											<td>{{strategy.strategyName}}</td>
+											<td>{{strategy.sqlExp}}</td>
+											<td>{{strategy.priority}}</td>
+											<td>
+												<a has-permission="494" href-void ng-click="edit(strategy.strategyId, 1)">
+													<i class="fa fa-edit"></i>修改
+												</a>
+												<a has-permission="495" href-void ng-click="remove(strategy.strategyId)">
+													<i class="fa fa-trash-o"></i>删除
+												</a>
+												<a has-permission="496" href-void ng-click="edit(strategy.strategyId, 2)">
+													<i class="fa fa-info-circle"></i>查看
+												</a>
+											</td>
+										</tr>
+									</tbody>
+								</table>
+								<div smart-include="app/layout/partials/page.tpl.html"></div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</article>
+		</div>
+
+	</section>
+
+</div>
+

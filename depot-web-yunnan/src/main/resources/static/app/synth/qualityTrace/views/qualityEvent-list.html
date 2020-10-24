@@ -1,0 +1,100 @@
+<!-- MAIN CONTENT -->
+<div id="content">
+	<!-- widget grid -->
+	<section widget-grid id="widget-grid">
+		<div class="row">
+			<article class="col-sm-12">
+
+				<div jarvis-widget id="standard-datatable-widget"
+					data-widget-color="darken" data-widget-editbutton="false">
+					<header>
+						<span class="widget-icon"> <i class="fa fa-table"></i>
+						</span>
+						<h2>质量事件数据管理列表</h2>
+					</header>
+					<div>
+						<div class="widget-body no-padding">
+							<div id="DataTables_Table_1_wrapper"
+								class="dataTables_wrapper form-inline no-footer">
+								<div class="dt-toolbar">
+									<div class="col-xs-12 col-sm-9">
+										<div class="form-group">
+											<a class="btn btn-primary btn-sm" ng-click="view()">
+												<span class="fa fa-plus"></span>&nbsp;新&nbsp;增
+											</a>&emsp;
+											<label>
+												仓房名称:
+												<select ng-model="houseId" 
+													ng-options="storehouse.storehouseId as storehouse.storehouseName for storehouse in storelist"
+													class="form-control input-sm" ng-change="getWareList(houseId)">
+														<option value="">--请选择--</option>
+												</select>&emsp;
+											</label>
+											<label>
+												货位名称:
+												<select ng-model="wareId" class="form-control input-sm" 
+													ng-options="ware.warehouseId as ware.warehouseName for ware in warelist">
+													<option value="">请选择</option>
+												</select>&emsp;
+											</label>
+											<a class="btn btn-default btn-sm" ng-click="loadData()">
+												<i class="fa fa-search"></i>&nbsp;查&nbsp;询
+											</a>&emsp;
+										</div>
+									</div>
+									<div class="col-sm-3 col-xs-6 hidden-xs">
+										<div class="dataTables_length">
+											<label>每页显示 <select ng-model="pageInfo.pageSize" ng-change="loadData()"
+												ng-options="num as num for num in [1,10,25,50,100]"
+												class="form-control input-sm"></select> 条
+											</label>
+										</div>
+									</div>
+								</div>
+
+								<table class="table table-striped table-bordered table-hover"
+									width="100%">
+									<thead>
+										<tr>
+				                            <th>序号</th>
+				                            <th>仓房名称</th>
+				                            <th>货位名称</th>
+				                            <th>粮油品种</th>
+				                            <th>存在问题</th>
+				                            <th>保管员</th>
+				                            <th>登记人</th>
+				                            <th>登记时间</th>
+				                            <th>操作</th>
+				                        </tr>
+									</thead>
+
+									<tbody>
+										<tr ng-repeat="event in pageInfo.list">
+											<td>{{$index+1}}</td>
+											<td>{{storehouseObj[event.houseId].storehouseName}}</td>
+											<td>{{warehouseObj[event.wareId].warehouseName}}</td>
+											<td>{{dicData[event.lspz]}}</td>
+											<td>{{event.czwt}}</td>
+											<td>{{event.bgy}}</td>
+											<td>{{event.inputPersonName}}</td>
+											<td>{{event.inputDate | date :'yyyy/MM/dd'}}</td>
+											<td>
+												<a href-void ng-click="view(event.id, '1')"><i class="fa fa-edit"></i>修改</a>&emsp;
+											    <a href-void ng-click="view(event.id, '2')"><i class="fa fa-info-circle"></i>查看</a>
+											</td>
+										</tr>
+									</tbody>
+
+								</table>
+								<div smart-include="app/layout/partials/page.tpl.html"></div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</article>
+		</div>
+
+	</section>
+
+</div>
+

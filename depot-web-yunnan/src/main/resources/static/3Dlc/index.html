@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<title>粮情信息三维展示</title>
+		<style>
+			body {
+				margin: 0;
+				overflow: hidden;
+				/* 隐藏body窗口区域滚动条 */
+			}
+
+			#CT {
+				width: 100%;
+				height: 100%;
+				z-index: 200;
+			}
+
+			.label {
+				color: white;
+				font-family: sans-serif;
+				padding: 2px;
+				/* margin-left: -80px;
+				top: -19px; */
+				background: rgba(0, 0, 0, .6);
+				display: none;
+			}
+			.label.active{
+				display: block;
+			}
+
+			#CTXX {
+				width: 300px;
+				height: 130px;
+				position: absolute;
+				margin-top: 134px;
+				background-color: #b9c5c5;
+				/* margin-left: 22px; */
+				right: 20px;
+				z-index: 9999;
+			}
+
+			#CTXXTile,
+			#CTWDTile {
+				width: 100%;
+				height: 30px;
+				background-color: black;
+			}
+
+			#CTXXContent {
+				width: 100%;
+				height: 100px;
+			}
+
+			#LK1 {
+				margin-left: 9px;
+				margin-top: 3px;
+			}
+
+			#CTWD {
+				z-index: 9999;
+				width: 300px;
+				height: 158px;
+				position: absolute;
+				margin-top: 277px;
+				background-color: #b9c5c5;
+				/* margin-left: 22px; */
+				right: 20px;
+			}
+
+			.ctbtn {
+				width: 145px;
+				height: 30px;
+				margin-left: 2px;
+				background-color: lightblue;
+				border-color: azure;
+			}
+			#CTTitle{
+				width: 100%;
+				height: 88px;
+				background-color: #1a1a1a;
+				position: absolute;
+			}
+		</style>
+		<!--引入three.js三维引擎-->
+		<script src="js/three.js"></script>
+		<!-- 引入threejs扩展控件OrbitControls.js -->
+		<script src="js/OrbitControls.js"></script>
+		<script src="js/Object3D.js"></script>
+		<script src="js/TrackballControls.js"></script>
+		<script src="js/stats.min.js"></script>
+		<script src="js/dat.gui.min.js"></script>
+		<script src="js/onEvent.js"></script>
+		<script src="js/CSS2DRenderer.js"></script>
+		<script src="js/jquery.js"></script>
+		<script src="tmp/threex.atmospherematerial.js"></script>
+		<script src="tmp/threex.atmospherematerialdatgui.js"></script>
+		<script src="tmp/threex.dilategeometry.js"></script>
+		<script src="tmp/threex.geometricglowmesh.js"></script>
+		<link rel="stylesheet" href="js/loading/jquery.mloading.css" />
+		<script src="js/loading/jquery.mloading.js"></script>
+		<script src="js/Tween.js"></script>
+	</head>
+	<body>
+		<div id="CT" onload="draw();">
+			<div id="CTTitle" style="z-index: 9999;">
+				<h1 style="position: absolute;color: #eee;margin-left: 28px;">粮情信息三维展示</h1>
+			</div>
+		</div>
+		<div id="CTXX">
+			<div id="CTXXTile">
+				<b style="position: absolute;margin-top: 6px;margin-left: 12px;color: beige;opacity: 0.6;">仓体信息</b>
+			</div>
+			<div id="CTXXContent">
+				<div id="LK1">
+					<i>粮食等级：</i>
+					<i id="LSDJ"></i>
+				</div>
+				<div id="LK1">
+					<i>粮库名称：</i>
+					<i id="LKMC"></i>
+				</div>
+				<div id="LK1">
+					<i>保管员：</i>
+					<i id="LKBGY"></i>
+				</div>
+				<div id="LK1">
+					<i>粮食品种：</i>
+					<i id="LSPZ"></i>
+				</div>
+			</div>
+		</div>
+		<div id="CTWD">
+			<div id="CTWDTile">
+				<b style="position: absolute;margin-top: 6px;margin-left: 12px;color: beige;opacity: 0.6;">仓体温度</b>
+			</div>
+			<div id="LK1">
+				<i>仓内湿度:</i>
+				<i id="CNSD"></i>
+			</div>
+			<div id="LK1">
+				<i>仓内温度:</i>
+				<i id="CNWD"></i>
+			</div>
+			<div id="LK1">
+				<i>仓外湿度:</i>
+				<i id="CWSD"></i>
+			</div>
+			<div id="LK1">
+				<i>仓外温度:</i>
+				<i id="CWWD"></i>
+			</div>
+			<button class="ctbtn" onclick="CWXQ()">测温详情</button>
+			<button class="ctbtn" onclick="HFQJ()">恢复全景</button>
+		</div>
+		<script src="tools/lctools.min.js"></script>
+	</body>
+</html>

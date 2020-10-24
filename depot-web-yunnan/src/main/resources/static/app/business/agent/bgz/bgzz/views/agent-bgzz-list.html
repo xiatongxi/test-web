@@ -1,0 +1,96 @@
+<div id="content">
+    <section widget-grid id="widget-grid">
+
+        <div class="row">
+            <article class="col-sm-12">
+                <div jarvis-widget id="standard-datatable-widget" data-widget-color="darken"
+                     data-widget-editbutton="false">
+                    <header>
+                        <span class="widget-icon"> <i class="fa fa-table"></i> </span>
+                        <h2>保管总账列表 </h2>
+                    </header>
+                    <div>
+                        <div class="widget-body no-padding">
+                            <div id="DataTables_Table_1_wrapper"
+                                 class="dataTables_wrapper form-inline no-footer">
+                                <div class="dt-toolbar">
+                                    <div class="col-xs-3 col-sm-10">
+                                        <div class="form-group">
+                                            <label> 代储点名称:&emsp;
+                                                <select ng-model="conditions.agentId" class="form-control input-sm"
+                                                        ng-options="agent.id as agent.agentName for agent in agentData.list"
+                                                        ng-change="getAgentDepotData(conditions.agentId)">
+                                                    <option value="">请选择</option>
+                                                </select>&emsp;
+                                            </label>
+                                            <label> 粮库名称:&emsp;
+                                                <select ng-model="conditions.dckId" class="form-control input-sm"
+                                                        ng-options="depot.depotId as depot.depotName for depot in depotList">
+                                                    <option value="">请选择</option>
+                                                </select>&emsp;
+                                            </label>
+                                            <label>
+	                                            <a class="btn btn-default btn-sm" ng-click="loadData()">
+	                                                <i class="fa fa-search"></i>&nbsp;查&nbsp;询
+	                                            </a> &emsp;
+	                                        </label>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="col-xs-3 col-sm-10">
+                                    	
+                                    </div>
+                                    <div class="col-sm-2 col-xs-6 hidden-xs">
+                                        <div class="dataTables_length">
+                                            <label>每页显示 <select ng-model="pageInfo.pageSize" ng-change="loadData()"
+                                                                ng-options="num as num for num in [10,25,50,100]"
+                                                                class="form-control input-sm"></select> 条
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <table class="table table-striped table-bordered table-hover" width="100%">
+                                    <thead>
+                                    <tr>
+                                        <th data-class="expand">序号</th>
+                                        <th data-class="expand">代储库点</th>
+                                        <th data-class="expand">代储库名称</th>
+                                        <th data-class="expand">粮食品种</th>
+                                        <th data-class="expand">粮食性质</th>
+                                        <th data-class="expand">业务发生月份</th>
+                                        <th data-class="expand">收入数量(公斤)</th>
+                                        <th data-class="expand">支出数量(公斤)</th>
+                                        <th data-class="expand">库存数量(公斤)</th>
+                                        <th data-class="expand">操作</th>
+                                    </tr>
+                                    </thead>
+
+                                    <tbody>
+                                    <tr ng-repeat="qc in pageInfo.list">
+                                        <td>{{$index + 1 + (pageInfo.pageNum-1) * pageInfo.pageSize}}</td>
+                                        <td>{{qc.agentName}}</td>
+                                        <td>{{qc.agentDepotName}}</td>
+                                        <td>{{dicData[qc.lspz]}}</td>
+                                        <td>{{dicData[qc.lsxz]}}</td>
+                                        <td>{{qc.fssj | date:'yyyy-MM'}}</td>
+                                        <td>{{qc.srsl}}</td>
+                                        <td>{{qc.zcsl}}</td>
+                                        <td>{{qc.kcsl}}</td>
+                                        <td>
+                                            <a has-permission="685" href-void ng-click="showEdit(qc,'jizhang')"><i class="fa fa-edit"></i>记账</a>
+                                            <a has-permission="686" href-void ng-click="showEdit(qc, 'shenhe')"><i class="fa fa-trash-o"></i>审核</a>
+                                            <a href-void ng-click="showEdit(qc,'show')"><i class="fa fa-info-circle"></i>查看</a>
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                                <div smart-include="app/layout/partials/page.tpl.html"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </article>
+        </div>
+    </section>
+</div>

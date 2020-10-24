@@ -1,0 +1,124 @@
+<!-- MAIN CONTENT -->
+<div id="content">
+
+	<!-- widget grid -->
+	<section widget-grid id="widget-grid">
+
+
+		<div class="row">
+			<article class="col-sm-12">
+
+				<div jarvis-widget id="standard-datatable-widget"
+					 data-widget-color="darken" data-widget-editbutton="false">
+					<header>
+						<span class="widget-icon"> <i class="fa fa-table"></i>
+						</span>
+						<h2>货位列表</h2>
+					</header>
+					<div>
+						<div class="widget-body no-padding">
+							<div id="DataTables_Table_1_wrapper"
+								 class="dataTables_wrapper form-inline no-footer">
+								<div class="dt-toolbar">
+									<div class="col-sm-9 col-xs-12 hidden-xs">
+										<a class="btn btn-primary btn-sm" ng-click="edit(ware.libraryType)">
+											<span class="fa fa-plus"></span>&nbsp;新&nbsp;增
+										</a>&emsp;
+										<label>仓房名称:&emsp;
+											<select ng-model="ware.storehouseId" class="form-control"
+													ng-options="store.storehouseId as store.storehouseName for store in storeHouseList"
+													ng-change="loadWare()">
+												<option value="">--请选择--</option>
+											</select>
+										</label>&emsp;
+										<label>货位名称:&emsp;<input class="form-control input-sm" ng-model="ware.warehouseName" placeholder=""> &emsp;
+										</label>
+										<a class="btn btn-default btn-sm" ng-click="loadData()">
+											<i class="fa fa-search"></i>&nbsp;查&nbsp;询</a>&emsp;
+<!-- 										<a class="btn btn-primary btn-sm" ng-click="print()"> -->
+<!-- 											<span class="fa fa-print"></span>&nbsp;打&nbsp;印 -->
+<!-- 										</a> -->
+									</div>
+									<div class="col-sm-3 col-xs-6 hidden-xs">
+										<div class="dataTables_length">
+											<label>每页显示 <select ng-model="pageInfo.pageSize" ng-change="loadData(pageInfo.pageNum=1)"
+																ng-options="num as num for num in [10,25,50,100]"
+																class="form-control input-sm"></select> 条
+											</label>
+										</div>
+									</div>
+								</div>
+
+								<table class="table table-striped table-bordered table-hover"
+									   width="100%">
+									<thead>
+									<tr>
+										<th data-class="expand">仓房名称</th>
+										<th data-class="expand">货位名称</th>
+<!-- 										<th data-hide="expand">使用状态</th> -->
+										<th data-hide="expand">使用情况</th>
+										<th data-hide="expand">货位容量(吨)</th>
+										<th data-hide="expand">操作</th>
+									</tr>
+									</thead>
+
+									<tbody>
+									<tr ng-repeat="warehouse in pageInfo.list | filter:search">
+										<td>{{storehouseObj[warehouse.storehouseId].storehouseName}}</td>
+										<td>{{warehouse.warehouseName}}</td>
+<!-- 										<td>{{dicData[warehouse.warehouseStatus]}}</td> -->
+										<td>{{warehouse.delFlag=='1'?"在用":"弃用"}}</td>
+										<td>{{warehouse.warehouseCapacity}}</td>
+										<td><a href-void ng-click="edit(warehouse.warehouseId)">
+											<i class="fa fa-edit"></i>修改
+										</a>
+											<a href-void ng-click="remove(warehouse.warehouseId,warehouse.storehouseId)">
+												<i class="fa fa-trash-o"></i>{{warehouse.delFlag=='1'?"弃用":"在用"}}
+											</a>
+											<a href-void ng-click="edit(warehouse.warehouseId, '1')">
+												<i class="fa fa-info-circle"></i>查看
+											</a>
+										</td>
+									</tr>
+									</tbody>
+
+								</table>
+								<div smart-include="app/layout/partials/page.tpl.html"></div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</article>
+		</div>
+
+	</section>
+
+</div>
+
+
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog"
+	 aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal"
+						aria-hidden="true">&times;</button>
+				<h4 class="modal-title" id="myModalLabel">计划</h4>
+			</div>
+			<div class="modal-body">
+
+				<!-- 				<div smart-include="app/basic/storehouse/views/Storehouse-edit.html"></div> -->
+
+			</div>
+			<div class="modal-footer">
+				<button ng-click="save()" type="button" class="btn btn-primary">提交</button>
+				<button type="button" class="btn btn-default" data-dismiss="modal">
+					取消</button>
+			</div>
+		</div>
+		<!-- /.modal-content -->
+	</div>
+	<!-- /.modal-dialog -->
+</div>
+<!-- /.modal -->

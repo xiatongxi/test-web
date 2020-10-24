@@ -1,0 +1,197 @@
+<div id="content" ng-init="tabindex = 1">
+	<section id="widget-grid" widget-grid>
+		<div class="row">
+			<article class="col-sm-12 col-md-12 col-lg-12">
+				<div jarvis-widget id="form-grid-widget"
+					data-widget-colorbutton="false" data-widget-editbutton="false"
+					data-widget-custombutton="false">
+					<div>
+						<div class="widget-body no-padding saf-asc-body">
+						<form id="foodInfo-form" name='foodInfo-form'
+							class="smart-form ng-pristine ng-valid"
+							data-validator-option="validateOptions" novalidate="novalidate">
+							<header>
+								<a href-void class="btn btn-default btn-xs" ng-click="retList()">
+									<i class="fa fa-angle-left"></i>&nbsp;返回&nbsp;
+								</a>
+								&nbsp;<strong>人员信息追溯</strong>
+							</header>
+							<!--row1-->
+							<div class="saf-asc-row2">
+								<h3>人员信息</h3>
+								<table>
+									<tr>
+										<td class="label-td">姓名：</td>
+										<td>{{data.keeper.name}}</td>
+										<td class="label-td">性别：</td>
+										<td>{{dicData[data.keeper.sex]}}</td>
+										<td class="label-td">年龄：</td>
+										<td>{{age}}</td>
+										<td class="label-td">岗位：</td>
+										<td>保管员</td>
+										<td class="label-td">工作年限：</td>
+										<td>{{data.keeper.workYear}}</td>
+									</tr>
+									<tr>
+										<td class="label-td">所属粮库：</td>
+										<td>{{depotInfo.orgName}}</td>
+										<td class="label-td">职业资格：</td>
+										<td>{{dicData[data.zyzgList[0].rank]}}</td>
+										<td class="label-td">政治面貌：</td>
+										<td>{{dicData[data.keeper.political]}}</td>
+										<td class="label-td">入职时间：</td>
+										<td>{{data.keeper.entryTime | date:'yyyy-MM-dd'}}</td>
+									</tr>
+								</table>
+							</div>
+							<!--/saf-asc-row3-->
+							<div class="saf-asc-row3">
+								<ul class="timeline-box timeline-box2">
+									<li class="ruz-sj timeline-bom-msg">
+										<div class="timeline-time">{{data.keeper.entryTime | date:'yyyy/MM/dd'}}</div> 
+										<i class="timeline-icon"></i>
+									</li>
+									<li class="zhengs-xx" ng-click="tabindex=1"><i
+										class="timeline-icon"></i>
+										<div class="timeline-time"></div></li>
+									<li class="suog-cf timeline-bom-msg" ng-click="tabindex=2">
+										<div class="timeline-time"></div> 
+										<i class="timeline-icon"></i>
+									</li>
+									<li class="gongz-jl" ng-click="tabindex=3">
+										<i class="timeline-icon"></i>
+										<div class="timeline-time"></div>
+									</li>
+									<li class="jix-kh timeline-bom-msg">
+										<div class="timeline-time"></div> 
+										<i class="timeline-icon"></i>
+									</li>
+								</ul>
+							</div>
+							<!--/saf-asc-row3-->
+							<div class="saf-asc-row4" ng-show="tabindex==1">
+								<table class="table table-bordered">
+									<thead>
+										<tr>
+											<th>序号</th>
+											<th>教育形式</th>
+											<th>毕业院校</th>
+											<th>专业</th>
+											<th>学历</th>
+											<th>学位</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr ng-repeat="edu in data.xlxwList">
+											<td>{{$index+1}}</td>
+											<td>{{dicData[edu.type]}}</td>
+											<td>{{edu.college}}</td>
+											<td>{{edu.department}}</td>
+											<td>{{dicData[edu.education]}}</td>
+											<td>{{edu.degree}}</td>
+										</tr>
+									</tbody>
+								</table>
+								<table class="table table-bordered">
+									<thead>
+										<tr>
+											<th>序号</th>
+											<th>专业</th>
+											<th>等级</th>
+											<th>颁证机构</th>
+											<th>颁证年月</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr ng-repeat="occupation in data.zyjsList">
+											<td>{{$index+1}}</td>
+											<td>{{occupation.department}}</td>
+											<td>{{dicData[occupation.rank]}}</td>
+											<td>{{occupation.issueFacility}}</td>
+											<td>{{occupation.issueTime | date:'yyyy-MM-dd'}}</td>
+										</tr>
+										<tr ng-repeat="occupation in data.zyzgList">
+											<td>{{data.zyjsList.length + $index + 1}}</td>
+											<td>{{dicData[occupation.occupation]}}</td>
+											<td>{{dicData[occupation.rank]}}</td>
+											<td>{{occupation.issueFacility}}</td>
+											<td>{{occupation.issueTime | date:'yyyy-MM-dd'}}</td>
+										</tr>
+									</tbody>
+								</table>
+								<table class="table table-bordered">
+									<thead>
+										<tr>
+											<th>序号</th>
+											<th>专业</th>
+											<th>颁证机构</th>
+											<th>颁证年月</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr ng-repeat="sgz in data.sgzList">
+											<td>{{$index+1}}</td>
+											<td>{{sgz.department}}</td>
+											<td>{{sgz.issueFacility}}</td>
+											<td>{{sgz.issueTime | date:'yyyy-MM-dd'}}</td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+							<div class="saf-asc-row4" ng-show="tabindex==2">
+								<table class="table table-bordered">
+									<thead>
+										<tr>
+											<th>仓房编号</th>
+											<th>仓房名称</th>
+											<th>仓房使用状态</th>
+											<th>仓房类型</th>
+											<th>仓房状态</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr ng-repeat="storehouse in storeList | filter:{delFlag:5}">
+											<td>{{storehouse.storehouseCode}}</td>
+											<td>{{storehouse.storehouseName}}</td>
+											<td>{{dicData[storehouse.currenttype]}}</td>
+											<td>{{dicData[storehouse.storehouseType]}}</td>
+											<td>{{dicData[storehouse.storehouseState]}}</td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+							<div class="saf-asc-row4" ng-show="tabindex==3">
+								<table class="table table-bordered">
+									<thead>
+										<tr>
+											<th>编号</th>
+											<th>仓房名称</th>
+											<th>作业编号</th>
+											<th>作业类型</th>
+											<th>开始时间</th>
+											<th>结束时间</th>
+											<th>操作人</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr ng-repeat="work in worklist">
+											<td>{{$index+1}}</td>
+											<td>{{work.houseName}}</td>
+											<td>{{work.taskCode}}</td>
+											<td>{{work.type}}</td>
+											<td>{{work.startTime | date:'yyyy-MM-dd HH:mm:ss'}}</td>
+											<td>{{work.endTime | date:'yyyy-MM-dd HH:mm:ss'}}</td>
+											<td>{{work.operator}}</td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+							<!--row3-->
+							</form>
+						</div>
+					</div>
+				</div>
+			</article>
+		</div>
+	</section>
+</div>

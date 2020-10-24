@@ -1,0 +1,99 @@
+<!-- MAIN CONTENT -->
+<div id="content">
+	<!-- widget grid -->
+	<section widget-grid id="widget-grid">
+		<div class="row">
+			<article class="col-sm-12">
+				<legend ng-show="isShow=='1'">
+					<a ng-click="returnUp()" href-void="" class="btn btn-default btn-xs" href="#">
+						<i class="fa fa-angle-left"></i>&nbsp;返回&nbsp;
+					</a>
+				</legend>
+				<div jarvis-widget id="standard-datatable-widget" data-widget-color="darken" data-widget-editbutton="false">
+					<header>
+						<span class="widget-icon"> <i class="fa fa-table"></i> </span>
+						<h2>仓房维修记录列表 </h2>
+					</header>
+					<div>
+						<div class="widget-body no-padding">
+							<div id="DataTables_Table_1_wrapper" class="dataTables_wrapper form-inline no-footer">
+								<div class="dt-toolbar">
+									<div class="col-xs-12 col-sm-9">
+										<div class="form-group">
+											<label>
+												<a has-permission="472" href-void class="btn btn-primary btn-sm" ng-click="showHouseCheckPage()"><i class="fa fa-plus"></i>&nbsp;新&nbsp;增</a>&emsp;
+											</label>
+										</div>
+										<div class="form-group">
+											<label> 仓房名称:&emsp;
+												<select ng-model="search.storehouseId" class="form-control input-sm"
+														ng-options="store.storehouseId as store.storehouseName for store in storelist"
+														ng-change="loadWare()">
+													<option value="">请选择</option>
+												</select>&emsp;
+											</label>
+										</div>
+										<div class="form-group">
+											<label> 状态:&emsp;
+												<select ng-model="houserepair.repairStatus" class="form-control input-sm">
+													<option value="">请选择</option>
+													<option value="0">维修中</option>
+													<option value="1">维修完成</option>
+												</select>&emsp;
+											</label>&emsp;
+											<a class="btn btn-default btn-sm" ng-click="loadData()"> <i class="fa fa-search"></i>&nbsp;查&nbsp;询</a>
+										</div>
+									</div>
+									<div class="col-sm-3 col-xs-6 hidden-xs">
+										<div class="dataTables_length">
+											<label>每页显示 <select ng-model="pageInfo.pageSize" ng-change="loadData()"
+																ng-options="num as num for num in [10,25,50,100]"
+																class="form-control input-sm"></select> 条
+											</label>
+										</div>
+									</div>
+								</div>
+
+								<table class="table table-striped table-bordered table-hover" width="100%">
+									<thead>
+									<tr>
+										<th data-hide="expand">仓房名称</th>
+										<th data-class="expand">仓房编码</th>
+										<th data-hide="expand">故障时间</th>
+										<th data-hide="expand"> 维修开始时间</th>
+										<th data-hide="expand"> 维修结束时间</th>
+										<th data-hide="expand"> 维修责任人</th>
+										<th data-hide="expand"> 状态</th>
+										<th data-hide="expand"> 操作</th>
+									</tr>
+									</thead>
+
+									<tbody>
+									<tr ng-repeat="houserepair in pageInfo.list">
+										<td>{{houserepair.storehouseName}}</td>
+										<td>{{houserepair.storehouseCode}}</td>
+										<td>{{houserepair.checkDate | date:'yyyy-MM-dd'}}</td>
+										<td>{{houserepair.repairStartDate | date:'yyyy-MM-dd'}}</td>
+										<td>{{houserepair.repairEndDate | date:'yyyy-MM-dd'}}</td>
+										<td>{{houserepair.bosshead}}</td>
+										<td >
+											<span ng-if="houserepair.repairStatus=='0'">维修中</span>
+											<span ng-if="houserepair.repairStatus=='1'">维修完成</span>
+										</td>
+										<td>
+											<a ng-show="isShow!='1'" has-permission="420" href-void ng-click="showEditRepair(houserepair.id)"><i class="fa fa-edit"></i>修改</a>
+											<a href-void ng-click="showRepair(houserepair.id)"><i class="fa fa-info-circle"></i>查看</a>
+										</td>
+									</tr>
+									</tbody>
+
+								</table>
+								<div smart-include="app/layout/partials/page.tpl.html"></div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</article>
+		</div>
+	</section>
+</div>

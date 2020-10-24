@@ -1,0 +1,96 @@
+<!-- MAIN CONTENT -->
+<div id="content">
+	<!-- widget grid -->
+	<section widget-grid id="widget-grid">
+		<div class="row">
+			<article class="col-sm-12">
+
+				<div jarvis-widget id="standard-datatable-widget" data-widget-color="darken" data-widget-editbutton="false">
+					<header>
+						<span class="widget-icon"> <i class="fa fa-table"></i> </span>
+						<h2>仓房检查记录列表 </h2>
+					</header>
+					<div>
+						<div class="widget-body no-padding">
+							<div id="DataTables_Table_1_wrapper" class="dataTables_wrapper form-inline no-footer">
+								<div class="dt-toolbar">
+									<div class="col-xs-12 col-sm-9">
+										<div class="form-group">
+											<label>
+												<a has-permission="137" href-void class="btn btn-primary btn-sm" ng-click="showAddHck()"><i class="fa fa-plus"></i>&nbsp;新&nbsp;增</a>&emsp;
+											</label>
+										</div>
+										<div class="form-group">
+											<label> 仓房名称:&emsp;
+												<select ng-model="search.storehouseId" class="form-control input-sm"
+														ng-options="store.storehouseId as store.storehouseName for store in storelist"
+														ng-change="loadWare()">
+													<option value="">请选择</option>
+												</select>&emsp;
+											</label>
+										</div>
+										<div class="form-group">
+											<label>
+												日期:&emsp;<input style="width: 100px;" class="form-control" type="text" ng-model="houserepair.searchStartDate" name="searchStartDate" data-smart-datepicker>
+												--&nbsp;<input style="width: 100px;" class="form-control" type="text" ng-model="houserepair.searchEndDate" name="searchEndDate" data-smart-datepicker>
+												&emsp;<a class="btn btn-default btn-sm" ng-click="loadData()"> <i class="fa fa-search"></i>&nbsp;查&nbsp;询</a>
+											</label>
+										</div>
+									</div>
+
+									<div class="col-sm-3 col-xs-6 hidden-xs">
+										<div class="dataTables_length">
+											<label>每页显示 <select ng-model="pageInfo.pageSize" ng-change="loadData()"
+																ng-options="num as num for num in [10,25,50,100]"
+																class="form-control input-sm"></select> 条
+											</label>
+										</div>
+									</div>
+								</div>
+
+								<table class="table table-striped table-bordered table-hover" width="100%">
+									<thead>
+									<tr>
+										<th data-hide="expand">检查日期</th>
+										<th data-hide="expand">仓房名称</th>
+										<th data-class="expand"> 登记人</th>
+										<th data-hide="expand">是否存在问题</th>
+										<th data-hide="expand">存在问题</th>
+										<th data-hide="expand">处理意见</th>
+										<th data-hide="expand"> 操作</th>
+									</tr>
+									</thead>
+
+									<tbody>
+									<tr ng-repeat="houserepair in pageInfo.list">
+										<td>{{houserepair.checkDate | date:'yyyy-MM-dd'}}</td>
+										<td>{{houserepair.storehouseName}}</td>
+										<td>{{houserepair.checkPerson}}</td>
+										<td >
+											<span ng-if="houserepair.problemExist=='0'">存在</span>
+											<span ng-if="houserepair.problemExist=='1'">不存在</span>
+										</td>
+										<td>{{houserepair.problem}}</td>
+										<td>{{houserepair.opinion}}</td>
+										<td>
+											<!-- <span ng-if="houserepair.repairStatus!='0' && houserepair.repairStatus!='1' && houserepair.problemExist=='0'">
+                                                <a has-permission="457" href-void ng-click="showRepair(houserepair.id)"><i class="fa fa-plus"></i>维修</a>
+                                            </span> -->
+											<a has-permission="264" href-void ng-click="showEditHck(houserepair.id)"><i class="fa fa-edit"></i>修改</a>
+											<a has-permission="391" href-void ng-click="remove(houserepair.id)"><i class="fa fa-trash-o"></i>删除</a>
+										</td>
+									</tr>
+									</tbody>
+
+								</table>
+								<div smart-include="app/layout/partials/page.tpl.html"></div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</article>
+		</div>
+
+	</section>
+
+</div>

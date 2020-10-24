@@ -1,0 +1,86 @@
+<div id="content">
+	<section id="widget-grid" widget-grid>
+		<div class="row">
+			<article class="col-sm-12 col-md-12 col-lg-12">
+				<div jarvis-widget id="form-grid-widget" data-widget-colorbutton="false" data-widget-editbutton="false"
+					 data-widget-custombutton="false">
+					<div>
+						<div class="widget-body no-padding">
+
+							<form id="foodbasicinfoForm" method="post" class="smart-form ng-pristine ng-valid" ng-submit='foodbasicinfo-form.$valid&&save(foodbasicinfo)' novalidate="novalidate">
+								<header>
+									<a href-void class="btn btn-default btn-xs" ng-click="retList()"><i class="fa fa-angle-left"></i>&nbsp;返回&nbsp;</a>
+								</header>
+								<fieldset>
+									<div class="row">
+										<section class="col col-6">
+											<label class="label">粮权所属单位：<span style="color: red;">*</span></label>
+											<label class="input">
+												<input type="text" ng-model="foodbasicinfo.recordUnite" name="recordUnite" required >
+											</label>
+										</section>
+										<section class="col col-6">
+											<label class="label"> 价格(元/Kg):</label>
+											<label class="input">
+												<input type="text" ng-model="foodbasicinfo.price" ng-change="clearNoNum(foodbasicinfo,'price')" name="price" >
+											</label>
+										</section>
+									</div>
+									<div class="row">
+										<section class="col col-6">
+											<label class="label">粮高:</label>
+											<label class="input">
+												<input type="text" ng-model="foodbasicinfo.height" ng-change="clearNoNum(foodbasicinfo,'height')" name="height" >
+											</label>
+										</section>
+										<section class="col col-6">
+											<label class="label">粮体积:</label>
+											<label class="input">
+												<input type="text" ng-model="foodbasicinfo.disperseCapacity" name="disperseCapacity" >
+											</label>
+										</section>
+									</div>
+									<div class="row">
+										<section class="col col-6">
+											<label class="label">存储地点</label>
+											<label class="input">
+												<input type="text" ng-model="foodbasicinfo.storageLocation" name="storageLocation" >
+											</label>
+										</section>
+										<section class="col col-6">
+											<label class="label">包存粮包数</label>
+											<label class="input">
+												<input type="text" ng-model="foodbasicinfo.packNum" name="packNum" >
+											</label>
+										</section>
+										<section class="col col-6">
+											<label class="label">保管方式</label>
+											<label class="input">
+												<input type="text" ng-model="foodbasicinfo.keepMethod" name="keepMethod" >
+											</label>
+										</section>
+										<section class="col col-6">
+											<label class="label">平均包重</label>
+											<label class="input">
+												<input type="text" ng-model="foodbasicinfo.packAverageWeight" name="packAverageWeight" >
+											</label>
+										</section>
+									</div>
+								</fieldset>
+
+								<footer>
+									<div class="row">
+										<div class="col-md-12">
+											<a class="btn btn-default" href-void="" href="#" style="margin: 10px;" ng-click="retList()">取消</a>
+											<a class="btn btn-primary" href-void="" href="#" ng-click="submitFoodBasic()">提交</a>
+										</div>
+									</div>
+								</footer>
+							</form>
+					    </div>
+					</div>
+				</div>
+			</article>
+		</div>
+	</section>
+</div>

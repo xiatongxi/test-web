@@ -1,0 +1,142 @@
+<!-- MAIN CONTENT -->
+<div id="content">
+    <!-- widget grid -->
+    <section widget-grid id="widget-grid">
+        <div class="row">
+            <article class="col-sm-12">
+                <div jarvis-widget id="standard-datatable-widget" data-widget-color="darken" data-widget-editbutton="false">
+                    <header>
+                        <span class="widget-icon"> <i class="fa fa-table"></i> </span>
+                        <h2>出入库通知单通过列表</h2>
+                    </header>
+                    <div>
+                        <div class="widget-body no-padding">
+                        <div id="DataTables_Table_1_wrapper" class="dataTables_wrapper form-inline no-footer" >
+                            <div class="dt-toolbar">
+                            	<div class="col-xs-12 col-sm-10">
+                                    <div class="form-group">
+										<label>通知单编号:  
+											<input type="search" class="form-control input-sm" ng-model="searchCondition.billNumber"/>
+                                        </label>&emsp;
+                                    	<label>
+                                    		<select class="form-control input-sm" ng-model="searchCondition.billType">
+                                                      	<option value="">--通知单类型--</option>
+                                                        <option value="1">入库</option>
+                                                        <option value="3">出库</option>
+                                            </select>
+										</label>&emsp;
+                                        <label><a class="btn btn-default btn-sm" ng-click="loadData()">
+												   		<i class="fa fa-search"></i>&nbsp;查&nbsp;询
+												   </a>
+										</label>&emsp;
+										<!-- <label><a class="btn btn-default btn-sm" ng-click="clearConditions()">
+														<i class="fa fa-trash-o"></i>&nbsp;清&nbsp;空
+												   </a>
+                                    	</label> -->
+                                    </div>
+                                </div>
+                                <div class="col-sm-2 col-xs-12 hidden-xs">
+                                    <div class="dataTables_length">
+											<label>每页显示 <select ng-model="pageInfo.pageSize" ng-change="loadData(pageInfo.pageNum=1)"
+																ng-options="num as num for num in [1,10,25,50,100]"
+																class="form-control input-sm"></select> 条
+											</label>
+									</div>
+                                </div>
+                            </div>
+
+                        <table class="table table-striped table-bordered table-hover" width="100%">
+	                        <thead>
+		                        <tr>
+		                            <th> 通知单类型</th>
+		                            <th> 通知单编号</th>
+		                            <th> 合同编号</th>
+		                            <th> 计划编号</th>
+		                            <th> 客户名称</th>
+		                            <th> 金额(元)</th>
+		                            <th> 审批结束日期</th>
+		                            <th> 是否启用</th>
+		                            <th> 操作</th>
+		                        </tr>
+	                        </thead>
+	                        
+	                        <tbody>
+	                            <tr ng-repeat="deliveryStorageNotice in pageInfo.list">
+	                                <td>
+	                                    <div ng-switch="{{deliveryStorageNotice.billType}}">
+	                                    <div ng-switch-when="1">入库</div>
+	                                    <div ng-switch-when="3">出库</div>
+	                                    </div>
+	                                </td>
+	                                <td>{{ deliveryStorageNotice.billNumber}}</td>
+	                                <td>{{ deliveryStorageNotice.contract}}</td>
+	                                <td>{{ deliveryStorageNotice.planNumber}}</td>
+	                                <td>{{ deliveryStorageNotice.deliveryCustomer}}</td>
+	                                <td>{{ deliveryStorageNotice.moneyQuantity}}</td>
+	                                <td>{{ deliveryStorageNotice.agreeTime | date:'yyyy-MM-dd' }}</td>
+	                                <td><div ng-switch="{{ deliveryStorageNotice.inApplication }}">
+		                                    <div ng-switch-when="1"><span style='color:green;'>启用</span></div>
+		                                    <div ng-switch-when="2"><span>执行完毕</span></div>
+		                                    <div ng-switch-when="3"><span style='color:red;'>终止</span></div>
+		                                    <div ng-switch-when="4"><span>暂停</span></div>
+	                                    </div>
+	                                </td>
+	                                <td>
+	                                    <div ng-switch="{{ deliveryStorageNotice.inApplication }}">
+		                                    <div ng-switch-when="4">
+	                                    		<a href-void ng-click="showView(deliveryStorageNotice)"><i class="fa fa-info-circle"></i>查看</a>&emsp;
+		                                    	<a has-permission="451" href-void ng-click="application(deliveryStorageNotice.id)"><i class="fa fa-play"></i>启用</a>&emsp;
+		                                    	<a has-permission="453" href-void ng-click="finish(deliveryStorageNotice.id)"><i class="fa fa-times"></i>终止</a>
+		                                    </div>
+		                                    <div ng-switch-when="1">
+	                                    		<a href-void ng-click="showView(deliveryStorageNotice)"><i class="fa fa-info-circle"></i>查看</a>&emsp;
+		                                    	<a has-permission="452" href-void ng-click="discontinue(deliveryStorageNotice.id)"><i class="fa fa-pause"></i>暂停</a>&emsp;
+		                                    	<a has-permission="453" href-void ng-click="finish(deliveryStorageNotice.id)"><i class="fa fa-times"></i>终止</a>
+		                                    </div>
+		                                    <div ng-switch-when="2">
+	                                    		<a href-void ng-click="showView(deliveryStorageNotice)"><i class="fa fa-info-circle"></i>查看</a>
+		                                    </div>
+		                                    <div ng-switch-default>
+		                                    	<a href-void ng-click="showView(deliveryStorageNotice)"><i class="fa fa-info-circle"></i>查看</a>
+		                                    </div>
+	                                    </div>
+	                                </td>
+	                            </tr>
+	                        </tbody>
+                        </table>
+						<div smart-include="app/layout/partials/page.tpl.html"></div>
+                        </div>
+                        </div>
+                    </div>
+                </div>
+            </article>
+        </div>
+
+    </section>
+    
+</div>
+
+
+<!-- UserList -->
+<div class="modal fade" id="myUserList" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                    &times;
+                </button>
+                <h4 class="modal-title" id="myModalLabel">选择审批人</h4>
+            </div>
+            <div class="modal-body">
+	         	<select class="form-control" ng-model="assignment.assignee" ng-options="user.userId as user.username for user in userList">
+	         		<option value="">-- 请选择 --</option>
+	         	</select>
+
+            </div>
+            <div class="modal-footer">
+                <button ng-click="submit(assignment.assignee)" type="button" class="btn btn-primary">提交</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">取消 </button>
+            </div>
+        </div>
+    </div>
+</div>

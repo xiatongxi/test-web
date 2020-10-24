@@ -1,0 +1,116 @@
+<!-- MAIN CONTENT -->
+<div id="content">
+    <!-- widget grid -->
+    <section widget-grid id="widget-grid">
+        <div class="row">
+            <article class="col-sm-12">
+                <div jarvis-widget id="standard-datatable-widget" data-widget-color="darken" data-widget-editbutton="false">
+                    <header>
+                        <span class="widget-icon"> <i class="fa fa-table"></i> </span>
+                        <h2>熏蒸方案审批列表 </h2>
+                    </header>
+                    <div>
+                        <div class="widget-body no-padding">
+                        <div id="DataTables_Table_1_wrapper" class="dataTables_wrapper form-inline no-footer" >
+                            <div class="dt-toolbar">
+                                <div class="col-xs-12 col-sm-10">
+                                    <div class="form-group">
+										<label>
+											<select type="search" class="form-control input-sm" ng-model="searchCondition.fumigationType"
+		                                                ng-options="enum.enumid as enum.enumname for enum in dicDataList[5216]">
+                                               		<option value="">--熏蒸方式--</option>
+                                        	</select>
+										</label>&emsp;
+										<label>
+											<select type="search" class="form-control input-sm" ng-model="searchCondition.drugName"
+		                                                ng-options="enum.enumid as enum.enumname for enum in dicDataList[3024]">
+                                               		<option value="">--药剂名称--</option>
+                                        	</select>
+                                       	</label>&emsp;
+                                       	<label><a class="btn btn-default btn-sm" ng-click="loadData()">
+											   	  <i class="fa fa-search"></i>&nbsp;查&nbsp;询
+											   </a>
+										</label>
+										<!-- <label><a class="btn btn-default btn-sm" ng-click="clearConditions()">
+											<i class="fa fa-trash-o"></i>&nbsp;清&nbsp;空</a>
+                                    	</label> -->
+                                    </div>
+                                </div>
+                                <div class="col-sm-2 col-xs-12 hidden-xs">
+                                    <div class="dataTables_length">
+											<label>每页显示 <select ng-model="pageInfo.pageSize" ng-change="loadData(pageInfo.pageNum=1)"
+																ng-options="num as num for num in [1,10,25,50,100]"
+																class="form-control input-sm"></select> 条
+											</label>
+									</div>
+                                </div>
+                            </div>
+
+                        <table class="table table-striped table-bordered table-hover" width="100%">
+	                        <thead>
+		                        <tr>
+		                        	<th> 方案编号</th>
+		                            <th> 仓房名称</th>
+		                            <th> 粮食品种</th>
+		                            <th> 熏蒸方式</th>
+		                            <th> 药剂名称</th>
+		                            <th> 熏蒸指挥人</th>
+		                            <th> 创建日期</th>
+		                            <th> 操作</th>
+		                        </tr>
+	                        </thead>
+	                        
+	                        <tbody>
+	                            <tr ng-repeat="fumigationProgram in pageInfo.list">
+	                            	<td>{{ fumigationProgram.fumigateProgramNumber }}</td>
+	                                <td>{{ storehouseObj[fumigationProgram.houseId].storehouseName }}</td>
+	                                <td>{{ dicData[fumigationProgram.grainKind] }}</td>
+	                                <td>{{ dicData[fumigationProgram.fumigationType] }}</td>
+	                                <td>{{ dicData[fumigationProgram.drugName] }}</td>
+	                                <td>{{ fumigationProgram.fumigationChargePerson }}</td>
+	                                <td>{{ fumigationProgram.createTime | date:'yyyy-MM-dd' }}</td>
+	                                <td>
+	                                	<span ng-if="fumigationProgram.auditState > 1">
+			                            <a has-permission="460" href-void ng-click="auditPage(fumigationProgram)"><i class="fa fa-pencil-square"></i>审批&nbsp;</a>
+	                                    </span>
+	                                    <a href-void ng-click="viewAuditPage(fumigationProgram)"><i class="fa fa-info-circle"></i>查看&nbsp;</a>
+	                                </td>
+	                            </tr>
+	                        </tbody>
+                        </table>
+						<div smart-include="app/layout/partials/page.tpl.html"></div>
+                        </div>
+                        </div>
+                    </div>
+                </div>
+            </article>
+        </div>
+
+    </section>
+    
+</div>
+
+
+<!-- UserList -->
+<div class="modal fade" id="myUserList" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                    &times;
+                </button>
+                <h4 class="modal-title" id="myModalLabel">选择审批人</h4>
+            </div>
+            <div class="modal-body">
+	         	<select class="form-control" ng-model="assignment.assignee" ng-options="user.userId as user.username for user in userList">
+	         		<option value="">-- 请选择 --</option>
+	         	</select>
+
+            </div>
+            <div class="modal-footer">
+                <button ng-click="submit(assignment.assignee)" type="button" class="btn btn-primary">提交</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">取消 </button>
+            </div>
+        </div>
+    </div>
+</div>

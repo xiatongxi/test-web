@@ -1,0 +1,88 @@
+<!-- MAIN CONTENT -->
+<div id="content">
+    <!-- widget grid -->
+    <section widget-grid id="widget-grid">
+        <div class="row">
+            <article class="col-sm-12">
+                <div id="standard-datatable-widget" data-widget-color="darken" data-widget-editbutton="false">
+                    <div class="form-group">
+                        <button type="button" class="close" ng-click="cancel()">
+                            &times;
+                        </button>
+                        <h4 class="modal-title" id="myModalLabel">粮情对比</h4>
+                    </div>
+                    <div>
+                        <div class="widget-body no-padding">
+                            <div id="DataTables_Table_1_wrapper" class="dataTables_wrapper form-inline no-footer">
+                                <div class="dt-toolbar">
+                                    <div>
+                                        <div class="col-xs-12 col-sm-6">
+                                            <label>检测时间:
+                                                <input style="width: 100px;height: 30px;" type="text" ng-model="search.startTimeLeft" data-smart-datepicker>-
+                                                <input style="width: 100px;height: 30px;" type="text" ng-model="search.endTimeLeft" data-smart-datepicker>&nbsp;
+                                            </label>
+                                            <label>
+                                                <a class="btn btn-default btn-sm" ng-click="loadDataLeft()"> <i class="fa fa-search"></i>&nbsp;查&nbsp;询</a>
+                                            </label>
+                                            <label>
+                                                <a class="btn btn-default btn-sm" ng-click="emptySearchLeft()"> <i class=""></i>&nbsp;清&nbsp;空</a>
+                                            </label>
+                                        </div>
+
+                                        <div class="col-xs-12 col-sm-6">
+                                            <label>检测时间:
+                                                <input style="width: 100px;height: 30px;" type="text" ng-model="search.startTimeRight" data-smart-datepicker>-
+                                                <input style="width: 100px;height: 30px;" type="text" ng-model="search.endTimeRight" data-smart-datepicker>&nbsp;
+                                            </label>
+                                            <label>
+                                                <a class="btn btn-default btn-sm" ng-click="loadDataRight()"> <i class="fa fa-search"></i>&nbsp;查&nbsp;询</a>
+                                            </label>
+                                            <label>
+                                                <a class="btn btn-default btn-sm" ng-click="emptySearchRight()"> <i class=""></i>&nbsp;清&nbsp;空</a>
+                                            </label>
+                                        </div>
+
+                                        <div class="col-xs-12 col-sm-6">
+                                            <label> 仓房名称:
+                                                <select ng-model="search.vCfCodeLeft"
+                                                        ng-options="store.storehouseCode as store.storehouseName for store in storelist"
+                                                        ng-disabled="isNotEdit" style="width: 100px;height: 30px;">
+                                                    <option value="">--请选择--</option>
+                                                </select>&emsp;
+                                            </label>
+                                            <!--<label>每页显示 <select ng-model="pageInfo.pageSize" ng-change="loadDataLeft()"
+                                                                ng-options="num as num for num in [7,15,30]"
+                                                                class="form-control input-sm"></select> 条
+                                            </label>-->
+                                        </div>
+
+                                        <div class="col-xs-12 col-sm-6">
+                                            <label> 仓房名称:
+                                                <select ng-model="search.vCfCodeRight"
+                                                        ng-options="store.storehouseCode as store.storehouseName for store in storelist"
+                                                        ng-disabled="isNotEdit" style="width: 100px;height: 30px;">
+                                                    <option value="">--请选择--</option>
+                                                </select>&emsp;
+                                            </label>
+                                            <!--<label>每页显示 <select ng-model="pageInfo.pageSize" ng-change="loadDataRight()"
+                                                                ng-options="num as num for num in [7,15,30]"
+                                                                class="form-control input-sm"></select> 条
+                                            </label>-->
+                                        </div>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="col-sm-6 home-module mar-top2" style="height: 400px" id="showChartsGrainComparisonLeft">
+                                    </div>
+                                    <div class="col-sm-6 home-module mar-top2" style="height: 400px" id="showChartsGrainComparisonRight">
+                                    </div>
+                                </div>
+                                <div class="dt-toolbar-footer"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </article>
+        </div>
+    </section>
+</div>

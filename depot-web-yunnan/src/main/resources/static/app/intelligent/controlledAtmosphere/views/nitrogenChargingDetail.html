@@ -1,0 +1,104 @@
+<div class="modal-content">
+    <div class="modal-header">
+        <button type="button" class="close" ng-click="cancel()">
+            &times;
+        </button>
+        <h4 class="modal-title" id="myModalLabel">{{ storeHouseCodeObj[vcfcode].storehouseName }}氮气房设置详情</h4>
+    </div>
+    <div class="modal-body">
+        <form id="ThresholdDetail-form" class="smart-form ng-pristine ng-valid" data-validator-option="validateOptions" novalidate="novalidate">
+            <div class="row">
+                <section class="col col-sm-3">
+                    库点名称:&emsp;
+                    <label class="input">
+                        <input type="text" ng-model="orgInfo.orgName" name="orgName" ng-readonly="true">
+                    </label>
+                </section>
+                <section class="col col-sm-3">
+                    站点编码:&emsp;
+                    <label class="input">
+                        <input type="text" ng-model="sitecode" name="sitecode" ng-readonly="true">
+                    </label>
+                </section>
+                <section class="col col-3">
+                    氮气房编码:&emsp;
+                    <label class="input">
+                        <input type="text" ng-model="vdevcode" name="vdevcode" ng-readonly="true">
+                    </label>
+                </section>
+                <section class="col col-3">
+                    氮气房名称:&emsp;
+                    <label class="input">
+                        <input type="text" ng-model="nitrogenhouse" name="nitrogenhouse" ng-readonly="true">
+                    </label>
+                </section>
+                <section class="col col-3">
+                    纯度:&emsp;
+                    <label class="input">
+                        <input type="text" ng-model="purity" name="purity" ng-readonly="true">
+                    </label>
+                </section>
+                <section class="col col-3">
+                    温度:&emsp;
+                    <label class="input">
+                        <input type="text" ng-model="temperature" name="temperature" ng-readonly="true">
+                    </label>
+                </section>
+                <section class="col col-3">
+                    压力:&emsp;
+                    <label class="input">
+                        <input type="text" ng-model="pressure" name="pressure" ng-readonly="true">
+                    </label>
+                </section>
+                <section class="col col-3">
+                    流量:&emsp;
+                    <label class="input">
+                        <input type="text" ng-model="flow" name="flow" ng-readonly="true">
+                    </label>
+                </section>
+                <section class="col col-3">
+                    制氮机信号:&emsp;
+                    <label class="input">
+                        <input type="text" ng-model="signal" name="signal" ng-readonly="true">
+                    </label>
+                </section>
+                <section class="col col-3">
+                    空压机信号:&emsp;
+                    <label class="input">
+                        <input type="text" ng-model="airsignal" name="airsignal" ng-readonly="true">
+                    </label>
+                </section>
+                <section class="col col-3">
+                    设备状态:
+                    <label class="select">
+                        <select ng-model="valarmstatue" name="valarmstatue" ng-disabled="true"
+                                ng-options="x.id as x.name for x in [{id:'0',name:'正常'},{id:'1',name:'异常'}]">
+                            <option value="" selected="" disabled="">无状态</option>
+                        </select>
+                    </label>
+                </section>
+                <section class="col col-3">
+                    操作状态:
+                    <label class="select">
+                        <select ng-model="vstatue" name="vstatue" ng-disabled="true"
+                                ng-options="x.id as x.name for x in [{id:'0',name:'关闭'},{id:'1',name:'打开'},{id:'2',name:'反转'},{id:'3',name:'停止'}]">
+                            <option value="" selected="" disabled="">无状态</option>
+                        </select>
+                    </label>
+                </section>
+                <section class="col col-3">
+                    更新时间:
+                    <label class="input">
+                        <input type="text" ng-model="updatetime" name="updatetime" ng-readonly="true">
+                    </label>
+                </section>
+                <section class="col col-3">
+                    描述:
+                    <label class="input">
+                        <input type="text" ng-model="remark" name="remark" ng-readonly="true">
+                    </label>
+                </section>
+            </div>
+        </form>
+    </div>
+</div>

@@ -1,0 +1,180 @@
+<!-- MAIN CONTENT -->
+<div id="content">
+
+	<!-- widget grid -->
+	<section id="widget-grid" widget-grid>
+
+		<!-- START ROW -->
+		<div class="row">
+
+			<!-- NEW COL START -->
+			<article class="col-sm-12 col-md-12 col-lg-12">
+
+				<!-- Widget ID (each widget will need unique ID)-->
+				<div jarvis-widget id="form-grid-widget"
+					data-widget-colorbutton="false" data-widget-editbutton="false"
+					data-widget-custombutton="false">
+
+					<!-- widget div-->
+					<div>
+						<!-- widget content -->
+						<div class="widget-body no-padding">
+							<form id="changeStore-form" name='changeStore-form'
+								class="smart-form ng-pristine ng-valid"
+								ng-submit='changeStore-form.$valid&&save(changestorage)'
+								novalidate="novalidate">
+								<header>
+									<a href-void class="btn btn-default btn-xs" ng-click="returnTop()">
+										<i class="fa fa-angle-left"></i>&nbsp;返回&nbsp;
+									</a>
+									&nbsp;<strong>仓房基础信息</strong>
+									<span class="pull-right font-xs">带*的部分必须填写</span>
+								</header>
+
+								<fieldset>
+									<table class="table table-striped table-bordered table-hover" width="100%">
+										<tr>
+											<th>
+												<label class="label" style="margin-top: 9px;text-align: center;">倒仓作业单号<span style="color: red;margin-left: 5px;text-align: center;">*</span></label>
+											</th>
+											<th>
+												<label class="input">
+													<input type="text" ng-model="changestorage.workNo" required ng-readonly="isNotEdit">
+												</label>
+											</th>
+											<th>
+												<label class="label" style="margin-top: 9px;text-align: center;">倒仓申请单号<span style="color: red;margin-left: 5px;text-align: center;">*</span></label>
+											</th>
+											<!-- <th> -->
+											<th>
+												<section >
+			                                            <input class="form-control" type="text" ng-model="changestorage.businessNo" 
+			                                            ng-readonly="true" ng-disabled="isNotEdit" 
+			                                            ng-click="addRow()" placeholder="请选择申请单号" 
+			                                           >
+		                                        </section>
+											</th>
+												<!-- <label class="input">
+													<input type="text" ng-model="changestorage.businessNo" required ng-readonly="isNotEdit">
+												</label>
+											</th> -->
+											<th>
+												<label class="label" style="margin-top: 9px;text-align: center;">申请倒仓企业<span style="color: red;margin-left: 5px;text-align: center;">*</span></label>
+											</th>
+											<th>
+												<label class="input">
+													<input type="text"  ng-model="changestorage.applyUnitName" required ng-readonly="isNotEdit">
+												</label>
+											</th>
+											<th>
+												<label class="label" style="margin-top: 9px;text-align: center;">计划开始日期</label>
+											</th>
+											<th>
+												<label class="input">
+													<input type="text" ng-model="changestorage.planStartDate"
+													class="form-control datepicker" data-smart-datepicker
+													name="planStartDate" ng-disabled="isNotEdit">
+												</label>
+											</th>
+										</tr>
+										<tr>
+											<th>
+												<label class="label" style="margin-top: 9px;text-align: center;">计划结束日期</label>
+											</th>
+											<th>
+												<label class="input">
+													<input type="text" ng-model="changestorage.planEndDate"
+													class="form-control datepicker" data-smart-datepicker
+													name="planEndDate" ng-disabled="isNotEdit">
+												</label>
+											</th>
+											<th>
+												<label class="label" style="margin-top: 9px;text-align: center;">作业队</label>
+											</th>
+											<th>
+												<label class="input">
+													<input type="text" ng-model="changestorage.workTeam"
+													name="planPourOutSum" maxlength="20">
+												</label>
+											</th>
+											<th>
+												<label class="label" style="margin-top: 9px;text-align: center;">作业组</label>
+											</th>
+											<th>
+												<label class="input">
+													<input type="text" ng-model="changestorage.workGroup"
+													name="planPourOutSum" maxlength="20">
+												</label>
+											</th>
+										</tr>
+									</table>
+								</fieldset>
+								<header>
+									<h3>
+										<strong>倒仓作业信息</strong>&nbsp;&nbsp; 
+									</h3>
+								</header>
+								<fieldset>
+									<div class="col-xs-12 col-sm-12">
+										<table class="table table-striped table-bordered table-hover" width="100%">
+											<tr>
+												<th colspan="6">
+													<label class="label" style="margin-top: 9px;text-align: center;">倒出</label>
+												</th>
+												<th colspan="6">
+													<label class="label" style="margin-top: 9px;text-align: center;">倒入</label>
+												</th>
+											</tr>
+                                			<table class="table table-striped table-bordered table-hover"  >
+												<thead>
+												<tr>
+													<th data-hide="expand" align="center" width="7%">仓房名称</th>
+													<th data-class="expand" align="center" width="7%">货位名称</th>
+													<th data-class="expand" align="center" width="7%">粮油品种</th>
+													<th data-class="expand" align="center" width="9%">期初数量（公斤）</th>
+													<th data-hide="expand" align="center" width="9%">倒出数量（公斤）</th>
+													<th data-hide="expand" align="center" width="9%">结余数量（公斤）</th>
+													<th data-hide="expand" align="center" width="7%">仓房名称</th>
+													<th data-hide="expand" align="center" width="7%">货位名称</th>
+													<th data-hide="expand" align="center" width="9%">期初数量（公斤）</th>
+													<th data-hide="expand" align="center" width="9%">倒入数量（公斤）</th>
+													<th data-hide="expand" align="center" width="9%">结余数量（公斤）</th>
+													<th data-hide="expand" align="center" width="8%" ng-hide="isNotEdit">操作</th>
+												</tr>
+												</thead>
+												<tbody>
+												<tr ng-repeat="changestorageDetail in addDcsl">
+													<td>{{storehouseObj[changestorageDetail.houseId].storehouseName}}</td>
+													<td>{{wares[changestorageDetail.wareId].warehouseName}}</td>
+													<td>{{dicData[changestorageDetail.lspz]}}</td>
+													<td>{{changestorageDetail.qichuNum}}</td>
+													<td>
+													<input type="text" ng-model="changestorageDetail.pourOutNum"
+													name="pourOutNum" style="width:50px;height:20px" ng-change="changeNum(changestorageDetail)">
+													</td>
+													<td>{{changestorageDetail.surplusNum}}</td>
+													<td>{{storehouseObj[changestorageDetail.storehouseId].storehouseName}}</td>
+													<td>{{wares[changestorageDetail.warehouseId].warehouseName}}</td>
+													<td>{{changestorageDetail.beginNum}}</td>
+													<td>{{changestorageDetail.pourInNum}}</td>
+													<td>{{changestorageDetail.resultNum}}</td>
+													<td ng-hide="isNotEdit">
+	                                                	<a class="btn btn-primary" ng-hide="isNotEdit" ng-click="delRow(changestorageDetail)">删除</a>
+													</td>
+												</tr>
+												</tbody>
+		                             </table>
+										</table>
+									</div>
+								</fieldset>
+								<footer class="modal-footer text-align-center">
+									<button ng-click="returnTop()" class="btn btn-default btn-lg" data-dismiss="modal">取消</button>
+									<button ng-click="save()" type="button" class="btn btn-primary btn-lg" ng-hide="isNotEdit">保存</button>
+								</footer>
+							</form>
+						</div>
+					</div>
+			</article>
+		</div>
+	</section>
+</div>

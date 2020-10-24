@@ -1,0 +1,13 @@
+<div class="col-sm-12 home-module" ng-controller="daibsxCtrl">
+
+    <div class="col-center col-center-1">
+        <h3>待办事项</h3>
+        <div class="home-module-content">
+            <ul class="list-group">
+              <li class="list-group-item daib-li"><img alt="!" src="styles/img/home-1/icon1.png"/>&nbsp;<a href-void  ng-click="moreTodo()"><span style='color:white;'>智能粮库待办事项&nbsp;<span style='color:red;'>&nbsp;{{TodoSize==null?0:TodoSize}}</span>&nbsp;&nbsp;条</span></a><div class="daib-line"></div></li>
+              <li class="list-group-item daib-li"><img alt="!" src="styles/img/home-1/icon2.png"/>&nbsp;<a href-void  ng-click="safeProduceNotifyTodo()"><span style='color:white;'>安全生产通知事项&nbsp;<span style='color:red;'>&nbsp;{{totalSize==null?0:totalSize}}</span>&nbsp;&nbsp;条</span></a><div class="daib-line"></div></li>
+            </ul>
+        </div>
+    </div>
+   
+</div>

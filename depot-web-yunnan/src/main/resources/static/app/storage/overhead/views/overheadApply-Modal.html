@@ -1,0 +1,59 @@
+<div class="modal-content">
+    <div class="modal-header">
+        <button type="button" class="close" ng-click="cancel()">
+            &times;
+        </button>
+        <h4 class="modal-title" id="myModalLabel">架空期延期申请明细</h4>
+    </div>
+    <div class="modal-body">
+		<div>
+           <div class="widget-body no-padding">
+           <div id="DataTables_Table_1_wrapper" class="table-responsive" style="overflow:auto;">
+                  <table class="table table-bordered">
+                  <thead>
+                   <tr>
+                   	   <th>序号</th>
+                   	   <th>出库日期</th>
+                       <th>仓房名称</th>
+                       <th>货位名称</th>
+                       <th>粮油品种</th>
+                       <th>计划单号</th>
+                       <th>架空期截止时间</th>
+                       <th>申请延期日期</th>
+                   </tr>
+                  </thead>
+                  <tbody>
+                      <tr ng-repeat="check in pageInfo.list">
+                          <td>
+                              <input type="checkbox" ng-model="check.checked" ng-click="selectData($event, check)">{{$index + 1 + (pageInfo.pageNum-1) * pageInfo.pageSize}}
+                          </td>
+                          <td>{{check.modifydate | date :'yyyy-MM-dd'}}</td>
+                          <td>{{storehouseObj[check.ch].storehouseName}}</td>
+                          <td>{{wares[check.hwh].warehouseName}}</td>
+                          <td>{{dicData[check.pz]}}</td>
+                          <td>{{check.jhbh}}</td>
+                          <td>{{check.jkqEnd | date :'yyyy-MM-dd'}}</td>
+                          <td>
+                          <label class="input">
+								<input type="text" ng-model="check.sqyqTime"
+								class="form-control datepicker" data-smart-datepicker
+								name="sqyqTime" ng-disabled="isNotEdit" ng-change="sqT(check.jkqEnd, check.sqyqTime)">
+						 </label>
+                          </td>
+                      </tr>
+                  </tbody>
+                  </table>
+				<div smart-include="app/layout/partials/page.tpl.html"></div>
+                  </div>
+                  </div>
+              </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-default"  ng-click="check()">
+        	确定
+        </button>
+        <button type="button" class="btn btn-default"  ng-click="cancel()">
+        	取消
+        </button>
+    </div>
+</div>

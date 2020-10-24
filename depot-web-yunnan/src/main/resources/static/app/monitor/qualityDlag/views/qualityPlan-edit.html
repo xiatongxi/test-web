@@ -1,0 +1,148 @@
+<div jarvis-widget="" id="wid-id-0" data-widget-colorbutton="false" data-widget-editbutton="false" data-widget-deletebutton="false" data-widget-sortable="false" class="jarviswidget" role="widget">
+    <div role="content">
+        <!-- widget content -->
+        <div class="widget-body"><div class="jarviswidget-editbox"><input class="form-control" type="text"></div>
+            <legend>
+                <a onclick="window.history.back();" class="btn btn-default btn-xs"><i class="fa fa-angle-left"></i>&nbsp;返回&nbsp;</a>
+            </legend>
+            <form method="post" class="smart-form ng-pristine ng-valid bv-form" novalidate="novalidate">
+                <header>
+                    <h2>
+                        <strong>&nbsp;视频质量诊断计划编辑</strong>
+                    </h2>
+                </header>
+
+                <fieldset>
+                    <div class="row">
+                        <section class="col col-4">
+                            <label class="label">计划名称</label>
+                            <label class="input">
+                                <input type="text" class="form-control" ng-model="diagPlan.name" data-bv-field="director">
+                            </label>
+                        </section>
+                        <section class="col col-4">
+                            <label class="label" title="如果选择‘是’则周期、时间、重复选择项不起作用">是否现在执行<span style="color: red;">*</span></label>
+                            <label class="select">
+                                <select class="form-control" ng-model="diagPlan.type" name="factory" >
+                                    <option value="0">不是</option>
+                                    <option value="1">是</option>
+                                </select>
+                            </label>
+                        </section>
+                        <section class="col col-4">
+                            <label class="label">需要进行诊断的分组<span style="color: red;">*</span></label>
+                            <label class="select">
+                                <select data-smart-select2 multiple style="width:100%" class="select2" id="groupIds">
+                                    <option ng-repeat='group in groupList' value="{{group.id}}">{{group.groupname}}</option>
+                                </select>
+                            </label>
+                        </section>
+                    </div>
+                    <div class="row">
+                        <section class="col col-4">
+                            <label class="label">诊断周期<span style="color: red;">*</span></label>
+                            <label class="select">
+                                <select ng-disabled="diagPlan.type=='1'" class="form-control" ng-model="diagPlan.plandate" data-bv-field="genre">
+                                    <option value=""></option>
+                                    <option value="0">每天</option>
+                                    <option value="1">星期一</option>
+                                    <option value="2">星期二</option>
+                                    <option value="3">星期三</option>
+                                    <option value="4">星期四</option>
+                                    <option value="5">星期五</option>
+                                    <option value="6">星期六</option>
+                                    <option value="7">星期日</option>
+                                </select>
+                            </label>
+                        </section>
+                        <section class="col col-4">
+                            <label class="label">是否重复<span style="color: red;">*</span></label>
+                            <label class="select">
+                                <select ng-disabled="diagPlan.type=='1'"  class="form-control" ng-model="diagPlan.isrepeat" name="factory" data-bv-field="genre">
+                                    <option value="0">不重复</option>
+                                    <option value="1">重复</option>
+                                </select>
+                            </label>
+                        </section>
+                        <section class="col col-4">
+                            <label class="label">检测时间<span style="color: red;">*</span></label>
+                            <div class="input-group">
+                                <input ng-model="diagPlan.plantime" ng-disabled="diagPlan.type=='1'" class="form-control" data-smart-clockpicker type="text" data-autoclose="true">
+                                <span class="input-group-addon"><i class="fa fa-clock-o"></i></span>
+                            </div>
+                        </section>
+                    </div>
+                </fieldset>
+            </form>
+            <form class="smart-form">
+                <header>
+                    诊断项开关
+                </header>
+                <fieldset>
+                    <div class="row">
+                        <section class="col col-5">
+                            <label class="toggle">
+                                <input type="checkbox" ng-model="diagPlan.signals" ng-checked="diagPlan.signals == '1'" ng-value="false">
+                                <i data-swchon-text="开" data-swchoff-text="关"></i>信号丢失</label>
+                            <label class="toggle">
+                                <input type="checkbox"  ng-model="diagPlan.blur" ng-checked="diagPlan.blur == '1'" ng-value="false">
+                                <i data-swchon-text="开" data-swchoff-text="关"></i>图像模糊</label>
+                            <label class="toggle">
+                                <input type="checkbox"  ng-model="diagPlan.dark" ng-checked="diagPlan.dark == '1'" ng-value="false">
+                                <i data-swchon-text="开" data-swchoff-text="关"></i>图像过暗</label>
+                            <label class="toggle">
+                                <input type="checkbox"  ng-model="diagPlan.chroma" ng-checked="diagPlan.chroma == '1'" ng-value="false">
+                                <i data-swchon-text="开" data-swchoff-text="关"></i>偏色异常</label>
+                            <label class="toggle">
+                                <input type="checkbox"  ng-model="diagPlan.freeze" ng-checked="diagPlan.freeze == '1'" ng-value="false">
+                                <i data-swchon-text="开" data-swchoff-text="关"></i>画面冻结</label>
+                            <label class="toggle">
+                                <input type="checkbox"  ng-model="diagPlan.bright" ng-checked="diagPlan.bright == '1'" ng-value="false">
+                                <i data-swchon-text="开" data-swchoff-text="关"></i>图像过亮</label>
+                            <label class="toggle">
+                                <input type="checkbox"  ng-model="diagPlan.mono" ng-checked="diagPlan.mono == '1'" ng-value="false">
+                                <i data-swchon-text="开" data-swchoff-text="关"></i>黑白图像</label>
+                            <label class="toggle">
+                                <input type="checkbox"  ng-model="diagPlan.stripe" ng-checked="diagPlan.stripe == '1'" ng-value="false">
+                                <i data-swchon-text="开" data-swchoff-text="关"></i>条纹干扰</label>
+                        </section>
+                        <div class="col col-2"></div>
+                        <section class="col col-5">
+                            <label class="toggle">
+                                <input type="checkbox" ng-model="diagPlan.cover" ng-checked="diagPlan.cover == '1'" ng-value="false">
+                                <i data-swchon-text="开" data-swchoff-text="关"></i>视频遮挡</label>
+                            <label class="toggle">
+                                <input type="checkbox" ng-model="diagPlan.hake" ng-checked="diagPlan.hake == '1'" ng-value="false">
+                                <i data-swchon-text="开" data-swchoff-text="关"></i>视频抖动</label>
+                            <label class="toggle">
+                                <input type="checkbox" ng-model="diagPlan.ptz" ng-checked="diagPlan.ptz == '1'" ng-value="false">
+                                <i data-swchon-text="开" data-swchoff-text="关"></i>云台失控</label>
+                            <label class="toggle">
+                                <input type="checkbox" ng-model="diagPlan.contrast" ng-checked="diagPlan.contrast == '1'" ng-value="false">
+                                <i data-swchon-text="开" data-swchoff-text="关"></i>对比度</label>
+                            <label class="toggle">
+                                <input type="checkbox" ng-model="diagPlan.noise" ng-checked="diagPlan.noise == '1'" ng-value="false">
+                                <i data-swchon-text="开" data-swchoff-text="关"></i>噪音干扰</label>
+                            <label class="toggle">
+                                <input type="checkbox" ng-model="diagPlan.flash" ng-checked="diagPlan.flash == '1'" ng-value="false">
+                                <i data-swchon-text="开" data-swchoff-text="关"></i>视频巨变</label>
+                            <label class="toggle">
+                                <input type="checkbox" ng-model="diagPlan.scene" ng-checked="diagPlan.scene == '1'" ng-value="false">
+                                <i data-swchon-text="开" data-swchoff-text="关"></i>场景变更</label>
+                        </section>
+                    </div>
+                </fieldset>
+                <footer>
+                    <button type="button" class="btn btn-default" onclick="window.history.back();">
+                        取消
+                    </button>
+                    <button type="submit" class="btn btn-primary" ng-click="saveData()">
+                        保存
+                    </button>
+                </footer>
+            </form>
+        </div>
+
+    </div>
+
+</div>

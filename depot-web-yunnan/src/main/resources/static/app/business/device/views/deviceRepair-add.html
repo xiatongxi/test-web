@@ -1,0 +1,118 @@
+<div id="content">
+	<section id="widget-grid" widget-grid>
+		<div class="row">
+			<article class="col-sm-12 col-md-12 col-lg-12">
+				<div jarvis-widget id="form-grid-widget" data-widget-colorbutton="false" data-widget-editbutton="false"
+					 data-widget-custombutton="false">
+					<div>
+						<div class="widget-body no-padding">
+							<form id="deviceRepair-form" class="smart-form" data-validator-option="validateOptions" novalidate="novalidate">
+								<button type="submit" class="bv-hidden-submit" style="display: none; width: 0px; height: 0px;"></button>
+								<header>
+									<a href-void class="btn btn-default btn-xs" ng-click="back()"><i class="fa fa-angle-left"></i>&nbsp;返回&nbsp;</a>
+									&nbsp;<strong>添加维修信息</strong>
+								</header>
+								<fieldset>
+									<div class="row">
+										<section class="col col-3">
+											<label class="label">设备名称：<span style="color: red;">*</span></label>
+											<label class="select">
+												<select ng-model="deviceRepair.deviceName" name="deviceName"  ng-change="deviceModelChange()"
+														ng-options="deviceinput.deviceName as deviceinput.inputDeviceName for deviceinput in deviceNameList"
+														class="form-control" ng-disabled="isNotEdit" required>
+													<option value="">--请选择--</option>
+												</select>
+											</label>
+										</section>
+										<section class="col col-3">
+											<label class="label">规格型号：<span style="color: red;">*</span></label>
+											<label class="select">
+												<select ng-model="deviceRepair.model" name="model" 
+														ng-options="deviceRepair.model as deviceRepair.model for deviceRepair in deviceInputList"
+														class="form-control" ng-disabled="isNotEdit" required>
+													<option value="">--请选择--</option>
+												</select>
+											</label>
+										</section>
+										<section class="col col-3">
+											<label class="label">维修设备编号：<span style="color: red;">*</span></label>
+											<label class="select">
+												<select ng-model="deviceRepair.number" name="number" ng-change="Numberchange()"
+														ng-options="deviceRepair.number as deviceRepair.number for deviceRepair in deviceInputList | filter:{model:deviceRepair.model}"
+														class="form-control" ng-disabled="isNotEdit" required>
+													<option value="">--请选择--</option>
+												</select>
+											</label>
+										</section>
+										<!-- <section class="col col-3">
+										          <label class="label">设备总数量：<span style="color: red;">*</span></label>
+													<label class="select">
+												   <select ng-model="deviceInput.useCount" name="repairSumnumber" 
+														ng-options="deviceInput.useCount asdeviceInput.useCount for deviceInput in deviceUseCountList"
+														class="form-control" ng-disabled="isNotEdit">
+													<option value="">--请选择--</option>
+												</select>
+											</label>
+										</section> -->
+										<section class="col col-3">
+												<label class="input">
+													<label class="label">设备故障数量：<span style="color: red;">*</span></label>
+													<input type="text" ng-model="deviceRepair.repairSumnumber" name="repairSumnumber" readonly
+														   placeholder="设备总数量" required>
+												</label>
+										</section>
+									</div>
+									<div class="row">
+										<section class="col col-3">
+											<label class="input">
+													<label class="label">维修设备数量：<span style="color: red;">*</span></label>
+													<input type="number" ng-model="deviceRepair.repairNumber" name="repairNumber" ng-readonly="isNotEdit"
+														ng-change="getCountChange()"   placeholder="维修设备数量" required>
+												</label>
+										</section>
+										<section class="col col-3">
+											<label class="label">维修开始时间：<span style="color: red;">*</span></label>
+											<label class="input">
+												<input type="text" ng-model="deviceRepair.repairStart" name="repairStart" data-smart-datepicker ng-disabled="isNotEdit"
+													   placeholder="维修开始时间" required>
+											</label>
+										</section>
+										<section class="col col-3">
+												<label class="input">
+													<label class="label">维修负责人：</label>
+													<input type="text" ng-model="deviceRepair.repairer" name="repairer" ng-readonly="isNotEdit"
+														   placeholder="保养负责人" >
+												</label>
+										</section>
+										<section class="col col-3">
+												<label class="input">
+													<label class="label">设备管理员：</label>
+													<input type="text" ng-model="deviceRepair.deviceManager" name="deviceManager" ng-readonly="isNotEdit"
+														   placeholder="设备管理员" >
+												</label>
+										</section>
+										 <section class="col col-10">
+												<label class="input">
+													<span>备注：</span>
+													<input type="text" ng-model="deviceRepair.remark" name="remark" placeholder="备注" ng-readonly="isNotEdit">
+													<input type="hidden" ng-model="deviceRepair.orgId" name="orgId">
+												</label>
+										</section>  
+									</div>       
+								</fieldset>
+								<footer>
+									<div class="row">
+										<div class="col-md-12">
+										    <a class="btn btn-default" href-void="" href="#" ng-click="back()" ng-hide="isNotEdit">取消</a>
+											<a class="btn btn-primary" href-void="" href="#" ng-click="saveData()"  ng-hide="isNotEdit">提交</a>
+										</div>
+									</div>
+								</footer>
+						    </form>
+					    </div>
+					</div>
+				</div>
+			</article>
+		</div>
+	</section>
+</div>

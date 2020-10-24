@@ -1,0 +1,82 @@
+<div class="modal-content">
+    <div class="modal-header">
+        <button type="button" class="close" ng-click="cancel()">
+            &times;
+        </button>
+        <h4 class="modal-title" id="myModalLabel">{{ storeHouseCodeObj[vcfcode].storehouseName }}内环流设置详情</h4>
+    </div>
+    <div class="modal-body">
+        <form id="ThresholdDetail-form" class="smart-form ng-pristine ng-valid" data-validator-option="validateOptions" novalidate="novalidate">
+            <div class="row">
+                <section class="col col-sm-3">
+                    库点名称:&emsp;
+                    <label class="input">
+                        <input type="text" ng-model="orgInfo.orgName" name="orgName" ng-readonly="true">
+                    </label>
+                </section>
+                <section class="col col-sm-3">
+                    仓房名称:&emsp;
+                    <label class="input">
+                        <input type="text" ng-model="storehouseName" name="storehouseName" ng-readonly="true">
+                    </label>
+                </section>
+                <section class="col col-sm-3">
+                    站点编码:&emsp;
+                    <label class="input">
+                        <input type="text" ng-model="sitecode" name="sitecode" ng-readonly="true">
+                    </label>
+                </section>
+                <section class="col col-3">
+                    设备编码:&emsp;
+                    <label class="input">
+                        <input type="text" ng-model="vdevcode" name="vdevcode" ng-readonly="true">
+                    </label>
+                </section>
+                <section class="col col-3">
+                    设备名称:&emsp;
+                    <label class="input">
+                        <input type="text" ng-model="vdevname" name="vdevname" ng-readonly="true">
+                    </label>
+                </section>
+                <section class="col col-3">
+                    设备状态:
+                    <label class="select">
+                        <select ng-model="valarmstatue" name="valarmstatue" ng-disabled="true"
+                                ng-options="x.id as x.name for x in [{id:'0',name:'正常'},{id:'1',name:'异常'}]">
+                            <option value="" selected="" disabled="">无状态</option>
+                        </select>
+                    </label>
+                </section>
+                <section class="col col-3">
+                    操作状态:
+                    <label class="select">
+                        <select ng-model="vstatue" name="vstatue" ng-disabled="true"
+                                ng-options="x.id as x.name for x in [{id:'0',name:'关闭'},{id:'1',name:'打开'},{id:'2',name:'反转'},{id:'3',name:'停止'}]">
+                            <option value="" selected="" disabled="">无状态</option>
+                        </select>
+                    </label>
+                </section>
+            <!-- </div> -->
+                <section class="col col-3">
+                    通道号:&emsp;
+                    <label class="input">
+                        <input type="text" ng-model="idevtdh" name="idevtdh" ng-readonly="true">
+                    </label>
+                </section>
+               <!--  <div class="row"> -->
+                <section class="col col-3">
+                    更新时间:
+                    <label class="input">
+                        <input type="text" ng-model="updatetime" name="updatetime" ng-readonly="true">
+                    </label>
+                </section>
+                <section class="col col-3">
+                    描述:
+                    <label class="input">
+                        <input type="text" ng-model="remark" name="remark" ng-readonly="true">
+                    </label>
+                </section>
+            </div>
+        </form>
+    </div>
+</div>

@@ -1,0 +1,206 @@
+<link rel="stylesheet" href="styles/css/additionalHome/index.css">
+<!-- <link rel="stylesheet" href="styles/css/additionalHome/swiper.css"> -->
+<link rel="stylesheet" href="styles/css/additionalHome/demo.css">
+<link rel="stylesheet" href="styles/css/additionalHome/jquery.flipster.css">
+<link rel="stylesheet" href="styles/css/additionalHome/flipsternavtabs.css">
+<div class="qualityCheck-main" ng-controller="qualityCtrl">
+	<div class="information">
+	    <div class="informationContent">
+	        <div class="notice">
+	            <div class="notHeader">
+	                <div class="skew">
+	                    <img src="styles/img/qualityCheck/1icon-gg.png" alt="">
+	                    <span>公告</span>
+	                </div>
+	                <div class="more">
+	                    <span ng-click="safeProduceNotifyTodo()">更多</span>
+	                    <span>></span>
+	                </div>
+	            </div>
+	            <div class="list">
+	                <ul>
+	                    <li ng-repeat="safeproduce in qualityPageInfo.list">
+	                        <span style="cursor: pointer;" ng-click="showViewNotify(safeproduce.id)">{{safeproduce.fileName}}</span>
+	                        <!-- <span>{{safeproduce.operationTime | date:'yyyy-MM-dd HH:mm:ss'}}</span> -->
+	                        <span>{{safeproduce.operationTime | date:'yyyy-MM-dd'}}</span>
+	                    </li>
+	                </ul>
+	            </div>
+	        </div>
+	        <div class="launch">
+	            <div class="notHeader">
+	                <div class="skew">
+	                    <img src="styles/img/qualityCheck/2icon-fq.png" alt="">
+	                    <span>发起</span>
+	                </div>
+	            </div>
+	            <!-- <div class="swiper">
+	                <div class="wrapper">
+	                    <div class="main">
+	                        <div>
+	                            <a href="javaScript:void(0)" ng-click="safeProduceTodo('publish')">
+	                                <img src="styles/img/qualityCheck/wendang (3).png" alt="">
+	                            </a>
+	                        </div>
+	                        <div>
+	                            <a href="javaScript:void(0)" ng-click="acceptanceApplication(50)">
+	                                <img src="styles/img/qualityCheck/wendang (1).png" alt="">
+	                            </a>
+	                        </div>
+	                        <div>
+	                            <a href="javaScript:void(0)" ng-click="showAddNotify()">
+	                                <img src="styles/img/qualityCheck/wendang (2).png" alt="">
+	                            </a>
+	                        </div>
+	                    </div>
+	                    <div class="btn">
+	                        <ul>
+	                            <li ng-click="reversal(0)" class="one move">1</li>
+	                            <li ng-click="reversal(1)" class="two">2</li>
+	                            <li ng-click="reversal(2)" class="three">3</li>
+	                        </ul>
+	                    </div>
+	                    <div class="dashLine"></div>
+	                    <div class="dashLine02"></div>
+
+                    </div>
+	            </div> -->
+	            <div class="flipster" style="margin-top: 35px;">
+					<ul>
+						<li>
+							<a href="javaScript:void(0)" id="noticeIssued" ng-click="showAddNotify('noticeIssued')">
+                                <img src="styles/img/qualityCheck/wendang (2).png" alt="">
+                            </a>
+						</li>
+						<li>
+							<a href="javaScript:void(0)" id="apply" ng-click="acceptanceApplication(50,'apply')">
+                                <img src="styles/img/qualityCheck/wendang (1).png" alt="">
+                            </a>
+						</li>
+						<li>
+							<a href="javaScript:void(0)" id="publishDocument" ng-click="safeProduceTodo('publish','publishDocument')">
+                                <img src="styles/img/qualityCheck/wendang (3).png" alt="">
+                            </a>
+						</li>
+				  	</ul>
+				</div>
+	        </div>
+	    </div>
+	</div>
+	<div class="business">
+	    <div class="businessContent">
+	        <div class="title">
+	            <img src="styles/img/qualityCheck/yewu01.png" alt="">
+	            <span>业务概览</span>
+	            <img src="styles/img/qualityCheck/yewu02.png" alt="">
+	
+	        </div>
+	        <div class="cartlist">
+	            <div class="item">
+	                <div class="itemHeader">
+	                    <span>验收</span>
+	                </div>
+	                <div class="itemContent">
+	                    <img src="styles/img/qualityCheck/icon1.png" alt="">
+	                    <div class="textList">
+	                        <ul>
+	                            <li>全&nbsp&nbsp&nbsp部:<i ng-click="acceptance(null)">{{acceptanceTotal}}</i></li>
+	                            <li>已验收:<i ng-click="acceptance(100)">{{acceptancedNumber}}</i></li>
+	                            <li>未验收:<i ng-click="acceptance(-100)">{{noAcceptanceNumber}}</i></li>
+	                        </ul>
+	                    </div>
+	                </div>
+	            </div>
+	            <div class="item">
+	                <div class="itemHeader">
+	                    <span>春秋普查</span>
+	                </div>
+	                <div class="itemContent">
+	                    <img src="styles/img/qualityCheck/icon2.png" alt="">
+	                    <div class="textList">
+	                        <ul>
+	                            <li>全&nbsp&nbsp&nbsp部:<i ng-click="generalSurvey(null)">{{generalSurveyTotal}}</i></li>
+	                            <li>合&nbsp&nbsp&nbsp格:<i ng-click="generalSurvey(0)">{{qualifiedNumber}}</i></li>
+	                            <li>不合格:<i ng-click="generalSurvey(1)">{{unqualifiedNumber}}</i></li>
+	                        </ul>
+	                    </div>
+	                </div>
+	            </div>
+	            <div class="item">
+	                <div class="itemHeader">
+	                    <span>第三方检查</span>
+	                </div>
+	                <div class="itemContent">
+	                    <img src="styles/img/qualityCheck/icon3.png" alt="">
+	                    <div class="textList">
+	                        <ul>
+	                            <li>全&nbsp&nbsp&nbsp部:<i ng-click="thirdParty(null)">{{thirdPartyTotal}}</i></li>
+	                            <li>合&nbsp&nbsp&nbsp格:<i ng-click="thirdParty(0)">{{passNumber}}</i></li>
+	                            <li>不合格:<i ng-click="thirdParty(1)">{{noPassNumber}}</i></li>
+	                        </ul>
+	                    </div>
+	                </div>
+	            </div>
+	            <div class="item">
+	                <div class="itemHeader">
+	                    <span>通知公告</span>
+	                </div>
+	                <div class="itemContent">
+	                    <img src="styles/img/qualityCheck/icon4.png" alt="">
+	                    <div class="textList oneLine">
+	                        <span>全&nbsp&nbsp&nbsp部:<span class="ml5" ng-click="safeProduceNotifyTodo()">{{safeProduceNumber}}</span></span>
+	                    </div>
+	                </div>
+	            </div>
+	            <div class="item">
+	                <div class="itemHeader">
+	                    <span>公共文档</span>
+	                </div>
+	                <div class="itemContent">
+	                    <img src="styles/img/qualityCheck/icon5.png" alt="">
+	                    <div class="textList oneLine">
+	                        <span>全&nbsp&nbsp&nbsp部:<span class="ml5" ng-click="safeProduceTodo('list')">{{documentsNumber}}</span></span>
+	                    </div>
+	                </div>
+	            </div>
+	        </div>
+	    </div>
+	</div>
+	<div class="Chart">
+	    <div class="curve">
+	        <div class="ChartTitle">
+	            <div class="titleRight">
+	                <img src="styles/img/qualityCheck/3icon-swqx.png" alt="">
+	                <span>三温曲线图</span>
+	            </div>
+	        </div>
+	        <div class="chartContent">
+	        	<select ng-change="initThree()" ng-model="houseId" 
+	        		ng-options="store.storehouseId as store.storehouseName for store in storehouseList">
+                </select>
+                <div id="Thermometer"></div>
+            </div>
+		</div>
+        <div class="Columnar">
+            <div class="ChartTitle">
+                <div class="titleRight">
+                    <img src="styles/img/qualityCheck/4icon-lspz.png" alt="">
+                    <span>粮食品种</span>
+                </div>
+            </div>
+            <div class="chartContent">
+                <div id="foodstuff"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+$(function(){ 
+	$(".flipster").flipster({ 
+		style: 'carousel', 
+		start: 0 }); 
+	});
+</script>
+<!-- <footer>
+    <div>版权所有：紫光软件系统有限公司</div>
+</footer> -->

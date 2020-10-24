@@ -1,0 +1,82 @@
+<!-- MAIN CONTENT -->
+<div style="position:relative; padding: 0 14px;">
+    <!-- widget grid -->
+    <section id="widget-grid" widget-grid>
+        <!-- START ROW -->
+        <div class="row" style="margin: 0;">
+            <!-- NEW COL START -->
+            <article class="col-sm-12 col-md-12 col-lg-12">
+                <!-- Widget ID (each widget will need unique ID)-->
+                <div jarvis-widget id="form-grid-widget"
+                    data-widget-colorbutton="false" data-widget-editbutton="false"
+                    data-widget-custombutton="false">
+                    <!-- widget div-->
+                    <div style="border-top-width:1px; border-width:1px;position:relative;padding: 0; box-sizing: border-box;">
+                        <!-- widget content -->
+                        <div class="widget-body no-padding" style="margin: 0;">
+                            <form id="auditAdivce-form" class="smart-form ng-pristine ng-valid" data-validator-option="validateOptions" novalidate="novalidate" >
+                                <header ng-hide="!isNotEdit"><h3><strong>审批信息</strong></h3></header>
+                                <fieldset ng-hide="!isNotEdit">
+                                    <div ng-hide="!isNotEdit" class="form-group has-feedback"  >
+		                                <table class="table table-striped table-bordered table-hover" ng-repeat="audit in auditList" >
+		                                	<tr>
+		                                		<td  rowspan="3" width='10%'  >
+		                                			<label class="label"  style="margin-top: 45%;text-align: center;">{{audit.taskName}}</label>
+		                                		</td>
+		                                		<td>
+		                                			<label class="label" style="margin-top: 9px;text-align: center;">处理人</label>
+		                                		</td>
+		                                		<td width='20%'>
+		                                			<label class="label" style="margin-top: 9px;text-align: center;">{{audit.fromUserName}}</label>
+		                                		</td>
+		                                		<td >
+		                                			<label class="label" style="margin-top: 9px;text-align: center;">提交部门</label>
+		                                		</td>
+		                                		<td colspan="2" width='30%' style="margin-top: 9px;text-align: center;">
+		                                			<label class="label" style="margin-top: 9px;text-align: center;">{{audit.fromDepartment}}</label>
+		                                		</td>
+		                                	</tr>
+		                                	<tr>
+		                                		<td rowspan="2">
+		                                			<label class="label" style="margin-top: 20px;text-align: center;">审批意见</label>
+		                                		</td>
+		                                		<td colspan="4" style="margin-top: 9px;text-align: center;">
+		                                			<label class="label" style="margin-top: 9px;text-align: center;">{{audit.content}}</label>
+		                                		</td>
+		                                	</tr>
+		                                	<tr>
+		                                		<td colspan="3" style="border-top: 0px;border-right: 0px;">
+		                                			<!-- 签字前面 -->
+		                                		</td>
+		                                		<td width='30%' style="border-top: 0px;border-left: 0px;">
+		                                		电子签名
+		                                		</td>
+		                                	</tr>
+		                                </table>
+		                                <input type="text" ng-model="state" ng-hide="false" name="state" hidden="true">
+                                    </div>
+                                 
+                                </fieldset>
+	                                <div  ng-hide="!isAudit" style=" border-width:1px; position:relative; padding: 12px 14px 12px 12px;">
+	                                    <label class="control-label pull-left" style="font-size:150%">审批意见</label>
+	                                    <textarea  class="form-control"  ng-model="audit.content" ng-readonly="!isAudit" rows="2" data-bv-field="review"></textarea>
+	                                </div>
+	                                <footer class="text-align-center" >
+	                                    <button type="button" class="btn btn-default" ng-click="retList()">取消</button>
+	                                    <button type="button" class="btn btn-primary" ng-hide="isNotSave" ng-click="save()">保存</button>
+	                                	<button type="button" class="btn btn-primary" ng-hide="!showNextButton" ng-click="next()">下一步</button>
+	                                    <button type="button" class="btn btn-primary" ng-hide="!showLastButton" ng-click="last()">上一步</button>
+	                                    <button type="button" class="btn btn-primary" ng-hide="!isAudit" ng-click="audit(taskApplyPlan, taskApplyPlan.applyPerson, audit.content, 6)">拒绝</button>
+	                                    <button type="button" class="btn btn-primary" ng-hide="!isAudit" ng-click="audit(taskApplyPlan, taskApplyPlan.applyPerson, audit.content, 0)">驳回</button>
+	                                    <button type="button" class="btn btn-primary" ng-hide="!isAudit" ng-click="choice(audit.content, state+1)">通过</button>
+	                                	<button type="button" class="btn btn-primary" ng-hide="isNotSave" ng-click="save('1')">提交</button>
+	                                </footer>
+                                
+                               
+                            </form>
+                        </div>
+                    </div>
+            </article>
+        </div>
+    </section>
+</div>

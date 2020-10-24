@@ -1,0 +1,266 @@
+<!-- MAIN CONTENT -->
+<div id="content">
+	<!-- widget grid -->
+	<section id="widget-grid" widget-grid>
+		<!-- START ROW -->
+		<div class="row">
+			<!-- NEW COL START -->
+			<article class="col-sm-12 col-md-12 col-lg-12">
+				<!-- Widget ID (each widget will need unique ID)-->
+				<div jarvis-widget id="form-grid-widget"
+					data-widget-colorbutton="false" data-widget-editbutton="false"
+					data-widget-custombutton="false">
+					<!-- widget div-->
+					<div>
+						<!-- widget content -->
+						<div class="widget-body no-padding">
+							<form id="aerationTaskRecord-form" name='aerationTaskRecord-form'
+								class="smart-form ng-pristine ng-valid"
+								data-validator-option="validateOptions" novalidate="novalidate">
+								<header>
+									<a href-void class="btn btn-default btn-xs" ng-click="retList()">
+										<i class="fa fa-angle-left"></i>&nbsp;返回&nbsp;
+									</a>
+									&nbsp;<strong>通风过程详情</strong>
+									<span class="pull-right font-xs">带*的部分必须填写</span>
+								</header>
+								<header ng-hide="isNext">基本信息</header>
+								<fieldset ng-hide="isNext">
+									<table class="table table-striped table-bordered table-hover" width="100%">
+										<tr>
+											<th width="10%">
+												<label class="label" style="margin-top: 8px;text-align: right;">所属粮库：</label>
+											</th>
+											<th width="15%">
+												<label class="input">
+													<input type="text" ng-model="aerationJob.orgName" ng-readonly="true">
+												</label>
+											</th>
+											<th width="10%">
+												<label class="label" style="margin-top: 8px;text-align: right;">通风作业单编号：</label>
+											</th>
+											<th width="15%">
+												<label class="input">
+													<input type="text" ng-model="aerationJob.taskNumber" name="taskNumber" ng-readonly="true">
+												</label>
+											</th>
+											<th width="10%">
+												<label class="label" style="margin-top: 8px;text-align: right;">仓房名称：</label>
+											</th>
+											<th width="15%">
+												<label class="select">
+													<select ng-model="JobApplication.vCfCode" name="vCfCode" ng-change="getTaskRecord(record.houseId)" ng-disabled="isNotEditHouseId"
+													ng-options="store.storehouseCode as store.storehouseName for store in storelist" ng-hide="notviewHouseId" required 
+													class="form-control">
+													</select>
+												</label>
+											</th>
+											
+										</tr>
+										<tr>
+											<th>
+												<label class="label" style="margin-top: 8px;text-align: right;">开始通风时间：</label>
+											</th>
+											<th>
+												<label class="input">
+													<input type="text" class="form-control" ng-model="aerationJob.taskStartTime" name="taskStartTime"
+	                                                data-field="datetime" required  ng-disabled="isNotEdit">
+												</label>
+											</th>
+											<th>
+												<label class="label" style="margin-top: 8px;text-align: right;">结束通风时间：</label>
+											</th>
+											<th>
+												<label class="input">
+													<input type="text" ng-model="aerationJob.taskEndTime" ng-disabled="isNotEdit" data-field="datetime"
+													name="taskEndTime"  required class="form-control">
+												</label>
+											</th>
+											<th></th>
+											<th></th>
+										</tr>
+									</table>
+								</fieldset>
+								
+								<header ng-hide="isLast">粮温检测</header>
+								<fieldset ng-hide="isLast">
+									<table class="table table-striped table-bordered table-hover" width="100%">
+										<tr>
+											<th >
+												<label class="label" style="margin-top: 31px;text-align: center;"></label>
+											</th>
+											<th >
+												<label class="label" style="margin-top: 31px;text-align: center;">仓内温(℃)</label>
+											</th>
+											<th >
+												<label class="label" style="margin-top: 31px;text-align: center;">仓内湿(℃)</label>
+											</th>
+											<th >
+												<label class="label" style="margin-top: 31px;text-align: center;">仓外温(℃)</label>
+											</th>
+											<th >
+												<label class="label" style="margin-top: 31px;text-align: center;">仓外湿(℃)</label>
+											</th>
+											<th >
+												<label class="label" style="margin-top: 31px;text-align: center;">最高粮温(℃)</label>
+											</th>
+											<th >
+												<label class="label" style="margin-top: 31px;text-align: center;">最低粮温(℃)</label>
+											</th>
+											<th >
+												<label class="label" style="margin-top: 31px;text-align: center;">平均粮温</label>
+											</th>
+										</tr>
+										
+										<tr>
+											<th>
+												通风前
+											</th>
+											<th>
+												<label class="input" style="margin-top: 8px;text-align: center;">
+													<input type="text" ng-model="aerationBefore.intemp" ng-disabled="isNotEdit" class="form-control">
+												</label>
+											</th>
+											<th>
+												<label class="input" style="margin-top: 8px;text-align: center;">
+													<input type="text" ng-model="aerationBefore.inh" ng-disabled="isNotEdit" class="form-control">
+												</label>
+											</th>
+											<th>
+												<label class="input" style="margin-top: 8px;text-align: center;">
+													<input type="text" ng-model="aerationBefore.outtemp" ng-disabled="isNotEdit" class="form-control">
+												</label>
+											</th>
+											<th>
+												<label class="input" style="margin-top: 8px;text-align: center;">
+													<input type="text" ng-model="aerationBefore.outh" ng-readonly="isNotEdit" class="form-control">
+												</label>
+											</th>
+											<th>
+												<label class="input" style="margin-top: 8px;text-align: center;">
+													<input type="text" ng-model="aerationBefore.max" ng-disabled="isNotEdit" class="form-control">
+												</label>
+											</th>
+											<th>
+												<label class="input" style="margin-top: 8px;text-align: center;">
+													<input type="text" ng-model="aerationBefore.min" ng-disabled="isNotEdit" class="form-control">
+												</label>
+											</th>
+											<th>
+												<label class="input" style="margin-top: 8px;text-align: center;">
+													<input type="text" ng-model="aerationBefore.avg" ng-disabled="isNotEdit" class="form-control">
+												</label>
+											</th>
+										</tr>
+										<tr>
+											<th>
+												通风后
+											</th>
+											<th>
+												<label class="input" style="margin-top: 8px;text-align: center;">
+													<input type="text" ng-model="aerationAfter.intemp" ng-disabled="isNotEdit" class="form-control">
+												</label>
+											</th>
+											<th>
+												<label class="input" style="margin-top: 8px;text-align: center;">
+													<input type="text" ng-model="aerationAfter.inh" ng-disabled="isNotEdit" class="form-control">
+												</label>
+											</th>
+											<th>
+												<label class="input" style="margin-top: 8px;text-align: center;">
+													<input type="text" ng-model="aerationAfter.outtemp" ng-disabled="isNotEdit" class="form-control">
+												</label>
+											</th>
+											<th>
+												<label class="input" style="margin-top: 8px;text-align: center;">
+													<input type="text" ng-model="aerationAfter.outh" ng-disabled="isNotEdit" class="form-control">
+												</label>
+											</th>
+											<th>
+												<label class="input" style="margin-top: 8px;text-align: center;">
+													<input type="text" ng-model="aerationAfter.max" ng-disabled="isNotEdit" class="form-control">
+												</label>
+											</th>
+											<th>
+												<label class="input" style="margin-top: 8px;text-align: center;">
+													<input type="text" ng-model="aerationAfter.min" ng-disabled="isNotEdit" class="form-control">
+												</label>
+											</th>
+											<th>
+												<label class="input" style="margin-top: 8px;text-align: center;">
+													<input type="text" ng-model="aerationAfter.avg" ng-disabled="isNotEdit" class="form-control">
+												</label>
+											</th>
+										</tr>
+									</table>
+								</fieldset>
+								<header>气体检测</header>
+								<fieldset>
+									<table class="table table-striped table-bordered table-hover" width="100%">
+										<tr>
+											<th >
+												<label class="label" style="margin-top: 31px;text-align: center;"></label>
+											</th>
+											<th >
+												<label class="label" style="margin-top: 31px;text-align: center;">氧气</label>
+											</th>
+											<th >
+												<label class="label" style="margin-top: 31px;text-align: center;">二氧化碳</label>
+											</th>
+											<th >
+												<label class="label" style="margin-top: 31px;text-align: center;">磷化氢</label>
+											</th>
+										</tr>
+										<tr >
+											<th>
+												通风前
+											</th>
+											<th>
+												<label class="input" style="margin-top: 8px;text-align: center;">
+													<input type="text" ng-model="gasBefore.o2avg" ng-readonly="isNotEdit" class="form-control">
+												</label>
+											</th>
+											<th>
+												<label class="input" style="margin-top: 8px;text-align: center;">
+													<input type="text" ng-model="gasBefore.co2avg" ng-readonly="isNotEdit" class="form-control">
+												</label>
+											</th>
+											<th>
+												<label class="input" style="margin-top: 8px;text-align: center;">
+													<input type="text" ng-model="gasBefore.ph3avg" ng-readonly="isNotEdit" class="form-control">
+												</label>
+											</th>
+										</tr>
+										<tr>
+											<th>
+												通风后
+											</th>
+											<th>
+												<label class="input" style="margin-top: 8px;text-align: center;">
+													<input type="text" ng-model="gasAfter.o2avg" ng-readonly="isNotEdit" class="form-control">
+												</label>
+											</th>
+											<th>
+												<label class="input" style="margin-top: 8px;text-align: center;">
+													<input type="text" ng-model="gasAfter.co2avg" ng-readonly="isNotEdit" class="form-control">
+												</label>
+											</th>
+											<th>
+												<label class="input" style="margin-top: 8px;text-align: center;">
+													<input type="text" ng-model="gasAfter.ph3avg" ng-readonly="isNotEdit" class="form-control">
+												</label>
+											</th>
+										</tr>
+									</table>
+								</fieldset>
+							</form>
+						</div>
+						<div class="modal-footer">
+							<button ng-click="retList()" class="btn btn-default" data-dismiss="modal">取消</button>
+						</div>
+					</div>
+				</div>
+			</article>
+		</div>
+	</section>
+</div>

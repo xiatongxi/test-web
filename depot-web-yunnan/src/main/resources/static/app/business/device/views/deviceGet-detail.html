@@ -1,0 +1,88 @@
+<!-- MAIN CONTENT -->
+<div id="content">
+    <!-- widget grid -->
+    <section widget-grid id="widget-grid">
+        <div class="row">
+            <article class="col-sm-12">
+
+                <div >
+                    <a href-void class="btn btn-default btn-xs" ng-click="back()"><i class="fa fa-angle-left"></i>&nbsp;返回&nbsp;</a>
+                    <div>
+						<table class="table table-striped table-bordered table-hover" width="100%">
+                        <thead>
+                         <tr>
+                              <th colspan="10"><h4>领用信息</h4></th>   
+                        </tr>
+                        <tr>
+                            <th data-hide="phone">序号</th>
+							<th data-class="expand">仓房</th>
+							<th data-class="expand">设备及器材名称</th>
+							<th data-class="expand">规格型号</th>
+							<th data-class="expand">设备编号</th>
+							<th data-class="expand">领用数量</th>
+                            <th data-class="expand">核对人</th>
+                            <th data-hide="phone">记账人</th>
+                            <th data-hide="phone,tablet">领用日期</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        	<tr ng-repeat="deviceGet in deviceGetDetail">
+								<th align="center">{{$index + 1}}</th>
+								<td>{{storehouseObj[deviceGet.houseId].storehouseName}}</td>
+							    <td>{{deviceGet.deviceName}}</td> 
+								<td>{{deviceGet.model}}</td>
+								<td>{{deviceGet.number}}</td>
+								<td>{{deviceGet.getCount}}</td>
+								<td>{{deviceGet.collator}}</td>
+								<td>{{deviceGet.bookKeeper}}</td>
+								<td>{{deviceGet.getTime | date :'yyyy-MM-dd'}}</td>
+                        	</tr>
+                        </tbody>
+
+                        </table>
+                    </div>
+                </div>
+                <div>
+                    
+                    <div>
+						<table class="table table-striped table-bordered table-hover" width="100%">
+                        <thead>
+                         <tr>
+                              <th colspan="10"><h4>归还信息</h4></th>   
+                        </tr>
+                        <tr>
+                            <th data-hide="phone">序号</th>
+							<th data-class="expand">仓房</th>
+							<th data-class="expand">设备及器材名称</th>
+							<th data-class="expand">规格型号</th>
+							<th data-class="expand">设备编号</th>
+							<th data-class="expand">归还数量</th>
+							<th data-class="expand">故障数量</th>
+                            <th data-class="expand">核对人</th>
+                            <th data-hide="phone">记账人</th>
+                            <th data-hide="phone,tablet">归还日期</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        	<tr ng-repeat="deviceGet in deviceBack">
+								<th align="center">{{$index + 1}}</th>
+								<td ng-repeat="deviceGet in deviceGetDetail">{{storehouseObj[deviceGet.houseId].storehouseName}}</td>
+							    <td ng-repeat="deviceGet in deviceGetDetail">{{deviceGet.deviceName}}</td> 
+								<td ng-repeat="deviceGet in deviceGetDetail">{{deviceGet.model}}</td>
+								<td>{{deviceGet.number}}</td>
+								<td>{{deviceGet.backCount}}</td>
+								<td>{{deviceGet.brokenCount}}</td>
+								<td>{{deviceGet.collator}}</td>
+								<td>{{deviceGet.backKeeper}}</td>
+								<td>{{deviceGet.backTime | date :'yyyy-MM-dd'}}</td>
+                        	</tr>
+                        </tbody>
+
+                        </table>
+						</div>
+                    	</div>
+            </article>
+        </div>
+    </section>
+</div>
+

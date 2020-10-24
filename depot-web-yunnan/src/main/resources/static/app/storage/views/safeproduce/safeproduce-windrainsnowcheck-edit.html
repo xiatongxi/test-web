@@ -1,0 +1,205 @@
+<div id="content">
+	<section id="widget-grid" widget-grid>
+		<div class="row">
+			<article class="col-sm-12 col-md-12 col-lg-12">
+				<div jarvis-widget id="form-grid-widget" data-widget-colorbutton="false" data-widget-editbutton="false"
+					 data-widget-custombutton="false">
+					<div>
+						<div class="widget-body no-padding">
+
+							<form id="windrainsnow-form" class="smart-form" data-validator-option="validateOptions" novalidate="novalidate">
+								<button type="submit" class="bv-hidden-submit" style="display: none; width: 0px; height: 0px;"></button>
+								<header>
+									<a href-void class="btn btn-default btn-xs" ng-click="back()"><i class="fa fa-angle-left"></i>&nbsp;返回&nbsp;</a>
+								</header>
+								<header>风雨雪前检查</header>
+								<fieldset>
+									<div class="row">
+										<section class="col col-3">
+											<label class="label">仓房名称：<span style="color: red;">*</span></label>
+											<label class="select">
+												<select ng-model="windrainsnow.houseId" name="houseId" required ng-change=change()
+														ng-options="store.storehouseId as store.storehouseName for store in storehouseList"
+														class="form-control" ng-disabled="isNotEdit">
+													<option value="">--请选择--</option>
+												</select>
+											</label>
+										</section>
+										<section class="col col-3">
+											<label class="label">日期：<span style="color: red;">*</span></label>
+											<label class="input">
+												<input type="text" ng-model="windrainsnow.checkDate" name="checkDate"  data-smart-datepicker
+													   ng-disabled="isNotEdit" placeholder="日期" required>
+												<!-- <input type="text" ng-model="windrainsnow.checkDate" name="checkDate" ng-readonly="isNotEdit"
+													   placeholder="日期" required>-->
+											</label>
+										</section>
+										<section class="col col-3">
+											<label class="select">
+												<label class="label">门窗是否关好：</label>
+												<label class="select">
+													<select name="preWindowClose" ng-model="windrainsnow.preWindowClose"  ng-disabled="isNotEdit" ng-readonly="isNotEdit">
+														<option value="" selected="">请选择</option>
+														<option value="0">是</option>
+														<option value="1">否</option>
+													</select> <i></i> </label>
+											</label>
+										</section>
+										<section class="col col-3">
+											<label class="select">
+												<label class="label">排水是否通畅：</label>
+												<label class="select">
+													<select name="preWaterClean" ng-model="windrainsnow.preWaterClean"  ng-disabled="isNotEdit" ng-readonly="isNotEdit">
+														<option value=""  selected="">请选择</option>
+														<option value="0">是</option>
+														<option value="1">否</option>
+													</select> <i></i> </label>
+											</label>
+										</section>
+									</div>
+								</fieldset>
+								<header>风雨雪中检查</header>
+								<fieldset>
+									<div class="row">
+										<section class="col col-3">
+											<span>天气情况：</span>
+											<label class="input">
+												<input type="text" ng-model="windrainsnow.doingWeather" name="doingWeather" ng-readonly="isNotEdit"
+													   placeholder="天气情况">
+											</label>
+										</section>
+										<section class="col col-3">
+											<label class="select">
+												<span>门窗是否关好：</span>
+												<label class="select">
+													<select name="doingWindowClose" ng-model="windrainsnow.doingWindowClose"  ng-disabled="isNotEdit" ng-readonly="isNotEdit">
+														<option value="" selected="">请选择</option>
+														<option value="0">是</option>
+														<option value="1">否</option>
+													</select> <i></i> </label>
+											</label>
+										</section>
+										<section class="col col-3">
+											<label class="select">
+												<span>水沟是否通畅：</span>
+												<label class="select">
+													<select name="doingWaterClean" ng-model="windrainsnow.doingWaterClean"  ng-disabled="isNotEdit" ng-readonly="isNotEdit">
+														<option value="" selected="">请选择</option>
+														<option value="0">是</option>
+														<option value="1">否</option>
+													</select> <i></i> </label>
+											</label>
+										</section>
+										<section class="col col-3">
+											<label class="select">
+												<span>仓房有无渗漏：</span>
+												<label class="select">
+													<select name="doingWaterIn" ng-model="windrainsnow.doingWaterIn"  ng-disabled="isNotEdit" ng-readonly="isNotEdit">
+														<option value="" selected="">请选择</option>
+														<option value="0">无</option>
+														<option value="1">有</option>
+													</select> <i></i> </label>
+											</label>
+										</section>
+									</div>
+									<div class="row">
+										<section class="col col-3">
+											<span>发生部位：</span>
+											<label class="input">
+												<input type="text" ng-model="windrainsnow.doingWaterInPosition" name="doingWaterInPosition" ng-readonly="isNotEdit"
+													   placeholder="发生部位">
+											</label>
+										</section>
+									</div>
+									<div class="row">
+										<section class="col col-10">
+											<label class="input">
+												<span>采取措施：</span>
+												<input type="text" ng-model="windrainsnow.doingWaterInSolution" name="doingWaterInSolution" ng-readonly="isNotEdit"
+													   placeholder="采取措施">
+											</label>
+										</section>
+									</div>
+								</fieldset>
+								<header>风雨雪后检查</header>
+								<fieldset>
+									<div class="row">
+										<section class="col col-3">
+											<span>日期：</span>
+											<label class="input">
+												<input type="text" ng-model="windrainsnow.postCheckDate" name="postCheckDate" data-smart-datepicker ng-disabled="isNotEdit"
+													   placeholder="日期">
+												<!--<input type="text" ng-model="windrainsnow.postCheckDate" name="postCheckDate" ng-readonly="isNotEdit"
+													   placeholder="日期">-->
+											</label>
+										</section>
+										<section class="col col-3">
+											<span>仓温℃：</span>
+											<label class="input">
+												<input type="text" ng-model="windrainsnow.postHouseTemp" name="postHouseTemp" ng-readonly="isNotEdit"
+													   placeholder="仓温℃">
+											</label>
+										</section>
+										<section class="col col-3">
+											<span>仓湿%：</span>
+											<label class="input">
+												<input type="text" ng-model="windrainsnow.postHouseWater" name="postHouseWater" ng-readonly="isNotEdit"
+													   placeholder="仓湿%">
+											</label>
+										</section>
+										<section class="col col-3">
+											<label class="select">
+												<span>仓房有无渗漏：</span>
+												<label class="select">
+													<select name="postWaterIn" ng-model="windrainsnow.postWaterIn"  ng-disabled="isNotEdit" ng-readonly="isNotEdit">
+														<option value="" selected="">请选择</option>
+														<option value="0">无</option>
+														<option value="1">有</option>
+													</select> <i></i> </label>
+											</label>
+										</section>
+									</div>
+									<div class="row">
+										<section class="col col-3">
+											<span>发生部位：</span>
+											<label class="input">
+												<input type="text" ng-model="windrainsnow.postWaterInPosition" name="postWaterInPosition" ng-readonly="isNotEdit"
+													   placeholder="发生部位">
+											</label>
+										</section>
+									</div>
+									<div class="row">
+										<section class="col col-10">
+											<label class="input">
+												<span>采取措施：</span>
+												<input type="text" ng-model="windrainsnow.postWaterInSolution" ng-readonly="isNotEdit" name="postWaterInSolution" placeholder="采取措施">
+											</label>
+										</section>
+									</div>
+									<div class="row">
+										<section class="col col-3">
+											<label class="label">检查人：<span style="color: red;">*</span></label>
+											<label class="input">
+												<input type="text" ng-model="windrainsnow.checkSign" name="checkSign" ng-readonly="isNotEdit"
+													   placeholder="检查人" required>
+											</label>
+										</section>
+									</div>
+								</fieldset>
+
+								<footer>
+									<div>
+										<div class="col-md-12">
+											<a class="btn btn-default" href-void="" href="#" ng-click="back()">取消</a>
+											<a class="btn btn-primary" href-void="" href="#" ng-click="saveData()" ng-hide="isNotEdit">提交</a>
+										</div>
+									</div>
+								</footer>
+						    </form>
+					    </div>
+					</div>
+				</div>
+			</article>
+		</div>
+	</section>
+</div>

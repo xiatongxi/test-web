@@ -1,0 +1,121 @@
+<div id="content">
+	<section id="widget-grid" widget-grid>
+		<div class="row">
+			<article class="col-sm-12 col-md-12 col-lg-12">
+				<div jarvis-widget id="form-grid-widget" data-widget-colorbutton="false" data-widget-editbutton="false"
+					 data-widget-custombutton="false">
+					<div>
+						<div class="widget-body no-padding">
+							<form id="houserepair-form" class="smart-form" data-validator-option="validateOptions" novalidate="novalidate">
+								<button type="submit" class="bv-hidden-submit" style="display: none; width: 0px; height: 0px;"></button>
+								<header>
+									<a href-void class="btn btn-default btn-xs" ng-click="back()"><i class="fa fa-angle-left"></i>&nbsp;返回&nbsp;</a>
+									&nbsp;<strong>仓房维修记录单</strong>
+								</header>
+								<fieldset>
+									<div class="row">
+										<section class="col col-3">
+											<label class="label">仓房名称：<span style="color: red;">*</span></label>
+											<label class="select">
+												<select ng-model="houserepair.storehouseId" name="storehouseId" required
+														ng-options="store.storehouseId as store.storehouseName for store in storelist"
+														class="form-control"  ng-disabled="true">
+													<option value="" disabled>--请选择--</option>
+												</select>
+											</label>
+										</section>
+										<section class="col col-3">
+											<label class="label">仓房编号：<span style="color: red;">*</span></label>
+											<label class="input">
+												<input type="text" ng-model="houserepair.storehouseCode" name="storehouseCode" ng-disabled="true" required>
+											</label>
+										</section>
+										<section class="col col-3">
+											<label class="label">故障时间：<span style="color: red;">*</span></label>
+											<label class="input">
+												<input type="text" ng-model="houserepair.checkDate" name="checkDate" ng-disabled="true" required>
+											</label>
+										</section>
+
+									</div>
+									<div class="row">
+										<section class="col col-9">
+											<label class="label">存在问题：<span style="color: red;">*</span></label>
+											<label class="textarea textarea-resizable">
+												<textarea rows="2" class="custom-scroll"  ng-model="houserepair.problem" name="problem"  ng-disabled="true" required></textarea>
+											</label>
+										</section>
+									</div>
+									<div class="row">
+										<section class="col col-9">
+											<label class="label">处理意见：<span style="color: red;">*</span></label>
+											<label class="textarea textarea-resizable">
+												<textarea rows="2" class="custom-scroll"  ng-model="houserepair.opinion" name="opinion"  ng-disabled="true" required></textarea>
+											</label>
+										</section>
+									</div>
+									<div class="row">
+										<section class="col col-9">
+											<label class="label">维修要点：<span style="color: red;">*</span></label>
+											<label class="textarea textarea-resizable">
+												<textarea rows="3" class="custom-scroll"  ng-model="houserepair.repairFocus" name="repairFocus" ng-disabled="isNotEdit"
+														  required></textarea>
+											</label>
+										</section>
+									</div>
+									<!--<div class="row">
+										<section class="col col-10">
+											<label class="label">维修备注：</label>
+											<label class="textarea textarea-resizable">
+												<textarea rows="3" class="custom-scroll"  ng-model="houserepair.remark" name="remark" ng-disabled="isNotEdit"></textarea>
+											</label>
+										</section>
+									</div>-->
+									<div class="row">
+										<section class="col col-3">
+											<label class="label">维修开始时间：<span style="color: red;">*</span></label>
+											<label class="input">
+												<input type="text" ng-model="houserepair.repairStartDate" name="repairStartDate" ng-disabled="isNotEdit" required
+													   data-smart-datepicker>
+											</label>
+										</section>
+										<section class="col col-3">
+											<label class="label">维修结束时间：</label>
+											<label class="input">
+												<input type="text" ng-model="houserepair.repairEndDate" name="repairEndDate" ng-disabled="isNotEdit"
+													   data-smart-datepicker>
+											</label>
+										</section>
+										<section class="col col-3">
+											<label class="label">维修负责人：</label>
+											<label class="input">
+												<input type="text" ng-model="houserepair.bosshead" name="bosshead" ng-disabled="isNotEdit"
+													   placeholder="维修负责人">
+											</label>
+										</section>
+									</div>
+									<div class="row">
+										<section class="col col-3">
+											<label class="label">登记人：<span style="color: red;">*</span></label>
+											<label class="input">
+												<input type="text" ng-model="houserepair.checkPerson" name="checkPerson" ng-disabled="true" required>
+											</label>
+										</section>
+									</div>
+								</fieldset>
+								<footer>
+									<div class="row">
+										<div class="col-md-12">
+											<a class="btn btn-default" href-void="" href="#" ng-click="back()">取消</a>
+											<a class="btn btn-primary" href-void="" href="#" ng-click="saveDataRepair()"  ng-hide="isNotEdit">提交</a>
+										</div>
+									</div>
+								</footer>
+							</form>
+						</div>
+					</div>
+				</div>
+			</article>
+		</div>
+	</section>
+</div>

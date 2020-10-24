@@ -1,0 +1,49 @@
+#defendFoodstuff{
+    width: 100%;
+    height: 250px;
+}
+
+.defend .navList{
+    width: 420px;
+}
+.defend .nav{
+    width: 465px;
+}
+.defend .user{
+    width:650px;
+}
+.defend .launchMain{
+    padding:36px;
+    display: flex;
+}
+.launchIMG{
+	flex: 1;
+	background-color: pink;
+	border-radius: 8px;
+	cursor: pointer;
+}
+.launchIMG:first-child{
+    margin-right: 85px;
+    background-image: url(../../img/defend/1icon1.png);
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+}
+.launchIMG:last-child{
+    background-image: url(../../img/defend/1icon2.png);
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+}
+.defend .itemContent{
+    padding:11px 63px !important;
+}
+.defend .VideoContent{
+    width: 100%;
+    height: 282px;
+    /* background-image: url(../../img/defend/3icon1.png); */
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    box-sizing: border-box;
+	position: relative;
+    margin: auto;
+}
+

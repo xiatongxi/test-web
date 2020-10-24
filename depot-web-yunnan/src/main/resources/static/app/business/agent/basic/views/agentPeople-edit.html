@@ -1,0 +1,116 @@
+<!-- MAIN CONTENT -->
+<div id="content">
+
+	<!-- widget grid -->
+	<section id="widget-grid" widget-grid>
+
+		<!-- START ROW -->
+		<div class="row">
+
+			<!-- NEW COL START -->
+			<article class="col-sm-12 col-md-12 col-lg-12">
+
+				<!-- Widget ID (each widget will need unique ID)-->
+				<div jarvis-widget id="form-grid-widget"
+					 data-widget-colorbutton="false" data-widget-editbutton="false"
+					 data-widget-custombutton="false">
+
+					<!-- widget div-->
+					<div>
+
+						<!-- widget content -->
+						<div class="widget-body no-padding">
+							<form id="agentPeople-form" class="smart-form ng-pristine ng-valid" data-validator-option="validateOptions" novalidate="novalidate">
+								<header>
+									<a href-void class="btn btn-default btn-xs" ng-click="retList()">
+										<i class="fa fa-angle-left"></i>&nbsp;返回&nbsp;
+									</a>
+									&nbsp;<strong>人员信息管理</strong>
+								</header>
+								<fieldset>
+									<div class="row">
+										<section class="col col-4">
+											<label class="label txt-bg-red">粮库名称</label>
+											<label class="select">
+												<select ng-model="agentPeopleEdit.depotId" ng-options="depot.depotId as depot.depotName for depot in depotList"
+														class="form-control">
+													<option value="">--请选择--</option>
+												</select>
+											</label>
+										</section>
+										<section class="col col-4">
+											<label class="label txt-bg-red">人员姓名</label>
+											<label class="input">
+												<i class="icon-prepend fa fa-user"></i>
+												<input type="text" name="agentName" ng-model="agentPeopleEdit.peopleName"
+													   minlength="2" maxlength="20" required/>
+											</label>
+										</section>
+										<section class="col col-4">
+											<label class="label txt-bg-red">性别</label>
+											<label class="select">
+												<select ng-model="agentPeopleEdit.gender" name="gender" ng-options="enum.enumid as enum.enumname for enum in dicDataList[5287]"
+														class="form-control" required>
+													<option value="">--请选择--</option>
+												</select>
+											</label>
+										</section>
+									</div>
+									<div class="row">
+										<section class="col col-4">
+											<label class="label txt-bg-red">学历</label>
+											<label class="input">
+												<i class="icon-prepend fa fa-user"></i>
+												<input type="text" name="creditCode" ng-model="agentPeopleEdit.creditCode"
+													   minlength="2" maxlength="20" required/>
+											</label>
+										</section>
+										<section class="col col-4">
+											<label class="label txt-bg-red">身份证号</label>
+											<label class="input">
+												<i class="icon-prepend fa fa-user"></i>
+												<input type="text" name="agentNature" ng-model="agentPeopleEdit.idNumber"
+													   minlength="2" maxlength="20" required/>
+											</label>
+										</section>
+										<section class="col col-4">
+											<label class="label txt-bg-red">籍贯</label>
+											<label class="input">
+												<i class="icon-prepend fa fa-user"></i>
+												<input type="text" name="capacity" ng-model="agentPeopleEdit.nativePlace"/>
+											</label>
+										</section>
+									</div>
+									<div class="row">
+										<section class="col col-4">
+											<label class="label txt-bg-red">家庭住址</label>
+											<label class="input">
+												<i class="icon-prepend fa fa-user"></i>
+												<input type="text" name="person" ng-model="agentPeopleEdit.homeAddress"
+													   minlength="2" maxlength="20" required/>
+											</label>
+										</section>
+									</div>
+									<div class="row">
+										<section class="col col-4">
+											<label class="label txt-bg-red">工作经历</label>
+											<label class="textarea textarea-resizable">
+												<textarea rows="3" class="custom-scroll"  ng-model="agentPeopleEdit.workExperience"
+														  maxlength="249" ng-disabled="isNotEdit" name="workExperience"></textarea>
+											</label>
+										</section>
+									</div>
+								</fieldset>
+
+								<footer class="text-align-center">
+									<button ng-show="isShow == '1'" type="button" class="btn btn-primary" ng-click="saveData()">提交</button>
+									<button type="button" class="btn btn-default" ng-click="getEmptying()">取消</button>
+								</footer>
+							</form>
+						</div>
+					</div>
+				</div>
+			</article>
+		</div>
+	</section>
+</div>

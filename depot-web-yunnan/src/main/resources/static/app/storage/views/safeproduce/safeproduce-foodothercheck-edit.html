@@ -1,0 +1,148 @@
+<form id="foodotherCheck-form" name='foodotherCheck-form' class="smart-form ng-pristine ng-valid" ng-submit=' foodotherCheck-form.$valid&&save( foodotherCheck)' novalidate="novalidate">
+	<fieldset>
+		<div class="row">
+			<section class="col col-3">
+				<label class="label">仓房名称：<span style="color: red;">*</span></label>
+				<label class="select">
+					<select ng-model="foodothercheck.houseId" name="houseId" required
+							ng-options="store.storehouseId as store.storehouseName for store in storelist"
+							class="form-control" ng-disabled="isNotEdit">
+						<option value="" disabled>--请选择--</option>
+					</select>
+				</label>
+			</section>
+			<section class="col col-3">
+				<label class="label">检查时间：<span style="color: red;">*</span></label>
+				<label class="input">
+					<input type="text" ng-model="foodothercheck.checkDate" name="checkDate"  data-smart-datepicker  ng-disabled="isNotEdit"
+						   placeholder="检查时间" required>
+               </label>
+           </section>
+           <section class="col col-3">
+			   <label class="label">检查人员：<span style="color: red;">*</span></label>
+               <label class="input">
+					<input type="text" ng-model="foodothercheck.checkSign" name="checkSign"
+						   placeholder="检查人员" required>
+				</label>
+			</section>
+		</div>
+    </fieldset>
+	<header>异常情况</header>
+	<fieldset>
+		<div class="row">
+			<section class="col col-3">
+				<span>类型：</span>
+				<label class="input">
+					<!--<input type="text" ng-model="foodothercheck.postCheckDate" name="postCheckDate" data-smart-datepicker
+                           placeholder="日期">-->
+					<input type="text" ng-model="foodothercheck.nonormalType" name="nonormalType" ng-readonly="isNotEdit"
+						   placeholder="类型">
+				</label>
+			</section>
+			<section class="col col-3">
+				<span>部位：</span>
+				<label class="input">
+					<input type="text" ng-model="foodothercheck.nonormalPosition" name="nonormalPosition" ng-readonly="isNotEdit"
+						   placeholder="部位">
+				</label>
+			</section>
+			<section class="col col-3">
+				<span>范围：</span>
+				<label class="input">
+					<input type="text" ng-model="foodothercheck.nonormalDomain" name="nonormalDomain" ng-readonly="isNotEdit"
+						   placeholder="范围">
+				</label>
+			</section>
+			<section class="col col-3">
+				<span>粮温℃：</span>
+				<label class="input">
+					<input type="text" ng-model="foodothercheck.nonormalTemp" name="nonormalTemp" ng-readonly="isNotEdit"
+						   placeholder="粮温℃">
+				</label>
+			</section>
+
+		</div>
+		<div class="row">
+			<section class="col col-3">
+				<span>水分%：</span>
+				<label class="input">
+					<input type="text" ng-model="foodothercheck.nonormalWater" name="nonormalWater" ng-readonly="isNotEdit"
+						   placeholder="水分%">
+				</label>
+			</section>
+			<section class="col col-3">
+				<label class="label">
+					<span>虫害等级：</span>
+					<label class="select">
+						<select ng-model="foodothercheck.pestLevel" name="pestLevel"
+								ng-options="enum.enumid as enum.enumname for enum in dicDataList[5281]">
+							<option value="" selected="">-- 虫害等级 --</option>
+						</select></label>
+
+				</label>
+			</section>
+		</div>
+	</fieldset>
+
+	<header>四无检查</header>
+	<fieldset>
+		<div class="row">
+			<section class="col col-6">
+				<span>鼠雀情况：</span>
+				<label>
+					<input type="radio" ng-value="0" ng-model="foodothercheck.mouseRecord"
+						  name="mouseRecord">有
+				</label>
+				<label>
+					<input type="radio" ng-value="1" ng-model="foodothercheck.mouseRecord"
+						  name="mouseRecord" ng-checked="true">无
+				</label>
+			</section>
+			<section class="col col-6">
+				<span>虫害情况：</span>
+				<label>
+					<input type="radio" ng-value="0" ng-model="foodothercheck.sectRecord"
+						  name="sectRecord">有
+				</label>
+				<label>
+					<input type="radio" ng-value="1" ng-model="foodothercheck.sectRecord"
+						  name="sectRecord" ng-checked="true">无
+				</label>
+			</section>
+		</div>
+		<div class="row">
+			<section class="col col-6">
+				<span>变质情况：</span>
+				<label>
+					<input type="radio" ng-value="0" ng-model="foodothercheck.badRecord"
+						  name="badRecord" >有
+				</label>
+				<label>
+					<input type="radio" ng-value="1" ng-model="foodothercheck.badRecord"
+						  name="badRecord" ng-checked="true">无
+				</label>
+			</section>
+			<section class="col col-6">
+				<span>事故情况：</span>
+				<label>
+					<input type="radio" ng-value="0" ng-model="foodothercheck.accidentRecord"
+						  name="accidentRecord">有
+				</label>
+				<label>
+					<input type="radio" ng-value="1" ng-model="foodothercheck.accidentRecord"
+						   name="accidentRecord" ng-checked="true">无
+				</label>
+			</section>
+
+		</div>
+
+		<div class="row">
+			<section class="col col-10">
+				<label class="label">处理方案或处理效果：</label>
+				<label class="textarea textarea-resizable">
+					<textarea rows="4" class="custom-scroll"  ng-model="foodothercheck.treatmentAdvice" name="treatmentAdvice"></textarea>
+				</label>
+			</section>
+		</div>
+	</fieldset>
+</form>

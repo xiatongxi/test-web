@@ -1,0 +1,97 @@
+<div class="modal-content">
+    <div class="modal-header">
+        <button type="button" class="close" ng-click="cancel()">
+            &times;
+        </button>
+        <h4 class="modal-title" id="myModalLabel">明细详情</h4>
+    </div>
+    <div id="dtBox"></div>
+    <div class="modal-body">
+        <form id="detail-form" class="smart-form ng-pristine ng-valid" data-validator-option="validateOptions" novalidate="novalidate">
+			<div class="row">
+				<section class="col col-sm-4">
+					<label class="label txt-bg-red">检查时间<span style="color: red;">*</span></label> 
+					<label class="input">
+                       	<input type="text" class="form-control" ng-model="detail.checkTime" name="checkTime"
+                       		data-field="datetime" data-format="yyyy-MM-dd hh:mm:ss" ng-disabled="isNotEdit" required>
+               		</label>
+				</section>
+				<section class="col col-sm-4">
+					<label class="label">测点1(ppm)</label>
+					<label class="input">
+						<input type="text" ng-model="detail.checkPointOne" name="checkPointOne"
+	                        validDetailNumber="true">
+					</label>
+				</section>
+				<section class="col col-sm-4">
+					<label class="label">测点2(ppm)</label>
+					<label class="input">
+						<input type="text" ng-model="detail.checkPointTwo" name="checkPointTwo"
+	                        validDetailNumber="true">
+					</label>
+				</section>
+			</div>
+			
+			<div class="row">
+				<section class="col col-sm-4">
+					<label class="label txt-bg-red">测点3(ppm)</label> 
+					<label class="input">
+						<input type="text" ng-model="detail.checkPointThree" name="checkPointThree"
+	                        validDetailNumber="true">
+					</label>
+				</section>
+				<section class="col col-sm-4">
+					<label class="label">测点4(ppm)</label>
+					<label class="input">
+						<input type="text" ng-model="detail.checkPointFour" name="checkPointFour"
+	                        validDetailNumber="true">
+					</label>
+				</section>
+				<section class="col col-sm-4">
+					<label class="label">测点5(ppm)</label>
+					<label class="input">
+						<input type="text" ng-model="detail.checkPointFive" name="checkPointFive"
+	                         validDetailNumber="true">
+					</label>
+				</section>
+			</div>
+			
+			<div class="row">
+				<section class="col col-sm-4">
+					<label class="label txt-bg-red">空间(ppm)</label> 
+					<label class="input">
+						<input type="text" ng-model="detail.checkSpace" name="checkSpace"
+	                        validDetailNumber="true">
+					</label>
+				</section>
+				<section class="col col-sm-4">
+					<label class="label">最低浓度(ppm)</label>
+					<label class="input">
+						<input type="text" ng-model="detail.minimumConcentration" name="minimumConcentration"
+	                        validDetailNumber="true">
+					</label>
+				</section>
+				<section class="col col-sm-4">
+					<label class="label">检测人<span style="color:red;">*</span></label>
+					<label class="input">
+						<input type="text" ng-model="detail.checkMan" name="checkMan"
+	                        required>
+					</label>
+				</section>
+			</div>
+			
+			
+		</form>
+
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-primary" ng-hide="isNotEdit" ng-click="save()">
+        	提交
+        </button>
+        <button type="button" class="btn btn-default"  ng-click="cancel()">
+        	取消
+        </button>
+    </div>
+</div>
+
+

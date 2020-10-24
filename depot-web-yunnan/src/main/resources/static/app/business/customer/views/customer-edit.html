@@ -1,0 +1,365 @@
+<div id="content">
+    <section id="widget-grid" widget-grid>
+        <div class="row">
+            <article class="col-sm-12 col-md-12 col-lg-12">
+                <div jarvis-widget id="form-grid-widget"
+                    data-widget-colorbutton="false" data-widget-editbutton="false"
+                    data-widget-custombutton="false">
+                    <div>
+                        <div class="widget-body no-padding">
+                            <form id="customer-form" class="smart-form ng-pristine ng-valid" data-validator-option="validateOptions" novalidate="novalidate">
+                                <header>
+                                    <a href-void class="btn btn-default btn-xs" ng-click="retList()">
+                                        <i class="fa fa-angle-left"></i>&nbsp;返回&nbsp;
+                                    </a>
+                                    &nbsp;<strong>客户详情</strong>
+                                    <span class="pull-right font-xs">带*的部分必须填写</span>
+                                </header>
+                                <fieldset>
+                                    <div class="row">
+                                        <section class="col col-4">
+                                            <label class="label">客户类型<span style="color: red;">*</span></label> 
+                                            <label class="select">
+                                                <select class="form-control" ng-model="customer.classify" name="classify"
+                                                            ng-options="enum.enumid as enum.enumname for enum in dicDataList[1049]" required>
+                                                       <option value="" disabled>--请选择--</option>
+                                                </select><i></i>
+                                            </label>
+                                        </section>
+                                        <section class="col col-4">
+                                            <label class="label txt-bg-red">客户编号<span style="color: red;">*</span></label> 
+                                            <label class="input"> 
+                                                <input class="form-control" type="text" ng-model="customer.customerNumber" 
+                                                 name="customerNumber" ng-readonly="true" placeholder="{{ customerNumber.msg }}">
+                                            </label>
+                                        </section>
+                                        <section class="col col-4">
+                                            <label class="label">客户名称<span style="color: red;">*</span></label> 
+                                            <label class="input"> 
+                                                <input class="form-control" type="text" ng-model="customer.name" ng-readonly="isNotEdit" name="name" placeholder="" required>
+                                            </label>
+                                        </section>
+                                    </div>
+                                    
+                                    
+                                    <div class="row">
+                                        <section class="col col-4">
+                                            <label class="label">客户分组编码</label> 
+                                            <label class="input"> 
+                                                <input class="form-control" type="text" ng-model="customer.customerGroupId" ng-readonly="isNotEdit" name="customerGroupId">
+                                            </label>
+                                        </section>
+                                        <section class="col col-4">
+                                            <label class="label">客户分组名称</label> 
+                                            <label class="input"> 
+                                                <input class="form-control" type="text" ng-model="customer.customerGroupName" ng-readonly="isNotEdit" name="customerGroupName">
+                                            </label>
+                                        </section>
+                                    </div>
+                                </fieldset>
+                                
+                                
+                                <!-- 个人客户 -->
+                                <header ng-show="customer.classify == 3152">
+                                    <h6>
+                                        <strong>个人客户基本信息</strong>
+                                    </h6>
+                                </header>
+                                <fieldset ng-show="customer.classify == 3152">
+                                    <div class="row">
+                                        <section class="col col-4">
+                                            <label class="label">身份证号<span style="color: red;">*</span></label> 
+                                            <label class="input"> 
+                                                <input class="form-control" type="text" ng-model="customer.identification" ng-readonly="isNotEdit" name="identification"
+                                                validLength=true required>
+                                            </label>
+                                        </section>
+                                        <section class="col col-4">
+                                            <label class="label">手机号<span style="color: red;">*</span></label>
+                                            <label class="input"> 
+                                                <input class="form-control" type="text" ng-model="customer.mobile" ng-readonly="isNotEdit" name="mobile"
+                                                validSjh=true required>
+                                            </label>
+                                        </section>
+                                        <section class="col col-4">
+                                            <label class="label">电子邮件</label>
+                                            <label class="input"> 
+                                                <input class="form-control" type="text" ng-model="customer.email" ng-readonly="isNotEdit" name="email">
+                                            </label>
+                                        </section>
+                                    </div>
+                                    <div class="row">
+                                        <section class="col col-4">
+                                            <label class="label">联系地址<span style="color: red;">*</span></label>
+                                            <label class="input"> 
+                                                <input class="form-control" type="text" ng-model="customer.address" ng-readonly="isNotEdit" name="address"
+                                                required>
+                                            </label>
+                                        </section>
+                                    </div>
+                                    
+                                    <div class="row">
+                                        <section class="col col-4">
+                                            <label class="label">开票信息(发票抬头)</label> 
+                                            <label class="input"> 
+                                                <input class="form-control" type="text" ng-model="customer.invoiceTitle" ng-readonly="isNotEdit" name="invoiceTitle">
+                                            </label>
+                                        </section>
+                                        <section class="col col-4">
+                                            <label class="label">开户行名称</label> 
+                                            <!-- <label class="input"> 
+                                                <input class="form-control" type="text" ng-model="customer.bankName" ng-readonly="isNotEdit" name="bankName">
+                                            </label> -->
+                                            <label class="select"> 
+				                                      <select ng-model="customer.bankName"  name="bankName" ng-disabled="isNotEdit">
+				                                             <option value="">--请选择--</option>
+				                                             <option value="中国工商银行">中国工商银行</option>
+				                                             <option value="中国农业银行">中国农业银行</option>
+				                                             <option value="中国银行">中国银行</option>
+				                                             <option value="中国建设银行">中国建设银行</option>
+				                                             <option value="农村商业银行">农村商业银行</option>
+				                                             <option value="农村信用合作社">农村信用合作社</option>
+				                                             <option value="中国邮政储蓄">中国邮政储蓄</option>
+				                                             <option value="其它银行">其它银行</option>
+				                                             </select><i></i>
+				                            </label>
+                                        </section>
+                                        <section class="col col-4">
+                                            <label class="label">银行账户名称</label> 
+                                            <label class="input"> 
+                                                <input class="form-control" type="text" ng-model="customer.accountName" ng-readonly="isNotEdit" name="accountName">
+                                            </label>
+                                        </section>
+                                    </div>
+                                    
+                                    <div class="row">
+                                        <section class="col col-4">
+                                            <label class="label">开户账号</label> 
+                                            <label class="input"> 
+                                                <input class="form-control" type="text" ng-model="customer.accountNumber" ng-readonly="isNotEdit" name="accountNumber">
+                                            </label>
+                                        </section>
+                                        <section class="col col-4">
+                                            <label class="label">客户所属地区名称</label> 
+                                            <label class="input"> 
+                                                <input class="form-control" type="text" ng-model="customer.district" ng-readonly="isNotEdit" name="district">
+                                            </label>
+                                        </section>
+                                        
+                                        <section class="col col-4">
+                                            <label class="label">种植面积(亩)</label> 
+                                            <label class="input"> 
+                                                <input class="form-control" type="text" ng-model="customer.plantAcreage" ng-readonly="isNotEdit" name="plantAcreage" 
+                                                validNumber="true">
+                                            </label>
+                                        </section>
+                                    </div>
+                                    
+                                    <div class="row">
+                                        <section class="col col-4">
+                                            <label class="label">每亩的价外补贴数量(公斤)</label> 
+                                            <label class="input"> 
+                                                <input class="form-control" type="text" ng-model="customer.subsidy" ng-readonly="isNotEdit" name="subsidy" 
+                                                validNumber="true">
+                                            </label>
+                                        </section>
+                                        <section class="col col-4">
+                                            <label class="label">通讯地址</label> 
+                                            <label class="input"> 
+                                                <input class="form-control" type="text" ng-model="customer.txdz" ng-readonly="isNotEdit" name="txdz">
+                                            </label>
+                                        </section>
+                                        <section class="col col-4">
+                                            <label class="label">邮政编码</label> 
+                                            <label class="input"> 
+                                                <input class="form-control" type="text" ng-model="customer.yzbm" ng-readonly="isNotEdit" name="yzbm">
+                                                
+                                            </label>
+                                        </section>
+                                    </div>
+                                    
+                                    <div class="row">
+                                        <fieldset>
+                                            <section>
+                                                <label class="label">客户描述</label>
+                                                <label class="textarea">
+                                                    <textarea class="form-control" ng-model="customer.remark" name="remark" ng-readonly="isNotEdit" rows="2" data-bv-field="review"></textarea>
+                                                </label>
+                                            </section>
+                                        </fieldset>
+                                    </div>
+                                </fieldset>
+                                
+                                
+                                
+                                
+                                <!-- 企业客户 -->
+                                <header ng-show="customer.classify == 3153">
+                                    <h6>
+                                        <strong>企业客户基本信息</strong>
+                                    </h6>
+                                </header>
+                                <fieldset ng-show="customer.classify == 3153">
+                                    <div class="row">
+                                        <section class="col col-4">
+                                            <label class="label">企业性质</label> 
+                                            <label class="select"> 
+                                                <select ng-model="customer.generalProperty" name="generalProperty" ng-disabled="isNotEdit" 
+                                                ng-options="enum.enumid as enum.enumname for enum in dicDataList[1014]">
+                                                    <option value="">--请选择--</option>
+                                                </select><i></i>
+                                            </label>
+                                        </section>
+                                        <section class="col col-4">
+                                            <label class="label">统一社会信用代码<span style="color: red;">*</span></label> 
+                                            <label class="input"> 
+                                                <input class="form-control" type="text" ng-model="customer.socialCreditCode" ng-readonly="isNotEdit" name="socialCreditCode"
+                                                qyLength=true required>
+                                            </label>
+                                        </section>
+                                        <section class="col col-4">
+                                            <label class="label">注册资本<span style="color: red;">*</span></label> 
+                                            <label class="input"> 
+                                                <input class="form-control" type="text" ng-model="customer.registeredCapital" ng-readonly="isNotEdit" name="registeredCapital"
+                                                required>
+                                            </label>
+                                        </section>
+                                    </div>
+                                    
+                                    <div class="row">
+                                        <section class="col col-4">
+                                            <label class="label">法人<span style="color: red;">*</span></label> 
+                                            <label class="input"> 
+                                                <input class="form-control" type="text" ng-model="customer.legalPerson" ng-readonly="isNotEdit" name="legalPerson" 
+                                                required>
+                                            </label>
+                                        </section>
+                                        <section class="col col-4">
+                                            <label class="label">联系人<span style="color: red;">*</span></label> 
+                                            <label class="input"> 
+                                                <input class="form-control" type="text" ng-model="customer.linkman" ng-readonly="isNotEdit" name="linkman"
+                                                required>
+                                            </label>
+                                        </section>
+                                        <section class="col col-4">
+                                            <label class="label">电子邮件</label>
+                                            <label class="input"> 
+                                                <input class="form-control" type="text" ng-model="customer.email" ng-readonly="isNotEdit" name="email">
+                                            </label>
+                                        </section>
+                                    </div>
+                                    
+                                    <div class="row">
+                                        <section class="col col-4">
+                                            <label class="label">联系地址<span style="color: red;">*</span></label>
+                                            <label class="input"> 
+                                                <input class="form-control" type="text" ng-model="customer.address" ng-readonly="isNotEdit" name="address"
+                                                required>
+                                            </label>
+                                        </section>
+                                        <section class="col col-4">
+                                            <label class="label">企业电话<span style="color: red;">*</span></label>
+                                            <label class="input"> 
+                                                <input class="form-control" type="text" ng-model="customer.enterprisePhone" ng-readonly="isNotEdit" name="enterprisePhone"
+                                                validSjh=true required>
+                                            </label>
+                                        </section>
+                                    </div>
+                                    
+                                    <div class="row">
+                                        <section class="col col-4">
+                                            <label class="label">开票信息(发票抬头)<span style="color: red;">*</span></label> 
+                                            <label class="input"> 
+                                                <input class="form-control" type="text" ng-model="customer.invoiceTitle" ng-readonly="isNotEdit" name="invoiceTitle"
+                                                required>
+                                            </label>
+                                        </section>
+                                        <section class="col col-4">
+                                            <label class="label">开户行名称</label> 
+                                            <label class="input"> 
+                                                <input class="form-control" type="text" ng-model="customer.bankName" ng-readonly="isNotEdit" name="bankName">
+                                            </label>
+                                        </section>
+                                        <section class="col col-4">
+                                            <label class="label">银行账户名称<span style="color: red;">*</span></label> 
+                                            <label class="input"> 
+                                                <input class="form-control" type="text" ng-model="customer.accountName" ng-readonly="isNotEdit" name="accountName"
+                                                required>
+                                            </label>
+                                        </section>
+                                    </div>
+                                    
+                                    <div class="row">
+                                        <section class="col col-4">
+                                            <label class="label">开户账号<span style="color: red;">*</span></label> 
+                                            <label class="input"> 
+                                                <input class="form-control" type="text" ng-model="customer.accountNumber" ng-readonly="isNotEdit" name="accountNumber"
+                                                required>
+                                            </label>
+                                        </section>
+                                        <section class="col col-4">
+                                            <label class="label">客户所属地区名称<span style="color: red;">*</span></label> 
+                                            <label class="input"> 
+                                                <input class="form-control" type="text" ng-model="customer.district" ng-readonly="isNotEdit" name="district"
+                                                required>
+                                            </label>
+                                        </section>
+                                        
+                                        <section class="col col-4">
+                                            <label class="label">种植面积(亩)</label> 
+                                            <label class="input"> 
+                                                <input class="form-control" type="text" ng-model="customer.plantAcreage" ng-readonly="isNotEdit" name="plantAcreage" 
+                                                validNumber="true">
+                                            </label>
+                                        </section>
+                                    </div>
+                                    
+                                    <div class="row">
+                                        <section class="col col-4">
+                                            <label class="label">每亩的价外补贴数量(公斤)</label> 
+                                            <label class="input"> 
+                                                <input class="form-control" type="text" ng-model="customer.subsidy" ng-readonly="isNotEdit" name="subsidy" 
+                                                validNumber="true">
+                                            </label>
+                                        </section>
+                                        <section class="col col-4">
+                                            <label class="label">通讯地址</label> 
+                                            <label class="input"> 
+                                                <input class="form-control" type="text" ng-model="customer.txdz" ng-readonly="isNotEdit" name="txdz">
+                                            </label>
+                                        </section>
+                                        <section class="col col-4">
+                                            <label class="label">邮政编码</label> 
+                                            <label class="input"> 
+                                                <input class="form-control" type="text" ng-model="customer.yzbm" ng-readonly="isNotEdit" name="yzbm">
+                                                
+                                            </label>
+                                        </section>
+                                    </div>
+                                    
+                                    <div class="row">
+                                        <fieldset>
+                                            <section>
+                                                <label class="label">客户描述</label>
+                                                <label class="textarea">
+                                                    <textarea class="form-control" ng-model="customer.remark" name="remark" ng-readonly="isNotEdit" rows="2" data-bv-field="review"></textarea>
+                                                </label>
+                                            </section>
+                                        </fieldset>
+                                    </div>
+                                </fieldset>
+                                
+                                <div>
+                                    <footer class="text-align-center">
+                                        <button type="button" class="btn btn-default" ng-click="retList()">取消</button>
+                                        <button type="button" class="btn btn-primary" ng-hide="isNotEdit" ng-click="save()">保存</button>
+                                    </footer>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+            </article>
+        </div>
+    </section>
+</div>
+

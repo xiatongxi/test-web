@@ -1,0 +1,84 @@
+<div class="modal-content">
+	<div class="modal-header">
+		<button type="button" class="close" ng-click="cancel()">
+			&times;</button>
+		<h4 class="modal-title" id="myModalLabel">编辑按钮</h4>
+	</div>
+	<div class="modal-body">
+	
+		<div id="content">
+			<!-- widget grid -->
+			<section widget-grid id="widget-grid">
+	
+				<div class="row">
+					<article class="col-md-sm-12">
+	
+						<div jarvis-widget data-widget-color="darken"
+							data-widget-editbutton="false" class="no-margin">
+							<div>
+								<div class="widget-body no-padding">
+									<div class="dataTables_wrapper form-inline no-footer">
+	
+										<table class="table table-striped table-bordered table-hover"
+											width="100%">
+											<thead>
+												<tr>
+													<th class="col col-md-2">按钮编号</th>
+													<th class="col col-md-2" data-hide="phone">按钮名称</th>
+													<th class="col col-md-2" data-hide="phone">功能url</th>
+													<th class="col col-md-3" data-hide="phone">说明</th>
+													<th class="col col-md-3" data-hide="phone">
+														<i class="fa fa-fw fa-wrench txt-color-blue"></i>
+														操作
+													</th>
+												</tr>
+											</thead>
+	
+											<tbody>
+												<tr ng-repeat="buttonInfo in pageInfo.list">
+													<td>{{buttonInfo.btnId}}</td>
+													<td>{{buttonInfo.btnName}}</td>
+													<td>{{buttonInfo.btnUrl}}</td>
+													<td>{{buttonInfo.remark}}</td>
+													<td><a href-void ng-click="delete(buttonInfo.btnId)"><i
+															class="fa fa-trash-o"></i>删除</a>
+														<a href-void ng-click="edit(buttonInfo.btnId)" id="{{buttonInfo.btnId}}"><i
+															class="fa fa-edit"></i>修改</a>
+													</td>
+												</tr>
+												<tr ng-repeat="buttonInfo in addedButton">
+													<td></td>
+													<td class="padding-5">
+														<input type="text" style="width:100%" ng-model="buttonInfo.btnName">
+													</td>
+													<td class="padding-5">
+														<input type="text" style="width:100%" ng-model="buttonInfo.btnUrl">
+													</td>
+													<td class="padding-5">
+														<input type="text" style="width:100%" ng-model="buttonInfo.remark">
+													</td>
+													<td><a href-void ng-click="deleteRow(buttonInfo)"><i
+															class="fa fa-trash-o"></i>删除</a></td>
+												</tr>
+											</tbody>
+	
+										</table>
+									</div>
+								</div>
+							</div>
+						</div>
+					</article>
+				</div>
+			</section>
+		</div>
+	</div>
+
+	<div class="modal-footer">
+		<button type="button" class="btn btn-primary" ng-click="addRow()">
+			添加</button>
+		<button type="button" class="btn btn-primary" ng-click="save()">
+			提交</button>
+		<button type="button" class="btn btn-default" ng-click="cancel()">
+			取消</button>
+	</div>
+</div>

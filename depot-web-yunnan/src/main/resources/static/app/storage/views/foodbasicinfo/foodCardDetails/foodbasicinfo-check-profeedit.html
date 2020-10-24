@@ -1,0 +1,52 @@
+<div class="modal-content">
+    <div class="modal-header">
+        <button type="button" class="close" ng-click="cancel()">
+            &times;
+        </button>
+        <h4 class="modal-title" id="myModalLabel">第三方检查列表</h4>
+    </div>
+    <div class="modal-body">
+        <div>
+            <div class="widget-body no-padding">
+                <div id="DataTables_Table_1_wrapper" class="table-responsive" style="overflow:auto;">
+                    <table class="table table-bordered">
+                        <thead>
+                        <tr>
+                            <th> 序号</th>
+                            <th> 检测类型</th>
+                            <th> 品种</th>
+                            <th> 检测项</th>
+                            <th> 检测时间</th>
+                            <th> 检测单位或检测人</th>
+                            <th> 操作</th>
+                        </tr>
+                        </thead>
+
+                        <tbody>
+                        <tr ng-repeat="qualitycheck in pageInfo.list">
+                            <th align="center">{{$index + 1 + (pageInfo.pageNum-1) * pageInfo.pageSize}}</th>
+                            <td>第三方检查</td>
+                            <td>{{dicData[qualitycheck.subType] }}</td>
+                            <td>水分:{{qualitycheck.water }},杂质:{{qualitycheck.impurity }},容重:{{qualitycheck.capacity }},
+                                不完善粒:{{qualitycheck.badpart}},面筋吸水量:{{qualitycheck.glutenWaterCount}},
+                                品尝评分值:{{qualitycheck.eatScore}}</td>
+                            <td>{{qualitycheck.checkTime | date:'yyyy-MM-dd'}}</td>
+                            <td>{{qualitycheck.checker }}</td>
+                            <td>
+                                <a href-void ng-click="selectCheck(qualitycheck)"><i class="fa fa-edit"></i>选择</a>
+                            </td>
+                        </tr>
+                        </tbody>
+
+                    </table>
+                    <div smart-include="app/layout/partials/page.tpl.html"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-default"  ng-click="cancel()">
+            取消
+        </button>
+    </div>
+</div>

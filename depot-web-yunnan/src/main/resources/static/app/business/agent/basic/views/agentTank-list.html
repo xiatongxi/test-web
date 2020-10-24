@@ -1,0 +1,82 @@
+<div id="content">
+    <section widget-grid id="widget-grid">
+
+        <div class="col-md-10" hidden>
+            <input uploader="uploader" multiple type="file" nv-file-select="" id="exampleInputFile1" accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet">
+        </div>
+
+        <div class="row">
+            <article class="col-sm-12">
+                <div jarvis-widget id="standard-datatable-widget" data-widget-color="darken"
+                     data-widget-editbutton="false">
+                    <header>
+                        <span class="widget-icon"> <i class="fa fa-table"></i> </span>
+                        <h2>油罐信息列表 </h2>
+                    </header>
+                    <div>
+                        <div class="widget-body no-padding">
+                            <div id="DataTables_Table_1_wrapper"
+                                 class="dataTables_wrapper form-inline no-footer">
+                                <div class="dt-toolbar">
+                                    <div class="col-xs-3 col-sm-10">
+                                        <a class="btn btn-primary btn-sm" ui-sref="app.business.agent.basic.agentTankEdit"><span class="fa fa-plus"></span>&nbsp;新&nbsp;增</a>&nbsp;
+                                        <div class="form-group">
+                                            <label class="btn btn-primary btn-sm" for="exampleInputFile1"><i class="glyphicon glyphicon-import"></i>&nbsp;导&nbsp;入</label>
+                                        </div>&nbsp;
+                                        <a class="btn btn-primary btn-sm" href="app/mould/油罐数据模板.xlsx"><i class="glyphicon glyphicon-export"></i>&nbsp;导出模板</a>&emsp;
+                                        <div class="form-group">
+                                            <label> 粮库名称:&emsp;
+                                                <input type="search" ng-model="agentDepotName" class="form-control input-sm" placeholder="">&emsp;
+                                            </label>
+                                            <a class="btn btn-default btn-sm" ng-click="loadData()"><i class="fa fa-search"></i>&nbsp;查&nbsp;询</a>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-2 col-xs-6 hidden-xs">
+                                        <div class="dataTables_length">
+                                            <label>每页显示 <select ng-model="pageInfo.pageSize" ng-change="loadData()"
+                                                                ng-options="num as num for num in [10,25,50,100]"
+                                                                class="form-control input-sm"></select> 条
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <table class="table table-striped table-bordered table-hover" width="100%">
+                                    <thead>
+                                    <tr>
+                                        <th data-class="expand">粮库名称</th>
+                                        <th data-class="expand">油罐编号</th>
+                                        <th data-class="expand">设计容量</th>
+                                        <th data-class="expand">设计年限</th>
+                                        <th data-hide="phone">是否国债投资</th>
+                                        <th data-hide="phone">当前状态</th>
+                                        <th data-hide="phone,tablet"> 操作</th>
+                                    </tr>
+                                    </thead>
+
+                                    <tbody>
+                                    <tr ng-repeat="agentTank in pageInfo.list">
+                                        <td>{{agentDepot[agentTank.depotId].agentDepotName}}</td>
+                                        <td>{{agentTank.tankNumber}}</td>
+                                        <td>{{agentTank.designStorage}}</td>
+                                        <td>{{agentTank.designYear}}</td>
+                                        <td>{{agentTank.treasuryBonds=='true'?'是':'不是'}}</td>
+                                        <td>{{dicData[agentTank.state]}}</td>
+                                        <td>
+                                            <a href-void ng-click="showEdit(agentTank.id,'edit')"><i class="fa fa-edit"></i>修改</a>
+                                            <a href-void ng-click="remove(agentTank.id)"><i
+                                                    class="fa fa-trash-o"></i>删除</a>
+                                            <a href-void ng-click="showEdit(agentTank.id,'detail')"><i class="fa fa-info-circle"></i>查看</a>
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                                <div smart-include="app/layout/partials/page.tpl.html"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </article>
+        </div>
+    </section>
+</div>

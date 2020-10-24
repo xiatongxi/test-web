@@ -1,0 +1,16 @@
+<div class="col-sm-12 home-module" ng-controller="homeworkCtrl">
+
+    <div class="col-center col-center-4">
+        <div>
+            <h3>当前作业</h3>
+        </div>
+        <div class="home-module-content">
+            <ul class="list-group" style="height:80%;overflow:auto; margin:30px 1px 0px 6px; padding-top: 0px;">
+                <li class="list-group-item" ng-repeat="tf in tfData" ng-click="getJobDate('3.1',tf.house_id,tf.task_status)" style="cursor:pointer;"><img src="styles/img/home-1/text-icon2.png"/>&nbsp;{{tf.storehouse_name}}正在通风作业</li>
+                <li class="list-group-item" ng-repeat="xz in xzData" ng-click="getJobDate('3.2',xz.house_id,'0')" style="cursor:pointer;"><img src="styles/img/home-1/text-icon2.png"/>&nbsp;{{xz.storehouse_name}}正在熏蒸作业</li>
+                <li class="list-group-item" ng-repeat="rk in rkData" ng-click="getJobDate('3.3',rk.house_id,rk.process_instance_id)" style="cursor:pointer;"><img src="styles/img/home-1/text-icon2.png"/>&nbsp;{{rk.storehouse_name}}正在入库作业</li>
+                <li class="list-group-item" ng-repeat="ck in ckData" ng-click="getJobDate('3.4',ck.house_id,ck.process_instance_id)" style="cursor:pointer;"><img src="styles/img/home-1/text-icon2.png"/>&nbsp;{{ck.storehouse_name}}正在出库作业</li>
+            </ul>
+        </div>
+    </div>
+</div>

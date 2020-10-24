@@ -1,0 +1,49 @@
+<!-- MAIN CONTENT -->
+<div id="content">
+    <!-- widget grid -->
+    <section widget-grid id="widget-grid">
+        <div class="row">
+            <article class="col-sm-12">
+                <div id="standard-datatable-widget" data-widget-color="darken" data-widget-editbutton="false">
+                    <div class="form-group">
+                        <button type="button" class="close" ng-click="cancel()">
+                            &times;
+                        </button>
+                        <h4 class="modal-title" id="myModalLabel">所有点粮情对比</h4>
+                    </div>
+                    <div>
+                        <div class="widget-body no-padding">
+                            <div id="DataTables_Table_1_wrapper" class="dataTables_wrapper form-inline no-footer">
+                                <div class="dt-toolbar">
+                                    <div class="col-xs-12 col-sm-12">
+                                        <div class="form-group">
+                                            <label> 仓房名称:
+                                                <select ng-model="search.storehouse"
+                                                        ng-options="store.storehouseCode as store.storehouseName for store in storelist"
+                                                        ng-disabled="isNotEdit" style="width: 100px;height: 30px;">
+                                                    <option value="">--请选择--</option>
+                                                </select>&emsp;
+                                            </label>
+                                            <label>检测时间:
+                                                <input style="width: 100px;height: 30px;" type="text" ng-model="search.time" data-smart-datepicker>
+                                            </label>
+                                            <label>
+                                                <a class="btn btn-default btn-sm" ng-click="loadData()"> <i class="fa fa-search"></i>&nbsp;查&nbsp;询</a>
+                                            </label>
+                                            <label>
+                                                <a class="btn btn-default btn-sm" ng-click="emptySearch()"> <i class=""></i>&nbsp;清&nbsp;空</a>
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-12 home-module mar-top2" style="height: 400px" id="showChartsGrainPointAllComparison">
+                                </div>
+                                <div smart-include="app/layout/partials/page.tpl.html"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </article>
+        </div>
+    </section>
+</div>

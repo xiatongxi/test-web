@@ -1,0 +1,202 @@
+<link rel="stylesheet" href="styles/css/additionalHome/index.css">
+<link rel="stylesheet" href="styles/css/additionalHome/earlyWarning.css">
+<link rel="stylesheet" href="styles/css/additionalHome/demo.css">
+<link rel="stylesheet" href="styles/css/additionalHome/jquery.flipster.css">
+<link rel="stylesheet" href="styles/css/additionalHome/flipsternavtabs.css">
+<div class="qualityCheck-main" ng-controller="businessCtrl">
+	<div class="information">
+	    <div class="informationContent">
+	        <div class="notice">
+	            <div class="notHeader">
+	                <div class="skew">
+	                    <img src="styles/img/qualityCheck/1icon-gg.png" alt="">
+	                    <span>待办</span>
+	                </div> 
+	                <div class="more">
+	                    <span ng-click="more()">更多</span>
+	                    <span>></span>
+	                </div>
+	            </div>
+	            <div class="list">
+	                <ul>
+	                    <li ng-repeat="approval in handleInfo.list">
+	                        <span style="cursor: pointer;" ng-click="auditPage(approval.projectId, approval.processInstanceId,approval.taskType, approval.taskId,approval.id, approval.result)">{{approval.taskTypeName}}</span>
+	                        <!-- <span>{{approval.applyTime | date:'yyyy-MM-dd HH:mm:ss'}}</span> -->
+	                        <span>{{approval.applyTime | date:'yyyy-MM-dd'}}</span>
+	                    </li>
+	                </ul>
+	            </div>
+	        </div>
+	        <div class="launch">
+	            <div class="notHeader">
+	                <div class="skew">
+	                    <img src="styles/img/qualityCheck/2icon-fq.png" alt="">
+	                    <span>发起</span>
+	                </div>
+	            </div>
+	            <div class="flipster" style="margin-top: 35px;">
+					<ul>
+						<li>
+							<a href="javaScript:void(0)" id="planEdit" ng-click="planApply('planEdit')">
+                                <img src="styles/img/business/1.png" alt="">
+                            </a>
+						</li>
+						<li>
+							<a href="javaScript:void(0)" id="contractEdit" ng-click="contractApply('contractEdit')">
+                                <img src="styles/img/business/2.png" alt="">
+                            </a>
+						</li>
+						<li>
+							<a href="javaScript:void(0)" id="inNotice" ng-click="inNoticeApply('inNotice')">
+                                <img src="styles/img/business/3.png" alt="">
+                            </a>
+						</li>
+						<li>
+							<a href="javaScript:void(0)" id="outNotice" ng-click="outNoticeApply('outNotice')">
+                                <img src="styles/img/business/4.png" alt="">
+                            </a>
+						</li>
+						<li>
+							<a href="javaScript:void(0)" id="rotationPlan" ng-click="rotationPlanApply('rotationPlan')">
+                                <img src="styles/img/business/7.png" alt="">
+                            </a>
+						</li>
+						<li>
+							<a href="javaScript:void(0)" id="noticeIssued" ng-click="showAddNotify('noticeIssued')">
+                                <img src="styles/img/business/6.png" alt="">
+                            </a>
+						</li>
+						<li>
+							<a href="javaScript:void(0)" id="publishDocument" ng-click="safeProduceTodo('publish','publishDocument')">
+                                <img src="styles/img/business/5.png" alt="">
+                            </a>
+						</li>
+				  	</ul>
+				</div>
+	        </div>
+	    </div>
+	</div>
+	<div class="business">
+	    <div class="businessContent">
+	        <div class="title">
+	            <img src="styles/img/qualityCheck/yewu01.png" alt="">
+	            <span>业务概览</span>
+	            <img src="styles/img/qualityCheck/yewu02.png" alt="">
+	
+	        </div>
+	        <div class="cartlist">
+	            <div class="item">
+	                <div class="itemHeader">
+	                    <span>计划</span>
+	                </div>
+	                <div class="itemContent">
+	                    <img src="styles/img/business/icon1.png" alt="">
+	                    <div class="textList">
+                            <ul>
+                                <li><span>全部</span> :<i ng-click="planList(null)">{{planTotal}}</i></li>
+                                <li><span>轮换</span> :<i ng-click="planList(3156)">{{rotationPlanNum}}</i></li>
+                                <li><span>收储</span> :<i ng-click="planList(3154)">{{buyPlanNum}}</i></li>
+                                <li><span>销售</span> :<i ng-click="planList(3155)">{{salePlanNum}}</i></li>
+                            </ul>
+                        </div>
+	                </div>
+	            </div>
+	            <div class="item">
+	                <div class="itemHeader">
+	                    <span>合同</span>
+	                </div>
+	                <div class="itemContent">
+	                    <img src="styles/img/business/icon2.png" alt="">
+	                    <div class="textList mt10">
+	                        <ul>
+                                <li><span>全部</span> :<i ng-click="contractList(null)">{{contractTotal}}</i></li>
+                                <li><span>收储</span> :<i ng-click="contractList(3147)">{{buyNum}}</i></li>
+                                <li><span>销售</span> :<i ng-click="contractList(3148)">{{saleNum}}</i></li>
+                            </ul>
+	                    </div>
+	                </div>
+	            </div>
+	            <div class="item">
+	                <div class="itemHeader">
+	                    <span>通知单</span>
+	                </div>
+	                <div class="itemContent">
+	                    <img src="styles/img/business/icon3.png" alt="">
+	                    <div class="textList mt10">
+                            <ul>
+                                <li><span>全部</span> :<i ng-click="storageNotice(null)">{{noticeTotal}}</i></li>
+                                <li><span>入库</span> :<i ng-click="storageNotice(1)">{{inNoticeNum}}</i></li>
+                                <li><span>出库</span> :<i ng-click="storageNotice(3)">{{outNoticeNum}}</i></li>
+                            </ul>
+                        </div>
+	                </div>
+	            </div>
+	            <div class="item">
+	                <div class="itemHeader">
+	                    <span>通知公告</span>
+	                </div>
+	                <div class="itemContent">
+	                    <img src="styles/img/business/icon4.png" alt="">
+	                    <div class="textList oneLine">
+	                        <span>全部:<span class="ml5" ng-click="safeProduceNotifyTodo()">{{safeProduceNumber}}</span></span>
+	                    </div>
+	                </div>
+	            </div>
+	            <div class="item">
+	                <div class="itemHeader">
+	                    <span>公共文档</span>
+	                </div>
+	                <div class="itemContent">
+	                    <img src="styles/img/business/icon5.png" alt="">
+	                    <div class="textList oneLine">
+	                        <span>全部:<span class="ml5" ng-click="safeProduceTodo('list')">{{documentsNumber}}</span></span>
+	                    </div>
+	                </div>
+	            </div>
+	        </div>
+	    </div>
+	</div>
+	<div class="Chart">
+	    <div class="curve">
+	        <div class="ChartTitle">
+	            <div class="titleRight">
+	                <img src="styles/img/qualityCheck/3icon-swqx.png" alt="">
+	                <span>预警信息</span>
+	            </div>
+	        </div>
+	        <div class="chartContent warningInformation">
+	        	<div class="fen02">
+                    <div class="fen02Bgc">
+                        <span>10</span>
+                    </div>
+                    <div class="fen02Title"><span>架空期预警</span></div>
+                </div>
+                <div class="fen02">
+                    <div class="fen02Bgc">
+                        <span>5</span>
+                    </div>
+                    <div class="fen02Title"><span>轮换预警</span></div>
+                </div>
+            </div>
+		</div>
+        <div class="Columnar">
+            <div class="ChartTitle">
+                <div class="titleRight">
+                    <img src="styles/img/qualityCheck/4icon-lspz.png" alt="">
+                    <span>粮食品种</span>
+                </div>
+            </div>
+            <div class="chartContent">
+                <div id="foodstuff"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+$(function(){ 
+	$(".flipster").flipster({ 
+		style: 'carousel', 
+		start: 0 }); 
+	});
+</script>
+

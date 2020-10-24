@@ -1,0 +1,142 @@
+<link rel="stylesheet" href="styles/css/additionalHome/index.css">
+<link rel="stylesheet" href="styles/css/additionalHome/swiper.css">
+<link rel="stylesheet" href="styles/css/additionalHome/defend.css">
+<div class="defend">
+    <div class="qualityCheck-main" ng-controller="defendCtrl">
+        <div class="information">
+            <div class="informationContent">
+                <div class="notice">
+                    <div class="notHeader">
+                        <div class="skew">
+                            <img src="styles/img/qualityCheck/1icon-gg.png" alt="">
+                            <span>公告</span>
+                        </div>
+                        <div class="more">
+                            <span ng-click="safeProduceNotifyTodo()">更多</span>
+                            <span>></span>
+                        </div>
+                    </div>
+                    <div class="list">
+                        <ul>
+                            <li ng-repeat="safeproduce in qualityPageInfo.list">
+                                <span style="cursor: pointer;" ng-click="showViewNotify(safeproduce.id)">{{safeproduce.fileName}}</span>
+	                        	<!-- <span>{{safeproduce.operationTime | date:'yyyy-MM-dd HH:mm:ss'}}</span> -->
+	                        	<span>{{safeproduce.operationTime | date:'yyyy-MM-dd'}}</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="launch">
+                    <div class="notHeader">
+                        <div class="skew">
+                            <img src="styles/img/qualityCheck/2icon-fq.png" alt="">
+                            <span>发起</span>
+                        </div>
+                    </div>
+                    <div class="launchMain">
+                        <div class="launchIMG" ng-click="showAddNotify()"></div>
+                        <div class="launchIMG" ng-click="safeProduceTodo('publish')"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="business">
+            <div class="businessContent">
+                <div class="title">
+                    <img src="styles/img/qualityCheck/yewu01.png" alt="">
+                    <span>业务概览</span>
+                    <img src="styles/img/qualityCheck/yewu02.png" alt="">
+
+                </div>
+                <div class="cartlist">
+                    <div class="item mr100">
+                        <div class="itemHeader">
+                            <span>监控报警</span>
+                        </div>
+                        <div class="itemContent">
+                            <img src="styles/img/defend/2icon1.png" alt="">
+                            <div class="textList mt10">
+                                <ul>
+                                    <li><span>全部</span> :<i ng-click="queryAlarmMessage('all')">{{alarmMessageTotal}}</i></li>
+                                    <li><span>本月</span> :<i ng-click="queryAlarmMessage('month')">{{monthMessageTotal}}</i></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="item mr100">
+                        <div class="itemHeader">
+                            <span>通知公告</span>
+                        </div>
+                        <div class="itemContent">
+                            <img src="styles/img/defend/2icon2.png" alt="">
+                            <div class="textList oneLine">
+                                <span><span>全部</span> :<span class="ml5" ng-click="safeProduceNotifyTodo()">{{safeProduceNumber}}</span></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="item">
+                        <div class="itemHeader">
+                            <span>公共文档</span>
+                        </div>
+                        <div class="itemContent">
+                            <img src="styles/img/defend/2icon3.png" alt="">
+                            <div class="textList oneLine">
+                                <span><span>全部</span> :<span class="ml5" ng-click="safeProduceTodo('list')">{{documentsNumber}}</span></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--********/弹窗*******-->
+        <div class="modal fade" id="cameraPlayModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                            &times;
+                        </button>
+                        <h4 class="modal-title" id="myModalLabel">{{alias}}</h4>
+                    </div>
+                    <div class="modal-body" id="ocxDiv">
+                        <!--<div smart-include="app/monitor/views/camera-ocx.html"></div>-->
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" style="padding: 6px 12px;width: 60px;height: 35px;" 
+                        	class="btn btn-default" data-dismiss="modal" ng-click="distroyOcx()">
+                            	取消
+                        </button>
+                    </div>
+                </div><!-- /.modal-content -->
+            </div><!-- /.modal-dialog -->
+        </div>
+        <div class="Chart">
+            <div class="curve">
+                <div class="ChartTitle">
+                    <div class="titleRight">
+                        <img src="styles/img/defend/smallIcon1.png" alt="">
+                        <span>视频监控</span>
+                    </div>
+                </div>
+                <div class="VideoContent">
+                	<img id="img" src="{{birdsEyeUrl}}" style="width: 100%;height: 100%;"/>
+                	<div style="position: absolute;width: 100%;height:100%;top:0px;left:0px" id="showDiv" auto-height></div>
+                	<div>
+	                	<div class='jk-icon-box' id="iconDiv"></div>
+                	</div>
+                </div>
+            </div>
+            <div class="Columnar">
+                <div class="ChartTitle">
+                    <div class="titleRight">
+                        <img src="styles/img/qualityCheck/4icon-lspz.png" alt="">
+                        <span>粮食品种</span>
+                    </div>
+                </div>
+                <div class="chartContent">
+                    <div id="foodstuff"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

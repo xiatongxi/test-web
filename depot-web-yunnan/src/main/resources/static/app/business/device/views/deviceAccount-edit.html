@@ -1,0 +1,69 @@
+<div id="content">
+	<section id="widget-grid" widget-grid>
+		<div class="row">
+			<article class="col-sm-12 col-md-12 col-lg-12">
+				<div jarvis-widget id="form-grid-widget" data-widget-colorbutton="false" data-widget-editbutton="false"
+					 data-widget-custombutton="false">
+					<div>
+						<div class="widget-body no-padding">
+							<form id="deviceInput-form" class="smart-form" data-validator-option="validateOptions" novalidate="novalidate">
+								<button type="submit" class="bv-hidden-submit" style="display: none; width: 0px; height: 0px;"></button>
+								<header>
+									<a href-void class="btn btn-default btn-xs" ng-click="back()"><i class="fa fa-angle-left"></i>&nbsp;返回&nbsp;</a>
+									&nbsp;<strong>台账信息</strong>
+								</header>
+								<fieldset>
+									<div class="row">
+										<section class="col col-3">
+											<label class="label">类型：<span style="color: red;">*</span></label>
+											<label class="select">
+												<select ng-model="device.deviceType" name="deviceType" ng-change="getDeviceName()"
+														ng-options="enum.enumid as enum.enumname for enum in dicDataList[5473]"
+														class="form-control" ng-disabled="isNotEdit" required>
+													<option value="">--请选择--</option>
+												</select>
+											</label>
+										</section>
+										<section class="col col-3">
+											<label class="label"  id="devicename-label">名称：<span style="color: red;">*</span></label>
+											<!-- <multi-select-tree  data-input-model="data2" data-default-label="请选择" name="name"  
+													multi-select="false" data-output-model="deviceName" select-only-leafs="true"
+													disabled-tree="isNotEdit" data-callback="selectOnly1Or2(item, selectedItems)">
+											 </multi-select-tree> -->
+											  <label class="select" id="deviceName-label">
+											 <multi-select-tree 
+					                            disabled-tree="isNotEdit"
+					                            data-input-model="deviceNameTreeData" 
+					                            data-output-model="device.deviceName"
+					                            data-default-label="请选择" name="deviceName" 
+					                            multi-select="false"
+					                            select-only-leafs="true"
+					                            data-callback="selectOnly1Or2(item, selectedItems)" required>
+					                        </multi-select-tree>
+											 <em><span style="color: #D56161;margin-top:6px;padding:0 1px;font-style:normal;font-size:11px;line-height:15px;" id="devicename-error"></span></em>
+											</label>
+										</section>
+										<section class="col col-3">
+													<label class="input"> <label class="label">规格型号：<span style="color: red;">*</span></label>
+														<input type="text" ng-model="device.model" name="model"
+															ng-disabled="isNotEdit" placeholder="规格型号" required>
+													</label>
+										</section>
+									</div>
+									
+								</fieldset>
+								<footer>
+									<div class="row">
+										<div class="col-md-12">
+											<a class="btn btn-default" href-void="" href="#" ng-click="back()" ng-hide="isNotEdit">取消</a>
+										</div>
+									</div>
+								</footer>
+						    </form>
+					    </div>
+					</div>
+				</div>
+			</article>
+		</div>
+	</section>
+</div>

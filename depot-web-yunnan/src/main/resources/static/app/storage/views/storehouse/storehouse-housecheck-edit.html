@@ -1,0 +1,99 @@
+<div id="content">
+	<section id="widget-grid" widget-grid>
+		<div class="row">
+			<article class="col-sm-12 col-md-12 col-lg-12">
+				<div jarvis-widget id="form-grid-widget" data-widget-colorbutton="false" data-widget-editbutton="false"
+					 data-widget-custombutton="false">
+					<div>
+						<div class="widget-body no-padding">
+							<form id="housecheck-form" class="smart-form" data-validator-option="validateOptions" novalidate="novalidate">
+								<button type="submit" class="bv-hidden-submit" style="display: none; width: 0px; height: 0px;"></button>
+								<header>
+									<a href-void class="btn btn-default btn-xs" ng-click="back()"><i class="fa fa-angle-left"></i>&nbsp;返回&nbsp;</a>
+									&nbsp;<strong>仓房检查记录单</strong>
+								</header>
+								<fieldset>
+									<div class="row">
+										<section class="col col-3">
+											<label class="label">仓房名称：<span style="color: red;">*</span></label>
+											<label class="select">
+												<select ng-model="houserepair.storehouseId" name="storehouseId" required
+														ng-options="store.storehouseId as store.storehouseName for store in storelist"
+														class="form-control" ng-disabled="isNotEdit">
+													<option value="" disabled>--请选择--</option>
+												</select>
+											</label>
+										</section>
+										<section class="col col-3">
+											<label class="label">检查日期：<span style="color: red;">*</span></label>
+											<label class="input">
+												<input type="text" ng-model="houserepair.checkDate" name="checkDate" data-smart-datepicker
+													   placeholder="检查日期" required>
+											</label>
+										</section>
+										<section class="col col-3">
+											<label class="input">
+												<label class="label">检查项目：<span style="color: red;">*</span></label>
+												<input type="text" ng-model="houserepair.project" name="project"
+													   placeholder="检查项目" required>
+											</label>
+										</section>
+									</div>
+									<div class="row">
+										<section class="col col-3">
+											<label class="input">
+												<label class="label">检查人员：<span style="color: red;">*</span></label>
+												<input type="text" ng-model="houserepair.checkPerson" name="checkPerson"
+													   placeholder="检查人员" ng-disabled="true" required>
+											</label>
+										</section>
+										<section class="col col-3">
+											<label class="label">是否存在问题：<span style="color: red;">*</span></label>
+											<label class="select">
+												<select name="problemExist" ng-model="houserepair.problemExist"  required>
+													<option value="?" selected="" disabled="">请选择</option>
+													<option value="0">是</option>
+													<option value="1">否</option>
+												</select> <i></i>
+											</label>
+
+										</section>
+									</div>
+								</fieldset>
+
+								<div ng-show="houserepair.problemExist==0 || houserepair.problemExist!=1">
+									<fieldset>
+										<div class="row">
+											<section class="col col-10">
+												<label class="label">存在问题：</label>
+												<label class="textarea textarea-resizable">
+													<textarea rows="3" class="custom-scroll"  ng-model="houserepair.problem" name="problem"></textarea>
+												</label>
+											</section>
+										</div>
+										<div class="row">
+											<section class="col col-10">
+												<label class="label">处理意见：</label>
+												<label class="textarea textarea-resizable">
+													<textarea rows="3" class="custom-scroll"  ng-model="houserepair.opinion" name="opinion"></textarea>
+												</label>
+											</section>
+										</div>
+									</fieldset>
+								</div>
+								<footer>
+									<div class="row">
+										<div class="col-md-12">
+											<a class="btn btn-default" href-void="" href="#" ng-click="back()">取消</a>
+											<a class="btn btn-primary" href-void="" href="#" ng-click="saveDataCheck()">提交</a>
+										</div>
+									</div>
+								</footer>
+							</form>
+						</div>
+					</div>
+				</div>
+			</article>
+		</div>
+	</section>
+</div>

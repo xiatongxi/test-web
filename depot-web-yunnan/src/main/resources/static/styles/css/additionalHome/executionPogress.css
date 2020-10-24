@@ -1,0 +1,64 @@
+.qualityCheck-main .itemContent{
+    padding:11px 63px !important;
+}
+.qualityCheck-main .item:nth-child(2) .itemHeader{
+    background-color:#4fb2ab;
+}
+.qualityCheck-main .item:nth-child(3) .itemHeader{
+    background-color: #47b5e3;
+}
+.w172{
+    width: 172px;
+}
+.SpeedItem{
+    height: 30px;
+    margin-top: 18px;
+}
+.SpeedItem span{
+    display: inline-block;
+    vertical-align: middle;
+}
+.progressTitle{
+    line-height: 30px;
+	width: 24%;
+    text-align: right;
+}
+.SpeedItem .progressFather{
+   display: inline-block;
+   width: 350px;
+   height: 100%;
+   background-color: #eee;
+   border-radius: 8px;
+   line-height: 35px;
+   vertical-align: middle;
+   margin: 0 10px;
+}
+.progressSon{
+    background-color: #313142;
+    height: 100%;
+    border-radius: 8px;
+}
+.progressNum{
+    line-height: 30px;
+}
+.qualityCheck-main .flipster--coverflow .flipster__item--past .flipster__item__content{
+    transform: scale(.82) rotateY(0deg) translateX(-80px)!important;
+}
+.qualityCheck-main .flipster--coverflow .flipster__item--future .flipster__item__content{
+    transform: scale(.82) rotateY(0deg) translateX(80px)!important;
+
+}
+.footMore{
+	display: inline-block;
+    position: absolute;
+    right: 0px;
+    top: 0;
+    line-height: 30px;
+    cursor: pointer;
+    width: 90px;
+    height: 100%;
+    background-color: #313143;
+    border-radius: 5px;
+    color: #fff;
+    text-align: center;
+}

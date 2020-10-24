@@ -1,0 +1,143 @@
+<!-- MAIN CONTENT -->
+<div id="content">
+	<!-- widget grid -->
+	<section widget-grid id="widget-grid">
+
+
+		<div class="row">
+			<article class="col-sm-12">
+
+				<div jarvis-widget id="standard-datatable-widget"
+					data-widget-color="darken" data-widget-editbutton="false">
+					<header>
+						<span class="widget-icon"> <i class="fa fa-table"></i>
+						</span>
+						<h2>转储管理</h2>
+					</header>
+					<div>
+						<div class="widget-body no-padding">
+							<div id="DataTables_Table_1_wrapper"
+								class="dataTables_wrapper form-inline no-footer">
+								<div class="dt-toolbar">
+									<div class="col-xs-12 col-sm-12">
+										<div class="form-group">
+											<a has-permission="147" class="btn btn-primary btn-sm" ng-click="edit(0,0)">
+												<span class="fa fa-plus"></span>&nbsp;新&nbsp;增
+											</a>&emsp;
+											<label>
+												<select ng-model="search.houseId" class="form-control input-sm" 
+													ng-options="store.storehouseId as store.storehouseName for store in storelist" 
+													ng-change="loadWare(search.houseId)">
+													<option value="">--仓房名称--</option>
+												</select>&emsp;
+											</label>
+<!-- 											<label>货位名称：</label> -->
+											<label>
+												<select ng-model="search.wareId" class="form-control input-sm" 
+													ng-options="ware.warehouseId as ware.warehouseName for ware in warelist">
+													<option value="">--货位名称--</option>
+												</select>&emsp;
+											</label>
+											<label>
+                                                <label class="select">
+                                                    <multi-select-tree
+                                                        data-input-model="grainAttributeTreeYData" 
+                                                        data-output-model="search.yLsxz"
+                                                        data-default-label="--原粮油性质--" 
+                                                        select-only-leafs="true"
+                                                        name="yLsxz" 
+                                                        multi-select="false" >
+                                                    </multi-select-tree>
+                                                </label>&emsp;
+											</label>
+											<label>
+                                                <label class="select">
+                                                    <multi-select-tree
+                                                        data-input-model="grainAttributeTreeXData" 
+                                                        data-output-model="search.xLsxz"
+                                                        data-default-label="--变动后性质--" 
+                                                        select-only-leafs="true"
+                                                        name="xLsxz" 
+                                                        multi-select="false" >
+                                                    </multi-select-tree>
+                                                </label>&emsp;
+											</label>
+										</div>
+									</div>
+									<div class="col-xs-12 col-sm-9">
+										<div class="form-group">
+											&emsp;&emsp;&emsp;&emsp;
+											<label>业务发生时间：</label>
+											<label>
+												<input ng-model="search.startTime" class="form-control datepicker" data-smart-datepicker >
+											</label>~
+											<label>
+												<input ng-model="search.endTime" class="form-control datepicker" data-smart-datepicker > &emsp;
+											</label>
+											<label>
+												<a class="btn btn-default btn-sm" ng-click="loadData()">
+													<i class="fa fa-search"></i>&nbsp;查&nbsp;询
+												</a>
+											</label>
+										</div>
+									</div>
+									<div class="col-sm-3 col-xs-6 hidden-xs">
+										<div class="dataTables_length">
+											<label>
+											每页显示 <select ng-change="loadData(pageInfo.pageNum=1)"
+													ng-options="num as num for num in [1,10,25,50,100]"
+													ng-model="pageInfo.pageSize" class="form-control input-sm">
+											</select> 条
+											</label>
+										</div>
+									</div>
+								</div>
+
+								<table class="table table-striped table-bordered table-hover"
+									width="100%">
+									<thead>
+										<tr>
+											<th data-class="expand">序号</th>
+											<th data-class="expand">仓房名称</th>
+											<th data-class="expand">货位名称</th>
+											<th data-class="expand">粮油品种</th>
+											<th data-class="expand">原粮油性质</th>
+											<th data-class="expand">变动后性质</th>
+											<th data-class="expand">等级</th>
+											<th data-hide="expand">仓房数量(公斤)</th>
+											<th data-hide="expand">业务发生日期</th>
+											<th data-hide="expand">操作</th>
+										</tr>
+									</thead>
+
+									<tbody>
+										<tr ng-repeat="dump in pageInfo.list">
+											<td>{{$index + 1 + (pageInfo.pageNum-1) * pageInfo.pageSize}}</td>
+											<td>{{storehouseObj[dump.houseId].storehouseName}}</td>
+											<td>{{warehouseObj[dump.wareId].warehouseName}}</td>
+											<td>{{dicData[dump.lspz]}}</td>
+											<td>{{dicData[dump.yLsxz]}}</td>
+											<td>{{dicData[dump.xLsxz]}}</td>
+											<td>{{dicData[dump.lsdj]}}</td>
+											<td>{{dump.clsl}}</td>
+											<td>{{dump.businessCreateTime | date :'yyyy-MM-dd'}}</td>
+											<td>
+												<a href-void ng-click="edit(dump.id,1)">
+													<i class="fa fa-info-circle"></i>查看
+												</a>
+											</td>
+										</tr>
+									</tbody>
+
+								</table>
+								<div smart-include="app/layout/partials/page.tpl.html"></div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</article>
+		</div>
+
+	</section>
+
+</div>

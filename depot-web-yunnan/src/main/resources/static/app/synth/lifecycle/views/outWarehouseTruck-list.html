@@ -1,0 +1,89 @@
+<!-- MAIN CONTENT -->
+<div id="content">
+    <!-- widget grid -->
+    <section widget-grid id="widget-grid">
+
+        <div class="row">
+            <article class="col-sm-12">
+                <div jarvis-widget id="standard-datatable-widget" data-widget-color="darken" data-widget-editbutton="false">
+                    <header>
+                        <span class="widget-icon"> <i class="fa fa-table"></i> </span>
+                        <h2>汽车出库记录 </h2>
+                    </header>
+                    <div>
+                        <div class="widget-body no-padding">
+                            <div id="DataTables_Table_1_wrapper"
+                                 class="dataTables_wrapper form-inline no-footer">
+                                <div class="dt-toolbar">
+                                    <div class="col-xs-12 col-sm-10">
+                                        <label>
+                                            <a class="btn btn-primary btn-sm" ng-click="returnHomePage()"> <i class="fa fa-reply"></i>返&nbsp;回</a>&nbsp;
+                                        </label>
+                                        <label ng-disabled="hc_show">
+                                            <a href-void class="btn btn-primary btn-sm" ng-click="loadDataTrain()"><i class="fa fa-search"></i>&nbsp;火&nbsp;车&nbsp;出&nbsp;库</a>
+                                        </label>&emsp;
+                                        <div class="form-group">
+                                            <label>
+                                                出库日期：<input class="form-control datepicker" ng-model="search.beginDate" size="10" data-smart-datepicker> -
+                                                <input class="form-control datepicker" ng-model="search.endDate" size="10" data-smart-datepicker>
+                                            </label>&emsp;
+                                            <label>
+                                                <a class="btn btn-default btn-sm" ng-click="loadData()">
+                                                    <i class="fa fa-search"></i>&nbsp;查&nbsp;询</a>
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-2 col-xs-12 hidden-xs">
+                                        <div class="dataTables_length">
+                                            <label>每页显示 <select ng-model="pageInfo.pageSize" ng-change="loadData()"
+                                                                ng-options="num as num for num in [1,10,25,50,100]"
+                                                                class="form-control input-sm"></select> 条
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <table class="table table-striped table-bordered table-hover" width="100%">
+                                    <thead>
+                                    <tr>
+                                        <th>序号</th>
+                                        <th>业务单号</th>
+                                        <th>汽车牌号</th>
+                                        <th>业务类型</th>
+                                        <th>粮油品种</th>
+                                        <th>数量(kg)</th>
+                                        <th>仓房名称</th>
+                                        <th>货位名称</th>
+                                        <th>出库日期</th>
+                                        <th>操作</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr ng-repeat="record in pageInfo.list">
+                                        <td>{{$index+1}}</td><!--序号-->
+                                        <td>{{record.bizNo}}</td><!--业务单号-->
+                                        <td>{{record.cphm}}</td><!--汽车牌号-->
+                                        <td>{{record.ywlx}}</td><!--业务类型-->
+                                        <td>{{record.lspz}}</td><!--粮油品种-->
+                                        <td>{{record.count}}</td><!--数量(kg)-->
+                                        <td>{{record.houseName}}</td><!--仓房名称-->
+                                        <td>{{record.wareName}}</td><!--货位名称-->
+                                        <td>{{record.rq | date:'yyyy-MM-dd'}}</td><!--出入库日期-->
+                                        <td>
+                                            <a href-void ng-click="view(record)"><i class="fa fa-info-circle"></i>查看</a>
+                                        </td>
+                                    </tr>
+                                    </tbody>
+
+                                </table>
+                                <div smart-include="app/layout/partials/page.tpl.html"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </article>
+        </div>
+
+    </section>
+
+</div>

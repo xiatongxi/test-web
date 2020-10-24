@@ -1,0 +1,90 @@
+<!-- MAIN CONTENT -->
+<div id="content">
+    <section id="widget-grid" widget-grid>
+        <div class="row">
+            <article class="col-sm-12 col-md-12 col-lg-12">
+                <div jarvis-widget id="form-grid-widget"
+                     data-widget-colorbutton="false" data-widget-editbutton="false"
+                     data-widget-custombutton="false">
+                    <!-- widget div-->
+                    <div>
+                        <!-- widget content -->
+                        <div class="widget-body no-padding">
+                            <form id="drugUseApply-form" class="smart-form ng-pristine ng-valid" data-validator-option="validateOptions" novalidate="novalidate">
+                                <header>
+                                    <a href-void class="btn btn-default btn-xs" ng-click="retList()">
+                                        <i class="fa fa-angle-left"></i>&nbsp;返回&nbsp;
+                                    </a>
+                                    &nbsp;<strong>报警阀值设置详情</strong>
+                                    <span class="pull-right font-xs">带*的部分必须填写</span>
+                                </header>
+                                <fieldset>
+                                    <div class="row">
+                                        <section class="col col-3">
+                                            <label class="label">仓房名称<span style="color: red;">*</span></label>
+                                            <label class="select"><!--ng-change="checkVcfCode()"-->
+                                                <select ng-model="thresholdInfo.vCfCode" name="vCfCode"
+                                                        ng-options="store.storehouseCode as store.storehouseName for store in storelist"
+                                                        ng-disabled="isNotEdit" class="form-control"
+                                                        required>
+                                                    <option value="">--请选择--</option>
+                                                </select>
+                                            </label>
+                                        </section>
+                                    </div>
+                                </fieldset>
+                                <header>
+                                    <h3>
+                                        <strong>新增信息</strong>
+                                        <a class="btn btn-primary" ng-hide="isNotEdit" ng-click="addRow()"><i class="fa fa-plus"></i>新增</a>
+                                    </h3>
+                                </header>
+                                <fieldset>
+                                    <table class="table table-striped table-bordered table-hover" width="100%">
+                                        <thead>
+                                        <tr>
+                                            <th class="col-sm-2" style="text-align:center;">序号</th>
+                                            <th class="col-sm-2" style="text-align:center;">归属模块</th>
+                                            <th class="col-sm-2" style="text-align:center;">预警名称</th>
+                                            <th class="col-sm-2" style="text-align:center;">是否开启</th>
+                                            <th class="col-sm-2" style="text-align:center;">预警阈值</th>
+                                            <th class="col-sm-2" style="text-align:center;" ng-hide="isNotEdit">操作</th>
+                                        </tr>
+                                        </thead>
+
+                                        <tbody>
+                                        <tr ng-repeat="thresholdInfo in addedDetail">
+                                            <td style="text-align:center;">{{$index+1}}</td>
+                                            <td style="text-align:center;">{{ dicData[thresholdInfo.wModule]}}</td>
+                                            <td style="text-align:center;">{{ dicData[thresholdInfo.wName]}}</td>
+                                            <!--<td style="text-align:center;">{{thresholdInfo.wModule}}</td>-->
+                                            <!--<td style="text-align:center;">{{thresholdInfo.wName}}</td>-->
+                                            <td style="text-align:center;">
+                                                <span ng-if="thresholdInfo.wState=='0'">是</span>
+                                                <span ng-if="thresholdInfo.wState=='1'">否</span>
+                                            </td>
+                                            <td style="text-align:center;">{{thresholdInfo.threshold}}</td>
+                                            <td ng-hide="isNotEdit" style="text-align:center;">
+                                                <a class="btn btn-primary" ng-hide="isNotEdit" ng-click="editRow(thresholdInfo)">编辑</a>
+                                                <a class="btn btn-primary" ng-hide="isNotEdit" ng-click="deleteRow(thresholdInfo)">删除</a>
+                                            </td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </fieldset>
+                                <div class="form-actions">
+                                    <footer class="text-align-center">
+                                        <button type="button" class="btn btn-default" ng-click="retList()">取消</button>
+                                        <button type="button" class="btn btn-primary" ng-hide="isNotEdit" ng-click="save()">保存</button>
+                                    </footer>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </article>
+        </div>
+    </section>
+</div>
+
+

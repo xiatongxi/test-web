@@ -1,0 +1,168 @@
+<!-- MAIN CONTENT -->
+<div id="content">
+    <!-- widget grid -->
+    <section id="widget-grid" widget-grid>
+        <!-- START ROW -->
+        <div class="row">
+            <!-- NEW COL START -->
+            <article class="col-sm-12 col-md-12 col-lg-12">
+                <!-- Widget ID (each widget will need unique ID)-->
+                <div jarvis-widget id="form-grid-widget"
+                    data-widget-colorbutton="false" data-widget-editbutton="false"
+                    data-widget-custombutton="false">
+                    <!-- widget div-->
+                    <div>
+                        <!-- widget content -->
+                        <div class="widget-body no-padding">
+                            <form id="drugDestroy-form" class="smart-form ng-pristine ng-valid" data-validator-option="validateOptions" novalidate="novalidate">
+                                <header>
+                                    <a href-void class="btn btn-default btn-xs" ng-click="retList()">
+                                        <i class="fa fa-angle-left"></i>&nbsp;返回&nbsp;
+                                    </a>&nbsp;
+                                    <strong>药剂销毁详情</strong>
+                                    <span class="pull-right font-xs">带*的部分必须填写</span>
+                                </header>
+                                <fieldset>
+                                	<div class="row">
+                                        <section class="col col-4">
+                                            <label class="label">销毁类型<span style="color: red;">*</span></label>
+                                            <label class="select">
+                                                <select ng-model="drugDestroy.destroyType" name="destroyType"
+                                                        ng-disabled="isNotEdit" required>
+                                                    <option value="">--请选择--</option>
+                                                    <option value="药剂销毁">药剂销毁</option>
+                                                    <option value="空瓶/袋销毁">空瓶/袋销毁</option>
+                                                </select>
+                                            </label>
+                                        </section>
+                                        <section class="col col-4">
+                                            <label class="label">销毁数量<span style="color: red;">*</span></label>
+                                            <label class="input"> 
+                                                <input class="form-control" type="text" ng-model="drugDestroy.destroyAmount" ng-readonly="isNotEdit" name="destroyAmount"
+                                                       validNumber="true" required>
+                                            </label>
+                                        </section>
+                                        <section class="col col-4">
+                                            <label class="label">药剂单位<span style="color: red;">*</span></label>
+                                            <label class="select">
+                                                <select ng-model="drugDestroy.drugUnit" ng-disabled="isNotEdit" name="drugUnit"
+                                                        ng-options="enum.enumid as enum.enumname for enum in dicDataList[5500]" required >
+                                                    <option value="">--请选择--</option><i></i>
+                                                </select><i></i>
+                                            </label>
+                                        </section>
+                                    </div>
+                                    
+                                    <div class="row">
+                                        <section class="col col-4">
+                                            <label class="label">药剂种类<span style="color: red;">*</span></label>
+                                            <label class="select">
+                                                <select ng-model="drugDestroy.drugKind" ng-disabled="isNotEdit" name="drugKind"
+                                                        ng-options="enum.enumid as enum.enumname for enum in dicDataList[5498]" required>
+                                                    <option value="">--请选择--</option>
+                                                </select><i></i>
+                                            </label>
+                                        </section>
+                                        <section class="col col-4">
+                                            <label class="label">药剂名称<span style="color: red;">*</span></label>
+                                            <label class="select">
+                                                <select ng-model="drugDestroy.drugName" ng-disabled="isNotEdit" name="drugName"
+                                                        ng-options="enum.enumid as enum.enumname for enum in dicDataList[drugDestroy.drugKind]" required>
+                                                    <option value="">--请选择--</option><i></i>
+                                                </select><i></i>
+                                            </label>
+                                        </section>
+                                        <section class="col col-4">
+                                            <label class="label">药剂形态<span style="color: red;">*</span></label>
+                                            <label class="select">
+                                                <select ng-model="drugDestroy.drugType" ng-disabled="isNotEdit" name="drugType"
+                                                        ng-options="enum.enumid as enum.enumname for enum in dicDataList[5499]" required>
+                                                    <option value="">--请选择--</option><i></i>
+                                                </select><i></i>
+                                            </label>
+                                        </section>
+                                    </div>
+
+                                    <div class="row">
+                                        <section class="col col-4">
+                                            <label class="label">生产厂家<span style="color: red;">*</span></label>
+                                            <label class="select">
+                                                <select ng-model="drugDestroy.manufacturer" name="manufacturer"
+                                                        ng-options="storage.manufacturer as storage.manufacturer for storage in drugManufacturerList"
+                                                        ng-disabled="isNotEdit" class="form-control"
+                                                        required>
+                                                    <option value="">--请选择--</option>
+                                                </select>
+                                            </label>
+                                        </section>
+                                    </div>
+                                    
+                                    <div class="row">
+                                        <fieldset>
+                                        	<section>
+                                                <label class="label">销毁地点<span style="color: red;">*</span></label>
+                                                <label class="textarea">
+                                                    <textarea class="form-control" ng-model="drugDestroy.destroyPlace" name="destroyPlace" ng-readonly="isNotEdit" rows="2" data-bv-field="review" required></textarea>
+                                                </label>
+	                                        </section>
+	                                        <section>
+                                                <label class="label">销毁原因<span style="color: red;">*</span></label>
+                                                <label class="textarea">
+                                                    <textarea class="form-control" ng-model="drugDestroy.destroyReason" name="destroyReason" ng-readonly="isNotEdit" rows="2" data-bv-field="review" required></textarea>
+                                                </label>
+	                                        </section>
+	                                        <section>
+                                                <label class="label">处理内容<span style="color: red;">*</span></label>
+                                                <label class="textarea">
+                                                    <textarea class="form-control" ng-model="drugDestroy.handleContent" name="handleContent" ng-readonly="isNotEdit" rows="2" data-bv-field="review" required></textarea>
+                                                </label>
+	                                        </section>
+	                                        <section>
+                                                <label class="label">处理措施<span style="color: red;">*</span></label>
+                                                <label class="textarea">
+                                                    <textarea class="form-control" ng-model="drugDestroy.handleMeasure" name="handleMeasure" ng-readonly="isNotEdit" rows="2" data-bv-field="review" required></textarea>
+                                                </label>
+	                                        </section>
+                                        </fieldset>
+                                    </div>
+                                    
+                                    <div class="row">
+                                        <section class="col col-4">
+                                            <label class="label">销毁日期<span style="color: red;">*</span></label>
+                                            <label class="input"> 
+                                                <input type="text" ng-model="drugDestroy.destroyDate" name="destroyDate" class="form-control datepicker" data-smart-datepicker
+                                                ng-readonly="isNotEdit" ng-disabled="isNotEdit" required>
+                                            </label>
+                                        </section>
+                                        <section class="col col-4">
+                                            <label class="label">销毁人<span style="color: red;">*</span></label>
+                                            <label class="input">
+                                                <input class="form-control" type="text" ng-model="drugDestroy.destroyPerson" name="destroyPerson" ng-readonly="isNotEdit" 
+                                                required>
+                                            </label>
+                                        </section>
+                                        <section class="col col-4">
+                                            <label class="label">见证人<span style="color: red;">*</span></label>
+                                            <label class="input"> 
+                                                <input class="form-control" type="text" ng-model="drugDestroy.witness" name="witness" ng-readonly="isNotEdit" required>
+                                            </label>
+                                        </section>
+                                    </div>
+                                </fieldset>
+                                
+                                <div><!--class="form-actions"-->
+                                    <footer class="text-align-center">
+                                        <button type="button" class="btn btn-default" ng-click="retList()">取消</button>
+                                        <button type="button" class="btn btn-primary" ng-hide="isNotEdit" ng-click="save()">提交</button>
+                                    </footer>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </article>
+        </div>
+    </section>
+</div>
+
+

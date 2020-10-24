@@ -1,0 +1,120 @@
+<div id="content">
+	<!-- widget grid -->
+	<section id="widget-grid" data-widget-grid>
+		<!-- row -->
+		<div class="row">
+			<!-- NEW WIDGET START -->
+			<article class="col-sm-12 col-md-12 col-lg-6">
+				<!-- Widget ID (each widget will need unique ID)-->
+				<div id="organizing-view-widget" data-widget-colorbutton="false"
+					data-widget-editbutton="false" data-widget-togglebutton="false"
+					data-widget-deletebutton="false"
+					data-widget-fullscreenbutton="false" data-widget-color="orange"
+					data-jarvis-widget>
+					<header>
+						<span class="widget-icon"> <i class="fa fa-lg fa-user"></i>
+						</span>
+						<h2>角色列表</h2>
+					</header>
+					<!-- widget div-->
+					<div>
+						<div class="row">
+							<tree-view tree-data="roleTree" text-field="roleName"
+								value-field='roleId' item-clicked="itemClicked($item)"
+								item-checked-changed="itemCheckedChanged($item)"
+								can-checked="true" item-template-url="/treeItemForRole.html"></tree-view>
+						</div>
+					</div>
+					<!-- end widget -->
+			</article>
+			<!-- WIDGET END -->
+			<!-- NEW WIDGET START -->
+			<article class="col-sm-12 col-md-12 col-lg-6">
+				<!-- Widget ID (each widget will need unique ID)-->
+				<div id="simple-view-widget" data-widget-colorbutton="false"
+					data-widget-editbutton="false" data-widget-togglebutton="false"
+					data-widget-deletebutton="false"
+					data-widget-fullscreenbutton="false" data-widget-color="blue"
+					data-jarvis-widget>
+					<header>
+						<span class="widget-icon"> <i class="fa fa-list-alt"></i>
+						</span>
+						<h2>功能列表</h2>
+					</header>
+					<!-- widget div-->
+					<div>
+						<div class="row">
+							<tree-view tree-data="funcTree" btn-data="btnlist" text-field="funcName"
+								value-field='funcId' item-clicked="itemClicked($item)" btn-clicked="btnClicked($item)" 
+								item-checked-changed="itemCheckedChanged($item)"
+								can-checked="true" item-template-url="/treeItemForFunc.html"></tree-view>
+						</div>
+						<h2 class="text-center">
+							<button ng-click="save()" class="btn btn-primary">提&nbsp;交</button>
+							<button ng-click="reset()" class="btn btn-default">重&nbsp;置</button>
+						</h2>
+					</div>
+					<!-- end widget div -->
+				</div>
+				<!-- end widget -->
+			</article>
+			<!-- WIDGET END -->
+		</div>
+		<!-- end row -->
+		<script type="text/ng-template" id="/treeView.html">
+        	<ul class="tree-view">
+               <li ng-repeat="item in treeData" ng-include="itemTemplateUrl" ></li>
+        	</ul>
+    	</script>
+
+		<script type="text/ng-template" id="/treeItemForRole.html">
+		<i ng-click="itemExpended(item, $event);" class="{{getItemIcon(item)}}"></i>
+		
+      	<span ng-class="{true:'txt-color-white bg-color-orange'}[item.isChecked]" ng-click="warpCallback('itemClicked', item, $event);">{{item[textField]}}</span>
+        <ul ng-if="!isLeaf(item)" ng-show="item.isExpend">
+        	<li ng-repeat="item in item.children" ng-include="itemTemplateUrl || '/treeItem.html'">
+        	</li>
+       	</ul>
+    	</script>
+
+		<script type="text/ng-template" id="/treeItemForFunc.html">
+			<i ng-click="itemExpended(item, $event);" class="{{getItemIcon(item)}}"></i>
+			<span ng-click="warpCallback('itemClicked', item, $event);">
+      			<input class="no-margin" type="checkbox" ng-model="valueField" ng-checked="item.isChecked" ng-if="canChecked">
+        		{{item[textField]}}
+			</span>
+			<span ng-repeat="btn in item.btnData" ng-click="warpCallback('btnClicked', btn, $event);">
+				<input class="no-margin" type="checkbox" ng-checked="btn.isChecked" ng-if="canChecked">
+				{{btn.btnName}}
+			</span>
+        	<ul ng-if="!isLeaf(item)" ng-show="item.isExpend">
+        		<li ng-repeat="item in item.children" ng-include="itemTemplateUrl">
+        		</li>
+       		</ul>
+    	</script>
+	</section>
+	<!-- end widget grid -->
+</div>
+<style>
+<!--
+ul li {
+	list-style-type : none;
+	cursor : pointer;
+	display: list-item; 
+}
+
+ul li span {
+	border-buttom : 1px dotted #999;
+    border-radius: 5px;
+    display: inline-block;
+    padding: 1px 8px;
+    text-decoration: none;
+	line-height : 20px;
+}
+
+ul li span:hover {
+	background-color : #C0C0C0;
+}
+
+-->
+</style>

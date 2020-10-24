@@ -1,0 +1,130 @@
+<div id="content">
+    <section widget-grid id="widget-grid">
+
+        <div class="col-md-10" hidden>
+            <input uploader="uploader" multiple type="file" nv-file-select="" id="exampleInputFile1" accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet">
+        </div>
+
+        <div class="row">
+            <article class="col-sm-12">
+                <div jarvis-widget id="standard-datatable-widget" data-widget-color="darken"
+                     data-widget-editbutton="false">
+                    <header>
+                        <span class="widget-icon"> <i class="fa fa-table"></i> </span>
+                        <h2>保管明细账列表 </h2>
+                    </header>
+                    <div>
+                        <div class="widget-body no-padding">
+                            <div id="DataTables_Table_1_wrapper"
+                                 class="dataTables_wrapper form-inline no-footer">
+                                <div class="dt-toolbar">
+                                    <div class="col-xs-3 col-sm-10">
+                                        <a has-permission="679" class="btn btn-primary btn-sm" ng-click="showEdit(null,'add')"><span class="fa fa-plus"></span>&nbsp;新&nbsp;增</a>&nbsp;
+                                        <a class="btn btn-primary btn-sm" ng-click="synchro()">&nbsp;同&nbsp;步</a>&nbsp;
+                                        <div class="form-group" ng-hide="true">
+                                            <label class="btn btn-primary btn-sm" for="exampleInputFile1"><i class="glyphicon glyphicon-import"></i>&nbsp;导&nbsp;入</label>
+                                        </div>&nbsp;
+                                        <a class="btn btn-primary btn-sm" ng-hide="true" href="app/mould/汽车出入库数据模板 .xlsx"><i class="glyphicon glyphicon-export"></i>&nbsp;导出模板</a>&emsp;
+                                        <div class="form-group">
+                                            <label> 代储点名称:&emsp;
+                                                <select ng-model="conditions.agentId" class="form-control input-sm"
+                                                        ng-options="agent.id as agent.agentName for agent in agentData.list"
+                                                        ng-change="getAgentDepotData(conditions.agentId)">
+                                                    <option value="">请选择</option>
+                                                </select>&emsp;
+                                            </label>
+                                            <label> 粮库名称:&emsp;
+                                                <select ng-model="conditions.szlkOrgId" class="form-control input-sm"
+                                                        ng-options="depot.depotId as depot.depotName for depot in depotList"
+                                                        ng-change="getHouseList(conditions.szlkOrgId)">
+                                                    <option value="">请选择</option>
+                                                </select>&emsp;
+                                            </label>
+                                            <label> 仓房名称:&emsp;
+                                                <select ng-model="conditions.houseId" class="form-control input-sm"
+                                                        ng-options="store.storehouseId as store.storehouseName for store in storehouseList"
+                                                        ng-change="getWareList(conditions.houseId)">
+                                                    <option value="">请选择</option>
+                                                </select>&emsp;
+                                            </label>
+                                            <label> 货位名称:&emsp;
+                                                <select ng-model="conditions.wareId" class="form-control input-sm"
+                                                        ng-options="ware.warehouseId as ware.warehouseName for ware in warelist">
+                                                    <option value="">请选择</option>
+                                                </select>&emsp;
+                                            </label>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="col-xs-3 col-sm-10">
+                                    	<label> &emsp;&emsp;&emsp;&emsp;&emsp;业务发生时间:&emsp;
+											<input type="text" ng-model="conditions.fssj" class="form-control datepicker" data-smart-datepicker>&emsp;
+                                        </label>
+                                    	<label>
+                                            <a class="btn btn-default btn-sm" ng-click="loadData()">
+                                                <i class="fa fa-search"></i>&nbsp;查&nbsp;询
+                                            </a> &emsp;
+                                        </label>
+                                    </div>
+                                    <div class="col-sm-2 col-xs-6 hidden-xs">
+                                        <div class="dataTables_length">
+                                            <label>每页显示 <select ng-model="pageInfo.pageSize" ng-change="loadData()"
+                                                                ng-options="num as num for num in [10,25,50,100]"
+                                                                class="form-control input-sm"></select> 条
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <table class="table table-striped table-bordered table-hover" width="100%">
+                                    <thead>
+                                    <tr>
+                                        <th data-class="expand">序号</th>
+                                        <th data-class="expand">代储库点</th>
+                                        <th data-class="expand">代储库名称</th>
+                                        <th data-class="expand">仓房名称</th>
+                                        <th data-class="expand">货位名称</th>
+                                        <th data-class="expand">粮食品种</th>
+                                        <th data-class="expand">粮食性质</th>
+                                        <th data-class="expand">粮食等级</th>
+                                        <th data-class="expand">业务发生时间</th>
+                                        <th data-class="expand">收入数量(公斤)</th>
+                                        <th data-class="expand">支出数量(公斤)</th>
+                                        <th data-class="expand">库存数量(公斤)</th>
+                                        <th data-class="expand"> 操作</th>
+                                    </tr>
+                                    </thead>
+
+                                    <tbody>
+                                    <tr ng-repeat="qc in pageInfo.list">
+                                        <td>{{$index + 1 + (pageInfo.pageNum-1) * pageInfo.pageSize}}</td>
+                                        <td>{{qc.agentName}}</td>
+                                        <td>{{qc.agentDepotName}}</td>
+                                        <td>{{qc.houseName}}</td>
+                                        <td>{{qc.wareName}}</td>
+                                        <td>{{dicData[qc.lspz]}}</td>
+                                        <td>{{dicData[qc.lsxz]}}</td>
+                                        <td>{{dicData[qc.lsdj]}}</td>
+                                        <td>{{qc.fssj | date:'yyyy-MM-dd HH:mm:ss'}}</td>
+                                        <td>{{qc.srsl}}</td>
+                                        <td>{{qc.zcsl}}</td>
+                                        <td>{{qc.kcsl}}</td>
+                                        <td>
+                                        	<span ng-if="qc.isJz == 0">
+                                            <a has-permission="681" href-void ng-click="showEdit(qc.id,'edit')"><i class="fa fa-edit"></i>修改</a>
+                                            <a has-permission="682" href-void ng-click="remove(qc.id)"><i class="fa fa-trash-o"></i>删除</a>
+                                        	</span>
+                                            <a href-void ng-click="showEdit(qc.id,'show')"><i class="fa fa-info-circle"></i>查看</a>
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                                <div smart-include="app/layout/partials/page.tpl.html"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </article>
+        </div>
+    </section>
+</div>

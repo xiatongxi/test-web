@@ -1,0 +1,48 @@
+<form id="foodinfoCheck-form" name=' foodinfoCheck-form' class="smart-form ng-pristine ng-valid" ng-submit=' foodinfoCheck-form.$valid&&save( foodinfoCheck)' novalidate="novalidate">
+
+    <fieldset>
+        <div class="row">
+            <section class="col col-6">
+                <label class="label">检测时间：<span style="color: red;">*</span></label>
+                <label class="input">
+                    <input type="text" ng-model="foodinfoCheck.checkTime" name="checkTime" data-smart-datepicker required
+                           placeholder="检测时间">
+                </label>
+            </section>
+            <section class="col col-6">
+                <label class="label"> 脂肪酸值（KOHmg/100g）:</label>
+                <label class="input">
+                    <input type="text" ng-model=" foodinfoCheck.boldfat" name="boldfat" >
+                </label>
+            </section>
+        </div>
+        <div class="row">
+            <section class="col col-6">
+                <label class="label">水分(%):</label>
+                <label class="input">
+                    <input type="text" ng-model=" foodinfoCheck.water" name="water" >
+                </label>
+            </section>
+            <section class="col col-6">
+                <label class="label">面筋吸水量(%):</label>
+                <label class="input">
+                    <input type="text" ng-model=" foodinfoCheck.glutenWater" name="glutenWater" >
+                </label>
+            </section>
+        </div>
+        <div class="row">
+            <section class="col col-6">
+                <label class="label">检测人：<span style="color: red;">*</span></label>
+                <label class="input">
+                    <input type="text" ng-model=" foodinfoCheck.checker" name="checker" required>
+                </label>
+            </section>
+            <section class="col col-6">
+                <label class="label">品尝评分值</label>
+                <label class="input">
+                    <input type="text" ng-model=" foodinfoCheck.eatScore" name="eatScore" >
+                </label>
+            </section>
+        </div>
+    </fieldset>
+</form>

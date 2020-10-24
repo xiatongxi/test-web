@@ -1,0 +1,152 @@
+<!-- MAIN CONTENT -->
+<div id="content">
+    <!-- widget grid -->
+    <section widget-grid id="widget-grid">
+
+
+        <div class="row">
+            <article class="col-sm-12">
+
+                <div jarvis-widget id="standard-datatable-widget" data-widget-color="darken" data-widget-editbutton="false">
+                    <header>
+                        <span class="widget-icon"> <i class="fa fa-table"></i> </span>
+                        <h2>库存数量管理查询</h2>
+                        <h2 style="color: red;">&emsp;&emsp;&emsp;&emsp;库存总量(公斤)：{{kczl}}</h2>
+                    </header>
+                    <div>
+                        <div class="widget-body no-padding">
+                            <div id="DataTables_Table_1_wrapper" class="dataTables_wrapper form-inline no-footer">
+                                <div class="dt-toolbar">
+                                    <div class="col-xs-12 col-sm-10">
+                                        <div class="form-group">
+                                            <label> 仓房名称:&emsp;
+                                                <select ng-model="searchCondition.houseId" class="form-control input-sm"
+                                                        ng-options="store.storehouseId as store.storehouseName for store in storelist"
+                                                        ng-change="getBasicData()">
+                                                    <option value="">请选择</option>
+                                                </select>&emsp;
+                                            </label>
+                                            <label> 货位名称:&emsp;
+                                                <select ng-model="searchCondition.warehouseId" class="form-control input-sm"
+                                                        ng-options="ware.warehouseId as ware.warehouseName for ware in warehouseList">
+                                                    <option value="">请选择</option>
+                                                </select>&emsp;
+                                            </label>
+                                            <label> 粮油品种:
+                                                <select ng-model="searchCondition.pz" class="form-control input-sm"
+												ng-options="enum.enumid as enum.enumname for enum in dicDataList[1061]">
+														<option value="">请选择</option>
+												</select>&emsp;
+                                            </label>
+                                            <label> 粮油性质:
+                                                <label class="select">
+                                                    <multi-select-tree
+                                                        data-input-model="grainAttributeTreeData" 
+                                                        data-output-model="searchCondition.hwxz"
+                                                        data-default-label="请选择" 
+                                                        select-only-leafs="true" 
+                                                        name="hwxz" 
+                                                        multi-select="false" >
+                                                    </multi-select-tree>
+                                                </label>&emsp;
+                                            </label>
+                                            <a class="btn btn-default btn-sm"  ng-click="loadDataSelect()">
+                                                <i class="fa fa-search"></i>&nbsp;查&nbsp;询
+                                            </a>
+<!--                                             <label>&emsp;&emsp;&emsp;&emsp;库存总量(公斤)：{{kczl}}</label> -->
+                                        </div>
+                                    </div>
+
+                                    <div class="col-sm-2 col-xs-12 hidden-xs">
+                                        <div class="dataTables_length" id="DataTables_Table_8_length">
+                                            <label>每页显示 <select name="DataTables_Table_8_length" ng-change="change_pageSize(pigeSizeChange)" ng-model="pigeSizeChange"
+                                                                aria-controls="DataTables_Table_8"
+                                                                class="form-control input-sm">
+                                                <option value="1">1</option>
+                                                <option value="10" ng-selected = "10">10</option>
+                                                <option value="25">25</option>
+                                                <option value="50">50</option>
+                                                <option value="100">100</option></select> 条
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <table class="table table-striped table-bordered table-hover" width="100%">
+                                    <thead>
+                                    <tr>
+                                        <th>序号</th>
+                                        <th>粮库名称</th>
+                                        <th>仓房名称</th>
+                                        <th>货位名称</th>
+                                        <th>粮油性质</th>
+                                        <th>粮油品种</th>
+                                        <th>粮油等级</th>
+                                        <th>收获年度</th>
+                                        <th>库存数量(公斤)</th>
+                                    </tr>
+                                    </thead>
+
+                                    <tbody>
+                                    <tr ng-repeat="numbermanage in pageInfo.list">
+                                        <td>{{$index+1}}</td>
+                                        <td>{{depotInfo.orgName}}</td>
+                                        <td>{{storehouseObj[numbermanage.ch].storehouseName}}</td>
+                                        <td>{{warehouseObj[numbermanage.hwh].warehouseName}}</td>
+                                        <td>{{dicData[numbermanage.hwxz]}}</td>
+                                        <td>{{dicData[numbermanage.pz]}}</td>
+                                        <!-- <td>{{numbermanage.grainKind}}</td> -->
+                                        <td>{{ dicData[numbermanage.dj]}}</td>
+                                        <!-- <td>{{ numbermanage.grainGrade }}</td> -->
+                                        <!--收获年度-->
+                                        <td>{{dicData[numbermanage.scnf]}}</td>
+                                        <td>{{ numbermanage.kcsl }}</td>
+                                    </tr>
+                                    </tbody>
+
+                                </table>
+
+                                <!--分页开始  -->
+                                <div class="dt-toolbar-footer">
+                                    <div class="col-sm-4 col-xs-12 hidden-xs">
+                                        <div class="dataTables_info">
+                                            显示 {{pageInfo.startRow}} - {{pageInfo.endRow}}条，共 {{pageInfo.total}}条
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-12 col-sm-8">
+                                        <div class="dataTables_paginate paging_simple_numbers">
+                                            <ul class="pagination">
+                                                <li ng-class="{true:'disabled'}[pageInfo.isFirstPage]">
+                                                    <a href-void ng-click="go_pages('firstPage', pageInfo.pageNum, pageInfo.pageSize)">首页</a>
+                                                </li>
+
+                                                <li class="previous" ng-class="{true:'disabled'}[!pageInfo.hasPreviousPage]">
+                                                    <a href-void ng-click="go_pages('previousPage', pageInfo.pageNum, pageInfo.pageSize)">上一页</a>
+                                                </li>
+
+                                                <li ng-repeat="page in pageInfo.navigatepageNums"
+                                                    ng-class="{true:'active'}[pageInfo.pageNum==page]">
+                                                    <a href-void ng-click="go_pages('loadPage', page, pageInfo.pageSize)">{{page}}</a>
+                                                </li>
+
+                                                <li class="next" ng-class="{true:'disabled'}[!pageInfo.hasNextPage]">
+                                                    <a href-void ng-click="go_pages('nextPage',pageInfo.pageNum, pageInfo.pageSize, pageInfo.pages,searchCondition.houseId)">下一页</a>
+                                                </li>
+                                                <li ng-class="{true:'disabled'}[pageInfo.isLastPage]">
+                                                    <a href-void ng-click="go_pages('lastPage',pageInfo.pageNum, pageInfo.pageSize, pageInfo.pages)">尾页</a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--分业结束  -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </article>
+        </div>
+
+    </section>
+
+</div>

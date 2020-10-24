@@ -1,0 +1,146 @@
+<link rel="stylesheet" href="styles/css/additionalHome/index.css">
+<link rel="stylesheet" href="styles/css/additionalHome/executionPogress.css">
+<link rel="stylesheet" href="styles/css/additionalHome/demo.css">
+<link rel="stylesheet" href="styles/css/additionalHome/jquery.flipster.css">
+<link rel="stylesheet" href="styles/css/additionalHome/flipsternavtabs.css">
+<div class="qualityCheck-main" ng-controller="transferCtrl">
+	<div class="information">
+	    <div class="informationContent">
+	        <div class="notice">
+	            <div class="notHeader">
+	                <div class="skew">
+	                    <img src="styles/img/qualityCheck/1icon-gg.png" alt="">
+	                    <span>待办</span>
+	                </div> 
+	                <div class="more">
+	                    <span ng-click="more()">更多</span>
+	                    <span>></span>
+	                </div>
+	            </div>
+	            <div class="list">
+	                <ul>
+	                    <li ng-repeat="approval in handleInfo.list">
+	                        <span style="cursor: pointer;" ng-click="auditPage(approval.projectId, approval.processInstanceId,approval.taskType, approval.taskId,approval.id, approval.result)">{{approval.taskTypeName}}</span>
+	                        <!-- <span>{{approval.applyTime | date:'yyyy-MM-dd HH:mm:ss'}}</span> -->
+	                        <span>{{approval.applyTime | date:'yyyy-MM-dd'}}</span>
+	                    </li>
+	                </ul>
+	            </div>
+	        </div>
+	        <div class="launch">
+	            <div class="notHeader">
+	                <div class="skew">
+	                    <img src="styles/img/qualityCheck/2icon-fq.png" alt="">
+	                    <span>发起</span>
+	                </div>
+	            </div>
+	            <div class="flipster" style="margin-top: 35px;">
+					<ul>
+						<li>
+							<a href="javaScript:void(0)" id="transferContractEdit" ng-click="transferContractApply('transferContractEdit')">
+                                <img src="styles/img/transfer/3.png" alt="">
+                            </a>
+						</li>
+						<li>
+							<a href="javaScript:void(0)" id="noticeIssued" ng-click="showAddNotify('noticeIssued')">
+                                <img src="styles/img/transfer/2.png" alt="">
+                            </a>
+						</li>
+						<li>
+							<a href="javaScript:void(0)" id="publishDocument" ng-click="safeProduceTodo('publish','publishDocument')">
+                                <img src="styles/img/transfer/1.png" alt="">
+                            </a>
+						</li>
+				  	</ul>
+				</div>
+	        </div>
+	    </div>
+	</div>
+	<div class="business">
+	    <div class="businessContent">
+	        <div class="title">
+	            <img src="styles/img/qualityCheck/yewu01.png" alt="">
+	            <span>业务概览</span>
+	            <img src="styles/img/qualityCheck/yewu02.png" alt="">
+	
+	        </div>
+	        <div class="cartlist">
+	            <div class="item mr100">
+	                <div class="itemHeader">
+	                    <span>中转合同</span>
+	                </div>
+	                <div class="itemContent">
+	                    <img src="styles/img/transfer/2icon1.png" alt="">
+	                    <div class="textList oneLine">
+	                    	<span><span class="w2">全部</span> :<span class="ml5" ng-click="transferContractList()">{{transferContractTotal}}</span></span>
+	                    </div>
+	                </div>
+	            </div>
+	            <div class="item mr100">
+	                <div class="itemHeader">
+	                    <span>通知公告</span>
+	                </div>
+	                <div class="itemContent">
+	                    <img src="styles/img/transfer/2icon2.png" alt="">
+	                    <div class="textList oneLine">
+	                    	<span><span class="w2">全部</span> :<span class="ml5" ng-click="safeProduceNotifyTodo()">{{safeProduceNumber}}</span></span>
+	                    </div>
+	                </div>
+	            </div>
+	            <div class="item">
+	                <div class="itemHeader">
+	                    <span>公共文档</span>
+	                </div>
+	                <div class="itemContent">
+	                    <img src="styles/img/transfer/2icon3.png" alt="">
+	                    <div class="textList oneLine">
+	                    	<span><span class="w2">全部</span> :<span class="ml5" ng-click="safeProduceTodo('list')">{{documentsNumber}}</span></span>
+	                    </div>
+	                </div>
+	            </div>
+	        </div>
+	    </div>
+	</div>
+	<div class="Chart">
+	    <div class="curve">
+	        <div class="ChartTitle" style="position: relative;">
+	            <div class="titleRight w172">
+	                <img src="styles/img/transfer/smallIcon1.png" alt="">
+	                <span>中转合同执行进度</span>
+	            </div>
+	            <div class="footMore">
+                    <span ng-click="transferContractMore()">更多</span>
+                    <span>></span>
+                </div>
+	        </div>
+	        <div class="chartContent">
+	        	<div class="SpeedItem" ng-repeat="transferContract in transferContractInfo.list">
+                    <span class="progressTitle">{{transferContract.contractTitle}}</span>
+                    <div class="progressFather">
+                        <div class="progressSon" style="width:{{transferContract.completeRate}}%;"></div>
+                    </div>
+                    <span class="progressNum">{{transferContract.completeRate}}%</span>
+                </div>
+            </div>
+		</div>
+        <div class="Columnar">
+            <div class="ChartTitle">
+                <div class="titleRight">
+                    <img src="styles/img/qualityCheck/4icon-lspz.png" alt="">
+                    <span>粮食品种</span>
+                </div>
+            </div>
+            <div class="chartContent">
+                <div id="foodstuff"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+$(function(){ 
+	$(".flipster").flipster({ 
+		style: 'carousel', 
+		start: 0 }); 
+	});
+</script>
+

@@ -1,0 +1,37 @@
+{
+  "name": "jquery-treegrid",
+  "homepage": "https://github.com/dkhlystov/jquery-treegrid",
+  "authors": [
+    "Dmitry Khlystov <dkhlystov@gmail.com>"
+  ],
+  "description": "TreeGrid plugin for jQuery, supported data manipulating.",
+  "main": [
+    "./dist/js/treegrid.jquery.js",
+    "./dist/css/treegrid.jquery.css"
+  ],
+  "moduleType": [
+    "globals"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests",
+    "docs"
+  ],
+  "dependencies": {
+    "jquery": ">= 1.9.1"
+  },
+  "version": "0.1.7",
+  "_release": "0.1.7",
+  "_resolution": {
+    "type": "version",
+    "tag": "v0.1.7",
+    "commit": "6457005f995fb301581d89daefa353d8746729de"
+  },
+  "_source": "https://github.com/dkhlystov/jquery-treegrid.git",
+  "_target": "~0.1.7",
+  "_originalSource": "treegrid"
+}

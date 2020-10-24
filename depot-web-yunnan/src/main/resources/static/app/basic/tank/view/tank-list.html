@@ -1,0 +1,142 @@
+<!-- MAIN CONTENT -->
+<div id="content">
+    <!-- widget grid -->
+    <section widget-grid id="widget-grid">
+
+<!--         <div class="col-md-10" hidden> -->
+<!--             <input uploader="uploader" multiple type="file" nv-file-select="" id="exampleInputFile1" accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"> -->
+<!--         </div> -->
+
+
+        <div class="row">
+            <article class="col-sm-12">
+
+                <div jarvis-widget id="standard-datatable-widget"
+                     data-widget-color="darken" data-widget-editbutton="false">
+                    <header>
+						<span class="widget-icon"> <i class="fa fa-table"></i>
+						</span>
+                        <h2>油罐列表</h2>
+                    </header>
+                    <div>
+                        <div class="widget-body no-padding">
+                            <div id="DataTables_Table_1_wrapper"
+                                 class="dataTables_wrapper form-inline no-footer">
+                                <div class="dt-toolbar">
+                                    <div class="col-xs-12 col-sm-9">
+                                        <div class="form-group">
+                                            <a has-permission="673" class="btn btn-primary btn-sm" ng-click="add()">
+                                                <span class="fa fa-plus"></span>&nbsp;新&nbsp;增
+                                            </a>
+<!--                                             <div  class="form-group"> -->
+<!--                                                 <label has-permission="677" class="btn btn-primary btn-sm" for="exampleInputFile1"><i class="glyphicon glyphicon-import"></i>&nbsp;导&nbsp;入</label> -->
+<!--                                             </div> -->
+<!--                                             <a has-permission="678" class="btn btn-primary btn-sm" href="app/mould/油罐数据导入模板.xlsx"><i class="glyphicon glyphicon-export"></i>&nbsp;导出模板</a> -->
+
+                                            <label> 油罐名称:&emsp;
+                                                <input ng-model="search.storagetankName" class="form-control input-sm">
+                                            </label>
+
+                                            <a class="btn btn-default btn-sm" ng-click="loadData()">
+                                                <i class="fa fa-search"></i>&nbsp;查&nbsp;询
+                                            </a>&emsp;
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-3 col-xs-6 hidden-xs">
+                                        <div class="dataTables_length">
+                                            <label>每页显示 <select ng-model="pageInfo.pageSize" ng-change="loadData(pageInfo.pageNum=1)"
+                                                                ng-options="num as num for num in [10,25,50,100]"
+                                                                class="form-control input-sm"></select> 条
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <table class="table table-striped table-bordered table-hover"
+                                       width="100%">
+                                    <thead>
+                                    <tr>
+                                        <th data-class="expand">油罐编码</th>
+                                        <th data-class="expand">油罐名称</th>
+                                        <th data-hide="expand">库区编码</th>
+                                        <th data-hide="expand">油罐容量(吨)</th>
+                                        <th data-hide="expand">设施是否完好</th>
+                                        <th data-hide="expand">有无加热装置</th>
+                                        <th data-hide="expand">油罐类型</th>
+<!--                                         <th data-hide="expand">油罐使用情况</th> -->
+                                        <th data-hide="expand">油罐状态</th>
+                                        <th data-hide="expand">使用情况</th>
+                                        <th data-hide="expand">建造日期</th>
+                                        <th data-hide="expand">操作</th>
+                                    </tr>
+                                    </thead>
+
+                                    <tbody>
+                                    <tr ng-repeat="tank in pageInfo.list">
+                                        <td>{{tank.storagetankCode}}</td>
+                                        <td>{{tank.storagetankName}}</td>
+                                        <td>{{tank.orgCode}}</td>
+                                        <td>{{tank.tankCapacity}}</td>
+                                        <td>
+                                            {{dicData[tank.facilitiesType]}}
+                                        </td>
+                                        <td>
+                                            {{dicData[tank.heatingType]}}
+                                        </td>
+                                        <td>
+                                            {{dicData[tank.tankType]}}
+                                        </td>
+<!--                                         <td> -->
+<!--                                             {{dicData[tank.tankApply]}} -->
+<!--                                         </td> -->
+                                        <td>
+                                            {{dicData[tank.tankStatus]}}
+                                        </td>
+
+                                        <td>{{tank.delFlag=='1'?"启用":"弃用"}}</td>
+                                        <td>{{tank.builddate | date :'yyyy-MM-dd'}}</td>
+                                        <td><a has-permission="674" href-void ng-click="add(tank.id)"><i class="fa fa-edit"></i>修改</a>
+                                            <a has-permission="675" href-void ng-click="remove(tank)"><i class="fa fa-trash-o"></i>{{tank.delFlag=='0'?"启用":"弃用"}}</a>
+                                            <a href-void ng-click="add(tank.id, '1')"><i class="fa fa-info-circle"></i>查看</a>
+                                        </td>
+                                    </tr>
+                                    </tbody>
+
+                                </table>
+                                <div smart-include="app/layout/partials/page.tpl.html"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </article>
+        </div>
+
+    </section>
+
+</div>
+
+
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog"
+     aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"
+                        aria-hidden="true">&times;</button>
+                <h4 class="modal-title" id="myModalLabel">计划</h4>
+            </div>
+            <div class="modal-body">
+
+            </div>
+            <div class="modal-footer">
+                <button ng-click="save()" type="button" class="btn btn-primary">提交</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">
+                    取消</button>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+<!-- /.modal -->

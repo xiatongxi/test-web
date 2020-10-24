@@ -1,0 +1,186 @@
+<!-- MAIN CONTENT -->
+<div id="content">
+    <!-- widget grid -->
+    <section id="widget-grid" widget-grid>
+        <!-- START ROW -->
+        <div class="row">
+            <!-- NEW COL START -->
+            <article class="col-sm-12 col-md-12 col-lg-12">
+                <!-- Widget ID (each widget will need unique ID)-->
+                <div jarvis-widget id="form-grid-widget"
+                     data-widget-colorbutton="false" data-widget-editbutton="false"
+                     data-widget-custombutton="false">
+                    <!-- widget div-->
+                    <div>
+                        <!-- widget content -->
+                        <div class="widget-body no-padding">
+
+                            <form id="profitLossSheet-form" class="smart-form ng-pristine ng-valid" data-validator-option="validateOptions" novalidate="novalidate">
+                                <header>
+                                    <a href-void class="btn btn-default btn-xs" ng-click="retList()">
+                                        <i class="fa fa-angle-left"></i>&nbsp;返回&nbsp;
+                                    </a>
+                                    &nbsp;<strong>详情</strong>
+                                </header>
+                                <fieldset>
+                                    <div class="row">
+                                        <section class="col col-4">
+                                            <label class="label txt-bg-red">仓房名称<span style="color: red;">*</span></label>
+                                            <label class="select">
+                                                <select ng-model="profitlossSheet.houseId" name=houseId required ng-change=change()
+                                                        ng-options="store.storehouseId as store.storehouseName for store in storelist"
+                                                        class="form-control" ng-disabled="!isNotEdit">
+                                                    <option value="">--请选择--</option>
+                                                </select>
+                                            </label>
+                                        </section>
+                                        <section class="col col-4">
+                                            <label class="label">货位名称<span style="color: red;">*</span></label>
+                                            <label class="select">
+	                                            <select ng-model="profitlossSheet.warehouseId" name=warehouseId class="form-control" ng-disabled="!isNotEdit" ng-change=findBasicinfoByStoreWarehouse()
+	                                                    ng-options="ware.warehouseId as ware.warehouseName for ware in warehouseList" required>
+	                                                <option value="">--请选择--</option>
+	                                            </select>
+                                            </label>
+                                        </section>
+                                        <section class="col col-4">
+                                            <label class="label">粮油品种<span style="color: red;">*</span></label>
+                                            <label class="select">
+                                                <select ng-model="profitlossSheet.grainKind" ng-disabled="sheetNotEdit" name="grainKind" ng-options="enum.enumid as enum.enumname for enum in dicDataList[1061]" required >
+                                                    <option value="">--请选择--</option>
+                                                </select><i></i>
+                                            </label>
+                                        </section>
+                                    </div>
+
+
+                                    <div class="row">
+                                        <section class="col col-4">
+                                            <label class="label">粮油等级<span style="color: red;">*</span></label>
+                                            <label class="select">
+                                                <select ng-model="profitlossSheet.grainGrade" ng-disabled="!isNotEdit"  name="grainGrade" ng-options="enum.enumid as enum.enumname for enum in dicDataList[1002]" required>
+                                                    <option value="">--请选择--</option>
+                                                </select><i></i>
+                                            </label>
+                                            <!-- <label class="input">
+                                                <input type="text" ng-model="profitlossSheet.grainGrade" name="grainGrade" ng-readonly="!isNotEdit" class="form-control datepicker"
+                                                  required>
+                                            </label> -->
+                                        </section>
+                                        <section class="col col-4">
+                                            <label class="label">损益数量（公斤）<span style="color: red;">*</span></label>
+                                            <label class="input">
+                                                <input type="text" ng-model="profitlossSheet.incomeTonnage" name="incomeTonnage" class="form-control datepicker"
+                                                       ng-readonly="!isNotEdit" validNumber="true" required ng-change="countByincomeTonnage()" 
+                                                       onkeyup="this.value= this.value.match(/\d+(\.\d{0,2})?/) ? this.value.match(/\d+(\.\d{0,2})?/)[0] : ''" />
+                                            </label>
+                                        </section>
+                                        <section class="col col-4">
+                                            <label class="label">库存数量（公斤）<span style="color: red;">*</span></label>
+                                            <label class="input">
+                                                <input type="text" ng-model="profitlossSheet.inventoryYear" name="inventoryYear" ng-readonly="sheetNotEdit" class="form-control datepicker"
+                                                       ng-change=countByincomeTonnage() validNumber="true" required>
+                                            </label>
+                                        </section>
+                                    </div>
+
+                                    <div class="row">
+                                        <section class="col col-4">
+                                            <label class="label">损益单类型<span style="color: red;">*</span></label>
+                                            <label class="select">
+                                                <select ng-model="profitlossSheet.lossType" ng-change="countByincomeTonnage()" ng-disabled="!isNotEdit"
+                                                        ng-options="x.id as x.name for x in [{id:1,name:'损耗'},{id:2,name:'溢出'}]" required >
+                                                    <option value="" selected="" disabled="">--请选择--</option>
+                                                </select><i></i>
+                                            </label>
+                                        </section>
+                                        <section class="col col-4">
+                                            <label class="label">损益比列（%）</label>
+                                            <label class="input">
+                                                <input type="text" ng-model="profitlossSheet.profitRatio" name="profitRatio" ng-readonly="sheetNotEdit" class="form-control datepicker"
+                                                       placeholder="自动计算,无需填写.">
+                                            </label>
+                                        </section>
+                                        <section class="col col-4">
+                                            <label class="label">实际库存（公斤）</label>
+                                            <label class="input">
+                                                <input type="text" ng-model="profitlossSheet.actualStock" name="actualStock" ng-readonly="sheetNotEdit" class="form-control datepicker"
+                                                       placeholder="自动计算,无需填写.">
+                                            </label>
+                                        </section>
+                                    </div>
+
+
+                                    <div class="row">
+                                        <!--收购年度-->
+                                        <section class="col col-4">
+                                            <label class="label">收购年度<span style="color: red;">*</span></label>
+                                            <label class="select">
+                                                <select ng-model="profitlossSheet.productionYear" name="productionYear" ng-disabled="!isNotEdit"
+                                                        ng-options="enum.enumid as enum.enumname for enum in dicDataList[1004]" required>
+                                                    <option value="">请选择</option>
+                                                </select>
+                                            </label>
+                                        </section>
+                                        <section class="col col-4">
+                                            <label class="label">粮油性质<span style="color: red;">*</span></label>
+                                            <label class="select">
+                                                <multi-select-tree
+                                                        data-input-model="grainAttributeTreeData"
+                                                        data-output-model="profitlossSheet.lsxzId"
+                                                        data-default-label="--请选择--"
+                                                        name="lsxzId"
+                                                        select-only-leafs="true"
+                                                        multi-select="false" required>
+                                                </multi-select-tree>
+                                                <em><span style="color: #D56161;margin-top:6px;padding:0 1px;
+                                                font-style:normal;font-size:11px;line-height:15px;" 
+                                                id="grainAttribute-error"></span></em>
+                                            </label>
+                                        </section>
+                                    </div>
+                                    <div class="row">
+                                        <fieldset>
+                                            <section>
+                                                <label class="label">备注</label>
+                                                <label class="textarea">
+                                                    <textarea class="form-control" ng-model="profitlossSheet.remark" name="remark" ng-readonly="!isNotEdit" rows="2" data-bv-field="review"></textarea>
+                                                </label>
+                                            </section>
+                                        </fieldset>
+                                    </div>
+
+                                    <div class="row" ng-hide="isNotEdit">
+                                        <section class="col col-4">
+                                            <label class="label">填单时间</label>
+                                            <label class="input">
+                                                <input type="text" ng-model="profitlossSheet.fillTime" name="fillTime" class="form-control datepicker"
+                                                       ng-readonly="!isNotEdit" required>
+                                            </label>
+                                        </section>
+                                        <section class="col col-4">
+                                            <label class="label">填单人</label>
+                                            <label class="input">
+                                                <input class="form-control" type="text" ng-model="profitlossSheet.fillPerson" ng-readonly="true" name="fillPerson" placeholder="" >
+                                            </label>
+                                        </section>
+                                    </div>
+
+
+                                </fieldset>
+
+                                <div class="form-actions">
+                                    <footer class="text-align-center">
+                                        <button type="button" class="btn btn-default" ng-click="retList()">取消</button>
+                                        <button type="button" class="btn btn-primary" ng-hide="!isNotEdit" ng-click="save()">保存</button>
+                                    </footer>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </article>
+        </div>
+    </section>
+</div>
+
